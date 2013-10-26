@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Дополнительные свойства полей клиентского набора данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Как известно, все классы полей имеют одного общего предка — класс
+<font face="Verdana" size="2">TField</font>. Подробно эти классы рассматриваются в гл. 13.
+Здесь же остановимся лишь на нескольких дополнительных свойствах полей, которые работают только в режиме кэширования в обычных компонентах, инкапсулирующих набор данных, и в компоненте
+<font face="Verdana" size="2">TClientDataSet</font>. Причем в компоненте
+<font face="Verdana" size="2">TClientDataSet</font> реализация этих свойств обеспечена локальным кэшем.
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, для разработчика могут быть полезны свойства объектов полей, содержащие не только текущее, но и предыдущее значение поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CurValue: Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает текущее значение поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OldValue: Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит значение поле, которое было до начала редактирования. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NewValue: Variant</font>;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит новое значение, которое может быть присвоено при обработке ошибки сервера методом-обработчиком
+<font face="Verdana" size="2">onReconclieError</font> (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

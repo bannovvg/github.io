@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Поля 
+  синхронного просмотра</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+При создании для исходного набора данных нового поля синхронного просмотра необходимо использовать перечисленные ниже свойства.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Свойство</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property LookupDataSet:   TDataSet;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+ задает набор данных синхронного просмотра.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Свойство</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property LookupResultField: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+представляет     поле     синхронного     просмотра     из     набора    данных
+<font face="Verdana" size="2">LookupDataSet</font>, данные из которого будут появляться в созданном поле.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Свойство</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property LookupKeyFields: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит поле (или поля) из набора данных синхронного просмотра, по значению которого выбирается значение из поля
+<font face="Verdana" size="2">LookupResultField</font>.
+</font ></P>
+<ul>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif">Свойство</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property KeyFields: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет поле (или поля) из исходного набора данных, для которого создается поле синхронного просмотра.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для просмотра данных из поля синхронного просмотра можно использовать любые компоненты отображения данных, но естественно будет применить специальные компоненты синхронного просмотра, о которых рассказывается в гл. 15.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, очень удобно использовать поля синхронного просмотра в компоненте
+<font face="Verdana" size="2">TDBGrid</font>. Если такое поле связать с одной из колонок компонента, то для него автоматически заполняется список синхронного просмотра. Его элементы хранятся в свойстве
+<font face="Verdana" size="2">PickList</font>, которое имеется в любой колонке. Теперь пользователю достаточно выбрать нужную колонку в сетке и, щелкнув на появившейся в текущей ячейке кнопке, получить возможные значения для замены. Одновременно с изменением поля синхронного просмотра изменяется и ключевое поле (свойство
+<font face="Verdana" size="2">KeyFields</font>) исходного набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>     Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При использовании полей синхронного просмотра 
+    в компоненте <font face="Verdana" size="2"> TDBGrid</font> открывать набор 
+    данных синхронного просмотра необязательно. При этом свойство <font face="Verdana" size="2">LookupCache</font>, 
+    о котором речь пойдет ниже, обязательно должно иметь значение <font face="Verdana" size="2">False</font>. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для идентификации полей синхронного просмотра можно использовать булевское свойство
+<font face="Verdana" size="2"> Lookup</font> базового класса <font face="Verdana" size="2">TField</font>, которое принимает истинное значение для таких полей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property LookupCache:   Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет режим использования специального буфера значений синхронного просмотра. Если это свойство истинно, то буфер работает.
+</font ></P>
+<P><font face="Verdana" size="3">
+Буфер основан на свойстве <font face="Verdana" size="2">LookupList</font>. При открытии исходного набора данных каждое поле синхронного просмотра получает свое значение, одновременно с этим, в соответствии со всеми имеющимися в исходном наборе данных значениями ключевого поля, заполняется и буфер синхронного просмотра. Впоследствии, при перемещении на другую запись, значение синхронного просмотра берется не из набора данных синхронного просмотра, а из буфера. Этот механизм при небольших объемах значений синхронного просмотра позволяет увеличить скорость работы с исходным набором данных, особенно в режиме удаленного доступа при низкоскоростных сетях.
+</font ></P>
+<P><font face="Verdana" size="3">
+При изменениях в наборе данных синхронного просмотра можно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RefreshLookupList;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который обновляет текущее значение поля и список значений в буфере.
+</font ></P>
+<P><font face="Verdana" size="3">
+Специально для разработчиков в базовый класс
+<font face="Verdana" size="2">TField</font> включено свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Offset: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое возвращает размер буфера в байтах.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания поля синхронного просмотра удобнее всего воспользоваться Редактором полей компонента доступа к данным. После выбора команды
+<b> New</b> <B>field </B>из всплывающего меню в одноименном диалоге (см. рис. 13.3), помимо обычных действий, соответствующих созданию поля данных, необходимо задать значения свойств в группе <B>Lookup definition. </B>Элементы управления группы становятся доступны после выбора типа поля (радиокнопка <B>Lookup </B>в группе <B>Field type). </B>Группа <B>Lookup definition </B>включает следующие элементы:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Geneva, Arial, Helvetica, sans-serif">в списке <B>Dataset </B>представлены все доступные 
+    в модуле наборы данных, из которых нужно выбрать набор данных синхронного 
+    просмотра (свойство  Lookup DataSet);</font></li>
+  <li><font size="3" face="Geneva, Arial, Helvetica, sans-serif">&nbsp;список <B>Result Field </B>позволяет выбрать поле синхронного 
+    просмотра (свойство LookupResultField);</font></li>
+  <li><font size="3" face="Geneva, Arial, Helvetica, sans-serif">&nbsp;список <B>Lookup Keys </B>задает ключевое поле в наборе 
+    данных синхронного <B>Просмотра (</B>свойство<B> </B>LookupKeyFields);</font></li>
+  <li><font size="3" face="Geneva, Arial, Helvetica, sans-serif">&nbsp;список <B>Key Fields </B>определяет ключевое поле исходного 
+    набора данных <B>(</B>свойство<B> </B>KeyFields).</font></li>
+</ul>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

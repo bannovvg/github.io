@@ -1,0 +1,376 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Коды 
+  ошибок в исключительных ситуациях</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Если ваше приложение уже готовится к продаже, если вы планируете его техническую поддержку, то пора задуматься о присвоении числовых кодов
+</font ></P>
+<P><font face="Verdana" size="3">
+Ошибкам, возникающим в нем. Сообщение типа <font face="Verdana" size="2"> &quot;Exception EZeroDivide in module MyNiceProgram at addr $0781BABO&quot;</font>
+годится для разработчика, пользователя же оно повергнет в полный ступор. Если он позвонит в вашу службу
+техподдержки, то, скорее всего, не сможет ничего объяснить. Гораздо грамотнее дать ему уже &quot;разжеванную&quot; информацию и, в том числе, числовой код.
+</font ></P>
+<P><font face="Verdana" size="3">
+Один из путей решения этой проблемы — размещение сообщений об ошибках в ресурсах программы. Если же вы еще делаете и несколько национальных версий программы на разных языках, то этот путь — единственный.
+</font ></P>
+<P><font face="Verdana" size="3">
+&quot;Классический&quot; способ поместить текст в файл ресурсов — 3-этапный:
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Создается исходный файл ресурсов с расширением гс, в который помещаются необходимые строки с нужными номерами.
+</font ></P>
+<P><font face="Verdana" size="3">
+2. Файл обрабатывается компилятором ресурсов brcc32.exe (находится в папке bin в структуре папок Delphi). На выходе образуется одноименный файл с расширением res.
+</font ></P>
+<P><font face="Verdana" size="3">
+3. Файл   включается   в   программу   указанием   директивы
+<font face="Verdana" size="2">   $R</font>,   например
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{$R mystrings.res}</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Чтобы совместно использовать константы-номера ошибок в файле ресурсов и в коде на Delphi, вынесем их в отдельный включаемый файл с расширением inc:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+const</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">IOError = 1000;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;FileOpenError = IOError + 1;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">FileSaveError = IOError + 2;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> InternetError = 2000;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+NoConnecticnError = InternetError + 1;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> ConnectionAbortedError = InternetError + 2;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Взглянув на файл, вы увидите, что ошибки в нем сгруппированы по категориям. Советуем вам поступить так же, разделив константы категорий промежутком в 1000 или даже 10 000.
+</font ></P>
+<P><font face="Verdana" size="3">
+Сам файл ресурсов может выглядеть так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+#include &quot;strids.inc&quot; STRINGTABLE</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FileOpenError, &quot;File Open Error&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FileSaveError, &quot;File Save Error&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+NoConnectionError, &quot;No Connection&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ConnectionAbortedError, &quot;Connection Aborted&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+}</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&quot;Вытащить&quot; строку из ресурсов можно несколькими способами, но самый простой из них — просто по числовому идентификатору, переданному в функцию
+<font face="Verdana" size="2"> Loadstr</font> (модуль <font face="Verdana" size="2">SysUtils</font>). Код
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ShowMessage(LoadStr(NoConnectionError) ) ;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+покажет сообщение &quot;NO connection&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если же строка используется при возбуждении ИС, то место идентификатору—в перекрываемом конструкторе<font face="Verdana" size="2">
+Exception.createRes,</font> один из вариантов которого работает подобно функции
+<font face="Verdana" size="2">Loadstr</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if FileOpent'c:\myfile.txt&quot;, fmOpenRead) = INVALID_HANDLE_VALUE then&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> raise EMyException.CreateRes(FileOpenError) ;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Таким образом, решена половина проблемы: возможным исключительным ситуациям присвоены номера, им в соответствие поставлен текст. Теперь о второй половине — как в обработчике ИС этот номер использовать.
+</font ></P>
+<P><font face="Verdana" size="3">
+Ясно, что нужно объявить свой класс ИС, включающий в себя свойство-код
+</font ></P>
+<P><font face="Verdana" size="3">
+ошибки.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+EExceptionWithCode = class(Exception)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;private</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;FErrCode : Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+public</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor CreateResCode(ResStringRec: PResStringRec);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ErrCode: Integer read FErrCode write FErrCode;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Тогда любой обработчик сможет к нему обратиться:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if E is EExceptionWithCode then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('Error code: ' + IntToStr(EExceptionWithCode(E).ErrCode) +</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+#13*10</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
++ 'Error text: ' + E.Message);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Присвоить свойству <font face="Verdana" size="2"> ErrCode</font> значение можно двумя способами:
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Добавить к классу ИС еще один конструктор, содержащий код в качестве дополнительного параметра:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor EExceptionWithCode.CreateResCode(Ident: Integer);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FErrCode := Ident;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+inherited CreateRes(Ident);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+2. Присвоить значение свойства в промежутке между созданием объекта ИС и его возбуждением:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var E: EExceptionWithCode; begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+E := EExceptionWithCode.CreateRes(NoConnectionError);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+E.ErrCode := NoConnectionError;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Raise E;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Вот, казалось бы, последний штрих. Но как быть тем, кто заранее не заготовил файл ресурсов, а работает со строками, описанными в PAS-файлах? Если вы используете оператор
+<font face="Verdana" size="2">resourcestring</font>, то помочь вам можно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Начнем с рассмотрения ключевого слова <font face="Verdana" size="2">resourcestring</font>. Вслед за ним описываются текстовые константы. Но, в отличие от ключевого слова
+<font face="Verdana" size="2">const</font>, эти константы размещаются не в сегменте данных программы, а в ресурсах, и подгружаются оттуда по мере необходимости. Каждая такая константа воспринимается и обрабатывается как обычная строка. Но за каждой из них на самом деле стоит такая структура:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PResStringRec = ^TResStringRec;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;TResStringRec = packed record&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Module: ^Cardinal;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Identifier: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если вы еще раз посмотрите на список конструкторов объекта
+<font face="Verdana" size="2">Exception</font>, вы увидите, что те из них, которые работают с ресурсами, имеют перегружаемую версию с параметром типа
+<font face="Verdana" size="2">pResstringRec</font>. Вы угадали правильно: они — для строк из resourcestring. А взглянув на приведенную выше структуру, вы увидите в ней поле
+<font face="Verdana" size="2">identifier</font>. Это то, что нам надо.
+</font ></P>
+<P><font face="Verdana" size="3">
+Чтобы у программиста, пользующегося <font face="Verdana" size="2">resourcestring</font>, голова не болела об уникальных идентификаторах ресурсных строк, среда Delphi берет на себя заботу об этом. Номера назначаются компилятором, начиная от 65 535
+<font face="Verdana" size="2">(SmallInt</font> (-D) и ниже (если рассматривать номер как тип
+<font face="Verdana" size="2">(SmallInt</font>, то выше): 65 534, 65 533 и т. п. Сначала в этом списке идут несколько сотен resourcestring-констант, описанных в VCL (из модулей, чье имя заканчивается на
+<font face="Verdana" size="2"> const</font> или <font face="Verdana" size="2"> consts: sysconst, DBConsts</font> и т. п.). Затем очередь доходит до пользовательских констант (рис. 3.3).
+</font ></P>
+<P><font face="Verdana" size="3">
+С одной стороны, отсутствие лишних забот — это большой плюс; с другой стороны, разработчик не может задать строкам те номера, какие хочет.
+</font ></P>
+<P><font face="Verdana" size="3">
+Все остальное почти ничем не отличается от работы с &quot;самодельными&quot; ресурсами. Так выглядит перегружаемая версия конструктора нашего объекта
+<font face="Verdana" size="2">EExceptionWithCode</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor EExceptionWithCode.CreateResCode(ResStringRec:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PResStringRec);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FErrCode := ResStringRec^.Identifier;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+inherited CreateRes(ResStringRec);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А так — возбуждение самой ИС:
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+resourcestring sErrorl = 'Error&nbsp; 1';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Raise EExceptionWithCode.CreateResCode</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(PResStringRec(@sErrorl));</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;Результат обработки показан на рис. 3.3.
+</font ></P>
+<p align="center"> 
+<div align="center"><IMG src="gl.3.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 3.3. </B>Результат обработки 
+  ИС типа EExceptionWithCode </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index9.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

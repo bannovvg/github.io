@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TFileStream</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TFileStream</font> позволяет создать поток для работы с файлами. При этом
+поток работает с файлом без учета типа хранящихся в нем данных (см.
+выше).
+</font ></P>
+<P><font face="Verdana" size="3">
+Полное имя файла задается в параметре <font face="Verdana" size="2"> FileName</font> при создании потока:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor Createfconst FileName: string; Mode: Word);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> Mode</font> определяет режим работы с файлом. Он составляется из флагов режима открытия:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fmCreate 
+    — файл создается;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fmOpenRead 
+    — файл открывается для чтения;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fmopenwrite 
+    — файл открывается для записи;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fmOpenReadWrite 
+    — файл открывается для чтения и записи.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+И флагов режима совместного использования:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fmShareExciusive — файл 
+    недоступен для открытия другими приложениями;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fmShareDenyWrite — другие 
+    приложения могут читать данные из файла;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fmShareDenyRead — другие 
+    приложения могут писать данные в файл;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fmShareDenyNone — другие 
+    приложения могут производить с файлом любые операции.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Для чтения и записи из потока используются методы
+<font face="Verdana" size="2"> Read</font> и <font face="Verdana" size="2">write</font>, унаследованные
+от класса <font face="Verdana" size="2">THandleStream</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.CopyBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Streaml, Stream2: TFileStream;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IntBuf: array[0..9] of Integer/begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Not OpenDlg.Execute then Exit;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Streaml := TFileStream.Create(OpenDlg.FileName, fmOpenRead);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Streaml.ReadBuffer(IntBuf, SizeOf(IntBuf));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Stream2 := TFileStream.Create('TextFile.tmp', fmOpenWrite);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Stream2.Seek(0, soFromEnd);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Stream2.WriteBuffer(IntBuf, SizeOf(IntBuf));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Stream2.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Streaml.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что в данном фрагменте кода функция
+<font face="Verdana" size="2"> seek</font> используется для записи данных в конец файлового потока.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости копирования одного файла в другой целиком используется метод
+<font face="Verdana" size="2">CopyFrom</font>, унаследованный от класса
+<font face="Verdana" size="2">Tstream</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.CopyBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Streaml, Stream2: TFileStream;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin if Not OpenDlg.Execute then&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Exit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Streaml := TFileStream.Create(OpenDlg.FileName, fmOpenRead);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Stream2 := TFileStream.Create('Sample.tmp1, fmOpenWrite);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Stream2.Seek{0, soFromEnd);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Stream2.CopyFrom(Streaml, Streaml.Size);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Streaml.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Stream2.Free;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что в данном случае идя определения размера передаваемого потока необходимо использовать свойство
+<font face="Verdana" size="2"> stream, size,</font> которое дает реальный объем данных, содержащихся в потоке. Функция
+<font face="Verdana" size="2"> sizeof</font> (<font face="Verdana" size="2">stream)</font> в этом случае даст размер объекта потока, и не более того.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

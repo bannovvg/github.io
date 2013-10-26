@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Взаимосвязь компонентов многомерного представления данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+При создании в приложении формы для многомерного представления данных следует помнить, что при этом обязательно должны решаться следующие задачи:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;должен быть создан группирующий и суммирующий запрос 
+    SQL, обеспечивающий открытие набора данных для кросстаба;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;перед отображением данных необходимо настроить параметры 
+    размерностей кросстаба;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;непосредственный показ данных в кросстабе;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;работающий кросстаб должен эффективно управляться на 
+    уровне размерностей.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Для этого в форме приложения требуется разместить как минимум пять компонентов со страницы <B>Decision Cube </B>Палитры компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания запроса SQL можно использовать компонент
+<font face="Verdana" size="2"> TDecisionQuery</font> или обычный
+компонент&nbsp; <font face="Verdana" size="2">TQuery</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Запрос должен быть связан с компонентом <font face="Verdana" size="2">TDecisionCube</font>, который осуществляет подготовку набора данных запроса к многомерному показу.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для соединения многомерного набора данных с компонентом отображения данных используется компонент
+<font face="Verdana" size="2"> TDecisionSource</font> — полный функциональный аналог
+<font face="Verdana" size="2">TDataSource</font>. Этот компонент, в свою очередь, должен связываться и с набором данных, и с инструментом многомерного представления данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Непосредственный показ многомерного набора данных проводится при помощи компонентов
+<font face="Verdana" size="2"> TDecisionGrid</font> и <font face="Verdana" size="2">TDecisionGraph</font>. Они должны поддерживать соединение с компонентом
+<font face="Verdana" size="2">TDecisionSource</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наконец, управление многомерным представлением данных реализует компонент
+<font face="Verdana" size="2">TDecisionPivot</font>, он также должен быть связан с компонентом
+<font face="Verdana" size="2">TDecisionSource</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Допустим, что на форме расположены следующие компоненты:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">TDecisionQuery</font> по
+    имени <font face="Verdana" size="2">DecisionQuery</font><font face="Verdana" size="2">1</font>;</li>
+  <li>&nbsp;<font face="Verdana" size="2">TDecisionCube</font> по
+    имени <font face="Verdana" size="2">DecisionCubel</font>;</li>
+  <li>&nbsp;<font face="Verdana" size="2">TDecisionSource</font> по
+    имени <font face="Verdana" size="2">DecisionSourcel</font>;</li>
+  <li>&nbsp;<font face="Verdana" size="2">TDecisionGrid</font> по
+    имени <font face="Verdana" size="2">DecisionGrid1;</font></li>
+  <li>&nbsp;<font face="Verdana" size="2">TDecisionPivot</font> по
+    имени <font face="Verdana" size="2">DecisionPivotl</font>.</li>
+</ul>
+<P><font face="Verdana" size="3">
+Тогда для того, чтобы связать все эти компоненты в единый работающий механизм многомерного представления данных, нужно установить значения для их важнейших свойств. Значения свойств представлены в табл. 30.1.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 30.1. </B>Как связать 
+  компоненты многомерного представления данных </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="455" HEIGHT="195">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="113" HEIGHT="27">
+<DIV WIDTH="148" HEIGHT="27" style="width: 32; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Свойство</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="122" HEIGHT="27">
+<DIV WIDTH="150" HEIGHT="27" style="width: 19; height: 27">
+<P><font face="Verdana" size="3">
+<b>Значение</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="27">
+<DIV WIDTH="346" HEIGHT="27" style="width: 57; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="541" HEIGHT="31">
+<DIV WIDTH="148" HEIGHT="31" style="width: 104; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"><b>
+TBecisionCube</b></font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="113" HEIGHT="42">
+<DIV WIDTH="148" HEIGHT="42" style="width: 56; height: 2">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DataSet</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="122" HEIGHT="42">
+<DIV WIDTH="150" HEIGHT="42" style="width: 112; height: 3">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">DecisionQuery1</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="42">
+<DIV WIDTH="346" HEIGHT="42" style="width: 209; height: 54">
+<P><font face="Verdana" size="3">Определяет компонент доступа к данным,&nbsp;
+который создает набор данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="541" HEIGHT="27">
+<DIV WIDTH="148" HEIGHT="27" style="width: 79; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"><b>
+TDecisionSource</b></font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="113" HEIGHT="42">
+<DIV WIDTH="148" HEIGHT="42" style="width: 96; height: 3">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DecisionCube</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="122" HEIGHT="42">
+<DIV WIDTH="150" HEIGHT="42" style="width: 104; height: 3">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">DecisionCubel</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="42">
+<DIV WIDTH="346" HEIGHT="42" style="width: 191; height: 54">
+<P><font face="Verdana" size="3">Указывает на компонент формирования многомерного набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="541" HEIGHT="1">
+<DIV WIDTH="148" HEIGHT="37" style="width: 104; height: 4">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"><b>TDecisionGrid</b></font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="113" HEIGHT="30">
+<DIV WIDTH="148" HEIGHT="30" style="width: 32; height: 30">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DecisionSource</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="122" HEIGHT="30">
+<DIV WIDTH="150" HEIGHT="30" style="width: 82; height: 30">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">DecisionSourcel</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="30">
+<DIV WIDTH="346" HEIGHT="30" style="width: 187; height: 35">
+<P><font face="Verdana" size="3">Ссылается на компонент <font face="Verdana" size="2"> TDecisionSource</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="503" HEIGHT="27">
+<DIV WIDTH="150" HEIGHT="27" style="width: 113; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"><b>
+TDecisionPivot</b></font>
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="117" HEIGHT="32">
+<DIV WIDTH="150" HEIGHT="32" style="width: 61; height: 32">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DecisionSource</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="32">
+<DIV WIDTH="148" HEIGHT="32" style="width: 102; height: 32">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">DecisionSourcel</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="258" HEIGHT="32">
+<DIV WIDTH="339" HEIGHT="32" style="width: 176; height: 32">
+<P><font face="Verdana" size="3">
+Ссылается на компонент <font face="Verdana" size="2"> TDecisionSource</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Если задать текст запроса SQL и открыть набор данных, то вся цепочка заработает, причем ее поведение ничем не отличается от поведения во время выполнения приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь, когда мы узнали, как объединить компоненты многомерного представления данных в единую систему, настало время более подробно изучить возможности каждого компонента.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

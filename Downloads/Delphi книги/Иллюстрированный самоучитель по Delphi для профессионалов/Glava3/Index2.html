@@ -1,0 +1,472 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Исключительная ситуация как класс</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Что же такое исключительная ситуация? Интуитивно понятно, что это — некое нештатное событие, могущее повлиять на дальнейшее выполнение программы. Если вы ранее писали в среде Turbo Pascal или подобной, то вы
+</font ></P>
+<P><font face="Verdana" size="3">
+наверняка пытались избежать таких ситуаций, вводя многочисленные проверки данных и кодов возврата функций. От этого громоздкого кода можно раз и навсегда избавиться, взяв на вооружение механизм, реализованный в Delphi.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компилятор Delphi генерирует код, который перехватывает любое такое нештатное событие, сохраняет необходимые данные о состоянии программы, и выдает разработчику... Что можно выдать в объектно-ориентированном языке программирования? Конечно же, объект. С точки зрения Object Pascal исключительная ситуация — это объект.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вы можете получить и обработать этот объект, предусмотрев в программе специальную языковую конструкцию
+(<font face="Verdana" size="2">try. .except</font>). Если такая конструкция не предусмотрена, все равно исключение будет обработано — в недрах VCL есть соответствующие обработчики, окружающие все потенциально опасные места.
+</font ></P>
+<P><font face="Verdana" size="3">
+Чем же различаются между собой исключительные ситуации? Как отличить одну исключительную ситуацию от другой? Поскольку это объекты, они отличаются классом (объектным типом). В модуле<font face="Verdana" size="2"> SYSUTILS.PAS
+</font> описан объектный тип <font face="Verdana" size="2">Exception</font>. Он является предком для всех других объектов — исключительных ситуаций. Вот он:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Exception = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;private</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FMessage: string;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; FHelpContext: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;public</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor Create(const Msg: string);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor CreateEmt(const Msg: string; const Args: array of const);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor CreateRes(Ident: Integer); overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor CreateRes(ResStringRec: PResStringRec); overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor CreateResFmt(Ident: Integer; const Args: array of const);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+overload; constructor CreateResFmt(ResStringRec: PResStringRec; const Args: array of const);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor CreateHelp(const Msg: string; AHelpContext: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;constructor CreateFmtHelp(const Msg: string; const Args:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+array of const;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AHelpContext: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;constructor CreateResHelp(Ident: Integer; AHelpContext: Integer);</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">constructor CreateResHelp(ResStringRec:
+PResStringRec; AHelpContext: Integer); overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor CreateResFmtHelp(ResStringRec: PResStringRec; const Args: array of const; AHelpContext:
+Integer); overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor CreateResFmtHelp(Ident: Integer; const Args: array of const; AHelpContext: Integer);
+overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property HelpContext: Integer read FHelpContext write
+FHelpContext;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property Message: string read FMessage write
+FMessage;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ExceptClass = class of Exception;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Как видно из приведенного описания класса <font face="Verdana" size="2">Exception</font>, у него имеется двенадцать (!) конструкторов, позволяющих задействовать при создании объекта текстовые строки из ресурсов приложения (имя включает строку
+<font face="Verdana" size="2">Res</font>), форматирование текста (включает
+<font face="Verdana" size="2">Fmt</font>), связь с контекстом справочной системы (включает
+<font face="Verdana" size="2">Help</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Конструкторы, в названии которых встречается подстрока
+<font face="Verdana" size="2">Fmt</font>, могут вставлять в формируемый текст сообщения об ошибке значения параметров, как это делает стандартная функция
+<font face="Verdana" size="2">Format</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+If MemSize &gt; Limit then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+raise EOutOfMemory.CreateFmt('Cannot allocate more than %d&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">bytes',[Limit]);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если в названии присутствует подстрока <font face="Verdana" size="2">Res</font>, это означает, что текст сообщения будет загружаться из ресурсов приложения. Это особенно полезно при создании локализованных версий программных продуктов, когда нужно сменить язык всех сообщений, ничего не компилируя заново.
+</font ></P>
+<P><font face="Verdana" size="3">
+И наконец, если в названии фигурирует подстрока
+<font face="Verdana" size="2">Help</font>, то такой конструктор инициализирует свойство
+<font face="Verdana" size="2"> HelpContext</font> создаваемого объекта. Естественно, система помощи должна быть создана и в ней должна иметься статья, связанная с этим контекстом. Теперь пользователь может затребовать помощь для данной ситуации, скажем, нажав клавишу &lt;F1&gt; в момент показа сообщения об ИС.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тип <font face="Verdana" size="2"> Exception</font> порождает многочисленные дочерние типы, соответствующие часто встречающимся случаям ошибок ввода/вывода, распределения памяти и т. п. Дерево исключительных ситуаций Delphi 7 приведено на рис. 3.1.
+</font ></P>
+<P><font face="Verdana" size="3">
+Заметим, что тип <font face="Verdana" size="2"> Exception</font> и его потомки представляют собой исключение из правила, предписывающего все объектные типы именовать с буквы Т.
+</font ></P>
+<P><font face="Verdana" size="3">
+Потомки
+<B> </B><font face="Verdana" size="2">Exception</font> начинаются
+с <font face="Verdana" size="2">Е</font>, например <font face="Verdana" size="2">EZeroDivide</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для экономии места потомки нескольких важных объектов не показаны. Ниже приведены табл. 3.1—3.3, содержащие описания этих групп исключительных ситуаций.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вы можете самостоятельно инициировать исключительную ситуацию при выполнении тех или иных действий. Но, хотя синтаксис конструктора объекта
+<font face="Verdana" size="2"> Exception</font> похож на конструкторы всех других объектов, создается он по-
+особенному.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.3.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 3.1. </B>Дерево объектов 
+  исключительных ситуаций Delphi 7 </font ></P>
+<P><font face="Verdana" size="3"> </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 3.1. </B>Исключительные 
+  ситуации при работе с памятью (порождены<B> </B>от<B> </B><font face="Verdana" size="2">EHeapException</font>) 
+  </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="457" HEIGHT="85">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="23"> <DIV WIDTH="171" HEIGHT="23" style="width: 50; height: 23"> 
+        <P><font face="Verdana" size="3"> <b> Тип</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="23"> <DIV WIDTH="456" HEIGHT="23" style="width: 188; height: 23"> 
+        <P><font face="Verdana" size="3"> <b> Условие возникновения</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="16"> 
+      <DIV WIDTH="171" HEIGHT="35" style="width: 115; height: 19"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EOutOfMemory</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="16"> 
+      <DIV WIDTH="456" HEIGHT="35" style="width: 253; height: 18"> 
+        <P><font face="Verdana" size="3"> Недостаточно места в куче (памяти) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="23"> 
+      <DIV WIDTH="171" HEIGHT="23" style="width: 134; height: 15"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EOutOfResources</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="23"> 
+      <DIV WIDTH="456" HEIGHT="23" style="width: 214; height: 23"> 
+        <P><font face="Verdana" size="3"> Нехватка системных ресурсов </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="23"> 
+      <DIV WIDTH="171" HEIGHT="40" style="width: 120; height: 22"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EInvalidPointer</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="23"> 
+      <DIV WIDTH="456" HEIGHT="40" style="width: 266; height: 22"> 
+        <P><font face="Verdana" size="3"> Недопустимый указатель (обычно <font face="Verdana" size="2">nil</font>) 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 3.2. </B>Исключительные 
+  ситуации целочисленной математики (порождены от<B> </B><font face="Verdana" size="2">EIntError</font>) 
+  </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="459" HEIGHT="123">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="31"> <DIV WIDTH="156" HEIGHT="31" style="width: 48; height: 31"> 
+        <P><font face="Verdana" size="3"> <b> Тип</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="348" HEIGHT="31"> <DIV WIDTH="473" HEIGHT="31" style="width: 191; height: 31"> 
+        <P><font face="Verdana" size="3"> <b> Условие возникновения</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="31"> 
+      <DIV WIDTH="156" HEIGHT="31" style="width: 87; height: 31"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EDivByZero</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="348" HEIGHT="31"> 
+      <DIV WIDTH="473" HEIGHT="31" style="width: 282; height: 31"> 
+        <P><font face="Verdana" size="3"> Попытка деления на ноль (целое число) 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="29"> 
+      <DIV WIDTH="156" HEIGHT="29" style="width: 100; height: 29"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ERangeError</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="348" HEIGHT="29"> 
+      <DIV WIDTH="473" HEIGHT="29" style="width: 327; height: 29"> 
+        <P><font face="Verdana" size="3"> Число или выражение выходит за допустимый 
+          диапазон </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="33"> 
+      <DIV WIDTH="156" HEIGHT="33" style="width: 105; height: 33"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EIntOverflow</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="348" HEIGHT="33"> 
+      <DIV WIDTH="473" HEIGHT="33" style="width: 219; height: 33"> 
+        <P><font face="Verdana" size="3"> Целочисленное переполнение </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 3.3. </B>Исключительные 
+  ситуации математики с плавающей точкой (порождены от EMa thError) </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="456" HEIGHT="228">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="33"> <DIV WIDTH="177" HEIGHT="33" style="width: 39; height: 33"> 
+        <P><font face="Verdana" size="3"> <b> Тип</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="33"> <DIV WIDTH="420" HEIGHT="33" style="width: 187; height: 33"> 
+        <P><font face="Verdana" size="3"> <b> Условие возникновения</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="27"> 
+      <DIV WIDTH="177" HEIGHT="27" style="width: 87; height: 27"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EInvalidOp</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="27"> 
+      <DIV WIDTH="420" HEIGHT="27" style="width: 144; height: 27"> 
+        <P><font face="Verdana" size="3"> Неверная операция </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="27"> 
+      <DIV WIDTH="177" HEIGHT="27" style="width: 92; height: 27"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EZeroDivide</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="27"> 
+      <DIV WIDTH="420" HEIGHT="27" style="width: 181; height: 27"> 
+        <P><font face="Verdana" size="3"> Попытка деления на ноль </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="31"> 
+      <DIV WIDTH="177" HEIGHT="31" style="width: 84; height: 31"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EOverflow</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="31"> 
+      <DIV WIDTH="420" HEIGHT="31" style="width: 251; height: 31"> 
+        <P><font face="Verdana" size="3"> Переполнение с плавающей точкой </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="23"> 
+      <DIV WIDTH="177" HEIGHT="23" style="width: 85; height: 23"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EUnderflow</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="23"> 
+      <DIV WIDTH="420" HEIGHT="23" style="width: 161; height: 23"> 
+        <P><font face="Verdana" size="3"> Исчезновение порядка </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="34"> 
+      <DIV WIDTH="177" HEIGHT="34" style="width: 134; height: 34"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EInvalidArgument</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="34"> 
+      <DIV WIDTH="420" HEIGHT="34" style="width: 318; height: 34"> 
+        <P><font face="Verdana" size="3"> Неверный аргумент математических функций 
+          </font ></P>
+        </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> Для этого используется оператор <font face="Verdana" size="2">raise</font>, 
+  за которым в качестве параметра должен идти экземпляр объекта типа <font face="Verdana" size="2">Exception</font>. 
+  Обычно сразу за оператором следует конструктор класса ИС: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> raise EMathError.Create(' 
+    ') ;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> но можно и разделить создание и возбуждение 
+  исключительной ситуации: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var E: EMathError;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> E := EMathError.Create 
+    С');</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> raise E;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Оператор <font face="Verdana" size="2"> raise</font> 
+  передает созданную исключительную ситуацию ближайшему блоку<font face="Verdana" size="2"> 
+  try. .except</font> (см. ниже). </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if С = 0 then</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> raise EDivByZero.Create('Деление 
+    на ноль')</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> else</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> А := В/С;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Самостоятельная инициализация ИС может пригодиться 
+  при программировании реакции приложения на ввод данных, для контроля значений 
+  переменных и т. д. В таких случаях желательно создавать собственные классы ИС, 
+  специально приспособленные для ваших нужд. Также полезно использовать специально 
+  спроектированные исключительные ситуации при создании собственных объектов и 
+  компонентов. Так, многие важнейшие классы VCL — списки, потоки, графические 
+  объекты — сигнализируют о своих (или ваших?) проблемах созданием соответствующей 
+  ИС —<font face="Verdana" size="2"> EListError, EInvalidGraphic, EPrinter</font> 
+  и т. д. </font ></P>
+<P><font face="Verdana" size="3"> Самый важный отличительный признак объекта <font face="Verdana" size="2"> 
+  Exception</font> — это все же класс, к которому он принадлежит. Именно факт 
+  принадлежности возникшей ИС к тому или иному классу говорит о том, что случилось. 
+  Если же нужно детализировать проблему, можно присвоить значение свойству <font face="Verdana" size="2">Message</font>. 
+  Если и этого мало, можно добавить в объект новые поля. Так, в ИС <font face="Verdana" size="2"> 
+  EinOutError</font> (ошибка ввода/вывода) есть поле <font face="Verdana" size="2">ErrorCode</font>, 
+  значение которого соответствует произошедшей ошибке — запрету записи, отсутствию 
+  или повреждению файла и т. д. </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> .FileOpenС 
+    с:\myfile.txt', fmOpenWrite);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> on E: EinOutError 
+    do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;case E.ErrorCode 
+    of</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ERROR_FILE_NOT_FOUND 
+    {=2}: ShowMessage('Файл не найден !');</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;ERROR_ACCESS_DENIED 
+    {=5}: ShowMessage('Доступ запрещен!');&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ERROR_DISK_FULL 
+    {=112}: ShowMessage ('Диск переполнен!') ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Впрочем, ИС <font face="Verdana" size="2">EInOutError</font> 
+  возникают только тогда, когда установлена опция компилятора <font face="Verdana" size="2"> 
+  {$IOCHECKS ON}</font> (или иначе <font face="Verdana" size="2">{$I+}</font>). 
+  В противном случае проверку переменной <font face="Verdana" size="2">IOResult</font> 
+  (известной еще по Turbo Pascal) нужно делать самому. </font ></P>
+<P><font face="Verdana" size="3"> Еще более &quot;продвинутый&quot; пример — ИС 
+  <font face="Verdana" size="2">EDBEngineError</font>. Она имеет свойства <font face="Verdana" size="2"> 
+  ErrorCount</font> и свойство-массив <font face="Verdana" size="2">Errors</font>: 
+  одна операция с базой данных может породить сразу несколько ошибок. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index1.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

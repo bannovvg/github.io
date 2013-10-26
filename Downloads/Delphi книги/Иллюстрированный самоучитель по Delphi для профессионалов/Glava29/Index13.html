@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Взаимные 
+  исключения</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Объект типа взаимное исключение (<font face="Verdana" size="2">mutex</font>) позволяет только одному потоку в данное время владеть им. Если продолжать аналогии, то этот объект можно сравнить с эстафетной палочкой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс, инкапсулирующий взаимное исключение, —
+<font face="Verdana" size="2"> TMutex</font> — находится в модуле IPCTHRD.PAS (пример
+<font face="Verdana" size="2">IPCDEMOS</font>). Конструктор:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor Create (const Name: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задает имя создаваемого объекта. Первоначально он не принадлежит никому. (Но функция API
+<font face="Verdana" size="2"> createMutex,</font> вызываемая в нем, позволяет передать созданный объект тому потоку, в котором это произошло.) Далее метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Get(TimeOut: Integer): Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+производит попытку в течение <font face="Verdana" size="2"> Timeout</font> миллисекунд завладеть объектом (в этом случае результат равен
+<font face="Verdana" size="2">True</font>). Если объект более не нужен, следует вызвать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Release: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Программист может использовать взаимное исключение, чтобы избежать считывания и записи общей памяти несколькими потоками одновременно.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

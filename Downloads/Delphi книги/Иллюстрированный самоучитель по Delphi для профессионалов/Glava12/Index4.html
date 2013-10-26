@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  таблицы</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент таблицы обеспечивает доступ к таблице базы данных целиком, создавая набор данных, структура полей которого полностью повторяет таблицу БД. За счет этого компонент прост в настройке и обладает многими дополнительными функциями, которые обеспечивают применение табличных индексов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Но в практике программирования работа с таблицами целиком используется не так часто. А при работе с серверами баз данных промежуточное ПО, используемых технологий доступа к данным, все равно транслирует запрос на получение табличного набора данных в простейший запрос SQL, например:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SELECT * FROM Orders</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В такой ситуации применение табличных компонентов становится менее эффективным, чем использование запросов.
+</font ></P>
+<P><font face="Verdana" size="3">
+После соединения с источником данных (процесс подключения для каждой технологии подробно рассматривается в части IV)
+необходимо задать имя таблицы в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TableName: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Иногда в свойстве <font face="Verdana" size="2">TаblеТуре</font> дополнительно задается тип таблицы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если соединение с источником данных настроено правильно, имя таблицы можно выбрать из выпадающего списка свойства
+<font face="Verdana" size="2">TableName</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Преимуществом табличного компонента является использование индексов, которые ускоряют работу с таблицей. Все индексы, созданные в базе данных для таблицы, автоматически загружаются в компонент. Их параметры доступны через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexDefs: TIndexDefs;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Подробно класс <font face="Verdana" size="2"> TIndexDefs</font> рассматривается ниже в этой главе.
+</font ></P>
+<P><font face="Verdana" size="3">
+При работе с компонентом разработчик имеет возможность управлять индексами.
+</font ></P>
+<P><font face="Verdana" size="3">
+Существующий индекс можно выбрать в Инспекторе объектов в списке свойств
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexName: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или использовать свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexFieldNames:   String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в котором можно задать произвольное сочетание имен индексированных полей таблицы. Имена полей разделяются символом точкой с запятой. Таким образом, при помощи свойства
+<font face="Verdana" size="2"> IndexFieldNames</font> можно создавать составные индексы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойства <font face="Verdana" size="2"> IndexName</font> и <font face="Verdana" size="2"> IndexFieldNames</font> нельзя использовать одновременно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Число полей, используемых в текущем индексе табличного компонента, возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexFieldCcunt: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexFields:   [Index:   Integer]:   TField;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+представляет собой индексированный список полей, входящих в текущий индекс:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for i := 0 to MyTable.IndexFieldCount — 1 do MyTable.IndexFields[i].Enabled := False;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для выполнения операций с таблицами и индексами целиком в табличных компонентах реализовано несколько методов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CreateTable;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+создает новую таблицу в базе данных, используя заданное имя и описание полей, и индексов из свойств
+<font face="Verdana" size="2">TFieldDefs</font> и <font face="Verdana" size="2">TindexDefs</font>. Если таблица с таким именем уже имеется в базе данных, то она будет уничтожена и создана заново с новой структурой и данными.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EmptyTable;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+удаляет из набора данных и таблицы базы данных все записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DeleteTable;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+уничтожает таблицу базы данных, связанную с компонентом. Набор данных должен быть закрыт.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIndexOption = (ixPrimary, ixUnique, ixDescending, ixCaselnsensitive,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ixExpression, ixNonMaintained);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIndexOptions = set of TIndexOption;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Addlndex(const Name, Fields: String; Options: TIndexOptions, const DescFields: String='');</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+добавляет к таблице БД новый индекс. Параметр
+<font face="Verdana" size="2"> Name</font> задает имя индекса. В параметре
+<font face="Verdana" size="2"> Fields</font> через точку с запятой определяются имена полей, входящих в индекс. Параметр
+<font face="Verdana" size="2"> DescFields</font> задает описание индекса из констант,
+объявленных<B> </B>в<B> </B>типе <font face="Verdana" size="2">TIndexOption</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Deletelndex(const Name: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+уничтожает индекс.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, табличные компоненты содержат свойства и методы, описываемые в гл. 14.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

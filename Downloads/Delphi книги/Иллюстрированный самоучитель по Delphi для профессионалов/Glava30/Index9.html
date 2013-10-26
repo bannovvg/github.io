@@ -1,0 +1,483 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TDecisionGrid</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDecisionGrid</font> предназначен для многомерного представления данных в табличном виде. Параметры отображаемого набора данных (какие размерности будут видны при открытии, как группировать данные, как управлять размерностями) настраиваются при помощи других компонентов многомерного представления. В компоненте
+<font face="Verdana" size="2"> TDecisionGrid</font> можно настроить только свойства самой сетки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для управления графиком во время выполнения можно использовать компонент
+<font face="Verdana" size="2">TDecisionPivot</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В табл. 30.5 приведены основные свойства и методы компонента.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 30.5. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TDecisionGrid</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="357" HEIGHT="800">
+<tr>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="224" HEIGHT="29">
+<DIV WIDTH="312" HEIGHT="29" style="width: 75; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="29">
+<DIV WIDTH="44" HEIGHT="29" style="width: 2; height: 29">
+<P><font face="Verdana" size="3">
+<b> Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="29">
+<DIV WIDTH="279" HEIGHT="29" style="width: 88; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</tr>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="507" HEIGHT="29">
+Свойства
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="224" HEIGHT="90">
+<DIV WIDTH="312" HEIGHT="90" style="width: 192; height: 37">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property  Cells [ACol,   ARow: Integer] :   string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="90">
+<DIV WIDTH="44" HEIGHT="90" style="width: 1; height: 90">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="90">
+<DIV WIDTH="279" HEIGHT="90" style="width: 227; height: 90">
+<P><font face="Verdana" size="3">
+Индексированный массив значений всех ячеек компонента в строковом формате
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="224" HEIGHT="46">
+<DIV WIDTH="312" HEIGHT="46" style="width: 157; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ColCount :   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="46">
+<DIV WIDTH="44" HEIGHT="46" style="width: 5; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RO&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="46">
+<DIV WIDTH="279" HEIGHT="46" style="width: 234; height: 46">
+<P><font face="Verdana" size="3">
+Возвращает общее число колонок в сетке
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="224" HEIGHT="86">
+<DIV WIDTH="312" HEIGHT="86" style="width: 199; height: 86">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DecisionSource: TDecisionSource;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="86">
+<DIV WIDTH="44" HEIGHT="86" style="width: 3; height: 86">
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">Рb&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="86">
+<DIV WIDTH="279" HEIGHT="86" style="width: 237; height: 86">
+<P><font face="Verdana" size="3">
+Указывает на компонент <font face="Verdana" size="2">TDecisionSource</font>, через который осуществляется связь с набором данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="224" HEIGHT="64">
+<DIV WIDTH="312" HEIGHT="64" style="width: 167; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Dimensions: TDisplayDims;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="64">
+<DIV WIDTH="44" HEIGHT="64" style="width: 1; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="64">
+<DIV WIDTH="279" HEIGHT="64" style="width: 246; height: 64">
+<P><font face="Verdana" size="3">
+Объект <font face="Verdana" size="2"> TDisplayDims</font> представляет индексированный список объектов визуальных свойств размерностей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="224" HEIGHT="98">
+<DIV WIDTH="312" HEIGHT="98" style="width: 164; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FixedCols: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="98">
+<DIV WIDTH="44" HEIGHT="98" style="width: 1; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="98">
+<DIV WIDTH="279" HEIGHT="98" style="width: 239; height: 98">
+<P><font face="Verdana" size="3">
+Возвращает число фиксированных колонок, которые используются для отображения информации о размерностях (названия, значения, обозначения)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="224" HEIGHT="100">
+<DIV WIDTH="312" HEIGHT="100" style="width: 156; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FixedRows: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="100">
+<DIV WIDTH="44" HEIGHT="100" style="width: 1; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="100">
+<DIV WIDTH="279" HEIGHT="100" style="width: 239; height: 100">
+<P><font face="Verdana" size="3">
+Возвращает число фиксированных строк, которые используются для отображения информации о размерностях (названия, значения, обозначения)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="224" HEIGHT="248">
+<DIV WIDTH="312" HEIGHT="248" style="width: 212; height: 248">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDecisionGridOption = (cgGridLines,   cgOutliner, cgPivo table) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDecisionGridOptions = set of TDecisionGridOption;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Options: TDecisionGridOptions;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="248">
+<DIV WIDTH="44" HEIGHT="248" style="width: 2; height: 248">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="248">
+<DIV WIDTH="279" HEIGHT="248" style="width: 229; height: 248">
+<P><font face="Verdana" size="3">
+Определяет общие настройки компонента:
+</font ></P>
+<ul>
+          <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif">cgGridLines — отображаются вертикальные и горизонтальные 
+            разделительные линии;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;cgOutliner — отображаются элементы управления 
+            в виде знаков &quot;+&quot; и &quot;-&quot; для открытия и закрытия 
+            размерностей;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> cgpivotable — размерности можно переупорядочивать 
+            при помощи перетаскивания</font></li>
+</ul>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="224" HEIGHT="38">
+<DIV WIDTH="312" HEIGHT="38" style="width: 216; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RcwCount:   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="38">
+<DIV WIDTH="44" HEIGHT="38" style="width: 6; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="38">
+<DIV WIDTH="279" HEIGHT="38" style="width: 232; height: 38">
+<P><font face="Verdana" size="3">
+Возвращает общее число строк в сетке
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="232" HEIGHT="65">
+<DIV WIDTH="298" HEIGHT="65" style="width: 193; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ShowCubeEditor: Boolean;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="65">
+<DIV WIDTH="38" HEIGHT="65" style="width: 3; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="65">
+<DIV WIDTH="300" HEIGHT="65" style="width: 250; height: 65">
+<P><font face="Verdana" size="3">
+Разрешает или запрещает использование специализированного редактора компонента TDecisionCube
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="232" HEIGHT="66">
+<DIV WIDTH="298" HEIGHT="66" style="width: 206; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Totals: Boolean;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="66">
+<DIV WIDTH="38" HEIGHT="66" style="width: 2; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="66">
+<DIV WIDTH="300" HEIGHT="66" style="width: 250; height: 66">
+<P><font face="Verdana" size="3">
+При значении True сетка имеет промежуточные суммы по каждой колонке и строке
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="563" HEIGHT="29">
+<DIV WIDTH="298" HEIGHT="29">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="232" HEIGHT="306">
+<DIV WIDTH="298" HEIGHT="306" style="width: 224; height: 361">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDecisionDrawStates =         i (dsGroupStart, dsRowCaption,&nbsp; dsColCaption,
+dsSum,&nbsp; dsRowValue, dsColValue,&nbsp; dsData, dsOpenAfter,&nbsp;
+dsCloseAfter, dsCloseBefore,&nbsp; dsOpenBefore, dsRowIndicator, dsColIndicator,
+dsRowPlus, dsColPlus, dsNone);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDecisionDrawState = set of TDecisionDrawStates;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CellDrawState(ACol, ARow: Integer; var Value: string; var DrawState: TDecisionDrawState) : boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="306">
+<DIV WIDTH="38" HEIGHT="306" style="width: 11; height: 306">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="306">
+<DIV WIDTH="300" HEIGHT="306" style="width: 235; height: 306">
+<P><font face="Verdana" size="3">
+Позволяет определить назначение любой ячейки сетки. Параметры
+<font face="Verdana" size="2"> ACol</font> и <font face="Verdana" size="2"> ARow</font> определяют положение ячейки в сетке.
+</font ></P>
+<P><font face="Verdana" size="3">
+В параметре <font face="Verdana" size="2"> Value</font> возвращается строка, содержащая значение в том виде, как оно представлено в ячейке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> DrawState</font> возвращает информацию о назначении ячейки
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="232" HEIGHT="79">
+<DIV WIDTH="298" HEIGHT="79" style="width: 214; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">function CellValueArray (ACol,&nbsp; ARow:
+Integer; var ValueArray: TValueArray): boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="79">
+<DIV WIDTH="38" HEIGHT="79" style="width: 6; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="79">
+<DIV WIDTH="300" HEIGHT="79" style="width: 219; height: 114">
+<P><font face="Verdana" size="3">
+Возвращает индексы всех полей, данные которых суммированы в ячейке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> ValueArray</font> содержит индексы полей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDecisionGrid</font> является предком класса
+<font face="Verdana" size="2"> TCustomGrid</font> и поэтому обладает всеми базовыми свойствами и методами, присущими сетке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для доступа к значению каждой ячейки используется свойство
+<font face="Verdana" size="2">cells</font>. Адресация ячеек осуществляется с левой верхней ячейки, которая имеет индексы [0,0].
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> Dimensions</font> является экземпляром объекта
+<font face="Verdana" size="2">TDisplayDims</font>, который инкапсулирует индексированный список указателей на экземпляры объектов
+<font face="Verdana" size="2">TDispiayDim</font>. Каждый такой объект содержит важнейшие визуальные свойства размерностей. При щелчке на кнопке в однострочном редакторе свойства в Инспекторе объектов разворачивается список всех таких объектов.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

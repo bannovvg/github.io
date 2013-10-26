@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">События</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Программистам, давно работающим в Windows, наверное, не нужно пояснять смысл термина &quot;событие&quot;. Сама эта среда и написанные для нее программы управляются событиями, возникающими в результате воздействий пользователя, аппаратуры компьютера или других программ. Весточка о наступлении события — это сообщение Windows, полученное так называемой функцией окна. Таких сообщений сотни, и, по большому счету, написать программу для Windows — значит определить и описать реакцию на некоторые из них.
+</font ></P>
+<P><font face="Verdana" size="3">
+Работать с таким количеством сообщений, даже имея под рукой справочник, нелегко. Поэтому одним из больших преимуществ Delphi является то, что программист избавлен от необходимости работать с сообщениями Windows (хотя такая возможность у него есть). Типовых событий в Delphi — не более двух десятков, и все они имеют простую интерпретацию, не требующую глубоких знаний среды.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим, как реализованы события на уровне языка Object Pascal. Событие —
+это свойство процедурного типа, предназначенное для создания пользовательской реакции на то или иное входное воздействие:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnMyEvent: TMyEvent read FOnMyEvent write FOnMyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь <font face="Verdana" size="2"> FOnMyEvent</font> — поле процедурного типа, содержащее адрес некоторого метода. Присвоить такому свойству значение — значит указать объекту адрес метода, который будет вызываться в момент наступления события. Такие методы называют обработчиками событий. Например, запись:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Application.OnActivate := MyActivatingMethod;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+означает, что при активизации объекта <font face="Verdana" size="2"> Application</font> (так называется объект, соответствующий работающему приложению) будет вызван метод-обработчик
+<font face="Verdana" size="2"> MyActivatingMethod</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Внутри библиотеки времени выполнения Delphi вызовы обработчиков событий находятся в методах, обрабатывающих сообщения Windows. Выполнив необходимые действия, этот метод проверяет, известен ли адрес обработчика, и, если это так, вызывает его:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Assigned(FOnMyEvent) then FOnMyEvent(Self);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+События имеют разное количество и тип параметров в зависимости от происхождения и предназначения. Общим для всех является параметр
+<font face="Verdana" size="2"> sender</font> — он указывает на объект-источник события. Самый простой тип —
+<font face="Verdana" size="2">TNotifyEvent</font> — не имеет других параметров:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TNotifyEvent = procedure   (Sender:   TObject)   of object;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Тип метода, предназначенный для извещения о нажатии клавиши, предусматривает передачу программисту кода этой клавиши о передвижении мыши — ее текущих координат и т. п. Все события в Delphi принято предварять префиксом
+<font face="Verdana" size="2"> On: onCreate, onMouseMove, onPaint </font> и т. д. Дважды щелкнув в Инспекторе объектов на странице
+<font face="Verdana" size="2"> Events</font> в поле любого события, вы получите в программе заготовку метода нужного типа. При этом его имя будет состоять из имени текущего компонента и имени события (без префикса On), а относиться он будет к текущей форме. Пусть, например, на форме
+<font face="Verdana" size="2"> Forml</font> есть текст <font face="Verdana" size="2">Label1</font>. Тогда для обработки щелчка мышью (событие
+<font face="Verdana" size="2">O</font><font face="Verdana" size="2">nclick</font>) будет создана заготовка метода
+<font face="Verdana" size="2">TFormi.Label1click:</font>
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.LabellClick(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Поскольку события — это свойства объекта, их значения можно изменять в любой момент во время выполнения программы. Эта замечательная возможность называется делегированием.
+Можно в любой момент взять способы реакции на события у одного объекта и присвоить (делегировать) их другому:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Objectl.OnMouseMove := Object2.OnMouseMove;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Принцип делегирования позволяет избежать трудоемкого процесса порождения новых дочерних классов для каждого специфического случая, заменяя его простой подстановкой процедур. При необходимости можно выбирать один из нескольких возможных вариантов обработчиков событий.
+</font ></P>
+<P><font face="Verdana" size="3">
+Но какой механизм позволяет подменять обработчики, ведь это не просто процедуры, а методы? Здесь как нельзя кстати приходится существующее в Object Pascal понятие указателя на метод. Отличие метода от процедуры состоит в том, что помимо явно описанных параметров методу всегда неявно передается еще и указатель на вызвавший его экземпляр класса (переменная
+<font face="Verdana" size="2"> self</font>). Вы можете описать процедурный тип, который будет совместим по присваиванию с методом (т. е. предусматривать получение
+<font face="Verdana" size="2"> self</font>). Для этого в описание процедуры нужно добавить зарезервированные слова
+<font face="Verdana" size="2"> of object</font>. Указатель на метод — это указатель на такую процедуру.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> TMyEvent = procedure(Sender: TObject; var AValue: Integer) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TlstObject = class;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FOnMyEvent: TMyEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnMyEvent: TMyEvent read FOnMyEvent write FOnMyEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+T2ndObject = class;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetValuel(Sender: TObject; var AValue: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetValue2(Sender: TObject; var AValue: Integer);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Objl: TlstObject;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Obj2: T2ndObject;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Objl := TlstObject.Create;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Obj2 := T2ndObject.Create;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Obj1.OnMyEvent := Obj2.SetValuel;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Obj1.OnMyEvent := Obj2.SetValue2;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Этот пример показывает, что при делегировании можно присваивать методы других классов. Здесь обработчиком события
+<font face="Verdana" size="2"> OnMyEvent </font> объекта <font face="Verdana" size="2"> Objl</font> по очереди выступают методы
+<font face="Verdana" size="2"> SetValuel</font> и <font face="Verdana" size="2"> Setvaiue2</font> объекта<font face="Verdana" size="2">
+Obj2</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обработчики событий нельзя сделать просто процедурами — они обязательно должны быть чьими-то методами.
+Но их можно &quot;отдать&quot; какому-либо другому объекту. Более того, для этих целей можно описать и создать специальный объект. Его единственное предназначение — быть носителем методов, которые затем делегируются другим объектам. Разумеется, такой объект надо не забыть создать до использования его методов, а в конце — уничтожить. Можно и не делать этого, объявив методы методами класса, о которых речь пойдет в одном из последующих разделов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Мы сейчас решили задачу использования нескольких разных обработчиков того или иного события для одного объекта. Но не менее часто требуется решить обратную задачу — а как использовать для различных событий разных объектов один и тот же обработчик?
+</font ></P>
+<P><font face="Verdana" size="3">
+Если никакой &quot;персонификации&quot; объекта, вызвавшего метод, не нужно, все делается тривиально и проблемы не возникает. Самый простой пример: в современных программах основные функции дублируются дважды — в меню и на панели инструментов. Естественно, сначала нужно создать и наполнить метод содержимым (скажем, для пункта меню), а затем в Инспекторе объектов указать его же для кнопки панели инструментов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Более сложный случай, когда внутри такого метода нужно разобраться, кто собственно его вызвал. Если потенциальные кандидаты имеют разный объектный тип (как в предыдущем абзаце — кнопка и пункт меню), то именно объектный тип можно применить в качестве критерия:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+If Sender is TMenuItem then ShowMessage('Выбран пункт меню');</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если же все объекты, разделяющие между собой один обработчик события, относятся к одному классу, то приходится прибегать к дополнительным ухищрениям. Типовой прием — использовать свойство
+<font face="Verdana" size="2"> Tag</font>, которое имеется у всех компонентов, и, вполне вероятно, именно для этого и задумывалось:
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+const colors : array[0..7]</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> of&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> TColor =
+  clWhite,clRed,clBlue,clYellow,clAqua,clGreen,</font> <font face="Verdana" size="2">clMaroon,clBlack);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.CheckBoxClick(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with TCheckBox(Sender) do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if Checked</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then Color := Colors[Tag]&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> else Color := clBtnFace;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Пусть в форме имеется несколько переключателей. Для того чтобы при нажатии каждый из них окрашивался в свой цвет, нужно в Инспекторе объектов присвоить свойству
+<font face="Verdana" size="2"> Tag</font> значения от 0 до 7 и для каждого связать событие
+<font face="Verdana" size="2">onclick</font> с методом <font face="Verdana" size="2"> CheckBoxClick</font>. Этот единственный метод справится с задачей для всех переключателей.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

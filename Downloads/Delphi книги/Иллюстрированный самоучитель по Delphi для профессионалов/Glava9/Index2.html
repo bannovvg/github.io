@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Использование файловых переменных. Типы файлов</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Зачастую современный программный код Delphi для чтения данных из файла удивительно похож на аналогичный, написанный, к примеру, в Turbo
+Pascal 4.0. Это возможно потому, что программисты Borland сохранили неизменным &quot;старый добрый&quot; набор файловых функций, работающих через файловые переменные.
+</font ></P>
+<P><font face="Verdana" size="3">
+При организации операций файлового ввода/вывода в приложении большое значение имеет, какого рода информация содержится в файле. Чаше всего это строки, но встречаются двоичные данные или структурированная информация, например массивы или записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+Естественно, что сведения о типе хранящихся в файле данных важно изначально задать. Для этого используются специальные файловые переменные, определяющие тип файла. Они делятся на нетипизированные и типизированные.
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед началом работы с любым файлом необходимо описать файловую переменную, соответствующую типу данных этого файла. В дальнейшем эта переменная используется при обращении к файлу.
+</font ></P>
+<P><font face="Verdana" size="3">
+В Delphi имеется возможность создавать нетипизированные файлы.
+Для их обозначения используется ключевое слово
+<font face="Verdana" size="2">file</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var UntypedFile: file;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Такие файловые переменные используются для организации быстрого и эффективного ввода/вывода безотносительно к типу данных. При этом подразумевается, что данные читаются или записываются в виде двоичного массива. Для этого применяются специальные процедуры блочного чтения и записи (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Типизированные файлы обеспечивают ввод/вывод с учетом конкретного типа данных. Для их объявления используется ключевое слово
+<font face="Verdana" size="2"> file of,</font> к которому добавляется конкретный тип данных. Например, для работы с файлом, содержащим набор байтов, файловая переменная объявляется так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var ByteFile: file of byte;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При этом можно использовать любые типы фиксированного размера, за исключением указателей. Разрешается применять структурные типы, если их составные части удовлетворяют названному выше ограничению. Например, можно создать файловую переменную для записи:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type Country = record</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Capital:&nbsp;&nbsp;&nbsp; String;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Population: Longlnt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Square:&nbsp;&nbsp;&nbsp;&nbsp; Longlnt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var CountryFile: file of Country;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для работы с текстовыми файлами используется специальная файловая переменная
+<font face="Verdana" size="2"> TextFile</font> или <font face="Verdana" size="2">Text</font>:
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> var F: TextFile;</font> 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компонент TActionManager</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Если вы не думаете о переносе своего приложения в среду Linux, то имеются все основания воспользоваться потомком
+<font face="Verdana" size="2"> TActionList</font> — компонентом
+<font face="Verdana" size="2"> TActionManager</font> (далее в тексте — менеджер действий). Более современный и &quot;продвинутый&quot; он обеспечит вас многими дополнительными возможностями. Итак, обо всем по порядку.
+</font ></P>
+<P><font face="Verdana" size="3">
+Будучи применен сам по себе, компонент <font face="Verdana" size="2"> TActionManager</font> ничем не отличается от предшественника. Отличия проявляются, если действия из этого компонента разместить на специальных панелях —
+<font face="Verdana" size="2"> TActionMainMenuBar</font> (будем называть его панелью главного меню) и
+<font face="Verdana" size="2">TActionToolBar</font> (далее — панель действий).
+</font ></P>
+<P><font face="Verdana" size="3">
+На первой странице редактора <font face="Verdana" size="2"> TActionManager</font> (вызывается двойным щелчком или командой <B>Customize </B>из контекстного меню; показан на рис. 8.5)
+
+
+
+как раз и содержится список всех панелей, связанных с данным менеджером действий. Вы можете добавить новый или убрать компонент
+<font face="Verdana" size="2">TActionToolBar</font> нажатием кнопок
+<b> New</b> и <B>Delete </B>соответственно. С компонентом
+<font face="Verdana" size="2"> TActionMainMenuBar</font> так по понятным причинам поступить нельзя — меню полагается иметь одно.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.8.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 8.5. </B>Первая страница 
+  редактора свойств компонента <font face="Verdana" size="2"> TActionManager</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Самый простой и рекомендованный Borland способ 
+  для связи действий с одной стороны и панелей меню и инструментов с другой — 
+  это перетаскивание (Drag-and-Drop). На второй странице редактора содержится 
+  список всех действий по категориям. И отдельное действие, и целую категорию 
+  можно брать и тащить мышью на нужную панель (рис. 8.6). </font ></P>
+<P><font face="Verdana" size="3"> Когда вы перетаскиваете действие на панель, 
+  на нем появляется специальный компонент, похожий на пункт меню или кнопку. Его 
+  роль — служить клиентом данного действия. Поэтому, естественно, он сразу и автоматически 
+  получает нужные <font face="Verdana" size="2"> Caption, imageindex, Hint</font> 
+  и прочие общие для всех клиентов свойства, о которых говорилось выше. Класс 
+  этого клиента — <font face="Verdana" size="2">TActionclientitem</font>; будем 
+  называть их псевдокнопками или псевдоэлементами. </font ></P>
+<P><font face="Verdana" size="3"> При перетаскивании нет особых сложностей, но 
+  надо иметь в виду следующие аспекты: </font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">при перетаскивании 
+    всей категории на панель главного меню она появляется в виде пункта меню верхнего 
+    уровня и содержит при этом все свои дочерние действия;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;при перетаскивании 
+    всей категории на панель действий создаются псевдокнопки для всех дочерних 
+    действий в категории. Логично поступить по принципу &quot;одна категория — 
+    одна панель действий&quot;, это будет полезно для настройки интерфейса пользователем;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;если вы 
+    ошиблись при перетаскивании, не нажимайте кнопку <B>Delete </B>— при этом 
+    удалится не только псевдокнопка, но и само действие. Перетяните ненужный псевдоэлемент 
+    за пределы панелей действий, тогда он будет удален;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;если вы 
+    уже перетянули категорию на панель главного меню, а потом решили добавить 
+    к ней действия, то вам придется убрать соответствующий ей псевдоэлемент и 
+    перетянуть всю категорию заново. Либо воспользоваться ручным способом, который 
+    описывается ниже.</font></li>
+</ul>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.8.6.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 8.6. </B>Страница действий 
+  редактора свойств компонента TActionManager </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index18.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index20.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

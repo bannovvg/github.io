@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Нумерация 
+  страниц отчета</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В первую очередь создадим заголовок страницы и включим механизм нумерации страниц. Для этого перенесем на страницу элемент
+<font face="Verdana" size="2"> Section</font> со страницы <B>Standard </B>Палитры инструментов и поместим его в верхней части страницы отчета. Эта секция будет объединять элементы оформления заголовка.
+</font ></P>
+<P><font face="Verdana" size="3">
+Поместим в секции элемент <font face="Verdana" size="2"> DataText</font> — нам необходимо его свойство
+<font face="Verdana" size="2">DataFieid</font>. Редактор свойства <B>Data Text Editor </B>(рис. 25.1) позволяет настраивать свойство так, чтобы элемент мог отображать разнообразные данные. Сейчас нас интересуют номера страниц отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+Из списка <B>Report Variables, </B>который содержит глобальные переменные отчета, необходимо выбрать переменную
+<font face="Verdana" size="2">RelativePage</font>. Затем нужно щелкнуть на кнопке <B>Insert Report Var </B>и переменная
+Report.<font face="Verdana" size="2">RelativePage</font> появится в поле <B>Data Text </B>в нижней части диалога. Эта переменная при печати отчета будет содержать порядковый номер текущей страницы.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.25.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 25.1. </B>Редактор свойства 
+  <font face="Verdana" size="2">DataField</font> элемента <font face="Verdana" size="2"> 
+  DataText</font> </font ></P>
+<P><font face="Verdana" size="3"> Аналогичным образом добавим переменную <font face="Verdana" size="2">TotalPages</font>, 
+  которая возвращает общее число страниц отчета. Затем вручную отредактируем текст 
+  в поле <B>Data Text:</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> '<font face="Verdana" size="2">Страница ' 
+    + Report.RelativePage + ' из ' + Report.TotaiPages</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Шаблон номера страницы готов. Но для того, чтобы 
+  механизм нумерации заработал, необходимо перенести на страницу невизуальный 
+  элемент <font face="Verdana" size="2">pageNuminit</font>. Он будет работать 
+  автоматически. Единственное, что нужно сделать, — это настроить свойство <font face="Verdana" size="2">initvalue</font>, 
+  в котором задается номер начальной страницы. </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание&nbsp;</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Обратите внимание, что элемент <font face="Verdana" size="2"> 
+    PageNuminit</font> должен быть только один и располагаться на первой странице, 
+    которая должна содержать свой номер. Иначе, на каждой странице, на которой 
+    есть такие элементы, нумерация начнется сначала. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

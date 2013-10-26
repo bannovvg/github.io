@@ -1,0 +1,357 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Вывод графики с использованием отображаемых файлов</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Спору нет — объект <font face="Verdana" size="2"> TBitmap</font> удобен и
+универсален. Программисты Borland шагают в ногу с разработчиками графического API Windows, и исходный код модуля GRAPHICS.PAS от версии к версии совершенствуется. Но в ряде случаев возможностей, предоставляемых стандартным компонентом, недостаточно. Один из таких случаев — работа с большими и очень большими изображениями (до сотен Мбайт). С ними приходится иметь дело в полиграфии, медицине, при обработке изображений дистанционного зондирования Земли из космоса и т. п. Здесь класс
+<font face="Verdana" size="2"> TBitmap</font> не подходит, т. к. запрашивает для хранения и преобразования картинки слишком много ресурсов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Что делать? На помощь следует призвать Windows API, поддерживающий файлы, отображаемые в память
+(<font face="Verdana" size="2">Memory Mapped Files</font>). У них много полезных свойств, но здесь важно только одно из них. При создании битовой карты Windows распределяет для нее часть виртуального адресного пространства. А оно не безгранично — для выделения 50—100 Мбайт может не хватить размеров файла подкачки, не говоря уже об ОЗУ. Но можно напрямую отобразить файл в виртуальную память, сделав его частью виртуального адресного пространства. В этом случае нашему файлу с изображением будет
+просто выделен диапазон адресов, которые можно использовать для последующей работы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура отображения файла в память и присвоения адреса его данным выглядит следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Var Memory: pByteArray;&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">ес : Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.OpenlClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i: integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+bmFile : pBitmapFileHeader;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> bmlnfo : pBitmapInfoHeader;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin if not OpenDialogl.execute then Exit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hf := CreateFile(pChar(OpenDialogl.FileName), GENERIC_READ or GENERIC_WRITE,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FILE_SHARE_READ, nil, OPEN_EXISTING, 0, 0) ; if hf=INVALID_HANDLE_VALUE then&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ec:=GetLastError;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage(' File opening error Ч-IntTostr (ec) ) ; Exit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hm := CreateFileMapping(hf,' nil, PAGE_READONLY, 0,0,nil);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">if hm=0 then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage(' File Mapping error %d',[GetLastError]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Expend;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pb := MapViewOfFile(hm, FILE_MAP_READ, 0,0,0);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> if pb=nil then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ec:=GetLastError;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+ShowMessage('Mapping error '+IntTostr(ec)); Exit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+bmFile := pBitmapFileHeader(pb);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (bmFile&quot;.bfTypeO$4D42) then BEGIN&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Exit;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">Memory:=@(рb^[bmFile^.bfOffBits]);</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+bmlnfo := @(рb^[SizeOf(TBitmapFileHeader)]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">StrLen:=(((bmInfo~.biWidth*bmInfoA.biBitCount)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">+31) div 32}*4;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">PaintMe(Self);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом коде последовательно получены дескрипторы файла
+(<font face="Verdana" size="2">hf</font>, с использованием функции
+<font face="Verdana" size="2">CreateFile</font>), его отображения в память (<font face="Verdana" size="2">hm</font>, с помощью функции
+<font face="Verdana" size="2">CreateFileMapping</font>) и указатель на отображенные данные (<font face="Verdana" size="2">pb</font>, посредством
+<font face="Verdana" size="2">MapviewOfFile</font>). He будем вдаваться в детали внутренней реализации битовой карты — графический формат BMP известен достаточно хорошо. Отметим только, что результатом проделанных операций являются структура
+<font face="Verdana" size="2"> bminfo</font> типа <font face="Verdana" size="2">TBitmapinfo</font>, полностью характеризующая битовую карту, и указатель
+<font face="Verdana" size="2"> Memory</font> на данные битовой карты. Теперь загруженные данные нужно суметь нарисовать на канве, в данном случае на канве объекта
+<font face="Verdana" size="2">PaintBox</font>. Делается это следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.PaintMe(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var OldP : hPalette;i : integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Memory=nil then Exit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+OldP := SelectPalette(PaintBox.Canvas.Handle, Palette, False);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RealizePalette(PaintBox.Canvas.Handle);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SetStretchBltMode(PaintBox.Canvas.Handle, STRETCH_DELETESCANS);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+case ViewMode of</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+vmStretch:</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+with bminfo^ do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i : =</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">StretchDIBits(PaintBox.Canvas.Handle,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">0,0,PaintBox.Height,PaintBox.Width,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">0,0,biWidth,Abs(biHeight),</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">Memory, pBitmapInfo(bminfo)^,
+  DIB_RGB_COLORS,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">PaintBox.Canvas.CopyMode);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">vmlxl:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with bminfoA,PaintBox.ClientRect do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i := SetDIBitsToDevice</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(PaintBox.Canvas.Handle,Left,Top,Right-Left,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Bottom-Top,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Left,Top,Top,Bottom-top,&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Memory, pBitmapInfо(bminfo)^, DIB_RGB_COLORS);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">vmZoom:&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with bminfo^,PaintBox.ClientRect do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i := StretchDIBits</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(PaintBox.Canvas.Handle,Left,Top,Right-Left,&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Bottom-Top,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+0,0,biWidth,Abs(biHeight) ,</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">Memory, pBitmapInfo(bminfo)^, DIB_RGB_COLORS,
+  PaintBox.Canvas.CopyMode);</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (i=0) or (i=GDI_ERROR) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ec :=GetLastError;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Forml.Caption := 'Error code '+IntToStr(ec);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SelectPalette(PaintBox.Canvas.Handle, OldP, False);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В зависимости от установленного режима отображения
+(<font face="Verdana" size="2">vmstretch, vmzoom или vmlxl</font>) применяются разные функции
+<font face="Verdana" size="2"> Win API: stretchoisits</font> или <font face="Verdana" size="2">SetoiBitsToDevice</font>.
+Выигрыш в скорости работы приложения особенно ощущается, если загружаемые файлы становятся велики и должны размещаться в файле подкачки. Наше же приложение не использует его и отображает данные прямо из файла на экран (рис. 10.3).
+</font ></P>
+<div align="center"><IMG src="gl.10.3.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 10.3. </B>Этот снимок 
+  с метеорологического спутника имеет размер десятки мегабайт </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index16.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index18.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

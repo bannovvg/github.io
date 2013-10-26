@@ -1,0 +1,1155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Псевдонимы баз данных и настройка ВDЕ</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для успешного доступа к данным приложение и BDE должны обладать информацией о местоположении файлов требуемой базы данных. Задание маршрута входит в обязанности разработчика.
+</font ></P>
+<P><font face="Verdana" size="3">
+Самый простой способ заключается в явном задании полного пути к каталогу, в котором хранятся файлы БД. Но в случае изменения пути, что случается не так уж редко, например, при переносе готового приложения на компьютер заказчика, разработчик должен перекомпилировать проект с учетом будущего местонахождения БД или предусмотреть специальные элементы управления, в которых можно задать путь к БД.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для решения такого рода проблем разработчик может использовать псевдоним
+базы данных, который представляет собой именованную структуру, содержащую путь к файлам БД и некоторые дополнительные параметры. В первом приближении можно сказать, что вы просто присваиваете маршруту произвольное имя, которое используется в приложении. Тогда при переносе приложения на компьютере заказчика достаточно создать стандартными средствами BDE одноименный псевдоним и настроить его на нужный каталог. При этом само приложение не требует переделок, т. к. оно обращается к псевдониму с одним именем, а вот BDE уже &quot;знает&quot; куда отправить запрос приложения, использовавшего этот псевдоним.
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо маршрута к файлам базы данных, псевдоним BDE обязательно содержит информацию о драйвере БД, который используется для доступа к данным. Наличие других параметров зависит от типа драйвера, а значит, от типа СУБД.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для управления псевдонимами баз данных, настройки стандартных и дополнительных драйверов в составе BDE имеется специальная утилита — BDE Administrator (исполняемый файл BDEADMIN.EXE). Стандартная конфигурация BDE сохраняется в файле IDAPI.CFG. При необходимости текущую конфигурацию можно сохранить в новом файле с расширением cfg или загрузить заново при помощи команд <B>Save
+As Configuration и Open Configuration </B>из меню <B>Object.</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+В верхней части окна утилиты расположена Панель инструментов, кнопки которой используются при работе с конкретным элементом настройки BDE. Рабочая область утилиты BDE Administrator представляет собой двухстраничный блокнот.
+</font ></P>
+<P><font face="Verdana" size="3">
+Страница <B>Databases </B>(рис. 16.2) содержит иерархическое дерево, в узлах которого расположены установленные в системе на данный момент псевдонимы БД. При выборе какого-либо псевдонима в правой части панели появляется путь к файлам базы данных и перечень параметров драйвера, соответствующего псевдониму, которые можно настраивать вручную.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.16.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 16.2. </B>Окно утилиты 
+  BDE Administrator с открытой страницей <B>Databases</B> </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.16.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 16.3. </B>Окно утилиты 
+  BDE Administrator с открытой страницей <B>Configuration</B> </font ></P>
+<P><font face="Verdana" size="3"> Страница <B>Configuration </B>(рис. 16.3) используется 
+  для настройки параметров драйверов BDE, предназначенных для обеспечения доступа 
+  к локальным СУБД и серверам БД. Также здесь определяется системная конфигурация 
+  BDE, которая включает параметры числовых форматов, форматов даты и времени. 
+  Вся информация на этой странице также структурирована в виде иерархического 
+  дерева. </font ></P>
+<P><font face="Verdana" size="3"> При выборе в левой части панели утилиты какого-либо 
+  узла, в правой части на странице <B>Definition </B>отображается вся необходимая 
+  информация для этого объекта. </font ></P>
+<P><font face="Verdana" size="3"> Сохранение изменений осуществляется при помощи 
+  команд меню <B>Object, </B>всплывающего меню или при перемещении на другой псевдоним. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Для создания нового псевдонима требуется выбрать 
+  команду <b> New</b> из меню <B>Object </B>или из всплывающего меню узла <B>Databases 
+  </B>на одноименной странице. Затем в появившемся простом диалоге задается необходимый 
+  драйвер. </font ></P>
+<P><font face="Verdana" size="3"> Отметим, что один из четырех стандартных локальных 
+  драйверов устанавливается на странице <B>Configuration </B>в качестве предопределенного, 
+  поэтому в списке он доступен под названием STANDARD, а остальные не видны вообще. 
+  Из драйверов SQL Links доступны те, которые были установлены при инсталляции 
+  Delphi или позже. </font ></P>
+<P><font face="Verdana" size="3"> Кроме того, в списке можно выбрать один из драйверов 
+  ODBC, установка которых осуществляется стандартными системными средствами на 
+  Панели управления Windows. </font ></P>
+<P><font face="Verdana" size="3"> После выбора драйвера в дереве псевдонимов БД 
+  появляется новый узел, для драйвера которого требуется установить необходимые 
+  параметры (см. ниже). </font ></P>
+<P><font face="Verdana" size="3"> Для четырех локальных драйверов список параметров 
+  в правой части панели утилиты на странице <B>Definition </B>ограничивается параметрами 
+  стандартного драйвера (STANDARD), подробная настройка для каждого драйвера осуществляется 
+  на странице <B>Configuration.</B> </font ></P>
+<P><font face="Verdana" size="3"> Назначение параметров локальных драйверов BDE 
+  (Paradox, dBASE, FoxPro, ASCII) представлено в табл. 16.2. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 16.2. </B>Параметры 
+  драйверов BDE для локальных баз данных </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="1" HEIGHT="231">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="138" HEIGHT="23"> <DIV WIDTH="198" HEIGHT="23" style="width: 65; height: 23"> 
+        <P><font face="Verdana" size="3"> <b> Параметр</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="23"> <DIV WIDTH="436" HEIGHT="23" style="width: 117; height: 23"> 
+        <P><font face="Verdana" size="3"> <b>&nbsp;Назначение</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="574" HEIGHT="33"> <DIV WIDTH="198" HEIGHT="33" style="width: 97; height: 28"> 
+        <P><font face="Verdana" size="3"> <b> STANDARD</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="138" HEIGHT="46"> 
+      <DIV WIDTH="198" HEIGHT="46" style="width: 133; height: 46"> 
+        <P><font face="Verdana" size="3"> DEFAULT DRIVER </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="46"> 
+      <DIV WIDTH="436" HEIGHT="46" style="width: 313; height: 46"> 
+        <P><font face="Verdana" size="3"> &nbsp;Задает тип конкретного локального 
+          драйвера (Paradox, dBASE, FoxPro, ASCII) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="138" HEIGHT="92"> 
+      <DIV WIDTH="198" HEIGHT="92" style="width: 101; height: 92"> 
+        <P><font face="Verdana" size="3"> ENABLE BCD </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="92"> 
+      <DIV WIDTH="436" HEIGHT="92" style="width: 354; height: 92"> 
+        <P><font face="Verdana" size="3"> i Определяет способ представления вещественных 
+          чисел. При значении True такие числа преобразуются в формат BCD (Binary 
+          Coded Decimals— десятичные с двоичным кодированием). Точность составляет 
+          20 знаков после запятой </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="138" HEIGHT="36"> 
+      <DIV WIDTH="198" HEIGHT="36" style="width: 52; height: 36"> 
+        <P><font face="Verdana" size="3"> PATH </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="36"> 
+      <DIV WIDTH="436" HEIGHT="36" style="width: 280; height: 36"> 
+        <P><font face="Verdana" size="3"> &nbsp;Указывает путь к файлам базы данных 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="576" HEIGHT="29"> <DIV WIDTH="200" HEIGHT="29" style="width: 200; height: 29"> 
+      <P><font face="Verdana" size="3"> <b> PARADOX</b> </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="108"> 
+      <DIV WIDTH="200" HEIGHT="108" style="width: 67; height: 108"> 
+        <P><font face="Verdana" size="3"> NET DIR </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="108"> 
+      <DIV WIDTH="436" HEIGHT="108" style="width: 357; height: 114"> 
+        <P><font face="Verdana" size="3">Указывает путь к файлу обеспечения сетевого 
+          доступа&nbsp; к БД PDOXUSRS.NET. Драйвер приложения, которое&nbsp; работает 
+          с БД локально, должен указывать на этот файл, расположенный на том же 
+          компьютере. Драйвер приложения, обращающегося к БД по сети, должен указывать 
+          на подключенный сетевой диск с этим файлом </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="25"> 
+      <DIV WIDTH="200" HEIGHT="25" style="width: 72; height: 25"> 
+        <P><font face="Verdana" size="3"> VERSION </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="25"> 
+      <DIV WIDTH="436" HEIGHT="25" style="width: 344; height: 25"> 
+        <P><font face="Verdana" size="3"> Нередактируемая информация о версии 
+          драйвера </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="46"> 
+      <DIV WIDTH="200" HEIGHT="46" style="width: 20; height: 46"> 
+        <P><font face="Verdana" size="3"> TYPE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="46"> 
+      <DIV WIDTH="436" HEIGHT="46" style="width: 320; height: 46"> 
+        <P><font face="Verdana" size="3"> Тип СУБД. Для Paradox имеет значение 
+          FILE. Только для чтения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="44"> 
+      <DIV WIDTH="200" HEIGHT="44" style="width: 26; height: 44"> 
+        <P><font face="Verdana" size="3"> LANGDRIVER </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="44"> 
+      <DIV WIDTH="436" HEIGHT="44" style="width: 296; height: 44"> 
+        <P><font face="Verdana" size="3"> &nbsp;Определяет драйвер языковой поддержки 
+          (используйте&nbsp; драйвер Paradox Cyrr 866) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="44"> 
+      <DIV WIDTH="200" HEIGHT="44" style="width: 94; height: 44"> 
+        <P><font face="Verdana" size="3"> BLOCK SIZE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="44"> 
+      <DIV WIDTH="436" HEIGHT="44" style="width: 327; height: 44"> 
+        <P><font face="Verdana" size="3">&nbsp;Задает размер блоков дискового 
+          пространства для хранения записей, кратно 1024 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="44"> 
+      <DIV WIDTH="200" HEIGHT="44" style="width: 107; height: 44"> 
+        <P><font face="Verdana" size="3"> FILL FACTOR </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="44"> 
+      <DIV WIDTH="436" HEIGHT="44" style="width: 372; height: 44"> 
+        <P><font face="Verdana" size="3">&nbsp;Определяет процент заполнения блока 
+          дискового пространства при хранении индексов, по умолчанию 95% </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="115"> 
+      <DIV WIDTH="200" HEIGHT="115" style="width: 37; height: 115"> 
+        <P><font face="Verdana" size="3"> LEVEL </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="115"> 
+      <DIV WIDTH="436" HEIGHT="115" style="width: 315; height: 171"> 
+        <P><font face="Verdana" size="3"> &nbsp;Задает формат временной таблицы 
+          в памяти:&nbsp; </font ></P>
+        <ul>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp; 3 — совместим с Paradox 3.5 
+              и ниже;&nbsp;</font ></P>
+          </li>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp;4 — Paradox 4.0;&nbsp;</font ></P>
+          </li>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp;5 — Paradox 5.0;&nbsp;</font ></P>
+          </li>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp;7 - Paradox для WIN32</font ></P>
+          </li>
+        </ul>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="94"> 
+      <DIV WIDTH="200" HEIGHT="94" style="width: 124; height: 94"> 
+        <P><font face="Verdana" size="3"> STRICTINTEGRTY </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="94"> 
+      <DIV WIDTH="436" HEIGHT="94" style="width: 356; height: 94"> 
+        <P><font face="Verdana" size="3"> Определяет возможность использования 
+          приложениями на базе Paradox 4.0 более поздних таблиц со ссылочной целостностью. 
+          При значении <font face="Verdana" size="2"> True</font> использование 
+          разрешается, но возникает риск нарушения целостности данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="576" HEIGHT="25"> <DIV WIDTH="200" HEIGHT="25" style="width: 59; height: 25"> 
+        <P><font face="Verdana" size="3"> <b> DBASE</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="23"> 
+      <DIV WIDTH="200" HEIGHT="23" style="width: 86; height: 23"> 
+        <P><font face="Verdana" size="3"> VERSION </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="23"> 
+      <DIV WIDTH="436" HEIGHT="23" style="width: 344; height: 23"> 
+        <P><font face="Verdana" size="3"> Нередактируемая информация о версии 
+          драйвера </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="46"> 
+      <DIV WIDTH="200" HEIGHT="46" style="width: 42; height: 46"> 
+        <P><font face="Verdana" size="3"> TYPE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="46"> 
+      <DIV WIDTH="436" HEIGHT="46" style="width: 313; height: 46"> 
+        <P><font face="Verdana" size="3"> Тип СУБД. Для dBASE имеет значение FILE. 
+          Только для чтения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="50"> 
+      <DIV WIDTH="200" HEIGHT="50" style="width: 84; height: 50"> 
+        <P><font face="Verdana" size="3"> LANGDRIVER </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="50"> 
+      <DIV WIDTH="436" HEIGHT="50" style="width: 297; height: 50"> 
+        <P><font face="Verdana" size="3"> Определяет драйвер языковой поддержки 
+          (используйте драйвер dBASE RUS ср866) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="40"> 
+      <DIV WIDTH="200" HEIGHT="40" style="width: 34; height: 40"> 
+        <P><font face="Verdana" size="3"> LEVEL </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="40"> 
+      <DIV WIDTH="436" HEIGHT="40" style="width: 325; height: 40"> 
+        <P><font face="Verdana" size="3"> Задает формат таблиц. Значение соответствует 
+          номеру&nbsp; версии СУБД </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="40"> 
+      <DIV WIDTH="200" HEIGHT="40" style="width: 101; height: 40"> 
+        <P><font face="Verdana" size="3"> MDX BLOCK SIZE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="40"> 
+      <DIV WIDTH="436" HEIGHT="40" style="width: 327; height: 40"> 
+        <P><font face="Verdana" size="3"> Размер блоков для файлов с расширением 
+          mdx, кратно 51 2 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="52"> 
+      <DIV WIDTH="200" HEIGHT="52" style="width: 101; height: 52"> 
+        <P><font face="Verdana" size="3"> MEMO FILE BLOCK SIZE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="436" HEIGHT="52"> 
+      <DIV WIDTH="436" HEIGHT="52" style="width: 342; height: 52"> 
+        <P><font face="Verdana" size="3"> Размер блоков для файлов с данными типа 
+          <font face="Verdana" size="2"> Memo</font> (pacширение dbt), кратно 
+          512 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="555" HEIGHT="34"> <DIV WIDTH="186" HEIGHT="34" style="width: 53; height: 34"> 
+      <P><font face="Verdana" size="3"> <b> FOXPRO</b> </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="126" HEIGHT="21"> 
+      <DIV WIDTH="186" HEIGHT="21" style="width: 67; height: 21"> 
+        <P><font face="Verdana" size="3"> VERSION </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="429" HEIGHT="21"> 
+      <DIV WIDTH="429" HEIGHT="21" style="width: 350; height: 21"> 
+        <P><font face="Verdana" size="3"> &nbsp;Нередактируемая информация о версии 
+          драйвера </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="126" HEIGHT="38"> 
+      <DIV WIDTH="186" HEIGHT="38" style="width: 29; height: 38"> 
+        <P><font face="Verdana" size="3"> TYPE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="429" HEIGHT="38"> 
+      <DIV WIDTH="429" HEIGHT="38" style="width: 325; height: 38"> 
+        <P><font face="Verdana" size="3"> Тип СУБД. Для FoxPro имеет значение 
+          FILE. Только для&nbsp; чтения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="126" HEIGHT="33"> 
+      <DIV WIDTH="186" HEIGHT="33" style="width: 72; height: 33"> 
+        <P><font face="Verdana" size="3"> LANGDRIVER </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="429" HEIGHT="33"> 
+      <DIV WIDTH="429" HEIGHT="33" style="width: 292; height: 33"> 
+        <P><font face="Verdana" size="3">Определяет драйвер языковой поддержки 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="126" HEIGHT="27"> 
+      <DIV WIDTH="186" HEIGHT="27" style="width: 40; height: 27"> 
+        <P><font face="Verdana" size="3"> LEVEL </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="429" HEIGHT="27"> 
+      <DIV WIDTH="429" HEIGHT="27" style="width: 185; height: 27"> 
+        <P><font face="Verdana" size="3">Имеет значение 25 </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> <B> Примечание&nbsp;</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Драйвер текстовых файлов ASCIIDRV имеет параметры 
+    стандартного драйвера. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Назначение параметров драйверов SQL Links для 
+  серверов SQL представлено в табл. 16.3. Сначала приведены параметры, которые 
+  встречаются в двух и более драйверах, затем уникальные для каждого драйвера 
+  параметры. Драйверы для серверов InterBase и Sybase не представлены, т. к. содержат 
+  только общие для двух серверов параметры. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 16.3. </B>Параметры 
+  драйверов ВОЕ для серверов SQL </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="382" HEIGHT="425">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="132" HEIGHT="32"> <DIV WIDTH="204" HEIGHT="32" style="width: 26; height: 32"> 
+        <P><font face="Verdana" size="3"> <b> Параметр</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="433" HEIGHT="32"> <DIV WIDTH="440" HEIGHT="32" style="width: 173; height: 32"> 
+        <P><font face="Verdana" size="3"> <b> Назначение</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="565" HEIGHT="29"> <DIV WIDTH="204" HEIGHT="29" style="width: 471; height: 38"> 
+        <P><font face="Verdana" size="3"> <b> Общие параметры (встречаются как 
+          минимум у двух драйверов)</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="132" HEIGHT="27"> 
+      <DIV WIDTH="204" HEIGHT="27" style="width: 54; height: 27"> 
+        <P><font face="Verdana" size="3"> VERSION </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="433" HEIGHT="27"> 
+      <DIV WIDTH="440" HEIGHT="27" style="width: 341; height: 27"> 
+        <P><font face="Verdana" size="3"> Нередактируемая информация о версии 
+          драйвера </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="132" HEIGHT="25"> 
+      <DIV WIDTH="204" HEIGHT="25" style="width: 4; height: 25"> 
+        <P><font face="Verdana" size="3"> TYPE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="433" HEIGHT="25"> 
+      <DIV WIDTH="440" HEIGHT="25" style="width: 272; height: 25"> 
+        <P><font face="Verdana" size="3"> Тип СУБД. Только для чтения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="132" HEIGHT="46"> 
+      <DIV WIDTH="204" HEIGHT="46" style="width: 2; height: 46"> 
+        <P><font face="Verdana" size="3"> DLL </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="433" HEIGHT="46"> 
+      <DIV WIDTH="440" HEIGHT="46" style="width: 352; height: 46"> 
+        <P><font face="Verdana" size="3"> Название библиотеки динамического связывания 
+          SQL Links для 16-разрядного драйвера. Только для чтения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="132" HEIGHT="48"> 
+      <DIV WIDTH="204" HEIGHT="48" style="width: 45; height: 48"> 
+        <P><font face="Verdana" size="3"> DLL32 </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="433" HEIGHT="48"> 
+      <DIV WIDTH="440" HEIGHT="48" style="width: 357; height: 48"> 
+        <P><font face="Verdana" size="3"> Название библиотеки динамического связывания 
+          SQL Links для 32-разрядного драйвера. Только для чтения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="132" HEIGHT="81"> 
+      <DIV WIDTH="204" HEIGHT="81" style="width: 112; height: 81"> 
+        <P><font face="Verdana" size="3"> DRIVER FLAGS </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="433" HEIGHT="81"> 
+      <DIV WIDTH="440" HEIGHT="81" style="width: 362; height: 81"> 
+        <P><font face="Verdana" size="3"> Используется только при необходимости 
+          применения старых версий драйвера, где не поддерживается уровень изоляции 
+          транзакций <font face="Verdana" size="2"> Read</font> <font face="Verdana" size="2"> 
+          Committed</font>. Для этого необходимо установить значение 512 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="132" HEIGHT="42"> 
+      <DIV WIDTH="204" HEIGHT="42" style="width: 104; height: 42"> 
+        <P><font face="Verdana" size="3"> TRACE MODE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="433" HEIGHT="42"> 
+      <DIV WIDTH="440" HEIGHT="42" style="width: 352; height: 42"> 
+        <P><font face="Verdana" size="3"> Содержит битовую маску, которая определяет 
+          тип выдаваемой отладочной информации </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="132" HEIGHT="46"> 
+      <DIV WIDTH="204" HEIGHT="46" style="width: 113; height: 46"> 
+        <P><font face="Verdana" size="3"> BATCH COUNT </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="433" HEIGHT="46"> 
+      <DIV WIDTH="440" HEIGHT="46" style="width: 337; height: 46"> 
+        <P><font face="Verdana" size="3"> Задает число записей, модифицируемых 
+          в одном пакете при фиксации транзакций </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="132" HEIGHT="48"> 
+      <DIV WIDTH="204" HEIGHT="48" style="width: 83; height: 48"> 
+        <P><font face="Verdana" size="3"> BLOB SIZE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="433" HEIGHT="48"> 
+      <DIV WIDTH="440" HEIGHT="48" style="width: 352; height: 48"> 
+        <P><font face="Verdana" size="3"> Размер кэша для данных типа BLOB. Диапазон 
+          от 32К до 1000К </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="40"> <DIV WIDTH="202" HEIGHT="40" style="width: 81; height: 40"> 
+      <P><font face="Verdana" size="3"> BLOBS TO CACHE </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="40"> <DIV WIDTH="425" HEIGHT="40" style="width: 363; height: 40"> 
+      <P><font face="Verdana" size="3"> Задает число кэшируемых записей с данными 
+        BLOB. Диапазон от 64 до 65 536 </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="156"> 
+      <DIV WIDTH="202" HEIGHT="156" style="width: 98; height: 156"> 
+        <P><font face="Verdana" size="3"> ENABLE BCD </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="156"> 
+      <DIV WIDTH="425" HEIGHT="156" style="width: 358; height: 156"> 
+        <P><font face="Verdana" size="3"> Определяет способ представления вещественных 
+          чисел. При значении <font face="Verdana" size="2"> True</font> такие 
+          числа преобразуются в формат BCD (Binary Coded Decimals — десятичные 
+          с двоичным кодированием), который позволяет округлять погрешности высших 
+          разрядов дробной части числа. Изменение параметра для псевдонима работает, 
+          только если параметр драйвера на странице Configuration не пустой </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="94"> 
+      <DIV WIDTH="202" HEIGHT="94" style="width: 129; height: 94"> 
+        <P><font face="Verdana" size="3"> ENABLE SCHEMA CACHE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="94"> 
+      <DIV WIDTH="425" HEIGHT="94" style="width: 362; height: 95"> 
+        <P><font face="Verdana" size="3"> Определяет режим кэширования структуры 
+          данных. При значении <font face="Verdana" size="2"> True</font> структура 
+          таблиц БД кэшируется локально в каталоге, задаваемом параметром SCHEMA 
+          CACHE DIR. Рекомендуется использовать только для баз данных с постоянной 
+          структурой </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="27"> 
+      <DIV WIDTH="202" HEIGHT="27" style="width: 78; height: 27"> 
+        <P><font face="Verdana" size="3"> LANGDRIVER </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="27"> 
+      <DIV WIDTH="425" HEIGHT="27" style="width: 302; height: 27"> 
+        <P><font face="Verdana" size="3"> Определяет драйвер языковой поддержки 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="62"> 
+      <DIV WIDTH="202" HEIGHT="62" style="width: 94; height: 62"> 
+        <P><font face="Verdana" size="3"> MAX ROWS </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="62"> 
+      <DIV WIDTH="425" HEIGHT="62" style="width: 344; height: 62"> 
+        <P><font face="Verdana" size="3"> Ограничивает максимальное число записей, 
+          которое может быть передано клиенту в ответ на запрос. Значение по умолчанию&nbsp; 
+          (ограничений нет) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="77"> 
+      <DIV WIDTH="202" HEIGHT="77" style="width: 98; height: 77"> 
+        <P><font face="Verdana" size="3"> OPEN MODE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="77"> 
+      <DIV WIDTH="425" HEIGHT="77" style="width: 273; height: 95"> 
+        <P><font face="Verdana" size="3"> Режим работы с записями БД:&nbsp; </font ></P>
+        <ul>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp;READ/WRITE — полный доступ;&nbsp;</font ></P>
+          </li>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp;READ ONLY — только чтение</font ></P>
+          </li>
+        </ul>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="44"> 
+      <DIV WIDTH="202" HEIGHT="44" style="width: 125; height: 44"> 
+        <P><font face="Verdana" size="3"> SCHEMA CACHE DIR </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="44"> 
+      <DIV WIDTH="425" HEIGHT="44" style="width: 334; height: 44"> 
+        <P><font face="Verdana" size="3"> Каталог для локального кэширования структуры 
+          данных (см. параметр ENABLE SCHEMA CACHE) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="46"> 
+      <DIV WIDTH="202" HEIGHT="46" style="width: 122; height: 46"> 
+        <P><font face="Verdana" size="3"> SCHEMA CACHE SIZE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="46"> 
+      <DIV WIDTH="425" HEIGHT="46" style="width: 332; height: 46"> 
+        <P><font face="Verdana" size="3"> Задает число таблиц, структура данных 
+          которых может кэшироваться </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="94"> 
+      <DIV WIDTH="202" HEIGHT="94" style="width: 124; height: 94"> 
+        <P><font face="Verdana" size="3"> SCHEMA CACHE TIME </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="94"> 
+      <DIV WIDTH="425" HEIGHT="94" style="width: 320; height: 133"> 
+        <P><font face="Verdana" size="3"> Задает время хранения кэшируемой структуры 
+          данных:&nbsp; </font ></P>
+        <ul>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp;-1 — время не ограничено;</font ></P>
+          </li>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp; 0 — данные не кэшируются;</font ></P>
+          </li>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp; 1 — 21 47483647 — секунды</font ></P>
+          </li>
+        </ul>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="71"> 
+      <DIV WIDTH="202" HEIGHT="71" style="width: 111; height: 71"> 
+        <P><font face="Verdana" size="3"> SERVER NAME </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="71"> 
+      <DIV WIDTH="425" HEIGHT="71" style="width: 325; height: 71"> 
+        <P><font face="Verdana" size="3"> Указывает путь к таблицам БД (это может 
+          быть локальный маршрут или маршрут с указанием удаленного сервера БД) 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="119"> 
+      <DIV WIDTH="202" HEIGHT="119" style="width: 111; height: 119"> 
+        <P><font face="Verdana" size="3"> SQLPASSTHRU MODE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="119"> 
+      <DIV WIDTH="425" HEIGHT="119" style="width: 332; height: 266"> 
+        <P><font face="Verdana" size="3"> Задает способ использования соединения 
+          с сервером прямыми запросами SQL и запросами, управляемыми пользователем. 
+          </font ></P>
+        <P><font face="Verdana" size="3"> SHARED AUTOCOMMIT— соединение используется 
+          совместно и прямые запросы фиксируются автоматически. </font ></P>
+        <P><font face="Verdana" size="3"> SHARED NO AUTOCOMMIT— соединение используется 
+          совместно и прямые запросы фиксируются сервером самостоятельно. </font ></P>
+        <P><font face="Verdana" size="3"> NOT SHARED — совместное использование 
+          запрещено </font ></P>
+        <P><font face="Verdana" size="3"> &nbsp; </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="116"> <DIV WIDTH="206" HEIGHT="116" style="width: 60; height: 116"> 
+      <P><font face="Verdana" size="3"> SQLQRYMODE </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="116"> <DIV WIDTH="438" HEIGHT="116" style="width: 347; height: 152"> 
+      <P><font face="Verdana" size="3"> Задает режим управления запросами. </font ></P>
+      <P><font face="Verdana" size="3"> NULL — сначала запрос передается серверу, 
+        если тот не может обработать его, запрос выполняется локально. </font ></P>
+      <P><font face="Verdana" size="3"> SERVER — запрос передается серверу. </font ></P>
+      <P><font face="Verdana" size="3"> &nbsp;LOCAL — запрос выполняется локально 
+        </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="34"> 
+      <DIV WIDTH="206" HEIGHT="34" style="width: 102; height: 34"> 
+        <P><font face="Verdana" size="3"> VENDOR INIT </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="34"> 
+      <DIV WIDTH="438" HEIGHT="34" style="width: 303; height: 34"> 
+        <P><font face="Verdana" size="3"> Название файла динамической библиотеки 
+          поставщика </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="40"> 
+      <DIV WIDTH="206" HEIGHT="40" style="width: 85; height: 40"> 
+        <P><font face="Verdana" size="3"> CONNECT TIMEOUT&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="40"> 
+      <DIV WIDTH="438" HEIGHT="40" style="width: 340; height: 57"> 
+        <P><font face="Verdana" size="3"> Определяет временной интервал, после 
+          которого клиент попытается восстановить прерванную связь с сервером 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="29"> 
+      <DIV WIDTH="206" HEIGHT="29" style="width: 71; height: 29"> 
+        <P><font face="Verdana" size="3"> TIMEOUT </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="29"> 
+      <DIV WIDTH="438" HEIGHT="29" style="width: 347; height: 29"> 
+        <P><font face="Verdana" size="3"> Задает время ожидания ответа сервера 
+          на запрос </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="64"> 
+      <DIV WIDTH="206" HEIGHT="64" style="width: 71; height: 64"> 
+        <P><font face="Verdana" size="3"> BLOB EDIT LOGGING&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="64"> 
+      <DIV WIDTH="438" HEIGHT="64" style="width: 358; height: 64"> 
+        <P><font face="Verdana" size="3"> Управляет механизмом сохранения всех 
+          изменений для полей типа BLOB. При значении <font face="Verdana" size="2"> 
+          True</font> изменения сохраняются </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="27"> 
+      <DIV WIDTH="206" HEIGHT="27" style="width: 134; height: 27"> 
+        <P><font face="Verdana" size="3"> DATABASE NAME&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="27"> 
+      <DIV WIDTH="438" HEIGHT="27" style="width: 169; height: 27"> 
+        <P><font face="Verdana" size="3"> Имя базы данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="37"> 
+      <DIV WIDTH="206" HEIGHT="37" style="width: 103; height: 37"> 
+        <P><font face="Verdana" size="3"> MAX QUERY TIME </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="37"> 
+      <DIV WIDTH="438" HEIGHT="37" style="width: 315; height: 37"> 
+        <P><font face="Verdana" size="3"> Задает максимальное время ожидания ответа 
+          на запрос </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="46"> 
+      <DIV WIDTH="206" HEIGHT="46" style="width: 101; height: 46"> 
+        <P><font face="Verdana" size="3"> USER NAME </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="46"> 
+      <DIV WIDTH="438" HEIGHT="46" style="width: 277; height: 46"> 
+        <P><font face="Verdana" size="3"> Имя пользователя, которое используется 
+          сервером при подключении </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="565" HEIGHT="31"> <DIV WIDTH="206" HEIGHT="31" style="width: 299; height: 24"> 
+        <P><font face="Verdana" size="3"> <b> Microsoft SQL Server (MSSSQL)</b> 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="42"> 
+      <DIV WIDTH="206" HEIGHT="42" style="width: 124; height: 42"> 
+        <P><font face="Verdana" size="3"> MAX DBPROCESSES&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="42"> 
+      <DIV WIDTH="438" HEIGHT="42" style="width: 332; height: 42"> 
+        <P><font face="Verdana" size="3"> Максимальное число процессов, одновременно 
+          работающих в данном соединении </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="44"> 
+      <DIV WIDTH="206" HEIGHT="44" style="width: 124; height: 44"> 
+        <P><font face="Verdana" size="3"> APPLICATION NAME&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="44"> 
+      <DIV WIDTH="438" HEIGHT="44" style="width: 256; height: 44"> 
+        <P><font face="Verdana" size="3"> Имя приложения, помогающее серверу идентифицировать 
+          процессы </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="108"> 
+      <DIV WIDTH="206" HEIGHT="108" style="width: 96; height: 108"> 
+        <P><font face="Verdana" size="3"> DATE MODE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="108"> 
+      <DIV WIDTH="438" HEIGHT="108" style="width: 184; height: 133"> 
+        <P><font face="Verdana" size="3"> Определяет формат даты: </font ></P>
+        <ul>
+          <li> 
+            <P><font face="Verdana" size="3">0 - МДГ;&nbsp;</font ></P>
+          </li>
+          <li> 
+            <P><font face="Verdana" size="3">&nbsp;1 - ДМГ; </font ></P>
+          </li>
+          <li> 
+            <P><font face="Verdana" size="3">2-ГМД</font ></P>
+          </li>
+        </ul>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="40"> 
+      <DIV WIDTH="206" HEIGHT="40" style="width: 95; height: 40"> 
+        <P><font face="Verdana" size="3"> HOST NAME </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="40"> 
+      <DIV WIDTH="438" HEIGHT="40" style="width: 321; height: 57"> 
+        <P><font face="Verdana" size="3"> Содержит имя рабочей станции. Помогает 
+          серверу при идентификации процессов </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="52"> 
+      <DIV WIDTH="206" HEIGHT="52" style="width: 131; height: 52"> 
+        <P><font face="Verdana" size="3"> NATIONAL LANG NAME&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="52"> 
+      <DIV WIDTH="438" HEIGHT="52" style="width: 348; height: 57"> 
+        <P><font face="Verdana" size="3"> Задает национальный язык, который используется 
+          для вывода текста в сообщениях об ошибках </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="134" HEIGHT="29"> 
+      <DIV WIDTH="206" HEIGHT="29" style="width: 134; height: 29"> 
+        <P><font face="Verdana" size="3"> TDS PACKET SIZE&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="431" HEIGHT="29"> 
+      <DIV WIDTH="438" HEIGHT="29" style="width: 310; height: 29"> 
+        <P><font face="Verdana" size="3"> Определяет размер пакетов потоков данных 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="548" HEIGHT="23"> <DIV WIDTH="202" HEIGHT="23" style="width: 163; height: 20"> 
+      <P><font face="Verdana" size="3"> <b> Oracle (ORACLE)</b> </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="29"> 
+      <DIV WIDTH="202" HEIGHT="29" style="width: 121; height: 29"> 
+        <P><font face="Verdana" size="3"> NET PROTOCOL&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="29"> 
+      <DIV WIDTH="425" HEIGHT="29" style="width: 355; height: 29"> 
+        <P><font face="Verdana" size="3"> Устанавливает сетевой протокол передачи 
+          данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="548" HEIGHT="25"> <DIV WIDTH="202" HEIGHT="25" style="width: 166; height: 18"> 
+        <P><font face="Verdana" size="3"> <b> Informix (INFORMIX)</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="29"> 
+      <DIV WIDTH="202" HEIGHT="29" style="width: 105; height: 38"> 
+        <P><font face="Verdana" size="3"> DATE SEPARATOR&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="29"> 
+      <DIV WIDTH="425" HEIGHT="29" style="width: 275; height: 29"> 
+        <P><font face="Verdana" size="3"> Задает разделитель для формата даты 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="548" HEIGHT="27"> <DIV WIDTH="202" HEIGHT="27" style="width: 316; height: 14"> 
+        <P><font face="Verdana" size="3"> <b> Microsoft Access (MSACCIESS)</b> 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="58"> 
+      <DIV WIDTH="202" HEIGHT="58" style="width: 90; height: 58"> 
+        <P><font face="Verdana" size="3"> SYSTEM DATABASE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="58"> 
+      <DIV WIDTH="425" HEIGHT="58" style="width: 359; height: 58"> 
+        <P><font face="Verdana" size="3"> Путь к системной базе данных с информацией 
+          о правах доступа. При изменении параметра драйвер необходимо перезагрузить 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="548" HEIGHT="27"> <DIV WIDTH="202" HEIGHT="27" style="width: 91; height: 27"> 
+        <P><font face="Verdana" size="3"> <b> DB2 (DB2)</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="56"> 
+      <DIV WIDTH="202" HEIGHT="56" style="width: 72; height: 56"> 
+        <P><font face="Verdana" size="3"> DB2 DSN&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="56"> 
+      <DIV WIDTH="425" HEIGHT="56" style="width: 330; height: 56"> 
+        <P><font face="Verdana" size="3"> Задает имя соединения с БД. Это название 
+          псевдонима клиента DB2, который создается на сервере </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="23"> 
+      <DIV WIDTH="202" HEIGHT="23" style="width: 65; height: 23"> 
+        <P><font face="Verdana" size="3"> DRIVER&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="23"> 
+      <DIV WIDTH="425" HEIGHT="23" style="width: 173; height: 23"> 
+        <P><font face="Verdana" size="3"> Имя драйвера DB2 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="27"> 
+      <DIV WIDTH="202" HEIGHT="27" style="width: 102; height: 27"> 
+        <P><font face="Verdana" size="3"> ROWSET SIZE&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="27"> 
+      <DIV WIDTH="425" HEIGHT="27" style="width: 305; height: 27"> 
+        <P><font face="Verdana" size="3"> Определяет число записей, передаваемых 
+          одновременно </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="548" HEIGHT="27"> <DIV WIDTH="202" HEIGHT="27" style="width: 153; height: 16"> 
+        <P><font face="Verdana" size="3"> <b> Драйверы ODBC</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="38"> 
+      <DIV WIDTH="202" HEIGHT="38" style="width: 114; height: 38"> 
+        <P><font face="Verdana" size="3"> ODBC DRIVER&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="38"> 
+      <DIV WIDTH="425" HEIGHT="38" style="width: 183; height: 38"> 
+        <P><font face="Verdana" size="3"> Имя драйвера ODBC </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="25"> 
+      <DIV WIDTH="202" HEIGHT="25" style="width: 86; height: 25"> 
+        <P><font face="Verdana" size="3"> ODBC DSN&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="418" HEIGHT="25"> 
+      <DIV WIDTH="425" HEIGHT="25" style="width: 256; height: 25"> 
+        <P><font face="Verdana" size="3"> Имя набора данных ODBC </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> После настройки параметров драйвера и сохранения 
+  текущей конфигурации новый псевдоним становится доступен для любого приложения, 
+  использующего BDE. </font ></P>
+<P><font face="Verdana" size="3"> Страница <B>Configuration, </B>помимо настройки 
+  установленных в BDE драйверов, позволяет редактировать параметры, используемые 
+  BDE при инициализации приложения. Эти параметры доступны при выборе узлов <B>System, 
+  </B>a затем <B>INIT </B>иерархического дерева. Назначение параметров представлено 
+  в табл. 16.4. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 16.4. </B>Параметры 
+  инициализации приложения </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="503" HEIGHT="175">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="29"> <DIV WIDTH="212" HEIGHT="29" style="width: 63; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Параметр</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="342" HEIGHT="29"> <DIV WIDTH="442" HEIGHT="29" style="width: 108; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Назначение</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="71"> 
+      <DIV WIDTH="212" HEIGHT="71" style="width: 93; height: 71"> 
+        <P><font face="Verdana" size="3"> AUTO ODBC </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="342" HEIGHT="71"> 
+      <DIV WIDTH="442" HEIGHT="71" style="width: 318; height: 71"> 
+        <P><font face="Verdana" size="3"> В значении <font face="Verdana" size="2"> 
+          True</font> при каждой инициализации в BDE автоматически импортируются 
+          все установленные в системе драйверы ODBC </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="31"> 
+      <DIV WIDTH="212" HEIGHT="31" style="width: 144; height: 31"> 
+        <P><font face="Verdana" size="3"> DATA REPOSITORY </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="342" HEIGHT="31"> 
+      <DIV WIDTH="442" HEIGHT="31" style="width: 221; height: 31"> 
+        <P><font face="Verdana" size="3"> Имя текущего словаря данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="44"> 
+      <DIV WIDTH="212" HEIGHT="44" style="width: 135; height: 44"> 
+        <P><font face="Verdana" size="3"> DEFAULT DRIVER </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="342" HEIGHT="44"> 
+      <DIV WIDTH="442" HEIGHT="44" style="width: 311; height: 44"> 
+        <P><font face="Verdana" size="3"> Локальный драйвер, используемый по умолчанию 
+          в драйвере STANDARD </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="102"> <DIV WIDTH="219" HEIGHT="102" style="width: 66; height: 102"> 
+      <P><font face="Verdana" size="3"> LANGDRIVER </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="102"> <DIV WIDTH="432" HEIGHT="102" style="width: 299; height: 114"> 
+      <P><font face="Verdana" size="3"> Драйвер языковой поддержки. При использовании 
+        стандартных локальных драйверов это значение перекрывают те, которые определены 
+        непосредственно в конфигурациях драйверов Paradox, dBASE, FoxPro, ASCII 
+        </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="79"> 
+      <DIV WIDTH="219" HEIGHT="79" style="width: 113; height: 79"> 
+        <P><font face="Verdana" size="3"> LOCAL SHARE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="79"> 
+      <DIV WIDTH="432" HEIGHT="79" style="width: 295; height: 79"> 
+        <P><font face="Verdana" size="3"> Устанавливает режим совместного использования 
+          файлов приложениями, работающих через BDE и другие программы. В значении 
+          True совместное использование разрешено </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="63"> 
+      <DIV WIDTH="219" HEIGHT="63" style="width: 134; height: 63"> 
+        <P><font face="Verdana" size="3"> LOW MEMORY USAGE LIMIT </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="63"> 
+      <DIV WIDTH="432" HEIGHT="63" style="width: 295; height: 63"> 
+        <P><font face="Verdana" size="3"> Максимальный объем памяти (в Кбайтах), 
+          который BDE пытается использовать в первом Мбайте оперативной памяти 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="62"> 
+      <DIV WIDTH="219" HEIGHT="62" style="width: 117; height: 62"> 
+        <P><font face="Verdana" size="3"> MAXBUFSIZE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="62"> 
+      <DIV WIDTH="432" HEIGHT="62" style="width: 313; height: 62"> 
+        <P><font face="Verdana" size="3"> Максимальный размер кэша данных. Он 
+          должен быть не меньше значения параметра MINBUFSIZE и кратен 1 28 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="31"> 
+      <DIV WIDTH="219" HEIGHT="31" style="width: 113; height: 31"> 
+        <P><font face="Verdana" size="3"> MAXFILEHANDLES </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="31"> 
+      <DIV WIDTH="432" HEIGHT="31" style="width: 299; height: 31"> 
+        <P><font face="Verdana" size="3"> Максимальное число используемых файлов 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="40"> 
+      <DIV WIDTH="219" HEIGHT="40" style="width: 97; height: 40"> 
+        <P><font face="Verdana" size="3"> MEMSIZE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="40"> 
+      <DIV WIDTH="432" HEIGHT="40" style="width: 291; height: 40"> 
+        <P><font face="Verdana" size="3"> Максимальный объем используемой BDE 
+          памяти в Мбайтах </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="65"> 
+      <DIV WIDTH="219" HEIGHT="65" style="width: 92; height: 65"> 
+        <P><font face="Verdana" size="3"> MINBUFSIZE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="65"> 
+      <DIV WIDTH="432" HEIGHT="65" style="width: 316; height: 65"> 
+        <P><font face="Verdana" size="3"> Минимальный размер кэша данных. Он должен 
+          быть не больше значения параметра MAXBUFSIZE и кратен 128 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="68"> 
+      <DIV WIDTH="219" HEIGHT="68" style="width: 103; height: 68"> 
+        <P><font face="Verdana" size="3"> MTS POOLING </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="68"> 
+      <DIV WIDTH="432" HEIGHT="68" style="width: 295; height: 68"> 
+        <P><font face="Verdana" size="3"> Управляет режимом объединения ресурсов 
+          MTS (Microsoft Transaction Server). Обеспечивает лучшую производительность 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="73"> 
+      <DIV WIDTH="219" HEIGHT="73" style="width: 101; height: 73"> 
+        <P><font face="Verdana" size="3"> SHAREDMEMLOCATION </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="73"> 
+      <DIV WIDTH="432" HEIGHT="73" style="width: 331; height: 95"> 
+        <P><font face="Verdana" size="3"> Содержит адрес памяти, который пытаются 
+          использовать Менеджер памяти и Менеджер буфера. При возникновении конфликтов 
+          адрес необходимо поменять вручную. Задается только второе слово адреса 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="42"> 
+      <DIV WIDTH="219" HEIGHT="42" style="width: 117; height: 42"> 
+        <P><font face="Verdana" size="3"> SHAREDMEMSIZE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="42"> 
+      <DIV WIDTH="432" HEIGHT="42" style="width: 317; height: 42"> 
+        <P><font face="Verdana" size="3"> Максимальный объем памяти, используемый 
+          Менеджером памяти и Менеджером буфера </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="42"> 
+      <DIV WIDTH="219" HEIGHT="42" style="width: 80; height: 42"> 
+        <P><font face="Verdana" size="3"> SQLQRYMODE </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="42"> 
+      <DIV WIDTH="432" HEIGHT="42" style="width: 154; height: 42"> 
+        <P><font face="Verdana" size="3"> См. табл. 16.2 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="19"> 
+      <DIV WIDTH="219" HEIGHT="19" style="width: 69; height: 19"> 
+        <P><font face="Verdana" size="3"> SYSFLAGS </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="19"> 
+      <DIV WIDTH="432" HEIGHT="19" style="width: 209; height: 19"> 
+        <P><font face="Verdana" size="3"> Не используется </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="44"> 
+      <DIV WIDTH="219" HEIGHT="44" style="width: 47; height: 44"> 
+        <P><font face="Verdana" size="3"> VERSION </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="332" HEIGHT="44"> 
+      <DIV WIDTH="432" HEIGHT="44" style="width: 298; height: 44"> 
+        <P><font face="Verdana" size="3"> Номер внутренней версии BDE. Только 
+          для чтения </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> Также на странице <B>Configuration </B>устанавливаются 
+  параметры форматов даты, времени и чисел. Доступ к параметрам осуществляется 
+  через узлы <B>System и Format.</B> </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

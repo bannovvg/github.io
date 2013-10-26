@@ -1,0 +1,1311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TBDEDataSet</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот класс является потомком класса <font face="Verdana" size="2">TDataSet</font>, его значение трудно переоценить: именно
+<font face="Verdana" size="2"> TBDEDataSet</font> обеспечивает работоспособность важнейших механизмов набора данных за счет обращения к функциям BDE (табл. 16.6). Например, класс
+<font face="Verdana" size="2"> TBDEDataSet</font> перекрывает абстрактные методы своего предка
+<font face="Verdana" size="2">TDataSet</font>, отвечающие за такие важнейшие операции, как чтение данных и сохранение изменений в базе данных, навигация по записям набора данных, фильтрация.
+</font ></P>
+<P><font face="Verdana" size="3">
+Напомним, что все эти механизмы не созданы &quot;с нуля&quot;, а только дополнены обращениями к функциям BDE в необходимых местах методов, изначально описанных в классе
+<font face="Verdana" size="2">TDataSet</font>. Например, для обеспечения фильтрации записей набора данных к классу добавлено новое свойство:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFilterOption = (foCaselnsensitive, foNoPartialCompare);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFilterOptions = set of TFilterOption;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FilterOptions: TFilterOptions;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Оно определяет дополнительные параметры отбора записей по фильтру (чувствительность к регистру символов и отбор по текстовому шаблону).
+</font ></P>
+<P><font face="Verdana" size="3">
+Дополнительно к существующим добавлен механизм кэширования изменений. Теперь все вносимые пользователем изменения могут накапливаться в специальном буфере, а их передачей в базу данных можно управлять.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание</B>
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> Эта возможность очень полезна при создании 
+    клиентских приложений в архитектуре клиент/сервер и играет ключевую роль при 
+    обеспечении возможности редактирования наборов данных сложных запросов SQL. 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+Дополнительно к методам работы с полями класса
+<font face="Verdana" size="2"> TDataSet</font> добавлены функции использования полей в формате BLOB.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для обеспечения использования функций API BDE на программном уровне добавлено свойство, содержащее дескриптор курсора, соответствующего текущей записи набора данных:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type HDBICur: Longint;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property Handle: HDBICur;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Также класс обеспечивает возможность программного управления вторичными индексами набора данных в зависимости от типа таблицы базы данных.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 16.6. </B>Свойства 
+  и методы класса <font face="Verdana" size="2"> TBDEDataSet</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="505" HEIGHT="279">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="31">
+<DIV WIDTH="284" HEIGHT="31" style="width: 116; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="45" HEIGHT="31">
+<DIV WIDTH="46" HEIGHT="31" style="width: 19; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="327" HEIGHT="31">
+<DIV WIDTH="344" HEIGHT="31" style="width: 100; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="521" HEIGHT="29">
+<DIV WIDTH="284" HEIGHT="29">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="164">
+<DIV WIDTH="284" HEIGHT="164" style="width: 189; height: 164">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BlockReadSize: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="45" HEIGHT="164">
+<DIV WIDTH="46" HEIGHT="164" style="width: 8; height: 164">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="327" HEIGHT="164">
+<DIV WIDTH="344" HEIGHT="164" style="width: 253; height: 164">
+<P><font face="Verdana" size="3">
+Определяет размер буфера при блочном чтении данных. Такой режим используется для быстрого перемещения по большим массивам данных. Если значение свойства больше нуля, навигация по набору данных осуществляется без изменения состояния компонентов отображения данных и вызова методов-обработчиков событий
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="56">
+<DIV WIDTH="284" HEIGHT="56" style="width: 165; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CacheBlobs:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="45" HEIGHT="56">
+<DIV WIDTH="46" HEIGHT="56" style="width: 2; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="327" HEIGHT="56">
+<DIV WIDTH="344" HEIGHT="56" style="width: 223; height: 56">
+<P><font face="Verdana" size="3">
+Разрешает использование буфера памяти для данных типа BLOB
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="83">
+<DIV WIDTH="275" HEIGHT="83" style="width: 194; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CachedUpdates: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="83">
+<DIV WIDTH="46" HEIGHT="83" style="width: 17; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="83">
+<DIV WIDTH="310" HEIGHT="83" style="width: 244; height: 83">
+<P><font face="Verdana" size="3">
+Включает или отключает режим кэширования изменений в наборе данных. Используется в клиентских приложениях архитектуры клиент/сервер
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="56">
+<DIV WIDTH="275" HEIGHT="56" style="width: 102; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CanModify: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="56">
+<DIV WIDTH="46" HEIGHT="56" style="width: 18; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="56">
+<DIV WIDTH="310" HEIGHT="56" style="width: 247; height: 57">
+<P><font face="Verdana" size="3">
+Если набор данных позволяет делать изменения, свойство возвращает
+<font face="Verdana" size="2"> True</font>, иначе — <font face="Verdana" size="2"> False</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="56">
+<DIV WIDTH="275" HEIGHT="56" style="width: 149; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Explndex: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="56">
+<DIV WIDTH="46" HEIGHT="56" style="width: 21; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="56">
+<DIV WIDTH="310" HEIGHT="56" style="width: 225; height: 56">
+<P><font face="Verdana" size="3">
+Показывает, используются ли в наборе данных индексы dBASE
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="44">
+<DIV WIDTH="275" HEIGHT="44" style="width: 138; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Filter: string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="44">
+<DIV WIDTH="46" HEIGHT="44" style="width: 9; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="44">
+<DIV WIDTH="310" HEIGHT="44" style="width: 240; height: 44">
+<P><font face="Verdana" size="3">
+Содержит выражение для фильтра набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="52">
+<DIV WIDTH="275" HEIGHT="52" style="width: 159; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Filtered: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="52">
+<DIV WIDTH="46" HEIGHT="52" style="width: 13; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font> 
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="52">
+<DIV WIDTH="310" HEIGHT="52" style="width: 225; height: 52">
+<P><font face="Verdana" size="3">
+Управляет включением фильтра набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="192">
+<DIV WIDTH="275" HEIGHT="192" style="width: 187; height: 192">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFilterOption = (foCaselnsensitive, foNoPartialCompare) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FilterOptions: TFilterOptions;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="192">
+<DIV WIDTH="46" HEIGHT="192" style="width: 1; height: 192">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="192">
+<DIV WIDTH="310" HEIGHT="192" style="width: 236; height: 209">
+<P><font face="Verdana" size="3">
+Определяет параметры фильтра:
+</font ></P>
+<ul>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;foCaselnsensitive — строковые 
+            значения фильтруются без учета регистра;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;foNoPartialCompare 
+            — при фильтрации символ &quot;*&quot; рассматривается как обычный 
+            символ, иначе он означает, что на этом месте может находиться произвольное 
+            подмножество любых символов</font></li>
+</ul>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="56">
+<DIV WIDTH="275" HEIGHT="56" style="width: 178; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type HDBICur: Longint; property Handle: HDBICur;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="56">
+<DIV WIDTH="46" HEIGHT="56" style="width: 5; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="56">
+<DIV WIDTH="310" HEIGHT="56" style="width: 218; height: 56">
+<P><font face="Verdana" size="3">
+Указатель на курсор ВОЕ, связанный с текущей записью набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="46">
+<DIV WIDTH="275" HEIGHT="46" style="width: 145; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property KeySize: Word;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="46">
+<DIV WIDTH="46" HEIGHT="46" style="width: 2; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="46">
+<DIV WIDTH="310" HEIGHT="46" style="width: 240; height: 46">
+<P><font face="Verdana" size="3">
+Содержит размер ключа для текущего индекса набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="48">
+<DIV WIDTH="275" HEIGHT="48" style="width: 181; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TLocale: Pointer; property Locale: TLocale;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="48">
+<DIV WIDTH="46" HEIGHT="48" style="width: 6; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="48">
+<DIV WIDTH="310" HEIGHT="48" style="width: 193; height: 48">
+<P><font face="Verdana" size="3">
+Указатель на языковый драйвер ВОЕ
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="31">
+<DIV WIDTH="275" HEIGHT="31" style="width: 133; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecNo: Longint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="31">
+<DIV WIDTH="46" HEIGHT="31" style="width: 7; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="31">
+<DIV WIDTH="310" HEIGHT="31" style="width: 219; height: 38">
+<P><font face="Verdana" size="3">
+Номер текущей записи набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="40">
+<DIV WIDTH="275" HEIGHT="40" style="width: 176; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecordCount: Longint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="40">
+<DIV WIDTH="46" HEIGHT="40" style="width: 2; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="40">
+<DIV WIDTH="310" HEIGHT="40" style="width: 228; height: 40">
+<P><font face="Verdana" size="3">
+Содержит число записей в наборе данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="46">
+<DIV WIDTH="275" HEIGHT="46" style="width: 171; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecordSize: Word;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="46">
+<DIV WIDTH="46" HEIGHT="46" style="width: 4; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="46">
+<DIV WIDTH="310" HEIGHT="46" style="width: 224; height: 46">
+<P><font face="Verdana" size="3">
+Содержит размер одной записи набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="79">
+<DIV WIDTH="275" HEIGHT="79" style="width: 178; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property UpdateObject: TDataSetUpdateObject;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="79">
+<DIV WIDTH="46" HEIGHT="79" style="width: 15; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="79">
+<DIV WIDTH="310" HEIGHT="79" style="width: 242; height: 79">
+<P><font face="Verdana" size="3">
+Экземпляр объекта <font face="Verdana" size="2"> TUpdateObject</font>, используемого при кэшировании изменений
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="157" HEIGHT="227">
+<DIV WIDTH="273" HEIGHT="227" style="width: 189; height: 227">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">type TUpdateRecordTypes = set of (rtModified, rtlnserted, rtDeleted, rtUnmodified) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property UpdateRecordTypes : TUpdateRecordTypes ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="34" HEIGHT="227">
+<DIV WIDTH="54" HEIGHT="227" style="width: 20; height: 227">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PU&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="227">
+<DIV WIDTH="294" HEIGHT="227" style="width: 229; height: 228">
+<P><font face="Verdana" size="3">
+Определяет видимость записей в режиме кэширования изменений в зависимости от их состояния:
+</font ></P>
+<ul>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;rtModified — доступны измененные 
+            записи;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;rtinserted — доступны 
+            добавленные записи;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;rtDeleted — доступны 
+            удаленные записи;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;rtUnmodified — 
+            доступны немодифицированные записи</font></li>
+</ul>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="157" HEIGHT="77">
+<DIV WIDTH="273" HEIGHT="77" style="width: 196; height: 77">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property UpdatesPending: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="34" HEIGHT="77">
+<DIV WIDTH="54" HEIGHT="77" style="width: 11; height: 77">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="77">
+<DIV WIDTH="294" HEIGHT="77" style="width: 250; height: 77">
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2">True</font> говорит о том, что буфер изменений при кэшировании содержит не сохраненные на сервере изменения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="468" HEIGHT="30">
+<DIV WIDTH="273" HEIGHT="30" style="width: 85; height: 30">
+<P><font face="Verdana" size="3">
+<b>Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="157" HEIGHT="42">
+<DIV WIDTH="273" HEIGHT="42" style="width: 191; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ApplyUpdates;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="34" HEIGHT="42">
+<DIV WIDTH="54" HEIGHT="42" style="width: 2; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="42">
+<DIV WIDTH="294" HEIGHT="42" style="width: 251; height: 57">
+<P><font face="Verdana" size="3">
+Записывает изменения из буфера в базу данных в режиме кэширования
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="157" HEIGHT="71">
+<DIV WIDTH="273" HEIGHT="71" style="width: 190; height: 71">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function BookmarkValid (Bookmark : TBookmark): Boolean; overrider</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="34" HEIGHT="71">
+<DIV WIDTH="54" HEIGHT="71" style="width: 1; height: 89">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="71">
+<DIV WIDTH="294" HEIGHT="71" style="width: 243; height: 73">
+<P><font face="Verdana" size="3">
+Проверяет существование экземпляра закладки, передаваемого в параметре
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Bookmark</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="157" HEIGHT="67">
+<DIV WIDTH="273" HEIGHT="67" style="width: 143; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Cancel;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="34" HEIGHT="67">
+<DIV WIDTH="54" HEIGHT="67" style="width: 5; height: 67">
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="67">
+<DIV WIDTH="294" HEIGHT="67" style="width: 251; height: 67">
+<P><font face="Verdana" size="3">
+Отменяет все изменения, сделанные в текущей записи с момента последнего сохранения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="157" HEIGHT="79">
+<DIV WIDTH="273" HEIGHT="79" style="width: 171; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CancelUpdates;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="34" HEIGHT="79">
+<DIV WIDTH="54" HEIGHT="79" style="width: 2; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="79">
+<DIV WIDTH="294" HEIGHT="79" style="width: 238; height: 79">
+<P><font face="Verdana" size="3">
+Отменяет все изменения, сделанные с момента последней записи в базу данных и очищает буфер в режиме кэширования
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="157" HEIGHT="36">
+<DIV WIDTH="273" HEIGHT="36" style="width: 139; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CommitUpdates;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="34" HEIGHT="36">
+<DIV WIDTH="54" HEIGHT="36" style="width: 3; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="36">
+<DIV WIDTH="294" HEIGHT="36" style="width: 227; height: 38">
+<P><font face="Verdana" size="3">
+Очищает буфер изменений в режиме кэширования
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="157" HEIGHT="100">
+<DIV WIDTH="273" HEIGHT="100" style="width: 185; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CompareBookmarks (Bookmarkl, Bookmark2: TBookmark): Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="34" HEIGHT="100">
+<DIV WIDTH="54" HEIGHT="100" style="width: 6; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="100">
+<DIV WIDTH="294" HEIGHT="100" style="width: 244; height: 114">
+<P><font face="Verdana" size="3">
+Проверяет идентичность закладок, указанных в параметрах
+<font face="Verdana" size="2">Bookmark1</font> и <font face="Verdana" size="2">Bookmark2</font>. При значении сигнализирует о наличии отличий в двух закладках
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="157" HEIGHT="96">
+<DIV WIDTH="273" HEIGHT="96" style="width: 189; height: 96">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ConstraintCallBack (Req: DsInfoReq; var ADataSources : DataSources) : DBIResult; stdcall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="34" HEIGHT="96">
+<DIV WIDTH="54" HEIGHT="96" style="width: 4; height: 96">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="96">
+<DIV WIDTH="294" HEIGHT="96" style="width: 231; height: 96">
+<P><font face="Verdana" size="3">
+Обеспечивает доступ к функциям ограничения данных API BDE
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="40">
+<DIV WIDTH="269" HEIGHT="40" style="width: 167; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ConstraintsDisabled: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="40">
+<DIV WIDTH="46" HEIGHT="40" style="width: 2; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="40">
+<DIV WIDTH="308" HEIGHT="40" style="width: 231; height: 40">
+<P><font face="Verdana" size="3">
+Показывает, включены или отключены ограничения данных
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="104">
+<DIV WIDTH="269" HEIGHT="104" style="width: 172; height: 104">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CreateBlobStream ( Field : TField; Mode: TblobStreamMode) : TStream; override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="104">
+<DIV WIDTH="46" HEIGHT="104" style="width: 6; height: 104">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="104">
+<DIV WIDTH="308" HEIGHT="104" style="width: 241; height: 104">
+<P><font face="Verdana" size="3">
+Создает поток для чтения/записи данных типа BLOB
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="29">
+<DIV WIDTH="269" HEIGHT="29" style="width: 158; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DisableConstraints;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="29">
+<DIV WIDTH="46" HEIGHT="29" style="width: 4; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="29">
+<DIV WIDTH="308" HEIGHT="29" style="width: 226; height: 29">
+<P><font face="Verdana" size="3">
+Отключает ограничения данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="23">
+<DIV WIDTH="269" HEIGHT="23" style="width: 150; height: 23">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EnableConstraints;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="23">
+<DIV WIDTH="46" HEIGHT="23" style="width: 16; height: 23">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="23">
+<DIV WIDTH="308" HEIGHT="23" style="width: 229; height: 23">
+<P><font face="Verdana" size="3">
+Включает ограничения данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="66">
+<DIV WIDTH="269" HEIGHT="66" style="width: 157; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FetchAll;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="66">
+<DIV WIDTH="46" HEIGHT="66" style="width: 2; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="66">
+<DIV WIDTH="308" HEIGHT="66" style="width: 253; height: 66">
+<P><font face="Verdana" size="3">
+Переносит все изменения из буфера и восстанавливает все записи от текущей позиции до конца набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="38">
+<DIV WIDTH="269" HEIGHT="38" style="width: 189; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FlushBuffers;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="38">
+<DIV WIDTH="46" HEIGHT="38" style="width: 5; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="38">
+<DIV WIDTH="308" HEIGHT="38" style="width: 261; height: 38">
+<P><font face="Verdana" size="3">
+Передает в базу данных все изменения из буфера записи
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="102">
+<DIV WIDTH="269" HEIGHT="102" style="width: 193; height: 102">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetBlobFieldData (FieldNo: Integer; var Buffer: TblobByteData): Integer; override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="102">
+<DIV WIDTH="46" HEIGHT="102" style="width: 16; height: 102">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="102">
+<DIV WIDTH="308" HEIGHT="102" style="width: 225; height: 102">
+<P><font face="Verdana" size="3">
+Читает все данные <font face="Verdana" size="2"> BLOB</font> из поля
+<font face="Verdana" size="2"> FieldNo</font> В буфер <font face="Verdana" size="2"> Buffer</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="65">
+<DIV WIDTH="269" HEIGHT="65" style="width: 151; height: 65">
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">
+function GetCurrentRecord (Buffer : PChar) : Boolean</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="65">
+<DIV WIDTH="46" HEIGHT="65" style="width: 8; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="65">
+<DIV WIDTH="308" HEIGHT="65" style="width: 248; height: 73">
+<P><font face="Verdana" size="3">
+Помещает текущую строку в буфер <font face="Verdana" size="2">Buffer</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="52">
+<DIV WIDTH="269" HEIGHT="52" style="width: 186; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Getlndexlnfo;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="52">
+<DIV WIDTH="46" HEIGHT="52" style="width: 5; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="52">
+<DIV WIDTH="308" HEIGHT="52" style="width: 238; height: 52">
+<P><font face="Verdana" size="3">
+Обновляет информацию о текущем индексе набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="129">
+<DIV WIDTH="269" HEIGHT="129" style="width: 183; height: 129">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IsSequenced: Boolean; override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="129">
+<DIV WIDTH="46" HEIGHT="129" style="width: 2; height: 129">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="129">
+<DIV WIDTH="308" HEIGHT="129" style="width: 251; height: 171">
+<P><font face="Verdana" size="3">
+Определяет, поддерживает ли таблица БД нумерацию последовательности записей. В классе
+<font face="Verdana" size="2"> TDataSet</font> всегда возвращает
+<font face="Verdana" size="2">True</font>, т. к. абстрактный набор данных свободен от конкретной реализации БД и всегда нумерует записи
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="149" HEIGHT="173">
+<DIV WIDTH="269" HEIGHT="173" style="width: 196; height: 173">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Locate (const KeyFields: string; const KeyValues : Variant; Options: TlocateOptions) : Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="173">
+<DIV WIDTH="46" HEIGHT="173" style="width: 8; height: 173">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="173">
+<DIV WIDTH="308" HEIGHT="173" style="width: 256; height: 173">
+<P><font face="Verdana" size="3">
+Осуществляет поиск в наборе данных. Параметр
+<font face="Verdana" size="2"> KeyFields</font> содержит список полей, по которым ведется поиск. Параметр
+<font face="Verdana" size="2"> KeyValues</font> содержит значения полей для поиска. Параметр
+<font face="Verdana" size="2"> Options</font> определяет условия поиска. Если запись найдена, курсор набора данных устанавливается на эту запись и возвращается
+<font face="Verdana" size="2"> True</font> (см. гл. 14)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="220" HEIGHT="98">
+<DIV WIDTH="267" HEIGHT="98" style="width: 185; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Lookup (const KeyFields: string; const KeyValues : Variant; const ResultFields: string): Variant;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="98">
+<DIV WIDTH="48" HEIGHT="98" style="width: 11; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="98">
+<DIV WIDTH="308" HEIGHT="98" style="width: 260; height: 98">
+<P><font face="Verdana" size="3">
+Осуществляет поиск в наборе данных. Возвращает массив значений требуемых полей найденной записи. Параметры аналогичны методу
+<font face="Verdana" size="2"> Locate</font> (см. гл. 14)
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="220" HEIGHT="54">
+<DIV WIDTH="267" HEIGHT="54" style="width: 127; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Post; override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="54">
+<DIV WIDTH="48" HEIGHT="54" style="width: 6; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="54">
+<DIV WIDTH="308" HEIGHT="54" style="width: 228; height: 54">
+<P><font face="Verdana" size="3">
+Пересылает сделанные в текущей записи изменения в базу данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="220" HEIGHT="65">
+<DIV WIDTH="267" HEIGHT="65" style="width: 190; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RevertRecord;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="65">
+<DIV WIDTH="48" HEIGHT="65" style="width: 1; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="65">
+<DIV WIDTH="308" HEIGHT="65" style="width: 252; height: 65">
+<P><font face="Verdana" size="3">
+Отменяет все изменения в текущей строке при работающем буфере изменений
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="220" HEIGHT="85">
+<DIV WIDTH="267" HEIGHT="85" style="width: 160; height: 85">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Translate (Src, Dest : PChar; ToOem: Boolean); override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="85">
+<DIV WIDTH="48" HEIGHT="85" style="width: 13; height: 85">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="85">
+<DIV WIDTH="308" HEIGHT="85" style="width: 254; height: 95">
+<P><font face="Verdana" size="3">
+Форматирует текст. Если параметр <font face="Verdana" size="2"> ToOem</font> =
+<font face="Verdana" size="2">True</font>, текст Src в формате ANSI переводится в текст
+<font face="Verdana" size="2"> Dest</font> в формате OEM и наоборот
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="220" HEIGHT="46">
+<DIV WIDTH="267" HEIGHT="46" style="width: 184; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function UpdateStatus: TUpdateStatus;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="46">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="46">
+<DIV WIDTH="308" HEIGHT="46" style="width: 220; height: 46">
+<P><font face="Verdana" size="3">
+Возвращает тип сохраняемых в буфере изменений данных (см. табл. 16.1)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="470" HEIGHT="34">
+<DIV WIDTH="267" HEIGHT="34">
+<P><font face="Verdana" size="3">
+<b>
+Методы-обработчики событий</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="220" HEIGHT="206">
+<DIV WIDTH="267" HEIGHT="206" style="width: 194; height: 206">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TUpdateAction = (uaFail, uaAbort, uaSkip, uaRetry, uaApplied);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TUpdateErrorEvent = procedure (DataSet: TDataSet; E: EDatabaseError; UpdateKind: TUpdateKind; var UpdateAction: TUpdateAction) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnUpdateError: TUpdateErrorEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="206">
+<DIV WIDTH="48" HEIGHT="206" style="width: 6; height: 206">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="206">
+<DIV WIDTH="308" HEIGHT="206" style="width: 234; height: 206">
+<P><font face="Verdana" size="3">
+Вызывается при возникновении ошибки переноса кэшированных в буфере изменений в таблицу базы данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="220" HEIGHT="208">
+<DIV WIDTH="267" HEIGHT="208" style="width: 190; height: 208">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TUpdateAction = (uaFail, uaAbort, uaSkip, uaRetry, uaApplied) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TUpdateRecordEvent = procedure ( DataSet : TDataSet ; UpdateKind: TUpdateKind; var UpdateAction: TUpdateAction) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnUpdateRecord : TUpdateRecordEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="1" HEIGHT="208">
+<DIV WIDTH="48" HEIGHT="208" style="width: 9; height: 208">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="208">
+<DIV WIDTH="308" HEIGHT="208" style="width: 235; height: 208">
+<P><font face="Verdana" size="3">
+Вызывается при сохранении кэшированных в буфере изменений для отдельной записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+Применяется для организации дополнительного управления этим процессом, например для контроля какого-либо конкретного значения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

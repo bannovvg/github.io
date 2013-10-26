@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TDecisionSource</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDecisionSource</font> предназначен для связывания визуальных компонентов многомерного представления с компонентом
+<font face="Verdana" size="2"> TDecisionCube</font> (табл. 30.4). Кроме того, за счет возможности подключения к этому компоненту нескольких визуальных компонентов одновременно, при изменении состояния одного визуального компонента осуществляется синхронизация многомерного представления во всех остальных компонентах.
+</font ></P>
+<P><font face="Verdana" size="3">
+От набора данных в визуальные компоненты передаются данные, обратно транслируются команды пользователя по управлению многомерным представлением данных.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 30.4. </B>Основные 
+  свойства компонента <font face="Verdana" size="2"> TDecisionSource</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="486" HEIGHT="353">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="202" HEIGHT="23">
+<DIV WIDTH="306" HEIGHT="23" style="width: 102; height: 23">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="384" HEIGHT="23">
+<DIV WIDTH="333" HEIGHT="23" style="width: 46; height: 23">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="202" HEIGHT="92">
+<DIV WIDTH="306" HEIGHT="92" style="width: 180; height: 115">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDecisionControlType= (xtCheck, xtRadio, xtRadioEx) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ControlT ype: TDecisionControlType;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="384" HEIGHT="92">
+<DIV WIDTH="333" HEIGHT="92" style="width: 276; height: 92">
+<P><font face="Verdana" size="3">
+Определяет способ управления отдельной размерностью в компоненте
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDecisionGrid</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="202" HEIGHT="44">
+<DIV WIDTH="306" HEIGHT="44" style="width: 165; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CurrentSum: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="384" HEIGHT="44">
+<DIV WIDTH="333" HEIGHT="44" style="width: 249; height: 44">
+<P><font face="Verdana" size="3">
+Содержит индекс текущей суммы в компоненте <font face="Verdana" size="2"> TDecisionGrid</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="202" HEIGHT="84">
+<DIV WIDTH="306" HEIGHT="84" style="width: 179; height: 84">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DecisionCube: TDecisionCube;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="384" HEIGHT="84">
+<DIV WIDTH="333" HEIGHT="84" style="width: 225; height: 84">
+<P><font face="Verdana" size="3">
+Связывает данный компонент с компонентом <font face="Verdana" size="2">TDecisionCube</font>. Содержит ссылку на экземпляр компонента
+<font face="Verdana" size="2"> TDecisionCube</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="202" HEIGHT="58">
+<DIV WIDTH="306" HEIGHT="58" style="width: 196; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Ready: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="384" HEIGHT="58">
+<DIV WIDTH="333" HEIGHT="58" style="width: 254; height: 58">
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2"> True</font> означает, что данный компонент связан с активным компонентом
+<font face="Verdana" size="2"> TDecisionCube</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="202" HEIGHT="52">
+<DIV WIDTH="306" HEIGHT="81" style="width: 160; height: 19">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SparseCols: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="384" HEIGHT="52">
+<DIV WIDTH="333" HEIGHT="81" style="width: 293; height: 15">
+<P><font face="Verdana" size="3">
+При значении True из компонента <font face="Verdana" size="2"> TDecisionGrid</font> удаляются пустые колонки
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="225" HEIGHT="52">
+<DIV WIDTH="302" HEIGHT="52" style="width: 202; height: 52">
+<P><font face="Verdana" size="3">
+property SparseRows:   Boolean;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="313" HEIGHT="52">
+<DIV WIDTH="344" HEIGHT="52" style="width: 295; height: 52">
+<P><font face="Verdana" size="3">
+При значении True из компонента <font face="Verdana" size="2"> TDecisionGrid</font> удаляются пустые строки
+</font ></P>
+</DIV>
+</TD>
+</TABLE>
+<P><font face="Verdana" size="3">
+Компонент имеет средства для управления состоянием многомерного представления в визуальных компонентах. Для этого используется свойство
+<font face="Verdana" size="2">ControlType</font>. Рассмотрим его возможные значения:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;xtcheck — щелчок на кнопках 
+    размерности в компонентах  TDecisionGrid и  
+    TDecisionPivot приводит к открытию или закрытию размерности;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;xtRadio — щелчок на кнопках 
+    размерности в компонентах  TDecisionGrid и  
+    TDecisionPivot приводит к открытию или закрытию данной размерности 
+    и закрытию всех остальных в этом направлении;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;xtRadioEx — щелчок на кнопках 
+    размерности в компонентах  TDecisionGrid и  
+    TDecisionPivot приводит к открытию или закрытию данной размерности 
+    и закрытию или открытию всех остальных размерностей в этом направлении.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

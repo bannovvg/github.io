@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TRvDataSetConnection</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TRvDataSetConnection</font> позволяет отчету получить доступ к наборам данных, инкапсулированных в любых компонентах, произошедших от класса
+<font face="Verdana" size="2">TDataSet</font>. Это открывает перед разработчиком самые широкие возможности по созданию отчетов для любых приложений баз данных и распределенных приложений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Сразу после переноса на форму компонент становится доступным в визуальной среде Rave Reports при создании объекта прямого просмотра. Однако толк от ненастроенного соединения пока небольшой. Сначала его нужно связать с компонентом набора данных. Для этого предназначено свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSet: TDataSet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И это все. Теперь созданный в визуальной среде объект прямого просмотра автоматически получит объекты полей, соответствующие полям в наборе данных компонента
+<font face="Verdana" size="2">DataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Впрочем, еще несколько вспомогательных свойств могут дать разработчику дополнительные удобства.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Здесь мы рассмотрим только часть свойств и 
+    методов. Компонент <font face="Verdana" size="2"> TRvDataSetConnection</font> 
+    обладает большой группой свойств и методов, которые, будучи использованы в 
+    методах-обработчиках событий, позволяют дополнительно оформлять отчет. Более 
+    детально эти свойства и методы рассматриваются ниже в разд. &quot;Компонент 
+    <font face="Verdana" size="2"> TRvCustomConnection</font>&quot; данной главы. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FieldAliasList: TStrings;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+пригодится, если нужно изменить имена полей в прямом просмотре проекта отчета. Для этого в списке свойства в формате
+<font face="Verdana" size="2"> Name = Alias </font> задаются имена полей связанного набора данных и их псевдонимы, которые будут использованы в объекте прямого просмотра.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы-обработчики событий компонента отслеживают процесс навигации по набору данных при печати отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+При открытии соединения для создания отчета генератором отчетов вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRPConnectorEvent = procedure(Connection: TRvCustomConnection);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnOpen: TRPConnectorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При открытии соединения отчет требует передать ему информацию о структуре набора данных (метаданные). Компонент соединения делает это и вызывает метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnGetCols: TRPConr.ectorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Когда курсор устанавливается на первую строку набора данных, вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnFirst: TRPConnectcrEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а при перемещении на следующую запись можно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnNext: TRPConnectorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если генератор отчетов нашел нужную запись и считал ее для представления в отчете, для отслеживания этого события разработчик может использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnGetRow: TRPConnectorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При достижении последней записи набора вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRPEOFEvent = procedure(Connection: TRvCustomConnection; var Eof: Boolean);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnEOF: TRPEOFEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При повторном использовании набора данных, например при печати отчетов &quot;один-ко-многим&quot; или при группировке записей, соединение обновляется. При этом все параметры соединения и набора данных приводятся к исходному состоянию и вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnRestore: TRPConnectorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Кроме этого, при печати сложных отчетов генератору отчетов может понадобиться некоторое подмножество отсортированных записей набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед началом сортировки и фильтрации и после их завершения вызываются пары методов-обработчиков
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnGetSort: TRPConnectorEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property OnSetSort: TRPConnectorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnGetFilter: TRPConnectorEvent;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnSetFilter: TRPConnectorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Однако вы можете обеспечить дополнительную фильтрацию записей, передаваемых из набора данных в отчет. Для этого используется метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRPValidateRowEvent = procedure(Connection: TRvCustomConnection;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var ValidRow: Boolean);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property OnValidateRow: TRPValidateRowEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> ValidRow</font> управляет отправкой отдельной записи отчету: при значении
+<font face="Verdana" size="2"> True</font> запись пропускается в отчет.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим простой пример. Для отчета, печатающего всем нам хорошо известную таблицу
+<font face="Verdana" size="2"> COUNTRY</font> из демонстрационной базы Delphi, можно ограничить список стран, а также исключить страны с площадью территории, меньше заданной:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.RvSomeConValidateRow(Connection: TRvCustomConnection;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var ValidRow: Boolean);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">with TRvDataSetConnection(Connection) do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ValidRow :=DataSet.FieldByName('Area').AsInteger &gt; 1000000;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

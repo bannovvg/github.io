@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>гл 2.htm</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body background="../FON.JPG">
+<p align="center"><a href="../Chapter%201/ch27.html">назад</a> | <a href="../index.html">содержание</a> 
+  | <a href="ch2.1.html">вперед</a> 
+<p><font face="Times New Roman Cyr" size=3><b><font size="4">Глава 2</font></b></font><b>.</b> 
+  <font face="Times New Roman Cyr" size="4"><b>Разработка приложения при помощи 
+  мастеров и шаблонов</b></font> 
+<p> <font face="Times New Roman Cyr" size="4">Мастера</font> 
+<p>
+<font face="Times New Roman CYR" size=3>Для увеличения эффективности разработки приложений инструментальная среда Visual Basic б предлагает большой набор специальных средств, помогающих быстрее создать как само приложение, так и его элементы: формы, диалоговые окна, отчеты, базы данных и многое другое, то есть практически все, что связано с разрабатываемым приложением и средой, в которой оно будет работать. Такие средства принято называть мастерами (Wizards).</font>
+
+<p>
+<font face="Times New Roman CYR" size=3>Мастер в интерактивном режиме по шагам выполняет процесс создания и сборки элементов приложения, в проект. При работе мастера необходимо только отвечать на вопросы посредством выбора предлагаемых на каждом шаге вариантов и нажимать на кнопку Next (Следующий шаг) для перехода к следующему шагу. В соответствии с выбором создаются все необходимые элементы приложения и предварительный исходный код для них. Результатом работы мастера является макет приложения, готовый к обсуждению с заказчиком и к дальнейшей доработке до коммерческого варианта. Работу мастера можно сравнить с работой конвейера по сборке проекта приложения из предлагаемых на каждом его шаге элементов выходного продукта, будь то приложение, база данных или просто отчет по ней.</font>
+
+<p>
+<font face="Times New Roman CYR" size=3>Мастер работает по шагам до окончательной сборки конечного продукта. Однако, если для разрабатываемого приложения не требуются все шаблоны форм или другие элементы приложения, предлагаемые мастером, можно на любом шаге кнопкой<b> Finish</b> (Готово) завершить работу мастера или пропустить указанный шаг и перейти к следующему нажатием кнопки Next. При этом будут созданы только выбранные на пройденных шагах элементы приложения. Например, если вам от мастера приложений требуется только MDI — окно и форма документа, то можно нажать кнопку<b> Finish</b> уже на втором шаге мастера приложений.</font>
+<p>
+<font face="Times New Roman CYR" size=3>Мастера Visual Basic 6 решают обширный круг задач, реализуемых в виде приложений или проектов. Практически любое приложение из любой предметной области можно предварительно создать при помощи мастеров и далее дорабатывать самостоятельно с использованием инструментария среды Visual Basic 6.</font>
+
+<p>
+<font face="Times New Roman CYR" size=3>В среде проектирования Visual Basic 6 имеются мастера, представленные в табл. 2.1.</font>
+
+<p> <font face="Times New Roman Cyr" size=3><b><i>Таблица 2.1.</i></b><i> Список 
+  мастеров для создания приложений</i></font> 
+<table align=left border=1 width="100%">
+  <tr> 
+    <td> 
+      <p align="center"> <b><font face="Times New Roman Cyr" size=3>Мастер</font> 
+        </b>
+    </td>
+    <td> 
+      <p align="center"> <b><font face="Times New Roman Cyr" size=3>Назначение</font> 
+        </b>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Application Wizard</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Мастер приложений</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Data Form Wizard</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Мастер форм для баз данных</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Data Object Wizard</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Мастер объектов баз данных</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Package and Deployment Wizard</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Мастер упаковки и распространения</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>ActiveX Ctrl Interface Wizard</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Мастер элементов управления 
+        ActiveX</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>ActiveX Doc Migration Wizard</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Мастер миграции документов ActiveX</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Property Page Wizard</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Мастер страницы свойств</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Toolbar Wizard</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Мастер панели управления</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Setup Wizard</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Мастер установки приложений</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Class Builder Utility</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Конструктор классов</font> 
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>VB Wizard Manager</font> 
+    </td>
+    <td> 
+      <p> <font face="Times New Roman Cyr" size=3>Конструктор мастеров</font> 
+    </td>
+  </tr>
+</table>
+<br clear=all>
+
+<p>&nbsp; 
+<p><font face="Times New Roman CYR" size=3>Наиболее часто используемые мастера 
+  вызываются из диалогового окна New <b>Project.</b> Другие мастера вызываются 
+  из главного меню командами, входящими в состав меню<b> Add-Ins</b> (Надстройки). 
+  Если в меню нет нужного вам мастера, его можно добавить при помощи диалогового 
+  окна<b> Add-In Manager </b>(Управление надстройками), выполнив следующие действия:</font> 
+<p>
+<font face="Times New Roman CYR" size=3>1. В меню<b> Add-Ins</b> выберите команду<b> Add-In Manager.</b></font>
+
+<p>
+<font face="Times New Roman CYR" size=3>2. В списке<b> Available Add-In</b> (Доступные надстройки) открывшегося диалогового окна<b> Add-In Manager</b> (рис. 2.1) установите курсор на наименование подключаемого мастера и выполните одно из следующих действий:</font>
+
+<ul>
+  <li> <font face="Times New Roman CYR" size=3>дважды щелкните мышью;</font> </li>
+  <li><font face="Times New Roman CYR" size=3> установите флажок<b> Loaded/Unloaded</b> 
+    (Загрузить/Выгрузить), расположенный в области<b> Load Behavior</b> (Поведение 
+    при загрузке).</font> </li>
+</ul>
+<p>
+<font face="Times New Roman CYR" size=3>3. Нажмите кнопку <b>ОК</b> для закрытия диалогового окна.</font>
+
+<p>
+<font face="Times New Roman CYR" size=3>Наименование мастера в виде команды появляется в меню<b> Add-Ins.</b> Для запуска мастера достаточно выбрать эту команду из меню.</font>
+<p><img src="2.1.gif" width="483" height="370"> 
+<p><font face="Times New Roman Cyr" size=3><b>Рис. 2.1.</b> Диалоговое окно<b> 
+  Add-In Manager</b></font> 
+<blockquote>
+  <p> <font face="Times New Roman Cyr" size=3><b><u>Замечание</u></b></font> </p>
+  <p> <font face="Times New Roman Cyr" size=3>Исключить команду вызова мастера 
+    из меню<b> Add-Ins</b> можно аналогичными действиями, только вместо установки 
+    флажка необходимо выполнить его снятие.</font> </p>
+</blockquote>
+<p>
+<font face="Times New Roman CYR" size=3>В этой главе подробно рассмотрим работу мастера создания приложении <b>Application Wizard</b> и мастера форм баз данных<b> Data Form Wizard.</b> <i>Сведения о мастере панели инструментов<b> Toolbar Wizard</b> и редакторе меню<b> Menu Editor </b>приведены в главе 7.</i></font>
+
+<p align="center"> <a href="../Chapter%201/ch27.html">назад</a> | <a href="../index.html">содержание</a> 
+  | <a href="ch2.1.html">вперед</a> 
+</body>
+</html>

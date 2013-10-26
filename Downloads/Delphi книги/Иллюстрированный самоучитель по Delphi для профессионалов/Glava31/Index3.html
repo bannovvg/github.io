@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Размещение значка приложения на System Tray</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Часто программисту приходится сталкиваться с задачей написания приложения, работающего в фоновом режиме и не нуждающегося в месте на Панели задач. Если вы посмотрите на правый нижний угол рабочего стола Windows, то наверняка найдете там приложения, для которых эта проблема решена: часы, переключатель раскладок клавиатуры, регулятор громкости и т. п. Ясно, что, как бы вы не увеличивали и не уменьшали формы своего приложения, попасть туда обычным путем не удастся. Способ для этого предоставляет Shell API.
+</font ></P>
+<P><font face="Verdana" size="3">
+Те картинки, которые находятся на <B>System Tray </B>— это действительно просто картинки, а не свернутые окна. Они управляются и располагаются панелью <B>System Tray. </B>Она же берет на себя еще две функции: показ подсказки для каждого из значков и оповещение приложения, создавшего значок, обо всех перемещениях мыши над ним.
+</font ></P>
+<P><font face="Verdana" size="3">
+Весь API <B>System Tray </B>состоит из 1 (одной) функции:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+f<font face="Verdana" size="2">unction Shell_NotifyIcon(dwMessage:   DWORD;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">IpData:   PNotifylconData):   BOOL; PNotifylconData = TNotifylconData; TNotifylconData =  record</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+cbSize:   DWORD;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Wnd:   HWND;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uID:   UINT;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uFlags:   UINT;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uCallbackMessage:   UINT;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hlcon:   HICON;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+szTip: array [0..63] of AnsiChar;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> dwMessage</font> определяет одну из операций:
+<font face="Verdana" size="2"> NIM_ADD</font> означает добавление значка в область,
+<font face="Verdana" size="2"> NIM_DELETE</font> — удаление, <font face="Verdana" size="2"> NIM_MODIFY</font> — изменение.
+</font ></P>
+<P><font face="Verdana" size="3">
+Ход операции зависит от того, какие поля структуры
+<font face="Verdana" size="2"> TNotifyiconData</font> будут заполнены.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обязательным для заполнения является поле <font face="Verdana" size="2"> cbsize</font> — там содержится размер структуры. Поле
+<font face="Verdana" size="2"> wnd</font> должно содержать дескриптор окна, которое будет оповещаться о событиях, связанных со значком. Идентификатор сообщения Windows, которое вы хотите получать от системы о перемещениях мыши над значком, запишите в поле
+<font face="Verdana" size="2">uCallbackMessage</font>. Если вы хотите, чтобы при этих перемещениях над вашим значком показывалась подсказка, то задайте ее текст в поле
+<font face="Verdana" size="2">szTip</font>. В поле UID задается номер значка — каждое приложение может поместить на <B>System Tray </B>сколько угодно значков. Дальнейшие операции вы будете производить, задавая этот номер. Дескриптор помещаемого значка должен быть задан в поле
+<font face="Verdana" size="2">hIcon</font>. Здесь вы можете задать значок, связанный с вашим приложением, или загрузить свой — из ресурсов.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание<U>&nbsp;</U></B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Изменить главный значок приложения можно в 
+    диалоговом окне Project/ Options на странице <font face="Verdana" size="2">Application</font>. 
+    Он будет доступен через свойство Application.Icon. Тут же можно отредактировать 
+    и строку для подсказки — свойство Application.Title. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Наконец, в поле <font face="Verdana" size="2">uFlags</font> вы должны сообщить системе, что именно вы от нее хотите, или, другими словами, какие из полей<font face="Verdana" size="2">
+hicon, uCaiibackMessage и szTip</font> вы на самом деле заполнили. В этом поле предусмотрена комбинация трех флагов:
+<font face="Verdana" size="2"> NIF_ICON, NIF_MESSAGE </font> и <font face="Verdana" size="2">NIF_TIP</font>. Вы можете заполнить, скажем, поле
+<font face="Verdana" size="2">szTip</font>, но если вы при этом не установили флаг
+<font face="Verdana" size="2">NIF_TIP</font>, созданный вами значок не будет иметь строки с подсказкой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Два приведенных ниже метода иллюстрируют сказанное. Первый из них создает значок на <B>System Tray, </B>а второй — уничтожает его.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+const WM_MYTRAYNOTIFY = WMJJSER + 123;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.CreateTraylcon(n:Integer);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var nidata : TNotifyiconData;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">with nidata do&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+cbSize := SizeOf{TNotifyiconData) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Wnd := Self.Handle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uID := n;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uFiags   := NIF_ICON or NIF_MESSAGE or NIFJTIP;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uCallBackMessage := WM_MYTRAYNOTIFY;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hicon := Application.Icon.Handle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+szTip := 'THis is Traylcon Example';&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Shell_NotifyIcon(NIM_ADD, @nidata);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.DeleteTraylcon(n:Integer);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var nidata : TNotifylconData; begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with nidata do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+cbSize := SizeOf(TNotifylconData);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Wnd := Self.Handle; uID := n; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Shell_NotifyIcon(NIM_DELETE, @nidata);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<B>Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> He забывайте уничтожать созданные вами значки 
+    на System Tray. Это не делается автоматически даже при закрытии приложения. 
+    Значок будет удален только после перезагрузки системы. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Внешний вид значка, помещенного нами на <B>System Tray, </B>ничем не отличается от значков других приложений (рис. 31.1).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.31.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 31.1. </B>Над значком, 
+  помещенным на панель <B>System Tray,</B> видна строка подсказки </font ></P>
+<P><font face="Verdana" size="3"> Сообщение, задаваемое в поле <font face="Verdana" size="2">uCallbackMessage</font>, 
+  по сути дела является единственной ниточкой, связывающей вас со значком после 
+  его создания. Оно объединяет в себе несколько сообщений. Когда к вам пришло 
+  такое сообщение (в примере, рассмотренном выше, оно имеет идентификатор <font face="Verdana" size="2">WM_MYTRAYNOTIFY</font>), 
+  поля в переданной в обработчик структуре типа <font face="Verdana" size="2">TMessage</font> 
+  распределены так. Параметр <font face="Verdana" size="2"> wParam</font> содержит 
+  номер значка (тот самый, что задавался в поле <font face="Verdana" size="2"> 
+  uID</font> при его создании), а параметр <font face="Verdana" size="2"> LParam</font> 
+  — идентификатор сообщения от мыши, вроде <font face="Verdana" size="2"> WM_MOUSEMOVE, 
+  WM_LBUTTONDOWN</font> и т. п. К сожалению, остальная информация из этих сообщений 
+  теряется. Координаты мыши в момент события придется узнать, вызвав функцию API 
+  <font face="Verdana" size="2">GetCursorPos</font>: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.WMICON(var 
+    msg: TMessage);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var P : TPoint; 
+    begin case msg.LParam of</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> WM_LBUTTONDOWN:&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> GetCursorPos(p);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SetForegroundWindow(Application.MainForm.Handle); 
+    PopupMenul.Popup(P.X, P.Y);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> WM_LBUTTONUP 
+    :&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Обратите внимание, что при показе всплывающего 
+  меню недостаточно просто вызвать метод <font face="Verdana" size="2">Popup</font>. 
+  При этом нужно вынести главную форму приложения на передний план, в противном 
+  случае она не получит сообщений от меню. </font ></P>
+<P><font face="Verdana" size="3"> Теперь решим еще две задачи. Во-первых, как 
+  сделать, чтобы приложение минимизировалось не на Панель задач (<font face="Verdana" size="2">TaskBar</font>), 
+  а на <b> System</b> <B>Tray? </B>И более того — как сразу запустить его в минимизированном 
+  виде, а показывать главную форму только по наступлении определенного события 
+  (приходу почты, наступлению определенного времени и т. п.). </font ></P>
+<P><font face="Verdana" size="3"> Ответ на первый вопрос очевиден. Если минимизировать 
+  не только окно главной формы приложения<B> </B>(<font face="Verdana" size="2">Application.MainForm.Handle</font>), 
+  но и окно<B> </B>приложения (<font face="Verdana" size="2">Application.Handle)</font>, 
+  то приложение полностью исчезнет &quot;с экранов радаров&quot;. В этот самый 
+  момент нужно создать значок на панели <font face="Verdana" size="2"> System 
+  Tray</font>. В его всплывающем меню должен быть пункт, при выборе которого оба 
+  окна восстанавливаются, а значок удаляется. </font ></P>
+<P><font face="Verdana" size="3"> Чтобы приложение запустилось сразу в минимизированном 
+  виде и без главной формы, следует к вышесказанному добавить установку свойства 
+  <font face="Verdana" size="2">Application.showMainForm</font> в значение <font face="Verdana" size="2">False</font>. 
+  Здесь возникает одна сложность — если главная форма создавалась в невидимом 
+  состоянии, ее компоненты будут также созданы невидимыми. Поэтому при первом 
+  ее показе установим их свойство <font face="Verdana" size="2"> visible</font> 
+  в значение <font face="Verdana" size="2">True</font>. Чтобы не повторять это 
+  дважды, установим флаг — глобальную переменную <font face="Verdana" size="2">shownonce</font>: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.HideMainForm;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Appiication.showMainForm 
+    := False;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ShowWindow(Application.Handle, 
+    SW_HIDE);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ShowWindow(Application.MainForm.Handle, 
+    SW_HIDE);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.RestoreMainForm;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var i,j : Integer;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Appiication.showMainForm 
+    := True;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ShowWindow(Application.Handle, 
+    SW_RESTORE); ShowWindow(Application.MainForm.Handle, SW_RESTORE);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">if not ShownOnce 
+    then begin</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> for I := 0 
+    to Application.MainForm.ComponentCount -1 do if Application.MainForm.Components[I] 
+    is TWinControl then with Application.MainForm.Components[I] as TWinControl 
+    do if Visible then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ShowWindow(Handle, 
+    SW_SHOWDEFAULT);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> for J := 0 
+    to ComponentCount -1 do if Components[J] is TWinControl then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ShowWindow((Components[J] 
+    as TWinControl).Handle, SW_SHOWDEFAULT);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ShownOnce := 
+    True;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.WMSYSCOMMAND(var 
+    msg: TMessage);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin 
+    inherited;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if (Msg.wParam=SC_MINIMIZE) 
+    then&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> HideMainForm; 
+    CreateTraylcon(l) ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.FileOpenltemlClick(Sender: 
+    TObject); begin</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> RestoreMainForm;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">DeleteTraylcon(l);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Теперь у вас в руках полноценный набор средств 
+  для работы с панелью <font face="Verdana" size="2"> System Tray.</font> В заключение 
+  необходимо добавить, что все описанное реализуется не в операционной системе, 
+  а в оболочке ОС — Проводнике (Explorer). В принципе, и Windows NT 4/2000, и 
+  Windows 95/98 допускают замену оболочки ОС на другие, например <font face="Verdana" size="2"> 
+  DashBoard</font> или <font face="Verdana" size="2">LightStep</font>. Там функции 
+  панели <font face="Verdana" size="2"> System Tray</font> могут быть не реализованы 
+  или реализованы через другие API. Впрочем, случаи замены оболочки достаточно 
+  редки. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Клиентские наборы данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В Палитре компонентов Delphi представлено несколько компонентов, инкапсулирующих клиентский набор данных. В то же время при разработке настоящих удаленных клиентских приложений применяется компонент
+<font face="Verdana" size="2">TClientDataSet</font>. Внесем ясность в этот вопрос. Итак, помимо компонента
+<font face="Verdana" size="2">TClientDataSet</font>, расположенного на странице <B>Data </B><b>Access</b>, существуют еще два компонента:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">TSimpleDataSet 
+    — разработан для технологии доступа к данным dbExpress и, по существу, является 
+    единственным полноценным средством для работы с набором данных в рамках этой 
+    технологии;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;TiBdientDataSet — используется 
+    в технологии доступа к данным сервера  InterBase 
+    — InterBase Express.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Все перечисленные компоненты произошли от общего предка — класса
+<font face="Verdana" size="2">TCustomClientoataSet</font> (рис. 22.2). Они обеспечивают локальное кэширование данных и взаимодействие с серверным набором данных при посредстве интерфейса
+<font face="Verdana" size="2">IProviderSupport</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основное различие между компонентом <font face="Verdana" size="2">TClientDataSet</font> и другими клиентскими компонентами заключается в том, что первый предназначен для использования с внешним
+компонентом-провайдером данных. А значит, он может взаимодействовать с удаленным провайдером данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Остальные перечисленные компоненты инкапсулируют внутренний
+провайдер данных, предоставляя тем самым для использования в рамках соответствующих технологий доступа к данным эффективный механизм локального кэширования данных. Использование внутреннего провайдера данных обеспечивает общий
+класс- предок <font face="Verdana" size="2">TCustomCachedDataSet</font>.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.22.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 22.2. </B>Иерархия классов 
+  клиентских наборов данных </font ></P>
+<P><font face="Verdana" size="3"> Для этого он имеет защищенное свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Provider: 
+    TDataSetProvider;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Соединение с источником данных осуществляется 
+  не свойством <font face="Verdana" size="2"> RemoteServer</font> (будет рассмотрено 
+  ниже применительно к компоненту <font face="Verdana" size="2">TclientDataSet</font>). 
+  задающим удаленный сервер, а стандартными средствами соответствующей технологии 
+  доступа к данным. </font ></P>
+<P><font face="Verdana" size="3"> Таким образом, для работы с удаленными данными 
+  (т. е. внешними по отношению к клиенту) пригоден только компонент <font face="Verdana" size="2">TclientDataSet</font>, 
+  умеющий работать с внешним провайдером данных. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

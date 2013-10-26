@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Параметры 
+  запросов и хранимых процедур</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> Params</font> представляет собой набор изменяемых параметров запроса или хранимой процедуры, а также набор объектов
+<font face="Verdana" size="2">TParam</font>, инкапсулирующих отдельные параметры.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим следующий запрос <font face="Verdana" size="2">SQL</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SELECT SaleDat, OrderNo</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FROM Orders</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+WHERE SaleDat &gt;= '01.08.2001' AND SaleDat &lt;= '31.08.2001'</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В нем осуществляется отбор номеров заказов, сделанных в августе 2001 года. Теперь вполне естественно было бы предположить, что пользователю может понадобиться получить подобный отчет за другой месяц или за первые десять дней августа.
+</font ></P>
+<P><font face="Verdana" size="3">
+В этом случае можно поступить так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.FormCreate(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with Queryl do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SQL[0] := 'SELECT PartDat, ItemNo, ItemCount, InputPrice';&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SQL[1] := 'FROM Parts';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SQL[2] := 'WHERE PartDat&gt;= &quot;01.08.2001&quot; AND PartDat&lt;=&quot; 31. 08 . 2001
+''';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.RunBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with Queryl do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Active then Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SQL[2] := 'WHERE PartDat&gt;= '+chr(39)+DatelEdit.Text+chr(39)+&nbsp;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> AND PartDat&lt;='+chr(39)+Date2Edit.Text+chr(39);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При создании формы в методе <font face="Verdana" size="2"> FormCreate</font> задается текст запроса. Для этого используется свойство
+<font face="Verdana" size="2">SQL</font>. При щелчке на кнопке
+<font face="Verdana" size="2">RunBtn</font>, в соответствии
+
+
+
+с заданными в однострочных редакторах <font face="Verdana" size="2">DatelEdit</font> и Date2Edit датах, изменяется текст запроса. Метод
+<font face="Verdana" size="2"> FormCreate</font> приведен только для того, чтобы обозначить первоначальный текст запроса, этот текст вполне можно задать в свойстве
+<font face="Verdana" size="2">SQL</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для решения подобных задач как раз и используются параметры. В этом случае текст запроса будет выглядеть следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SELECT PartDat, ItemNo, ItemCount, InputPrice</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FROM Parts</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+WHERE PartDat&gt;= :PD1 AND PartDat&lt;= :PD2</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Двоеточие перед именами <font face="Verdana" size="2">PD</font><font face="Verdana" size="2">1</font> и
+<font face="Verdana" size="2"> PD2</font> означает, что это параметры. Имя параметра выбирается произвольно. В списке свойства
+<font face="Verdana" size="2"> Params</font> первым идет тот параметр, который расположен первым по тексту запросу.
+</font ></P>
+<P><font face="Verdana" size="3">
+После ввода в свойстве <font face="Verdana" size="2"> SQL</font> текста запроса для каждого параметра автоматически создается объект
+<font face="Verdana" size="2">TParam</font>. Эти объекты доступны в специализированном редакторе, который вызывается при щелчке на кнопке свойства
+<font face="Verdana" size="2"> Params</font> в Инспекторе объектов (рис. 12.2). Для каждого параметра требуется установить тип данных, который должен согласовываться с типом данных соответствующего поля.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.12.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 12.2. </B>Специализированный 
+  редактор параметров запроса </font ></P>
+<P><font face="Verdana" size="3"> Теперь для задания текущих ограничений по дате 
+  поступления можно использовать свойство <font face="Verdana" size="2">Params</font>: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.RunBtnClick(Sender; 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with Queryl 
+    do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; Close;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Params[0].AsDateTime 
+    := StrToDate(DatelEdit.Text);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; Params[l].AsDateTime 
+    := StrToDate(Date2Edit.Text);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Open;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> При щелчке на кнопке <font face="Verdana" size="2"> 
+  RunBtn</font> при помощи параметров в запрос передаются текущие значения ограничений 
+  дат. </font ></P>
+<P><font face="Verdana" size="3"> Значения параметров запроса можно задать и из 
+  другого набора данных. Для этого применяется свойство <font face="Verdana" size="2"> 
+  DataSource</font> компонента набора данных. Указанный в свойстве компонент <font face="Verdana" size="2"> 
+  TDataSource</font> должен быть связан с набором данных, значения полей которого 
+  требуется передать в параметры. Названия параметров должны соответствовать названиям 
+  полей этого набора данных, тогда свойство <font face="Verdana" size="2"> DataSource</font> 
+  начнет работать. При перемещении по записям набора данных текущие значения одноименных 
+  параметров полей автоматически передаются в запрос. </font ></P>
+<P><font face="Verdana" size="3"> Для иллюстрации работы этого свойства рассмотрим 
+  простой пример, главная форма которого представлена на рис. 12.3. Этот проект 
+  не имеет ни одной строки написанного вручную программного кода. </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.12.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 12.3. </B>Главная форма 
+  проекта <font face="Verdana" size="2"> DemoQueryParams</font> </font ></P>
+<P><font face="Verdana" size="3"> Верхний компонент <font face="Verdana" size="2"> 
+  TDBGrid</font> отображает данные из таблицы <font face="Verdana" size="2"> Orders</font> 
+  базы данных <font face="Verdana" size="2"> DBDEMOS</font> и связан через компонент 
+  <font face="Verdana" size="2"> OrdersSource</font> типа <font face="Verdana" size="2"> 
+  TDataSource</font> с компонентом запроса <font face="Verdana" size="2">ordersQuery</font>. 
+  Текст запроса выглядит так: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SELECT * FROM 
+    Orders</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Нижний компонент <font face="Verdana" size="2"> 
+  TDBGrid</font> отображает данные о покупателе и через компонент <font face="Verdana" size="2"> 
+  CustSource</font> типа <font face="Verdana" size="2"> TDataSource</font> связан 
+  с запросом <font face="Verdana" size="2">CustSource</font>, свойство <font face="Verdana" size="2">SQL</font> 
+  которого имеет следующий вид: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SELECT * FROM 
+    Customer WHERE CustNo=:CustNo</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Обратите внимание, что название параметра соответствует 
+  названию поля номера покупателя из таблицы <font face="Verdana" size="2">Orders</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Свойство <font face="Verdana" size="2"> DataSource</font> 
+  компонента <font face="Verdana" size="2"> custQuery</font> указывает на компонент 
+  <font face="Verdana" size="2">OrdersSource</font>. </font ></P>
+<P><font face="Verdana" size="3"> Как только оба набора данных открываются, текущее 
+  значение из поля <font face="Verdana" size="2"> CustNo</font> набора данных 
+  <font face="Verdana" size="2"> orders</font> автоматически передается в параметр 
+  запроса компонента <font face="Verdana" size="2">CustQuery</font>. </font ></P>
+<P><font face="Verdana" size="3"> Благодаря этому, для двух наборов данных реализована 
+  связь &quot;один-к-одному&quot; по полю номера поставщика. </font ></P>
+<P><font face="Verdana" size="3"> И в завершение разговора о параметрах запросов 
+  рассмотрим свойства и методы класса <font face="Verdana" size="2">TParams</font>, 
+  составляющего свойство <font face="Verdana" size="2">Params</font>, и класса 
+  <font face="Verdana" size="2">TParam</font>, инкапсулирующего отдельный параметр. 
+  </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index11.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index13.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

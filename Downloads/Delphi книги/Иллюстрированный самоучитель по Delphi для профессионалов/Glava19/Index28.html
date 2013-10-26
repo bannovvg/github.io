@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index27.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index29.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Команда ADO </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для выполнения запросов к источнику данных любой компонент ADO инкапсулирует специальный объект команды ADO.
+</font ></P>
+<P><font face="Verdana" size="3">
+При использовании компонентов-потомков класса
+<font face="Verdana" size="2"> TCustomADODataSet</font> обычно нет необходимости применять объект команды напрямую. И хотя все реальное взаимодействие объекта набора данных ADO с источником данных осуществляется через объект команды, настройка и выполнение команды скрыты в свойствах и методах компонентов ADO. Тем не менее в классе
+<font face="Verdana" size="2"> TCustomADODataSet</font> доступ к объекту команды можно получить при помощи свойства&nbsp;
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property Command: TADOCommand;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3"><B>Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При необходимости выполнить команду ADO, не 
+    связанную с конкретным набором данных, разработчик может использовать отдельный 
+    компонент <font face="Verdana" size="2">TADOCommand</font>, также расположенный 
+    на странице ADO Палитры компонентов. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Тип команды задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TCommandType = (cmdUnknown, cmdText, cmdTable, cmdStoredProc, cmdFile,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cmdTableDirect);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property CommandType: TCommandType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+cmdunknown</font> — тип команды неизвестен и будет определен источником данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+cmdText</font> — текстовая команда, интерпретируемая источником данных (например запрос SQL); текст должен быть составлен с учетом правил для конкретного источника данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cmdTable</font> — команда на получение набора данных таблицы из хранилища данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+cmdstoredProc</font> — команда на выполнение хранимой процедуры;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+cmdFile</font> — команда на получение набора данных, сохраненного в файле в формате, используемым конкретным источником данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cmdTableoirect</font> — команда на получение набора данных таблицы напрямую, например из файла таблицы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Текст команды, представленный свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CommandText: WideString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+обязательно должен быть согласован с ее типом.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для ограничения времени ожидания выполнения команды используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CommandTimeout: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В компонентах наборов данных ADO команды выполняется при выполнении следующих операций:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">открытие и закрытие набора данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;выполнение запросов и хранимых процедур;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;обновление набора данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;сохранение изменений;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;групповые операции.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Разработчик может повлиять на способ выполнения команды. Для этого он может изменить свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TExecuteOption = (eoAsyncExecute, eoAsyncFetch, eoAsyncFetchNonBlocking, eoExecuteNoRecords);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TExecuteOptions = set of TExecuteOption;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property ExecuteOptions: TExecuteOptions;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+eoAsyncExecute</font> — асинхронное выполнение команды;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+eoAsyncFetch</font> — асинхронное выполнение команды на обновление набора данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+eoAsyncFetchNonBlocking</font> — асинхронное выполнение команды на обновление набора данных без установки блокировки;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+eoExecuteNoRecords</font> — выполнение команды не требует возвращения набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index27.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index29.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

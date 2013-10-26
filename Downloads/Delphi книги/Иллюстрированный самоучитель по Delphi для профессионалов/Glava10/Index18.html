@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Класс TAnimate</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В заключение — несколько слов для тех, кто хочет применить в своих программах анимированные (движущиеся) картинки. Самый простой путь для этого — быстрая смена нескольких последовательных битовых карт. Но, во-первых, их еще нужно нарисовать; во-вторых, если у вас достаточно большие картинки или недостаточно мощный компьютер, обязательно будет заметно мерцание, задержки и другие проблемы с выводом на экран. С появлением очередной версии библиотеки элементов управления COMCTL32 гораздо проще применить готовый компонент
+<font face="Verdana" size="2">TAnimate</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот компонент предназначен для воспроизведения на форме файлов формата
+<font face="Verdana" size="2"> AVI (audio-video interleaved;</font> появился впервые с выходом пакета Microsoft Video for Windows).
+</font ></P>
+<P><font face="Verdana" size="3">
+Альтернативными источниками таких файлов могут послужить:&nbsp;
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">файл (с расширением avi). Его имя нужно задать в свойстве:</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FileName: TFileName;&nbsp;</font>
+</font ></P>
+</blockquote>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">ресурс Windows. Он может быть задан одним из трех свойств:</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ResHandle: THandle;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property ResID: Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property ResName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Наконец, если вы не запаслись своим AVI-файлом, то можете воспользоваться готовым, имеющимся в Windows и иллюстрирующим один из происходящих в системе процессов. Для этого из списка свойства CommonAVi нужно выбрать один из вариантов (рис. 10.4).
+</font ></P>
+<div align="center"><IMG src="gl.10.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 10.4. </B>Так выглядит 
+  ролик &quot;перенос файлов&quot; </font ></P>
+<P><font face="Verdana" size="3"> Все эти свойства при своей установке обнуляют 
+  прочие альтернативные варианты. Запуск ролика начинается при установке свойства 
+  <font face="Verdana" size="2"> Active</font> в значение <font face="Verdana" size="2">True</font>; 
+  при этом показываются кадры, начиная с <font face="Verdana" size="2">StartFrame</font> 
+  и до <font face="Verdana" size="2">StopFrame</font>. </font ></P>
+<P><font face="Verdana" size="3"> Число повторений этой последовательности кадров 
+  задается свойством <font face="Verdana" size="2">Repetitions</font>; если вам 
+  нужен бесконечный цикл, установите это свойство в 0. </font ></P>
+<P><font face="Verdana" size="3"> Что особенно удобно, компонент <font face="Verdana" size="2"> 
+  TAnimate</font> снимает проблемы синхронизации показа ролика с другими процессами 
+  в системе и вашем приложении. </font ></P>
+<P><font face="Verdana" size="3"> Если свойство <font face="Verdana" size="2"> 
+  Timers</font> равно значению <font face="Verdana" size="2">False</font>, показ 
+  ролика происходит в отдельном программном потоке и никак не влияет на остальное; 
+  если оно равно значению <font face="Verdana" size="2">True</font>, ролик синхронизируется 
+  по внутреннему таймеру. Вы можете привязать к показу ролика, например, проигрывание 
+  звука. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index17.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index19.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Наследование</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Вторым &quot;столпом&quot; ООП является наследование.
+Этот простой принцип означает, что если вы хотите создать новый класс, лишь немного отличающийся от старого, то совершенно нет необходимости в переписывании заново уже существующих полей и методов. Вы объявляете, что новый класс
+<font face="Verdana" size="2"> TNewObject</font>
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TNewObject = class(TOldObject);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+является потомком или дочерним классом старого класса
+<font face="Verdana" size="2"> TOldObject</font>, называемого предком
+или родительским классом, и добавляете к нему новые поля, методы и свойства — иными словами, то, что нужно при переходе от общего к частному.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Прекрасный пример, иллюстрирующий наследование, 
+    представляет собой иерархия классов VCL. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В Object Pascal все классы являются потомками класса
+<font face="Verdana" size="2">TObject</font>. Поэтому, если вы создаете дочерний класс прямо от
+<font face="Verdana" size="2"> TObject</font>, то в определении его можно не упоминать. Следующие два выражения одинаково верны:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMyObject = class(TObject); TMyObject = class;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Первый вариант, хотя он и более длинный, предпочтительнее — для устранения возможных неоднозначностей. Класс
+<font face="Verdana" size="2"> TObject</font> несет очень серьезную нагрузку и будет рассмотрен отдельно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Унаследованные от класса-предка поля и методы доступны в дочернем классе; если имеет место совпадение имен методов, то говорят, что они перекрываются.
+</font ></P>
+<P><font face="Verdana" size="3">
+Поведение методов при наследовании, без преувеличения, является краеугольным камнем объектно-ориентированного программирования. В зависимости от того, какие действия происходят при вызове, методы делятся на три группы. В первую группу отнесем статические методы, во вторую — виртуальные (<font face="Verdana" size="2">virtual</font>) и динамические (<font face="Verdana" size="2">dynamic</font>) и, наконец, в третью — появившиеся только в Delphi 4 — перегружаемые (<font face="Verdana" size="2">overload</font>) методы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы первой группы полностью перекрываются в классах-потомках при их переопределении. При этом можно полностью изменить объявление метода. Методы второй группы при наследовании должны сохранять наименование и тип. Перегружаемые методы дополняют механизм наследования возможностью использовать нужный вариант метода (собственный или родительский) в зависимости от условий применения. Подробно все эти методы обсуждаются ниже.
+</font ></P>
+<P><font face="Verdana" size="3">
+Язык C++ допускает так называемое множественное наследование. В этом случае новый класс может наследовать часть своих элементов от одного родительского класса, а часть — от другого. Это, наряду с удобствами, зачастую приводит к проблемам. В Object Pascal понятие множественного наследования отсутствует. Если вы хотите, чтобы новый класс объединял свойства нескольких, породите классы-предки один от другого или включите в один класс несколько полей, соответствующих другим желаемым классам.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

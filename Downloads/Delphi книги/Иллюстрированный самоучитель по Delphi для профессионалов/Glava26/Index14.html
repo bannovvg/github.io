@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Группирующий 
+  отчет</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Отчеты, работающие с базами данных, часто должны отображать данные с различными уровнями группировки. Обычно группировка осуществляется в наборе данных, если он создается на основе запроса SQL с применением оператора GROUP BY. Но в самом наборе данных невозможно предусмотреть оформление групп записей, однако это можно сделать в отчете.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для полосы данных, которая отображает данные из просмотра с группировкой, можно создать полосы группового заголовка и группового окончания. Для этого используются свойства
+<font face="Verdana" size="2"> GroupDataView</font> и <font face="Verdana" size="2">GroupKey</font>. Первое должно указывать на объект группирующего просмотра, а второе задает поле или несколько полей, по которым осуществляется группировка. Применительно к оформлению отчета это означает, что при изменении значения группового ключа будут напечатаны полосы группового заголовка и окончания.
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве таких полос могут использоваться обычные полосы и полосы данных. Обычные полосы применяются, если группировка имеет один уровень вложенности (для каждого значения группового ключа существует одна или несколько сгруппированных записей). Полосы данных используются, если группировка имеет несколько уровней (внутри группы выделяется еще один групповой ключ и каждая запись в группе имеет еще несколько сгруппированных записей второго уровня).
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, для полос группового заголовка необходимо в свойстве
+<font face="Verdana" size="2">ControllerBand</font> задать основную полосу данных и настроить свойство
+<font face="Verdana" size="2">Bandstyle</font>. Для группового заголовка в редакторе <B>Band Style Editor </B>в группе <B>Print Location </B>устанавливается флажок <B>Group Header (G), </B>а для полосы группового окончания — флажок <B>Group Footer (g).</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+Обычно группирующие запросы SQL используют агрегатные функции для вычисления одного или нескольких величин по всей группе. Чаще всего это общая денежная сумма или общее количество. Такие величины удобно размещать в полосах группового окончания.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>
+

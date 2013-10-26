@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Отчет 
+  &quot;один-ко-многим&quot;</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+При помощи средств Rave Reports можно создавать и более сложные отчеты. В приложениях баз данных очень часто используются отношения &quot;один-ко-многим&quot; между наборами данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Давайте посмотрим, как создать отчет &quot;один-ко-многим&quot;. Само собой, он должен быть связан как минимум с двумя просмотрами, которые находятся в отношении &quot;один-ко-многим&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для компонентов наборов данных в Delphi не нужно создавать отношение &quot;один-ко-многим&quot;— речь идет о том, что их поля позволяют такое отношение создать теоретически.
+</font ></P>
+<P><font face="Verdana" size="3">
+Подобно рассмотренному выше простому отчету, отчет &quot;один-ко-многим&quot; может содержать полосы
+<font face="Verdana" size="2"> Band</font> и <font face="Verdana" size="2">DataBand</font>. Причем дополнительные настройки необходимы для обоих типов полос. Число полос
+<font face="Verdana" size="2"> DataBand</font> должно соответствовать числу используемых в отчете наборов данных. Полосы
+<font face="Verdana" size="2"> Band</font> несут в основном оформительскую нагрузку, и их число зависит от эскиза отчета и вашей фантазии.
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве примера создадим отчет для двух таблиц из демонстрационной базы данных Delphi. Таблицы
+<font face="Verdana" size="2"> CUSTOMER</font> и <font face="Verdana" size="2"> ORDERS</font> находятся в отношении &quot;один-ко-многим&quot;. Для них в тестовом приложении создано соединение с использованием ADO, и два табличных компонента ADO подключены
+r компонентам соединения <font face="Verdana" size="2">TRvDataSetConnection</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Соответственно полоса данных <font face="Verdana" size="2"> CustBand</font> будет отображать записи из набора данных
+<font face="Verdana" size="2">tCustomer</font>, а полоса <font face="Verdana" size="2"> ordBand</font> — из набора данных
+<font face="Verdana" size="2"> torders</font> (рис. 26.6). Их необходимо связать с объектами прямых просмотров, как уже описывалось выше для примера простого отчета.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.26.6.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 26.6. </B>Страница отчета 
+  <font face="Verdana" size="2"> MasterDetailReport</font> в визуальной среде 
+  Rave Reports </font ></P>
+<P><font face="Verdana" size="3"> А теперь займемся созданием отношения &quot;один-ко-многим&quot;. 
+  </font ></P>
+<P><font face="Verdana" size="3"> В подчиненной полосе данных <font face="Verdana" size="2"> 
+  ordBand</font> необходимо задать значения для четырех свойств. </font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Свойство 
+    controllerBand должно содержать ссылку на главную полосу CustBand.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Свойство 
+    MasterDataview должно содержать ссылку на главный объект просмотра CustomersView.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;В свойстве 
+    MasterKey необходимо задать ключевое поле custNo главного просмотра CustomersView, 
+    по которому будет установлено отношение.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;В свойстве 
+    DetailKey необходимо задать ключевое поле CustNo подчиненного просмотра Ordersview, 
+    по которому будет установлено отношение.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Кроме этого, необходимо настроить атрибуты местоположения 
+  полос на странице отчета. Для этого используется Редактор полос отчета <B>Band 
+  Style Editor </B>(рис. 26.7), который открывается при щелчке на кнопке свойства 
+  <font face="Verdana" size="2"> Bandstyle</font> Инспектора объектов визуальной 
+  среды Rave Reports. В нем в группе <B>Print Location </B>для подчиненной полосы 
+  <font face="Verdana" size="2"> ordBand</font> необходимо установить флажок <B>Detail.</B> 
+  </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.26.7.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 26.7.</B> Редактор полос 
+  отчета Band Style Editor для отчета MasterDetailReport </font ></P>
+<P><font face="Verdana" size="3"> На этом настройка отношения &quot;один-ко-многим&quot; 
+  завершена. Однако скажем еще несколько слов об использовании обычных полос при 
+  оформлении такого рода отчетов. В нашем примере две дополнительные полосы <font face="Verdana" size="2"> 
+  OrdHeaderBand</font> и <font face="Verdana" size="2"> OrdFooterBand</font> помогают 
+  визуально выделить группы записей подчиненной полосы. Для этого необходимо в 
+  их свойстве controiierBand выбрать полосу данных <font face="Verdana" size="2">OrdBand</font>. 
+  Затем в редакторе полос отчета в группе <B>Print Location </B>для полосы <font face="Verdana" size="2"> 
+  OrdHeaderBand</font> необходимо выбрать флажок <B>Body Header (В), </B>а для 
+  полосы <font face="Verdana" size="2"> OrdFooterBand</font> — флажок <B>Body 
+  Footer (b).</B> </font ></P>
+<P><font face="Verdana" size="3"> Обратите внимание (см. рис. 26.6 и 26.7), что 
+  значки маркировки на полосах страницы и в редакторе полос наглядно демонстрируют 
+  текущий статус полосы. Цветом выделены уровни вложения данных и подчиненность 
+  полос. Полосы с маркировкой одного цвета печатаются в одном блоке. Квадраты 
+  обозначают полосы данных, а треугольники — обычные полосы, при этом направление 
+  вершины треугольника обозначает полосу заголовка или окончания. Левая панель 
+  редактора полос отчета <B>Band Style Editor </B>(рис. 26.7) наглядно демонстрирует 
+  модель отчета, как если бы он был напечатан для трех записей набора данных. 
+  </font ></P>
+<P><font face="Verdana" size="3"> На основе отчета &quot;один-ко-многим&quot; 
+  можно легко разработать и более сложные отчеты. Для этого необходимо детальную 
+  полосу данных связать с новыми детальными полосами и настроить по описанной 
+  методике отношение &quot;один-ко-многим&quot;. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index12.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index14.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

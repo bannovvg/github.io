@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Класс TScreen</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот компонент представляет свойства дисплея (в Windows 98 и 2000 — нескольких дисплеев), на котором выполняется приложение. Поскольку экземпляр данного класса только один (он создается системой при запуске приложения), то большинство методов и свойств имеют информационный характер и недоступны для записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+Курсор приложения, общий для всех форм, доступен через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Cursor: TCursor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Часто приходится включать &quot;песочные часы&quot; на время выполнения длительной операции. Правильнее всего это сделать следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Screen.Cursor := crHourglass;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">{Calculations...}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Screen.Cursor := crDefault;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Имеется список всех курсоров. Получить дескриптор курсора с индексом
+<font face="Verdana" size="2"> index</font> можно при помощи свойства:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Cursors[Index: Integer]: HCURSOR;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Напомним, что индексы зарегистрированных курсоров лежат в диапазоне
+от —22 (<font face="Verdana" size="2">crSizeAll</font>) до 0 (<font face="Verdana" size="2">crDefault</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотренный ниже фрагмент кода при инициализации формы заносит имена всех зарегистрированных в системе курсоров в список
+<font face="Verdana" size="2">ListBoxl</font>. Затем при выборе элемента списка устанавливается соответствующий ему курсор:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.FormCreate(Sender: TObj ect);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TGetStrFunc = function(const Value: string): Integer of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CursorNames: TStringList;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+AddValue: TGetStrFunc;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CursorNames := TStringList.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AddValue := CursorNames.Add;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+GetCursorValues(TGetStrProc(AddValue));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ListBoxl.Items.Assign(CursorNames);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.ListBoxlClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Screen.Cursor := StringToCursor(ListBoxl.Items</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+[ListBoxl.Itemlndex]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+список курсоров, функции
+<B> </B><font face="Verdana" size="2">GetCursorValues</font>, <font face="Verdana" size="2"> StringToCursor</font>
+и некоторые другие содержатся в модуле CONTROLS.PAS.
+</font ></P>
+<P><font face="Verdana" size="3">
+Имена всех установленных в системе шрифтов помещаются в список, определенный в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Fonts: TStrings;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Компонент сообщает неизменяемые свойства экрана (в данном видеорежиме). Его размеры в пикселах определены в свойствах
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Height: Integer; property Width: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В последних версиях ОС Microsoft имеется поддержка отображения на нескольких мониторах одновременно. Для этой цели предусмотрены свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MonitorCount: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Monitors[Index: Integer]: TMonitor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Каждый компонент <font face="Verdana" size="2"> TMonitor</font> несет информацию о размерах и положении изображения на нем. Образовавшийся же
+виртуальный рабочий стол характеризуется следующими свойствами:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DesktopLeft: Integer; property DesktopTop: Integer; property DesktopWidth: Integer; property DesktopHeight: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Все координаты отсчитываются от верхнего левого угла первого монитора. Если монитор один, значения этих свойств совпадают с
+<font face="Verdana" size="2"> Left, Top, width и Height.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> С исходными текстами Delphi 5 поставляется 
+    модуль MULTIMON.PAS, содержащий прототипы структур и функций Windows 98, 2000 
+    для работы со многими мониторами. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Число точек на дюйм дисплея содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PixelsPerlnch: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При появлении каждая форма заносит себя в список форм глобального объекта
+<font face="Verdana" size="2">screen</font>. Два (доступных только для чтения) свойства дают информацию об этом списке:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Forms[Index: Integer]: TForm;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property FormCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Нужно иметь в виду, что в списке указаны только формы, открытые приложением, а не все окна системы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Следующие два свойства указывают на активную в данный момент форму и ее активный элемент управления:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ActiveControl: TWinControl;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property ActlveForm: TForm;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При их изменении генерируются, соответственно, события
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnActiveControlChange: TNotifyEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property OnActiveFormChange: TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Хотя и &quot;некстати&quot;, расскажем здесь о свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DefaultKbLayout: HKL;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Оно указывает на раскладку клавиатуры, принятую в системе по умолчанию. Часто раскладку клавиатуры нужно переключать программно, чтобы облегчить жизнь пользователю. Так, в приложении, в котором надо быстро вводить в базу данных большой объем информации на русском и английском языках, такое переключение при смене полей просто необходимо.
+</font ></P>
+<P><font face="Verdana" size="3">
+Сначала следует прочитать список имеющихся в системе раскладок и установить нужную:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var RusLayout, EngLayout : THandle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.FormCreate(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Layouts : array[0..7] of THandle; i,n :
+Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+// Считывание раскладок RusLayout := 0; EngLayout := 0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+n   := GetKeyboardLayoutList(High(Layouts)+1,   Layouts);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if n&gt;0  then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for  i:=0  to n-1  do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if LoWord(Layouts[i])   and $FF = LANG_RUSSIAN then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;RusLayout   := Layouts[i] else  if LoWord(Layouts [i])   and $FF    =  LANG_ENGLISH then EngLayout   : = Layouts[i];</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+//  Если есть,   включим русскую</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if RusLayout&lt;&gt;0  then    ActivateKeyboardLayout(RusLayout,0);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Затем при входе в определенное поле (компонент редактирования данных) и выходе из него можно программно сменить раскладку:
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.EditDocSerEnter(Sender: 
+    TObject);&nbsp;</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"><font face="Verdana" size="2"> if EngLayout&lt;&gt;0 
+    then ActivateKeyboardLayout(EngLayout, 0);</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.EditDocSerExit(Sender: 
+    TObject};&nbsp;</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"><font face="Verdana" size="2"> if RusLayout&lt;&gt;0 
+    then ActivateKeyboardLayout(RusLayout,0);</font> </font ></p>
+  <p><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

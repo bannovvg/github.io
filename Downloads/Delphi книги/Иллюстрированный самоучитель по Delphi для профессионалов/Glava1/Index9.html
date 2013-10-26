@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Перегрузка методов</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Есть еще одна, совершенно особенная разновидность методов — перегружаемые.
+</font ></P>
+<P><font face="Verdana" size="3">
+Эту категорию методов нельзя назвать антагонистом двух предыдущих: и статические, и виртуальные, и динамические методы могут быть перегружаемыми. Перегрузка методов нужна, чтобы произвести одинаковые или похожие действия с разнотипными данными.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим немного измененный пример, иллюстрирующий статические методы:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TlstObj = class</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FExtData : Extended;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetData(AValue: Extended);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end; T2ndObj = class(TlstObj)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FIntData : Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetData(AValue: Integer); end;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+var&nbsp; Tl: TlstObj;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> T2 : T2ndObj;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом случае попытка вызова из объекта <font face="Verdana" size="2"> Т2</font> методов
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Т2.SetData (1.0);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Т2.SetData(1);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+вызовет ошибку компиляции на первой из двух строк. Для компилятора внутри Т2 статический метод с параметром типа
+<font face="Verdana" size="2"> extended</font> перекрыт, и он его &quot;не признает&quot;. Где же выход из сложившегося положения? Переименовать
+один из методов, например создать <font face="Verdana" size="2"> SetlntegerData</font>
+и <font face="Verdana" size="2">SetExtendedData</font>? Можно, но если методов не два, а, скажем, сто, моментально возникнет путаница. Сделать методы виртуальными? Нельзя, поскольку тип и количество параметров в одноименных виртуальных методах должны в точности совпадать. Теперь для этого существуют перегружаемые методы, объявляемые при помощи директивы
+<font face="Verdana" size="2"> overload</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TlstObj = class</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FExtData : Extended;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetData(AValue: Extended);overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+T2ndObj = class(TlstObj)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> FIntData : Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetData(AValue: Integer); overload;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Объявив метод <font face="Verdana" size="2"> SetData</font>
+перегружаемым, в программе можно использовать обе его реализации одновременно. Это возможно потому, что компилятор определяет тип передаваемого параметра (целый или с плавающей точкой) и в зависимости от этого подставит вызов соответствующего метода: для целочисленных данных — метод объекта T2ndobj, для данных с плавающей точкой — метод объекта
+<font face="Verdana" size="2"> Tistobj</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Можно перегрузить и виртуальный (динамический) метод. Надо только в этом случае добавить директиву
+<font face="Verdana" size="2"> reintroduce</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TlstObj = class</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FExtData : Extended;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetData(AValue: Extended); overload; virtual;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> T2ndObj = class(TlstObj)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FIntData : Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetData(AValue: Integer); reintroduce; overload;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+На перегрузку методов накладывается
+ограничение — нельзя перегружать методы, находящиеся в области видимости
+<font face="Verdana" size="2"> published</font>, т. е. те, которые будут использоваться в Инспекторе объектов.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

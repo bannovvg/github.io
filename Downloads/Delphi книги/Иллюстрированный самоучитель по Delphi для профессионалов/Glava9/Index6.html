@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Контроль ошибок ввода/вывода</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+При работе с файлами разработчик обязательно должен предусмотреть обработку возможных ошибок. Практика показывает, что именно операции ввода/вывода вызывают большую часть ошибок, возникающих в приложении из-за воздействия окружающей программной среды.
+</font ></P>
+<P><font face="Verdana" size="3">
+Контроль за ошибками ввода/вывода зависит от применяемых функций. При использовании доступа через Win32 API все функции возвращают код ошибки Windows, который и нужно проанализировать.
+</font ></P>
+<P><font face="Verdana" size="3">
+При возникновении ошибок ввода/вывода в функциях, использующих файловые переменные, генерируется исключительная ситуация класса
+<font face="Verdana" size="2">EinOutError</font>. Но так происходит только в том случае, если включен контроль ошибок ввода/вывода. Для этого используются соответствующие директивы компилятора:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">{$I+}— контроль включен (установлен по умолчанию);&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">{$I-} — контроль отключен.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> EinOutError</font> отличается тем, что у него есть поле
+<font face="Verdana" size="2">ErrorCode</font>. При возникновении этой исключительной ситуации вы можете получить его значение и принять решение. Основные коды имеют такие значения:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;2 — файл не найден;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;3 — неверное имя файла;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;4 — слишком много открытых файлов;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;5 — доступ запрещен;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;100 — достигнут конец файла;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;101 — диск переполнен;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;106 — ошибка ввода.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+При отключенном контроле в случае возникновения ошибки выполнение программы продолжается без остановки. Однако в этом случае устранение возможных последствий ошибки возлагается на разработчика. Для этого применяется функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function lOResult: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которая возвращает значение 0 при отсутствии ошибок.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

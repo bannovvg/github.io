@@ -1,0 +1,417 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TBitmap</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TBitmap</font> является основой растровой графики в Delphi. В первых версиях среды этот класс соответствовал битовой карте, зависимой от устройства
+(<font face="Verdana" size="2">Device Dependent Bitmap, DDB</font>). Этот формат хорош для деловой графики — отображения небольших картинок с малой глубиной цвета, например, на кнопках. Формат DDB появился во времена первых версий Windows, когда еще не было графических ускорителей и кое-где еще помнили о EGA. Поэтому и форматы хранения были привязаны к определенным видеорежимам.
+</font ></P>
+<P><font face="Verdana" size="3">
+Со временем аппаратура совершенствовалась, росло и количество поддерживаемых видеорежимов. Появились режимы<font face="Verdana" size="2"> High Color</font> (15—16 бит на точку) и
+<font face="Verdana" size="2"> True Color</font> (24 бита на точку). Все это привело к тому, что картинка стала храниться в аппаратно-независимом формате
+(<font face="Verdana" size="2">Device Independent Bitmap, DIB</font>), а проблемы ее быстрого отображения легли на аппаратуру и драйверы.
+</font ></P>
+<P><font face="Verdana" size="3">
+За формат битовой карты — DIB или DDB — отвечает свойство:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TBitraapHandleType = (bmDIB, bmDDB);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property HandleType: TBitmapHandleType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+По умолчанию устанавливается режим bmDIB. Впрочем, можно заставить приложение, написанное на Delphi, вернуться к старому типу. Для этого нужно установить глобальную переменную
+<font face="Verdana" size="2">DOBsOnly</font> (модуль GRAPHICS.PAS) в значение
+<font face="Verdana" size="2">True</font>. Впрочем, необходимость этого сомнительна. Все новые видеокарты и драйверы к ним, а также графические интерфейсы (такие, как DirectX) оптимизированы для использования DIB.
+</font ></P>
+<P><font face="Verdana" size="3">
+Желаемую глубину цвета битовой карты можно узнать и переустановить, меняя значение свойства:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TPixelFormat = (pfDevice, pflbit, pf4bit, pfSbit, pflSbit, pf!6bit, pf24bit, pf32bit, pfCustom);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property PixelFormat: TPixelFormat;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Режим <font face="Verdana" size="2"> pfDevice</font> соответствует битовой карте DDB. Глубина цвета в 1, 4 и 8 бит на пиксел — традиционная и предусматривает наличие у изображения палитры. Другие режимы заботятся о хранении непосредственных яркостей точек в каждом из трех основных цветов — красном (R), зеленом (G) и синем (В). Разрядность 15 бит соответствует распределению бит 5-5-5 (RGB555), 16 бит - RGB 565, 24 бит - RGB888. Режим 32 бит похож на 24-битный, но в нем дополнительно добавлен четвертый канат (альфа-канал), содержащий дополнительную информацию о прозрачности каждой точки. Режим
+<font face="Verdana" size="2"> pfCustom</font> предназначен для реализации программистом собственных графических конструкций. В стандартном классе
+<font face="Verdana" size="2"> TBitmap</font> установка свойства
+<font face="Verdana" size="2"> PixelFormat</font> в режим <font face="Verdana" size="2"> pfCustom</font> приведет к ошибке — поэтому использовать его нужно только в написанных вами потомках
+<font face="Verdana" size="2">TBitmap</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Битовая карта является одним из видов ресурсов. Естественно, что класс
+<font face="Verdana" size="2"> TBitmap</font> поддерживает загрузку из ресурсов приложения:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromResourcelD(Instance: THandle; ResID: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure LoadFromResourceName(Instance: THandle; const ResName: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь <font face="Verdana" size="2"> instance</font> — это глобальная переменная модуля
+<font face="Verdana" size="2">System</font>, хранящая уникальный идентификатор запущенной копии приложения (или динамической библиотеки).
+</font ></P>
+<P><font face="Verdana" size="3">
+Канва битовой карты доступна через свойство:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Canvas: TCanvas;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+С ее помощью можно рисовать на поверхности растрового изображения. Обратите внимание, что никакие другие потомки
+<font face="Verdana" size="2"> TGraphic</font> канвы не имеют.
+</font ></P>
+<P><font face="Verdana" size="3">
+Дескрипторы битовой карты и ее палитры доступны как свойства:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle: HBITMAP;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property Palette: HPALETTE;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Имея дело с классом <font face="Verdana" size="2">TBitmap</font>, учитывайте, что принцип &quot;один объект — один дескриптор&quot; из-за наличия механизма кэширования неверен. Два метода:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ReleaseHandle: HBITMAP;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> function ReleasePalette: HPALETTE;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращают дескрипторы битовой карты и палитры соответственно, а после этого обнуляют дескрипторы, т. е. как бы &quot;отдают&quot; их пользователю.
+</font ></P>
+<P><font face="Verdana" size="3">
+При любом внешнем обращении к дескриптору битовой карты и любой попытке рисовать на ее канве разделение одной картинки несколькими объектами прерывается, и объект получает собственную копию содержимого дескриптора. Для этого есть методы:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">procedure Dormant </font> — <font size="3" face="Verdana, Arial, Helvetica, sans-serif">выгружает 
+    изображение в поток и уничтожает дескрипторы битовой карты и палитры;</font></li>
+  <li>&nbsp;<font face="Verdana" size="2">procedure Freeimage</font> — <font size="3" face="Verdana, Arial, Helvetica, sans-serif">&quot;освобождающий&quot; 
+    дескриптор битовой карты для дальнейшего использования и внесения изменений. 
+    Это означает, что если на данный дескриптор есть ссылки, то он дублируется; 
+    поток очищается.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Битовая карта может быть монохромной и цветной, что определено свойством:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Monochrome: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2"> True</font> соответствует монохромной битовой карте. При его изменении происходит преобразование содержимого к требуемому виду.
+</font ></P>
+<P><font face="Verdana" size="3">
+За прозрачность битовой карты отвечают следующие свойства:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TransparentColor: TColor;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TTransparentMode = (tmAuto, tmFixed);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TransparentMode: TTransparentMode;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если свойство <font face="Verdana" size="2"> TransparentMode</font> установлено в режим
+<font face="Verdana" size="2">tmAuto</font>, то за прозрачный (фоновый) принимается цвет верхнего левого пиксела. В противном случае этот цвет берется из свойства
+<font face="Verdana" size="2">Transparentcolor</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Битовая карта может использоваться в качестве маски для других битовых карт. В этом случае она превращается в двухцветную, где в белый цвет окрашиваются точки фона (см. свойство
+<font face="Verdana" size="2">Transparentcolor</font>), а в черный — все остальные. Для поддержки этого режима служат следующие методы и свойства:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Mask(Transparentcoior: TColor);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property MaskHandle: HBitmap;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> function ReleaseMaskHandle: HBitmap;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Наконец, последним по счету будет рассмотрено очень важное свойство битовой карты
+<font face="Verdana" size="2">TBitmap</font>. Если формат ее хранения — DIB, то есть возможность получить доступ к данным самой битовой карты:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ScanLine[Row: Integer]: Pointer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Это свойство представляет собой массив указателей на строки с данными битовой карты. Параметр ROW содержит номер строки. Следует помнить, что в большинстве случаев строки в битовой карте упорядочены в памяти снизу вверх и фактически первой после заголовка хранится нижняя строка. Код, возвращающий значение свойства
+<font face="Verdana" size="2">ScanLine</font>, это учитывает; поэтому не удивляйтесь, если с ростом параметра ROW значение свойства уменьшается.
+</font ></P>
+<P><font face="Verdana" size="3">
+Внутри строки данные упорядочены в соответствии с форматом
+(<font face="Verdana" size="2">pixelFormat</font>). Для формата <font face="Verdana" size="2"> pfsbit</font> все просто — каждый байт в строке соответствует одному пикселу. Для форматов
+<font face="Verdana" size="2"> pfisbit</font> и <font face="Verdana" size="2"> pfiebit</font> пикселу соответствуют два байта (в этих 16 битах упакованы данные о трех каналах), pf24bit — три байта (по байту на канал).
+</font ></P>
+<P><font face="Verdana" size="3">
+Примерно так может выглядеть обработчик события
+<font face="Verdana" size="2">onMouseMove</font>, выводящий на панель состояния информацию о яркости в данной точке (подразумевается, что формат битовой карты — 8 или 24 бита):
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.ImagelMouseMove(Sender: TObject; Shift: TShiftState;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+X, Y: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+if not Assigned(Imagel. Picture.Bitmap) then Exit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">with Imagel.Picture.Bitmap,&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> do case PixelFormat of</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+pfSbit: Statusbarl.SimpleText := Format('x: %d y: %d b: %d',[x, y, pByteArray(ScanLine[у])^[x] ]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pf24bit: Statusbarl.SimpleText := Format('x: %d y: %d R: %d,G: %d, B: %d',&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">[x,y, pByteArray(ScanLine[y])л[3*х], pByteArray(ScanLine[у])^[ 3*x+l], pByteArray(ScanLine[у])^[ 3*х+2]]);&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Само значение свойства <font face="Verdana" size="2"> ScanLine</font> изменить нельзя (оно доступно только для чтения). Но можно изменить данные, на которые оно указывает. Вот так можно получить негатив 24-битной картинки:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Var line : pByteArray;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+For i:=0 to Imagel.Picture.Bitmap.Height — 1 do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Line := Imagel.Picture.Bitmap.ScanLine[i];</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;For j:=0 to Imagel.Picture.Bitmap.Width * 3 - 1 do</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;Line^[j] := 255 - Line^[j];</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;End;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если вы хотите решать более серьезные задачи — на уровне профессиональных средств — на помощь может прийти библиотека обработки изображений фирмы
+<font face="Verdana" size="2"> Intel (Intel Image Processing Library)</font>. Этот набор инструментов позволяет разработчику включать в программы алгоритмы обработки изображений, написанные и оптимизированные специально для процессоров фирмы
+<font face="Verdana" size="2">Intel</font>. Библиотека является свободно распространяемой, и последняя ее версия располагается на Web-сайте фирмы. Интерфейсы к функциям библиотеки для Delphi разработаны авторами этой книги и вместе с примерами находятся на прилагаемой к книге дискете.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> В Delphi можно столкнуться с &quot;тезкой&quot; 
+    рассматриваемого объекта — структурой <font face="Verdana" size="2">TBitmap</font>, 
+    описанной в файле WINDOWS.PAS. Поскольку обе они относятся к одной и той же 
+    предметной области, часто возникают коллизии, приводящие к ошибкам. Напомним, 
+    чтобы отличить структуры-синонимы, следует использовать имя модуля, в котором 
+    они описаны. Поэтому если в вашей программе есть модули Windows и Graphics, 
+    то описывайте и употребляйте типы <font face="Verdana" size="2"> Windows.TBitmap</font> 
+    И<font face="Verdana" size="2"> Graphics.TBitmap.</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В состав Windows входят карточные игры (точнее, пасьянсы), которые черпают ресурсы из динамической библиотеки cards.dll. Если вы откроете эту библиотеку в редакторе ресурсов, то увидите там изображения всех пятидесяти двух карт и десятка вариантов их рубашек (оборотных сторон). Используем эту возможность для рисования карт. Так загружается битовая карта для рубашки:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var CardsDll : THandle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+BackBitmap : Graphics.TBitmap;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> initialization</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CardsDll := LoadLibraryEx('cards.dll',0, LOAD_LIBRARY__AS_DATAFILE) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+BackBitmap := Graphics.TBitmap.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+BackBitmap.LoadFromResourcelD(CardsDll, 64) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+finalization</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">BackBitmap.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">FreeLibrary(CardsDll);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> В Windows 95/98 эта динамическая библиотека 
+    — 16-разрядная, и работать так, как описано, не будет. Используйте библиотеку 
+    Cards.dll из состава Windows NT, 2000. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Аналогичным образом можно загрузить битовые карты для всей колоды. При показе карты, в зависимости от того, открыта она или закрыта, отрисовывается один из объектов
+<font face="Verdana" size="2">TBitmap</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Known then // карта открыта</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Canvas.StretchDraw(ClientRect, FaceBitmap)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> else</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Canvas.StretchDraw(ClientRect,BackBitmap)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

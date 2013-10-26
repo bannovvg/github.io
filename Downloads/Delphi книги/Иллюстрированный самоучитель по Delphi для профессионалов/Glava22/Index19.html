@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Пример &quot;тонкого&quot; клиента</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Пример клиентского приложения является частью группы проектов SimpleRemote.bpg и предназначен для взаимодействия с сервером приложений
+<font face="Verdana" size="2">simpleAppSrvr</font> (рис. 22.5), процесс создания которого подробно рассматривался в гл. 21.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.22.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 22.5. </B>Окно клиентского 
+  приложения <font face="Verdana" size="2"> Simple Clien</font>t </font ></P>
+<P><font face="Verdana" size="3"> Проект клиента<font face="Verdana" size="2"> 
+  Simple Client</font> состоит из двух файлов. </font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Компоненты, 
+    обеспечивающие соединение с удаленным сервером приложения и работу с наборами 
+    данных, сосредоточены в модуле данных DataModule (файл uDataModule.pas). Обратите 
+    внимание, что это &quot;обычный&quot; модуль данных, используемый в приложениях 
+    баз данных (см. гл. 11).</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Главная 
+    форма клиентского приложения fmMain (файл uMain.pas), содержащая визуальные 
+    компоненты пользовательского интерфейса.</font></li>
+</ul>
+<P align="center"><font face="Verdana" size="3"> <B>ЛИСТИНГ 22.1 .</B>Секция implementation 
+  модуля данных <font face="Verdana" size="2">DataModule</font><B>&nbsp;</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> implementation</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> uses uMain, 
+    Variants, Dialogs;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> {$R *.dfm}</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TDM.SrvrConAfterConnect(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var i: Integer;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> for i := 0 
+    to SrvrCon.DataSetCount - 1 do&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">SrvrCon.DataSets[i].Open;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> cdsVendors.Open;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TDM.SrvrConBeforeDisconnect(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">var i: Integer;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> for i := 0 
+    to SrvrCon.DataSetCount - 1</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;do SrvrCon.DataSets[i].Close;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> cdsVendors.Close;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TDM.cdsVendorsAfterScroll(DataSet: 
+    TDataSet);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> fmMain.edCostSum.Text 
+    := VarToStr(cdsParts.Aggregates[0].Value);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> fmMain.edPriceSum.Text 
+    := VarToStr(cdsParts.Aggregatesfl].Value);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TDM.cdsPartsReconcileError(DataSet: 
+    TCustomClientDataSet;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">E: EReconcileError; 
+    UpdateKind: TUpdateKind; var Action: TReconcileAction);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> cdsParts.CancelUpdates;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MessageDlg(E.Message, 
+    mtError, [mbOK], 0);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index18.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index20.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

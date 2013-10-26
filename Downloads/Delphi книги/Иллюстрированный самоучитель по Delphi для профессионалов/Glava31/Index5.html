@@ -1,0 +1,834 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Интерфейс IShellFolder</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот интерфейс соответствует папке — одному из основных элементов пространства имен Проводника. Зачем было вводить термин &quot;папка&quot;, когда существовали уже общепринятые &quot;каталог&quot; и &quot;директория&quot;? В отличие от последних двух, папка может быть не просто обычным элементом файловой системы. Она может быть виртуальной — как папки Принтеры, Документы или Панель управления. Любая папка может содержать коллекцию объектов из состава пространства имен.
+</font ></P>
+<P><font face="Verdana" size="3">
+Получив указатель на интерфейс <font face="Verdana" size="2">ishellFoider</font>, соответствующий папке, вы можете работать с ней, как с объектом СОМ. &quot;Верхушкой&quot; (корневой папкой) пространства имен является папка Рабочий стол
+(<font face="Verdana" size="2">Desktop</font>). Получить интерфейс isheiiFoider этой папки можно путем вызова функции:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SHGetDesktopFolder(var ppshf: IShellFolder): HResult;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Логика работы с описываемым интерфейсом такова: сначала необходимо получить интерфейс нужной папки, а затем можно переходить к работе с ее содержимым. Содержимое представляет собой список, а каждый элемент папки представлен структурой
+<font face="Verdana" size="2">pitemiDList</font>. Эта структура не типизирована; ее единственное обязательное поле содержит длину в байтах, зная которую можно переместиться к следующему элементу. То есть получается обычная цепочка. Все остальные поля заполняются соответствующими функциями и методами интерфейса
+<font face="Verdana" size="2">ishellFoider</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Все служебные функции работы со структурами 
+    <font face="Verdana" size="2"> PitemiDList</font> — создание, уничтожение, 
+    копирование, перемещение по цепочке и т. п. — содержатся в примере <font face="Verdana" size="2"> 
+    Virtual</font> <font face="Verdana" size="2">ListView</font>, поставляемом 
+    с Delphi. Если вы намерены писать программы, работающие с <font face="Verdana" size="2">ishellFoider</font>, 
+    целесообразно взять их на заметку. В дальнейшем для простоты эти структуры 
+    будем именовать <font face="Verdana" size="2">pidl</font>. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Рассмотрим функции интерфейса <font face="Verdana" size="2">ishellFoider</font>. Под &quot;текущей папкой&quot; в табл. 31.1 понимается та папка, которая в данный момент представляет
+интерфейс<B> </B><font face="Verdana" size="2">IShellFolder</font>.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 31.1. </B>Функции 
+  интерфейса <font face="Verdana" size="2"> IShellFolder</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="439" HEIGHT="373">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="258" HEIGHT="23">
+<DIV WIDTH="369" HEIGHT="23" style="width: 45; height: 23">
+<P><font face="Verdana" size="3">
+<b>
+Метод</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="23">
+<DIV WIDTH="285" HEIGHT="23" style="width: 104; height: 23">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="258" HEIGHT="118">
+<DIV WIDTH="369" HEIGHT="118" style="width: 257; height: 118">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ParseDisplayName (hwndOwner : HWND; pbcReserved: Pointer; IpszDisplayName: POLESTR; out pchEaten: ULONG; out ppidl: PitemiDList; var dwAttributes : ULONG) : HResult;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="118">
+<DIV WIDTH="285" HEIGHT="118" style="width: 237; height: 118">
+<P><font face="Verdana" size="3">
+Эта функция позволяет получить указатель на элемент
+<font face="Verdana" size="2">ppidl</font>, зная только его полное имя (с путем)
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IpszDisplayName</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="258" HEIGHT="92">
+<DIV WIDTH="369" HEIGHT="92" style="width: 230; height: 92">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function EnumObjects (hwndOwner: HWND; grf Flags: DWORD; out EnumlDList: lEnumlDList) : HResult;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="92">
+<DIV WIDTH="285" HEIGHT="92" style="width: 241; height: 95">
+<P><font face="Verdana" size="3">
+Возвращает указатель на специальный интерфейс
+<font face="Verdana" size="2">lEnumlDList</font>, предназначенный для организации цикла по всем элементам списка в текущей папке
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="258" HEIGHT="85">
+<DIV WIDTH="369" HEIGHT="85" style="width: 243; height: 85">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function BindToObject (pidl: PitemiDList; pbcReserved: Pointer; const riid: TIID; out ppvOut: Pointer) : HResult;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="85">
+<DIV WIDTH="285" HEIGHT="85" style="width: 231; height: 85">
+<P><font face="Verdana" size="3">
+Возвращает интерфейс папки <font face="Verdana" size="2">pidl</font>, которая должна находиться в текущей папке (на которую ссылается интерфейс, вызвавший этот метод)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="258" HEIGHT="56">
+<DIV WIDTH="369" HEIGHT="56" style="width: 236; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ComparelDs (IParam: LPARAM; pidll, pid!2: PitemiDList): HResult;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="56">
+<DIV WIDTH="285" HEIGHT="56" style="width: 229; height: 56">
+<P><font face="Verdana" size="3">
+Сравнивает два первых элемента В списках <font face="Verdana" size="2"> pidll</font> И
+<font face="Verdana" size="2">pid</font>l2
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="243" HEIGHT="67">
+<DIV WIDTH="340" HEIGHT="67" style="width: 237; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CreateViewObject (hwndOwner: HWND; const riid: TIID; out ppvOut: Pointer) : HResult;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="244" HEIGHT="67">
+<DIV WIDTH="283" HEIGHT="67" style="width: 221; height: 67">
+<P><font face="Verdana" size="3">
+Создает визуальный объект для текущей папки и возвращает указатель на него в параметре
+<font face="Verdana" size="2"> ppvOut</font>
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="243" HEIGHT="88">
+<DIV WIDTH="340" HEIGHT="88" style="width: 215; height: 88">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetAttributesOf (cidl: UINT; var apidl: PItemlDList; var rgflnOut: UINT): HResult;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="244" HEIGHT="88">
+<DIV WIDTH="283" HEIGHT="88" style="width: 238; height: 88">
+<P><font face="Verdana" size="3">
+Возвращает атрибуты элемента под номером <font face="Verdana" size="2"> cidl</font> в списке
+<font face="Verdana" size="2">apidl</font>. Результат — набор флагов, устанавливаемых в параметре
+<font face="Verdana" size="2"> rgf</font> <font face="Verdana" size="2"> inOut</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="243" HEIGHT="102">
+<DIV WIDTH="340" HEIGHT="102" style="width: 203; height: 102">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetUIObjectOf (hwndOwner : HWND; cidl: UINT; var apidl: PItemlDList; const riid: TIID; prgflnOut: Pointer; out ppvOut: Pointer) : HResult;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="244" HEIGHT="102">
+<DIV WIDTH="283" HEIGHT="102" style="width: 225; height: 102">
+<P><font face="Verdana" size="3">
+Создает объект пользовательского интерфейса, связанный с элементом списка
+<font face="Verdana" size="2"> aplidl</font> под номером <font face="Verdana" size="2"> cidl</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="243" HEIGHT="60">
+<DIV WIDTH="340" HEIGHT="60" style="width: 210; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetDisplayNameOf (pidl: PItemlDList; uFlags: DWORD; var IpName: TStrRet) : HResult;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="244" HEIGHT="60">
+<DIV WIDTH="283" HEIGHT="60" style="width: 216; height: 60">
+<P><font face="Verdana" size="3">
+Возвращает имя элемента <font face="Verdana" size="2">pidl</font>. Полнота возвращаемой информации определяется параметром
+<font face="Verdana" size="2"> uFlags</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="243" HEIGHT="104">
+<DIV WIDTH="340" HEIGHT="104" style="width: 226; height: 104">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetNaraeOf (hwndOwner: HWND; pidl: PItemlDList; IpszName: POLEStr; uFlags: DWORD; var ppidlOut: PItemlDList) : HResult;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="244" HEIGHT="104">
+<DIV WIDTH="283" HEIGHT="104" style="width: 238; height: 104">
+<P><font face="Verdana" size="3">
+Задает новое имя <font face="Verdana" size="2"> IpszName</font> для списка
+<font face="Verdana" size="2">pidl</font>. При этом возвращается новый указатель на список —
+<font face="Verdana" size="2">ppidlOut</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Два метода — <font face="Verdana" size="2"> ParseDisplayName</font>
+и <font face="Verdana" size="2">GetDisplayNameOf</font> — взаимно
+дополняют друг друга. Первый из них нужен, если вы имеете указатель на
+<font face="Verdana" size="2">ishellFoider</font> и хотите связать его с конкретной папкой. На практике это сводится к задаче в три действия:
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Получить указатель на интерфейс какой-либо папки, скажем, рабочего
+стола при помощи<b> </b><font face="Verdana" size="2">ShGetDesktopFolder</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+2.  Получить указатель (<font face="Verdana" size="2">pidl</font>) нужного вам элемента. Это осуществимо многими   способами.   Первый   из   них —   как   раз   через   вызов   метода
+<font face="Verdana" size="2">IShellFolder. ParseDisplayName</font>.  Если
+вы хотите получить доступ к одной из виртуальных (специальных) папок, то незаменимой будет следующая функция:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SHGetSpecialFolderLocation(hwndOwner: HWND; nFolder: Integer; var ppidl: PItemlDList): HResult;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В параметре <font face="Verdana" size="2"> nFolder</font> вы задаете константу, соответствующую выбранной специальной папке. На выходе будет указатель на элемент
+<font face="Verdana" size="2">ppidl</font>, соответствующий этой папке.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>      Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Во многих функциях<font face="Verdana" size="2"> 
+    Shell</font> API и методах его интерфейсов встречается параметр <font face="Verdana" size="2">hwndOwner</font>. 
+    Он должен задавать дескриптор окна на тот случай, если придется выводить диалоговое 
+    окно или окно с сообщением об ошибке. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Возможные значения параметра <font face="Verdana" size="2">nFolder</font> перечислены в табл. 31.2. В комментариях к ним &quot;виртуальная&quot; папка является особым объектом, который предоставляется пользователю при помощи
+<font face="Verdana" size="2"> Shell</font> API. Просто &quot;папка&quot; реально существует где-то в файловой системе.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 31.2. </B>Константы, 
+  определяющие специальные папки </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="353" HEIGHT="656">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="31">
+<DIV WIDTH="225" HEIGHT="31" style="width: 79; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Значение</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="31">
+<DIV WIDTH="394" HEIGHT="31" style="width: 149; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Комментарий</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="86">
+<DIV WIDTH="225" HEIGHT="86" style="width: 115; height: 86">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_BITBUCKET</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="86">
+<DIV WIDTH="394" HEIGHT="86" style="width: 242; height: 110">
+<P><font face="Verdana" size="3">
+Корзина (<font face="Verdana" size="2">Recycle bin</font>) — специальная  папка для удаленных файлов. Пути к<font face="Verdana" size="2"> Recycle bin
+</font> нет в системном реестре во избежание перемещения или удаления, и его не узнать иным методом
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="56">
+<DIV WIDTH="225" HEIGHT="56" style="width: 101; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_CONTROLS</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="56">
+<DIV WIDTH="394" HEIGHT="56" style="width: 250; height: 74">
+<P><font face="Verdana" size="3">
+Панель инструментов (<font face="Verdana" size="2">Control
+Panel</font>) — виртуальная  папка,  содержащая значки апплетов Панели инструментов
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="46">
+<DIV WIDTH="225" HEIGHT="46" style="width: 113; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_DESKTOP</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="46">
+<DIV WIDTH="394" HEIGHT="46" style="width: 249; height: 55">
+<P><font face="Verdana" size="3">
+Виртуальная папка Рабочий стол (<font face="Verdana" size="2">Desktop</font>), корневая в пространстве имен
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="46">
+<DIV WIDTH="225" HEIGHT="46" style="width: 138; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_DESKTOPDIRECTORY</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="46">
+<DIV WIDTH="394" HEIGHT="46" style="width: 260; height: 46">
+<P><font face="Verdana" size="3">
+Папка  файловой   системы,   реально  содержащая объекты рабочего стола
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="98">
+<DIV WIDTH="225" HEIGHT="98" style="width: 98; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL DRIVES</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="98">
+<DIV WIDTH="394" HEIGHT="98" style="width: 254; height: 126">
+<P><font face="Verdana" size="3">
+Виртуальная папка Мой компьютер (My Computer), содержащая элементы для всех накопителей на компьютере подключенных сетевых устройств, папки Принтеры, Панель инструментов, Удаленный доступ к сети
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="25">
+<DIV WIDTH="225" HEIGHT="25" style="width: 95; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL  FONTS</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="25">
+<DIV WIDTH="394" HEIGHT="25" style="width: 213; height: 25">
+<P><font face="Verdana" size="3">
+Виртуальная папка Шрифты
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="25">
+<DIV WIDTH="225" HEIGHT="27" style="width: 111; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL NETHOOD</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="25">
+<DIV WIDTH="394" HEIGHT="27" style="width: 221; height: 36">
+<P><font face="Verdana" size="3">
+Папка, содержащая объекты сетевого окружения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="42">
+<DIV WIDTH="225" HEIGHT="42" style="width: 109; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_NETWORK</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="42">
+<DIV WIDTH="394" HEIGHT="42" style="width: 222; height: 73">
+<P><font face="Verdana" size="3">
+Виртуальная папка Сетевое окружение
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(Network Neighborhood)</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="31">
+<DIV WIDTH="225" HEIGHT="31" style="width: 114; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_PERSONAL</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="31">
+<DIV WIDTH="394" HEIGHT="31" style="width: 163; height: 31">
+<P><font face="Verdana" size="3">
+Папка Мои документы
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="25">
+<DIV WIDTH="225" HEIGHT="25" style="width: 117; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_PRINTERS</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="25">
+<DIV WIDTH="394" HEIGHT="25" style="width: 241; height: 37">
+<P><font face="Verdana" size="3">
+Виртуальная папка Принтеры (<font face="Verdana" size="2">Printers</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="44">
+<DIV WIDTH="225" HEIGHT="44" style="width: 118; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_PROGRAMS</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="44">
+<DIV WIDTH="394" HEIGHT="44" style="width: 241; height: 72">
+<P><font face="Verdana" size="3">
+Папка Программы из главного меню, содержащая папки установленных на компьютере программ
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="44">
+<DIV WIDTH="225" HEIGHT="44" style="width: 111; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL  RECENT</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="44">
+<DIV WIDTH="394" HEIGHT="44" style="width: 226; height: 55">
+<P><font face="Verdana" size="3">
+Папка, содержащая ссылки на последние использовавшиеся документы
+(<font face="Verdana" size="2">Recent</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="176" HEIGHT="56">
+<DIV WIDTH="225" HEIGHT="56" style="width: 100; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL  SENDTO</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="56">
+<DIV WIDTH="394" HEIGHT="56" style="width: 243; height: 56">
+<P><font face="Verdana" size="3">
+Папка, содержащая элементы контекстного меню
+<font face="Verdana" size="2">Send To...</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="48">
+<DIV WIDTH="198" HEIGHT="48" style="width: 130; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_STARTMENU</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="334" HEIGHT="48">
+<DIV WIDTH="410" HEIGHT="48" style="width: 255; height: 48">
+<P><font face="Verdana" size="3">
+Папка, содержащая элементы главного меню Пуск
+(<font face="Verdana" size="2">Start</font>)
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="44">
+<DIV WIDTH="198" HEIGHT="44" style="width: 104; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_STARTUP</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="334" HEIGHT="44">
+<DIV WIDTH="410" HEIGHT="44" style="width: 253; height: 44">
+<P><font face="Verdana" size="3">
+Папка, содержащая элементы меню Автозапуск
+(<font face="Verdana" size="2">Startup</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="140" HEIGHT="36">
+<DIV WIDTH="198" HEIGHT="36" style="width: 88; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CSIDL_TEMPIATES</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="334" HEIGHT="36">
+<DIV WIDTH="410" HEIGHT="36" style="width: 228; height: 36">
+<P><font face="Verdana" size="3">
+Папка, содержащая шаблоны типовых документов
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Третий вариант получить <font face="Verdana" size="2"> pidi</font> нужной папки — интерактивный, с помощью функции
+<font face="Verdana" size="2"> Shell</font> API.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ShBrowseForFolder(var Ipbi: TBrowselnfo): PItemlDList;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перед ее вызовом следует заполнить структуру типа
+<font face="Verdana" size="2">TBrowselnfo</font>, содержащую в частности
+<font face="Verdana" size="2"> pidi</font> того элемента, который будет корневым. После вызова функции пользователь увидит перед собой диалоговое окно выбора папки (рис. 31.3).
+</font ></P>
+<p align="center"> 
+<div align="center"><IMG src="gl.31.3.gif" > 
+
+</div>
+<blockquote>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 31.3. </B>Диалоговое 
+    окно выбора папки, созданное при вызове функции <font face="Verdana" size="2"> 
+    ShBrowseForFolder</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В данном примере корневой служит виртуальная 
+  папка <b> My</b> <B>Computer. </B>Пользователю предоставляется возможность выбрать 
+  одну из папок файловой системы (за это отвечает флаг <font face="Verdana" size="2">TBrowseinfo.uiFlags,</font> 
+  равный </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> BIF_RETURNONLYFSDIRS).</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> На выходе функция возвращает <font face="Verdana" size="2"> 
+  pidi</font> папки, имя которой извлекается из него вызовом еще одной функции<font face="Verdana" size="2"> 
+  Shell — shGetPathFromList.</font> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml/ButtonlClick(Sender: 
+    TObject) ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> BI : TBrowselnfo;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Image : integer;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> StartPIDL, 
+    ResPIDL : PItemlDList;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> S, Path : ArraytO..max_path-l] 
+    Of WideChar;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 01eCheck(SHGetSpecialFolderLocation(Handle, 
+    CSIDL_DRIVES, StartPIDL));</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> With BI do</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hwndOwner = 
+    Application.Handle;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> pszDisplayName 
+    = @S;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IpszTitle = 
+    'Выберите необходимую папку';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ulFlags = BIF_RETURNONLYFSDIRS;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> pidlRoot = 
+    StartPIDL;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Ipfn = nil;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> iImage = 1;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ResPIDL := 
+    SHBrowseForFolder(BI) ;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if SHGETPathFromlDList(ResPIDL, 
+    @Path[0])&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then Labe11.Caption 
+    := StrPas(@Path[0]) ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Полученное имя здесь отображается при помощи 
+  компонента <font face="Verdana" size="2"> Label 1</font>. </font ></P>
+<P><font face="Verdana" size="3"> 3. Наконец, перейдем к третьему действию нашей 
+  задачи. Теперь, зная pidi папки, с которой вы будете работать, можно получить 
+  указатель на интерфейс <font face="Verdana" size="2">ishellFolder</font> вызовом 
+  метода <font face="Verdana" size="2">BindToObject</font>. Мы еще не рассмотрели 
+  такой важный аспект работы с папками, как просмотр их содержимого. Верные правилу 
+  СОМ: &quot;каждый должен заниматься своим делом&quot;, разработчики <font face="Verdana" size="2"> 
+  Shell</font> предоставили для просмотра еще один интерфейс — <font face="Verdana" size="2">IEnumiDList</font>. 
+  Пугаться нечего, набор возможностей этого интерфейса даже меньше, чем у пульта 
+  ДУ в магнитофоне. Его четыре метода — <font face="Verdana" size="2"> Next, Skip,</font> 
+  <font face="Verdana" size="2"> Reset и clone </font> — позволяют организовать 
+  просмотр списка в одном направлении, а также возврат к началу и дублирование 
+  (<font face="Verdana" size="2">Clone</font>) выбранного элемента списка. Вот 
+  как это выглядит на практике. </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Memol.Clear; 
+    try</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 01eCheck(SHGetDesktopFolder(DeskTop));</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if not Succeeded(DeskTop.ParseDisplayName</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> (Self.Handle,nil, 
+    StringToWideChar (Editl.Text,ws, MAX_PATH),n, pidi, attr))</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then begin 
+    ShowMessage('Неизвестное имя');</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; Exit; 
+    end; OleCheck(DeskTop.BindToObject(pidl,nil, IID_IShellFolder, Pointer(NewShellFolder)});</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> OleCheck(NewShellFolder.EnumObj 
+    ects{Self.Handle,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SHCONTF_FOLDERS 
+    or SHCONTF_NONFOLDERS, Enumerator)); while Enumerator.Next(1, pidl, Numpidls) 
+    = S_OK do&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> NewShellFolder.GetDisplayNameOf(PIDL, 
+    SHGDN_FORPARSING, StrRet); case StrRet.uType of STRRET_CSTR:</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> s := StrRet.cStr; 
+    STRRET_OFFSET:</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> P := @PIDL.mkid.abID[StrRet.uOffset 
+    - SizeOf(PIDL.mkid.cb)];</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; SetString(s, 
+    P, PIDL.mkid.cb - StrRet.uOffset);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end; STRRET_WSTR:</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> s := StrRet.pOleStr;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;//case</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Memol.Lines.Add(s);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end; except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> on ErEOleSysError 
+    do ShowMessage('');&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В этом примере имя нужной папки извлекается 
+  из компонента <font face="Verdana" size="2">Edit</font><font face="Verdana" size="2">1</font>. 
+  Получив указатель на интерфейс <font face="Verdana" size="2">ishellFoider</font> 
+  и затем интерфейс <font face="Verdana" size="2">IEnumiDList</font>, программа 
+  заполняет полученными именами файлов список <font face="Verdana" size="2"> Memol.Lines.</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Помимо названия из большинства объектов файловой 
+  системы можно &quot;вытащить&quot; массу полезной информации. Чаще всего задаются 
+  вопросом: а как извлечь значок, соответствующий данному файлу или хранящийся 
+  в нем? </font ></P>
+<P><font face="Verdana" size="3"> Способов для достижения этой цели несколько. 
+  Самый простой — через вызов функции: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function SHGetFileInfo(pszPath: 
+    PAnsiChar; dwFileAttributes: DWORD;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var psfi: TSHFilelnfo; 
+    cbFilelnfo, uFlags: UINT): DWORD;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Параметр pszPath может быть указателем как на 
+  строку с именем файла, так и на структуру вида <font face="Verdana" size="2">pidl</font>. 
+  Функция заполняет структуру <font face="Verdana" size="2"> psfi</font> (тип 
+  <font face="Verdana" size="2">TSHFilelnfo</font>) длиной <font face="Verdana" size="2"> 
+  cbFilelnfo</font> байт. В зависимости от значения слова флагов (параметр uFlags) 
+  на выходе может быть разнообразная информация. В частности, если в параметре 
+  <font face="Verdana" size="2"> uFlags</font> заданы значения <font face="Verdana" size="2"> 
+  SHGFI_SYSICONINDEX</font> и <font face="Verdana" size="2">SHGFI_ICON</font>, 
+  то в структуру <font face="Verdana" size="2"> psfi</font> будет записан номер 
+  значка для данного файла в системном списке изображений, а результатом выполнения 
+  функции будет дескриптор этого списка. Воспользоваться им можно (например, для 
+  панели инструментов) так: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.FormCreate(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Filelnfo: TSHFilelnfo;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ImageListHandle: 
+    THandle;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ImageListHandle 
+    := SHGetFilelnfo('С:\',</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 0,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Filelnfo, SizeOf(Filelnfo) 
+    ,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SHGFI_SYSICONINDEX 
+    or SHGFI_ICON);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SendMessage(ToolBarl.Handle, 
+    TB_SETIMAGELIST, 0, ImageListHandle);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Точно так же можно извлечь значок, соответствующий 
+  конкретному файлу. В составе <font face="Verdana" size="2"> Shell</font> есть 
+  другие функции, созданные для извлечения значков: </font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;function Extractlcon(hlnst: HINST; IpszExeFileName: 
+    PChar; nlconlndex: UINT): HICON;</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Эта функция извлекает значок из файла <font face="Verdana" size="2"> 
+  IpszExeFileName</font> (это должен быть файл типа EXE, DLL или ICO) и возвращает 
+  его дескриптор. Если значок не найден, возвращаемое значение равно 0. </font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;function ExtractAssociatedIcon(hInst: 
+    HINST; IpIconPath: PChar; var Ipilcon: Word): HICON;</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Эта функция может работать с файлами разных 
+  форматов. Сначала она, как и предыдущая, ищет значок в теле файла. Если его 
+  там нет, предпринимается попытка отыскать значок в приложении, связанном с данным 
+  типом файлов. Например, из файла с расширением <font face="Verdana" size="2"> 
+  doc</font> будет извлечен один из значков Microsoft Word. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index6.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

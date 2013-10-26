@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Подготовка набора данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компоненты многомерного представления данных работают со специально созданным и подготовленным набором данных. Эта работа выполняется специальным компонентом доступа к данным —
+<font face="Verdana" size="2">TDecisionQuery</font>. Его непосредственным предком является компонент
+<font face="Verdana" size="2">TQuery</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Набор данных формируется при помощи запроса, который основан на стандартном синтаксисе SQL 92. Для обеспечения работы многомерного представления данных запрос должен удовлетворять ряду требований.
+</font ></P>
+<P><font face="Verdana" size="3">
+1.  В тексте запроса должны присутствовать только те поля, которые разработчик хочет показать в компонентах многомерного представления данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+2.  Поля   запроса  должны   быть   сгруппированы   при   помощи   оператора
+<font face="Verdana" size="2">GROUP  BY.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+3. Запрос должен содержать агрегатные функции, которые определяют вид
+</font ></P>
+<P><font face="Verdana" size="3">
+информации, отображаемой в ячейках кросстаба.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDecisionQuery</font> должен только обеспечить выполнение запроса и создание набора данных, он не имеет никаких дополнительных свойств или методов. Поэтому для создания набора данных можно использовать и
+обычный компонент <font face="Verdana" size="2">TQuery</font>. Преимущество компонента
+<font face="Verdana" size="2"> TDecisionQuery</font> состоит в том, что он имеет специализированный редактор для создания текста запроса (рис. 30.2). Он вызывается командой <B>Decision Query Editor </B>из всплывающего меню компонента или двойным щелчком на компоненте. Элементы управления страницы <B>Dimensions/Summaries </B>позволяют создавать текст запроса, манипулируя именами полей таблиц. Псевдоним базы данных выбирается в комбинированном списке <B>Database. </B>После этого в списке <B>Table </B>задается нужная таблица. Если в запросе требуется использовать несколько таблиц, то для их выбора можно воспользоваться утилитой
+<font face="Verdana" size="2"> SQL</font> <font face="Verdana" size="2">Builder</font>, которая вызывается щелчком на одноименной кнопке.
+</font ></P>
+<div align="center"><IMG src="gl.30.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 30.2. </B>Специализированный 
+  редактор компонента <font face="Verdana" size="2"> TDecisionQuery</font> </font ></P>
+<P><font face="Verdana" size="3"> Из списка доступных полей при помощи кнопок 
+  <b> Add</b> требуемые поля можно перенести в список полей — размерностей <B>Dimensions 
+  </B>и список суммирующих полей <B>Summaries. </B>Поля из этих списков используются 
+  при создании запроса. </font ></P>
+<P><font face="Verdana" size="3"> Запрос формируется автоматически при работе 
+  с описанными элементами управления. Текст запроса доступен для просмотра и редактирования 
+  на странице <B>SQL Query.</B> </font ></P>
+<P><font face="Verdana" size="3"> Подготовка набора данных к многомерному представлению 
+  осуществляется компонентом <font face="Verdana" size="2">TDecisionCube</font>. 
+  Его основная задача — создание размерностей для многомерной структуры данных 
+  на основе каждого поля набора данных. Для каждой размерности в компоненте можно 
+  задать ряд параметров, которые определяют ее поведение и внешний вид. </font ></P>
+<P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TDecisionCube</font> 
+  формирует размерности при открытии набора данных, причем созданное многомерное 
+  представление данных полностью работоспособно уже во время разработки. Для этого 
+  достаточно присвоить свойству <font face="Verdana" size="2">Active</font> Компонентов 
+  <font face="Verdana" size="2"> TDecisionQuery</font> или <font face="Verdana" size="2">TQuery</font> 
+  значение <font face="Verdana" size="2">True</font>. После этого любой визуальный 
+  компонент многомерного представления начинает работать так же, как и во время 
+  выполнения. </font ></P>
+<P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TDecisionCube</font> 
+  также позволяет управлять использованием памяти многомерного представления данных. 
+  Дело в том, что при добавлении к многомерному представлению новой размерности 
+  объем занимаемой памяти возрастает в арифметической прогрессии. Поэтому возможность 
+  ограничения размеров используемой памяти особенно актуальна для больших наборов 
+  данных. </font ></P>
+<P><font face="Verdana" size="3"> Все основные настройки компонента выполняются 
+  при помощи специализированного редактора свойства <font face="Verdana" size="2"> 
+  DecisionMap</font> (рис. 30.3). </font ></P>
+<div align="center"><IMG src="gl.30.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 30.3. </B>Специализированный 
+  редактор свойства <font face="Verdana" size="2"> DecisionMap</font> компонента 
+  <font face="Verdana" size="2"> TDecisionCube</font> (страница <B>Dimension Settings)</B> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Для настроек размерностей используется страница 
+  <B>Dimension Settings </B>этого редактора. В расположенном слева списке <B>Available 
+  Fields </B>содержатся все поля набора данных. В элементах управления справа 
+  приведены параметры размерности для выбранного поля. </font ></P>
+<P><font face="Verdana" size="3"> В однострочном редакторе <B>Display Name </B>задается 
+  название поля, которое будет присутствовать в визуальных компонентах многомерного 
+  просмотра. </font ></P>
+<P><font face="Verdana" size="3"> Неактивный список выбора <B>Туре </B>показывает, 
+  является ли поле основой для размерности или суммы. </font ></P>
+<P><font face="Verdana" size="3"> Список выбора <B>Active Type </B>определяет, 
+  когда данные поля появляются в визуальных компонентах. Его элементы обозначают 
+  следующее: </font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">Active 
+    — данные поля видны сразу после открытия формы и набора данных во время выполнения 
+    или сразу после открытия набора данных во время разработки;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;AS Needed 
+    — данные поля становятся видны после выполнения пользователем во время выполнения 
+    или разработчиком во время разработки действий по отображению данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;inactive 
+    — данные поля не видны.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Однострочный редактор <B>Format </B>содержит 
+  строку форматирования для данных поля. </font ></P>
+<P><font face="Verdana" size="3"> Комбинированный список <B>Grouping </B>необходим 
+  для того, чтобы определить, какие значения будут показаны. Варианты <font face="Verdana" size="2"> 
+  Year, Quarter, Month </font> возможны только для полей с календарным типом данных. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Однострочный редактор <B>Initial Value </B>задает 
+  начальное значение для поля. </font ></P>
+<P><font face="Verdana" size="3"> Страница <B>Memory Control </B>используется 
+  для управления расходом памяти для нужд компонента (рис. 30.4). Однострочные 
+  редакторы <B>Dimensions, Summaries и Cells </B>в ряду <B>Maximum </B>позволяют 
+  задать максимальное число размерностей, сумм и ячеек, соответственно. </font ></P>
+<div align="center"><img src="gl.30.4.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 30.4. </B>Специализированный 
+  редактор свойства <font face="Verdana" size="2"> DecisionMap</font> компонента 
+  <font face="Verdana" size="2"> TDecisionCube</font> (страница <B>Memory Control)</B> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Аналогичные значения в ряду <B>Current </B>показывают 
+  текущее число этих структур. </font ></P>
+<P><font face="Verdana" size="3"> Аналогичные значения в ряду <B>Active+Needed 
+  </B>показывают общее возможное число размерностей, сумм и ячеек. </font ></P>
+<P><font face="Verdana" size="3"> Значения в ряду <B>Active </B>показывают число 
+  видимых размерностей сумм и ячеек. </font ></P>
+<P><font face="Verdana" size="3"> Кнопка <B>Get Cell Counts </B>выполняет запрос, 
+  который возвращает число ячеек в кросстабе. </font ></P>
+<P><font face="Verdana" size="3"> Группа радиокнопок <B>Designer Data Options 
+  </B>задает режим показа данных во время разработки: </font ></P>
+<ul>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Display 
+    Dimension Names </B>— отображаются только названия размерностей;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Display 
+    Names and Values </B>— отображаются названия размерностей и значения;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Display 
+    Names, Values, and Totals </B>— отображаются названия, значения и суммы размерностей;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Run 
+    Time Display Only </B>— визуализация данных осуществляется только во время 
+    выполнения.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Подготовленный к использованию для многомерного 
+  отображения набор данных необходимо связать с визуальными компонентами. Это 
+  делается при помощи компонента <font face="Verdana" size="2">TDecisionSource</font>. 
+  Через один такой компонент с набором данных можно связать несколько визуальных 
+  компонентов (см. табл. 30.1). </font ></P>
+<P><font face="Verdana" size="3"> Кроме этого, компонент <font face="Verdana" size="2"> 
+  TDecisionSource</font> позволяет разработчику установить общие для всех связанных 
+  с ним визуальных компонентов многомерного представления данных настройки отображения 
+  данных. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

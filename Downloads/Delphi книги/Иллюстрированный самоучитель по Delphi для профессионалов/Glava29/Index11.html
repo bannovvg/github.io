@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Средства синхронизации потоков</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Проще всего говорить о синхронизации, если создаваемый поток не взаимодействует с ресурсами других потоков и не обращается к VCL. Допустим, у вас на компьютере несколько процессоров, и вы хотите &quot;распараллелить&quot; вычисления. Тогда вполне уместен следующий код:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyCompThread := TComputationThread.Create(False);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+// Здесь можно что-нибудь делать, пока второй поток производит вычисления</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DoSomeWork;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+// Теперь ожидаем его завершения</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyCompThread.WaitFor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Приведенная схема совершенно недопустима, если во время своей работы поток
+<font face="Verdana" size="2"> MyCompThread</font> обращается к VCL посредством метода
+<font face="Verdana" size="2">synchronize</font>. В этом случае поток ждет главный поток для обращения к VCL, а тот, в свою очередь, его — классический тупик.
+</font ></P>
+<P><font face="Verdana" size="3">
+За &quot;спасением&quot; следует обратиться к программному интерфейсу Win32. Он предоставляет богатый набор инструментов, которые могут понадобиться для организации совместной работы потоков.
+</font ></P>
+<P><font face="Verdana" size="3">
+Главные понятия для понимания механизмов синхронизации — функции ожидания и объекты синхронизации. В Windows API предусмотрен ряд функций, позволяющих приостановить выполнение вызвавшего эту функцию потока вплоть до того момента, как будет изменено состояние какого-то объекта, называемого объектом синхронизации
+(под этим термином здесь понимается не объект Delphi, а объект операционной системы). Простейшая из этих функций —
+<font face="Verdana" size="2"> waitForSingieCbject</font> — предназначена для ожидания одного объекта.
+</font ></P>
+<P><font face="Verdana" size="3">
+К возможным вариантам относятся четыре объекта, которые разработаны специально для синхронизации: событие
+(<font face="Verdana" size="2">event</font>), взаимное исключение
+(<font face="Verdana" size="2">mutex</font>), семафор (<font face="Verdana" size="2">semaphore</font>) и таймер
+(<font face="Verdana" size="2">timer</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Но кроме специальных объектов можно организовать ожидание и других объектов, дескриптор которых используется в основном для иных целей, но может применяться и для ожидания. К ним относятся: процесс
+(<font face="Verdana" size="2">process</font>), поток (<font face="Verdana" size="2">thread</font>), оповещение об изменении в файловой системе<font face="Verdana" size="2">
+(change notification</font>) и консольный ввод <font face="Verdana" size="2"> (console
+input)</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Косвенно к этой группе может быть добавлена критическая секция<font face="Verdana" size="2">
+(critical section).</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание<U>&nbsp;</U></B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Перечисленные выше средства синхронизации 
+    в основном инкапсулированы в состав классов Delphi. У программиста есть две 
+    альтернативы. С одной стороны, в состав библиотеки VCL включен модуль SYNCOBJS.PAS, 
+    содержащий классы для события (<font face="Verdana" size="2">TEvent</font>) 
+    и критической секции (<font face="Verdana" size="2">TCriticalSection</font>). 
+    С другой, с Delphi поставляется отличный пример <font face="Verdana" size="2">IPCDEMOS</font>, 
+    который иллюстрирует проблемы взаимодействия процессов и содержит модуль IPCTHRD.PAS 
+    с аналогичными классами — для того же события, взаимного исключения (<font face="Verdana" size="2">TMutex</font>), 
+    а также совместно используемой памяти (<font face="Verdana" size="2">TSharedMem</font>). 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перейдем к подробному описанию объектов, используемых для синхронизации.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

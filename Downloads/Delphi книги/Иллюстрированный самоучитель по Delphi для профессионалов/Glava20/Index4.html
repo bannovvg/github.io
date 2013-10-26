@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Сервер 
+  приложений</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Сервер приложений инкапсулирует большую часть бизнес-логики распределенного приложения и обеспечивает доступ клиентов к базе данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основной частью сервера приложений является удаленный модуль данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Во-первых, подобно обычному модулю данных (см. гл. 11)
+он является платформой для размещения невизуальных компонентов доступа к данным и компонентов-провайдеров. Размещенные на нем компоненты соединений, транзакций и компоненты, инкапсулирующие наборы данных, обеспечивают трехзвенное приложение связью с сервером БД. Это могут быть наборы компонентов для технологий ADO, BDE, InterBase Express, dbExpress.
+</font ></P>
+<P><font face="Verdana" size="3">
+Во вторых, удаленный модуль данных реализует основные функции сервера приложений на основе предоставления клиентам интерфейса
+<font face="Verdana" size="2">IAppServer</font> или его потомка. Для этого удаленный модуль данных должен содержать необходимое число компонентов-провайдеров
+<font face="Verdana" size="2">TDataSetProvider</font>. Эти компоненты передают пакеты данных клиентскому приложению, а точнее компонентам
+<font face="Verdana" size="2">TdientDataSet</font>, а также обеспечивают доступ к методам интерфейса.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.20.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 20.3. </B>Выбор удаленных 
+  модулей данных в Репозитории Delphi </font ></P>
+<P><font face="Verdana" size="3"> В состав Delphi входят удаленные модули данных. 
+  Для их создания используйте страницы <B>Multitier, WebSnap и WebServices </B>Репозитория 
+  Delphi (рис. 20.3). </font ></P>
+<ul>
+  <li> <B>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Remote 
+    Data Module </font></B><font size="3" face="Verdana, Arial, Helvetica, sans-serif">— 
+    удаленный модуль данных, инкапсулирующий сервер Автоматизации. Используется 
+    для организации соединений через DCOM, HTTP, сокеты (см. гл. 21).</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Transactioiial 
+    Data Module </B>— удаленный модуль данных, инкапсулирующий сервер MTS (Microsoft 
+    Transaction Server).</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;SOAP 
+    Server Data Module </B>— удаленный модуль данных, инкапсулирующий сервер SOAP 
+    (Simple Object Access Protocol).</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;WebSnap 
+    Data Module </B>— удаленный модуль данных, использующий Web-службы и Web-браузер 
+    в качестве сервера.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Помимо удаленного модуля данных неотъемлемой 
+  частью сервера приложений являются компоненты-провайдеры <font face="Verdana" size="2">TDataSetProvider</font>. 
+  С каждым компонентом, инкапсулирующим набор данных, предназначенным для передачи 
+  клиенту, в модуле данных должен быть связан компонент-провайдер. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

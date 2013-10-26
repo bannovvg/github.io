@@ -1,0 +1,111 @@
+<html>
+
+<head>
+<title>Электронный учебник - Словарь Б</title>
+</head>
+
+<body BACKGROUND="../tile1.gif">
+
+<p><a NAME="Bayesian Networks"><font SIZE="4" COLOR="navy">Байесовы сети.</font></a>
+Сети, чей принцип действия основан на теореме
+Байеса, позволяющей сделать выводы о
+распределении вероятностей на основании
+имеющихся данных.</p>
+
+<p>См. разделы о&nbsp;&nbsp; <a HREF="gloss_v.html#PNN">вероятностных</a>
+&nbsp; и <a HREF="gloss_o.html#GRNN">обобщенно-регрессионных</a>
+нейронных сетях.<br>
+<br>
+<br>
+<a NAME="Beta Distribution"><font SIZE="4" COLOR="navy">Бета-распределение.</font></a>
+Термин<em> бета-распределение</em> был впервые
+использован в работе Жини (Gini, 1911 г.). Эта функция
+определяется следующим образом:</p>
+
+<p><font color="blue">f(x) = <img src="../graphics/biggambl.gif" align="absmiddle" WIDTH="14" HEIGHT="15">(<img src="../graphics/nublue.gif" WIDTH="11" HEIGHT="8">+<img src="../graphics/omegablu.gif" WIDTH="11" HEIGHT="8">)/(<img src="../graphics/biggambl.gif" align="absmiddle" WIDTH="14" HEIGHT="15">(<img src="../graphics/nublue.gif" WIDTH="11" HEIGHT="8">)<img src="../graphics/biggambl.gif" align="absmiddle" WIDTH="14" HEIGHT="15">(<img src="../graphics/omegablu.gif" WIDTH="11" HEIGHT="8">)) *
+x<sup><img src="../graphics/nublue.gif" WIDTH="11" HEIGHT="8">-1</sup> * (1-x)<sup><img src="../graphics/omegablu.gif" WIDTH="11" HEIGHT="8">-1</sup><br>
+0 <img src="../graphics/lteblue.gif" align="absmiddle" WIDTH="12" HEIGHT="16"> x <img src="../graphics/lteblue.gif" align="absmiddle" WIDTH="12" HEIGHT="16"> 1<br>
+<img src="../graphics/nublue.gif" WIDTH="11" HEIGHT="8"> &gt; 0, <img src="../graphics/omegablu.gif" WIDTH="11" HEIGHT="8"> &gt; 0<br>
+</font><br>
+где<br>
+<img src="../graphics/biggambl.gif" WIDTH="14" HEIGHT="15">&nbsp;&nbsp; - <em>гамма</em>-функция <br>
+<img src="../graphics/nublue.gif" WIDTH="11" HEIGHT="8">, <img src="../graphics/omegablu.gif" WIDTH="11" HEIGHT="8">&nbsp;&nbsp;&nbsp;
+- параметры (формы)</p>
+
+<p><img SRC="../graphics/an_beta.gif" BORDER="0" WIDTH="400" HEIGHT="124"></p>
+
+<p>На рисунке показано изменение формы&nbsp; <em>бета</em>-распределения
+при изменении значений параметров.<br>
+<br>
+<br>
+<a NAME="Bimodal Distribution"><font SIZE="4" COLOR="navy">Бимодальное
+распределение.</font></a> Распределение, имеющее две
+моды (т.е. два &quot;пика&quot;).</p>
+
+<p><img BORDER="0" SRC="../popups/popup192.gif" alt="Бимодальное распределение" WIDTH="253" HEIGHT="135"></p>
+
+<p>Бимодальность распределения выборки часто
+является показателем того, что распределение не
+является нормальным. Бимодальность
+распределения дает важную информацию о природе
+исследуемой переменной. Например, если
+переменная представляет собой предпочтение или
+отношение к чему-то, то бимодальность может
+означать противоположность мнений. Тем не менее,
+бимодальность часто может показывать, что
+выборка не является однородной и наблюдения
+порождены двумя или более &quot;наложенными&quot;
+распределениями. Иногда бимодальность
+распределения означает, что выбранные
+инструменты не подходят для измерения (например
+&quot;проблемы разметки&quot; в естественных
+науках,&quot;смещенные ответы&quot; в социальных).</p>
+
+<p>См. также разделы об&nbsp; <a HREF="gloss_u.html#Unimodal Distribution">унимодальном</a>
+и <a HREF="gloss_m.html#Multimodal Distribution">мультимодальном
+распределениях</a>.<br>
+<br>
+<br>
+<a NAME="Binomial Distribution"><font SIZE="4" COLOR="navy">Биномиальное
+распределение.</font></a> Биномиальное распределение
+(этот термин был впервые использован в работе Yule,
+1911 г.) определяется следующим образом:</p>
+
+<p><font color="blue">f(x) = [n!/(x!*(n-x)!)] * p<sup>x</sup> * q<sup>n-x</sup><br>
+для&nbsp; x = 0, 1, 2, ..., n</font></p>
+
+<p>где<br>
+<font color="blue"><i>p </i></font>&nbsp;&nbsp;&nbsp; - вероятность
+успеха в каждом испытании<br>
+<font color="blue"><i>q</i></font>&nbsp;&nbsp; - величина, равная <em>1-p </em><br>
+<font color="blue"><i>n </i></font>&nbsp;&nbsp; - число независимых
+испытаний.</p>
+
+<p><br>
+<br>
+<a NAME="Box-Ljung Q Statistic"><font SIZE="4" COLOR="navy">Бокса-Льюнга Q
+статистика.</font></a> В анализе <a HREF="../modules/sttimser.html">временных
+рядов</a>&nbsp; вы можете сдвинуть ряд на лаг k. На
+данном лаге статистика Бокса-Льюнга Q
+определяется как:</p>
+
+<p><font color="blue">Q<sub>k</sub> = n*(n+2)*Sum(r<sub>i</sub><sup>2</sup>/(n-1))<br>
+для i&nbsp; от 1 до k</font></p>
+
+<p>Асимптотически (при большом числе наблюдений) <font color="blue"><i>Q</i></font> статистика имеет <em>хи-квадрат</em>
+распределение с <font color="blue"><i>k-p-q</i></font> степенями
+свободы, где <font color="blue"><i>p</i></font> и <font color="blue"><i>q</i></font>
+числа параметров авторегрессии и скользящего
+среднего соответственно. <br>
+<br>
+<br>
+<a NAME="Quick Propagation"><font SIZE="4" COLOR="navy">Быстрое
+распространение.</font></a> Эвристическая
+модификация алгоритма <a HREF="gloss_o.html#Back Propagation">обратного
+распространения</a>, где для ускорения сходимости
+применяется простая квадратичная модель
+поверхности ошибок (которая вычисляется
+отдельно для каждого веса) (Fahlman, 1988; Patterson, 1996). См.
+раздел <a HREF="../modules/stneunet.html">Нейронные сети</a>. </p>
+</body>
+</html>

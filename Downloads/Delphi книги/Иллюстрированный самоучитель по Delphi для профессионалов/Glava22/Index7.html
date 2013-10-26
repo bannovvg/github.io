@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Управление 
+  запросом на сервере</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TdientDataSet</font> может не только эффективно управлять своим набором данных, но и влиять на выполнение серверного компонента, с которым он связан через провайдер.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CornmandText:   string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит текст запроса SQL, имя таблицы или хранимой процедуры в зависимости от типа серверного компонента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Изменив значение этого свойства на клиенте, можно, например, модифицировать запрос SQL на сервере. Но для этого в свойстве
+<font face="Verdana" size="2"> Options</font> соответствующего компонента-провайдера
+<font face="Verdana" size="2"> TDataSetProvider</font> должно быть установлено значение
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poAliowCommandText := True;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Новое значение свойства <font face="Verdana" size="2"> CommandText</font> отправляется на сервер только после открытия клиентского набора данных или выполнения метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Execute; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для запросов или хранимых процедур можно задавать параметры, которые сохраняются в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Params: TParams;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+До выполнения запроса присваиваются значения входным параметрам. После выполнения хранимой процедуры в выходных параметрах размещаются полученные от сервера значения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обратите внимание, что при выполнении запросов или хранимых процедур может измениться порядок следования параметров. Поэтому обращаться к параметрам желательно по их именам. Например, так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Editl.Text := ClientDataSet.Params .ParamByName('OutputParam') .AsString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для того чтобы получить текущие значения параметров компонента набора данных на сервере, достаточно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FetchParams;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перед и после получения параметров от провайдера, клиентский набор данных вызывает методы-обработчики событий:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeGetParams: TRemoteEvent;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property AfterGetParams: TRemoteEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

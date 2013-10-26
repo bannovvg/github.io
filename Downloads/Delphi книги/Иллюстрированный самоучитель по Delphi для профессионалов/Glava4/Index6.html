@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Особенности программирования для Linux</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Операционные системы Windows и Linux имеют достаточно серьезных различий, чтобы сделать кроссплатформенную разработку делом сложным и кропотливым. В первую очередь необходимо хорошо знать обе операционные системы и иметь опыт работы с ними.
+</font ></P>
+<P><font face="Verdana" size="3">
+Очевидно, что создание исходного кода для кроссплатформенных приложений — это трудоемкий процесс, который усложняется по мере использования специфических возможностей операционных систем. Простейшим путем в данном случае будет применение только стандартных свойств и методов компонентов CLX. Но, к сожалению, такой путь возможен для сравнительно несложных приложений.
+</font ></P>
+<P><font face="Verdana" size="3">
+К примеру, большинство приложений имеют функции для работы с файлами. Файловые системы Windows и Linux отличаются настолько, что кроссплатформенная реализация любых мало-мальски сложных операций с файлами требует серьезного внимания и усилий.
+</font ></P>
+<P><font face="Verdana" size="3">
+Linux чувствительна к регистру символов в именах файлов и путях, поэтому не стоит использовать в исходном коде имена файлов напрямую, а при необходимости делать это нужно аккуратно. Во многих компонентах для решения проблемы заглавных и строчных букв можно использовать свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CaseSensitive: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После присвоения свойству значения <font face="Verdana" size="2"> True</font> компонент производит все строковые операции с учетом регистра символов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для формирования полного пути файла используйте константы из модуля
+<font face="Verdana" size="2">SysUtils</font>. Это <font face="Verdana" size="2"> PathDelim</font> (символ разделителя каталогов в пути файла),
+<font face="Verdana" size="2"> DriveDelim</font> (символ логического диска),
+<font face="Verdana" size="2"> pathsep</font> (символ разделителя между несколькими путями файлов в одной строке).
+</font ></P>
+<P><font face="Verdana" size="3">
+При работе с текстовыми файлами необходимо помнить о различии управляющих символов в Windows и Linux. Для обозначения конца строки в Windows используются символы CR/LF, а в Linux — только символ LF. В Windows окончание текста определяется символом Ctrl-Z, а в Linux — просто концом файла.
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как в Linux отсутствует системный реестр, то для сохранения настроек приложения используйте класс
+<font face="Verdana" size="2">TMeminiFile</font>, обеспечивающий сохранение переменных среды в INI-файле.
+</font ></P>
+<P><font face="Verdana" size="3">
+При создании кроссплатформенных приложений желательно использовать только свойства и методы классов CLX. В библиотеке CLX также доступны для применения такие важные для написания бизнес-
+логики приложения классы, как<B> </B><font face="Verdana" size="2">TList, TStringList, TCollection, TAction</font>
+и др.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если это ограничение является слишком жестким, и в программе требуется использовать функции системных API, применяйте директивы условного перехода:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{$IFDEF MSWINDOWS}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{код для Windows}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;{$ENDIF}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{$IFDEF LINUX}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{код для Linux}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;{$ENDIF}</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для определения исходного кода Windows применяйте константу
+<font face="Verdana" size="2">MSWINDOWS</font>, и не используйте константу WIN32, т. к. все еще есть код
+<font face="Verdana" size="2">WIN32</font> и никто не может поручиться, что вам не понадобится константа
+<font face="Verdana" size="2"> WIN64</font> для соответствующего кода.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

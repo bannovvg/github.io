@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Отображение данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+На третьем этапе создания приложения баз данных необходимо разработать пользовательский интерфейс на основе компонентов отображения данных. Эти компоненты предназначены специально для решения задач просмотра и редактирования данных. Внешне большинство этих компонентов ничем не отличаются от стандартных элементов управления. Более того, многие из компонентов отображения данных являются наследниками стандартных компонентов — элементов управления.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компоненты отображения данных должны быть связаны с компонентом
+<font face="Verdana" size="2"> TDataSource</font> и через него с компонентом набора данных. Для этого используется их свойство
+<font face="Verdana" size="2">DataSource</font>. Оно присутствует во всех компонентах отображения данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Большинство компонентов предназначены для представления данных из одного единственного поля. В таких компонентах имеется еще одно свойство
+<font face="Verdana" size="2">DataField</font>, которое определяет поле связанного набора данных, отображаемое в компоненте.
+</font ></P>
+<P><font face="Verdana" size="3">
+Особое значение для приложений баз данных играет компонент
+<font face="Verdana" size="2">TOBGrid</font>, который представляет данные в виде таблицы. В столбцах таблицы размещаются поля набора данных, а в строках — записи. Для этого компонента не имеет смысла определять конкретное поле, но можно задать настраиваемый набор колонок, а для каждой из них определить поле набора данных. (Подробнее о визуальных компонентах отображения данных см. гл. 15.)
+</font ></P>
+<P><font face="Verdana" size="3">
+Таким образом, для каждого визуального компонента отображения данных необходимо выполнить следующие операции:
+</font ></P>
+<P><font face="Verdana" size="3">
+1.   Связать компонент отображения данных и компонент
+<font face="Verdana" size="2">TDataSource</font>. Для этого используется свойство
+<font face="Verdana" size="2">Datasource</font>, которое должно указывать на экземпляр требуемого компонента
+<font face="Verdana" size="2">TDataSource</font>. Один компонент отображения данных можно связать только с одним компонентом
+<font face="Verdana" size="2">TDataSource</font>. Необходимый компонент можно выбрать в списке свойств в Инспекторе объектов.
+</font ></P>
+<P><font face="Verdana" size="3">
+2.  Задать поле данных. Для этого используется свойство
+<font face="Verdana" size="2"> DataField</font> типа <font face="Verdana" size="2">TFields</font>. В нем необходимо указать имя поля связанного набора данных. После задания свойства
+<font face="Verdana" size="2"> Datasource</font> поле можно выбрать из списка. Этот этап применяется только для компонентов, отображающих единственное поле.
+</font ></P>
+<P><font face="Verdana" size="3">
+Отдельное место среди компонентов отображения данных занимает компонент
+<font face="Verdana" size="2">TDBNavigator</font>. Он предназначен для перемещения по записям набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+В приложении <font face="Verdana" size="2"> DemoDBApp</font> использованы компоненты
+<font face="Verdana" size="2"> TDBGrid, TDBNavigator и TDBEdit</font> (рис.
+11.3)<B>.</B>
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.11.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 11.3. </B>Главная форма 
+  приложения <font face="Verdana" size="2"> DemoDBApp</font> </font ></P>
+<P><font face="Verdana" size="3"> Все три компонента отображения данных связаны 
+  с компонентом <font face="Verdana" size="2">CountrySource</font> типа<B> </B><font face="Verdana" size="2">TDataSource</font> 
+  при помощи свойства <font face="Verdana" size="2">DataSource</font>. </font ></P>
+<P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TDBEdit</font> 
+  отображает данные из поля <font face="Verdana" size="2"> capital</font> (столица 
+  государства) и позволяет редактировать их. </font ></P>
+<P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TDBGrid</font> 
+  показывает набор данных целиком, данные в ячейках можно редактировать. </font ></P>
+<P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TDBNavigator</font> 
+  позволяет перемещаться по записям набора данных <font face="Verdana" size="2">CountryTable</font>. 
+  При этом результат заметен во всех подключенных к набору данных компонентах 
+  отображения данных. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

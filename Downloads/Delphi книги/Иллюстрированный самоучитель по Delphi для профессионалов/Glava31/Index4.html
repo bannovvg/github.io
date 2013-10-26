@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Интерфейс IShellLink</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот интерфейс представляет собой средство для создания и управления ярлыками
+(<font face="Verdana" size="2">shortcuts</font>). Все читатели этой главы наверняка создавали и перемещали ярлыки для наиболее нужных программ, файлов и папок — на рабочем столе, в главном меню и т. д. С точки зрения ОС эти действия — не что иное, как создание и изменение свойств СОМ-объекта.
+</font ></P>
+<P><font face="Verdana" size="3">
+Каждый ярлык содержит следующую информацию:&nbsp;
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;путь к объекту, на который ссылается ярлык (Path);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;рабочий каталог для этого объекта (Working 
+    Directory);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;список параметров, передаваемый объекту при его активизации 
+    (Arguments);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;начальное состояние окна, соответствующего объекту 
+    (нормальное, минимизированное, максимизированное) (ShowCmd);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;путь к значку, соответствующему объекту (Icon 
+    Location);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;описание объекта (Description);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;сочетание &quot;горячих&quot; клавиш (HotKey).</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Для всех этих свойств ярлыка в интерфейсе дано по паре методов — один для чтения, другой для установки значения:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IShellLink = interface(lUnknown)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> { si }</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+[SID_IShellLinkA]</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetPath(pszFile: PAnsiChar;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;cchMaxPath: Integer; var pfd: TWin32FindData;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">fFlags: DWORD): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetlDList(var ppidl: PItemlDList): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetlDList(pidl: PItemlDList): HResult;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetDescription(pszName: PAnsiChar;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cchMaxName: Integer): HResult;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetDescription(pszName: PAnsiChar): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetWorkingDirectory(pszDir: PAnsiChar; cchMaxPath: Integer): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetWorkingDirectory(pszDir: PAnsiChar): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetArguments(pszArgs: PAnsiChar; cchMaxPath: Integer): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetArguments(pszArgs: PAnsiChar): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetHotkey(var pwHotkey: Word): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetHotkey(wHotkey: Word): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetShowCmd(out piShowCmd: Integer): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetShowCmd(iShowCmd: Integer): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetIconLocation(pszIconPath: PAnsiChar; cchlconPath: Integer; out pilcon: Integer): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetlconLocation(pszIconPath: PAnsiChar; ilcon: Integer): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetRelativePath(pszPathRel: PAnsiChar; dwReserved: DWORD): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Resolve(Wnd: HWND; fFlags: DWORD): HResult; stdcall;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> function SetPath(pszFile: PAnsiChar): HResult; stdcall;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Сохраним ярлык для данной программы-примера где-нибудь на диске, скажем, в той же самой папке. Для этого создадим новый объект
+<font face="Verdana" size="2"> NewLink</font> класса <font face="Verdana" size="2">CLSiD_shellLink,</font> предоставляющий нам нужный интерфейс:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.ButtonlClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var NewLink : IShellLink;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">fn, fp : string; ws : WideString; hRes :
+THandle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">pf : IPersistFile;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+NewLink := CreateComObject(CLSID_ShellLink) as IShellLink; fn := ParamStr(O); NewLink.SetPath(pchar(fn));&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> fp := ExtractFilePath(fn); NewLink.SetWorkingDirectory(pchar(fp));
+NewLink.SetDescription</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> (pChar(Application.Title));&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> ws := fp+Application.Title+'.Ink';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hRes := NewLink.Querylnterface(IID__IPersistFile, pf) ; if Succeeded(hRes) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">pf.Save(pWideChar(ws),False);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере помимо <font face="Verdana" size="2"> IShellLink</font> нужно получить доступ к интерфейсу
+<font face="Verdana" size="2">IPersistFile</font>, который &quot;умеет&quot; записывать данные. Задав параметры ярлыка, мы записываем его на диск. При этом проверяется тот факт, что созданный нами объект поддерживает интерфейс
+IPersistF<font face="Verdana" size="2">i</font>le. Если указатель на этот интерфейс получен, вызывается его метод
+<font face="Verdana" size="2">save</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Среди перечисленных выше методов <font face="Verdana" size="2"> IShellLink</font> особое внимание уделим методу
+<font face="Verdana" size="2">Resolve</font>. Он понадобится вам при получении указателя на интерфейс уже существующих ярлыков. Windows пытается вести себя &quot;разумно&quot; и отслеживает перемещения и переименования объекта, на который указывает существующий
+<font face="Verdana" size="2">IShellLink</font>. Но если вы записали содержимое ярлыка в поток (или на диск), то отследить соответствие ярлыка объекту должны сами, вызвав метод Resolve. Если объект, на который ссылается ярлык, по-прежнему находится на своем месте, метод немедленно завершается с нормальным кодом возврата. Если файл или объект перемещен или переименован, начинается его поиск (рис. 31.2).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.31.2.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 31.2. </B>Поиск объекта, 
+  на который указывает ярлык </font ></P>
+<P><font face="Verdana" size="3"> Знакомая картина, не правда ли? Особенно часто 
+  она наблюдается в том случае, если пользователь не выработал у себя привычки 
+  правильно деинсталлировать раздобытый где-то &quot;софт&quot;, стирая его &quot;по 
+  старинке&quot;. Между тем, за привычным диалоговым окном на рисунке стоит вызов 
+  метода <font face="Verdana" size="2">ishellLink</font>. <font face="Verdana" size="2">Resolve</font>. 
+  Если в пределах досягаемости поиска окажется файл с тем же именем и размерами, 
+  ярлык будет автоматически переадресован на него; в противном случае пользователю 
+  будет предложено использовать ближайший по характеристикам файл из просмотренных. 
+  Если вы вообще не хотите, чтобы пользователь вмешивался в процесс отыскания 
+  соответствия, при вызове метода <font face="Verdana" size="2"> Resolve</font> 
+  в параметре <font face="Verdana" size="2">fFlags</font> укажите значение <font face="Verdana" size="2"> 
+  SLR_NO_UI</font> — диалоговое окно появляться в этом случае не будет. </font ></P>
+<P><font face="Verdana" size="3"> Если вы внимательно изучили рабочий стол своего 
+  компьютера, то должны были заметить там ярлыки, ссылающиеся не на файлы, а на 
+  специальные объекты — &quot;Мой компьютер&quot;, &quot;Сетевое окружение&quot;, 
+  &quot;Принтеры&quot; и т. п. Чтобы создать такой ярлык самому, нужно обращение 
+  к методу <font face="Verdana" size="2">setiDList</font>. В качестве параметра 
+  ему передается структура <font face="Verdana" size="2"> pitemiDList</font> <font face="Verdana" size="2"> 
+  (pidi). </font> О том, где ее взять и как заполнить, рассказано в следующем 
+  разделе. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

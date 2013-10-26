@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс TBrush </strong><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот класс инкапсулирует свойства кисти — инструмента для заливки областей. Когда создается экземпляр этого класса, первоначально используется белая сплошная
+(<font face="Verdana" size="2">styie=bsSolid)</font> кисть. Свойства класса приведены в табл. 10.3.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 10.3. </B>Свойства 
+  класса <font face="Verdana" size="2"> TBrush</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="508" HEIGHT="306">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="32">
+<DIV WIDTH="266" HEIGHT="32" style="width: 80; height: 32">
+<P><font face="Verdana" size="3">
+<b>
+Свойство</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="32">
+<DIV WIDTH="388" HEIGHT="32" style="width: 134; height: 32">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="25">
+<DIV WIDTH="266" HEIGHT="25" style="width: 196; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle:   HBrush;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="25">
+<DIV WIDTH="388" HEIGHT="25" style="width: 208; height: 25">
+<P><font face="Verdana" size="3">
+Содержит дескриптор кисти
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="27">
+<DIV WIDTH="266" HEIGHT="27" style="width: 188; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Color:   TColor;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="27">
+<DIV WIDTH="388" HEIGHT="27" style="width: 172; height: 27">
+<P><font face="Verdana" size="3">
+Определяет цвет кисти
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="127">
+<DIV WIDTH="266" HEIGHT="127" style="width: 200; height: 147">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Style:   TBrushStyle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TBrushStyle =   (bsSolid, bsClear,   bsHorizontal, bsVertical,   bsFDiagonal, bsBDiagonal,   bsCross, bsDiagCross) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="127">
+<DIV WIDTH="388" HEIGHT="127" style="width: 298; height: 127">
+<P><font face="Verdana" size="3">
+Определяет стиль кисти (фактура закраски)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="94">
+<DIV WIDTH="266" HEIGHT="94" style="width: 203; height: 94">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Bitmap:   TBitmap;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="94">
+<DIV WIDTH="388" HEIGHT="94" style="width: 303; height: 94">
+<P><font face="Verdana" size="3">
+Содержит битовую карту, определенную пользователем для закраски  поверхностей.  Если это свойство определено, то свойства
+<font face="Verdana" size="2"> Color</font> и <font face="Verdana" size="2"> style</font> недействительны
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Шрифт, перо и кисть не могут использоваться самостоятельно. Они являются составными частями специального класса, который и будет сейчас рассмотрен.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Настройка компонента TDataSource</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+На втором этапе разработки приложения баз данных необходимо перенести на форму и настроить компонент
+<font face="Verdana" size="2">TDataSource</font>. Он обеспечивает взаимодействие набора данных с компонентами отображения данных. Чаще всего
+одному набору данных соответствует один компонент
+<font face="Verdana" size="2">TDataSource</font>, хотя их может быть несколько.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для настройки свойств компонента необходимо выполнить следующие действия.
+</font ></P>
+<P><font face="Verdana" size="3">
+1.  Связать набор данных и компонент <font face="Verdana" size="2">TDataSource</font>.
+Для этого используется свойство <font face="Verdana" size="2"> DataSet</font> компонента
+<font face="Verdana" size="2">TDataSource</font>, доступное через Инспектор объектов. Это указатель на экземпляр компонента доступа к данным. В списке этого свойства в Инспекторе объектов перечислены все доступные компоненты наборов данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+2. Переименовать компонент. Это не обязательное действие. Тем не менее желательно присваивать компонентам осмысленные имена, соответствующие названиям связанных наборов данных. Обычно название компонента комбинирует имя набора данных (например
+<font face="Verdana" size="2"> OrdSource</font> или <font face="Verdana" size="2">dsOrders</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+В приложении <font face="Verdana" size="2"> DemoDBApp</font> компонент
+<font face="Verdana" size="2"> countrysource</font> связан с компонентом
+<font face="Verdana" size="2">CountryTable</font>. Поэтому
+свойство <font face="Verdana" size="2">DataSet</font> имеет значение
+<font face="Verdana" size="2">CountryTable</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TDataSource</font> 
+    можно подключить не только к набору данных из той же формы, но и любой другой, 
+    модуль которой указан в секции <font face="Verdana" size="2">uses</font>. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDataSource</font> имеет ряд полезных свойств и методов. Итак, связывание с компонентом набора данных выполняет свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSet: TDataSet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а определить текущее состояние набора данных можно, использовав свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDataSetState = (dslnactive, dsBrowse, dsEdit, dslnsert, dsSetKey, dsCalcFields, dsFilter, dsNewValue, dsOldValue, dsCurValue, dsBlockRead, dsInternalCalc); property State: TDataSetState;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Enabled: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+можно включить или отключить все связанные визуальные компоненты. При значении
+<font face="Verdana" size="2"> False</font> ни один связанный компонент отображения данных не будет работать.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AutoEdit: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+при значении <font face="Verdana" size="2"> True</font> всегда будет переводить набор данных в режим редактирования при получении фокуса одним из связанных визуальных компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Аналогично, метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Edit;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+переводит связанный набор данных в режим редактирования.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IsLinkedTo(DataSet: TDataSet): Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает значение <font face="Verdana" size="2">True</font>, если компонент, указанный в параметре
+<font face="Verdana" size="2">DataSet</font>, действительно связан с данным компонентом
+<font face="Verdana" size="2">TDataSource</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDataChangeEvent = procedure(Sender: TObject; Field: TField)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnDataChange: TDataChangeEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+вызывается при редактировании данных в одном из связанных визуальных компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnUpdateData: TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+вызывается перед сохранением изменений в базе данных. Метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnStateChange: TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+вызывается при изменении состояния связанного набора данных (см. гл. 12).
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

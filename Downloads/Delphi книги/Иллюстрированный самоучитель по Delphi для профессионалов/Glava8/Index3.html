@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>События, 
+  связанные с действиями</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент TAction реагирует на три события<B>: </B><font face="Verdana" size="2">OnExecute, OnUpdate И OnHint.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Первое — и самое главное — должно быть как раз реакцией на данное действие. Это событие возникает в момент нажатия кнопки, пункта меню — короче, при поступлении сигнала от клиента действия. Здесь — как правило—и пишется обработчик. Почему &quot;как правило&quot;? Потому что схема обработки сигнала 4-этапная:
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Сначала  вызывается   обработчик  события <font face="Verdana" size="2">   OnExecute</font>   списка  действий
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TActionList:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnExecute: TActionEvent;</font> <font face="Verdana" size="2">TActionEvent = procedure (Action: TBasicAction; var Handled: Boolean)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+of object;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если обработчик этого события вами не предусмотрен, или в параметре
+<font face="Verdana" size="2"> Handled</font> он вернул значение
+<font face="Verdana" size="2">False</font>, происходит генерация следующего события — шаг 2.
+</font ></P>
+<P><font face="Verdana" size="3">
+2. Вызывается обработчик события <font face="Verdana" size="2"> onActionExecute</font> глобального объекта
+<font face="Verdana" size="2"> Application</font> (тип события тот же —
+<font face="Verdana" size="2">TActionEvent</font>). Если и оно не обработало сигнал действия, переходим к следующему шагу.
+</font ></P>
+<P><font face="Verdana" size="3">
+3. Вызывается обработчик события <font face="Verdana" size="2"> onExecute</font> самого действия (объекта типа
+<font face="Verdana" size="2"> TAction</font> или его потомка).
+</font ></P>
+<P><font face="Verdana" size="3">
+4. Если первые три шага не обработали ситуацию (вернули
+<font face="Verdana" size="2">False</font>), то, вероятно, это было связано с неправильной целью
+(<font face="Verdana" size="2">Target</font>) действия. В качестве &quot;последнего шанса&quot; приложению посылается сообщение
+<font face="Verdana" size="2"> CM_ACTIONEXECUTE.</font> В этом случае происходит поиск другой цели для данного действия (об алгоритме поиска цели см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Первые две возможности в этом списке используются относительно редко. Тем не менее они полезны, если вам нужно глобально добавлять/удалять/разрешать/запрещать действия.
+</font ></P>
+<P><font face="Verdana" size="3">
+Введение события <font face="Verdana" size="2"> onupdate</font> является очень хорошей находкой, о нем напишем подробно. И автор этих строк, и, возможно, вы потратили немало времени, чтобы в разрабатываемых программах элементы управления находились в актуальном состоянии. Если, скажем, вашей программой открыт первый файл, то нужно активировать ряд кнопок и пунктов меню
+(<b>Save, Save as</b>, <B>Print </B>и т. п.); как только закрыт последний — отключить их. Если в буфере обмена есть что-то подходящее, необходимо активизировать пункт меню и кнопку <B>Paste, </B>если нет — отключить. В результате код, отслеживающий это, у неопытных программистов &quot;размазывается&quot; по всему приложению. А ведь можно поступить проще. Событие
+<font face="Verdana" size="2"> TAction.onUpdate</font> возникает в моменты простоя приложения, т. е. тогда, когда оно не занято обработкой сообщений (цикл содержится в методе
+<font face="Verdana" size="2"> idle</font> объекта <font face="Verdana" size="2">Application</font>). Это гарантирует, что оно возникнет ДО ТОГО, как пользователь щелкнет мышью и увидит выпадающие пункты меню; поэтому можно успеть обновить их состояние. Пример использования события
+<font face="Verdana" size="2">onupdate</font>:
+</font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.PasteActionUpdate(Sender: 
+    TObject); begin</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TAction(Sender).Checked 
+    := Clipboard.HasFormat(CFJTEXT);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+</blockquote>
+<p><font face="Verdana" size="3"> <b> Примечание</b> </font ></p>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Перед вызовом события <font face="Verdana" size="2"> 
+    onupdate</font> также происходит 4-этапная последовательность действий, точно 
+    такая же, как при <font face="Verdana" size="2">OnExecute</font>. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Третье событие имеет такой тип:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+THintEvent = procedure (var HintStr: string; var CanShow: Boolean) of object;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Оно вызывается тогда, когда от элемента управления требуется показать подсказку, связанную с данным действием. В обработчике события можно указать, будет ли что-нибудь показываться (параметр
+<font face="Verdana" size="2">CanShow</font>) и, если да, то что именно (параметр
+<font face="Verdana" size="2">Hintstr</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Это были события, относящиеся к компоненту <font face="Verdana" size="2">TAction</font>. Сам компонент
+<font face="Verdana" size="2"> TActionList</font> также имеет три события:
+<font face="Verdana" size="2"> OnExecute, OnUpdate И OnChange.</font> О первых двух мы уже сказали; третье происходит в момент изменения списка (добавления или удаления действий).
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

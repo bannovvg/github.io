@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Экспорт из DLL</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания перечня экспортируемых из динамической библиотеки процедур и функций используется ключевое слово exports. При этом можно указывать как функции, описанные в главном файле DLL, так и функции из присоединенных модулей.
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве примера рассмотрим исходный код динамической библиотеки
+<font face="Verdana" size="2">DataCheck</font>, простейшие функции которой проверяют введенную строку перед конвертацией на соответствие одному из типов данных.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"><b>Листинг 28.2. </b>Исходный 
+  код динамической библиотеки DataCheck </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">library DataChek</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uses</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Windows, SysUtils, Classes, Messages, Forms,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; Dialogs, StdCtrls, ComCtrls;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ValidDate(AText: String): Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := 0; StrToDate(AText);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on E:EConvertError do Result := -1;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ValidTime(AText: String): Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := 0; StrToTime(AText);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on E:EConvertError do Result := -1;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Validlnt(AText: String): Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := 0; StrToInt(AText);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on E:EConvertError do Result := -1;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+exports Validlnt,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ValidDate index 1, ValidTime index 2 name 'IsValidTime';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Length(DateToStr(Date)) &lt; 10</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then ShowMessage('Год представлен двумя цифрами');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Итак, три функции этой библиотеки обеспечивают проверку строки перед преобразованием ее в целое число, дату или время. Для обеспечения экспорта этих функций их необходимо объявить в секции
+<font face="Verdana" size="2">exports</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При компиляции библиотеки адрес, имя и порядковый номер экспортируемой функции добавляется к специальной таблице экспорта в файле
+DLL.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Компилятор Delphi без проблем добавит таблицу 
+    экспорта и к исполняемому файлу приложения. Правда, при этом получить доступ 
+    к такой функции невозможно — это системное ограничение Windows. </font ></P>
+  <P><font face="Verdana" size="3"> Попробуйте объявить пару функций после ключевого 
+    слова <font face="Verdana" size="2"> exports</font> в обычном приложении — 
+    проект компилируется без ошибок. Но сами функции недоступны другим процессам. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Имена процедур и функций в секции экспорта разделяются запятыми. Внимательный взгляд на пример экспорта в листинге 28.2 обнаруживает три различных варианта объявления.
+</font ></P>
+<P><font face="Verdana" size="3">
+В первом варианте компилятор самостоятельно определяет положение функции в таблице экспорта.
+</font ></P>
+<P><font face="Verdana" size="3">
+При использовании ключевого слова <font face="Verdana" size="2"> index</font> следующее за ним число задает положение функции в таблице экспорта относительно других таких же функций.
+</font ></P>
+<P><font face="Verdana" size="3">
+Ключевое слово <font face="Verdana" size="2"> name</font> позволяет экспортировать функцию под другим именем.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

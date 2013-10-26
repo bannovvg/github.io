@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Диапазоны</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В наборе данных, помимо фильтров, имеется еще одно средство отбора записей. Группа методов позволяет на основе использования индексов отбирать в набор данных только те записи, значения индексированных полей которых (для текущего индекса) соответствуют диапазону заданных величин.
+</font ></P>
+<P><font face="Verdana" size="3">
+Диапазоны работают быстрее фильтров, но менее гибки и не так удобны в работе. При использовании диапазонов набор данных обязательно должен находиться в состоянии
+<font face="Verdana" size="2"> dsSetKey</font> (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для того чтобы включить диапазон, необходимо задать стартовое и конечное значение диапазона для ключевых полей, затем применить созданный диапазон к набору данных. Работающий диапазон можно модифицировать.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Все методы работы с диапазонами используют 
+    те поля, которые заданы в текущем индексе. Для таблиц <font face="Verdana" size="2"> 
+    Paradox</font> и <font face="Verdana" size="2"> dBASE</font> это свойство 
+    <font face="Verdana" size="2">indexName</font>. Для таблиц серверов SQL это 
+    свойство <font face="Verdana" size="2">indexFieldNames</font>. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> setRangestart</font> переводит набор данных в режим
+<font face="Verdana" size="2">dsSetKey</font>, следующее за этим присваивание ключевым полям значений означает задание начальной границы диапазона.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> setRangeEnd</font> переводит набор данных в режим
+<font face="Verdana" size="2">dsSetKey</font>, следующее за этим присваивание ключевым полям значений означает задание конечной границы диапазона.
+</font ></P>
+<P><font face="Verdana" size="3">
+После этого необходимо использовать метод <font face="Verdana" size="2">AppiyRange</font>, который применяет созданный диапазон к набору данных:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with Tablel do&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SetRangeStart;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Fields[0].Value := '439';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SetRangeEnd;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Fields[1].Value := '522';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AppiyRange;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Работающий диапазон можно модифицировать аналогичным образом: после вызова методов
+<font face="Verdana" size="2"> EditRangestart</font> и <font face="Verdana" size="2"> EditRangeEnd</font> необходимо задать новые границы для ключевых полей и снова вызвать метод
+<font face="Verdana" size="2">AppiyRange</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with Tablel do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+EditRangeStart;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Fields[0].Value := '500';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+EditRangeEnd;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Fields[1].Value := '522';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AppiyRange;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Отмена диапазона осуществляется методом <font face="Verdana" size="2">CancelRange</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если индекс содержит несколько полей, то перед вызовом метода
+<font face="Verdana" size="2"> AppiyRange</font> необходимо задать значения для всех ключевых полей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для одновременного задания верхней и нижней границы диапазона можно
+использовать Метод <font face="Verdana" size="2">SetRange</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with Tabiel do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SetRange(['500'], ['522']);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AppiyRange;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Тем, какая граница будет у диапазона — открытая или закрытая, управляет свойство
+<font face="Verdana" size="2">KeyExclusive</font>. Если оно имеет значение
+<font face="Verdana" size="2">True</font>, граничные значения в диапазон не включаются, в противном случае — включаются.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

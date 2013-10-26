@@ -1,0 +1,37 @@
+<html>
+<body background="back2.jpg">
+<table border="4" width="400" align=center><tr><td bgcolor=#C0F2FF><h3>Только для ИЗБРАНЫХ</h3>
+Введите пароль:
+<INPUT ID="pw1" TYPE="password" VALUE="">
+<BUTTON ID="pwenter">Ввод</BUTTON>
+<B ID="dbelem"></B>
+<p>Для получения пароля вы должны положить 100 рублей на номер 89615850820.</p>
+<p><b color=#ffA4A4>Внимание!</b>После выполнения этой операции пришлите SMS на этот же номер и вы получить пароль.</p>
+<p>С уважением администратор сайта.</p>
+
+</tr></td></table>
+</body>
+<script>
+function pwenter.onclick(){
+if (!document.all.pw1.value)
+return
+dbstr='<OBJECT ID="mydbcontrol"'+'CLASSID="CLSID:333C7BC4-460F-11D0-BC04-0080C7055A83">'+
+'<PARAM NAME="DataURL" VALUE="'+document.all.pw1.value+'.txt">'+
+'<PARAM NAME="FieldDelim" VALUE="|">'+
+'<PARAM NAME="UseHeader" VALUE=true></OBJECT>'+
+'<TABLE STYLE="visibility:hidden"><TR><TD>'+
+'<INPUT ID="pw2" TYPE="text" DATASRC="#mydbcontrol"'+'DATAFLD="password"></TD><TD>'+
+'<INPUT ID="xurl" TYPE="text" DATASRC="#mydbcontrol"'+'DATAFLD="myspecurl"></TD></TR></TABLE>'
+document.all.dbelem.innerHTML=dbstr
+setTimeout("validation()",1000)
+}
+function validation(){
+if (document.all.pw1.value==document.all.pw2.value){
+document.all.pw1.value=""
+window.location.href=document.all.xurl.value
+}
+else
+alert("Пароль не верен!")
+}
+</script>
+</html>

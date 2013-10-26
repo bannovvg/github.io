@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <font size="4"><strong><font size="3">Компонент 
+  TDecisionPivot</font></strong></font> <font size="3"><strong><br>
+  </strong></font> </font> </P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDecisionPivot</font> предоставляет пользователю средства управления размерностями многомерного представления данных. В стандартном состоянии компонент представляет собой панель, разделенную на три части (табл. 30.6). Каждая часть имеет собственный набор кнопок.
+</font ></P>
+<P><font face="Verdana" size="3">
+Левая часть имеет единственную кнопку, щелчок на которой позволяет сделать выбор суммирующего поля из развернувшегося списка. Элементы списка соответствуют вычисляемым полям с использованием агрегатных функций из запроса соответствующего компонента
+<font face="Verdana" size="2">TDecisionQuery</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Выбор поля приводит к изменению значений в ячейках кросстаба. Например, выбор поля с функцией зим изменит значения в ячейках на суммы полей, поле с функцией
+<font face="Verdana" size="2"> COUNT</font> произведет подсчет количества элементов в полях.
+</font ></P>
+<P><font face="Verdana" size="3">
+Средняя часть панели предназначена для размещения кнопок, соответствующих горизонтальным размерностям.
+</font ></P>
+<P><font face="Verdana" size="3">
+Правая часть панели используется для кнопок, соответствующих вертикальным размерностям.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кнопка в нажатом состоянии показывает размерность. Одновременно отображается и общая сумма по размерности.
+</font ></P>
+<P><font face="Verdana" size="3">
+Размерности можно менять местами и перемещать с вертикали на горизонталь и обратно. Для этого можно выбрать команду <B>Moved to Column Area </B>из всплывающего меню кнопки. Во время выполнения можно использовать обычное перетаскивание кнопок при помощи мыши.
+</font ></P>
+<P><font face="Verdana" size="3">
+Всплывающее меню кнопки размерности имеет еще одну команду — <B>Drilled In. </B>По этой команде размерность переходит в режим детального просмотра по каждому значению поля. Конкретное значение можно выбрать из списка, который открывается при щелчке на кнопке. В этом случае суммы в ячейках кросстаба рассчитываются не по всей размерности, а только по выбранному значению.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 30.6. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TDecisionPivot</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="458" HEIGHT="117">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="152" HEIGHT="27">
+<DIV WIDTH="275" HEIGHT="27" style="width: 62; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Объявление&nbsp;</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="27">
+<DIV WIDTH="44" HEIGHT="27" style="width: 13; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="27">
+<DIV WIDTH="342" HEIGHT="27" style="width: 82; height: 27">
+<P><font face="Verdana" size="3">
+<b>Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="484" HEIGHT="31">
+<DIV WIDTH="275" HEIGHT="31" style="width: 63; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="152" HEIGHT="59">
+<DIV WIDTH="275" HEIGHT="88" style="width: 132; height: 43">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DecisionSource:&nbsp; TDecisionSource;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="59">
+<DIV WIDTH="44" HEIGHT="88" style="width: 16; height: 53">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Рb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="59">
+<DIV WIDTH="342" HEIGHT="88" style="width: 232; height: 91">
+<P><font face="Verdana" size="3">Определяет компонент <font face="Verdana" size="2">TDecisionSource</font>, через который осуществляется управление многомерным представлением данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="186">
+<DIV WIDTH="267" HEIGHT="186" style="width: 179; height: 186">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDecisionButtonPosition = (xtHorizontal, xtVertical, XtLeftTop) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property GroupLayout: TDecisionButtonPosition;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="186">
+<DIV WIDTH="50" HEIGHT="186" style="width: 1; height: 186">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Рb&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="264" HEIGHT="186">
+<DIV WIDTH="314" HEIGHT="186" style="width: 229; height: 190">
+<P><font face="Verdana" size="3">
+Задает способ расположения кнопок на панели:
+</font ></P>
+<ul>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;xtHorizontal — в ряд слева 
+            направо;&nbsp;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;xtVertical — в 
+            колонку сверху вниз;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;xtLeftTop — кнопки 
+            вертикальных размерностей вдоль верхнего края, кнопки горизонтальных 
+            размерностей вдоль левого края, кнопка сумм в левом верхнем углу</font></li>
+</ul>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="152">
+<DIV WIDTH="267" HEIGHT="152" style="width: 173; height: 169">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDecisionPivotOption = (xtRows, xtColumns, xtSuiranaries);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDecisionPivotOptions = set of TDecisionPivotOption;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Groups : TDecisionPivotOptions;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="152">
+<DIV WIDTH="50" HEIGHT="152" style="width: 1; height: 152">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">РЬ</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="264" HEIGHT="152">
+<DIV WIDTH="314" HEIGHT="152" style="width: 225; height: 152">
+<P><font face="Verdana" size="3">
+Управляет видимостью трех групп кнопок
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="40">
+<DIV WIDTH="267" HEIGHT="40" style="width: 183; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property GroupSpacing: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="40">
+<DIV WIDTH="50" HEIGHT="40" style="width: 4; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="264" HEIGHT="40">
+<DIV WIDTH="314" HEIGHT="40" style="width: 229; height: 54">
+<P><font face="Verdana" size="3">
+Определяет размер в пикселах промежутка между группами кнопок
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="488" HEIGHT="31">
+<DIV WIDTH="267" HEIGHT="31" style="width: 90; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="58">
+<DIV WIDTH="267" HEIGHT="58" style="width: 163; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetBounds (Left, Top, Height, Width: Integer); override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="58">
+<DIV WIDTH="50" HEIGHT="58" style="width: 1; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="264" HEIGHT="58">
+<DIV WIDTH="314" HEIGHT="58" style="width: 210; height: 58">
+<P><font face="Verdana" size="3">
+Переустанавливает размеры компонента в соответствии с параметрами метода
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Методы-обработчики компонента унаследованы от класса
+<font face="Verdana" size="2">TWinControl</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Усовершенствованное масштабирование</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В класс <font face="Verdana" size="2">TContro</font><font face="Verdana" size="2">l</font> добавлены свойства, позволяющие упростить масштабирование форм и находящихся на них компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+<B> </B><font face="Verdana" size="2">Anchors</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TAnchorKind = (akLeft, akTop, akRight, akBottom);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TAnchors = set of TAnchorKind; property Anchors: TAnchors;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+отвечает за привязку компонентов к определенным краям формы при масштабировании. По умолчанию любой компонент привязан к верхней и левой сторонам
+(<font face="Verdana" size="2">[akLeft, akTop]</font>), т. е. не двигается при стандартном масштабировании. Но, изменив значение этого свойства, можно сделать так, чтобы компонент находился, к примеру, все время в нижнем правом углу.
+</font ></P>
+<P><font face="Verdana" size="3">
+С другой стороны, если прикрепить все четыре стороны, то получится интересный и нужный во многих случаях эффект. Такой компонент увеличивается и уменьшается вместе с формой; но в то же время сохраняется расстояние до всех четырех ее краев.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> constraints</font> представляет собой набор ограничений на изменение размеров компонента. Оно содержит четыре свойства:
+<font face="Verdana" size="2"> MaxHeight, Maxwidth, MinHeight и Minwidth.</font> Как легко догадаться из названий, размеры компонента могут меняться только в пределах значений этих четырех свойств.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наконец, большинство элементов управления получили свойство
+<font face="Verdana" size="2">Autosize</font>, позволяющее им автоматически масштабироваться при изменении содержимого (скажем, надписи на кнопке).
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P align="center"><font face="Verdana" size="3"> &nbsp;<strong> </strong></font ><strong><font face="Verdana" size="3"> 
+  <font size="4">ГЛАВА 16</font></font></strong></P>
+<P align="center"><strong><font face="Verdana" size="3"><font size="4"><br>
+  Процессор баз данных Borland Database Engine</font> </font></strong><font face="Verdana" size="3"><br>
+  </font> </P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+<P><font face="Verdana" size="3">
+Любое приложение баз данных имеет в своем составе или использует сторонний механизм доступа к данным, который берет на себя подавляющее большинство стандартных низкоуровневых операций работы с базами данных. Например, любое такое приложение при открытии таблицы БД должно выполнить примерно одинаковый набор операций.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">поиск местоположения базы данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;поиск таблицы, ее открытие и чтение служебной информации;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;чтение данных в соответствии с форматом хранения данных</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> и т. д. </font ></li>
+</ul>
+<P><font face="Verdana" size="3">
+Очевидно, что если все стандартные функции доступа к данным реализовать в виде специальной программы, сервиса или динамической библиотеки, то это существенно упростит разработку приложений баз данных, которым для выполнения той или иной операции достаточно будет вызвать готовую процедуру.
+</font ></P>
+<P><font face="Verdana" size="3">
+Одним из традиционных способов взаимодействия приложения, созданного в среде разработки Delphi, и базы данных является использование процессора баз данных Borland Database Engine 5. Он представляет собой набор динамических библиотек, функции которых позволяют не только обращаться к данным, но и эффективно управлять ими на стороне приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для работы с источниками данных при посредстве BDE в Delphi имеется специальный набор компонентов, расположенных на странице BDE Палитры компонентов. Эти компоненты для работы с базами данных используют возможности BDE, обращаясь к его функциям и процедурам. Механизм доступа к BDE инкапсулирован в базовом классе TBDEDataSet. (Подробно базовые классы компонентов доступа к данным рассмотрены далее в этой части.) Поэтому в процессе программирования у вас не будет необходимости использовать функции BDE напрямую. Почти все, что можно сделать путем прямого обращения, можно сделать и через компоненты — это проще и надежнее.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тем не менее внутреннюю организацию механизма доступа к данным всегда полезно знать. Кроме этого, всегда полезно знать и уметь использовать дополнительные возможности, которые BDE может предоставить разработчику.
+</font ></P>
+<P><font face="Verdana" size="3">
+BDE взаимодействует с базами данных при посредстве драйверов. Для особенно распространенных локальных СУБД разработан набор стандартных драйверов. Работа с наиболее распространенными серверами БД осуществляется при помощи драйверов системы SQL Links. Кроме этого, если для базы данных существует драйвер ODBC, то можно использовать и его. Достаточно зарегистрировать этот драйвер в BDE.
+</font ></P>
+<P><font face="Verdana" size="3">
+Однако BDE не претендует на всеобъемлющую универсальность и имеет некоторые недостатки. Это, например, снижение скорости работы приложения, недостатки реализации некоторых драйверов и т. д. В документации к Delphi 7 содержится предупреждение, что после 2002 года фирма Borland перестанет поддерживать BDE и рекомендует использовать технологию dbExpress, которая также рассматривается в настоящей книге.
+</font ></P>
+<P><font face="Verdana" size="3">
+В этой главе обсуждаются следующие вопросы.
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;архитектура и составные части BDE;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;что такое псевдонимы БД и настройка драйверов BDE;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;использование утилиты BDE Administrator;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;способы прямого использования функций API BDE;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;компоненты доступа к данным BDE.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

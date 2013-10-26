@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компонент управления отчетом TRvSystem</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент управления отчетом <font face="Verdana" size="2"> TRvSystem</font> обеспечивает выполнение основных операций с отчетом из приложения. В приложении он должен быть связан с компонентом
+<font face="Verdana" size="2"> TRvProject</font> (см. выше разд. &quot;Компонент отчета
+<font face="Verdana" size="2"> TRvProject</font>&quot; данной главы).
+Этого вполне достаточно, чтобы компонент <font face="Verdana" size="2"> TRvSystem</font> выполнил свою работу. У разработчика нет необходимости вызывать какие-либо методы компонента, чтобы направить отчет на печать.
+</font ></P>
+<P><font face="Verdana" size="3">
+В его составе инкапсулированы объекты, обеспечивающие вывод отчета из компонента
+<font face="Verdana" size="2"> TRvProject</font> в один из трех системных приемников:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">файл (объект класса TSystemFiler);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;предварительный просмотр (объект класса TSystemPreview);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;принтер (объект класса TSystemPrinter).</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+За это отвечает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TReportDest = (rdPreview, rdPrinter, rdFile);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property ReportDest: TReportDest;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое может принимать одно из трех значений типа
+<font face="Verdana" size="2">TReportDest</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Соответственно, для каждого типа системного приемника имеется свойство, позволяющее задать все его основные параметры.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для вывода в файл это комплексное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SystemFiler: TSystemFiler;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Внутри него задается имя файла во вложенном свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FileName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+но при этом вложенное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TStreamMode = (smMemory, smTempFile, smFile, sraUser); property StreamMode: TStreamMode;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+должно иметь значение <font face="Verdana" size="2">smFile</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При выводе отчета для предварительного просмотра используется экземпляр класса
+<font face="Verdana" size="2">TSystemPreview</font>, который доступен через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SystemPreview: TSystemPreview;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Его свойства совпадают со свойствами компонента
+<font face="Verdana" size="2">TRvRenderPreview</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Стандартное   диалоговое   окно   предварительного   просмотра   отчета
+<font face="Verdana" size="2">   Rave</font> <font face="Verdana" size="2"> Reports</font> представлено на рис. 23.3.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.23.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 23.3. </B>Стандартное 
+  диалоговое окно предварительного просмотра компонента <font face="Verdana" size="2"> 
+  TRvSystem</font> </font ></P>
+<P><font face="Verdana" size="3"> Заголовок этого окна задается свойством </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property TitlePreview: 
+    TFormatString;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Перед открытием окна предварительного просмотра 
+  вызывается метод-обработчик </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnPreviewShow: 
+    TNotifyEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> За вывод отчета на печать отвечает инкапсулированный 
+  в компоненте объект типа <font face="Verdana" size="2">TSystemPrinter</font>. 
+  К нему можно обратиться при помощи свойства </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property SystemPrinter: 
+    TSystemPrinter;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Его свойства совпадают со свойствами компонента 
+  <font face="Verdana" size="2">TRvRenderPrinter</font>. </font ></P>
+<P><font face="Verdana" size="3"> Перед тем как отправить отчет одному из трех 
+  системных приемников, компонент открывает диалог настройки печати (рис. 23.4). 
+  </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.23.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <strong>Рис. 23.4</strong>. Диалог 
+  настройки печати компонента <font face="Verdana" size="2"> TRvSystem</font> 
+  Его заголовок определяется свойством </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property TitleSetup: 
+    TFormatString;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Перед открытием этого окна вызывается метод-обработчик 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnPreviewSetup: 
+    TNotifyEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Кроме этого, для диалога настройки печати можно 
+  задать ряд дополнительных параметров. Это делается в свойстве </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TSystemSetup 
+    = (ssAllowSetup, ssAllowCopies, ssAllowCollate,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ssAllowDuplex, 
+    ssAllowDestPreview, ssAllowDestPrinter, ssAllowDestFile,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ssAllowPrinterSetup);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TSystemSetups 
+    = set of TSystemSetup;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;property 
+    SystemSetups: TSystemSetups;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Элементы множества <font face="Verdana" size="2"> 
+  TSystemSetup</font> означают следующее: </font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">ssAllowSetup 
+    — разрешает или запрещает использование диалога настройки печати компонента;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;ssAllowCopies 
+    — управляет доступностью установки числа копий отчета;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;ssAllowCollate 
+    — разрешает или запрещает настройку режима печати с разбором страниц по копиям;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;ssAllowDuplex 
+    — разрешает или запрещает настройку двусторонней печати;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;ssAllowDestPreview 
+    — разрешает или запрещает использование окна предварительного просмотра;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;ssAiiowDestPrinter 
+    — разрешает или запрещает использование принтера;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;ssAllowDestFile 
+    — разрешает или запрещает использование файла для вывода отчета;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;ssAiiowPrinterSetup 
+    — разрешает или запрещает использование диалога настройки параметров принтера.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Во время выполнения любой из перечисленных операций 
+  вывода отчета открывается окно состояния процесса (рис. 23.5). Его заголовок 
+  определяется свойством </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property TitleStatus: 
+    TFormatString;</font> </font ></P>
+</blockquote>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.23.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 23.5. </B>Форма состояния 
+  процесса вывода отчета компонента <font face="Verdana" size="2"> TRvSystem</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> В нем отображается информационная строка состояния, 
+  которая может быть настроена при помощи свойств объекта <font face="Verdana" size="2">SystemFiler</font>, 
+  представленного в компоненте <font face="Verdana" size="2"> TRvSystem</font> 
+  одноименным свойством. </font ></P>
+<P><font face="Verdana" size="3"> Вложенное свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property StatusFormat: 
+    string;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> определяет строку форматирования для текста 
+  о состоянии процесса. Для нее предусмотрены следующие управляющие символы: </font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;%с — текущее 
+    состояние процесса вывода;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;%р — номер 
+    текущей страницы;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;%f — номер 
+    первой страницы;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;%1 — номер 
+    последней страницы;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;%d — название 
+    устройства вывода (название принтера, имя файла, предварительный просмотр);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;%r — имя 
+    драйвера устройства вывода;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;%s — общее 
+    число страниц;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;%t — порт 
+    печати;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;%о-%9 
+    — номера строк для свойства statusText (см. ниже).</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Вложенное свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property StatusText: 
+    TStrings;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> позволяет задать до десяти строк (можно задать 
+  и больше, но они не будут восприняты строкой статуса) с какой-либо дополнительной 
+  информацией, описывающей процесс вывода. Первая строка списка будет выведена 
+  при наличии в свойстве <font face="Verdana" size="2"> statusFormat</font> управляющего 
+  символа %0, вторая — при наличии символа %1 и т. д. </font ></P>
+<P><font face="Verdana" size="3"> При помощи перечисленных свойств вы сможете 
+  детально описать процесс вывода отчета. В этом вам помогут методы-обработчики 
+  событий компонента <font face="Verdana" size="2">TRvSystem</font>. </font ></P>
+<P><font face="Verdana" size="3"> До начата печати отчета и по его окончании (даже 
+  если печать была прервана) соответственно вызывается пара методов-обработчиков: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnBeforePrint: 
+    TNotifyEvent;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnAfterPrint: 
+    TNotifyEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В начале печати непосредственно отчета (не заголовка) 
+  вызывается метод-обработчик </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnPrint: 
+    TNotifyEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Если вы печатаете одну страницу, будет вызван 
+  метод-обработчик </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TPrintPageEvent 
+    = function(Sender: TObject;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">var PageNum: 
+    Integer): Boolean;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnPrintPage: 
+    TPrintPageEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Но до начала печати вызывается метод-обработчик 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnNewPage: 
+    TNotifyEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> который обозначает генерацию страницы. </font ></P>
+<P><font face="Verdana" size="3"> При печати колонтитулов в верхней и нижней частях 
+  страницы вызываются методы-обработчики </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnPrintHeader: 
+    TNotifyEvent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">property OnPrintFooter: 
+    TNotifyEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Разработчик может задать несколько опций для 
+  всего компонента <font face="Verdana" size="2">TRvSystem</font>, управляя тем 
+  самым процессом вывода отчета. Для это используется свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TSystemOption 
+    = (soUseFiler, soWaitForOK, soShowStatus, soAllowPrintFromPreview, soPreviewModal);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TSystemOptions 
+    = set of TSystemOption;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property SystemOptions: 
+    TSystemOptions;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Элементы типа <font face="Verdana" size="2"> 
+  TSystemOptions</font> обозначают следующее: </font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">soUseFiler 
+    — при установке этой опции в значение True вывод будет направляться в файл, 
+    заданный свойством SystemFiler, независимо от других настроек компонента;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;SoWaitForOK 
+    — если включить эту опцию, генерация отчета будет задержана до момента, когда 
+    пользователь нажмет кнопку ОК в диалоге настройки печати компонента (см. рис. 
+    23.4);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;soshowstatus 
+    — эта опция управляет видимостью окна состояния процесса вывода отчета в компоненте;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;soAiiowPrintFromPreview 
+    — будучи включенной, эта опция позволяет печатать отчет из окна предварительного 
+    просмотра;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;soPreviewModal 
+    — при значении True делает окно предварительного просмотра модальным.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

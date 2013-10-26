@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TWebConnection</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TWebConnection</font> предоставляет клиенту соединение на основе транспорта HTTP. Для работы компонента на клиентском компьютере должна быть зарегистрирована библиотека wininet.dll. Обычно это не требует специальных усилий, т. к. этот файл уже имеется в системной папке Windows, если на компьютере установлен Internet Explorer.
+</font ></P>
+<P><font face="Verdana" size="3">
+На компьютере сервера должен быть инсталлирован Internet Information Server версии не ниже 4.0 или Netscape Enterprise версии не ниже 3.6. Перечисленное ПО обеспечивает доступ компонента
+<font face="Verdana" size="2"> TWebConnection</font> к динамической библиотеке HTTPsrvr.dll, которая также должна находиться на сервере.
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, если файл HTTPsrvr.dll расположен в папке Scripts US 4.0 на Web-сервере <B>www.someserver.com, </B>то свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property URL: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+должно содержать следующее значение:
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp; <B>http://someserver.com/scripts/httpsrvr.dll</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+Если URL задан верно и сервер настроен правильно, то в списке свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ServerName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в Инспекторе объектов появляется перечень зарегистрированных серверов
+</font ></P>
+<P><font face="Verdana" size="3">
+Приложений. Имя одного из них должно содержаться
+в свойстве <font face="Verdana" size="2">ServerName</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+После выбора имени сервера в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ServerGUID: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+автоматически появляется GUID сервера. Свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property UserName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Password: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+при необходимости могут содержать имя и пароль пользователя, которые будут использованы при авторизации.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Proxy: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит имя используемого прокси-сервера.
+</font ></P>
+<P><font face="Verdana" size="3">
+В заголовок сообщений HTTP можно поместить имя приложения. Для этого используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Agent: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Соединение открывается и закрывается при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Connected: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Аналогичные операции выполняют методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure Close;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Доступ к интерфейсу <font face="Verdana" size="2">IAppServer</font> предоставляет свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AppServer: Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetServer: IAppServer; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Список доступных соединению серверов приложений возвращает метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetServerList: OleVariant; virtual;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ObjectBroker:   TCustomObjectBroker;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяет использовать экземпляр компонента
+<font face="Verdana" size="2"> TSimpieObjectBroker</font> для получения списка доступных серверов во время выполнения (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы-обработчики событий компонента <font face="Verdana" size="2"> TWebConnection</font> полностью совпадают с методами-обработчиками компонента
+<font face="Verdana" size="2"> TDCOMConnection</font> (см. табл. 20.1).
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

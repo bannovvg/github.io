@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Процесс. 
+  Порождение дочернего процесса</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Объект типа процесс (<font face="Verdana" size="2">process</font>) может быть использован для того, чтобы приостановить выполнение потока в том случае, если он для своего продолжения нуждается в завершении процесса. С практической точки зрения такая проблема встает, когда нужно в рамках вашего приложения исполнить приложение, созданное кем-то другим, или, к примеру, сеанс MS-DOS.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим, как, собственно, один процесс может породить другой. Вместо устаревшей и поддерживаемой только для совместимости функции
+<font face="Verdana" size="2">winExec</font>, перекочевавшей из прежних версий Windows, гораздо правильнее использовать более мощную:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CreateProcess(IpApplicationName: PChar; IpCorranandLine: PChar;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">IpProcessAttributes, IpThreadAttributes: PSecurityAttributes;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">blnheritHandles: BOOL;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">dwCreationFlags: DWORD; IpEnvironment: Pointer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">IpCurrentDirectory: PChar;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> const IpStartupInfo: TStartupInfo;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">var IpProcessInformation: TProcessInformation): BOOL;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Первые два параметра ясны — это имя запускаемого приложения и передаваемые ему в командной строке параметры. Параметр
+<font face="Verdana" size="2"> dwCreationFlags</font> содержит флаги, определяющие способ создания нового процесса и его будущий приоритет. Использованные в приведенном ниже листинге флаги означают:<font face="Verdana" size="2"> CREATE_NEW_CONSOLE</font> —будет
+запущено новое консольное приложение с отдельным окном;
+<font face="Verdana" size="2"> NORMAL_PRIORITY_CLASS</font> — нормальный приоритет.
+</font ></P>
+<P><font face="Verdana" size="3">
+Структура <font face="Verdana" size="2"> TStartupInfo</font> содержит сведения о размере, цвете, положении окна создаваемого приложения. В нижеследующем примере (листинг 29.1) используется поле
+<font face="Verdana" size="2">wshowwindow</font>: установлен флаг
+<font face="Verdana" size="2">SW_SHOWNORMAL</font>, означающий визуализацию окна с нормальным размером.
+</font ></P>
+<P><font face="Verdana" size="3">
+На выходе функции заполняется структура <font face="Verdana" size="2">IpProcessInformation</font>. В ней программисту возвращаются дескрипторы и идентификаторы созданного процесса и его первичного потока. Нам понадобится дескриптор процесса — в нашем примере создается консольное приложение, затем происходит ожидание его завершения. &quot;Просигналит&quot; нам об этом именно объект
+<font face="Verdana" size="2">IpProcessInformation</font>.hProcess.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <b> Листинг 29.1. </b> Порождение 
+  дочернего процесса&nbsp; </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IpStartupInfo: TStartupInfo;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">IpProcessInformation: TProcessInformation;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">FillChar(IpStartupInfo,Sizeof(IpStartupInfo),10);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;IpStartupInfo.cb := Sizeof(IpStartupInfo};&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> IpStartupInfo.dwFlags := STARTFJJSESHOWWINDOW; IpStartupInfo.wShowWindow :=
+SW_SHOWNORMAL;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if not CreateProcess(nil,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PChar('ping localhost'),</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+nil,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+nil,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+false,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; nil,&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">nil,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IpStartupInfo, IpProcessInformation) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage(SysErrorMessage(GetLastError; )&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> else&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+WaitForSingleObject</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(IpProcessInformation.hProcess, 10000); CloseHandle(IpProcessInformation.hProcess);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

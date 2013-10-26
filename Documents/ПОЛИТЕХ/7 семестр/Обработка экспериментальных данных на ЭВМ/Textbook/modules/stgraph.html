@@ -1,0 +1,1633 @@
+<html>
+
+<head>
+<title>Графические методы анализа данных</title>
+</head>
+
+<body>
+<font SIZE="5" COLOR="AA0000"><b>
+
+<p ALIGN="CENTER">Графические методы анализа данных</b></font></p>
+
+<hr SIZE="1">
+<font SIZE="4" COLOR="AA0000"><b>
+
+<p align="center">Краткий обзор типов графиков</b></font> </p>
+
+<table CELLPADDING="2" width="456">
+  <tr>
+    <td VALIGN="TOP" width="157"><font COLOR="navy"><b>2М графики</b></font><br>
+    <img SRC="../graphics/bar_col.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Bar-Column Plot">Столбцы</a><br>
+    <img SRC="../graphics/bar-dev.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_s.html#Bar Dev Plot">Отклонения</a><br>
+    <img SRC="../graphics/bar-l-y.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_s.html#Bar Left Y Plot">По левой оси Y</a><br>
+    <img SRC="../graphics/bar-r-y.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_s.html#Bar Right Y Plot">По правой оси Y</a><br>
+    <img SRC="../graphics/bar-top.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_s.html#Bar Top Plot">Столбцы сверху</a><br>
+    <img SRC="../graphics/bar-x.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_s.html#Bar X Plot">Столбцы по X</a><br>
+    <img SRC="../graphics/1r_bw.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Box Plots, 2D">Размах</a><br>
+    <img SRC="../graphics/m_p_det.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_n.html#Detrended Probability Plots">Вероятностные с
+    исключ. трендом</a><br>
+    <img SRC="../graphics/m_p_half.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Half-Normal Probability Plots">Полунорм.
+    вероятностные</a><br>
+    <img SRC="../graphics/1h_hh.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Hanging Bars Histogram">Висячие стобцы</a><br>
+    <img SRC="../graphics/1h_re.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Histograms, 2D">Гистограммы</a><br>
+    <img SRC="../graphics/1l_mu.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Line Plots, 2D">Линейные</a><br>
+    <img SRC="../graphics/1h_pc.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Pie Chart">Круговые диаграммы</a><br>
+    <img SRC="../graphics/m_p_nor.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_n.html#Normal Probability Plots">Вероятностные</a><br>
+    <img SRC="../graphics/pp_plot.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_g.html#Probability-Probability Plots">Вероят.-вероятн.</a><br>
+    <img SRC="../graphics/qq_plot.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_g.html#Quantile-Quantile Plots">Квант.-квантиль</a><br>
+    <img SRC="../graphics/1r_reg.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Range Plots - Columns">Диапазоны</a><br>
+    <img SRC="../graphics/1s_re.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">Диаграммы рассеяния</a><br>
+    <img SRC="../graphics/1ss_ar.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Sequential-Stacked Plots">Послед./Налож.</a><br>
+    <img SRC="../graphics/voronoi.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_2m.html#Voronoi Scatterplot">Диагр. Вороного</a><br>
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    <br>
+    <font COLOR="navy"><b>3М XYZ графики</b></font><br>
+    <img SRC="../graphics/g_cont.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_3m.html#Contour Plot">Карты линий уровня</a><br>
+    <img SRC="../graphics/3d-dev.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_d.html#Deviation Plots">Отклонения</a><br>
+    <img SRC="../graphics/13ds_re.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_3m.html#Scatterplot, 3D">Диаграммы рассеяния</a><br>
+    <img SRC="../graphics/3d-space.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Space Plots">Пространств.</a><br>
+    </td>
+    <td VALIGN="TOP" width="154"><img SRC="../graphics/3d-spect.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_s.html#Spectral Plot">Спектральные</a><br>
+    <img SRC="../graphics/3d-trace.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Trace Plots">Трассировочные</a><br>
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    <br>
+    <font COLOR="navy"><b>3М последовательные графики</b></font><br>
+    <img SRC="../graphics/b_3d.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_3m.html#Histograms, 3D Bivariate">Гистограммы двух
+    переменных</a><br>
+    <img SRC="../graphics/13drb.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_3m.html#Box Plots, 3D">Размах</a><br>
+    <img SRC="../graphics/13drb.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_3m.html#Error Bars (3D Range Plots)">Диапазоны</a><br>
+    <img SRC="../graphics/contdisc.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_d.html#Contour-Discrete Raw Data Plot">Дискретные
+    карты линий уровня </a><br>
+    <img SRC="../graphics/g_cont.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_3m.html#Sequential Contour Plot (3D)">Последоват.
+    карты линий уровня</a> <br>
+    <img SRC="../graphics/surface.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_3m.html#Sequential Surface Plot (3D)">Послед.
+    поверхн.</a><br>
+    <img SRC="../graphics/3dspikes.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_3m.html#Spikes (3D)">Всплески</a><br>
+    <img SRC="../graphics/surface.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_g.html#Surface Plot (from Raw Data)">Поверхность по
+    исх. данным</a><br>
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    <br>
+    <font COLOR="navy"><b>4М/Тернарные графики</b></font><br>
+    <img SRC="../graphics/tern_2d.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Ternary Plots, 2D - Scatterplot">Диагр.рассеяния</a><br>
+    <img SRC="../graphics/ternary.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Ternary Plots, 3D">3М тернарные</a><br>
+    <img SRC="../graphics/tern_ca.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Ternary Plots, 3D - Contour-Areas">Карты зон</a><br>
+    <img SRC="../graphics/tern_cl.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Ternary Plots, 3D - Contour-Lines">Карты линий</a><br>
+    <img SRC="../graphics/tern_3d.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Ternary Plots, 3D - Deviation">3М отклонения</a><br>
+    <img SRC="../graphics/tern_3d.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Ternary Plots, 3D - Space">3М пространст.</a><br>
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    <br>
+    <font COLOR="navy"><b>2М категоризованные графики</b></font><br>
+    <img SRC="../graphics/m_p_det.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Categorized Plots, 2D - Detrended Probability Plots">Вероятностные
+    с исключ. трендом</a><br>
+    <img SRC="../graphics/m_p_half.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Categorized Plots, 2D - Half-Normal Probability Plots">Полунормальн.
+    вероятностные</a><br>
+    <img SRC="../graphics/m_p_nor.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Categorized Plots, 2D - Normal Probability Plots">Норм.
+    вероятн.</a><br>
+    <img SRC="../graphics/pp_cat.gif" width="20" height="16" border="0" align="absbottom">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Probability-Probability Plots - Categorized">Вероят.-вероятн.</a><br>
+    <img SRC="../graphics/qq_cat.gif" width="20" height="16" border="0" align="absbottom">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Quantile-Quantile Plots - Categorized">Квант.-квантиль</a><br>
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    </td>
+    <td VALIGN="TOP" width="131"><font COLOR="navy"><b>3М категоризованные
+    графики</b></font><br>
+    <img SRC="../graphics/g_cont.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Categorized Plots, 3D - Contour Plot">Линии
+    уровня</a><br>
+    <img SRC="../graphics/3d-dev.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Categorized Plots, 3D - Deviation Plot">Отклонения</a><br>
+    <img SRC="../graphics/3d-scatt.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Categorized Plots, 3D - Scatterplot">Диагр.
+    рассеян.</a><br>
+    <img SRC="../graphics/3d-space.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Categorized Plots, 3D - Space Plot">Пространств.</a><br>
+    <img SRC="../graphics/3d-spect.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Categorized Plots, 3D - Spectral Plot">Спектральн.</a><br>
+    <img SRC="../graphics/surface.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_k.html#Categorized Plots, 3D - Surface Plot">Поверхности</a><br>
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    <br>
+    <font COLOR="navy"><b>Тернарные категоризованные графики </b></font><br>
+    <img SRC="../graphics/tern_ca.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Categorized Contour-Areas (Ternary graph)">Тернарные
+    карты зон </a><br>
+    <img SRC="../graphics/tern_cl.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Categorized Contour-Lines (Ternary graph)">Тренарные
+    карты линий </a><br>
+    <img SRC="../graphics/tern_3d.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_t.html#Ternary Plots, 3D - Categorized Scatterplot">Тернарные
+    диагр. рассеяния </a><br>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    <br>
+    <font COLOR="navy"><b>n-мерные пиктографики</b></font><br>
+    <img SRC="../graphics/chernoff.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Icon Plots - Chernoff Faces">Лица Чернова</a><br>
+    <img SRC="../graphics/i_column.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Icon Plots - Columns">Столбцы</a><br>
+    <img SRC="../graphics/i_lines.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Icon Plots - Lines">Линии</a><br>
+    <img SRC="../graphics/i_pies.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Icon Plots - Pies">Круг. диагр.</a><br>
+    <img SRC="../graphics/i_poly.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Icon Plots - Polygons">Многоугольн.</a><br>
+    <img SRC="../graphics/i_prof.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Icon Plots - Profiles">Профили</a><br>
+    <img SRC="../graphics/i_star.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Icon Plots - Stars">Звезды</a><br>
+    <img SRC="../graphics/i_sunray.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_p.html#Icon Plots - Sun Rays">Лучи</a><br>
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    <br>
+    <font COLOR="navy"><b>Матричные графики</b></font><br>
+    <img SRC="../graphics/sq_col.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_m.html#Matrix Plots - Columns">Столбчатые
+    диаграммы</a><br>
+    <img SRC="../graphics/sq_line.gif" border="0" align="absbottom" WIDTH="20" HEIGHT="16">&nbsp;&nbsp;<a HREF="../glossary/gloss_m.html#Matrix Plots - Lines">Линейные графики</a><br>
+    <img SRC="../graphics/rec_scat.gif" width="20" height="16" border="0" align="absbottom">&nbsp;&nbsp;<a HREF="../glossary/gloss_m.html#Matrix Plots - Scatterplot">Диаграммы
+    рассеяния</a><br>
+    </td>
+  </tr>
+</table>
+
+<hr SIZE="1">
+
+<p><a NAME="index"></a></p>
+<font SIZE="4" COLOR="AA0000"><b>
+
+<p align="center">Типичные методы визуализации</b></font> </p>
+
+<ul>
+  <li><a HREF="stgraph.html#categorized">Категоризованные графики</a> <ul>
+      <li><a HREF="stgraph.html#categorized1">Что такое категоризованные
+        графики?</a> </li>
+      <li><a HREF="stgraph.html#categorized2">Методы категоризации</a> </li>
+      <li><a HREF="stgraph.html#categorized3">Гистограммы</a> </li>
+      <li><a HREF="stgraph.html#categorized4">Диаграммы рассеяния</a> </li>
+      <li><a HREF="stgraph.html#categorized5">Вероятностные графики</a> </li>
+      <li><a HREF="stgraph.html#categorized6">Графики квантиль-квантиль</a>
+      </li>
+      <li><a HREF="stgraph.html#categorized7">Графики
+        вероятность-вероятность</a> </li>
+      <li><a HREF="stgraph.html#categorized8">Линейные графики</a> </li>
+      <li><a HREF="stgraph.html#categorized9">Диаграммы размаха</a> </li>
+      <li><a HREF="stgraph.html#categorized10">Круговые диаграммы</a> </li>
+      <li><a HREF="stgraph.html#categorized11">Графики пропущенных
+        значений и диапазонов</a> </li>
+      <li><a HREF="stgraph.html#categorized12">3М графики</a> </li>
+      <li><a HREF="stgraph.html#categorized13">Тернарные графики</a> </li>
+    </ul>
+  </li>
+  <li><a HREF="stgraph.html#brushing">Закрашивание</a> </li>
+  <li><a HREF="stgraph.html#smoothing">Сглаживание двумерных
+    распределений</a> </li>
+  <li><a HREF="stgraph.html#layered">Послойное сжатие</a> </li>
+  <li><a HREF="stgraph.html#projections">Проекции&nbsp;трехмерных
+    наборов данных</a> </li>
+  <li><a HREF="stgraph.html#icon_plots">Пиктографики</a> <ul>
+      <li><a HREF="stgraph.html#icon1">Анализ пиктографиков</a> </li>
+      <li><a HREF="stgraph.html#icon2">Систематизация пиктографиков</a>
+      </li>
+      <li><a HREF="stgraph.html#icon3">Стандартизация значений</a> </li>
+      <li><a HREF="stgraph.html#icon4">Применения</a> </li>
+      <li><a HREF="stgraph.html#icon5">Близкие способы графического
+        представления</a> </li>
+      <li><a HREF="stgraph.html#icon6">Типы графиков</a> </li>
+      <li><a HREF="stgraph.html#icon7">Маркировка пиктограмм</a> </li>
+    </ul>
+  </li>
+  <li><a HREF="stgraph.html#reduction">Выборка данных</a> </li>
+  <li><a HREF="stgraph.html#rotation">Вращение (в трехмерном
+    пространстве)</a> </li>
+</ul>
+
+<hr SIZE="1">
+
+<p><a NAME="categorized"></a> <font size="5" color="navy">Категоризованные
+графики</font></p>
+
+<p>Одним из наиболее мощных аналитических методов
+исследования является разделение
+(&quot;разбиение&quot;) данных на группы для сравнения
+структуры получившихся подмножеств. Эти методы
+широко применяются как в&nbsp; <a href="stdatmin.html#eda">разведочном
+анализе данных</a>, так и при проверке гипотез и
+известны под разными названиями (<i>классификация</i>,
+<i>группировка</i>, <i>категоризация</i>, <i>разбиение,
+расслоение</i> и пр.). Например, взаимосвязь между
+возрастом и риском инфаркта может отличаться для
+мужчин и женщин (для мужчин эта зависимость
+сильнее). Или например, зависимость между приемом
+лекарств и снижением уровня холестерина может
+наблюдаться только для женщин с пониженным
+давлением и в возрасте 30-40 лет. &nbsp;
+Производительность или&nbsp; <a HREF="../glossary/gloss_2m.html#Histograms, 2D">гистограммы</a>
+мощности могут различаться для временных
+промежутков, когда управление осуществляется
+разными операторами. Разным экспериментальным
+группам также могут &nbsp; соответствовать разные
+наклоны линий регрессии.</p>
+
+<p>Для количественного описания различий между
+группами наблюдений разработаны многочисленные
+вычислительные методы, основанные на
+группировке данных (например,&nbsp; <a HREF="stanman.html">дисперсионный
+анализ</a>). Однако графические средства (такие как
+рассматриваемые в этом разделе <a HREF="../glossary/gloss_k.html#Categorized Graphs"><i>категоризованные
+графики</i></a>) дают особые преимущества и
+позволяют выявить закономерности, которые
+трудно поддаются количественному описанию и
+которые весьма сложно обнаружить с помощью
+вычислительных процедур (например, сложные
+взаимосвязи, исключения или аномалии). В этих
+случаях графические методы предоставляют
+уникальные возможности многомерного
+аналитического исследования&nbsp; или &quot;<a HREF="stdatmin.html#mining">добычи</a>&quot; данных.</p>
+
+<p><a NAME="categorized1"></a> <font size="4" color="navy">Что такое
+категоризованные графики</font></p>
+
+<p>Термин &quot;категоризованные графики&quot; впервые
+был использован в программе <i>STATISTICA</i> компании
+StatSoft в 1990 году (кроме того, Becker, Cleveland и Clark из Bell Labs
+называют их&nbsp; <i>графиками на решетке</i>). Эти
+графики представляют собой наборы двумерных,
+трехмерных, тернарных или n-мерных графиков
+(таких как <a HREF="../glossary/gloss_2m.html#Histograms, 2D">гистограммы</a>,
+<a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">диаграммы рассеяния</a>,
+<a HREF="../glossary/gloss_2m.html#Line Plots, 2D">линейные графики</a>, <a HREF="../glossary/gloss_k.html#Categorized Plots, 3D - Surface Plot">поверхности</a>,
+<a HREF="../glossary/gloss_t.html#Ternary Plots, 2D - Scatterplot">тернарные
+диаграммы рассеяния</a> и пр.), по одному графику
+для каждой выбранной <i>категории</i>
+(подмножества) наблюдений, например,
+опрашиваемых из Нью-Йорка, Чикаго или Далласа.
+Эти &quot;входящие&quot; графики располагаются
+последовательно в одном графическом окне,
+позволяя сравнивать структуру данных для каждой
+из указанных подгрупп (например, городов). </p>
+
+<p>Для выбора подгрупп можно использовать
+множество методов, самый простой из них - это
+введение категориальной переменной (например,
+переменной <i>City</i> с значениями<i> New York</i>, <i>Chicago</i>
+и <i>Dallas</i>). На следующем графике показаны&nbsp; <a HREF="../glossary/gloss_2m.html#Histograms, 2D">гистограммы</a>
+переменной, представляющей данные о самооценке
+стресса жителями каждого из трех городов. </p>
+
+<p><img BORDER="0" SRC="../popups/popup166.gif" alt="Категоризованная гистограмма" WIDTH="300" HEIGHT="212"></p>
+
+<p>На основе этих данных можно сделать вывод о том,
+что жители Далласа не очень подвержены стрессам,
+в то время как распределения уровня стресса в
+Нью-Йорке и Чикаго довольно похожи. </p>
+
+<p>Некоторые программы (например, система&nbsp; <i>STATISTICA</i>)
+поддерживают двухвходовую или многомерную
+категоризацию, где для задания подгрупп
+используется не один (например, <i>City</i>), а два или
+более критериев (например, <i>City</i> и <i>Time</i> ).
+Двухвходовые категоризованные графики можно
+рассматривать как &quot;таблицы графиков&quot;, где
+каждый входящий график находится на
+&quot;пересечении&quot; определенных значений первой
+(например, <i>City</i>) и второй (например, <i>Time</i>)&nbsp; <a HREF="../glossary/gloss_g.html#Grouping Variable">группирующих
+переменных</a>. </p>
+
+<p><img BORDER="0" SRC="../popups/popup167.gif" alt="Категоризация гистограмм по двум переменным" WIDTH="300" HEIGHT="212"></p>
+
+<p>Добавление второго фактора показывает, что
+картины стрессовых нагрузок в Нью-Йорке и Чикаго
+в действительности сильно различаются, если
+учитывается <i>время </i>опроса, в то время как
+фактор <i>времени </i>практически ничего не меняет
+в Далласе. </p>
+<b>
+
+<p>Категоризованные и матричные графики.</b> <a HREF="../glossary/gloss_m.html#Matrix Plots">Матричные графики</a>&nbsp;
+также состоят из нескольких графиков; однако
+здесь каждый из них основывается (или может
+основываться) на одном и том же множестве
+наблюдений, и графики строятся для всех
+комбинаций переменных из одного или двух
+списков. Для категоризованных графиков
+требуется такой же выбор переменных, как и для
+некатегоризованных графиков соответствующего
+типа (например, две переменных для диаграммы
+рассеяния). В то же время для категоризованных
+графиков необходимо указать по крайней мере одну
+<a HREF="../glossary/gloss_g.html#Grouping Variable"><i>группирующую
+переменную</i></a> (или способ разбиения наблюдений
+на категории), где содержалась бы информация о
+принадлежности каждого наблюдения к
+определенной подгруппе (например, <i>Chicago</i>, <i>Dallas</i>).
+<a HREF="../glossary/gloss_g.html#Grouping Variable"><i>Группирующая
+переменная</i></a> не будет непосредственно
+изображена на графике (т.е. не будет построена),
+однако она будет служить критерием для
+разделения всех анализируемых наблюдений на
+отдельные подгруппы. Как показано выше, для
+каждой группы (категории), определяемой
+группирующей переменной, будет построен один
+график. </p>
+
+<p><b>Общие и независимые шкалы.</b> Каждый
+элементарный график, входящий в состав
+категоризованного графика, может быть
+масштабирован в соответствии со своим
+собственным диапазоном значений (<i>независимые</i>
+шкалы). </p>
+
+<p><img SRC="../popups/popup168.gif" alt="Независимый масштаб категоризованных графиков" WIDTH="303" HEIGHT="215"></p>
+
+<p>Или все графики могут иметь <i>общую </i>шкалу,
+достаточно широкую, чтобы охватить весь диапазон
+значений. </p>
+
+<p><img SRC="../popups/popup169.gif" alt="Общий масштаб категоризованных графиков" WIDTH="306" HEIGHT="216"></p>
+
+<p><i>Общий </i>масштаб позволяет сравнивать
+диапазоны и распределения значений разных
+категорий. Однако, если эти диапазоны сильно
+различаются (что приводит к очень большой общей
+шкале), то исследование некоторых графиков может
+быть затруднено. Использование <i>независимого </i>масштаба
+может упростить выявление трендов и
+определенных закономерностей внутри категорий,
+но в то же время затруднить сравнение диапазонов
+значений разных подгрупп. </p>
+
+<p><a NAME="categorized2"></a> <font size="4" color="navy">Методы
+категоризации</font></p>
+
+<p>Существует пять основных методов
+категоризации значений, которые будут кратко
+описаны в этом разделе: целые числа, категории,
+границы, коды и сложные подгруппы. Обратите
+внимание, что одни и те же методы категоризации
+можно использовать как для разбиения наблюдений
+по входящим графикам, так и для категоризации
+наблюдений внутри входящих графиков ( например,
+на&nbsp; <a HREF="../glossary/gloss_2m.html#Histograms, 2D">гистограммах</a>
+или <a HREF="../glossary/gloss_2m.html#Box Plots, 2D">диаграммах
+размаха</a>). </p>
+
+<p><b>Целые числа.</b> При использовании этого режима
+для определения категорий будут использованы
+целые значения выбранной <a HREF="../glossary/gloss_g.html#Grouping Variable">группирующей
+переменной</a>, и для всех наблюдений,
+принадлежащих каждой категории (заданной этими
+целыми числами), будет построено по одному
+графику. Если выбранная группирующая переменная
+содержит не целочисленные значения, то программа
+автоматически округлит каждое значение
+выделенной переменной до целого числа.&nbsp; </p>
+
+<p><img SRC="../popups/popup187.gif" alt="Категоризация по целым числам" WIDTH="293" HEIGHT="202"></p>
+
+<p><b>Категории.</b> В этом режиме категоризации
+нужно указать желаемое число категорий.
+Программа разделит весь диапазон значений
+выбранной <a HREF="../glossary/gloss_g.html#Grouping Variable">группирующей
+переменной</a> (от минимального до максимального)
+на указанное число интервалов равной длины. </p>
+
+<p><img SRC="../popups/popup188.gif" alt="Категории группирующей переменной" WIDTH="292" HEIGHT="202"></p>
+
+<p><b>Границы.</b> Метод границ также представляет
+собой интервальную категоризацию, однако в этом
+случае интервалы могут иметь произвольную
+(например, различную) длину, определяемую
+пользователем (например, &quot;меньше -10&quot;,
+&quot;больше или равно -10, но меньше 0&quot;, &quot;больше
+или равно 0, но меньше 10&quot; и &quot;больше или равно
+10&quot;).&nbsp; </p>
+
+<p><img SRC="../popups/popup189.gif" alt="Категоризация по границам" WIDTH="292" HEIGHT="201"></p>
+
+<p><b>Коды.</b> Этот метод следует использовать в том
+случае, если выбранная <a HREF="../glossary/gloss_g.html#Grouping Variable">группирующая
+переменная</a> содержит &quot;<a HREF="../glossary/gloss_k.html#Codes">коды</a>
+&quot; (т.е. особые смысловые значения, такие как <i>Male</i>,
+<i>Female</i>), по которым можно разбить данные на
+категории. </p>
+
+<p><img SRC="../popups/popup190.gif" alt="Категоризация по кодам" WIDTH="292" HEIGHT="207"></p>
+
+<p><b>Сложные подгруппы.</b> Этот метод дает
+возможность пользователю использовать для
+выделения подгрупп более одной переменной.
+Другими словами, категоризация, основанная на
+выделении сложных подгрупп, может представлять
+не распределения конкретных переменных, а
+распределения частот определенных
+&quot;событий&quot; при заданной комбинации значений
+любого числа переменных текущего набора данных.
+Например, можно указать шесть категорий,
+задаваемых комбинациями значений трех
+переменных <i>Gender</i>, <i>Age</i> и <i>Employment</i>. </p>
+
+<p><img SRC="../popups/popup191.gif" alt="Категоризация методом сложных подгрупп" WIDTH="292" HEIGHT="201"></p>
+
+<p><a NAME="categorized3"></a> <font size="4" color="navy">Гистограммы</font></p>
+
+<p><a HREF="../glossary/gloss_2m.html#Histograms, 2D">Гистограммы</a>
+используются для изучения распределений частот
+значений переменных. Такое частотное
+распределение показывает, какие именно
+конкретные значения или диапазоны значений
+исследуемой переменной встречаются наиболее
+часто, насколько различаются эти значения,
+расположено ли большинство наблюдений около&nbsp; <a HREF="../glossary/gloss_s.html#Mean">среднего значения</a>,
+является распределение&nbsp; <a HREF="../glossary/gloss_s.html#Symmetrical Distribution">симметричным</a>
+или <a HREF="../glossary/gloss_a.html#Skewness">асимметричным</a>, <a HREF="../glossary/gloss_m.html#Multimodal Distribution">многомодальным</a>
+(т.е. имеет две или более вершины) или <a HREF="../glossary/gloss_u.html#Unimodal Distribution">одномодальным</a> и
+т.д. <a HREF="../glossary/gloss_2m.html#Histograms, 2D">Гистограммы</a>
+также используются для сравнения наблюдаемых и
+теоретических или ожидаемых распределений. </p>
+
+<p>Категоризованные гистограммы представляют
+собой наборы <a HREF="../glossary/gloss_2m.html#Histograms, 2D">гистограмм</a>,
+соответствующих различным значениям одной или
+нескольких категоризующих переменных или
+наборам логических условий категоризации (см. <a HREF="stgraph.html#categorized2">Методы категоризации</a>). </p>
+
+<p>Частотные распределения могут представлять
+интерес по двум основным причинам. 
+
+<ul>
+  <li>По форме распределения можно судить о природе
+    исследуемой переменной (например, <a HREF="../glossary/gloss_b.html#Bimodal Distribution">бимодальное
+    распределение</a> позволяет предположить, что
+    выборка не является однородной и содержит
+    наблюдения, принадлежащие двум различным
+    множествам, которые в свою очередь нормально
+    распределены). </li>
+  <li>Многие статистики основываются на определенных
+    предположениях о распределениях анализируемых
+    переменных;&nbsp; <a HREF="../glossary/gloss_2m.html#Histograms, 2D">гистограммы</a>
+    позволяют проверить, выполняются ли эти
+    предположения. </li>
+</ul>
+
+<p>Как правило, работа с новым набором данных
+начинается с построения&nbsp; <a HREF="../glossary/gloss_2m.html#Histograms, 2D">гистограмм</a> всех
+переменных. </p>
+<b>
+
+<p>Гистограммы и группировка.</b> Категоризованные
+гистограммы предоставляют такую же информацию о
+данных, как и группировка (например, <a HREF="../glossary/gloss_s.html#Mean">среднее</a>, <a HREF="../glossary/gloss_m.html#Median">медиану</a>, минимум,
+максимум, разброс и т.п.; см. главу <a HREF="stbasic.html">Основные
+статистики и таблицы</a>). Хотя конкретные
+(числовые) значения описательных статистик легко
+увидеть в таблице, в то же время общую структуру и
+глобальные характеристики распределения проще
+изучать на графике. Более того, график дает
+качественную информацию о распределении,
+которую невозможно отразить с помощью
+какого-либо одного параметра. Например, по&nbsp; <a HREF="../glossary/gloss_a.html#Skewness">асимметрии</a>
+распределения значений дохода можно сделать
+вывод о том, что большинство населения имеет
+низкий, а не высокий уровень доходов. Если помимо
+этого провести группировку данных по
+этническому и половому признакам, то можно
+обнаружить, что в некоторых подгруппах эта
+структура распределения станет еще более ярко
+выраженной. Хотя эта информация содержится в
+значении коэффициента <a HREF="../glossary/gloss_a.html#Skewness">асимметрии</a>
+(для каждой подгруппы), но она легче
+воспринимается и запоминается, будучи
+графически представленной&nbsp; на <a HREF="../glossary/gloss_2m.html#Histograms, 2D">гистограмме</a>. Кроме
+того, на гистограмме можно наблюдать некоторые
+&quot;впадины и выпуклости&quot;, которые могут
+свидетельствовать о социальном расслоении в
+исследуемой группе населения или об аномалиях в
+распределении дохода отдельных подгрупп,
+связанных с недавней налоговой реформой. </p>
+<b>
+
+<p>Категоризованные гистограммы и диаграммы
+рассеяния.</b> Полезное применение категоризации
+для непрерывных переменных - это представление
+взаимосвязи трех переменных одновременно. Ниже
+показана диаграмма рассеяния для двух
+переменных Load 1 и Load 2. </p>
+
+<p><img SRC="../popups/popup170.gif" alt="Диаграмма рассеяния" WIDTH="355" HEIGHT="249"></p>
+
+<p>Предположим, к ним нужно добавить третью
+переменную (Output) и исследовать ее распределение
+при различных значения совместного
+распределения переменных Load 1 и Load 2. Для этого
+можно построить следующий график: </p>
+
+<p><img SRC="../popups/popup171.gif" alt="Категоризованные гистограммы" WIDTH="353" HEIGHT="276"></p>
+
+<p>На этом графике обе переменные Load 1 и Load 2
+сгруппированы в 5 интервалов, и для каждой
+комбинации этих интервалов вычислено
+распределение переменной Output. Обратите внимание,
+что внутри &quot;прямоугольника&quot;
+(параллелограмма) находятся наблюдения,
+одинаковые для обоих показанных выше графиков. </p>
+
+<p><a NAME="categorized4"></a> <font size="4" color="navy">Диаграммы
+рассеяния</font></p>
+
+<p>Двумерные <a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">диаграммы
+рассеяния</a> используются для визуализации
+взаимосвязей между двумя переменными X и Y
+(например, весом и ростом). На этих диаграммах
+отдельные точки данных представлены маркерами
+на плоскости, где оси соответствуют переменным.
+Две координаты (X и Y), определяющие положение
+точки, соответствуют значениям переменных. Если
+между переменными существует сильная
+взаимосвязь, то точки на графике образуют
+упорядоченную структуру (например, прямую линию
+или характерную кривую). Если переменные не
+взаимосвязаны, то точки образуют &quot;облако&quot;. </p>
+
+<p>Можно построить также категоризованные <a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">диаграммы рассеяния</a>,
+сгруппированные по значениям одной или
+нескольких переменных, а с помощью метода
+сложных подгрупп (см. <a HREF="stgraph.html#categorized2">Методы
+категоризации</a>) - диаграммы рассеяния,
+категоризованные по заданным логическим
+условиям выбора подгрупп наблюдений. </p>
+
+<p>Категоризованные <a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">диаграммы
+рассеяния</a>представляют собой мощный <a HREF="stdatmin.html#eda">исследовательский</a> и
+аналитический метод для изучения взаимосвязей
+между двумя и более переменными среди различных
+подгрупп. </p>
+<b>
+
+<p>Однородность двумерных распределений (форма
+взаимосвязей).</b><a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">Диаграммы
+рассеяния</a> обычно используются для выявления
+природы взаимосвязи двух переменных (например,
+кровяного давления и уровня холестерина),
+поскольку они предоставляют гораздо больше
+информации, чем коэффициент <a HREF="../glossary/gloss_k.html#Correlation">корреляции</a>. </p>
+
+<p>Например, неоднородность выборки, по которой
+рассчитываются корреляции, может привести к
+искажению значений коэффициента корреляции.
+Предположим, коэффициент корреляции
+рассчитывается по данным, полученным в двух
+экспериментальных группах, но этот факт при
+вычислениях игнорируется. Пусть эксперимент в
+одной из подгрупп привел к увеличению значений
+обеих переменных, и на диаграмме рассеяния
+данные из каждой группы образуют отдельные
+&quot;облака&quot; (как показано на картинке). </p>
+
+<p><img SRC="../popups/popup172.gif" alt="Диаграмма рассеяния" WIDTH="300" HEIGHT="195"></p>
+
+<p>В этом примере большое значение коэффициента
+корреляции целиком обусловлено распределением
+по группам и не отражает &quot;истинную&quot;
+взаимосвязь между двумя переменными, которая
+практически близка к 0 (это хорошо видно, если
+рассматривать каждую группу отдельно). </p>
+
+<p>Если вы предполагаете, что подобная структура
+присутствует и в ваших данных, и знаете, каким
+образом выделить &quot;подгруппы&quot; наблюдений, то
+имеет смысл построить категоризованную
+диаграмму рассеяния. </p>
+
+<p><img SRC="../popups/popup173.gif" alt="Категоризованная диаграмма рассеяния" WIDTH="300" HEIGHT="198"></p>
+
+<p>Такой график поможет вам прояснить структуру
+взаимосвязей между переменными X и Y внутри
+каждой подгруппы (после соответствующего
+разбиения наблюдений). </p>
+<b>
+
+<p>Нелинейные зависимости.</b> С помощью <a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">диаграмм рассеяния</a>
+можно исследовать и нелинейные взаимосвязи
+между переменными. При этом не существует
+каких-либо &quot;автоматических&quot; или простых
+способов оценки нелинейности. Стандартный
+коэффициент корреляции Пирсона&nbsp; r позволяет
+оценить только линейность связи, а некоторые
+непараметрические корреляции, например,
+Спирмена R, дают возможность оценить
+нелинейность, но только для монотонных
+зависимостей. На <a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">диаграммах
+рассеяния</a> можно изучить структуру
+взаимосвязей, чтобы затем с помощью
+преобразования привести данные к линейному виду
+или выбрать подходящую нелинейную подгонку. </p>
+
+<p>Дополнительную информацию можно найти в
+разделах <a HREF="stbasic.html">Основные статистики</a>, <a HREF="stnonpar.html">Непараметрическая статистика и
+распределения</a>, <a HREF="stmulreg.html">Множественная
+регрессия</a> и <a HREF="stnonlin.html">Нелинейное
+оценивание</a>. </p>
+
+<p><a NAME="categorized5"></a> <font size="4" color="navy">Вероятностные
+графики</font></p>
+
+<p>Существует три типа категоризованных
+вероятностных графиков:&nbsp; <a HREF="../glossary/gloss_k.html#Categorized Plots, 2D - Normal Probability Plots">нормальные</a>,
+<a HREF="../glossary/gloss_p.html#Half-Normal Probability Plots - Categorized">полунормальные</a>
+и <a HREF="../glossary/gloss_k.html#Categorized Plots, 2D - Detrended Probability Plots">с
+исключенным трендом</a>. Нормальные вероятностные
+графики - это быстрый способ визуальной проверки
+степени соответствия данных нормальному
+распределению. </p>
+
+<p>В свою очередь категоризованные вероятностные
+графики дают возможность исследовать близость к
+нормальному распределению различных подгрупп
+данных . </p>
+
+<p><img SRC="../popups/popup174.gif" alt="Нормальный вероятностный график" WIDTH="300" HEIGHT="201"></p>
+
+<p>Категоризованные нормальные вероятностные
+графики представляют собой эффективный
+инструмент для исследования однородности группы
+наблюдений с точки зрения соответствия
+нормальному распределению. </p>
+
+<p><img SRC="../popups/popup175.gif" WIDTH="300" HEIGHT="193" alt="Категоризованный вероятностный график"></p>
+
+<p><a NAME="categorized6"></a> <font size="4" color="navy">Графики
+квантиль-квантиль</font></p>
+
+<p>Категоризованные <a HREF="../glossary/gloss_g.html#Quantile-Quantile Plots">графики
+квантиль-квантиль (или К-К)</a> используются для
+поиска в определенном семействе распределений
+того распределения, которое наилучшим образом
+описывает имеющиеся данные. </p>
+
+<p><img SRC="../popups/popup176.gif" alt="Графики квантиль-квантиль" WIDTH="300" HEIGHT="212"></p>
+
+<p>В случае категоризованных графиков К-К
+строится набор графиков квантиль-квантиль, по
+одному для каждого значения категориальных
+переменных (X или X и Y) или для заданных условий
+выбора сложных подгрупп (см. <a HREF="stgraph.html#categorized2">Методы
+категоризации</a>). Для графиков К-К используются
+следующие семейства распределений:&nbsp; <a HREF="../glossary/gloss_ae.html#Exponential Distribution">экспоненциальное</a>,
+<a HREF="../glossary/gloss_ae.html#Extreme Value Distribution">экстремальное</a>,
+<a HREF="../glossary/gloss_n.html#Normal Distribution">нормальное</a>, <a HREF="../glossary/gloss_r.html#Rayleigh Distribution">Релея</a>, <a HREF="../glossary/gloss_b.html#Beta Distribution">бета-</a>, <a HREF="../glossary/gloss_g.html#Gamma Distribution">гамма-</a>, <a HREF="../glossary/gloss_l.html#Log-normal Distribution">логнормальное</a> и <a HREF="../glossary/gloss_r.html#Weibull Distribution">Вейбулла</a>. </p>
+
+<p><a NAME="categorized7"></a><font size="4" color="navy">Графики
+вероятность-вероятность</font></p>
+
+<p>Категоризованные <a HREF="../glossary/gloss_g.html#Probability-Probability Plots">графики
+вероятность-вероятность (или В-В)</a> &nbsp;
+используются для проверки соответствия
+конкретного теоретического распределения
+имеющимся исходным данным. На этих графиках для
+каждого значения категориальных переменных (X
+или X и Y) или для заданных условий выбора сложных
+подгрупп (см. <a HREF="stgraph.html#categorized2">Методы
+категоризации</a>) создается по одному графику
+вероятность-вероятность. </p>
+
+<p><img SRC="../popups/popup177.gif" alt="Графики вероятность-вероятность" WIDTH="300" HEIGHT="212"></p>
+
+<p>На графиках В-В строится наблюдаемая функция
+распределения (доля непропущенных значений <img SRC="../graphics/lte.gif" WIDTH="33" HEIGHT="29">x) в зависимости от
+теоретической функции распределения, чтобы
+оценить соответствие этой теоретической функции
+наблюдаемым данным. Если все точки этого графика
+располагаются на диагонали (содержащей точку 0 и
+имеющей наклон 1), то можно заключить, что
+наблюдаемое распределение хорошо
+аппроксимируется данной теоретической функцией.
+</p>
+
+<p>Если не все точки данных располагаются на
+диагональной линии, то на таком графике можно
+визуально выделить группы наблюдений,
+соответствующие и не соответствующие искомому
+распределению (если, к примеру, точки образуют
+кривую S-образной формы вокруг диагональной
+линии, то к ним можно применить определенное
+преобразование для приведения к нужной форме
+распределения). </p>
+
+<p><a NAME="categorized8"></a> <font size="4" color="navy">Линейные графики</font></p>
+
+<p>На&nbsp; <a HREF="../glossary/gloss_2m.html#Line Plots, 2D">линейных
+графиках</a> &nbsp; отдельные точки данных
+соединяются линиями. Это простой способ
+визуального представления последовательности
+значений (например, цены на фондовом рынке за
+несколько дней торгов). Категоризованные
+линейные графики строятся в том случае, если
+необходимо разбить данные на несколько групп
+(категоризовать) с помощью&nbsp; <a HREF="../glossary/gloss_g.html#Grouping Variable">группирующей
+переменной</a> &nbsp; (например, цены при закрытии
+рынка по понедельникам, вторникам и т.д.) или с
+помощью логических условий, составленных по
+нескольким переменным (например, цены при
+закрытии рынка в те дни, когда две другие акции и
+индекс Доу Джонса выросли по сравнению с другими
+ценами закрытия; см.&nbsp; <a HREF="stgraph.html#categorized2">Методы
+категоризации</a>). </p>
+
+<p><img SRC="../popups/popup178.gif" alt="Линейный график" WIDTH="300" HEIGHT="212"></p>
+
+<p><a NAME="categorized9"></a> <font SIZE="4" COLOR="#000080">Диаграммы
+размаха</p>
+</font>
+
+<p>На&nbsp; <a HREF="../glossary/gloss_2m.html#Box Plots, 2D">диаграммах
+размаха</a>&nbsp; (этот термин был впервые
+использован Тьюки в 1970 году) представлены
+диапазоны значений выбранной переменной (или
+переменных) для отдельных групп наблюдений. Для
+выделения этих групп используются от одной до
+трех категориальных (группирующих) переменных
+или набор логических условий выбора подгрупп. </p>
+
+<p>Для каждой группы наблюдений вычисляется
+центральная тенденция&nbsp; (<a HREF="../glossary/gloss_m.html#Median">медиана</a>
+или&nbsp; <a HREF="../glossary/gloss_s.html#Mean">среднее</a>), а также
+размах или изменчивость (<a HREF="../glossary/gloss_k.html#Quartiles">квартили</a>,
+<a HREF="../glossary/gloss_s.html#Standard Error">стандартные ошибки</a>
+или <a HREF="../glossary/gloss_s.html#Standard Deviation">стандартные
+отклонения</a>). Выбранные параметры отображаются
+на графике одним из пяти способов (<a HREF="../glossary/gloss_2m.html#Box Plots, 2D - Box Whiskers">Прямоугольники-Отрезки</a>,
+<a HREF="../glossary/gloss_2m.html#Box Plots, 2D - Whiskers">Отрезки</a>, <a HREF="../glossary/gloss_2m.html#Box Plots, 2D - Boxes">Прямоугольники</a>, <a HREF="../glossary/gloss_s.html#Columns (Box Plot)">Столбцы</a> или
+Верхние-нижние засечки). На этом графике можно
+показать и выбросы (см. разделы о&nbsp; <a HREF="../glossary/gloss_v.html#Outliers (in Box Plots)">выбросах</a> &nbsp; и <a HREF="../glossary/gloss_ae.html#Extreme Values">крайних точках</a>). </p>
+
+<p>На следующем графике, например, выбор факторов
+можно было бы считать вполне удачным, если бы не
+&quot;досадное&quot; несоответствие, на которое
+указывают выделенные на рисунке выбросы (в
+данном случае это значения, попадающие за
+пределы 1,5 квартильных размахов): </p>
+
+<p><img SRC="../popups/popup179.gif" alt="Категоризованная диаграмма размаха" WIDTH="305" HEIGHT="202"></p>
+
+<p>А на следующем рисунке не показаны ни выбросы,
+ни крайние точки. </p>
+
+<p><img SRC="../popups/popup180.gif" alt="Диаграмма размаха без выбросов" WIDTH="300" HEIGHT="212"></p>
+
+<p>Можно выделить два основных направления
+использования&nbsp; <a HREF="../glossary/gloss_2m.html#Box Plots, 2D">диаграмм
+размаха</a>: (a) отображение диапазонов значений
+отдельных элементов, наблюдений или выборок
+(например, типичные минимаксные графики цен на
+акции или товары или графики агрегированных
+данных с диапазонами), (б) отображение изменения
+значений в отдельных группах или выборках
+(например, когда точкой внутри прямоугольника
+представлено&nbsp; <a HREF="../glossary/gloss_s.html#Mean">среднее</a>
+значение для каждой выборки, сам прямоугольник
+соответствует значениям&nbsp; <a HREF="../glossary/gloss_s.html#Standard Error">стандартной ошибки</a>, а
+меньший прямоугольник или пара &quot;отрезков&quot;
+обозначает&nbsp; <a HREF="../glossary/gloss_s.html#Standard Deviation">стандартное
+отклонение</a> от <a HREF="../glossary/gloss_s.html#Mean">среднего</a>).
+</p>
+
+<p>С помощью <a HREF="../glossary/gloss_2m.html#Box Plots, 2D">диаграмм
+размаха</a>,&nbsp; на которых представлены
+характеристики изменчивости, можно быстро
+оценить и &quot;интуитивно представить&quot; силу
+связи между группирующей и зависимой переменной.
+Предположив, что зависимая переменная нормально
+распределена, и зная долю наблюдений, попадающих,
+к примеру, в интервал &nbsp; ±1 или ±2 <a HREF="../glossary/gloss_s.html#Standard Deviation">стандартных
+отклонения</a>&nbsp; от <a HREF="../glossary/gloss_s.html#Mean">среднего</a>
+(см. <a HREF="../esc.html">Элементарные понятия статистики</a>),
+можно сделать, например,&nbsp; вывод о том, что&nbsp; 95%
+наблюдений из экспериментальной группы 1
+попадают в другой диапазон значений, нежели&nbsp; 95%
+наблюдений из группы 2. </p>
+
+<p>На этих графиках можно изобразить и так
+называемые <a HREF="../glossary/gloss_u.html#Trimmed Means">усеченные
+средние</a> &nbsp; (этот термин был впервые
+использован Тьюки в 1962 году), которые вычисляются
+после исключения заданного пользователем
+процента наблюдений с концов (хвостов)
+распределения. </p>
+
+<p><a NAME="categorized10"></a> <font SIZE="4" COLOR="#000080">Круговые
+диаграммы</p>
+</font>
+
+<p>Одним из наиболее широко используемых типов
+графического представления данных являются&nbsp; <a HREF="../glossary/gloss_2m.html#Pie Chart">круговые диаграммы</a>, на
+которых показаны пропорции или сами значения
+переменных. Категоризованные графики этого типа
+состоят из нескольких круговых диаграмм, где
+данные разделены по группам с помощью одной или
+нескольких&nbsp; <a HREF="../glossary/gloss_g.html#Grouping Variable">группирующих
+переменных</a>&nbsp; (например, gender) или
+категоризованы согласно логическим условиям
+выбора подгрупп (см. <a HREF="stgraph.html#categorized2">Методы
+категоризации</a>). </p>
+
+<p>В дальнейшем, говоря о категоризации этих
+графиков, мы будем иметь ввиду&nbsp; <a HREF="../glossary/gloss_k.html#Pie Chart - Counts">круговые диаграммы
+частот</a> (в противоположность&nbsp; <a HREF="../glossary/gloss_k.html#Pie Chart - Values">круговым диаграммам
+значений</a>). Эти типы графиков, называемые также
+частотными круговыми диаграммами, представляют
+данные аналогично <a HREF="../glossary/gloss_2m.html#Histograms, 2D">гистограммам</a>.
+Все значения выбранной переменной
+категоризуются с помощью заданного метода
+категоризации, а затем относительные значения
+частот отображаются в виде сегментов круговой
+диаграммы пропорционального размера. Таким
+образом, эти графики являются альтернативным
+представлением гистограммы частот&nbsp; (см. раздел
+о <a HREF="stgraph.html#categorized3">категоризованных
+гистограммах</a>). </p>
+
+<p><img SRC="../popups/popup181.gif" alt="Круговые диаграммы" WIDTH="300" HEIGHT="212"></p>
+<b>
+
+<p>Диаграммы рассеяния круговых диаграмм.</b> Еще
+одно очень полезное применение категоризованных
+круговых диаграмм - это представление
+относительных частот значений какой-либо
+переменной в различных &quot;местах&quot; совместного
+распределения двух других переменных. Например: </p>
+
+<p><img SRC="../popups/popup182.gif" WIDTH="289" HEIGHT="217" alt="Диаграммы рассеяния круговых диаграмм"></p>
+
+<p>Обратите внимание, что круговые диаграммы
+изображены только в тех &quot;местах&quot;, где
+имеются данные.&nbsp; Показанный выше график
+напоминает диаграмму рассеяния (переменных&nbsp; L1
+и L2), где маркерами точек являются круговые
+диаграммы. Однако помимо обычной информации,
+содержащейся в <a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">диаграмме
+рассеяния</a>, здесь в каждой точке дополнительно
+показано относительное распределение третьей
+переменной (а именно, доля значений Low, Medium и High
+Quality). </p>
+
+<p><a NAME="categorized11"></a> <font SIZE="4" COLOR="#000080">Графики
+пропущенных значений и данных вне диапазона</p>
+</font>
+
+<p>На этих графиках можно наглядно представить
+структуру распределения точек данных,
+содержащих пропущенные значения или находящихся
+&quot;вне диапазонов&quot;, заданных пользователем.
+При этом строится по одной двумерной диаграмме
+для каждой группы наблюдений, выделенной с
+помощью <a HREF="../glossary/gloss_g.html#Grouping Variable">группирующих
+переменных</a> или с помощью условий выбора
+сложных подгрупп (см. <a HREF="stgraph.html#categorized2">Методы
+категоризации</a>).&nbsp;&nbsp; </p>
+
+<p><img SRC="../popups/popup183.gif" WIDTH="317" HEIGHT="228" alt="Графики пропущенных значений"></p>
+
+<p>Эти типы графиков используются в&nbsp; <a HREF="stdatmin.html#eda">разведочном анализе данных</a>,
+чтобы определить, является ли случайным
+распределение точек с пропущенными значениями, а
+также для оценки их&nbsp; диапазона. </p>
+
+<p><a NAME="categorized12"></a> <font SIZE="4" COLOR="#000080">Трехмерные (3М)
+графики</p>
+</font>
+
+<p><a HREF="../glossary/gloss_3m.html#Scatterplot, 3D">Трехмерные
+диаграммы рассеяния</a> (<a HREF="../glossary/gloss_p.html#Space Plots">пространственные</a>,
+<a HREF="../glossary/gloss_s.html#Spectral Plot">спектральные</a>,&nbsp; <a HREF="../glossary/gloss_t.html#Trace Plots">трассировочные</a> и <a HREF="../glossary/gloss_d.html#Deviation Plots">диаграммы отклонений</a>),
+<a HREF="../glossary/gloss_3m.html#Contour Plot">карты линий уровня</a> и
+<a HREF="../glossary/gloss_k.html#Categorized Plots, 3D - Surface Plot">поверхности</a>
+&nbsp; также можно построить для подгрупп
+наблюдений, заданных с помощью выбранной
+категориальной переменной или логических
+условий выбора (см. <a HREF="stgraph.html#categorized2">Методы
+категоризации</a>). Основная задача этих графиков -
+упростить сравнение взаимосвязей между тремя и
+более переменными для различных групп или
+категорий наблюдений. </p>
+
+<p><img SRC="../popups/popup184.gif" alt="Трехмерный график" WIDTH="300" HEIGHT="212"></p>
+<b>
+
+<p>Применения.</b> Трехмерные графики в
+координатах&nbsp; XYZ отображают взаимосвязи между
+тремя переменными. С помощью различных способов
+категоризации можно исследовать эти зависимости
+при различных условиях (т.е. в разных группах). </p>
+
+<p>Изучая, например, показанный ниже
+категоризованный график поверхности, можно
+сделать вывод о том, что величина допуска прибора
+не влияет на измерения (переменные Depend1, Depend2 и
+Height), кроме случая, когда она&nbsp; <img SRC="../graphics/lte.gif" WIDTH="34" HEIGHT="33">3. </p>
+
+<p><img SRC="../popups/popup132.gif" WIDTH="292" HEIGHT="241" alt="Категоризованный график поверхности"></p>
+
+<p>Этот вывод становится еще более очевидным, если
+использовать вместо поверхности карту линий
+уровня. </p>
+
+<p><img SRC="../popups/popup133.gif" alt="Категоризованная карта линий уровня" WIDTH="248" HEIGHT="236"></p>
+
+<p><a NAME="categorized13"></a> <font SIZE="4" COLOR="#000080">Тернарные
+графики</p>
+</font>
+
+<p>Категоризованные <a HREF="../glossary/gloss_t.html#Ternary Plots, 3D">тернарные</a>
+&nbsp; графики используются для исследования
+взаимосвязей между тремя и более переменными,
+три из которых представляют собой компоненты
+смеси (т.е. для каждого наблюдения значения их
+суммы являются постоянной величиной), при этом
+отдельный график строится для каждого уровня&nbsp; <a HREF="../glossary/gloss_g.html#Grouping Variable">группирующей
+переменной</a>. </p>
+
+<p><img SRC="../popups/popup185.gif" alt="Тернарный график" WIDTH="300" HEIGHT="212"></p>
+
+<p>Для построения&nbsp; <a HREF="../glossary/gloss_t.html#Ternary Plots, 3D">тернарных
+графиков</a>&nbsp; используется треугольная система
+координат на плоскости или в пространстве и
+строится зависимость между четырьмя (или более)
+переменными (компонентами X, Y и Z и откликами V1, V2 и
+т.д.). При этом накладываются ограничения на
+относительные значения каждой из компонент,
+чтобы они в сумме давали одинаковую величину для
+каждого наблюдения (например, 1). </p>
+
+<p>На категоризованных тернарных графиках
+строится по одному графику для каждого значения
+&nbsp; <a HREF="../glossary/gloss_g.html#Grouping Variable">группирующей
+переменной</a> (или заданного пользователем
+подмножества данных), и все они отображаются в
+одном графическом окне, чтобы можно было
+сравнивать различные подгруппы наблюдений. </p>
+<b>
+
+<p>Применения.</b> Эти графики применяются для
+анализа результатов эксперимента, в котором
+измеряемый отклик зависит от относительного
+соотношения трех компонент (например, трех
+химических веществ при <a HREF="stexdes.html#mixture">составлении
+смесей</a>), которое варьируется с целью
+определения его оптимального значения.&nbsp; Эти
+типы графического представления можно
+использовать и в других случаях, когда
+взаимосвязь между переменными, на которые
+наложены определенные ограничения, необходимо
+исследовать для различных групп или категорий
+наблюдений. </p>
+
+<p><img SRC="../popups/popup186.gif" alt="Категоризованный тернарный график" WIDTH="303" HEIGHT="281"></p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><font size="1"><a HREF="stgraph.html#index">В начало</a></font> </td>
+  </tr>
+</table>
+
+<p><br>
+<br>
+<a NAME="brushing"></a> <font SIZE="5" COLOR="#000080">Закрашивание</p>
+</font><i>
+
+<p>Закрашивание </i>является одним из первых и,
+по-видимому, наиболее широко распространенных
+методов, известных как <i>графический разведочный
+анализ данных</i>. Этот метод позволяет
+интерактивно выделять на экране отдельные точки
+или подмножества данных и задавать их
+характеристики, или исследовать их влияние на
+взаимосвязи между переменными (например, на&nbsp; <a HREF="../glossary/gloss_m.html#Matrix Plots - Scatterplot">матрицах
+диаграмм рассеяния</a>) и идентифицировать <a HREF="../glossary/gloss_v.html#Outliers">выбросы</a>(например, с
+помощью меток).&nbsp;</p>
+
+<p>Связи между переменными можно наглядно
+представить с помощью аппроксимирующих функций
+(например, двумерных кривых или трехмерных
+поверхностей) и доверительных интервалов.
+Интерактивно удаляя или добавляя определенные
+подгруппы наблюдений, можно наблюдать за
+изменениями этих функций и их параметров. Одно из
+применений метода закрашивания - это, например,
+выделение на&nbsp; <a HREF="../glossary/gloss_m.html#Matrix Plots - Scatterplot">матричной
+диаграмме рассеяния</a>&nbsp; всех точек данных,
+принадлежащих определенной категории (например,
+на показанном ниже рисунке на правом верхнем
+графике выделена группа наблюдений,
+соответствующих значению &quot;среднего&quot; уровня
+дохода).</p>
+
+<p><img SRC="../graphics/brushex1.gif" alt="Закрашивание на матричном графике" WIDTH="210" HEIGHT="168"></p>
+
+<p>Такое исследование помогает определить, как
+эти конкретные наблюдения влияют на связи между
+другими переменными того же набора данных
+(например, на корреляцию между &quot;расходами&quot; и
+&quot;активами&quot;). </p>
+
+<p>В режиме &quot;динамического закрашивания&quot; (см.
+следующий пример) или &quot;автоматического
+обновления функции подгонки&quot; можно задать
+движение кисти по определенным последовательным
+диапазонам выбранной переменной (например,
+непрерывной, а не дискретной, как на показанном
+ранее примере) и исследовать динамику вклада
+этой переменной в связи между другими
+переменными этого набора данных. </p>
+
+<p><img SRC="../graphics/brushing.gif" ALT="Динамическое закрашивание" WIDTH="492" HEIGHT="358"></p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><font size="1"><a HREF="stgraph.html#index">В начало</a></font> </td>
+  </tr>
+</table>
+
+<p><br>
+<br>
+<a NAME="smoothing"></a> <font SIZE="5" COLOR="#000080">Сглаживание
+двумерных распределений</p>
+</font>
+
+<p>Для наглядного представления таблицы значений
+двух переменных используются трехмерные
+гистограммы. Их можно рассматривать как
+объединение двух простых гистограмм для
+совместного анализа частот значений двух
+переменных. Чаще всего на этом графике для каждой
+&quot;ячейки&quot; таблицы нарисован один трехмерный
+столбец, а его высота соответствует частоте
+значений в этой ячейке. При построении
+трехмерной гистограммы для каждой из двух
+переменных можно использовать свой метод
+категоризации (см. ниже). </p>
+
+<p><img SRC="../popups/popup110.gif" alt="Гистограмма двух переменных" WIDTH="356" HEIGHT="273"></p>
+
+<p>Когда предусмотрены процедуры сглаживания
+данных, то трехмерное представление частот
+значений можно аппроксимировать поверхностью.
+Такое сглаживание можно осуществить для любой
+трехмерной гистограммы. Для достаточно простой
+структуры данных (как на предыдущем рисунке)
+такое сглаживание не имеет особого смысла. </p>
+
+<p><img SRC="../popups/popup111.gif" WIDTH="393" HEIGHT="300" alt="Сглаживание трехмерной гистограммы"></p>
+
+<p>Однако, в случае более сложной картины
+распределения частот эта процедура может
+оказаться эффективным инструментом
+разведочного анализа данных</p>
+
+<p><img SRC="../popups/popup112.gif" alt="Сглаживание трехмерной гистограммы" WIDTH="387" HEIGHT="273"></p>
+
+<p>и позволит выявить особенности, которые трудно
+обнаружить на обычной трехмерной гистограмме
+(например, показанную выше &quot;волновую
+структуру&quot; поверхности). </p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><font size="1"><a HREF="stgraph.html#index">В начало</a></font> </td>
+  </tr>
+</table>
+
+<p><br>
+<br>
+<a NAME="layered"></a> <font SIZE="5" COLOR="#000080">Послойное сжатие</p>
+</font>
+
+<p>На графиках этого типа за счет сокращения
+области основного графика освобождается место
+для <i>графиков на полях</i>, которые располагаются
+в правой и верхней части графического окна
+(включая маленький угловой график). Эти <i>графики
+на полях</i> представляют собой соответственно
+вертикально и горизонтально сжатые изображения
+основного графика. </p>
+
+<p>Послойное сжатие двумерных графиков является
+методом разведочного анализа данных, который
+дает возможность скрытые тренды и структуры
+двумерных наборов данных. Рассмотрим следующий
+рисунок.</p>
+
+<p><img SRC="../popups/popup109.gif" alt="Послойное сжатие" WIDTH="426" HEIGHT="254"></p>
+
+<p>Здесь на примере, приведенном Кливландом (Cleveland,
+1993), можно убедиться, что в каждом цикле солнечной
+активности число пятен уменьшается гораздо
+медленнее, чем нарастает в начале цикла. Такое
+поведение совершенно не очевидно при
+исследовании обычного линейного графика, в то
+время как сжатый график позволяет обнаружить эту
+скрытую картину. </p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><font size="1"><a HREF="stgraph.html#index">В начало</a></font> </td>
+  </tr>
+</table>
+
+<p><a NAME="projections"></a> <font SIZE="5" COLOR="#000080">Проекции
+трехмерных наборов данных</p>
+</font>
+
+<p>Полезным методом изучения и аналитического
+исследования структуры поверхности (созданной,
+как правило, по трехмерным наборам данных)
+является построение ее проекции на плоскость в
+виде карты линий уровня. </p>
+
+<p><img SRC="../popups/popup58.gif" alt="Поверхность и карта линий уровня" WIDTH="310" HEIGHT="268"></p>
+
+<p>Эти графики менее эффективны для быстрого
+визуального анализа формы трехмерных структур
+по сравнению с графиками поверхности, </p>
+
+<p><img SRC="../popups/popup60.gif" WIDTH="306" HEIGHT="217" alt="Построение карты линий уровня"></p>
+
+<p>однако их преимущество заключается в
+возможности точного исследования формы
+поверхности -</p>
+
+<p><img SRC="../popups/popup61.gif" WIDTH="306" HEIGHT="217" alt="Построение карты линий уровня"></p>
+
+<p>на <i>картах линий уровня </i>отображается ряд не
+искаженных горизонтальных &quot;сечений&quot;. </p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><font size="1"><a HREF="stgraph.html#index">В начало</a></font> </td>
+  </tr>
+</table>
+
+<p><br>
+<br>
+<a NAME="icon_plots"></a> <font SIZE="5" COLOR="#000080">Пиктографики</p>
+</font>
+
+<p>На пиктографиках каждое наблюдение
+представлено в виде многомерного символа, что
+позволяет использовать эти типы графического
+представления данных в качестве не очень
+простого, но мощного исследовательского
+инструмента. Главная идея такого метода анализа
+основана на человеческой способности
+&quot;автоматически&quot; фиксировать сложные связи
+между многими переменными, если они проявляются
+в последовательности элементов (в данном случае
+&quot;пиктограмм&quot;). Иногда понимание (или
+&quot;чувство&quot;) того, что некоторые элементы
+&quot;чем-то похожи&quot; друг на друга, приходит
+раньше, чем наблюдатель (аналитик) может
+объяснить, какие именно переменные
+обусловливают это сходство (Lewicki, Hill, &amp; Czyzewska, 1992).
+Конкретную природу проявившихся взаимосвязей
+между переменными позволяет выявить уже
+последующий анализ данных, основанный на
+изучении этого интуитивно обнаруженного
+сходства. </p>
+
+<p><img SRC="../popups/popup157.gif" alt="Пиктографик лучей" WIDTH="282" HEIGHT="189"></p>
+
+<p>Основная идея пиктографиков заключается в
+представлении элементарных наблюдений как
+отдельных графических объектов, где значения
+переменных соответствуют определенным чертам
+или размерам объекта (обычно одно наблюдение =
+одному объекту). Это соответствие
+устанавливается таким образом, чтобы общий вид
+объекта менялся в зависимости от конфигурации
+значений. </p>
+
+<p><img SRC="../popups/popup158.gif" alt="Пиктограмма" WIDTH="183" HEIGHT="123"></p>
+
+<p>Таким образом, объекты имеют определенный
+&quot;внешний вид&quot;, который уникален для каждой
+конфигурации значений и может быть
+идентифицирован наблюдателем. Изучение таких
+пиктограмм помогает выявить как простые связи,
+так и сложные <a HREF="../glossary/gloss_v.html#Interactions">взаимодействия</a>
+между переменными. </p>
+
+<p><a NAME="icon1"></a> <font SIZE="4" COLOR="#000080">Анализ
+пиктографиков</p>
+</font>
+
+<p>Целесообразно проводить анализ пиктографиков
+в пять этапов. 
+
+<ol>
+  <li>Сначала выберите порядок анализируемых
+    переменных. В большинстве случаев наилучшим
+    вариантом оказывается случайная
+    последовательность. Кроме того, можно
+    попробовать расположить их в порядке,
+    соответствующем полученному уравнению <a HREF="stmulreg.html">множественной регрессии</a>, факторным
+    нагрузкам или объясняемым факторам (см. главу <a HREF="stfacan.html">Факторный анализ</a>). Таким образом
+    можно упростить и сделать более
+    &quot;однородным&quot; общий вид пиктограмм, чтобы
+    легче идентифицировать слабо выраженные
+    различия. В то же время такой подход может
+    затруднить идентификацию некоторых структур. На
+    этом этапе можно дать только один универсальный
+    совет: прежде чем использовать какие-либо
+    сложные методы, попробуйте наиболее простой и
+    быстрый вариант, а именно, случайную
+    последовательность переменных. </li>
+  <li>Попробуйте обнаружить какие-либо
+    закономерности, например, сходства между
+    группами пиктограмм, <a HREF="../glossary/gloss_v.html#Outliers">выбросы</a>
+    или определенные связи между элементами
+    (например, &quot; если первые два луча звезды
+    длинные, то как правило, с другой стороны есть
+    один или два коротких луча&quot;). На этом этапе
+    лучше использовать пиктографики <a HREF="stgraph.html#tax1">кругового
+    типа</a>. </li>
+  <li>При обнаружении закономерностей постарайтесь
+    сформулировать их в терминах конкретных
+    переменных. </li>
+  <li>Измените соответствие переменных и элементов
+    пиктограмм (или переключитесь на один из <a HREF="stgraph.html#tax2">последовательных пиктографиков</a>),
+    чтобы проверить обнаруженную структуру
+    взаимосвязей (например, попробуйте переместить
+    ближе друг к другу элементы, между которыми
+    обнаружена связь). В некоторых случаях в конце
+    этого этапа целесообразно исключить из
+    рассмотрения те переменные, которые не вносят
+    явного вклада в обнаруженную структуру. </li>
+  <li>И наконец, используйте один из численных
+    методов (таких как <a HREF="stmulreg.html">регрессионный
+    анализ</a>, <a HREF="stnonlin.html">нелинейное оценивание</a>, <a HREF="stdiscan.html">дискриминантный</a> или <a HREF="stcluan.html">кластерный
+    анализ</a>), чтобы проверить и попытаться
+    количественно оценить обнаруженные
+    закономерности или хотя бы их часть. </li>
+</ol>
+
+<p><a NAME="icon2"></a> <font SIZE="4" COLOR="#000080">Систематизация
+пиктографиков</p>
+</font>
+
+<p>Большинство пиктографиков можно отнести к
+одной из двух групп: круговые и последовательные.
+<a NAME="tax1"></a></p>
+<b>
+
+<p>Круговые пиктографики.</b> Круговые
+пиктографики (звезды, лучи, многоугольники) имеют
+вид &quot;велосипедного колеса&quot;, на них значения
+переменных представлены расстояниями между
+центром пиктограммы (&quot;втулкой&quot;)&nbsp; и их
+концами. </p>
+
+<p><img SRC="../popups/popup159.gif" alt="Лучевые пиктограммы" WIDTH="279" HEIGHT="185"></p>
+
+<p>Такие графики могут помочь в обнаружении
+связей между переменными, которые проявляются в
+общей структуре пиктограмм и зависят от
+конфигурации значений самих переменных. </p>
+
+<p>Чтобы описать такую &quot; общую картину&quot; в
+терминах конкретных моделей или проверить
+имеющиеся предположения, имеет смысл
+использовать <a HREF="stgraph.html#tax2">последовательные
+пиктографики</a>, которые могут оказаться более
+эффективными, если уже известно, что именно
+требуется обнаружить.</p>
+<b>
+
+<p><a NAME="tax2"></a>Последовательные пиктографики.</b>
+Последовательные пиктографики (столбцы, профили,
+линии) представляют собой набор картинок с
+маленькими последовательными графиками
+(различных типов). </p>
+
+<p><img SRC="../popups/popup160.gif" WIDTH="276" HEIGHT="184" alt="Столбчатые пиктограммы"></p>
+
+<p>Значения переменных представлены здесь
+расстояниями между основанием пиктограммы и
+последовательными точками (например, высотами
+показанных выше столбцов). Эти графики менее
+эффективны на начальной стадии разведочного
+анализа, поскольку пиктограммы очень похожи
+между собой. Однако, как уже упоминалось ранее,
+такое представление может быть весьма полезным
+для проверки уже сформулированной гипотезы. </p>
+<b>
+
+<p><a NAME="tax3"></a>Пиктограммы круговых диаграмм.</b> Эти
+пиктографики нельзя однозначно отнести к одной
+из двух групп. Все они имеют круговую форму, но в
+то же время последовательно разделены в
+соответствии с значениями переменных. </p>
+
+<p><img SRC="../popups/popup161.gif" WIDTH="276" HEIGHT="184" alt="Пиктограммы круговых диаграмм"></p>
+
+<p>Их можно отнести скорее к последовательным, чем
+к круговым пиктографикам, но можно использовать
+и в том, и в другом случае. </p>
+<b>
+
+<p><a NAME="tax4"></a>&quot;Лица Чернова&quot;.</b> Этот тип
+пиктографиков составляет отдельную группу.
+Здесь каждое наблюдение представляет собой
+схематичное изображение лица, определенным
+чертам которого соответствуют относительные
+значения выбранных переменных. </p>
+
+<p><img SRC="../popups/popup162.gif" alt="Лица Чернова" WIDTH="282" HEIGHT="185"></p>
+
+<p>Некоторые исследователи рассматривают этот
+способ графического представления данных как
+уникальный многомерный метод разведочного
+анализа, позволяющий выявить такие скрытые
+картины взаимосвязей между переменными, которые
+не могут быть обнаружены другими методами.
+Вероятно, такое заявление можно считать
+преувеличением. Кроме того, следует заметить, что
+этот способ исследования весьма непрост в
+применении и требует большого опыта в том, что
+касается сопоставления переменных чертам лица.
+См. также раздел <a HREF="stdatmin.html">Методы &quot;добычи
+данных&quot; </a>. </p>
+
+<p><a NAME="icon3"></a> <font SIZE="4" COLOR="#000080">Стандартизация
+значений</p>
+</font>
+
+<p>Как правило, при построении пиктографиков
+значения переменных должны быть
+стандартизованы, чтобы их можно было сравнивать
+в пределах одной пиктограммы. Исключения
+составляют те случаи, когда на пиктограммах
+необходимо отобразить глобальные различия
+диапазонов выбранных переменных. Поскольку
+масштаб пиктограммы определяется наибольшим
+значением, то на пиктограмме могут отсутствовать
+те переменные, которые имеют значения другого
+порядка малости, например, на пиктограмме звезды
+некоторые лучи могут оказаться настолько
+короткими, что совсем не будут видны.. </p>
+
+<p><a NAME="icon4"></a> <font SIZE="4" COLOR="#000080">Применения</p>
+</font>
+
+<p>Пиктографики обычно используются: (1) для
+обнаружения структур или кластеров наблюдений и
+(2) для исследования сложных взаимосвязей между
+несколькими переменными. Первый вариант
+соответствует <a HREF="stcluan.html">кластерному анализу</a>;
+т.е. процедуре классификации наблюдений. </p>
+
+<p>Предположим, вы изучали характеры актеров и
+записали их ответы на вопросы анкеты. С помощью
+пиктографика можно определить, существуют ли
+группы артистов, которые отличаются по их
+ответам на заданные вопросы (можно, к примеру,
+обнаружить, что некоторые артисты являются
+творческими, недисциплинированными и
+независимыми личностями, в то время как другая
+группа состоит из умных, дисциплинированных
+людей, которые ценят свою популярность). </p>
+
+<p>Другая область применений - изучение
+взаимосвязей между переменными - напоминает <a HREF="stfacan.html">факторный анализ</a>, который
+используется для исследования вопроса о
+зависимости переменных. Предположим, изучалось
+мнение группы людей о различных марках
+автомобилей. В файле данных записаны средние
+оценки по каждому из свойств (рассматриваемых
+как переменные) для каждого из автомобилей
+(рассматриваемых как наблюдения).</p>
+
+<p>При изучении &quot;лиц Чернова&quot; (где каждое лицо
+представляет мнение об одном из автомобилей)
+может оказаться, что улыбающиеся лица обычно
+имеют большие уши; при этом, если цене
+соответствует &quot;ширина&quot; улыбки, а
+динамическим качествам - размер ушей, то это
+&quot;открытие&quot; означает, что быстрые машины
+являются более дорогими. Разумеется, это очень
+простой пример; однако при реальном анализе
+данных применение этого метода может сделать
+более очевидными сложные взаимосвязи между
+многими переменными. </p>
+
+<p><a NAME="icon5"></a> <font SIZE="4" COLOR="#000080">Близкие способы
+графического представления</p>
+</font>
+
+<p>Связи между переменными из одного или двух
+списков могут быть представлены на <a HREF="../glossary/gloss_m.html#Matrix Plots">матричных графиках</a>.
+Использование матричных графиков одновременно с
+выделением подгрупп позволяет получить
+информацию, подобную той, которая отображается
+на пиктографиках. </p>
+
+<p>Если использовать методы выделения подгрупп на
+диаграммах рассеяния, то для исследования
+взаимосвязей между двумя переменными можно
+использовать обычные <a HREF="../glossary/gloss_2m.html#Scatterplot, 2D">2М диаграммы рассеяния</a>;
+а в случае трех переменных - <a HREF="../glossary/gloss_3m.html#Scatterplot, 3D">3Мдиаграммы рассеяния</a>.
+</p>
+
+<p><a NAME="icon6"></a> <font SIZE="4" COLOR="#000080">Типы графиков</p>
+</font>
+
+<p>Существуют различные типы пиктографиков. </p>
+<b>
+
+<p>&quot;Лица Чернова&quot;.</b> Для каждого наблюдения
+рисуется отдельное &quot;лицо&quot;; при этом
+относительные значения выбранных переменных
+соответствуют форме и размерам определенных его
+черт (например, длине носа, изгибу бровей, ширине
+лица). </p>
+
+<p><img SRC="../popups/popup81.gif" WIDTH="306" HEIGHT="217" alt="Лица Чернова"></p>
+
+<p>Дополнительно см. абзац <a HREF="stgraph.html#tax4">&quot;Лица
+Чернова&quot;</a> в разделе <a HREF="stgraph.html#icon2">Систематизация
+пиктографиков</a>.</p>
+<b>
+
+<p>Звезды.</b> Это пиктографики <a HREF="stgraph.html#tax1">кругового
+типа</a>. Для каждого наблюдения рисуется
+пиктограмма в виде звезды; относительные
+значения выбранных переменных соответствуют
+относительным длинам лучей каждой звезды (по
+часовой стрелке, начиная с 12:00). Концы лучей
+соединены линиями. </p>
+
+<p><img SRC="../popups/popup82.gif" WIDTH="306" HEIGHT="217" alt="Пиктограммы звезд"></p>
+<b>
+
+<p>Лучи.</b> Эти пиктографики также относятся к <a HREF="stgraph.html#tax1">круговому типу</a>. Для каждого
+наблюдения строится одна пиктограмма. Каждый луч
+соответствует одной из выбранных переменных (по
+часовой стрелке, начиная с 12:00), и на нем отложено
+значение соответствующей переменной. Эти
+значения соединены линиями. </p>
+
+<p><img SRC="../popups/popup83.gif" WIDTH="306" HEIGHT="217" alt="Пиктограммы лучей"></p>
+<b>
+
+<p>Многоугольники.</b> Это пиктографики<a HREF="stgraph.html#tax1">кругового типа</a>. Для каждого
+наблюдения рисуется отдельный многоугольник;
+относительные значения выбранных переменных
+соответствуют расстояниям вершин от центра
+многоугольника (по часовой стрелке, начиная с
+12:00). </p>
+
+<p><img SRC="../popups/popup84.gif" WIDTH="306" HEIGHT="217" alt="Пиктограммы многоугольников"></p>
+<b>
+
+<p>Круговые диаграммы.</b> Это пиктографики <a HREF="stgraph.html#tax1">кругового типа</a>. Для каждого
+наблюдения рисуется круговая диаграмма;
+относительные значения выбранных переменных
+соответствуют размерам сегментов диаграммы (по
+часовой стрелке, начиная с 12:00). </p>
+
+<p><img SRC="../popups/popup85.gif" WIDTH="306" HEIGHT="217" alt="Круговые диаграммы"></p>
+<b>
+
+<p>Столбцы.</b> Это пиктографики <a HREF="stgraph.html#tax2">последовательного
+типа</a>. Для каждого наблюдения строится
+столбчатая диаграмма; относительные значения
+выбранных переменных соответствуют высотам
+последовательных столбцов. </p>
+
+<p><img SRC="../popups/popup86.gif" WIDTH="306" HEIGHT="217" alt="Пиктограммы столбчатых диаграмм"></p>
+<b>
+
+<p>Линии.</b> Это пиктографики <a HREF="stgraph.html#tax2">последовательного
+типа</a>. </p>
+
+<p><img SRC="../popups/popup87.gif" WIDTH="306" HEIGHT="217" alt="Пиктограммы линейных графиков"></p>
+
+<p>Для каждого наблюдения строится линейный
+график; относительные значения выбранных
+переменных соответствуют расстояниям точек
+излома линии от основания графика. </p>
+<b>
+
+<p>Профили.</b> Это пиктографики <a HREF="stgraph.html#tax2">последовательного
+типа</a>. Для каждого наблюдения строится зонный
+график; относительные значения выбранных
+переменных соответствуют расстояниям
+последовательных пиков сечения над линией
+основания. </p>
+
+<p><img SRC="../popups/popup88.gif" WIDTH="306" HEIGHT="217" alt="Пиктограммы профилей"> </p>
+
+<p><a NAME="icon7"></a> <font SIZE="4" COLOR="#000080">Маркировка
+пиктограмм</p>
+</font>
+
+<p>Если программа позволяет вам выделять
+подгруппы наблюдений, то это свойство можно
+использовать и для маркировки соответствующих
+пиктограмм. При этом вокруг выделенных
+пиктограмм будут нарисованы рамки. </p>
+
+<p><img SRC="../popups/popup163.gif" alt="Маркированные пиктограммы" WIDTH="340" HEIGHT="240"></p>
+
+<p>Шаблоны рамок, идентифицирующих заданные
+подгруппы, будут показаны в условных
+обозначениях рядом с текстом соответствующих
+условий выбора наблюдений. На следующем графике
+показан пример маркированных подгрупп. </p>
+
+<p><img SRC="../popups/popup164.gif" alt="Маркированные подгруппы пиктограмм" WIDTH="312" HEIGHT="211"></p>
+
+<p>Все наблюдения, удовлетворяющие условию для
+подгруппы 1 (значение переменной Iristype равно
+значению переменной Setosa и номер наблюдения
+меньше 100), обозначены специальной рамкой вокруг
+пиктограммы. </p>
+
+<p>А все наблюдения, которые удовлетворяют
+условию для подгруппы 2 (значение переменной Iristype
+равно значению переменной Virginic и номер
+наблюдения меньше 100), обозначены на графике
+рамкой другого цвета. </p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><font size="1"><a HREF="stgraph.html#index">В начало</a></font> </td>
+  </tr>
+</table>
+
+<p><br>
+<br>
+<a NAME="reduction"></a> <font SIZE="5" COLOR="#000080">Выборка данных</p>
+</font>
+
+<p>Иногда отображение на графике слишком большого
+числа точек данных затрудняет изучение их
+структуры (см. следующий рисунок). Если файл
+данных слишком большой, то имеет смысл показать
+на графике лишь подмножество наблюдений, чтобы
+общая картина не была скрыта маркерами точек. </p>
+
+<p><img SRC="../graphics/an_reduc.gif" ALT="Процесс сокращения числа точек данных" WIDTH="227" HEIGHT="237"></p>
+
+<p>Некоторые программы предлагают методы выборки
+(или оптимизации) данных, которые в ряде случаев
+могут оказаться весьма полезны. При этом
+пользователь может задать целое число <i>n</i>,
+меньшее числа наблюдений в файле данных, а
+программа случайным образом выберет из этого
+файла приблизительно <i>n</i> допустимых наблюдений
+и именно их построит на графике.</p>
+
+<p>Заметим, что такие методы сокращения набора
+данных (или размера выборки) эффективно
+отображают случайную структуру этих данных.
+Очевидно, эти методы принципиально отличаются от
+методов выделения конкретного подмножества или
+подгруппы наблюдений с помощью определенных
+критериев (например, по полу, области или уровню
+холестерина). Последние можно применять
+интерактивно (например, в режиме <a HREF="stgraph.html#brushing">динамического закрашивания</a>)
+или каким-либо другим способом (например, на <a HREF="../glossary/gloss_k.html#Categorized Graphs">категоризованных
+графиках</a> или с помощью условий выбора
+наблюдений). Все эти методы в равной мере могут
+помочь в идентификации сложной структуры
+большого набора данных. </p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><font size="1"><a HREF="stgraph.html#index">В начало</a></font> </td>
+  </tr>
+</table>
+
+<p><br>
+<br>
+<a NAME="rotation"></a> <font SIZE="5" COLOR="#000080">Вращение (в
+трехмерном пространстве)</p>
+</font>
+
+<p>Изменение угла зрения при отображении
+трехмерной диаграммы рассеяния (<a HREF="../glossary/gloss_3m.html#Scatterplot, 3D">простой</a>, <a HREF="../glossary/gloss_s.html#Spectral Plot">спектральной</a> или <a HREF="../glossary/gloss_p.html#Space Plots">пространственной</a>)
+может оказаться эффективным средством для
+выявления некоторой структуры, которая видна
+только при определенном повороте &quot;облака&quot;
+точек (см. следующий рисунок). </p>
+
+<p><img SRC="../graphics/an_rotate.gif" ALT="Вращение графика" WIDTH="185" HEIGHT="185"></p>
+
+<p>Некоторые программы предоставляют полезный
+инструмент для интерактивного изменения
+перспективы и вращения изображения. Эти средства
+контроля изображения позволяют подобрать
+подходящий угол зрения и перспективу, чтобы
+найти наиболее удачное расположение &quot;точки
+зрения&quot; на график, а также дают возможность
+управлять его вращением в горизонтальной и
+вертикальной плоскости. </p>
+
+<p>Эти инструменты могут оказаться весьма
+полезными не только при начальном <a HREF="stdatmin.html#eda">разведочном
+анализе данных</a>, но и при исследовании
+факторного пространства (см.<a HREF="stfacan.html">Факторный
+анализ</a>) или пространства размерностей (см. <a HREF="stmulsca.html">Многомерное шкалирование</a>). </p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><font size="1"><a HREF="stgraph.html#index">В начало</a></font> </td>
+  </tr>
+</table>
+
+<p><br>
+<br CLEAR="RIGHT">
+<br>
+<br>
+</p>
+
+<hr SIZE="1">
+
+<p align="center"><br>
+<img SRC="../stathoms.jpg" ALIGN="LEFT" WIDTH="151" HEIGHT="47"> <br CLEAR="ALL">
+<font size="1">(c) Copyright StatSoft, Inc., 1984-2001<br>
+STATISTICA является торговой маркой StatSoft, Inc. </font></p>
+
+<hr SIZE="1">
+</body>
+</html>

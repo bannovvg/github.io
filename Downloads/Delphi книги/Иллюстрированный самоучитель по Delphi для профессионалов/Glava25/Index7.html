@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Отчет в приложении</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь, когда проект SimpleDemo.RAV с двумя отчетами готов, перейдем к разработке приложения в Delphi.
+</font ></P>
+<P><font face="Verdana" size="3">
+Любое приложение, использующее генератор отчетов Rave Reports, должно иметь как минимум пару компонентов —
+<font face="Verdana" size="2"> TRvProject</font> и <font face="Verdana" size="2">TRvSystem</font>. Первый из
+</font ></P>
+<P><font face="Verdana" size="3">
+них есть проект отчета в приложении. С его помощью разработчик получает доступ к отчетам проекта и их свойствам. Второй компонент обеспечивает использование ядра генератора отчетов Rave Reports при печати или предварительном просмотре отчета (см. рис. 23.1). Подробнее о свойствах и методах этих компонентов см. гл. 23.
+</font ></P>
+<P><font face="Verdana" size="3">
+При использовании этих компонентов в состав исполняемого кода приложения автоматически включается ядро генератора отчетов Rave Reports. Соответственно при распространении приложения не требуются дополнительные файлы — даже файл проекта отчета можно включить в приложение (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TRvProject</font> необходимо связать с файлом проекта Simple-Demo. RAV. Для этого используется его свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ProjectFile: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Файл RAV можно распространять вместе с приложением или включить его в состав исполняемого файла. Для этого используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StoreRAV: boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+компонента (см. рис. 23.2).
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед использованием отчетов из компонента
+<font face="Verdana" size="2"> TRvProject</font> его необходимо открыть. В нашем примере при открытии формы приложения компонент открывается и в список считываются полные имена отчетов проекта и отображается описание текущего отчета:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmMain.FormShow(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">rpProject.Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">rpProject.GetReportList(IbxRptLiat.Items, True);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">rpProject.ReportDescToMemo(meDesc) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но только один из отчетов доступен для использования одновременно. Для смены текущего отчета можно воспользоваться методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SelectReport(ReportName: string;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">FullName:   boolean):   boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для идентификации текущего отчета компонент
+<font face="Verdana" size="2"> TRvProject</font> имеет два свойства, которые возвращают его имя и полное имя. Это соответственно свойства
+<font face="Verdana" size="2"> ReportName</font> и <font face="Verdana" size="2">ReportFullName</font>. При необходимости
+использовать имя отчета для одного из методов (например метод
+<font face="Verdana" size="2">SelectReport</font>) можно использовать оба имени. Во всех методах, где в качестве параметра применяется имя отчета, имеется дополнительный параметр
+<font face="Verdana" size="2"> FullName</font> типа <font face="Verdana" size="2">Boolean</font>. При его значении
+<font face="Verdana" size="2"> True</font> используется полное имя отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обратите внимание, что перед использованием любых свойств и методов, относящихся к отчету в компоненте
+<font face="Verdana" size="2">TRvProject</font>, отчет необходимо открыть.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для этого используется метод <font face="Verdana" size="2">open</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.Open;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или свойство&nbsp;
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Active: RvProjectl.Active   := True;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Так же, если в процессе работы приложения в компонент
+<font face="Verdana" size="2"> TRvproject</font> нужно загрузить новый проект отчета, процедуру открытия нужно повторить:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.SetProjectFile</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(dlgOpenProject.FileName);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.Open;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Компонент отчета необходимо связать с компонентом
+<font face="Verdana" size="2">TRvSystem</font>. Для этого в свойстве
+<font face="Verdana" size="2"> Engine</font> компонента <font face="Verdana" size="2"> TRvproject</font> необходимо задать ссылку на компонент
+<font face="Verdana" size="2">TRvSystem</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

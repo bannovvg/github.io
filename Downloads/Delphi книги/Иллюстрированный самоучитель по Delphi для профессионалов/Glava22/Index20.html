@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index21.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Соединение 
+  клиента с сервером приложения</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для соединения клиентского приложения с сервером в локальной сети использован компонент
+<font face="Verdana" size="2"> srvrCon</font> класса <font face="Verdana" size="2">TDCOMConnection</font>. Данный тип соединения выбран как наиболее простой и требующий лишь наличия локальной сети или даже не требующий ничего — в демонстрационном приложении можно использовать сервер приложения, установленный на этом же компьютере.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для настройки соединения компонента <font face="Verdana" size="2"> SrvrCon</font> в свойстве
+<font face="Verdana" size="2"> ComputerName</font> было указано имя компьютера сервера. После этого в списке свойства
+<font face="Verdana" size="2"> ServerName</font> можно выбрать один из доступных зарегистрированных серверов. В нашем случае это сервер simpieAppSrvr.simpieRDM, имя которого состоит из имени приложения сервера и имени главного удаленного модуля данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обратите внимание, что в этом же списке имеется и дочерний модуль
+<font face="Verdana" size="2">Secondary</font>. Однако для получения доступа к наборам данных дочернего модуля данных мы не будем создавать еще одно соединение, а воспользуемся компонентом
+<font face="Verdana" size="2">TSharedConnection</font>, т. к. он специально предназначен для подобных случаев. Для его настройки достаточно указать в свойстве
+<font face="Verdana" size="2"> Parentconnection</font> компонент соединения. В нашем случае — это
+<font face="Verdana" size="2">srvrCon</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для компонента <font face="Verdana" size="2"> srvrCon</font> предусмотрены два метода-обработчика (см. листинг 22.1) — после подключения и перед отключением соединения. В них открываются и закрываются все наборы данных клиентского приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь в клиентском приложении доступны наборы данных обоих удаленных модулей данных сервера приложений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Непосредственно подключение к серверу осуществляется кнопкой <B>Соединение. </B>При ее нажатии выполняется следующий простой код:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmMain.tbConnectClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DM.SrvrCon.Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DM.SrvrCon.ComputerName := edServerName.Text; DM.SrvrCon.Open;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> except</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+on E: Exception do MessageDlg(E.Message, mtError, [mbOK], O);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SetCtrlState;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+-Соединение закрывается, задается новое имя компьютера сервера, соединение открывается. Специально созданный метод формы
+<font face="Verdana" size="2"> setctristate</font> управляет доступностью кнопок формы, анализируя текущее состояние наборов данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index21.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

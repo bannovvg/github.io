@@ -1,0 +1,434 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Обработка событий</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Клиентское приложение Delphi, работающее с сервером
+<font face="Verdana" size="2">InterBase</font>, имеет возможность отслеживать события, происходящие в базе данных и вызываемые другими процессами или приложениями. Для этого используется
+компонент <font face="Verdana" size="2">TiBEvents</font>. Он позволяет определить список необходимых событий и предоставляет разработчику простой механизм отслеживания возникающих на сервере событий. Свойства и методы компонента
+<font face="Verdana" size="2"> TiBEvents</font> представлены в табл. 18.7.
+</font ></P>
+<P><font face="Verdana" size="3">
+Список событий задается свойством
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Events: TStrings;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+в котором можно определить до 15 контролируемых событий.
+</font ></P>
+<P><font face="Verdana" size="3">
+Выбранные события необходимо зарегистрировать на сервере. Для этого применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RegisterEvents;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+ Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure QueueEvents;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+начинает процесс передачи сообщений от сервера.
+</font ></P>
+<P><font face="Verdana" size="3">
+При возникновении на сервере зарегистрированного события компонент вызывает метод-обработчик события
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnEventAlert: TEventAlert;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TEventAlert = procedure) Sender: TObject; EventName: String; EventCount:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+longint; var CancelAlerts: Boolean)</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> EventName</font> содержит имя последнего произошедшего события.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> EventCount</font> содержит число заданных событий, произошедших с момента последнего вызова метода-обработчика.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> CancelAlerts</font> позволяет прервать процесс передачи сообщений приложению. Для этого необходимо присвоить параметру значение
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для возобновления работы компонента нужно снова использовать метод
+<font face="Verdana" size="2">QueueEvents</font>.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 18.7. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TiBEvents</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="478" HEIGHT="229">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="170" HEIGHT="27">
+<DIV WIDTH="260" HEIGHT="27" style="width: 88; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="27">
+<DIV WIDTH="46" HEIGHT="27" style="width: 3; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="280" HEIGHT="27">
+<DIV WIDTH="325" HEIGHT="27" style="width: 24; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="486" HEIGHT="31">
+<DIV WIDTH="260" HEIGHT="31" style="width: 90; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="170" HEIGHT="46">
+<DIV WIDTH="260" HEIGHT="46" style="width: 148; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Database: TIBDatabase;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="46">
+<DIV WIDTH="46" HEIGHT="46" style="width: 3; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="280" HEIGHT="46">
+<DIV WIDTH="325" HEIGHT="46" style="width: 140; height: 46">
+<P><font face="Verdana" size="3">
+Задает базу данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="170" HEIGHT="27">
+<DIV WIDTH="260" HEIGHT="27" style="width: 134; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Events:   TStrings;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="27">
+<DIV WIDTH="46" HEIGHT="27" style="width: 1; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="280" HEIGHT="27">
+<DIV WIDTH="325" HEIGHT="27" style="width: 237; height: 27">
+<P><font face="Verdana" size="3">
+Список контролируемых событий
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="170" HEIGHT="48">
+<DIV WIDTH="260" HEIGHT="48" style="width: 133; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Queued:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="48">
+<DIV WIDTH="46" HEIGHT="48" style="width: 3; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="280" HEIGHT="48">
+<DIV WIDTH="325" HEIGHT="48" style="width: 272; height: 48">
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2"> True</font> говорит о том, что процесс передачи сообщений работает
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="170" HEIGHT="50">
+<DIV WIDTH="260" HEIGHT="50" style="width: 162; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Registered:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="50">
+<DIV WIDTH="46" HEIGHT="50" style="width: 1; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="280" HEIGHT="50">
+<DIV WIDTH="325" HEIGHT="50" style="width: 263; height: 50">
+<P><font face="Verdana" size="3">
+Определяет регистрацию сообщений на сервере
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="480" HEIGHT="31">
+<DIV WIDTH="262" HEIGHT="31" style="width: 100; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="40">
+<DIV WIDTH="262" HEIGHT="40" style="width: 108; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CancelEvents;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="40">
+<DIV WIDTH="44" HEIGHT="40" style="width: 2; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="264" HEIGHT="40">
+<DIV WIDTH="304" HEIGHT="40" style="width: 233; height: 40">
+<P><font face="Verdana" size="3">
+Останавливает процесс передачи сообщений
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="27">
+<DIV WIDTH="262" HEIGHT="27" style="width: 103; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure QueueEvents;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="27">
+<DIV WIDTH="44" HEIGHT="27" style="width: 5; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="264" HEIGHT="27">
+<DIV WIDTH="304" HEIGHT="27" style="width: 202; height: 27">
+<P><font face="Verdana" size="3">
+Включает процесс передачи сообщений
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="46">
+<DIV WIDTH="262" HEIGHT="46" style="width: 128; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RegisterEvents;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="46">
+<DIV WIDTH="44" HEIGHT="46" style="width: 2; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="264" HEIGHT="46">
+<DIV WIDTH="304" HEIGHT="46" style="width: 247; height: 46">
+<P><font face="Verdana" size="3">
+Проводит регистрацию сообщений на сервере
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="40">
+<DIV WIDTH="262" HEIGHT="40" style="width: 135; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure UnRegisterEvents;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="40">
+<DIV WIDTH="44" HEIGHT="40" style="width: 9; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="264" HEIGHT="40">
+<DIV WIDTH="304" HEIGHT="40" style="width: 247; height: 40">
+<P><font face="Verdana" size="3">
+&nbsp;Отменяет регистрацию сообщений на сервере
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="480" HEIGHT="25">
+<DIV WIDTH="262" HEIGHT="25" style="width: 262; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Методы-обработчики событий</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="144">
+<DIV WIDTH="262" HEIGHT="144" style="width: 184; height: 144">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnEventAlert:&nbsp; TEventAlert;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TEventAlert = procedure (Sender : TObject; EventName: String;&nbsp; EventCount : longint ; var CancelAlerts : Boolean)</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="144">
+<DIV WIDTH="44" HEIGHT="144" style="width: 12; height: 144">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="264" HEIGHT="144">
+<DIV WIDTH="304" HEIGHT="144" style="width: 256; height: 144">
+<P><font face="Verdana" size="3">
+Вызывается при передаче сообщения от сервера компоненту
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

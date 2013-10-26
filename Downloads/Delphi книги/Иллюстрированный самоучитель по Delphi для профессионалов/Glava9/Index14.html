@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Использование отображаемых файлов</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Последний — самый нетрадиционный вид работы с файлами — это так называемые отображаемые файлы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вообще говоря, в 32-разрядной Windows под &quot;памятью&quot; подразумевается не только оперативная память (ОЗУ), но также и память, резервируемая операционной системой на жестком диске. Этот вид памяти называется виртуальной памятью.
+Код и данные отображаются на жесткий диск посредством страничной системы
+<font face="Verdana" size="2">
+(paging system)</font> подкачки. Страничная система использует для отображения страничный файл (win386.swp в Windows 95/98 и pagefile.sys в Windows NT). Необходимый фрагмент виртуальной памяти переносится из страничного файла в ОЗУ и, таким образом, становится доступным.
+</font ></P>
+<P><font face="Verdana" size="3">
+А что, если так же поступить и с любым другим файлом и сделать его частью адресного пространства? В Win32 это возможно. Для выделения фрагмента памяти должен быть создан специальный системный объект Win32, называемый отображаемым файлом.
+Этот объект &quot;знает&quot;, как соотнести файл, находящийся на жестком диске, с памятью, адресуемой процессами.
+</font ></P>
+<P><font face="Verdana" size="3">
+Одно или более приложений могут открыть отображаемый файл и получить тем самым доступ к данным этого объекта. Таким образом, данные, помещенные в страничный файл приложением, использующим отображаемый файл, могут быть доступны другим приложениям, если они открыли и используют тот же самый отображаемый файл.
+</font ></P>
+<P><font face="Verdana" size="3">
+Создание и использование объектов файлового отображения осуществляется посредством функций Windows API. Этих функций три:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CreateFileMapping</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MapViewOfFile</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+UnMapViewOfFile</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Отображаемый файл создается операционной системой при вызове функции
+<font face="Verdana" size="2">CreateFileMapping</font>. Этот объект поддерживает соответствие между содержимым файла и адресным пространством процесса, использующего этот файл. Функция
+<font face="Verdana" size="2"> CreateFiieMapping</font> имеет шесть параметров:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CreateFiieMapping(hFile: THandle; IpFileMappingAttributes: PSecurityAttributes; flProtect, dwMaximumSizeHigh, dwMaximumSizeLow:&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">DWORD; IpName: PChar): THandle;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Первый параметр имеет тип <font face="Verdana" size="2">THandle</font>. Он должен соответствовать дескриптору уже открытого при помощи функции
+<font face="Verdana" size="2">createFile</font> файла. Если значение параметра
+<font face="Verdana" size="2"> hFile</font> равно <font face="Verdana" size="2">SFFFFFFFF</font>, то это приводит к связыванию объекта файлового отображения со страничным файлом операционной системы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Второй параметр — указатель на запись типа <font face="Verdana" size="2">TSecurityAttributes</font>. При отсутствии требований к защите данных в Windows NT значение этого параметра всегда равно nil. Третий параметр имеет тип
+<font face="Verdana" size="2">DWORD</font>. Он определяет атрибут защиты. Если при помощи отображаемого файла вы планируете совместное использование данных, третьему параметру следует присвоить значение
+<font face="Verdana" size="2">PAGE_READWRITE</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Четвертый и пятый параметры также имеют тип
+<font face="Verdana" size="2">DWORD</font>. Когда выполняется функция
+<font face="Verdana" size="2">CreateFiieMapping</font>, значение типа
+<font face="Verdana" size="2"> DWORD</font> четвертого параметра сдвигается влево на четыре байта и затем объединяется со значением пятого параметра посредством операции
+<font face="Verdana" size="2">and</font>. Проще говоря, значения объединяются в одно 64-разрядное число, равное объему памяти, выделяемой объекту файлового отображения из страничного файла операционной системы. Поскольку вы вряд ли попытаетесь осуществить выделение более чем 4 Гбайт данных, то значение четвертого параметра всегда должно быть равно нулю. Используемый затем пятый параметр должен показывать, сколько памяти в байтах необходимо зарезервировать в качестве совместной. Если вы хотите отобразить весь файл, четвертый и пятый параметры должны быть равны нулю.
+</font ></P>
+<P><font face="Verdana" size="3">
+Шестой параметр имеет тип PChar и представляет собой имя объекта файлового отображения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Функция <font face="Verdana" size="2">CreateFileMapping</font> возвращает значение типа
+<font face="Verdana" size="2">THandle</font>. В случае успешного завершения возвращаемое функцией значение представляет собой дескриптор созданного объекта файлового отображения. В случае возникновения какой-либо ошибки возвращаемое значение будет равно 0.
+</font ></P>
+<P><font face="Verdana" size="3">
+Следующая задача — спроецировать данные файла в адресное пространство нашего процесса. Этой цели служит функция
+<font face="Verdana" size="2">MapviewOfFile</font>. Функция <font face="Verdana" size="2"> MapViewOfFile</font> имеет пять параметров:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function MapViewOfFile(hFileMappingObject: THandle; dwDesiredAccess:&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">DWORD; dwFileOffsetHigh, dwFileOffsetLow, dwNumberOfBytesToMap:
+DWORD):</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Pointer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Первый параметр имеет тип <font face="Verdana" size="2">THandle</font>. Его значением должен быть дескриптор созданного объекта файлового отображения — тот, который возвращает
+функция <font face="Verdana" size="2">createFileMapping</font>. Второй параметр определяет режим доступа к
+файлу:<font face="Verdana" size="2"> FILE_MAP_WRITE, FILE_MAP_READ
+или FILE_MAP_ALL_ACCESS</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Третий и четвертый параметры также имеют тип
+<font face="Verdana" size="2">DWORD</font>. Это — смещение отображаемого участка относительно начала файла в байтах. В нашем случае эти параметры должны быть установлены в нуль, поскольку значение, которое мы даем пятому (последнему) параметру функции
+<font face="Verdana" size="2">MapViewOfFile</font>, также равно нулю.
+</font ></P>
+<P><font face="Verdana" size="3">
+Пятый (и последний) параметр функции <font face="Verdana" size="2">MapViewOfFile</font>, как и предыдущие параметры, имеет тип
+<font face="Verdana" size="2">DWORD</font>. Он используется для определения (в байтах) количества данных объекта файлового отображения, которые надо отобразить в процесс (сделать доступными для вас). Для достижения наших целей это значение должно быть установлено в нуль, что означает автоматическое отображение в процессе всех данных, выделенных перед этим функцией
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">CreateFileMapping.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Значение,  возвращаемое  функцией <font face="Verdana" size="2">MapViewOfFile</font>,  имеет тип  &quot;указатель&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если функция отработала успешно, то она вернет начальный адрес данных
+объекта файлового отображения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Следующий фрагмент кода демонстрирует вызов функции
+<font face="Verdana" size="2">MapViewOfFile</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hMappedFile: THandle; pSharedBuf: PChar;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hMappedFile :=</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CreateFiieMapping(FHandle, nil, PAGE_READWRITE, 0, 0, 'SharedBlock');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if {hMappedFile = 0) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('Mapping error!')</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+else</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pSharedBuf :=</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MapViewOfFiie(hMappedFile, FILE_MAP_ALL_ACCESS, 0, 0, 0) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (pSharedBuf = nil) then</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+ShowMessage ('MapView error');&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После того как получен указатель <font face="Verdana" size="2">pSharedBuf</font>, вы можете работать со своим файлом как с обычной областью памяти, не заботясь о вводе, выводе, позиционировании и т. п. Все эти проблемы берет на себя файловая система. Последние две функции, имеющие отношение к объекту файлового отображения, называются
+<font face="Verdana" size="2"> UnMapViewOfFile</font> И <font face="Verdana" size="2">CloseHandle</font>. Функция
+<font face="Verdana" size="2"> UnMapViewOfFile</font> делает то, что подразумевает ее название.  Она прекращает отображение
+в адресное пространство процесса того файла, который перед этим был отображен При
+помощи функции <font face="Verdana" size="2">MapViewOfFile</font>. Функция
+<font face="Verdana" size="2"> CloseHandle</font> закрывает дескриптор объекта файлового отображения, возвращаемый функцией
+<font face="Verdana" size="2">CreateFileMapping</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Функция
+<B> </B><font face="Verdana" size="2">UnMapViewOfFile</font> должна вызываться перед функцией <B> </B><font face="Verdana" size="2">CloseHandle</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Функция <font face="Verdana" size="2"> UnMapViewOfFile</font> передает единственный параметр типа указатель:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TClientForm.FormDestroy(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+UnMapViewOfFile(pSharedBuf};</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">CloseHandle(hFileMapObj);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Отображаемые файлы уже будут использоваться и в других главах этой книги. Не стоит удивляться, ведь это очень мощный инструмент: помимо возможности совместного доступа он позволяет заметно ускорить доступ к файлам, особенно большого размера.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

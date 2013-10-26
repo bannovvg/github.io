@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Явный 
+  вызов</strong> <br>
+</font ></P>
+<p align="left">
+
+</P>
+<P><font face="Verdana" size="3">
+Явный вызов динамической библиотеки подразумевает создание программистом соответствующего исходного кода. Ему необходимо предусмотреть загрузку DLL, получение адресов переменных процедурного типа для используемых функций и процедур, выгрузку DLL.
+</font ></P>
+<P><font face="Verdana" size="3">
+Пример явного вызова функций динамической библиотеки имеется в демонстрационном приложении DemoDLL2, которое по выполняемым функциям полностью совпадает с предыдущим примером.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"><b>Листинг 28.6.</b> Модуль главной 
+  формы проекта DemoDll2 </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+unit Unit2;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;interface</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uses</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+StandardProc = function(AText: String): Boolean;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMainForm = class(TForm)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Editl: TEdit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Edit2: TEdit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Edit3: TEdit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Label1: TLabel;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Label2: TLabel;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+LabelS: TLabel;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FormShow(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EditlExit(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FormClose(Sender: TObject; var Action: TCloseAction);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Edit2Exit(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EditSExit(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;private</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLLHandle: THandle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+LoadError: Word;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsValidlnt: StandardProc;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsValidDate: StandardProc;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ValidTime: StandardProc;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;public</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{ Public declarations }</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MainForm: TMainForm;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+implementation {$R *.DFM}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.FormShow(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLLHandle := LoadLibrary('DataCheck');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if DLLHandle = 0 then begin if GetLastError = ERROR_DLL_NOT_FOUND</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then ShowMessagef'Ошибка загрузки DLL');&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+@IsValidInt := GetProcAddress(DLLHandle, 'IsValidlnt');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;SIsValidDate := GetProcAddress(DLLHandle,
+'IsValidDate');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;SValidTime := GetProcAddress(DLLHandle,
+'ValidTime');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.FormClose(Sender: TObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Action: TCloseAction);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin if DLLHandle &lt;&gt; 0</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then FreeLibrary(DLLHandle);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.EditlExit(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if not IsValidlnt(Editl.Text)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then Edit2.Clear;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.Edit2Exit(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin if not IsValidDate(Edit2.Text)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then Editl.Clear;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.EditSExit(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> if not ValidTime(Edit3.Text)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then Edit3.Clear;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Загрузка динамической библиотеки <font face="Verdana" size="2"> DataCheck</font> осуществляется в методе-обработчике
+<font face="Verdana" size="2"> FormShow</font> при помощи
+функции <font face="Verdana" size="2">LoadLibrary</font>. Имя
+динамической библиотеки может не содержать маршрута, если файл
+<font face="Verdana" size="2"> DLL</font> расположен в одном каталоге с программой. Если в этом каталоге файл
+<font face="Verdana" size="2"> DLL</font> не найден, поиск последовательно проводится в текущем каталоге, \SYSTEM и каталогах из перечня
+<font face="Verdana" size="2">Path</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как для этой системной функции не создается исключительная ситуация, то следом предусмотрен контроль возможных ошибок. Функция GetLastError возвращает код последней ошибки.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3">Код ошибки <font face="Verdana" size="2">ERROR_DLL_NOT_FOUND</font>, 
+    Наряду со многими другими кодами, содержится в файле Windows.PAS. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если библиотека успешно загружена, в три процедурные переменные типа
+<font face="Verdana" size="2"> standardProc</font> передаются адреса соответствующих функций DLL. Процедурный тип
+<font face="Verdana" size="2"> standardProc</font> объявлен перед классом формы. Для этого используется системная
+функция <font face="Verdana" size="2">GetProcAddress</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В дальнейшем созданные таким образом функции применяются для вводимых значений в компонентах
+<font face="Verdana" size="2">TEdit</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При закрытии приложения необходимо выгрузить все используемые динамические библиотеки Припомощи
+системной функции <font face="Verdana" size="2">FreeLibrary</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

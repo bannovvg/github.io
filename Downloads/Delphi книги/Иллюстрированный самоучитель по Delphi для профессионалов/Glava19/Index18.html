@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Транзакции</strong> 
+  <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">TADOconnection</font> позволяет выполнять транзакции. Методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function BeginTrans: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure CommitTrans;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure RollbackTrans;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+обеспечивают начало, фиксацию и откат транзакции соответственно. Методы-обработчики
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TBeginTransCompleteEvent = procedure(Connection: TADOConnection;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TransactionLevel: Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> const Error: Error;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var EventStatus:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TEventStatus) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnBeginTransComplete: TBeginTransCompleteEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TConnectErrorEvent = procedure(Connection: TADOConnection;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Error: Error;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var EventStatus: TEventStatus) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnCornmitTransComplete: TConnectErrorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+вызываются после начала и фиксации транзакции. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TIsolationLevel =   (ilUnspecified,   ilChaos,   ilReadUncommitted, ilBrowse,   ilCursorStability,   ilReadCorranitted,   ilRepeatableRead, ilSerializable,   illsolated);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property IsolationLevel:   TIsolationLevel;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяет задать уровень изоляции транзакции:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;IlUnspecif 
+    led — уровень изоляции не задается;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">Iichaos — изменения 
+    более защищенных транзакций не перезаписываются данной транзакцией;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">IlReadUncommitted — 
+    незафиксированные изменения других транзакций видимы;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;IlBrowse — незафиксированные 
+    изменения других транзакций видимы;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">IlCursorStability — 
+    изменения других транзакций видимы только после фиксации;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;IlReadCommitted — изменения 
+    других транзакций видимы только после фиксации;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">IlRepeatableRead — изменения 
+    других транзакций не видимы, но доступны при обновлении данных;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">ISerializable 
+    — транзакция выполняется изолированно от других транзакций;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">Ilisolated — транзакция 
+    выполняется изолированно от других транзакций.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TXactAttribute = (xaCommitRetaining, xaAbortRetaining); property Attributes: TXactAttributes;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задает способ управления транзакциями при их фиксации и откате:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;xaCommitRetaining — после 
+    фиксации очередной транзакции автоматически начинается выполнение новой;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;xaAbortRetaining — после 
+    отката очередной транзакции автоматически начинается выполнение новой.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

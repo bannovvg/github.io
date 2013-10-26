@@ -1,0 +1,957 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TiBDatabaseinfo</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент TiBDatabaseinfo обладает большим числом свойств и методов, содержащих разнообразные сведения о состоянии БД (табл. 18.8). Компонент очень прост в применении.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для выбора базы данных (компонента TiBDatabase) используется стандартное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Database: TiBDatabase;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В процессе работы с базой данных свойствам компонента TiBDatabaseinfo передаются соответствующие значения. Разработчику необходимо лишь в нужных местах использовать значения требуемых свойств.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 18.8. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TiBDatabaseinfo</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="421" HEIGHT="864">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="33">
+<DIV WIDTH="263" HEIGHT="33" style="width: 94; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="33">
+<DIV WIDTH="44" HEIGHT="33" style="width: 27; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="33">
+<DIV WIDTH="329" HEIGHT="33" style="width: 82; height: 33">
+<P><font face="Verdana" size="3">
+<b> Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="498" HEIGHT="31">
+<DIV WIDTH="263" HEIGHT="31" style="width: 77; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="25">
+<DIV WIDTH="263" HEIGHT="25" style="width: 168; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Allocation: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="25">
+<DIV WIDTH="44" HEIGHT="25" style="width: 4; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="25">
+<DIV WIDTH="329" HEIGHT="25" style="width: 224; height: 25">
+<P><font face="Verdana" size="3">
+Число выделенных страниц БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="44">
+<DIV WIDTH="263" HEIGHT="44" style="width: 179; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BackoutCount: TStringList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="44">
+<DIV WIDTH="44" HEIGHT="44" style="width: 4; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="44">
+<DIV WIDTH="329" HEIGHT="44" style="width: 257; height: 44">
+<P><font face="Verdana" size="3">
+Число вариантов удаленных записей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="44">
+<DIV WIDTH="263" HEIGHT="44" style="width: 158; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BaseLevel: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="44">
+<DIV WIDTH="44" HEIGHT="44" style="width: 8; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="44">
+<DIV WIDTH="329" HEIGHT="44" style="width: 249; height: 44">
+<P><font face="Verdana" size="3">
+ Версия базы данных (содержится во втором байте)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="50">
+<DIV WIDTH="263" HEIGHT="50" style="width: 179; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CurrentMemory: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="50">
+<DIV WIDTH="44" HEIGHT="50" style="width: 12; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="50">
+<DIV WIDTH="329" HEIGHT="50" style="width: 239; height: 50">
+<P><font face="Verdana" size="3">
+ Объем памяти (в байтах), занятый сервером
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="44">
+<DIV WIDTH="263" HEIGHT="44" style="width: 150; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Database: TIBDatabase;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="44">
+<DIV WIDTH="44" HEIGHT="44" style="width: 1; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="44">
+<DIV WIDTH="329" HEIGHT="44" style="width: 242; height: 44">
+<P><font face="Verdana" size="3">
+&nbsp;Ссылка на компонент соединения с БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="25">
+<DIV WIDTH="263" HEIGHT="25" style="width: 165; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DBFileName: String;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="25">
+<DIV WIDTH="44" HEIGHT="25" style="width: 6; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RO</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="25">
+<DIV WIDTH="329" HEIGHT="25" style="width: 137; height: 25">
+<P><font face="Verdana" size="3">&nbsp;Имя файла БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="50">
+<DIV WIDTH="263" HEIGHT="50" style="width: 173; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DBIinplementationClass : Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="50">
+<DIV WIDTH="44" HEIGHT="50" style="width: 5; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="50">
+<DIV WIDTH="329" HEIGHT="50" style="width: 169; height: 50">
+<P><font face="Verdana" size="3">
+Номер класса описания
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="42">
+<DIV WIDTH="263" HEIGHT="42" style="width: 157; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DBImplementationNo: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="42">
+<DIV WIDTH="44" HEIGHT="42" style="width: 2; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="42">
+<DIV WIDTH="329" HEIGHT="42" style="width: 125; height: 42">
+<P><font face="Verdana" size="3">
+Номер описания
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="23">
+<DIV WIDTH="263" HEIGHT="23" style="width: 148; height: 23">
+<P><font face="Verdana" size="3">
+property DBSiteName: String;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="23">
+<DIV WIDTH="44" HEIGHT="23" style="width: 2; height: 23">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="23">
+<DIV WIDTH="329" HEIGHT="23" style="width: 114; height: 23">
+<P><font face="Verdana" size="3">
+Имя сайта БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="33">
+<DIV WIDTH="263" HEIGHT="33" style="width: 180; height: 33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DBSQLDialect: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="33">
+<DIV WIDTH="44" HEIGHT="33" style="width: 2; height: 33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="33">
+<DIV WIDTH="329" HEIGHT="33" style="width: 155; height: 33">
+<P><font face="Verdana" size="3">Номер диалекта SQL
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="42">
+<DIV WIDTH="263" HEIGHT="42" style="width: 168; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DeleteCount: TStringList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="42">
+<DIV WIDTH="44" HEIGHT="42" style="width: 7; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="42">
+<DIV WIDTH="329" HEIGHT="42" style="width: 269; height: 42">
+<P><font face="Verdana" size="3">
+Число удалений с момента последнего обновления БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="46">
+<DIV WIDTH="263" HEIGHT="46" style="width: 107; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ExpungeCount: TStringList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="46">
+<DIV WIDTH="44" HEIGHT="46" style="width: 4; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="46">
+<DIV WIDTH="329" HEIGHT="46" style="width: 247; height: 46">
+<P><font face="Verdana" size="3">Число удалений записей с момента последнего сохранения БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="27">
+<DIV WIDTH="263" HEIGHT="27" style="width: 143; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Fetches: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="27">
+<DIV WIDTH="44" HEIGHT="27" style="width: 2; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="27">
+<DIV WIDTH="329" HEIGHT="27" style="width: 166; height: 27">
+<P><font face="Verdana" size="3">
+&nbsp;Число чтений из кэша
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="42">
+<DIV WIDTH="263" HEIGHT="42" style="width: 155; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ForcedWrites: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="42">
+<DIV WIDTH="44" HEIGHT="42" style="width: 3; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="42">
+<DIV WIDTH="329" HEIGHT="42" style="width: 235; height: 42">
+<P><font face="Verdana" size="3">
+ Режим чтения: 0 — асинхронное чтение; 1 — синхронное чтение.
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="46">
+<DIV WIDTH="263" HEIGHT="46" style="width: 102; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property InsertCount: TStringList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="46">
+<DIV WIDTH="44" HEIGHT="46" style="width: 7; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="46">
+<DIV WIDTH="329" HEIGHT="46" style="width: 241; height: 46">
+<P><font face="Verdana" size="3">Число добавлений в БД с момента последнего сохранения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="31">
+<DIV WIDTH="263" HEIGHT="31" style="width: 131; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Marks: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="31">
+<DIV WIDTH="44" HEIGHT="31" style="width: 9; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="31">
+<DIV WIDTH="329" HEIGHT="31" style="width: 247; height: 31">
+<P><font face="Verdana" size="3">
+Число выполненных записей в кэш
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="62">
+<DIV WIDTH="263" HEIGHT="62" style="width: 165; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MaxMemory: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="62">
+<DIV WIDTH="44" HEIGHT="62" style="width: 6; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="62">
+<DIV WIDTH="329" HEIGHT="62" style="width: 216; height: 62">
+<P><font face="Verdana" size="3">Максимальный размер памяти, занимаемый БД с момента последнего сохранения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="38">
+<DIV WIDTH="263" HEIGHT="38" style="width: 152; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NoReserve: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="38">
+<DIV WIDTH="44" HEIGHT="38" style="width: 20; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RO</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="38">
+<DIV WIDTH="329" HEIGHT="38" style="width: 181; height: 57">
+<P><font face="Verdana" size="3">Резервирование страниц: 0 — резервирование есть; 1 — резервирования нет
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="31">
+<DIV WIDTH="263" HEIGHT="31" style="width: 167; height: 32">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NumBuffers: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="31">
+<DIV WIDTH="44" HEIGHT="31" style="width: 2; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="31">
+<DIV WIDTH="329" HEIGHT="31" style="width: 196; height: 31">
+<P><font face="Verdana" size="3">
+Число выделенных буферов
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="192" HEIGHT="54">
+<DIV WIDTH="263" HEIGHT="54" style="width: 184; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ODSMajorVersion: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="54">
+<DIV WIDTH="44" HEIGHT="54" style="width: 3; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="277" HEIGHT="54">
+<DIV WIDTH="329" HEIGHT="54" style="width: 162; height: 54">
+<P><font face="Verdana" size="3">
+Верхнее значение ODS
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="44">
+<DIV WIDTH="267" HEIGHT="44" style="width: 188; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ODSMinorVersion: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="44">
+<DIV WIDTH="42" HEIGHT="44" style="width: 6; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="44">
+<DIV WIDTH="306" HEIGHT="44" style="width: 157; height: 44">
+<P><font face="Verdana" size="3">
+Нижнее значение ODS
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="32">
+<DIV WIDTH="267" HEIGHT="32" style="width: 151; height: 32">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PageSize: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="32">
+<DIV WIDTH="42" HEIGHT="32" style="width: 7; height: 32">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="32">
+<DIV WIDTH="306" HEIGHT="32" style="width: 158; height: 32">
+<P><font face="Verdana" size="3">
+&nbsp;Размер страницы БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="44">
+<DIV WIDTH="267" HEIGHT="44" style="width: 162; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PurgeCount: TStringList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="44">
+<DIV WIDTH="42" HEIGHT="44" style="width: 17; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="44">
+<DIV WIDTH="306" HEIGHT="44" style="width: 241; height: 44">
+<P><font face="Verdana" size="3">
+Общее число удаленных по любой причине записей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="40">
+<DIV WIDTH="267" HEIGHT="40" style="width: 177; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ReadldxCount: TStringList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="40">
+<DIV WIDTH="42" HEIGHT="40" style="width: 17; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="40">
+<DIV WIDTH="306" HEIGHT="40" style="width: 230; height: 40">
+<P><font face="Verdana" size="3">&nbsp;Число чтений через индексы с момента последнего сохранения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="42">
+<DIV WIDTH="267" HEIGHT="42" style="width: 149; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Readonly: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="42">
+<DIV WIDTH="42" HEIGHT="42" style="width: 2; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="42">
+<DIV WIDTH="306" HEIGHT="42" style="width: 196; height: 42">
+<P><font face="Verdana" size="3">&nbsp;0 — БД только для чтения; 1 — перезаписываемая БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="38">
+<DIV WIDTH="267" HEIGHT="38" style="width: 123; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Reads: Long;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="38">
+<DIV WIDTH="42" HEIGHT="38" style="width: 6; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="38">
+<DIV WIDTH="306" HEIGHT="38" style="width: 146; height: 38">
+<P><font face="Verdana" size="3">
+Число чтений из БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="42">
+<DIV WIDTH="267" HEIGHT="42" style="width: 176; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ReadSeqCount: TStringList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="42">
+<DIV WIDTH="42" HEIGHT="42" style="width: 9; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="42">
+<DIV WIDTH="306" HEIGHT="42" style="width: 223; height: 42">
+<P><font face="Verdana" size="3">
+Число чтений таблиц целиком с последнего сохранения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="32">
+<DIV WIDTH="267" HEIGHT="31" style="width: 188; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Sweeplnterval: Long;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="32">
+<DIV WIDTH="42" HEIGHT="31" style="width: 2; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="32">
+<DIV WIDTH="306" HEIGHT="31" style="width: 255; height: 31">
+<P><font face="Verdana" size="3">
+Число зафиксированных транзакций
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="40">
+<DIV WIDTH="267" HEIGHT="40" style="width: 171; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property UpdateCount: TStringList;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="40">
+<DIV WIDTH="42" HEIGHT="40" style="width: 11; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="40">
+<DIV WIDTH="306" HEIGHT="40" style="width: 229; height: 40">
+<P><font face="Verdana" size="3">Число обновлений БД с момента&nbsp; последнего сохранения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="53">
+<DIV WIDTH="267" HEIGHT="54" style="width: 174; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property UserNames:&nbsp; TStringList;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="53">
+<DIV WIDTH="42" HEIGHT="54" style="width: 5; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="53">
+<DIV WIDTH="306" HEIGHT="54" style="width: 229; height: 54">
+<P><font face="Verdana" size="3">Список активных пользователей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="23">
+<DIV WIDTH="267" HEIGHT="23" style="width: 196; height: 23">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Version: String;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="23">
+<DIV WIDTH="42" HEIGHT="23" style="width: 5; height: 23">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="23">
+<DIV WIDTH="306" HEIGHT="23" style="width: 81; height: 23">
+<P><font face="Verdana" size="3">
+Версия БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="29">
+<DIV WIDTH="267" HEIGHT="29" style="width: 143; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+1 property Writes: Long;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="29">
+<DIV WIDTH="42" HEIGHT="29" style="width: 6; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="29">
+<DIV WIDTH="306" HEIGHT="29" style="width: 213; height: 29">
+<P><font face="Verdana" size="3">
+Число постраничных записей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="486" HEIGHT="34">
+<DIV WIDTH="267" HEIGHT="34" style="width: 69; height: 34">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="66">
+<DIV WIDTH="267" HEIGHT="66" style="width: 194; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Call (ErrCode:&nbsp; ISC STATUS; RaiseError: Boolean) : ISC STATUS;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="66">
+<DIV WIDTH="42" HEIGHT="66" style="width: 8; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="66">
+<DIV WIDTH="306" HEIGHT="66" style="width: 213; height: 66">
+<P><font face="Verdana" size="3">
+Возвращает сообщение об ошибке по параметру
+<font face="Verdana" size="2"> ErrCode</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+</font ></P>
+<P><font face="Verdana" size="3">
+
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

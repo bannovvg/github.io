@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Просмотр и печать отчета</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Если в предыдущем пункте, обсуждая отчет в приложении Delphi, мы говорили о компоненте
+<font face="Verdana" size="2">TRvproject</font>, то за выполнение любых операций с ним отвечает компонент
+<font face="Verdana" size="2">TRvSystem</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При стандартной настройке этого компонента при печати или предварительном просмотре отчета всегда отображается диалог настройки печати (см. рис. 23.4). Если отображение этого диалога необходимо, печать текущего отчета компонента
+<font face="Verdana" size="2">TRvproject</font>, с которым связан данный компонент
+<font face="Verdana" size="2">TrvSystem</font>. осуществляется методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Execute;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+любого из этих компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если диалог настройки печати не нужен, компонент
+<font face="Verdana" size="2"> TRvSystem</font> позволяет выполнить операцию напрямую. Для этого необходимо выполнить несколько действий.
+</font ></P>
+<P><font face="Verdana" size="3">
+Сначала нужно настроить свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TReportDest = (rdPreview, rdPrinter, rdFile);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property DefaultDest: TReportDest;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое определяет, куда будет направлен отчет — в окно просмотра, на принтер или в файл.
+</font ></P>
+<P><font face="Verdana" size="3">
+Затем необходимо изменить свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SystemSetup = (ssAllowSetup, ssAllowCopies, ssAllowCollate,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ssAllowDuplex, ssAllowDestPreview, ssAllowDestPrinter, ssAllowDestFiie,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ssAllowPrinterSetup);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSystemSetups = Set of TSystemSetup;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property SystemSetups: TSystemSetups;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+убрав из него опцию <font face="Verdana" size="2">ssAllowSetup</font>, которая включена по умолчанию:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvSysteml.SystemSetups := RvSysteml.SystemSetups — [ssAllowSetup];</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">и, наконец ,свойству
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DoNativeOutput: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+необходимо присвоить значение <font face="Verdana" size="2">False</font>, т. к. по умолчанию оно имеет значение
+<font face="Verdana" size="2">True</font>, которое и заставляет компонент показывать диалог настройки печати перед выполнением операции.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обратите внимание на очень важную деталь — чтобы все сделанные настройки действительно сработали, печать отчета необходимо выполнять
+только методом <font face="Verdana" size="2">Execute</font> Компонента
+<font face="Verdana" size="2">TRvProjeet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

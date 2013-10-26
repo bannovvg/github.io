@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index31.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index33.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Класс TParameter </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TParameter</font> инкапсулирует отдельный параметр. Имя параметра определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Name: WideString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Тип данных, которому должно соответствовать его значение, задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDataType = TFieldType; property DataType: TDataType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И так как параметры взаимодействуют с полями таблиц БД, то тип данных параметров совпадает с типами данных полей. От типа данных зависит размер параметра
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Size: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который может быть изменен для строкового или символьного типа данных и им подобных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Само значение параметра содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Value:   OleVariant;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TParameterAttribute = (paSigned, paNullable, paLong);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TParameterAttributes = set of TParameterAttribute; property Attributes: TParameterAttributes;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+контролирует значение, присваиваемое параметру:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;paSigned — значение может 
+    быть символьным;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;paNullable — значение параметра 
+    может быть пустым;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;paLong — значение может 
+    содержать данные типа BLOB.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Тип параметра задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TParameterDirection = (pdUnknown, pdlnput, pdOutput, pdlnputOutput, pdReturnValue);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Direction: TParameterDirection;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pdUnknown</font> — неизвестный тип, источник данных попытается определить его самостоятельно;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pdinput</font> — входной параметр, используется в запросах и хранимых процедурах;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pdOutput</font> — выходной параметр, используется в хранимых процедурах;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pdlnputOutput</font> — входной и выходной параметр одновременно, используется в хранимых процедурах;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pdReturnValue</font> — параметр для передачи значения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если параметр должен передавать большие бинарные массивы (например, изображения или файлы), то значение параметра можно загрузить, используя методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromFile(const FileName: String; DataType: TDataType);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromStream(Stream: TStream; DataType: TDataType);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index31.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index33.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Класс TThread</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Delphi представляет программисту полный доступ к возможностям программирования интерфейса Win32. Для чего же тогда фирма Borland представила специальный класс для организации потоков? Вообще говоря, программист не обязан разбираться во всех тонкостях механизмов, предлагаемых операционной системой. Класс должен инкапсулировать и упрощать программный интерфейс; класс
+<font face="Verdana" size="2"> TThread</font> — прекрасный пример предоставления разработчику простого доступа к программированию потоков. Сам API потоков, вообще говоря, не очень сложен, но предоставленные классом
+<font face="Verdana" size="2"> TThread</font> возможности вообще замечательно просты. В двух словах, все, что вам необходимо сделать, — это перекрыть виртуальный метод
+<font face="Verdana" size="2">Execute</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Другая отличительная черта класса <font face="Verdana" size="2"> TThread</font> — это гарантия безопасной работы с библиотекой визуальных компонентов VCL. Без использования класса
+<font face="Verdana" size="2"> TThread</font> во время вызовов VCL могут возникнуть ситуации, требующие специальной синхронизации (см. разд. &quot;Проблемы при синхронизации потоков&quot; далее в этой главе).
+</font ></P>
+<P><font face="Verdana" size="3">
+Нужно отдавать себе отчет, что с точки зрения операционной системы поток — это ее объект. При создании он получает дескриптор и отслеживается ОС. Объект класса
+<font face="Verdana" size="2"> TThread</font> — это конструкция Delphi, соответствующая потоку ОС. Этот объект VCL создается до реального возникновения потока в системе и уничтожается после его исчезновения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Изучение класса <font face="Verdana" size="2"> TThread</font> начнем с метода Execute:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Execute; virtual; abstract;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Это и есть код, исполняемый в создаваемом вами потоке
+<font face="Verdana" size="2">TThread</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание<U>&nbsp;</U></B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Хотя формальное описание <font face="Verdana" size="2"> 
+    Execute</font> — метод <font face="Verdana" size="2">abstract</font>, но мастер 
+    создания нового объекта <font face="Verdana" size="2"> TThread</font> создает 
+    для вас пустой шаблон этого метода. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Переопределяя метод <font face="Verdana" size="2">Execute</font>, мы можем тем самым закладывать в новый потоковый класс то, что будет выполняться при его запуске. Если поток
+был<B>  </B>создан с аргументом<B>  </B><font face="Verdana" size="2">CreateSuspended</font>,
+равным<B> </B><font face="Verdana" size="2">False</font>, то
+метод<B> </B><font face="Verdana" size="2">Execute</font> выполняется немедленно, в противном случае
+<font face="Verdana" size="2"> Execute</font> выполняется после вызова метода
+<font face="Verdana" size="2"> Resume</font> (см. описание конструктора ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Если поток рассчитан на однократное выполнение каких-либо действий, то никакого специального кода завершения внутри
+<font face="Verdana" size="2"> Execute</font> писать не надо.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если же в потоке будет выполняться какой-то цикл, и поток должен завершиться вместе с приложением, то условия окончания цикла должны быть примерно такими:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMyThread.Execute;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+repeat</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DoSomething;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Until CancelCondition or Terminated;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь <font face="Verdana" size="2"> CancelCondition</font> — ваше личное условие завершения потока (исчерпание данных, окончание вычислений, поступление на вход того или иного символа и т. п.), а свойство
+<font face="Verdana" size="2"> Terminated</font> сообщает о завершении потока (это свойство может быть установлено как изнутри потока, так и извне; скорее всего, завершается породивший его процесс).
+</font ></P>
+<P><font face="Verdana" size="3">
+Конструктор объекта:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor Create(CreateSuspended: Boolean);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+получает параметр <font face="Verdana" size="2">CreateSuspended</font>. Если его значение равно
+<font face="Verdana" size="2">True</font>, вновь созданный поток не начинает выполняться до тех пор, пока не будет сделан вызов метода
+<font face="Verdana" size="2">Resume</font>. В случае, если параметр
+<font face="Verdana" size="2"> CreateSuspended</font> имеет значение
+<font face="Verdana" size="2">False</font>, конструктор завершается и только затем поток начинает исполнение.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+destructor Destroy; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Деструктор <font face="Verdana" size="2"> Destroy</font> вызывается, когда необходимость в созданном потоке отпадает. Деструктор завершает его и высвобождает все ресурсы, связанные
+с объектом <font face="Verdana" size="2">TThread. function Terminate:   Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Для окончательного завершения потока (без последующего запуска) существует метод
+<font face="Verdana" size="2">Terminate</font>. Но если вы думаете, что этот метод делает какие-то принудительные действия по остановке потока, вы ошибаетесь. Все, что происходит, — это установка свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Terminated: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в значение <font face="Verdana" size="2">True</font>. Таким образом,
+<font face="Verdana" size="2"> Terminate</font> — это указание потоку завершиться, выраженное &quot;в мягкой форме&quot;, с возможностью корректно освободить ресурсы. Если вам нужно немедленно завершить поток, используйте функцию
+<font face="Verdana" size="2"> Windows API TerminateThread.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Метод <font face="Verdana" size="2"> Terminate</font> 
+    автоматически вызывается и из деструктора объекта. Поток— объект VCL будет 
+    дожидаться, пока завершится поток— объект операционной системы. Таким образом, 
+    если поток не умеет завершаться корректно, вызов деструктора потенциально 
+    может привести к зависанию всей программы. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Еще одно полезное свойство:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FreeOnTerminate: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если это свойство равно <font face="Verdana" size="2">True</font>, то деструктор потока будет вызван автоматически по его завершении. Это очень удобно для тех случаев, когда вы в своей программе не уверены точно, когда именно завершится поток, и хотите использовать его по принципу &quot;выстрелил и забыл&quot;
+(<font face="Verdana" size="2">fire and forget</font>).
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WaitFor: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> WaitFor</font> предназначен для синхронизации и позволяет одному потоку дождаться момента, когда завершится другой поток. Если вы внутри потока
+<font face="Verdana" size="2">FirstThread </font>пишите код
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Code := SecondThread.WaitFor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+то это означает, что поток <font face="Verdana" size="2"> FirstThread</font> останавливается до момента завершения потока
+<font face="Verdana" size="2">SecondThread</font>. Метод <font face="Verdana" size="2"> WaitFor</font> возвращает код завершения ожидаемого потока (см. свойство
+<font face="Verdana" size="2">Returnvalue</font>).
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle: THandle read FHandle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property ThreadID: THandle read FThreadID;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойства <font face="Verdana" size="2"> Handle</font> и <font face="Verdana" size="2"> ThreadID</font> дают программисту непосредственный доступ к потоку средствами API Win32. Если разработчик хочет обратиться к потоку и управлять им, минуя возможности класса
+<font face="Verdana" size="2">TThread</font>, значения <font face="Verdana" size="2"> Handle</font> и
+<font face="Verdana" size="2"> ThreadID</font> могут быть использованы в качестве аргументов функций Win32 API. Например, если программист хочет перед продолжением выполнения приложения дождаться завершения сразу нескольких потоков, он должен вызвать функцию API
+<font face="Verdana" size="2">waitForMuitipieObjects</font>; для ее вызова необходим массив дескрипторов потоков.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Priority: TThreadPriority;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> Priority</font> позволяет запросить и установить приоритет потоков. Приоритеты потоков в деталях описаны выше. Допустимыми значениями приоритета для объектов
+<font face="Verdana" size="2"> TThread</font> являются <font face="Verdana" size="2"> tpidle, tpLowest, tpLower, tpNormai, tpHigher, tpHighest
+и tpTimeCritical.</font>
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Synchronize(Method: TThreadMethod);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Этот метод относится к секции <font face="Verdana" size="2">protected</font>, т. е. может быть вызван только из потомков
+<font face="Verdana" size="2">TThread</font>. Delphi предоставляет программисту метод
+<font face="Verdana" size="2"> Synchronize</font> для
+</font ></P>
+<P><font face="Verdana" size="3">
+безопасного вызова методов VCL внутри потоков. Во избежание конфликтных ситуаций, метод
+<font face="Verdana" size="2"> synchronize</font> дает гарантию, что к каждому объекту VCL одновременно имеет доступ только один поток. Аргумент, передаваемый в метод
+<font face="Verdana" size="2">Synchronize</font>, — это имя метода, который производит обращение к VCL; вызов
+<font face="Verdana" size="2"> Synchronize</font> с этим параметром — это то же, что и вызов самого метода. Такой метод (класса
+<font face="Verdana" size="2">TThreadMethod</font>) не должен иметь никаких параметров и не должен возвращать никаких значений. К примеру, в основной форме приложения нужно предусмотреть функцию
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.SyncShowMessage; begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessagedntToStr (ThreadListl. Count) ) ; // другие обращения к VCL</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а в потоке для показа сообщения писать не
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage(IntToStr(ThreadListl.Count));</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и даже не
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MainForm.SyncShowMessage;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а только так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Synchronize(MainForm.SyncShowMessage);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<B>Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Производя любое обращение к объекту VCL из 
+    потока, убедитесь, что при этом используется метод <font face="Verdana" size="2">Synchronize</font>; 
+    в противном случае результаты могут оказаться непредсказуемыми. Это верно 
+    даже в том случае, если вы используете средства синхронизации, описанные ниже. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Resume;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> Resume</font> класса <font face="Verdana" size="2"> TThread</font> вызывается, когда поток возобновляет выполнение после остановки, или для явного запуска потока, созданного с параметром
+<font face="Verdana" size="2">CreateSuspended</font>, равным <font face="Verdana" size="2">True</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Suspend;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Вызов метода <font face="Verdana" size="2"> Suspend</font> приостанавливает поток с возможностью повторного запуска впоследствии. Метод
+<font face="Verdana" size="2"> suspend</font> приостанавливает поток вне зависимости от кода, исполняемого потоком в данный момент; выполнение продолжается с точки останова.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Suspended: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> suspended</font> позволяет программисту определить, не приостановлен ли поток. С помощью этого свойства можно также запускать и останавливать поток. Установив свойство
+<font face="Verdana" size="2"> suspended</font> в значение <font face="Verdana" size="2">True</font>, вы получите тот же результат, что и при вызове метода
+<font face="Verdana" size="2"> Suspend</font> — приостановку. Наоборот, установка свойства
+<font face="Verdana" size="2"> Suspended</font> в значение <font face="Verdana" size="2"> False</font> возобновляет выполнение потока, как и вызов метода
+<font face="Verdana" size="2">Resume</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ReturnValue: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> ReturnValue</font> позволяет узнать и установить значение, возвращаемое потоком по его завершении. Эта величина полностью определяется пользователем. По умолчанию поток возвращает ноль, но если программист захочет вернуть другую величину, то простая переустановка свойства
+<font face="Verdana" size="2"> ReturnValue</font> внутри потока позволит получить эту информацию другим потокам. Это, к примеру, может пригодиться, если внутри потока возникли проблемы, или с помощью свойства
+<font face="Verdana" size="2"> ReturnValue</font> нужно вернуть число не прошедших орфографическую проверку слов.
+</font ></P>
+<P><font face="Verdana" size="3">
+На этом завершим подробный обзор класса <font face="Verdana" size="2">TThread</font>. Для более близкого знакомства с потоками и классом
+<font face="Verdana" size="2"> Delphi TThread </font> создадим многопоточное приложение. Для этого нужно написать всего несколько строк кода и несколько раз щелкнуть мышью.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

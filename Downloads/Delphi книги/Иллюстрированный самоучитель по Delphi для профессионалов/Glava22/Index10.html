@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Работа 
+  с данными типа BLOB</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Если набор данных сервера содержит большие поля (например, изображения), передача данных по медленному каналу займет очень много времени,
+</font ></P>
+<P><font face="Verdana" size="3">
+что, несомненно, снизит эффективность приложения. Простейшее решение проблемы — передача клиенту данных типа
+<font face="Verdana" size="2"> BLOB</font> только в том случае, когда это ему действительно необходимо — т. е. исключительно по его запросу.
+</font ></P>
+<P><font face="Verdana" size="3">
+В компоненте <font face="Verdana" size="2"> TCHentDataSet</font> процессом передачи полей типа
+<font face="Verdana" size="2"> BLOB</font> можно управлять, используя свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FetchOnDemand: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+По умолчанию оно равно значению <font face="Verdana" size="2"> True</font> и клиентский набор данных &quot;выкачивает&quot; данные
+<font face="Verdana" size="2"> BLOB</font> по мере необходимости автоматически. Это означает, что приложение будет останавливаться и заново получать данные при любом просмотре данных, прокрутке и т. д. Если свойство имеет значение
+<font face="Verdana" size="2">False</font>, для получения данных клиент должен явно вызвать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FetchBlobs;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но, кроме этого, в свойстве <font face="Verdana" size="2"> options</font> компонента-провайдера
+<font face="Verdana" size="2"> TDataSetProvider</font> обязательно должно быть установлено значение:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poFetchBlobsOnDemand := True;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P align="center"><font face="Verdana" size="3"> &nbsp; </font ><font face="Verdana" size="3"> 
+  <font size="4"><strong>ГЛАВА 24</strong></font></font></P>
+<P align="center"><strong><font face="Verdana" size="3"><font size="4"><br>
+  Визуальная среда создания отчетов</font> </font></strong><font face="Verdana" size="3"><br>
+  </font> </P>
+<p align="left">
+<font face="Verdana" size="3">
+<P><font face="Verdana" size="3">
+Визуальная среда создания отчетов входит в состав генератора отчетов Rave Reports 5.0. В отличие от генератора отчетов Quick Report, который поставлялся с Delphi 6 и более ранними версиями, визуальная среда в Rave Reports значительно облегчает самый трудоемкий этап в процессе создания отчета и его включения в состав приложения — постраничную разработку шаблона отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+Под шаблоном отчета мы подразумеваем совокупность страниц отчета с расположенными на них графическими и текстовыми элементами оформления, а также свойствами и правилами создания отчета, сохраненными в файле с расширением rav.
+</font ></P>
+<P><font face="Verdana" size="3">
+Каждый файл RAV может включать несколько независимых шаблонов отчетов. Затем эти шаблоны используются в компонентах TRvProject и служат основой для создания и печати отчетов в приложении.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, средствами визуальной среды шаблон отчета может быть подключен к различным источникам данных. При этом могут использоваться следующие технологии доступа к данным:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;ADO;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;dbExpress;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;BDE.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Визуальная среда Rave Reports открывается из меню <B>Tools | Rave Designer</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+главного окна Delphi или при двойном щелчке на компоненте
+<font face="Verdana" size="2">TRvProject</font>. Исполняемый файл Rave.exe расположен в папке Delphi7\Rave5.
+</font ></P>
+<P><font face="Verdana" size="3">
+Подводя итог сказанному, мы можем выделить несколько основных задач, которые можно решать в визуальной среде создания отчетов:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> загрузка, редактирование и сохранение шаблонов отчетов в 
+    файлах RAV;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;создание структуры отчета и определение его основных 
+    свойств;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;разработка страниц отчета;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;подключение к отчету источников данных и использование 
+    этих данных при оформлении страниц отчетов;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;генерация отчета на основе созданного шаблона, его 
+    предварительный просмотр или печать.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+В этой главе рассматриваются следующие вопросы:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;составные части визуальной среды и инструментарий создания 
+    отчетов;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;структура шаблона отчета;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;текстовые и графические элементы оформления страниц 
+    отчетов;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;как использовать методы-обработчики событий;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;какие источники данных доступны в отчетах, как их подключить 
+    и использовать при оформлении страниц.</font></li>
+</ul>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

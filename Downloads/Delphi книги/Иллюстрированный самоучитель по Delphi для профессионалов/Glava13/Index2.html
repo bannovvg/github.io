@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Объекты полей</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Объекты полей инкапсулируют свойства и методы полей различных типов данных. Они функционируют совместно с набором данных и очень тесно связаны с ним. Например, для того чтобы получить значения полей из текущей записи набора данных, разработчик должен создать примерно такой код:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Editl.Text := Tablel.Fields[0].AsString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> Fields</font> представляет собой индексированный список объектов полей набора данных (см. гл. 12).
+Если разработчик не изменяет порядок следования полей в наборе данных, то расположение объектов полей в списке
+<font face="Verdana" size="2"> Fields</font> соответствует структуре таблицы базы данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Каждый объект полей хранит ряд параметров, определяющих поле. Например, в наборе данных к объекту поля можно обратиться, зная только название поля:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Editl.Text := Tablel.FieldByName('SomeField1).AsString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для того чтобы присвоить значение полю в текущей записи, можно воспользоваться приведенными выше способами или, если тип данных поля неизвестен, свойством
+<font face="Verdana" size="2">Fieidvalues</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Tablel.FieldValues['SomeField'] := Editl.Text;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Знание имени поля дает самый простой способ обращения к текущему значению поля:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Tablel['SomeField'] := Editl.Text;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Editl.Text := Tablel['SomeField'];</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"><B>Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При присваивании значений полям набора данных 
+    необходимо контролировать состояние, в котором находится набор данных (см. 
+    гл. 12). </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В основе классов, описывающих иерархию типизированных полей, лежит класс
+<font face="Verdana" size="2">TField</font>. От него порождены другие классы, обеспечивающие работу целых групп полей, объединенных по типам данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Что же такое объект поля и какие возможности он предоставляет разработчику?
+</font ></P>
+<P><font face="Verdana" size="3">
+Во-первых, назначение класса <font face="Verdana" size="2">TField</font>, как базового класса поля, заключается в умении взаимодействовать с компонентом отображения данных для обеспечения правильной визуализации данных. Например, объект поля хранит способ выравнивания, параметры шрифта, текст заголовка и т. д.
+</font ></P>
+<P><font face="Verdana" size="3">
+Во-вторых, с точки зрения набора данных объект поля является хранилищем текущего значения этого поля (а не всего столбца данных, как это можно себе представить по названию).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.13.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <b> Рис. 13.1</b>. Иерархия классов 
+  полей </font ></P>
+  <P align="left"><font face="Verdana" size="3"> Компоненты отображения данных при 
+    работе с набором данных взаимодействуют именно с полями. Например, колонки 
+    компонента <font face="Verdana" size="2"> TDBCrid</font> при отсутствии дополнительных 
+    настроек соответствуют расположению объектов полей в связанном наборе данных. 
+    </font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+
+  <table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Категория 
+  Internet</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Здесь всего три — типовых для пользователя Сети — действия.
+</font ></P>
+<P><font face="Verdana" size="3">
+Действие TBrowseURL открывает URL, заданный в одноименном свойстве. Поскольку это происходит при помощи функции
+<font face="Verdana" size="2">shellExecute</font>, для просмотра открывается браузер, зарегистрированный в системе по умолчанию.
+</font ></P>
+<P><font face="Verdana" size="3">
+Действие <font face="Verdana" size="2">TSendMai</font><font face="Verdana" size="2">l</font> запускает программу — почтового клиента для отправки письма (с помощью интерфейса MAPI). Текст письма вы можете задать в свойстве
+<font face="Verdana" size="2">Text</font>. Но! Ни получателя, ни тему, ни вложений задать нельзя — это придется делать вручную в почтовой программе. При желании полностью автоматизировать процесс отправки вам придется породить дочерний
+компонент от действия <font face="Verdana" size="2">TSendMail</font>,
+где и перекрыть метод <font face="Verdana" size="2">ExecuteTarget</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Исходные тексты — в модуле <font face="Verdana" size="2">ExtActns</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наконец, самый сложный компонент <font face="Verdana" size="2">TDownloadURL</font>. Он позволяет загрузить содержимое с адреса URL и сохранить его на локальной машине под именем
+<font face="Verdana" size="2">FileName</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Поскольку загрузка — процесс долгий, в то время, пока она происходит, периодически возникает событие
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnDownloadProgress: TDowriloadProgressEvent;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> TDownloadProgressEvent = procedure(Sender: TDownLoadURL;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Progress,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ProgressMax: Cardinal; StatusCode: TURLDownloadStatus;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">StatusText: String;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var Cancel: Boolean) of object;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметры обработчика этого события следующие.
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Progress 
+    и  ProgressMax — текущее и максимальное значение показателя 
+    хода скачивания. Во-первых, не все HTTP-серверы правильно сообщают о размере 
+    ответа; во-вторых, для некоторых типов файлов (например, HTML) эти параметры 
+    вычисляются не всегда верно (вы можете это видеть в  Internet 
+    Explorer); в-третьих, из-за маршрутизации пакетов ожидать ритмичного 
+    изменения параметра  Progress не следует. Поэтому пользователю 
+    надо показывать соотношение progress/ProgressMax.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+<B>     Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Значение <font face="Verdana" size="2"> ProgressMax</font> 
+    может быть равно нулю. В этом случае о ходе загрузки численно судить нельзя. 
+    Информацию несут другие параметры события. </font ></P>
+</blockquote>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">StatusCode и  
+    StatusText — код, описывающий текущее состояние операции и соответствующий 
+    ему текст. Список возможных кодов содержит около 30 значений. Для тех, кто 
+    знает протокол HTTP и хочет разобраться в этом глубже, следует обратиться 
+    к описанию интерфейса IBindstatusCallback в MSDN. 
+    Если же вам достаточно показать пользователю текст, то он содержится во втором 
+    параметре. По содержанию он представляет примерно то же, что вы видите при 
+    загрузке файлов с помощью Internet Explorer.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Cancel — этот параметр 
+    одинаков для всех долго продолжающихся операций. Установив его в значение 
+    True, вы можете прервать выполнение загрузки.</font></li>
+</ul>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

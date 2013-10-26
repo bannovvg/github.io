@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Соединения с источниками данных в Rave Reports</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Если отчет Rave Reports должен отображать данные из какого-либо источника данных, на этапе разработки в визуальной среде в проект отчета должны быть добавлены специальные объекты, обеспечивающие соединение с источником данных и формирование набора данных, который затем отображается в отчете.
+</font ></P>
+<P><font face="Verdana" size="3">
+В Rave Reports существуют два типа соединений с источниками данных (рис. 26.1):
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;соединение через драйвер Rave Reports;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;соединение через компонент Rave Reports и компонент 
+    набора данных в приложении Delphi.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+В обоих случаях соединение инкапсулировано в объекте визуальной среды, а различаются только способы доступа к данным и набор компонентов, необходимый для этого.
+</font ></P>
+<P><font face="Verdana" size="3">
+При соединении через драйвер Rave Reports проект отчета на этапе разработки и ядро генератора отчетов на этапе выполнения используют драйверы, которые реализованы в виде файлов с расширением rvd. Именно наличие этих файлов предопределяет выбор технологий доступа к данным при создании объекта соединения в среде разработки (рис. 26.2). В стандартную поставку Rave Reports 5.0 входят драйверы для следующих технологий доступа к данным:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">ADO;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;dbExpress;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;BDE.</font></li>
+</ul>
+<p align="center">
+<div align="center"><IMG src="gl.26.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 26.1. </B>Соединения 
+  с источниками данных в отчете Rave Reports </font ></P>
+<P><font face="Verdana" size="3"> При соединении через компоненты в Delphi сначала 
+  необходимо создать объект просмотра <B>Direct Data View, </B>который реализует 
+  прямой доступ к набору данных на основе активного соединения в приложении Delphi. 
+  При этом соединение может быть создано на основе любой доступной в Delphi технологии 
+  доступа к данным. Это позволяет сделать набор компонентов Rave Reports на странице 
+  <B>Rave </B>Палитры компонентов Delphi. Это следующие технологии доступа к данным: 
+  </font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">ADO;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;DbExpress;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;BDE;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;InterBase 
+    Express;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;клиентские 
+    наборы данных распределенных приложений;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;источники 
+    данных, не использующие базы данных (текстовые файлы, электронная почта, электронные 
+    таблицы и т. д.)</font>.</li>
+</ul>
+<P><font face="Verdana" size="3"> За визуализацию данных в отчете отвечают специализированные 
+  элементы оформления, расположенные на странице <B>Report </B>Палитры инструментов 
+  визуальной среды Rave Reports. Они связываются с полями объекта просмотра данных, 
+  созданного разработчиком. Это может быть просмотр на основе запроса SQL, созданного 
+  разработчиком, или прямой просмотр набора данных Delphi. Просмотр объединяет 
+  нужные поля из таблиц, которые доступны через соединение с источником данных 
+  (см. гл. 24). Для этого используется свойство <font face="Verdana" size="2"> 
+  Dataview</font> элементов оформления. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index1.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

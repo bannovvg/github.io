@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index23.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index25.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"><b>Состояние записи </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TCustomADODataSet</font> обладает дополнительными возможностями, которые позволяют отслеживать состояние каждой записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для текущей записи набора данных можно определить ее состояние. Для этого предназначено свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRecordStatus  =   (rsOK,   rsNew,   rsModified,   rsDeleted,   rsUnmodified, rslnvalid,   rsMultipleChanges,   rsPendingChanges,   rsCanceled, rsCantRelease,   rsConcurrencyViolation,   rsIntegrityViolation, rsMaxChangesExceeded,   rsObjectOpen,   rsOutOfMemory,   rsPermissionDenied, rsSchemaViolation,   rsDBDeleted); property RecordStatus:   TRecordStatusSet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где <font face="Verdana" size="2"> rsOK</font> — запись успешно сохранена;
+<font face="Verdana" size="2">rsNew</font> — запись добавлена;
+<font face="Verdana" size="2"> rsModified</font> — запись была изменена;
+<font face="Verdana" size="2"> rsDeleted</font> — запись удалена; rsUnmodified — запись без изменений;
+<font face="Verdana" size="2"> rslnvalid</font> — запись не может быть сохранена из-за неверной закладки;
+<font face="Verdana" size="2"> rsMultipleChanges</font> — запись не может быть сохранена из-за множественных изменений;
+<font face="Verdana" size="2"> rsPendingChanges</font> — запись не может быть сохранена из-за ссылки на несохраненные изменения;
+<font face="Verdana" size="2"> rsCanceled</font> — операция с записью была отменена;
+<font face="Verdana" size="2"> rsCantRelease</font> — запись заблокирована;
+<font face="Verdana" size="2"> rsConcurrencyViolation</font> — запись не может быть сохранена из-за типа блокировки;
+<font face="Verdana" size="2"> rsintegrityvioiation</font> — нарушена ссылочная целостность;
+<font face="Verdana" size="2"> rsMaxChangesExceeded</font> —
+слишком много изменений; <font face="Verdana" size="2"> rsObjectOpen</font> — конфликт с объектом базы данных;
+<font face="Verdana" size="2"> rsoutofMemory</font> — недостаток памяти,
+<font face="Verdana" size="2">rsPermissionDenied</font> — нет доступа;
+<font face="Verdana" size="2"> rsSchemaViolation</font> —
+нарушение структуры данных; <font face="Verdana" size="2"> rsDBDeleted</font> — запись удалена в БД.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как видите, благодаря этому свойству состояние отдельной записи может
+быть определено очень точно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TUpdateStatus = (usUnmodified, usModifled, uslnserted, usDeleted);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;function UpdateStatus: TUpdateStatus; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает информацию о состоянии текущей записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+Соответственно до и после изменения записи вызываются методы-обработчики
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TWillChangeRecordEvent = procedure(DataSet: TCustomADODataSet; const Reason: TEventReason;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> const RecordCount: Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var EventStatus: TEventStatus) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property OnWillChangeRecord: TWillChangeRecordEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRecordChangeCompleteEvent = procedure(DataSet: TCustomADODataSet; const Reason:
+TEventReason;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">const RecordCount: Integer; const Error: Error;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var EventStatus: TEventStatus) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property OnRecordChangeComplete:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">TrecordChangeCompleteEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где параметр <font face="Verdana" size="2"> Reason</font> позволяет узнать, какой метод изменил записи, а параметр
+<font face="Verdana" size="2"> RecordCount</font> возвращает число измененных записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index23.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index25.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

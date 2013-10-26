@@ -1,0 +1,551 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Использование диалогов для загрузки и сохранения графических файлов</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для удобства открытия картинок существует пара компонентов-диалогов:
+<font face="Verdana" size="2">TOpenPictureDialog</font> и <font face="Verdana" size="2">TSavePictureDialog</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Список форматов открываемых файлов определяется свойством
+<font face="Verdana" size="2">Filter</font>. Можно, как в случае со стандартными диалогами
+<font face="Verdana" size="2"> TOpenDiaiog</font> или <font face="Verdana" size="2">TSaveDialog</font>, сформировать их вручную с помощью редактора свойства
+<font face="Verdana" size="2">Filter</font>. Можно поступить проще, воспользовавшись готовыми средствами. Для удобства формирования строк графических фильтров существуют три специальные функции:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">function GraphicFilter(GraphicClass: TGraphicClass): string;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Формирует строку с полным текстом графического фильтра, позволяющего открывать все файлы, форматы которых являются потомками параметра
+<font face="Verdana" size="2">GraphicClass</font>. Если в качестве параметра этой функции будет передан класс
+<font face="Verdana" size="2">TGraphic</font>, то в строке будут перечислены все форматы:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+'Аll (*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf} I *.jpg;*.jpeg;*.bmp;*.ico; *.emf;*.wmfIJPEG Image File (*.jpg) I *.jpgI JPEG Image File (*.jpeg) I *.jpeg|Bitmaps (*.bmp) I *.bmplIcons (*.ico) I*.ico|Enhanced Metafiles (*.emf) |*.emf[Metafiles (*.wmf) I *.wmf'</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Формат JPEG появляется в перечне, если в приложении используется модуль с тем же названием — JPEG. В приводимом ниже примере возникла необходимость совместить фильтры только для классов
+<font face="Verdana" size="2"> TBitmap</font> и <font face="Verdana" size="2">TJPEGimage</font>, которые не являются предками друг друга. В этом случае получившиеся строки нужно соединить, использовав символ конкатенации
+<font face="Verdana" size="2"> &quot;|&quot;</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+S := GraphicFilter(TBitmap)+'|'+</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+GraphicFilter(TJpeglmage)&nbsp;</font>
+</font ></P>
+</blockquote>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">function GraphicExtension(GraphicClass: TGraphicClass): string;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Возвращает расширение файла, формат которого соответствует графическому классу
+<font face="Verdana" size="2">GraphicClass</font>. Так, если передать в качестве параметра класс
+<font face="Verdana" size="2">TBitmap</font>, то функция вернет строку
+'BMP';
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">function GraphicFileMask(GraphicClass: TGraphicClass): string;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Эта функция возвращает перечень расширений файлов с форматами — потомками
+<font face="Verdana" size="2">GraphicClass</font>, перечисленных через точку с запятой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для диалогов предусмотрено несколько событий, которые программист может обработать самостоятельно. Первые три — достаточно тривиальные:
+<font face="Verdana" size="2"> OnShow, oncanciose</font> и <font face="Verdana" size="2">enclose</font>. Нужно предостеречь программиста: по чьему-то недосмотру последние два вызываются только в случае нормального завершения диалога (нажатием кнопки <B>Open </B>или
+<b>Save</b>), а если завершить диалог нажатием кнопки <B>Cancel </B>или &quot;крестика&quot; на заголовке диалога, то управления они не получат.
+</font ></P>
+<P><font face="Verdana" size="3">
+Другие три события связаны с изменениями, которые осуществляет пользователь во время выбора нужного файла. Они происходят в момент изменения формата открываемого файла (событие
+<font face="Verdana" size="2">onTypeChange</font>), изменения текущей
+папки (<font face="Verdana" size="2">OnFolderChange</font>) и
+текущего файла (<font face="Verdana" size="2">OnSelectionChange</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Но разработчики диалогов не предусмотрели одну очень нужную возможность. Дело в том, что у разных графических форматов возможны различные опции и варианты. Если вы имеете опыт работы с графическими пакетами вроде Adobe Photoshop или Corel, то знаете, что, в зависимости от выбранного формата сохранения данных, диалог изменяет свой внешний вид — к нему добавляются элементы управления, соответствующие параметрам формата.
+</font ></P>
+<P><font face="Verdana" size="3">
+Поступим так и мы, предусмотрев настройку при сохранении файлов формата JPEG. Для этого будет использовано событие
+<font face="Verdana" size="2"> OnTypeChange</font> компонента <font face="Verdana" size="2">TSavePictureDialog</font>. Для события нужно проверить значение свойства
+<font face="Verdana" size="2">Filterindex</font>. Если оно больше 1 (т. е. выбраны файлы формата JPEG), нужно увеличить высоту окна диалога и разместить на нем дополнительные
+компоненты<B>:    </B>    флажок, соответствующий
+свойству<B> </B><font face="Verdana" size="2">ProgressiveEncoding</font>,
+и редактор свойства <font face="Verdana" size="2"> compressionQuaiity</font> (рис. 10.2). Если тип файла снова поменялся и стал равным 1, нужно эти компоненты убрать.
+</font ></P>
+<div align="center"><IMG src="gl.10.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 10.2. </B>Внешний вид 
+  модифицированного компонента <font face="Verdana" size="2"> TSavePictureDiaiog</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Поможет нам в этом внимательное изучение исходных 
+  кодов диалогов, находящихся в модуле EXTDLGS.PAS. Программисты Borland пошли 
+  по пути модернизации внешнего вида стандартных диалогов, добавив к ним справа 
+  панель для отображения внешнего вида открываемых (записываемых) картинок. Можно 
+  пойти дальше и добавить таким же образом и свои элементы управления. </font ></P>
+<P><font face="Verdana" size="3"> Приводимый ниже пример <font face="Verdana" size="2"> 
+  ModifDlg</font> — усовершенствованная программа просмотра и сохранения файлов 
+  растровой графики, к которым относятся файлы форматов JPEG и BMP. Чтобы исключить 
+  метафайлы и значки (*.wmf, *.emf, *.ico), соответствующим образом настраиваются 
+  фильтры в диалогах открытия и сохранения. </font ></P>
+<P><font face="Verdana" size="3"> Для изменения размеров диалогового окна нужно 
+  отыскать среди входящих в его состав компонентов панель <font face="Verdana" size="2">picturePanel</font> 
+  (так назвали ее разработчики Borland) и увеличить ее высоту. Следует также поменять 
+  и размеры родительских окон. Поскольку они не являются компонентами Delphi (стандартные 
+  диалоги являются составными частями Windows) для этой цели используются функции 
+  <font face="Verdana" size="2"> API</font> <font face="Verdana" size="2"> GetWindowRect</font> 
+  И <font face="Verdana" size="2">SetWindowPos</font>. </font ></P>
+<P><font face="Verdana" size="3"> Обратите также внимание, что при загрузке используется 
+  событие <font face="Verdana" size="2"> OnProgress</font> класса <font face="Verdana" size="2">TGraphic</font>. 
+  В его обработчике информация об объеме проделанной работы отображается на компоненте 
+  <font face="Verdana" size="2">progressBar</font><font face="Verdana" size="2">1</font>. 
+  Для маленьких картинок обработчик вызывается только в начале и в конце операции, 
+  пользователь ничего не заметит. Зато при загрузке большого изображения он будет 
+  спокоен, видя, что процесс загрузки идет и машина не зависла. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Листинг 10.1. </B> Исходный 
+  текст главного модуля программы ModifDlg&nbsp; </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> unit mainUnit;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> interface</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> uses</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Windows, Messages, 
+    SysUtils, Classes, Graphics, Controls, Forms,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Dialogs,</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ExtDlgs, StdCtrls, 
+    ComCtrls, ExtCtrls, Buttons;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TForml = class(TForm)</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SavePictureDialogl: 
+    TSavePictureDialog;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">OpenPictureDialogl: 
+    TOpenPictureDialog;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;ScrollBoxl: 
+    TScrollBox; Imagel: TImage;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ProgressBari: 
+    TProgressBar;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;OpenBitBtn: 
+    TBitBtn;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;SaveBitBtn: 
+    TBitBtn;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure SavePictureDialoglTypeChange(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure ImagelProgress(Sender: 
+    TObject; Stage: TProgressStage;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;PercentDone: 
+    Byte;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">RedrawNow: Boolean;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> const R: TRect;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;const 
+    Msg: String);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure SavePictureDialoglClose(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure FormCreate(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">procedure SavePictureDialoglShow(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;procedure 
+    OpenBitBtnClick(Sender: TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;procedure 
+    SaveBitBtnClick(Sender: TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> private&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> public&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Forml: TForml;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> implementation</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> {$R *.DFM}&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> uses jpeg;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> const DeltaH 
+    : Integer = 80;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var Quality 
+    : TJpegQualityRange;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ProgressiveEnc 
+    : Boolean;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.OpenBitBtnClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if OpenPictureDialogl.Execute</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then Imagel.Picture.LoadFromFile</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> (OpenPictureDialogl.FileName);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.SaveBitBtnClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var ji : TJpeglmage;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if SavePictureDialogl.Execute 
+    then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ji := TJpeglmage.Create;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ji.CompressionQuality 
+    := Quality;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ji.ProgressiveEncoding 
+    := ProgressiveEnc;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> j i.Assign(Imagel.Picture.Bitmap);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ji.SaveToFile(SavePictureDialogl.FileName);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ji.Free;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.SavePictureDialoglTypeChange(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;var ParentHandle:THandle;wRect:TRect;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PicPanel,PaintPanel:TPanel;JEdit 
+    : TEdit;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> Expanded : boolean;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> With Sender 
+    as TSavePictureDialog do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PicPanel := 
+    (FindComponent('PicturePanel') as TPanel);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if not Assigned(PicPanel) 
+    then Exit;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ParentHandle:=GetParent(Handle);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">PaintPanel:=(FindComponent('PaintPanel') 
+    as TPanel);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PaintPanel.Align 
+    := alNone;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Expanded 
+    := FindComponent('JLabel') &lt;&gt; nil;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;if Filterlndex 
+    &gt;1 then begin if not Expanded then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> GetWindowRect(ParentHandle,WRect);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SetWindowPos(ParentHandle,0,0,0,</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> WRect.Right-WRect.Left,</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> WRect.Bottom-WRect.Top+DeltaH,</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SWP_NOMOVE+SWP_NOZORDER);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> GetWindowRect(Handle,WRect);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SetWindowPos(handle,0,0,0,WRect.Right-</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> WRect.Left,</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> WRect.Bottom-WRect.Top+DeltaH,</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SWP_NOMOVE+SWP_NOZORDER);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Expanded:=True;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PicPanel.Height 
+    := PicPanel.Height+DeltaH;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if FindComponent('JLabel')=nil</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;then with 
+    TLabel.Create(Sender as TSavePictureDialog) do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Parent := PicPanel;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Name := 'JLabel';</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Caption := 
+    'Quality';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Left := 5;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Height := 25;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Top := PaintPanel.Top+PaintPanel.Height+5; 
+    end;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if FindComponent('JEdit')=nil 
+    then&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> JEdit := TEdit.Create(Sender 
+    as TSavePictureDialog);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;with JEdit 
+    do&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Parent := PicPanel;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Name:='JEdit';</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Text := '75';</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Left:-50;Width 
+    := 50;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Height := 25;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Top := PaintPanel.Top+PaintPanel.Height+5;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if FindComponent('JUpDown')=nil 
+    then&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with TUpDown.Create(Sender 
+    as TSavePictureDialog) do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Parent := PicPanel;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Name:='JUpDown';</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Associate := 
+    JEdit;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Increment := 
+    5;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Min := 1; Max 
+    := 100;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Position := 
+    75; end;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if FindComponent('JCheck')=nil 
+    then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with TCheckBox.Create(Sender 
+    as TSavePictureDialog) do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Name: = 'JCheck';</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Caption:='Progressive 
+    Encoding'; Parent:=PicPanel;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Left:=5;Width 
+    := PicPanel.Width - 10; Height:=25;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Top := PaintPanel.Top+PaintPanel.Height+35;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> else</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">SavePictureDialoglClose(Sender);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.ImagelProgress(Sender: 
+    TObject; Stage: TProgressStage;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;PercentDone: 
+    Byte; RedrawNow: Boolean; const R: TRect;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> const Msg: 
+    String);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> case Stage 
+    of psStarting:&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Progressbarl.Position 
+    := 0;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Progressbarl.Max 
+    := 100;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;psEnding: 
+    begin</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Progressbarl.Position 
+    := 0;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> psRunning: 
+    begin</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Progressbarl.Position 
+    := PercentDone;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.SavePictureDialoglClose(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;var PicPanel 
+    : TPanel; ParentHandle : THandle; WRect : TRect;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> With Sender 
+    as TSavePictureDialog do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PicPanel := 
+    (FindComponent('PicturePanel') as TPanel);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;if not 
+    Assigned(PicPanel) then Exit; ParentHandle:=GetParent(Handle);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;if ParentHandle=0 
+    then Exit;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;if FindComponent('JLabel')onil 
+    then&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> FindComponent('JLabel').Free;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">FindComponent('JEdit').Free;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ProgressiveEnc 
+    := (FindComponent('JCheck1) as TCheckBox).Checked; FindComponent('JCheck').Free;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Quality := 
+    (FindComponent('JUpDown') as TUpDown).Position; FindComponent('JUpDown').Free;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PicPanel.Height:=PicPanel.Height-DeltaH;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">GetWindowRect(Handle,WRect);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SetWindowPos(Handle,0,0,0,WRect.Right-WRect.Left, 
+    WRect.Bottom-WRect.Top-DeltaH,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SWP_NOMOVE+SWP_NOZORDER); 
+    GetWindowRect(ParentHandle,WRect);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SetWindowPos(ParentHandle,0,0,0,</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> WRect.Right-WRect.Left, 
+    WRect.Bottom-WRect.Top-DeltaH,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SWP_NOMOVE+SWP_NOZORDER); 
+    Filterlndex := 1;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.FormCreate(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var s: string;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> s :=GraphicFilter(TBitmap)+'|'+</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> GraphicFilter(TJpeglmage);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> OpenPictureDialogl.Filter 
+    := s;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SavePictureDialogl.Filter 
+    := s;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.SavePictureDialoglShow(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with Sender 
+    as TSavePictureDialog do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if FindComponent('JLabel')Onil 
+    then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> FilterIndex 
+    := 2;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SavePictureDialoglTypeChange(Sender) 
+    ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Приведенный пример может послужить толчком, 
+  во-первых, к углубленному изучению формата JPEG, а во-вторых, — к модификации 
+  стандартных диалогов. На его базе можно создать диалоги открытия аудиозаписей, 
+  документов и других специализированных видов файлов. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index13.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index15.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Интерфейс IAppServer</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Интерфейс <font face="Verdana" size="2">I</font><font face="Verdana" size="2">AppServer</font> является основной механизма удаленного доступа клиентских приложений к серверу приложения. Набор данных клиента использует его для общения с компонентом-провайдером на сервере приложения. Наборы данных клиента получают экземпляр
+<font face="Verdana" size="2">IAppServer</font> от компонента соединения в клиентском приложении (см. рис. 20.2).
+</font ></P>
+<P><font face="Verdana" size="3">
+При создании удаленных модулей данных (см. ниже)
+каждому такому модулю ставится в соответствие вновь создаваемый интерфейс, предком которого является интерфейс
+<font face="Verdana" size="2">IAppServer</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Разработчик может добавить к новому интерфейсу собственные методы, которые, благодаря возможностям механизма удаленного доступа многозвенных приложений, становятся доступны приложению-клиенту.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AppServer: Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в клиентском приложении имеется как в компонентах удаленного соединения, так и клиентском наборе данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+По умолчанию интерфейс является несохраняющим состояние (stateless). Это означает, что вызовы методов интерфейса независимы и не привязаны
+</font ></P>
+<P><font face="Verdana" size="3">
+к предыдущему вызову. Поэтому интерфейс <font face="Verdana" size="2">IAppServer</font> не имеет свойств, которые бы хранили информацию о состоянии между вызовами.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обычно разработчику ни к чему использовать методы интерфейса напрямую, однако его значение для многозвенных приложений трудно переоценить. И при детальной работе с механизмом удаленного доступа интерфейс понадобится так или иначе.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы интерфейса <font face="Verdana" size="2">IAppServer</font> представлены в табл. 21.1
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 21.1. </B>Методы интерфейса 
+  <font face="Verdana" size="2">IAppServar</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="489" HEIGHT="679">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="25">
+<DIV WIDTH="267" HEIGHT="25" style="width: 103; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="25">
+<DIV WIDTH="362" HEIGHT="25" style="width: 121; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="317">
+<DIV WIDTH="267" HEIGHT="317" style="width: 173; height: 317">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AS ApplyUpdates (const ProviderName: WideString; Delta: OleVariant; MaxErrors: Integer; out ErrorCount: Integer; var OwnerData: OleVariant) : OleVariant; safecall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="317">
+<DIV WIDTH="362" HEIGHT="317" style="width: 296; height: 380">
+<P><font face="Verdana" size="3">
+Передает изменения, полученные от клиентского набора данных, компоненту-провайдеру, определяемому параметром
+<font face="Verdana" size="2">ProviderName</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Изменения содержатся в параметре Delta.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> MaxErrors</font> задает максимальное число ошибок, пропускаемых при сохранении данных перед прерыванием операции. Реальное число возникших ошибок возвращается параметром
+<font face="Verdana" size="2">ErrorCount</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> OwnerData</font> содержит дополнительную информацию, передаваемую между клиентом и сервером (например, значения параметров методов-обработчиков).
+</font ></P>
+<P><font face="Verdana" size="3">
+Функция возвращает пакет данных, содержащий все записи, которые не были сохранены в базе данных по какой-либо причине
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="77">
+<DIV WIDTH="267" HEIGHT="77" style="width: 189; height: 77">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AS DataRequest (const ProviderName: WideString; Data: OleVariant) : OleVariant; safecall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="77">
+<DIV WIDTH="362" HEIGHT="77" style="width: 280; height: 77">
+<P><font face="Verdana" size="3">
+Генерирует событие <font face="Verdana" size="2"> OnDataRequest</font> для указанного провайдера
+<font face="Verdana" size="2"> ProviderName</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="123">
+<DIV WIDTH="267" HEIGHT="123" style="width: 193; height: 123">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure AS Execute (const ProviderName: WideString; const CommandText : WideString; var Params : OleVariant; var OwnerData: OleVariant) ; safecall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="123">
+<DIV WIDTH="362" HEIGHT="123" style="width: 268; height: 123">
+<P><font face="Verdana" size="3">
+Выполняет запрос или хранимую процедуру, определяемые параметром
+<font face="Verdana" size="2"> CommandText</font> для  провайдера,  указанного  параметром
+<font face="Verdana" size="2">ProviderName</font>. Параметры запроса или хранимой процедуры содержатся в параметре
+<font face="Verdana" size="2"> Params</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="88">
+<DIV WIDTH="267" HEIGHT="88" style="width: 184; height: 88">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AS GetParams (const ProviderName: WideString; var OwnerData: OleVariant):
+OleVariant; safecall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="88">
+<DIV WIDTH="362" HEIGHT="88" style="width: 260; height: 88">
+<P><font face="Verdana" size="3">
+Передает провайдеру <font face="Verdana" size="2"> ProviderName</font> текущие значения параметров клиентского набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="48">
+<DIV WIDTH="267" HEIGHT="48" style="width: 177; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AS GetProviderNames: OleVariant; safecall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="48">
+<DIV WIDTH="362" HEIGHT="48" style="width: 287; height: 48">
+<P><font face="Verdana" size="3">
+Возвращает список всех доступных провайдеров удаленного модуля данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="196" HEIGHT="323">
+<DIV WIDTH="265" HEIGHT="323" style="width: 191; height: 323">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AS GetRecords (const ProviderName : WideString, Count: Integer; out RecsOut: Integer; Options: Integer; const CommandText: WideString; var Params : OleVariant; var OwnerData :OieVariant) : OleVariant; safecall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="323">
+<DIV WIDTH="377" HEIGHT="323" style="width: 284; height: 361">
+<P><font face="Verdana" size="3">
+Возвращает пакет данных с записями набора данных сервера, связанного с компонентом-провайдером.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> CommandText</font> содержит имя таблицы, текст запроса или имя хранимой процедуры, откуда необходимо получить записи. Но он работает только в случае, если для провайдера в параметре
+<font face="Verdana" size="2"> Options</font> включена опция <font face="Verdana" size="2">poAllowCommandText</font>. Параметры запроса или процедуры помещаются в параметре
+<font face="Verdana" size="2">Params</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр задает требуемое число записей, начиная с текущей, если его значение больше нуля. Если параметр равен нулю — возвращаются только метаданные, если он равен -1 — возвращаются все записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр RecsOut возвращает реальное число переданных записей
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="196" HEIGHT="115">
+<DIV WIDTH="265" HEIGHT="115" style="width: 196; height: 115">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AS RowRequest (const ProviderName: WideString; Row: OleVariant; RequestType: Integer; var
+OwnerData: OleVariant): OleVariant; safecall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="115">
+<DIV WIDTH="377" HEIGHT="115" style="width: 254; height: 115">
+<P><font face="Verdana" size="3">
+Возвращает запись набора данных (предоставляемого провайдером
+<font face="Verdana" size="2">ProviderName</font>), определяемую параметром Row.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> RequestType</font> содержит значение типа
+<font face="Verdana" size="2"> TfetchOptions</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Большинство методов интерфейса используют параметры
+<font face="Verdana" size="2"> ProviderName</font> и <font face="Verdana" size="2">OwnerData</font>. Первый определяет имя компонента-провайдера, а второй содержит набор параметров, передаваемых для использования в методах-обработчиках.
+</font ></P>
+<P><font face="Verdana" size="3">
+Внимательный читатель обратил внимание, что использование метода
+<font face="Verdana" size="2"> AS_GetRecords</font> подразумевает сохранение информации при работе интерфейса, т. к. метод возвращает записи, начиная с текущей, хотя интерфейс
+<font face="Verdana" size="2">I</font><font face="Verdana" size="2">AppServer</font> имеет тип
+<font face="Verdana" size="2">stateless</font>. Поэтому перед использованием метода рекомендуется обновлять набор данных клиента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тип
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFetchOption = (foRecord, foBlobs, foDetails);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;TFetchOptions = set of TFetchOption;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+используется в<B> </B>параметре<B> </B><font face="Verdana" size="2">RequestType</font>
+метода <font face="Verdana" size="2">AS_RowRequest</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+foRecord</font> — возвращает значения полей текущей записи;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+foBlobs</font> — возвращает значения полей типа <font face="Verdana" size="2"> BLOB</font> текущей записи;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">foDetails</font> — возвращает все подчиненные записи вложенных наборов данных для текущей записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

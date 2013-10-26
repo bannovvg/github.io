@@ -1,0 +1,444 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Добавление пунктов в системное контекстное меню</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Вы обращали внимание на то, что некоторые приложения после установки добавляют в системное контекстное меню свои собственные пункты? Так поступают многие архиваторы, антивирусные средства и другие утилиты. Эта возможность предоставляется оболочкой Windows.
+</font ></P>
+<P><font face="Verdana" size="3">
+Когда пользователь щелкает правой кнопкой мыши на любом объекте в пространстве имен, система создает контекстное меню из двух частей: стандартного меню для объектов данного типа и пунктов меню, добавляемых
+зарегистрированными обработчиками. Зарегистрированные обработчики — это СОМ-серверы, запускаемые в адресном пространстве процесса (in-process servers) и реализованные в виде динамических библиотек.
+</font ></P>
+<P><font face="Verdana" size="3">
+Ваш СОМ-объект, который расширяет системное контекстное меню, должен поддерживать как минимум два интерфейса —
+<font face="Verdana" size="2">ishellExtinit</font> и <font face="Verdana" size="2">IContextMenu</font>.
+существует и два новых интерфейса<B> </B>— <font face="Verdana" size="2">    IContextMenu2</font>
+и <font face="Verdana" size="2">icontextMenuS</font>, но они вносят в логику работы контекстных меню лишь небольшие дополнения и здесь рассмотрены не будут. Интерфейс
+<font face="Verdana" size="2">ishellExtinit</font> отвечает за инициализацию меню, а интерфейс
+<font face="Verdana" size="2"> IContextMenu</font> — за выполнение основных функций.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы интерфейса <font face="Verdana" size="2"> IContextMenu</font> приведены в табл. 31.3.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 31.3. </B> Методы 
+  интерфейса <B> </B><font face="Verdana" size="2">IContextMenu</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="491" HEIGHT="248">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="38">
+<DIV WIDTH="364" HEIGHT="38" style="width: 66; height: 38">
+<P><font face="Verdana" size="3">
+<b>
+Метод</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="38">
+<DIV WIDTH="266" HEIGHT="38" style="width: 90; height: 38">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="62">
+<DIV WIDTH="364" HEIGHT="62" style="width: 256; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function QueryContextMenu (Menu: HMENU; indexMenu, idCmdFirst, idCmdLast, uFlags: UINT) : HResult; stdcall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="62">
+<DIV WIDTH="266" HEIGHT="62" style="width: 221; height: 62">
+<P><font face="Verdana" size="3">
+Добавляет пункт к системному контекстному меню
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="64">
+<DIV WIDTH="364" HEIGHT="64" style="width: 225; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function InvokeCommand(var- Ipici: TCMInvokeCommandlnfo): HResult; stdcall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="64">
+<DIV WIDTH="266" HEIGHT="64" style="width: 233; height: 64">
+<P><font face="Verdana" size="3">
+Осуществляет вызов обработчика
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="84">
+<DIV WIDTH="364" HEIGHT="84" style="width: 264; height: 84">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetCommandString (idCmd, uType: UINT; pwReserved: POINT; PszName: LPSTR; cchMax: UINT) : HResult; stdcall;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="84">
+<DIV WIDTH="266" HEIGHT="84" style="width: 230; height: 84">
+<P><font face="Verdana" size="3">
+Возвращает описание добавленного пункта меню (подсказку или полное название)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Рассмотрим их подробнее.  Параметры метода <font face="Verdana" size="2"> QueryContextMenu</font> означают следующее:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Menu 
+    — дескриптор системного меню;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">IndexMenu 
+    — позиция в меню, в которую следует вставить пункт (пункты);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;IdCmdFirst,IdCmdLast 
+    — диапазон допустимых значений для идентификаторов вставляемых пунктов меню;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;uFlags 
+    — набор флагов, главные из которых означают:</font></li>
+</ul>
+<blockquote> 
+  <ul>
+    <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;CMF_NORMAL 
+      — обычный вызов контекстного меню, пункты могут быть добавлены. Значение 
+      этого флага нулевое, проверять его следует, очистив все биты в параметре 
+      uFlags, кроме пяти младших (маска $1F);</font></li>
+    <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;CMF_DEFAULTONLY 
+      — устанавливается, если пользователь задал с объектом действие по умолчанию 
+      (например, двойной щелчок). В этом случае пункты меню добавляться не должны;</font></li>
+    <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;CMF_VERBSONLY 
+      — устанавливается, если меню создается для ярлыка объекта, а не для самого 
+      объекта. В этом случае многие пункты меню создаваться не должны;</font></li>
+    <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;CMF_EXPLORE 
+      — устанавливается, если меню создается для объекта, находящегося на левой 
+      панели Проводника.</font></li>
+  </ul>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для иллюстрации объектов — расширений контекстного меню — выберем пример
+<font face="Verdana" size="2"> ContMenu</font> (поставляется с Delphi в папке
+DEMOS\<font face="Verdana" size="2">ACTIVEX</font> \<font face="Verdana" size="2">SHELLEXT</font>). В этом примере для объектов типа &quot;проект Delphi&quot; добавляется возможность запуска компилятора в командной строке. При вызове метода
+<font face="Verdana" size="2"> QueryContextMenu</font> нужный пункт добавляется с помощью функции
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+InsertMenu!</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function TContextMenu.QueryContextMenu(Menu:   HMENU;   indexMenu,   idCmdFirst,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+idCmdLast,   uFlags:   UINT):   HResult;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result   :=  0;   //  или использовать  MakeResult(SEVERITY_SUCCESS, // FACILITY_NULL,   0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if   ( (uFlags  and $OOOOOOOF)   = CMF__NORMAL)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">   or</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+((uFlags  and CMF_EXPLORE)   о   0)   then begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> // Добавить  один пункт меню во  всплывающее меню&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">InsertMenu(Menu,   indexMenu,   MF__STRING  or MF_BYPOSITION,   idCmdFirst,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+'Compile...');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := 1;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> // или использовать MakeResult(SEVERITY_SUCCESS, //&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">FACILITY_NULL, 1)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> Getcornmandstring</font> предоставляет системе данные о пункте меню, в частности, текст подсказки; эта подсказка будет отображаться в строке состояния Проводника, когда курсор находится в нужном месте меню.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметры <font face="Verdana" size="2"> Getcommandstring</font> просты. Первый —
+<font face="Verdana" size="2"> idCmd</font> — соответствует идентификатору пункта меню, второй —
+<font face="Verdana" size="2">uType</font> — запрос на тип информации
+(<font face="Verdana" size="2">GCS_HELPTEXT</font> — текст подсказки,
+<font face="Verdana" size="2"> GCS_VERB</font> — полное название пункта меню). Наконец, параметры
+<font face="Verdana" size="2"> pszName</font> <font face="Verdana" size="2"> и
+cchMax</font>&nbsp; задают буфер, в который будут копироваться текстовые данные. Полное название необходимо системе, чтобы с его помощью вызывать предусмотренные в пункте действия программно. В примере
+<font face="Verdana" size="2"> ContMenu</font> возврат названия (т. е. обработка запроса
+<font face="Verdana" size="2">GCS_VERB</font>) не предусмотрен, а в ответ на запрос GCS_HELPTEXT возвращается текстовая строка
+<font face="Verdana" size="2"> &quot;Compile the selected Delphi project&quot;.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Наиболее сложным является метод <font face="Verdana" size="2">Invokecommand</font>. Он вызывается при выборе пользователем вставленного вами пункта меню. По сути дела метод
+<font face="Verdana" size="2">InvokeCommand</font> представляет собой прямой аналог обработчика
+<font face="Verdana" size="2">onclick</font> обычных пунктов меню (объектов
+<font face="Verdana" size="2">TMenuitem</font>) в Delphi.
+</font ></P>
+<P><font face="Verdana" size="3">
+Единственным параметром метода является структура типа
+<font face="Verdana" size="2"> TCMinvoke-commandinfo,</font> поля которой имеют такое предназначение:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">cbsize — размер 
+    структуры в байтах;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;hwnd — задает дескриптор 
+    окна, которое будет владельцем диалоговых окон, вызываемых из метода;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fMask — определяет, заданы 
+    ли параметры dwHotkey/hicon;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Ipverb — вызываемая команда;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;IpFarameters — параметры 
+    (если есть);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;IpDirectory — рабочая папка 
+    (поле не обязательно);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;nShow — флаг состояния 
+    окна, который будет передан в функцию ShowWindow 
+    (SW_*);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;dwHotKey — &quot;горячая&quot; 
+    комбинация клавиш, которая будет сопоставляться приложению, запускаемому из 
+    этого пункта меню (только если в параметре  fMask 
+    установлен флаг CMIC_MASK_HOTKEY);</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">hIсоn — значок, который 
+    будет сопоставляться приложению, запускаемому из этого пункта меню (только 
+    если в параметре  fMask установлен флаг 
+    CMIC_MASK_ICON);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Monitor — монитор по умолчанию 
+    (поле не обязательно).</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Отдельно следует остановиться на описании параметра
+<font face="Verdana" size="2">ipverb</font>. Как уже говорилось, он может представлять из себя как идентификатор пункта меню, так и его текст — строку, заканчивающуюся нулем. Чтобы выяснить это, нужно проверить старшее слово этого 32-разрядного параметра на равенство нулю. В примере
+<font face="Verdana" size="2"> ContMenu</font> вызов по тексту не предусмотрен:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (HiWord(Integer(Ipici.IpVerb)) &lt;&gt; 0) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Exit;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для создания расширения контекстного меню мы должны породить объект, поддерживающий эти интерфейсы. К сожалению, мастера, предусмотренные в Delphi, не позволяют в автоматизированном режиме создавать объекты, реализующие уже существующие интерфейсы. Поэтому и описание, и реализацию методов придется делать &quot;по старинке&quot;, вручную. В примере
+<font face="Verdana" size="2"> ContMenu</font> описание объекта таково:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TContextMenu = class(TComObject, IShellExtlnit, IContextMenu) private</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FFileName: array[0..MAX_PATHj of Char;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> protected</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+( IShellExtlnit }</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IShellExtlnit.Initialize = SEIInitialize;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SEIInitialize(pidlFolder: PItemlDList; Ipdobj: IDataObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hKeyProgID: HKEY): HResult; stdcall; { IContextMenu }</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function QueryContextMenufMenu: HMENU;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">indexMenu, idCmdFirst, idCmdLast,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uFlags: UINT): HResult;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function InvokeCommand(var Ipici: TCMInvokeCommandlnfo): HResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetCommandString(idCmd, uType: UINT; pwReserved: POINT;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pszName: LPSTR; cchMax: UINT): HResult;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">stdcall;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Вас может насторожить конструкция, описывающая переименование метода
+<font face="Verdana" size="2"> initialize</font> интерфейса <font face="Verdana" size="2">ishellExtinit</font>. На самом деле одноименный метод имеется у объекта
+<font face="Verdana" size="2">TComObject</font>, и приведенный синтаксис как раз и предназначен для выхода из подобных ситуаций.
+</font ></P>
+<P><font face="Verdana" size="3">
+Последняя часть работы — регистрация созданного обработчика. Самое подходящее место для этого — метод
+<font face="Verdana" size="2"> updateRegistry</font> фабрики класса. Разработчики примера
+<font face="Verdana" size="2"> ContMenu</font> породили класс <font face="Verdana" size="2">TContextMenuFactory</font>, который при регистрации СОМ-сервера регистрирует создаваемые фабрикой объекты:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Classic := GUIDToString(Class_ContextMenu);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CreateRegKey('DelphiProjectXshellex', '', '')/'</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CreateRegKey</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+('DelphiProject\shellex\ContextMenuHandlers', '', '');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">CreateRegKey</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">('DelphiProject\shellex</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">\ContextMenuHandlers\ContMenu', '',</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ClassID);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Пример <font face="Verdana" size="2"> ContMenu</font> иллюстрирует &quot;дельфийский&quot; подход к созданию серверов СОМ через соответствующие объекты из иерархии объектов Delphi. Но в папке
+<font face="Verdana" size="2"> SHELLEXT</font> вы найдете еще один пример создания расширения для контекстного меню, сделанный целиком и только с использованием интерфейсов и функций СОМ. Присмотритесь к этому примеру внимательнее, если хотите глубже понимать внутреннюю структуру СОМ-объектов.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

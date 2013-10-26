@@ -1,0 +1,566 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Провайдеры данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент-провайдер <font face="Verdana" size="2"> TDataSetProvider</font> представляет собой мост между набором данных сервера приложений и клиентским набором данных. Он обеспечивает формирование и передачу пакетов данных клиентскому приложению и прием от него сделанных изменений (см. рис. 20.2).
+</font ></P>
+<P><font face="Verdana" size="3">
+Все необходимые операции компонент выполняет автоматически. Разработчику необходимо лишь разместить компонент
+<font face="Verdana" size="2"> TDataSetProvider</font> и связать его с набором данных сервера приложений. Для этого предназначено свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSet: TDataSet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если соединение в клиентском приложении настроено правильно (см. выше),
+ТО В списке выбора свойства <font face="Verdana" size="2"> ProviderName</font> компонента
+<font face="Verdana" size="2"> TClientDataSet</font> в Инспекторе объектов появляются имена всех компонентов-провайдеров сервера приложений. Если связать клиентский набор данных с компонентом-провайдером, а затем открыть его, в клиентский набор данных будут переданы записи из набора данных сервера приложений, указанного в свойстве
+<font face="Verdana" size="2"> DataSet</font> компонента-провайдера
+<font face="Verdana" size="2">TDataSetProvider</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент также содержит свойства, помогающие настроить процесс обмена данными.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ResolveToDataSet: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+управляет передачей данных от клиента серверу БД. Если оно имеет значение
+<font face="Verdana" size="2">True</font>, все изменения передаются в набор данных сервера приложений, заданный свойством
+<font face="Verdana" size="2">DataSet</font>. Иначе изменения направляются напрямую серверу БД. Если сервер приложений не должен отображать сделанные клиентом изменения, то свойству
+<font face="Verdana" size="2"> ResolveToDataSet</font> можно присвоить значение
+<font face="Verdana" size="2">False</font>, что ускорит работу приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Constraints: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+управляет передачей ограничений серверного набора данных клиентскому. Если свойство имеет значение
+<font face="Verdana" size="2">True</font>, ограничения передаются.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Exported: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяет использовать в клиентском наборе данных интерфейс
+<font face="Verdana" size="2">IAppServer</font>. Для этого свойство должно иметь значение
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметры компонента-провайдера задаются свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TProviderOption = (poFetchBlobsOnDemand, poFetchDetailsOnDemand,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poIncFieldProps, poCascadeDeletes, poCascadeUpdates, poReadOnly, poAllowMultiRecordUpdates, poDisablelnserts, poDisableEdits, poDisableDeletes, poNoReset, poAutoRefresh, poPropogateChanges, poAllowCoinmandText, poRetainServerOrder);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TProviderOptions = set of TProviderOption;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Набор параметров свойства задается присвоением элементам значения
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Options: TProviderOptions;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poFetchBlobsOnDemand</font> — включает передачу в клиентский набор данных значений полей типа
+<font face="Verdana" size="2">BLOB</font>. По умолчанию эта возможность, отключена для ускорения работы;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poFetchDetailsOnDemand</font> — включает передачу в клиентский набор данных подчиненных записей для отношения &quot;один-ко-многим&quot;. По умолчанию эта возможность отключена для ускорения работы;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poIncFieldProps</font> — включает передачу в клиентский набор данных нескольких
+свойств для объектов полей: <font face="Verdana" size="2"> Alignment, DisplayLabel, DisplayWidth, Visible, DisplayFormat, EditFormat, MaxValue, MinValue, Currency, EditMask, DisplayValues;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poCascadeDeletes</font> — включает автоматическое удаление подчиненных записей в отношении &quot;один-ко-многим&quot; на стороне сервера, если главная запись была удалена в клиентском наборе данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poCascadeUpdates</font> — включает автоматическое обновление подчиненных записей в отношении &quot;один-ко-многим&quot; на стороне сервера, если главная запись была изменена в клиентском наборе данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poReadOnly</font> — включает режим &quot;только для чтения&quot; для набора данных сервера;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poAllowMultiRecordUpdates</font> — включает режим внесения изменений сразу в несколько записей одновременно. Иначе все записи изменяются последовательно, одна за одной;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poDisablelnserts</font> — запрещает клиенту вносить в набор данных сервера новые записи;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poDisableEdits</font> — запрещает клиенту вносить в набор данных сервера изменения;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poDisableDeletes</font> — запрещает клиенту удалять записи в наборе данных сервера;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poNoReset</font> — запрещает обновление набора данных сервера перед передачей записей клиенту (перед вызовом метода
+<font face="Verdana" size="2"> AS_GetReccrds</font> интерфейса <font face="Verdana" size="2">IAppServer</font>);
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poAutoRefresh</font> — включает автоматическое обновление записей клиентского набора данных. По умолчанию эта возможность отключена для ускорения работы;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poPropogateChanges</font> — если В методах-обработчиках
+<font face="Verdana" size="2"> BeforeUpdateRecord</font> или <font face="Verdana" size="2">AfterUpdateRecord</font> клиентского набора данных были сделаны дополнительные изменения, то после их записи в наборе данных сервера, изменения снова направляются клиенту для обновления записи. Во включенном состоянии эта возможность позволяет полностью контролировать сохранение изменений на сервере;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">poAllowCommandText</font> — позволяет изменять текст запроса SQL, имена хранимых процедур или таблиц в компоненте набора данных на сервере приложений;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+poRetainServerOrder</font> — включает запрет на изменение порядка сортировки записей клиентом. Если этот параметр отключить, возможны ошибки отображения набора данных, проявляющиеся в появлении двойных записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы-обработчики компонента-провайдера данных представлены в табл. 20.2.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 20.2. </B>Методы-обработчики 
+  событий компонента <font face="Verdana" size="2"> TDataSetProvider</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="471" HEIGHT="406">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="180" HEIGHT="25">
+<DIV WIDTH="256" HEIGHT="25" style="width: 96; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="321" HEIGHT="25">
+<DIV WIDTH="402" HEIGHT="25" style="width: 97; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="180" HEIGHT="46">
+<DIV WIDTH="256" HEIGHT="46" style="width: 130; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Af terApplyUpdates: TRemoteEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="321" HEIGHT="46">
+<DIV WIDTH="402" HEIGHT="46" style="width: 259; height: 54">
+<P><font face="Verdana" size="3">
+Вызывается  после сохранения  изменений,  переданных от клиента, в наборе данных сервера
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="180" HEIGHT="50">
+<DIV WIDTH="256" HEIGHT="50" style="width: 112; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AfterExecute: TRemoteEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="321" HEIGHT="50">
+<DIV WIDTH="402" HEIGHT="50" style="width: 237; height: 50">
+<P><font face="Verdana" size="3">
+Вызывается после выполнения запроса SQL или хранимой процедуры на сервере
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="180" HEIGHT="62">
+<DIV WIDTH="256" HEIGHT="62" style="width: 124; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AfterGetParams: TRemoteEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="321" HEIGHT="62">
+<DIV WIDTH="402" HEIGHT="62" style="width: 253; height: 72">
+<P><font face="Verdana" size="3">
+Вызывается   после   того,   как   компонент-провайдер сформировал набор параметров набора данных сервера для их передачи клиенту
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="180" HEIGHT="69">
+<DIV WIDTH="256" HEIGHT="69" style="width: 130; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AfterGetRecords: TRemoteEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="321" HEIGHT="69">
+<DIV WIDTH="402" HEIGHT="69" style="width: 251; height: 72">
+<P><font face="Verdana" size="3">
+Вызывается   после   того,   как   компонент-провайдер сформировал пакет данных для передачи набора данных сервера клиенту
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="180" HEIGHT="40">
+<DIV WIDTH="256" HEIGHT="40" style="width: 131; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AfterRowRequest: TRemoteEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="321" HEIGHT="40">
+<DIV WIDTH="402" HEIGHT="40" style="width: 242; height: 54">
+<P><font face="Verdana" size="3">
+Вызывается после обновления текущей записи клиента компонентом-провайдером
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="180" HEIGHT="48">
+<DIV WIDTH="256" HEIGHT="48" style="width: 180; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AfterUpdateRecord: TAf terUpdateRecordEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="321" HEIGHT="48">
+<DIV WIDTH="402" HEIGHT="48" style="width: 253; height: 48">
+<P><font face="Verdana" size="3">
+Вызывается сразу после обновления единичной записи на сервере
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="180" HEIGHT="65">
+<DIV WIDTH="256" HEIGHT="65" style="width: 142; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Bef oreApplyUpdates: TRemoteEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="321" HEIGHT="65">
+<DIV WIDTH="402" HEIGHT="65" style="width: 258; height: 65">
+<P><font face="Verdana" size="3">
+Вызывается    перед    сохранением    изменений, переданных от клиента, в наборе данных сервера
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="46">
+<DIV WIDTH="250" HEIGHT="46" style="width: 115; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeExecute: TRemoteEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="46">
+<DIV WIDTH="371" HEIGHT="46" style="width: 248; height: 54">
+<P><font face="Verdana" size="3">
+Вызывается  перед выполнением запроса SQL или хранимой процедуры на сервере
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="52">
+<DIV WIDTH="250" HEIGHT="52" style="width: 131; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeGetParams: TRemoteEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="52">
+<DIV WIDTH="371" HEIGHT="52" style="width: 254; height: 72">
+<P><font face="Verdana" size="3">
+Вызывается    перед   тем,    как   компонент-провайдер сформировал набор параметров набора данных сервера для их передачи клиенту
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="60">
+<DIV WIDTH="250" HEIGHT="60" style="width: 138; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeGetRecords: TRemoteEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="60">
+<DIV WIDTH="371" HEIGHT="60" style="width: 255; height: 72">
+<P><font face="Verdana" size="3">
+Вызывается   перед   тем,    как   компонент-провайдер сформировал пакет данных для передачи набора данных сервера клиенту
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="44">
+<DIV WIDTH="250" HEIGHT="44" style="width: 140; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeRowRequest: TRemoteEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="44">
+<DIV WIDTH="371" HEIGHT="44" style="width: 249; height: 54">
+<P><font face="Verdana" size="3">
+Вызывается перед обновлением текущей записи клиента компонентом-провайдером
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="46">
+<DIV WIDTH="250" HEIGHT="46" style="width: 164; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeUpdateRecord: TBeforeUpdateRecordEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="46">
+<DIV WIDTH="371" HEIGHT="46" style="width: 257; height: 54">
+<P><font face="Verdana" size="3">
+Вызывается непосредственно перед обновлением единичной записи на сервере
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="48">
+<DIV WIDTH="250" HEIGHT="48" style="width: 186; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnDataRequest: TDataRequestEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="48">
+<DIV WIDTH="371" HEIGHT="48" style="width: 261; height: 48">
+<P><font face="Verdana" size="3">
+Вызывается при обработке запроса на получение данных клиентом
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="40">
+<DIV WIDTH="250" HEIGHT="40" style="width: 157; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnGetData: TProviderDataEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="40">
+<DIV WIDTH="371" HEIGHT="40" style="width: 263; height: 54">
+<P><font face="Verdana" size="3">
+Вызывается после получения данных от набора данных сервера, но перед их отправкой клиенту
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="60">
+<DIV WIDTH="250" HEIGHT="60" style="width: 187; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnGetDataSetProperties: TGetDSProps;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="60">
+<DIV WIDTH="371" HEIGHT="60" style="width: 246; height: 60">
+<P><font face="Verdana" size="3">
+Вызывается при создании структуры параметров набора данных сервера для их передачи клиенту
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="56">
+<DIV WIDTH="250" HEIGHT="56" style="width: 157; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnGetTableName: TGetTableNameEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="56">
+<DIV WIDTH="371" HEIGHT="56" style="width: 255; height: 57">
+<P><font face="Verdana" size="3">
+Вызывается   при   получении   компонентом-провайдером имени таблицы, подлежащей обновлению
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="52">
+<DIV WIDTH="250" HEIGHT="52" style="width: 165; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnUpdateData: TProviderDataEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="52">
+<DIV WIDTH="371" HEIGHT="52" style="width: 254; height: 52">
+<P><font face="Verdana" size="3">
+Вызывается при сохранении изменений в наборе данных сервера
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="50">
+<DIV WIDTH="250" HEIGHT="50" style="width: 187; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnUpdateError: TResolverErrorEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="50">
+<DIV WIDTH="371" HEIGHT="50" style="width: 245; height: 54">
+<P><font face="Verdana" size="3">
+Вызывается при возникновении ошибки сохранения изменений в наборе данных сервера
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

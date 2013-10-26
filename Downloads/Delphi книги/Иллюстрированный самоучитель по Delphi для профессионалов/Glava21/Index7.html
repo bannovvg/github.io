@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Дочерние 
+  удаленные модули данных</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Один сервер приложения может содержать несколько удаленных модулей данных, которые, например, выполняют различные функции или обращаются к разным серверам БД. В этом случае процесс разработки серверной части не претерпевает изменений. При выборе имени сервера в компоненте удаленного соединения на стороне клиента (см. гл. 22)
+будут доступны имена всех удаленных модулей данных, включенных в состав сервера приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Однако тогда для каждого модуля понадобится собственный компонент соединения. Если это нежелательно, можно использовать компонент
+<font face="Verdana" size="2">TSharedConnection</font>, но в этом случае в интерфейсы удаленных модулей данных необходимо внести изменения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для того чтобы несколько модулей данных были доступны в рамках одного удаленного соединения, необходимо выделить один главный модуль данных, а остальные сделать дочерними.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим, что же это означает для практики создания удаленных модулей данных. Суть идеи проста. Интерфейс главного модуля данных (разработчик назначает модуль главным, исходя из собственных соображений) должен содержать свойства, указывающие на интерфейсы всех других модулей данных, которые также необходимо использовать в рамках одного соединения на клиенте. Такие модули данных и называются дочерними.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если такие свойства (свойство должно иметь атрибут только для чтения) существуют, все дочерние модули данных будут доступны в свойстве
+<font face="Verdana" size="2"> ChildName</font> Компонента <font face="Verdana" size="2"> TSharedConnection</font> (см. гл. 20).
+</font ></P>
+<P><font face="Verdana" size="3">
+Например,   если   дочерний   удаленный   модуль   данных   носит   название
+Secondary, главный модуль данных <B> </B>должен содержать <B>
+</B>свойство <B> </B><font face="Verdana" size="2">Secondary</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ISimpleRDM = interface(lAppServer)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+['{E2CBEBCB-1950-4054-B823-62906306E840}'] function Get_Secondary: Secondary;
+safecall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property Secondary: Secondary read
+Get_Secondary;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Реализация метода <font face="Verdana" size="2"> Get_secondary</font> выглядит так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function TSimpleRDM.Get_Secondary: Secondary;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := FSecondaryFactory.CreateCOMObject(nil) as ISecondary;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Как видите, в простейшем случае достаточно вернуть ссылку на вновь созданный дочерний интерфейс.
+</font ></P>
+<P><font face="Verdana" size="3">
+Полностью пример создания дочернего удаленного модуля данных рассматривается далее в этой главе.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

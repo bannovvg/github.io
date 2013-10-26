@@ -1,0 +1,517 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Ввод/вывод с использованием функций Windows API</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для тех, кто переходит на Delphi не с прежних версий Turbo Pascal, а с С, других языков или начинает освоение с &quot;нуля&quot;, более привычными будут стандартные функции работы с файлами Windows. Тем более, что возможности ввода/вывода в них расширены. Каждый файл в этом наборе функций описывается не переменной, а дескриптором (Handle) — 32-разрядной величиной, которая идентифицирует файл в операционной системе.
+</font ></P>
+<P><font face="Verdana" size="3">
+В Win32 файл открывается при помощи функции, имеющей обманчивое название:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CreateFile(IpFileName: PChar; dwDesiredAccess,&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">dwShareMode: DWORD;   IpSecurityAttributes:
+PSecurityAttributes;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;dwCreationDistribution, dwFlagsAndAttributes: DWORD;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">hTemplateFile: THandle): THandle</font>;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Хоть ее название и начинается с <font face="Verdana" size="2"> create</font>, но она позволяет не только создавать, но и открывать уже существующие файлы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Такое огромное количество параметров оправдано, т. к.
+<font face="Verdana" size="2"> createFile</font> используется для открытия файлов на диске, устройств, каналов, портов и вообще любых источников ввода/вывода. Назначение параметров описано в табл. 9.2.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 9.2. </B> Параметры 
+  функции <B> </B><font face="Verdana" size="2">CreateFile</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="196" HEIGHT="508">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="35">
+<DIV WIDTH="244" HEIGHT="35" style="width: 76; height: 35">
+<P><font face="Verdana" size="3">
+<b>
+Параметр</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="313" HEIGHT="35">
+<DIV WIDTH="381" HEIGHT="35" style="width: 150; height: 35">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="81">
+<DIV WIDTH="244" HEIGHT="81" style="width: 128; height: 81">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">IpFileName:pChar</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="313" HEIGHT="81">
+<DIV WIDTH="381" HEIGHT="81" style="width: 279; height: 95">
+<P><font face="Verdana" size="3">
+Имя открываемого объекта. Может представлять собой традиционную строку с путем и именем файла, UNC (для открытия объектов в сети, имя порта, драйвера или устройства)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="160">
+<DIV WIDTH="244" HEIGHT="160" style="width: 153; height: 160">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">dwDesiredAccess,:DWORD</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="313" HEIGHT="160">
+<DIV WIDTH="381" HEIGHT="160" style="width: 287; height: 221">
+<P><font face="Verdana" size="3">
+Способ доступа к объекту. Может быть равен:
+</font ></P>
+<ul>
+  <li>
+    <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;GENERIC  READ</font> — для чтения;&nbsp;</font ></P>
+  </li>
+  <li>&nbsp;<font face="Verdana" size="2">GENERIC  WRITE</font> — для
+    записи.</li>
+</ul>
+<P><font face="Verdana" size="3">
+Их комбинация позволяет открыть файл для чтения  и записи.  Параметр 0 применяется, если нужно получить атрибуты файла без его фактического открытия
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="144">
+<DIV WIDTH="244" HEIGHT="144" style="width: 138; height: 144">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">dwShareMode:DWORD</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="313" HEIGHT="144">
+<DIV WIDTH="381" HEIGHT="144" style="width: 272; height: 240">
+<P><font face="Verdana" size="3">
+Режим совместного использования файла:&nbsp;
+</font ></P>
+<ul>
+  <li>
+    <P><font face="Verdana" size="3">&nbsp;0 — совместный доступ запрещен;</font ></P>
+  </li>
+  <li>
+    <P><font face="Verdana" size="3"><font face="Verdana" size="2">FILE   SHARE   READ </font> — для чтения;</font ></P>
+  </li>
+  <li><font face="Verdana" size="2">FILE_SHARE_WRITE</font> -&nbsp; для
+    записи.</li>
+</ul>
+<P><font face="Verdana" size="3">
+Их  комбинация — для  полного совместного доступа
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="89">
+<DIV WIDTH="244" HEIGHT="89" style="width: 169; height: 89">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IpSecurityAttributes :PSecurityAttributes</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="313" HEIGHT="89">
+<DIV WIDTH="381" HEIGHT="89" style="width: 296; height: 89">
+<P><font face="Verdana" size="3">
+Атрибуты защиты файла. В Windows 95/98 не используются    (должны    быть    равны
+<font face="Verdana" size="2">nil</font>). В  Windows  NT/2000 этот параметр,  равный
+<font face="Verdana" size="2">nil</font>, дает объекту атрибуты по умолчанию
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="268">
+<DIV WIDTH="269" HEIGHT="268" style="width: 183; height: 268">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dwCreationDistribution:   DWORD;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="313" HEIGHT="268">
+<DIV WIDTH="365" HEIGHT="268" style="width: 278; height: 294">
+<P><font face="Verdana" size="3">
+Способ открытия файла:
+</font ></P>
+<ul>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;CREATE NEW — создается 
+            новый файл, если таковой уже существует, функция возвращает ошибку 
+            ERROR_ALREADY_EXISTS;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;CREATE ALWAYS  
+            — создается новый файл, если таковой уже существует, он перезаписывается;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;OPEN EXISTING— 
+            открывает существующий файл, если таковой не найден, функция возвращает 
+            ошибку;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;OPEN ALWAYS  — 
+            открывает существующий файл, если таковой не найден, он создается</font></li>
+</ul>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="65">
+<DIV WIDTH="269" HEIGHT="65" style="width: 164; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dwFlagsAndAttributes: DWORD;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="313" HEIGHT="65">
+<DIV WIDTH="365" HEIGHT="65" style="width: 285; height: 72">
+<P><font face="Verdana" size="3">
+Набор атрибутов (скрытый, системный, сжатый) и флагов для открытия объекта. Подробное описание см. в документации по Win32
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="65">
+<DIV WIDTH="269" HEIGHT="65" style="width: 126; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hTemplateFile:   THandle</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="313" HEIGHT="65">
+<DIV WIDTH="365" HEIGHT="65" style="width: 281; height: 72">
+<P><font face="Verdana" size="3">
+Файл-шаблон, атрибуты которого используются для открытия. В Windows 95/98 не используется и должен быть равен 0
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Функция <font face="Verdana" size="2"> createFile</font> возвращает дескриптор открытого объекта ввода/вывода. Если открытие невозможно из-за ошибок, возвращается код
+<font face="Verdana" size="2">INVALID_HANDLE_VALUE</font>, а расширенный код ошибки можно узнать, вызвав
+функцию<B> </B><font face="Verdana" size="2">GetLastError</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Закрывается файл в Win32 функцией <font face="Verdana" size="2">closeHandie</font> (не
+<font face="Verdana" size="2">closeFile</font>, a <font face="Verdana" size="2">closeHandle</font>! Правда, &quot;легко&quot; запомнить? Что поделать, так их назвали разработчики Win32).
+</font ></P>
+<P><font face="Verdana" size="3">
+Приведем из большого разнообразия несколько приемов использования функции
+<font face="Verdana" size="2">CreateFile</font>. Часто программисты хотят иметь возможность организовать посекторный доступ к физическим устройствам хранения — например к дискете. Сделать это не так уж сложно, но при этом методы для Windows 98 и Windows 2000 различаются. В Windows 2000 придется открывать устройство ('\\.\A:'), а в Windows 98 — специальный драйвер доступа (обозначается '\\.\vwin32'). И то и другое делается функцией
+<font face="Verdana" size="2">createFile</font>.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>&nbsp;Листинг 9.1&nbsp; </B>Чтение 
+  сектора с дискеты при помощи функции CreateFile&nbsp; </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+pDIOCRegs  = ^TDIOCRegs;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDIOCRegs = packed record</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+rEBX,rEDX,rECX,rEAX,rEDI, rESI, rFlags : DWORD;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+const VWIN32_DIOC_DOS_IOCTL = 1;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+VWIN32_DIOC_DOS_INT13  =  4;        //Прерывание 13</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SectorSize = 512;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ReadSector(Head, Track, Sector: Integer; buffer : pointer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Floppy: char):Boolean;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var hDevice : THandle;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Regs : TDIOCRegs;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;DevName : string; nb : Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if WIN32PLATFORM &lt;&gt; VER_PLATFORM_WIN32_NT then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin {win95/98} hDevice := CreateFile('\\.\vwin32',
+GENERIC_READ, 0, nil, 0,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FILE_FLAG_DELETE_ON_CLOSE, 0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (hDevice = INVALID_HANDLE_VALUE) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := FALSE;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Exit; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+regs.rEDX := Head * $100 + Ord(Floppy in ['b', 'B']);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+regs.rEAX := $201; // KOH onepam-iM read sector</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+regs.rEBX := DWORD(buffer); // buffer</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+regs.rECX := Track * $100 + Sector;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+regs.rFlags := $0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := DeviceloControl(hDevice,VWIN32_DIOC_DOS_INT13,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+@regs, sizeof(regs),  @regs, sizeof(regs), nb, nil)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> and ((regs.rFlags and $1)=0); CloseHandle(hDevice);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> end {win95/98}&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> else</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin // Windows NT/2000&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> DevName :='\\.\A:';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Floppy in ['b', 'B'] then DevName[5] := Floppy;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hDevice := CreateFile(pChar(Devname), GENERIC_READ,     FILE_SHARE_READ&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> or FILE_SHARE_WRITE, nil, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (hDevice = INVALID_HANDLE_VALUE) then&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Result := FALSE;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Exit;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SetFilePointer(hDevice, (Sector-1)*SectorSize,
+nil, FILE_BEGIN); // нумерация с 1</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+Result := ReadFile(hDevice, buffer';, SectorSize, nb, nil) and (nb=SectorSize);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CloseHandle(hDevice);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end; // Windows NT/2000&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для чтения и записи данных в Win32 используются функции:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ReadFile(hFile: THandle; var Buffer; nNumberOfBytesToRead: DWORD; var IpNumberOfBytesRead: DWORD; IpOverlapped: POverlapped): BOOL; function WriteFile(hFile: THandle; const Buffer; nNumberOfBytesToWrite: DWORD; var IpNumberOfBytesWritten: DWORD; IpOverlapped: POverlapped): BOOL;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь все сходно с <font face="Verdana" size="2">BlockRead</font> и
+<font face="Verdana" size="2">Blockwrite: hFile</font> — это дескриптор файла,
+<font face="Verdana" size="2"> Buffer</font> — адрес, по которому будут читаться (писаться) данные; третий параметр означает требуемое число читаемых (записываемых) байтов, а четвертый — фактически прочитанное (записанное). Последний параметр —
+<font face="Verdana" size="2"> IpOverlapped</font> — обсудим чуть позже.
+</font ></P>
+<P><font face="Verdana" size="3">
+Функция <font face="Verdana" size="2"> createFile</font> используется и для доступа к портам ввода/вывода. Часто программисты сталкиваются с задачей: как организовать обмен данными с различными нестандартными устройствами, подключенными к параллельному или последовательному порту? В Turbo Pascal для DOS был очень хороший псевдомассив
+<font face="Verdana" size="2"> Ports</font>: пишешь <font face="Verdana" size="2"> Port[x] := у;</font> и не знаешь проблем. В Win32 прямой доступ к портам запрещен и приходится открывать их как файлы:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+hCom := CreateFile('COM2', GENERIC_READ or GENERIC_WRITE,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+0, NIL, OPEN_EXISTING, FILE_FLAG__OVERLAPPED, 0) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if hCom = INVALID_HANDLE_VALUE then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+raise EAbort.CreateFmt('Ошибка открытия порта: %d*,[GetLastError]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Самое  большое  отличие  от  предыдущего  примера —  в  скромном  флаге
+<font face="Verdana" size="2">FILE_FLAG_OVERLAPPED</font>. О роли
+этих изменений- в следующем разделе
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

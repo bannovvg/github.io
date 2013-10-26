@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Проект CLX</font>
+<br>
+</font>
+</P>
+<p align="left"><font face="Verdana" size="3">Создание кроссплатформенного приложения 
+  в Delphi требует выполнения абсолютно стандартных действий. Достаточно создать 
+  новый проект, выбрав для этого в Репозитории пункт <B>CLX Application.</B> </font ></P>
+<P><font face="Verdana" size="3">
+На первый взгляд новый проект ничем не отличается от обычного, но это не так. Да и среда разработки тоже претерпела некоторые изменения. В Палитре компонентов теперь представлены компоненты из библиотеки CLX, той самой, которую использует Kylix. Да и немногочисленные изменения в составе проекта также связаны с необходимостью совмещения с Kylix.
+</font ></P>
+<P><font face="Verdana" size="3">
+Проект CLX отличается от обычного типом файла, содержащего информацию о форме. Если в обычном проекте файл формы имеет расширение dfm, то в проекте CLX это файл с расширением xfm, одинаково понятный и для Delphi, и для Kylix, так так и те и другие файлы являются обычными текстовыми файлами и сведения о форме представлены в них в текстовом виде. Примерно то же самое вы видите, просматривая форму в текстовом представлении в окне Редактора Delphi (команда <B>View as Text </B>из всплывающего меню формы).
+</font ></P>
+<P><font face="Verdana" size="3">
+Обратите внимание, что форма и модуль CLX связываются при помощи директивы
+{<font face="Verdana" size="2">$R *.xfm</font>}.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, в проектах Delphi и Kylix различаются расширения файла опций проекта (в Delphi — dof, в Kylix — kof). Однако это не принципиальная проблема и при отсутствии такого файла среда разработки создаст новый с настройками по умолчанию. Таким образом, всегда можно придумать как минимум несколько способов перенести текстовое содержимое файла настроек проекта.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь рассмотрим сгенерированный Delphi исходный код проекта — это даст нам несколько интересных наблюдений. По синтаксису и основным элементам исходный код не отличается от стандартного. Файл проекта содержит список модулей и секцию<font face="Verdana" size="2">
+begin, .end.</font> Файл модуля также обычен, за исключением списка используемых модулей в секции
+<font face="Verdana" size="2">uses</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Выше мы говорили о библиотеке компонентов CLX и ее роли в кроссплатформенной разработке. И модули с непривычными названиями QControis, QForms и др. как раз содержат базовые классы библиотеки CLX.
+</font ></P>
+<P><font face="Verdana" size="3">
+В остальном проект CLX подобен стандартному проекту Delphi и в нем можно использовать весь инструментарий среды разработки и приемы визуального программирования.
+</font ></P>
+<P><font face="Verdana" size="3">
+В подтверждение сказанного при помощи нескольких изменений в проекте VCL мы можем легко преобразовать проект VCL в CLX и обратно. Для этого понадобится любой текстовый редактор. И конечно проект не должен содержать компонентов, которые не входят в состав библиотеки CLX.
+</font ></P>
+<P><font face="Verdana" size="3">
+1. В файле проекта в секции <font face="Verdana" size="2"> uses</font> изменим ссылку на модуль
+<font face="Verdana" size="2"> Forms</font> на <font face="Verdana" size="2">QForms.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+2. В файлах модулей заменим ссылки на модули VCL на модули CLX. Например, секция
+<font face="Verdana" size="2"> uses</font> может выглядеть так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uses SysUtils, Types, Classes, QGraphics, QControls, QForms;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+3. В файлах модулей заменим директиву {<font face="Verdana" size="2">$R
+*.dfm</font>} на {<font face="Verdana" size="2">$R *.xfm}</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+4. В файлах форм заменим расширение dfm на xfm.
+</font ></P>
+<P><font face="Verdana" size="3">
+Сохранив сделанные изменения и открыв проект в среде разработки, вы убедитесь, что Delphi приняла его за проект CLX, изменила соответствующим образом Палитру компонентов и с готовностью компилирует его.
+</font ></P>
+<P><font face="Verdana" size="3">
+Что же касается непосредственно кода кроссплатформенного приложения для Linux, то основные принципы его создания рассматриваются ниже в этой главе.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости разработчик может добавлять к проекту новые шаблоны, используя для этого Репозиторий. При этом в Репозитории доступны только те шаблоны, которые можно использовать в проекте CLX (например, форма, модуль или модуль данных). Отсутствуют шаблоны, использование которых в Linux невозможно или поддержку которых не обеспечивает библиотека CLX (например, шаблон однодокументного приложения или шаблоны печатных форм Quick Report).
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

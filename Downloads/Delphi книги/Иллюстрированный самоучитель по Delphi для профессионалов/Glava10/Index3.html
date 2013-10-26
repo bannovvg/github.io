@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TFont</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс инкапсулирует шрифт Windows. В Delphi допускаются только горизонтально расположенные шрифты. В конструкторе объекта по умолчанию принимается шрифт
+<font face="Verdana" size="2">System</font>, цвета <font face="Verdana" size="2"> ciwindowText</font> и размером 10 пунктов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойства класса приведены в табл. 10.1.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 10.1. </B>Свойства 
+  класса <font face="Verdana" size="2"> TFont</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="483" HEIGHT="688">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="36">
+<DIV WIDTH="294" HEIGHT="36" style="width: 99; height: 36">
+<P><font face="Verdana" size="3">
+<b>
+Свойство</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="36">
+<DIV WIDTH="371" HEIGHT="36" style="width: 233; height: 36">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="27">
+<DIV WIDTH="294" HEIGHT="27" style="width: 185; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle:  HFont;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="27">
+<DIV WIDTH="371" HEIGHT="27" style="width: 273; height: 27">
+<P><font face="Verdana" size="3">
+Содержит дескриптор шрифта
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="39">
+<DIV WIDTH="294" HEIGHT="39" style="width: 205; height: 39">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Name:   TFontName;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="39">
+<DIV WIDTH="371" HEIGHT="39" style="width: 255; height: 39">
+<P><font face="Verdana" size="3">
+Содержит имя  (начертание)  шрифта,  например, Arial
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="82">
+<DIV WIDTH="294" HEIGHT="82" style="width: 187; height: 82">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Style:   TFontStyles; TFontStyle =   (fsBold,   fsltalic, fsUnderline,   fsStrikeOut) ; TFontStyles =  set  of TFontStyle;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="82">
+<DIV WIDTH="371" HEIGHT="82" style="width: 227; height: 82">
+<P><font face="Verdana" size="3">
+Содержит стиль (особенности начертания) шрифта:  соответственно жирный,  курсив, подчеркнутый и перечеркнутый
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="71">
+<DIV WIDTH="294" HEIGHT="71" style="width: 188; height: 71">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Color:   TColor; TColor =  - (COLOR ENDCOLORS  + 1} . . $2FFFFFF;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="71">
+<DIV WIDTH="371" HEIGHT="71" style="width: 207; height: 71">
+<P><font face="Verdana" size="3">
+Определяет цвет шрифта
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="69">
+<DIV WIDTH="294" HEIGHT="69" style="width: 181; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Charset:   TFontCharset TFontCharset  =  0..255;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="69">
+<DIV WIDTH="371" HEIGHT="69" style="width: 251; height: 95">
+<P><font face="Verdana" size="3">
+Содержит номер набора символов шрифта. По умолчанию равно 1
+(<font face="Verdana" size="2">DEFAULT CHARSET</font>). Для вывода символов кириллицы требуется
+<font face="Verdana" size="2">RUSSIAN  CHARSET</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="131">
+<DIV WIDTH="294" HEIGHT="131" style="width: 173; height: 131">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Pitch:   TFontPitch;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFontPitch = (fpDefault, fpVariable, fpFixed);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="131">
+<DIV WIDTH="371" HEIGHT="131" style="width: 234; height: 131">
+<P><font face="Verdana" size="3">
+Определяет   способ    установки    ширины символов шрифта. Значение
+<font face="Verdana" size="2"> fpFixed</font> соответствует     моноширинным     шрифтам;
+<font face="Verdana" size="2">fpVariable</font>— шрифтам с переменной шириной символа. Установка
+<font face="Verdana" size="2"> fpDefault</font> означает  принятие  того   способа,   который определен начертанием
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="42">
+<DIV WIDTH="294" HEIGHT="42" style="width: 135; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Height:   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="42">
+<DIV WIDTH="371" HEIGHT="42" style="width: 263; height: 42">
+<P><font face="Verdana" size="3">
+Содержит значение высоты шрифта в пикселах
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="104">
+<DIV WIDTH="294" HEIGHT="104" style="width: 184; height: 104">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PixelsPerlnch:   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="104">
+<DIV WIDTH="371" HEIGHT="104" style="width: 272; height: 104">
+<P><font face="Verdana" size="3">
+Определяет число точек на дюйм. Первоначально равно числу точек на дюйм в контексте   экрана.   Программист   не   должен изменять это свойство, т. к. оно используется системой для приведения изображения на экране и на принтере к одному виду
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="211" HEIGHT="86">
+<DIV WIDTH="294" HEIGHT="113" style="width: 185; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Size:   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="86">
+<DIV WIDTH="371" HEIGHT="113" style="width: 266; height: 91">
+<P><font face="Verdana" size="3">
+Содержит размер шрифта в пунктах (как принято в Windows). Это свойство связано с
+<font face="Verdana" size="2"> Height</font> соотношением:&nbsp;
+<font face="Verdana" size="2">Font. Size   :=  -Font . Height*72/ Font . PixelsPerlnch</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Установка этих свойств вручную, как правило, не нужна. Если вы хотите изменить шрифт для какого-то компонента, воспользуйтесь компонентом
+<font face="Verdana" size="2">TFontDialog</font>. В нем можно и поменять свойства, и сразу увидеть получившийся результат на тестовой надписи; потом выбранный шрифт присваивается свойству
+<font face="Verdana" size="2"> Font</font> нужного компонента:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if FontDialogl.Execute then Editl.Font := FontDialogl.Font;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> Если вы хотите, не закрывая диалог, увидеть 
+    результат применения шрифта на вашем тексте, включите опцию <font face="Verdana" size="2"> 
+    fdApplyButton</font> в свойстве Options объекта <font face="Verdana" size="2"> 
+    TFontDialog</font> и напишите для него обработчик события <font face="Verdana" size="2">onApply</font>. 
+    При этом в диалоговом окне появится кнопка Apply, no нажатии которой (событие 
+    <font face="Verdana" size="2">OnApply</font>) можно изменить параметры шрифта. 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Сохранение 
+  набора данных в файлах</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Клиентское приложение может использовать одну очень удобную функцию компонента
+<font face="Verdana" size="2">TClientDataSet</font>. Представим, что соединение между сервером и клиентом обладает малой пропускной способностью и к тому же часто обрывается. Что в этом случае делать пользователю, который внес много изменений и не может сохранить их на сервере?
+</font ></P>
+<P><font face="Verdana" size="3">
+В этом случае можно сохранить набор данных клиента в файле на локальном диске, а при удобной возможности — загрузить обратно и переслать на сервер.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для сохранения данных (по существу это буфер
+<font face="Verdana" size="2">Data</font>) в файле используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SaveToFile(const FileName: string = ''; Format: TDataPacketFormat=dfBinary);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Причем, если параметр <font face="Verdana" size="2"> FileName</font> пуст, имя файла берется из свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FileName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Также можно передать данные в поток:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SaveToStream(Stream: TStream;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Format: TDataPacketFormat=dfBinary);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Формат,   в  котором  данные  будут  сохранены,   определяется   параметром
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Format!</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDataPacketFormat = (dfBinary, dfXML, dfXMLUTFS);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где <font face="Verdana" size="2"> dfBinary</font> — бинарный вид,
+<font face="Verdana" size="2"> dfXML</font> — формат <font face="Verdana" size="2"> XML, dfXMLUTFS</font> — формат XML в кодировке UTF8.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обратная загрузка данных, соответственно, выполняется методами:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromFile(const FileName: string = '');</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromStreamfStream: TStream);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После загрузки набор данных полностью готов к работе:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if LoadFileDialog.Execute then&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ClientDataSet.LoadFromFile</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(LoadFileDialog.FileName);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ClientDataSet.Open;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

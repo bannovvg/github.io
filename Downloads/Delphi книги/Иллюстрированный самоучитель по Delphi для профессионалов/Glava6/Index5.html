@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Включение 
+  манифеста Windows XP в ресурсы приложения</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как использование стандартного компонента TXPManifest требует настройки исходного манифеста Delphi для каждого проекта, было бы неплохо изыскать более удобный способ. В качестве альтернативы вы можете подключить манифест к файлу вашего проекта и по мере надобности редактировать его, не опасаясь, что ваша забывчивость может отразиться на версиях в манифестах других приложений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для начала необходимо создать исходный файл ресурса RC, включающий единственную строку:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+1  24   &quot;ХР.manifest&quot;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где 1 — номер ресурса версии библиотеки ComCtl32.dll, а 24 — номер ресурса манифеста (нумерация соответствует заголовочным файлам, распространяемых Microsoft); &quot;ХР.manifest&quot; — имя файла с документом XML, содержащим манифест. Естественно, манифест нужно настроить в соответствии с потребностями вашего проекта.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь нужно откомпилировать файл ресурса при помощи строчного компилятора-ресурсов \Delphi7\Bin\brcc32.exe и разместить его в папке проекта.
+</font ></P>
+<P><font face="Verdana" size="3">
+И последняя операция — добавьте в исходный код файла проекта директиву подключения ресурса манифеста:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{$R xpmanifest.res}</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В результате при компиляции проекта манифест из ресурса будет добавлен в исполняемый файл приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Пример ресурсов манифеста имеется на дискете, прилагаемой к этой книге.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

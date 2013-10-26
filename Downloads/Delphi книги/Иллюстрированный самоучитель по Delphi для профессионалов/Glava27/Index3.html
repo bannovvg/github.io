@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Интерфейс присоединения Drag-and-Dock</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Эта возможность появилась в Delphi 4. Она &quot;подсмотрена&quot; опять-таки у разработчиков из Microsoft, внедривших плавающие панели инструментов в MS Office, Internet Explorer и другие продукты (рис. 27.2).
+</font ></P>
+<P><font face="Verdana" size="3">
+Речь идет о том, что ряд элементов управления (а конкретно — потомки класса
+<font face="Verdana" size="2">xwinContro</font><font face="Verdana" size="2">l</font>) могут служить носителями (доками) для других элементов управления с возможностью их динамического перемещения из одного дока в другой при помощи мыши. Перетаскивать можно практически все — от статического текста до форм включительно. Пример использования техники Drag-and-Dock дает сама среда разработки Delphi — с ее помощью можно объединять на экране различные инструменты, такие как Инспектор объектов и Менеджер проекта.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как и в случае с технологией перетаскивания Drag-and-Drop, возможны два варианта реализации техники Drag-and-Dock: автоматический и ручной. В первом случае дело сводится к установке нужных значений для нескольких свойств, а остальную часть работы берет на себя код VCL; во втором, как следует из названия, вся работа возлагается на программиста.
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, что же нужно сделать для внедрения Drag-and-Dock? В Инспекторе объектов необходимо изменить значение свойства
+<font face="Verdana" size="2"> DragKind</font> на <font face="Verdana" size="2">dkDock</font>, a свойства
+<font face="Verdana" size="2"> DragMode</font> — на <font face="Verdana" size="2">dmAutomatic</font>. Теперь этот элемент управления можно перетаскивать с одного носителя-дока на другой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Носителем других компонентов (доком) может служить потомок
+<font face="Verdana" size="2">TwinContro</font><font face="Verdana" size="2">l</font>. У него есть свойство
+<font face="Verdana" size="2">Docksite</font>, установка которого в
+<font face="Verdana" size="2"> True</font> разрешает перенос на него других компонентов. Если при этом еще и установить свойство
+<font face="Verdana" size="2"> AutoSize</font> в <font face="Verdana" size="2">True</font>, док будет автоматически масштабироваться в зависимости от того, что на нем находится. В принципе, этими тремя операциями исчерпывается минимальный обязательный набор.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.27.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 27.2. </B>Плавающие панели 
+  инструментов </font ></P>
+<P><font face="Verdana" size="3"> Естественно, для программиста предусмотрены 
+  возможности контроля за этим процессом. Каждый переносимый элемент управления 
+  имеет два события, возникающие в моменты начала и конца переноса: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TStartDockEvent 
+    = procedure(Sender: TObject;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var DragObject: 
+    TDragDockObject) of object;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TEndDragEvent 
+    = procedure(Sender, Target: TObject; X, Y: Integer) of object;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В первом из методов <font face="Verdana" size="2"> 
+  sender</font> — это переносимый объект, a <font face="Verdana" size="2"> DragObject</font> 
+  — специальный объект, создаваемый на время процесса переноса и содержащий его 
+  свойства. Во втором <font face="Verdana" size="2"> sender</font> — это также 
+  переносимый объект, a <font face="Verdana" size="2"> Target</font> — объект-док. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Док тоже извещается о событиях во время переноса: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TGetSitelnfoEvent 
+    = procedure(Sender: TObject; DockClient: TControl;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var InfluenceRect: 
+    TRect; MousePos: TPoint;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var CanDock: 
+    Boolean)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> of object;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TDockOverEvent 
+    = procedure(Sender: TObject; Source: TDragDockObject;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> X, Y: Integer; 
+    State: TDragState; var Accept: Boolean) of object;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TDockDropEvent 
+    = procedure(Sender: TObject;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Source: 
+    TDragDockObject;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> X, Y: Integer) 
+    of object;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TUnDockEvent 
+    = procedure(Sender: TObject; Client: TControl; NewTarget:</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TWinControl; 
+    var Allow: Boolean) of object;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Как только пользователь нажал кнопку мыши над 
+  переносимым компонентом и начал сдвигать его с места, всем потенциальным докам 
+  (компонентам, свойство которых <font face="Verdana" size="2"> Docksite</font> 
+  установлено в <font face="Verdana" size="2">True</font>) рассылается событие 
+  <font face="Verdana" size="2">onGetsiteinfo</font>. С ним передаются параметры: 
+  кто хочет &quot;приземлиться&quot; (параметр <font face="Verdana" size="2">Dockclient</font>) 
+  и где (<font face="Verdana" size="2">MousePos</font>). В ответ док должен сообщить 
+  решение, принимает он компонент (параметр <font face="Verdana" size="2">CanDock</font>) 
+  и предоставляемый прямоугольник (<font face="Verdana" size="2">infiuenceRect</font>) 
+  или нет. При помощи этого события можно принимать только определенные элементы 
+  управления, как показано в примере: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.PanellGetSitelnfо(Sender: 
+    TObject; DockClient: TControl; var InfiuenceRect:&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">TRect; MousePos: 
+    TPoint; var CanDock: Boolean);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if DockClient 
+    is TBitBtn then CanDock := False;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Два последующих события в точности соответствуют 
+  своим аналогам из механизма переноса Drag-and-Drop). Событие <font face="Verdana" size="2"> 
+  onDockOver</font> происходит при перемещении перетаскиваемого компонента над 
+  доком, <font face="Verdana" size="2"> OnDockDrop</font> — в момент его отпускания. 
+  Наконец, <font face="Verdana" size="2"> onUnDock</font> сигнализирует об уходе 
+  компонента с дока и происходит в момент его &quot;приземления&quot; в другом 
+  месте. </font ></P>
+<P><font face="Verdana" size="3"> Между доком и содержащимися на нем элементами 
+  управления есть двусторонняя связь. Все &quot;припаркованные&quot; элементы 
+  управления содержатся в векторном свойстве <font face="Verdana" size="2">Dockclients</font>, 
+  а их количество можно узнать из свойства </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DockClientCount:</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> s : = ' ' ;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> for i := 0 
+    to Panell.DockClientCount-1&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> do AppendStr(s,Panell.DockClients[i].Name+#$D#$A); 
+    ShowMessage(s) ;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> С другой стороны, если элемент управления находится 
+  на доке, то ссылка на док располагается в свойстве <font face="Verdana" size="2">HostDocksite</font>. 
+  С ее помощью можно установить, где находится элемент, и даже поменять свойства 
+  дока: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMyForm.ButtonlEndDock(Sender, 
+    Target: TObject; X, Y: Integer); begin</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> (Sender as 
+    TControl).HostDockSite.SetTextBuf(pChar((Sender as TControl).Name));</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Компоненты можно не только переносить с одного 
+  дока на другой, но и отпускать в любом месте. Хотя сам по себе компонент <font face="Verdana" size="2"> 
+  TControl</font> и его потомки не являются окнами Windows, но специально для 
+  этого случая создается окно-носитель. Свойство <font face="Verdana" size="2">FloatingDockSiteClass</font> 
+  как раз и определяет класс создаваемого окна. По умолчанию для большинства компонентов 
+  значение этого свойства равно <font face="Verdana" size="2">TCustomDockForm</font>. 
+  Это — форма, которая обладает свойствами дока и создается в момент отпускания 
+  элемента управления вне других доков. Внешне она ничем не отличается от обычной 
+  стандартной формы. Если вы хотите, чтобы ваша плавающая панель инструментов 
+  выглядела по- особенному, нужно породить потомка от класса <font face="Verdana" size="2">TCustomDockForm</font> 
+  и связать свойство <font face="Verdana" size="2">FloatingDockSiteCiass</font> 
+  с этим порожденным классом: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TMyCustomFloatingForm 
+    = class(TCustomDockForm)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;public</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> constructor 
+    Create(AOwner: TComponent);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;override;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> constructor 
+    TMyCustomFloatingForm.Create(AOwner: TComponent};</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> inherited Create(AOwner);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> BorderStyle 
+    := bsNone;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.FormCreate(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ToolBarl.FioatingDockSiteCiass 
+    := TMyCustomFloatingForm; end;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В этом примере решена типовая задача — сделать 
+  так, чтобы несущее окно плавающей панели инструментов не содержало заголовка. 
+  Внешний вид таких панелей приведен на рис. 27.3. </font ></P>
+<P><font face="Verdana" size="3"> Переносить компоненты можно не только с помощью 
+  мыши, но и программно. Для этого есть пара методов <font face="Verdana" size="2">ManualDock</font> 
+  и <font face="Verdana" size="2">ManualFioat</font>. В приводимом ниже примере 
+  нажатие кнопки с именем <font face="Verdana" size="2"> BitBtnl</font> переносит 
+  форму <font face="Verdana" size="2"> custForm</font> на док <font face="Verdana" size="2">MainForm.Paneil</font> 
+  и размещает ее по всей доступной площади (параметр выравнивания <font face="Verdana" size="2">alclient</font>). 
+  Нажатие кнопки <font face="Verdana" size="2"> BitBtn2</font> снимает эту форму 
+  с дока и выравнивает ее по центру экрана. В свойствах <font face="Verdana" size="2"> 
+  UndockHeight</font> и <font face="Verdana" size="2"> undockwidth</font> хранятся 
+  высота и ширина элемента управления на момент, предшествующий помещению на док: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.BitBtnlClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">GustForm.ManualDock</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">(MainForm.Pane11,nil,alClient);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.BitBtn2Click(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with CustForm 
+    do&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin ManualFloat(Rect((Screen.Width-UndockWidth) 
+    div 2,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> (Screen.Height-UndockHeight) 
+    div 2, (Screen.Width+UndockWidth) div 2, (Screen.Height+UndockHeight) div 
+    2) );</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+</blockquote>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.27.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 27.3. </B>Плавающие панели 
+  инструментов без заголовка окна </font ></P>
+<P><font face="Verdana" size="3"> Полное рассмотрение внутреннего устройства механизмов 
+  Drag-and-Dock потребовало бы расширения объема этой главы. Тем, кто хочет использовать 
+  их на все 100%, рекомендуем обратиться к свойствам <font face="Verdana" size="2"> 
+  useDockManager</font> и <font face="Verdana" size="2">DockManager</font>. Последнее 
+  представляет собой СОМ-интерфейс, позволяющий расширить возможности дока, вплоть 
+  до записи его состояния в поток (класс<B> </B><font face="Verdana" size="2">TStream</font>). 
+  </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

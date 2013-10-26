@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Подключение набора данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент доступа к данным является основой приложения баз данных. На основе выбранной таблицы БД он создает набор данных и позволяет эффективно управлять им. В процессе работы такой компонент тесно взаимодействует с функциями соответствующей технологии доступа к данным. Обычно доступ к функциональности технологии доступа к данным осуществляется через совокупность интерфейсов. Все компоненты доступа к данным являются невизуальными.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания нового проекта достаточно выбрать команду
+<b> New</b> <B>Application </B>из меню <B>File </B>или воспользоваться Репозиторием объектов, который открывается командой
+<b> New</b> из меню <B>File.</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Здесь рассматривается простейший вариант создания 
+    приложения. В реальных проектах для размещения компонентов доступа к данным 
+    следует использовать модуль данных. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Затем на форму нового проекта необходимо перенести компонент, инкапсулирующий набор данных, и выполнить следующие действия. Последовательность действий рассмотрим для компонента, инкапсулирующего функции таблицы (см. гл. 12).
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Подключить компонент к базе данных. Для этого, в зависимости от конкретной технологии, используется или специальный компонент, устанавливающий соединение, или прямое обращение к драйверу, интерфейсу или динамической библиотеке. Детально способы соединения рассматриваются в части IV.
+</font ></P>
+<P><font face="Verdana" size="3">
+2.  Подключить к компоненту таблицу БД. Для этого используется свойство
+<font face="Verdana" size="2">TableName</font>, доступное в Инспекторе объектов. После выполнения действий первого этапа в списке этого свойства должны появиться имена всех доступных в подключенной базе данных таблиц. После выбора имени таблицы в свойстве
+<font face="Verdana" size="2"> TableName</font> компонент оказывается связанным с ней.
+</font ></P>
+<P><font face="Verdana" size="3">
+3. Переименовать компонент. Это не обязательное действие. Тем не менее, в любых случаях желательно присваивать компонентам доступа к данным осмысленные имена, соответствующие названиям подключенных таблиц. Обычно название компонента копирует название таблицы (например,
+<font face="Verdana" size="2">Orders</font> или <font face="Verdana" size="2">OrdTable</font>
+илт <font face="Verdana" size="2">tblOrders</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+4. Активизировать связь между компонентом и таблицей БД.
+Для этого используется свойство <font face="Verdana" size="2">Active</font>. Если в Инспекторе объектов присвоить этому свойству значение
+<font face="Verdana" size="2">True</font>, то связь активизируется. Эту операцию можно выполнить и в исходном коде приложения. Также существует метод
+<font face="Verdana" size="2">open</font>, который открывает набор данных, и метод
+<font face="Verdana" size="2">close</font>, закрывающий его.
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве примера попробуем создать простейшее приложение баз данных, работающее с таблицей COUNTRY.DB из стандартной демонстрационной базы данных
+<font face="Verdana" size="2"> DBDEMOS</font> через драйвер процессора
+<font face="Verdana" size="2"> Borland Database Engine.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+На форму нового проекта необходимо перенести компонент
+<font face="Verdana" size="2">TTаblе</font> со страницы <font face="Verdana" size="2"> BDE</font> Палитры компонентов. Свойство
+<font face="Verdana" size="2"> DatabaseName</font> должно ссылаться на псевдоним
+<font face="Verdana" size="2">DBDEMOS</font>, который создается автоматически при установке Delphi, его можно выбрать из списка свойства
+<font face="Verdana" size="2">DatabaseName</font>. Для свойства <font face="Verdana" size="2"> TableName</font> необходимо задать имя таблицы &quot;COUNTRY.DB&quot;. Его также можно выбрать из списка. Двойной щелчок на свойстве
+<font face="Verdana" size="2"> Active</font> в Инспекторе объектов присваивает ему значение
+<font face="Verdana" size="2">True</font>. После этого связь компонента с таблицей активизируется. Свойство
+<font face="Verdana" size="2"> Name</font> имеет значение &quot;<font face="Verdana" size="2">CountryTable</font>&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Открытие и закрытие набора данных можно предусмотреть как реакцию на действия пользователя или возникновение события. Чаще всего набор данных должен открываться при первом показе формы и закрываться при ее закрытии.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>&nbsp;Листинг 11.1. </B> Секция 
+  Implementation главного модуля проекта DemoDBApp&nbsp; </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+implementation</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;{$R *.DFM}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.FormShowfSender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">CountryTable.Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('Table open error');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.FormClose(Sender: TObject; var Action: TCloseAction);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CountryTable.Close;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При открытии формы выполняется метод обработчик
+<font face="Verdana" size="2">FormShow</font>. В нем набор данных открывается при помощи метода
+<font face="Verdana" size="2">Open</font>. Обратите внимание на использование конструкции
+<font face="Verdana" size="2">try</font>..<font face="Verdana" size="2">except</font>, которая обеспечивает корректное завершение при возникновении исключительных ситуаций.
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как ошибки в работе приложений баз данных могут привести к серьезным последствиям (потеря или искажение данных), то защитный код должен присутствовать во всех критических местах.
+</font ></P>
+<P><font face="Verdana" size="3">
+В методе-обработчике <font face="Verdana" size="2">FormClose</font>, который вызывается при закрытии формы, набор данных закрывается методом
+<font face="Verdana" size="2">close</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> В принципе, для выполнения рассмотренных операций 
+    можно воспользоваться и свойством <font face="Verdana" size="2">Active</font>. 
+    Однако реальные операции выполняют указанные методы. Поэтому использование 
+    свойства является лишним этапом, да и с точки зрения ООП все действия должны 
+    выполнять методы объекта, а свойства служат только для представления значений. 
+    Свойство <font face="Verdana" size="2"> Active</font> сигнализирует о состоянии 
+    набора данных. </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Манифест Windows XP</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, начнем с манифеста. Он представляет собой документ в формате XML, содержащий всю информацию, необходимую для взаимодействия приложения и библиотеки ComCtl32.dll версии 6.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание<U>&nbsp;</U></B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Следует отметить, что манифесты широко используются 
+    во многих продуктах и технологиях, работающих в операционных системах Microsoft. 
+    С полной схемой XML манифеста вы можете ознакомиться в документации Microsoft 
+    MSDN. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Пример манифеста представлен в листинге 6.1.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 6.1. </B> Манифест 
+  Windows XP&nbsp; </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;assembly xmlns=&quot;urn:schemas-microsoft-com:asm.vl&quot; manifestVersion=&quot;l.0&quot;&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;assemblyIdentity</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+version=&quot;l.0.0.0&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+processorArchitecture=&quot;X86&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+name=&quot;CompanyName.ProductName.YourApp&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type=&quot;win32&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+/&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;description&gt;Your application description here.&lt;/description&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;dependency&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;dependentAs s embly&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;assemblyIdentity</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type=&quot;win32&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+name=&quot;Microsoft.Windows.Common-Controls&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+version=&quot;6.0.0.0&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+processorArchitecture=&quot;X86&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+publicKeyToken=&quot;6595b64144ccfldf&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+language=&quot;*&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+/&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;/dependentAss embly&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;/dependency&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;/assembly&gt;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что в элементе
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;dependency&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;dependentAss emblу&gt;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> &lt;assemblyldentity&gt;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+описывается версия системной библиотеки, используемой приложением для отрисовки элементов управления.
+</font ></P>
+<P><font face="Verdana" size="3">
+При загрузке приложения операционная система Windows XP считывает манифест (если он есть) и получает информацию о том, что для выполнения приложения потребуется библиотека ComCtl32.dll версии 6.
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо этой информации манифест может содержать и другие необходимые сведения о приложении и условиях его работы. Например, общая информация о приложении и его версии представлены элементом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;AssemblyIdentity&gt;.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Вы можете добавить манифест в ваше приложение двумя способами:&nbsp;
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">использовать компонент TxpManifest;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp; добавить манифест в ресурсы приложения вручную. Рассмотрим 
+    их.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

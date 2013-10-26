@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Доступ 
+  к связанным наборам данных и командам ADO</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">TADOconnection</font> обеспечивает доступ ко всем компонентам, которые используют его для доступа к хранилищу данных ADO. Все открытые таким образом наборы данных доступны через индексированное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSets[Index: Integer]: TCustomADODataSet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Каждый элемент этого списка содержит дескриптор компонента доступа к данным ADO (тип
+<font face="Verdana" size="2">TCustomADODataSet</font>). Общее число связанных компонентов с наборами данных возвращается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSetCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для этих компонентов можно централизованно установить тип используемого курсора при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TCursorLocation = (clUseServer, clUseClient); property CursorLocation: TCursorLocation;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2"> clUseClient</font> задает локальный курсор на стороне клиента, что позволяет выполнять любые операции с данными, в том числе не поддерживаемые сервером.
+</font ></P>
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2">cIUseServer</font> задает курсор на сервере, который реализует только возможности сервера, но обеспечивает быструю обработку больших массивов данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Например:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for i := 0 to ADOConnection.DataSetCount — 1 do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if ADOConnection.DataSets[i].Active = True then ADOConnection.DataSets[i].Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ADOConnection.DataSets[i].CursorLocation := clUseClient; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Помимо наборов данных компонент <font face="Verdana" size="2"> TADOConnection</font> обеспечивает выполнение команд ADO. Команду ADO инкапсулирует специальный компонент
+<font face="Verdana" size="2">TADOCommand</font>, который рассматривается ниже. Все команды ADO, работающие с хранилищем данных через это соединение, доступны для управления через индексированное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Commands[Index: Integer]: TADOCommand</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Каждый   элемент   этого   списка   представляет   собой   экземпляр   класса
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TADOCommand.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Общее число доступных команд возвращается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CommandCount: Integer</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Например, сразу после открытия соединения можно выполнить все связанные команды ADO, реализовав таким образом нечто вроде скрипта:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.ADOConnectionConnectComplete(Connection: TADOConnection;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> const Error: Error; var EventStatus: TEventStatus);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var i, ErrorCnt: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if EventStatus = esOK then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for i := 0 to ADOConnection.CommandCount — 1 do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;try if ADOConnection.Commands[i].CommandText &lt;&gt;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then ADOConnection.Commands[i].Execute; except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on E: Exception do Inc(ErrorCnt);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Однако компонент <font face="Verdana" size="2"> TADOConnection</font> может выполнять команды ADO самостоятельно, без помощи других компонентов. Для этого используется перегружаемый метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Execute(const CommandText: WideString; ExecuteOptions:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TExecuteOptions = []): _RecordSet; overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Execute(const CommandText: WideString;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var RecordsAffected:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Integer; ExecuteOptions: TExecuteOptions = [eoExecuteNoRecords]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+overload;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Выполнение команды осуществляется процедурой
+<font face="Verdana" size="2"> Execute</font> (если команда не возвращает набор записей) или одноименной функцией
+<font face="Verdana" size="2"> Execute</font> (если команда возвращает набор записей).
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> commandText</font> должен содержать текст команды. Параметр
+<font face="Verdana" size="2"> RecordsAffected</font> возвращает число обработанных командой записей (если они есть). Параметр
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TExecuteOption = (eoAsyncExecute, eoAsyncFetch, eoAsyncFetchNonBlocking, eoExecuteNoRecords);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TExecuteOptions = set of TExecuteOptio</font>n;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задает условия выполнения команды:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">eoAsyncExecute 
+    — команда выполняется асинхронно (соединение не будет ожидать окончания выполнения 
+    команды, а продолжит работу, обработав сигнал о завершении команды, когда 
+    он поступит);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;eoAsyncFetch — команда 
+    получает необходимые записи также асинхронно;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;eoAsyncFetchNonBlocking 
+    — команда получает необходимые записи также асинхронно, но при этом созданная 
+    нить не блокируется;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;eoExecuteNoRecords — команда 
+    не должна возвращать записи.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Если источник данных принял команду для выполнения и сообщил об этом соединению, вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TWillExecuteEvent = procedure(Connection: TADOConnection;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var CommandText: WideString; var CursorType: TCursorType; var LockType:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TADOLockType; var ExecuteOptions: TExecuteOptions;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var EventStatus:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TEventStatus; const Command: _Command;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;const Recordset: _Recordset)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnWillExecute: TWillExecuteEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После выполнения команды вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TExecuteCompleteEvent = procedure(Connection: TADOConnection; RecordsAffected: Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> const Error: Error; var EventStatus: TEventStatus;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> const Command: _Command;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;const Recordset: _Recordset) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property OnExecuteComplete: TExecuteCompleteEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

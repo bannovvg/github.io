@@ -1,0 +1,1271 @@
+<html>
+
+<head>
+<title>Компоненты дисперсии и смешанная модель
+ANOVA/ANCOVA</title>
+</head>
+
+<body BACKGROUND="../tile1.gif">
+<font SIZE="5" COLOR="AA0000"><b>
+
+<p align="center">Компоненты дисперсии и смешанная
+модель ANOVA/ANCOVA</b></font> </p>
+
+<hr SIZE="1">
+
+<p><a NAME="index"></a> 
+
+<ul>
+  <li><a HREF="stvarcom.html#basic ideas">Основные идеи</a> <ul>
+      <li><a HREF="stvarcom.html#random">Свойства случайных эффектов</a></li>
+      <li><a HREF="stvarcom.html#vcproperties">Свойства компонент
+        дисперсии</a></li>
+    </ul>
+  </li>
+  <li><a HREF="stvarcom.html#estimate">Оценивание компонент
+    дисперсии (технический обзор)</a> <ul>
+      <li><a HREF="stvarcom.html#estim1">Оценивание дисперсии
+        случайных факторов</a></li>
+      <li><a HREF="stvarcom.html#estim2">Оценивание компонент
+        дисперсии</a> </li>
+      <li><a HREF="stvarcom.html#testing">Проверка значимости компонент
+        дисперсии</a></li>
+      <li><a HREF="stvarcom.html#estim3">Оценка внутриклассовой
+        корреляции</a></li>
+    </ul>
+  </li>
+</ul>
+
+<hr SIZE="1">
+
+<p><a NAME="basic ideas"></a>&nbsp;</p>
+
+<p><font size="4" color="#000080">Основные идеи</font></p>
+
+<p>В некоторых исследованиях иногда ошибочно
+предполагается, что достаточно только проделать
+некоторые действия с уровнями независимых
+переменных и оценить соответствующие отклики
+зависимых переменных. Независимые переменные,
+уровни которых определяются исследователем,
+называются <a href="../glossary/gloss_f.html#Fixed Effects">фиксированными
+эффектами</a>. Другой тип эффектов, часто
+вызывающий интерес исследователей, представляют
+<a href="../glossary/gloss_s.html#Random Effects">случайные эффекты</a>.
+Предполагается, что уровни фактора этого типа
+случайным образом выбраны из генеральной
+совокупности всех возможных уровней. В
+исследовательской работе иногда не
+представляется возможным осуществлять
+какие-либо действия с независимыми переменными,
+участвующими в анализе. Выходом является
+рассмотрение данных переменных как <a href="../glossary/gloss_s.html#Random Effects">случайных</a>. Например,
+генетический набор особей различных видов в
+настоящий момент не может быть полностью изменен
+в результате генетических экспериментов,
+поэтому генетик не имеет возможности полностью
+воссоздать картину воздействия различных
+комбинаций генов на здоровье, поведенческие
+характеристики и т.п. для обследуемой особи. В
+качестве еще одного примера, рассмотрим задачу
+производителя, который желает исследовать
+компоненты дисперсии характеристик какого-либо
+продукта, производящегося с помощью некоторого
+набора случайно выбранных станков, которыми
+управляли некоторые случайно выбранные
+операторы. Статистический анализ <a href="../glossary/gloss_s.html#Random Effects">случайных эффектов</a>
+основан на <em>модели случайных эффектов</em>, если
+все независимые переменные являются <em>случайными
+эффектами</em>, или на <em>смешанной модели</em>, если
+некоторые эффекты предполагаются случайными, а
+некоторые являются <a href="../glossary/gloss_f.html#Fixed Effects">фиксированными</a>.</p>
+
+<p><a NAME="random"></a><strong>Свойства случайных эффектов.</strong>
+Предположим, что вы располагаете данными об
+ущербе, который нанесен насекомыми-вредителями
+различным сортам зерновых. В данном эксперименте
+вы, по техническим причинам, не можете
+исследовать все существующие сорта зерновых,
+поэтому вы случайно выбираете из всей
+совокупности сортов зерновых только четыре
+сорта. Обследуется ущерб не более чем для четырех
+участков, на которых произрастает один из
+рассматриваемых сортов. Ущерб оценивается в
+баллах от 0 (нет ущерба) до 10 (огромный ущерб).
+Следующие данные представлены в работе Milliken и
+Johnson (1992, стр. 237).</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="3"><font size="2" color="blue">ДАННЫЕ: wheat.sta 3v</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">СОРТ </font></th>
+    <th align="left"><font size="2" color="blue">УЧАСТОК</font></th>
+    <th align="left"><font size="2" color="blue">УЩЕРБ </font></th>
+  </tr>
+  <tr>
+    <td align="center"><font size="2" color="blue">A<br>
+    A<br>
+    A<br>
+    B<br>
+    B<br>
+    B<br>
+    B<br>
+    C<br>
+    C<br>
+    C<br>
+    C<br>
+    D<br>
+    D</font></td>
+    <td align="right"><p align="center"><font size="2" color="blue">1<br>
+    2<br>
+    3<br>
+    4<br>
+    5<br>
+    6<br>
+    7<br>
+    8<br>
+    9<br>
+    10<br>
+    11<br>
+    12<br>
+    13</font></td>
+    <td align="right"><p align="center"><font size="2" color="blue">3.90<br>
+    4.05<br>
+    4.25<br>
+    3.60<br>
+    4.20<br>
+    4.05<br>
+    3.85<br>
+    4.15<br>
+    4.60<br>
+    4.15<br>
+    4.40<br>
+    3.35<br>
+    3.80</font></td>
+  </tr>
+</table>
+
+<p>Для определения компонент дисперсии по
+сопротивлению воздействию насекомым для
+переменных <em>Сорт </em>и <em>Участок </em>применим
+вначале модель дисперсионного анализа (ANOVA).
+Несколько неожиданным является то, что
+результаты для переменной <em>Сорт </em>в модели
+дисперсионного анализа совпадают для случая,
+когда данная переменная полагается
+фиксированным фактором, и для случая, когда
+данная переменная полагается случайным фактором
+(учитывая то, что используется сумма квадратов
+типа I, и зная, что переменная <em>Сорт </em>вычисляется
+первой). Таблица, следующая далее, показывает
+результаты анализа, смешанной модели ANOVA, в
+которой рассматривая переменную <em>Сорт </em>как <a href="../glossary/gloss_f.html#Fixed Effects">фиксированный эффект</a>,
+игнорируя переменную <em>Участок </em>(т.е.,
+рассматривая вариацию участок на участок как
+меру случайной ошибки).</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="8"><font size="2" color="blue">Итоги ANOVA: DAMAGE
+    (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">&nbsp;<br>
+    Эффект </font></th>
+    <th align="center"><font size="2" color="blue">Эффект<br>
+    фикс/сл.</font></th>
+    <th align="center"><font size="2" color="blue">сс<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">MS<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">сс<br>
+    Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">MS<br>
+    Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    F</font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    p</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">{1} СОРТ</font></th>
+    <td align="center"><font size="2" color="blue">Fixed</font></td>
+    <td align="center"><font size="2" color="blue">3</font></td>
+    <td align="center"><font size="2" color="blue">.270053</font></td>
+    <td align="center"><font size="2" color="blue">9</font></td>
+    <td align="center"><font size="2" color="blue">.056435</font></td>
+    <td align="center"><font size="2" color="blue">4.785196</font></td>
+    <td align="center"><font size="2" color="blue">.029275</font></td>
+  </tr>
+</table>
+
+<p>В той же модели можно рассматривать переменную <em>Сорт
+</em>как <a href="../glossary/gloss_f.html#Fixed Effects">фиксированный
+эффект</a>, а переменную <em>Участок </em>как <a href="../glossary/gloss_s.html#Random Effects">случайный эффект</a>.
+Таблица, представленная ниже, показывает
+результаты анализа данной смешанной модели.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="8"><font size="2" color="blue">Итоги ANOVA для
+    объединенной ощибки: DAMAGE (wheat.sta) </font></th>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th align="left" colspan="7"><font size="2" color="blue">сс ошибка
+    вычислена по методу Саттервейта</font></th>
+  </tr>
+  <tr>
+    <th align="left"><p align="center"><font size="2" color="blue">&nbsp;<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">Эффект<br>
+    фикс/сл.</font></th>
+    <th align="center"><font size="2" color="blue">сс<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">MS<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">сс<br>
+    Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">MS<br>
+    Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    F</font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    p</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">{1} СОРТ<br>
+    {2} УЧАСТОК&nbsp; </font></th>
+    <td align="right"><font size="2" color="blue">фиксир.<br>
+    случайн.</font></td>
+    <td align="center"><font size="2" color="blue">3<br>
+    9</font></td>
+    <td align="center"><font size="2" color="blue">.270053<br>
+    .056435</font></td>
+    <td align="center"><font size="2" color="blue">9<br>
+    -----</font></td>
+    <td align="center"><font size="2" color="blue">.056435<br>
+    -----</font></td>
+    <td align="center"><font size="2" color="blue">4.785196<br>
+    -----</font></td>
+    <td align="center"><font size="2" color="blue">.029275<br>
+    -----</font></td>
+  </tr>
+</table>
+
+<p>В следующей таблице представлены результаты
+анализа модели со <a href="../glossary/gloss_s.html#Random Effects">случайными
+эффектами</a>, в которой обе переменные <em>Участок </em>и
+<em>Сорт </em>рассматриваются как <a href="../glossary/gloss_s.html#Random Effects">случайные эффекты</a>.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="8"><font size="2" color="blue">Итоги ANOVA для
+    объединенной ощибки: DAMAGE (wheat.sta) </font></th>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th align="left" colspan="7"><font size="2" color="blue">сс ошибка
+    вычислена по методу Саттервейта</font></th>
+  </tr>
+  <tr>
+    <th align="left"><p align="center"><font size="2" color="blue">&nbsp;<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">Эффект<br>
+    фикс/сл.</font></th>
+    <th align="center"><font size="2" color="blue">сс<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">MS<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">сс<br>
+    Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">MS<br>
+    Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    F</font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    p</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">{1} СОРТ <br>
+    {2} УЧАСТОК </font></th>
+    <td align="right"><font size="2" color="blue">Random<br>
+    Random</font></td>
+    <td align="center"><font size="2" color="blue">3<br>
+    9</font></td>
+    <td align="center"><font size="2" color="blue">.270053<br>
+    .056435</font></td>
+    <td align="center"><font size="2" color="blue">9<br>
+    -----</font></td>
+    <td align="center"><font size="2" color="blue">.056435<br>
+    -----</font></td>
+    <td align="center"><font size="2" color="blue">4.785196<br>
+    -----</font></td>
+    <td align="center"><font size="2" color="blue">.029275<br>
+    -----</font></td>
+  </tr>
+</table>
+
+<p>Как следует из таблиц дисперсионного анализа,
+критерии значимости для переменной <em>Сорт </em>имеет
+один и тот же уровень для всех трех моделей.
+Однако если вычислить компоненты дисперсии, то
+различие между смешанной моделью
+(рассматривающей <em>Участок </em>как фиксированный
+эффект) и случайной моделью (рассматривающей <em>Участок
+</em>как случайный эффект) становится очевидна.
+Таблица, представленная ниже, показывает оценки <a href="../glossary/gloss_k.html#Variance Components">компонент дисперсии</a>
+для смешанной модели, рассматривающей
+переменную <em>Участок </em>как фиксированный
+эффект.</p>
+
+<table border="1">
+  <tr>
+    <th colspan="2" align="left"><font size="2" color="blue">Компоненты
+    дисперсии (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th align="right"><font size="2" color="blue">Тип средн. квадрата: 1</font></th>
+  </tr>
+  <tr>
+    <th align="left"><p align="center"><font size="2" color="blue">Источник</font></th>
+    <th align="right"><p align="center"><font size="2" color="blue">DAMAGE</font></th>
+  </tr>
+  <tr>
+    <td align="left"><p align="center"><font size="2" color="blue">{2} УЧАСТОК <br>
+    Ошибка</font></td>
+    <td align="right"><p align="center"><font size="2" color="blue">.056435<br>
+    0.000000</font></td>
+  </tr>
+</table>
+
+<p>Следующая таблица показывает оценки <a href="../glossary/gloss_k.html#Variance Components">компонент дисперсии</a>
+когда переменные <em>Сорт</em> и <em>Участок</em>
+рассматриваются как случайные эффекты.<br>
+Компоненты дисперсии (wheat.sta) </p>
+
+<table border="1">
+  <tr>
+    <th colspan="2" align="left"><font size="2" color="blue">Компоненты
+    дисперсии (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th align="right"><font size="2" color="blue">Тип средн. квадр.: 1</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">Источник</font></th>
+    <th align="right"><p align="center"><font size="2" color="blue">DAMAGE</font></th>
+  </tr>
+  <tr>
+    <td align="left"><font size="2" color="blue">{1} СОРТ <br>
+    {2} УЧАСТОК <br>
+    Ошибка</font></td>
+    <td align="right"><p align="center"><font size="2" color="blue">.067186<br>
+    .056435<br>
+    0.000000</font></td>
+  </tr>
+</table>
+
+<p>Очевидно, различие между данными наборами
+оценок состоит в том, что <em><a href="../glossary/gloss_k.html#Variance Components">компонента
+дисперсии</a></em> для переменной <em>Сорт</em>
+вычисляется только, если анализ проводится с
+помощью модели <em><a href="../glossary/gloss_s.html#Random Effects">случайных
+эффектов</a></em>. Это отражает основное отличие
+между <em><a href="../glossary/gloss_f.html#Fixed Effects">фиксированным</a></em>
+и <em><a href="../glossary/gloss_s.html#Random Effects">случайными
+эффектами</a></em>. Предполагается, что вариация
+уровней случайного фактора является
+представительной для вариации популяции
+всевозможных уровней в целом. Таким образом, по
+наблюдаемым уровням фактора можно оценить его
+дисперсию. Еще более важным является то, что
+ковариация между уровнями случайного фактора и
+откликами зависимой переменной может быть
+использована для оценки <a href="../glossary/gloss_k.html#Variance Components">компоненты
+дисперсии</a> зависимой переменной, которая
+обусловлена рассматриваемым случайным фактором.
+Напротив вариация уровней фиксированных
+факторов произвольно выбирается исследователем
+(т.е. исследователь может выбрать столько уровней
+фиксированного фактора, сколько ему нужно).
+Следовательно, вариация фиксированного фактора
+не может быть использована ни для разумной
+оценки дисперсии, ни для разумной оценки
+ковариации. Имея в виду описанную разницу между <em><a href="../glossary/gloss_f.html#Fixed Effects">фиксированными</a></em> и <em>случайными
+эффектами</em>, рассмотрим более подробно
+особенности <a href="../glossary/gloss_k.html#Variance Components">компонент
+дисперсии</a>.</p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><a HREF="stvarcom.html#index"><font SIZE="1">В начало</font></a> </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><a NAME="vcproperties"></a><strong>Свойства компонент
+дисперсии.</strong> Следующий пример иллюстрирует
+применение языка <i>STATISTICA BASIC</i>, если у вас не
+имеется доступа к системе STATISTICA, вы можете
+воспользоваться любой другой язык
+программирования, (например, Visual BASIC).</p>
+
+<p>Чтобы лучше разобраться с понятием компонент
+дисперсии: сгенерируем файл данных с заранее
+известными <a href="../glossary/gloss_k.html#Variance Components">компонентами
+дисперсии</a>, затем с помощью модуля <em>Компоненты
+дисперсии и смешанная модель ANOVA/ANCOVA</em> оценим
+компоненты дисперсии рассматриваемых данных
+Создадим новый файл данных с 2 переменными и 500
+наблюдениями. Затем составим следующую
+программу на языке STATISTICA BASIC .</p>
+
+<table>
+  <tr>
+    <td align="left"><font size="2" color="blue">NoGroups:=50;<br>
+    NoCases:=500;<br>
+    NPerGroup:=NoCases/NoGroups;<br>
+    redim RandomEffects(NoGroups);<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    for ilevel:=1 to NoGroups do<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RandomEffects(ilevel):=Normal(2);<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    error:=1;<br>
+    for i:=1 to ncases do begin<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ilevel:=trunc((i-1)/NPerGroup)+1;<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    data(i,1):=ilevel;<br>
+    &nbsp;<br>
+    data(i,2):=RandomEffects(ilevel)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+Normal(error);<br>
+    end;</font></td>
+    <td align="left"><font size="2">&nbsp;<br>
+    &nbsp;<br>
+    &nbsp;<br>
+    { Данный массив будет содержать }<br>
+    { случайные эффекты на соответствующих}<br>
+    { уровнях зависимой переменной }<p><br>
+    { Здесь генерируются случайные эффекты, }<br>
+    { имеющие нормальное распределения со }<br>
+    {&nbsp; ст.откл. = 2, т.е. с дисперсией = 4 }<br>
+    &nbsp;<br>
+    { Сигма (и дисперсия) ошибки будет равна 1 }<br>
+    &nbsp;<br>
+    { В данной строке генерируются }<br>
+    { целые числа: 1-50, n=10 }<br>
+    &nbsp;<br>
+    { Запись чисел в первую переменную }<br>
+    &nbsp;<br>
+    {Вычисление значений зависимой переменной: }<br>
+    { y(i)=СлучайныйЭффект(ilevel) + случ. ошибка }<br>
+    &nbsp;</font></td>
+  </tr>
+</table>
+
+<p>Данная программа размещает числа от 1 до 50 в
+первую переменную рассматриваемого файла
+данных. Данные числа образуют 50 подвыборок по 10
+элементов в каждой. Обратите внимание на то, что в
+начале программы <a href="../glossary/gloss_s.html#Random Effects">случайные
+эффекты</a> определяются как случайные числа,
+распределенные нормально с параметром
+стандартного отклонения равным 2 (дисперсия
+равна 2*2=4). Ошибка задается случайными числами,
+которые распределены по нормальному закону с
+параметром стандартного отклонения равным 1
+(дисперсия равна 1). Затем, каждое значение
+зависимой переменной вычисляется как сумма двух
+случайных чисел, независимых и распределенных по
+нормальному закону, одно из данных чисел
+является значение ошибки, а другое обуславливает
+значение <a href="../glossary/gloss_s.html#Random Effects">случайного
+эффекта</a> (т.е. случайное число для
+соответствующего уровня <em>случайного эффекта</em>).</p>
+
+<p>Когда вы будете анализировать созданные таким
+образом данные, рассматривая переменную 1 как
+случайный фактор и, вычисляя <a href="../glossary/gloss_k.html#Variance Components">компоненты
+дисперсии</a> (выберите любой метод оценки), то вы
+будете получать оценки обычно близкие к 4 для
+случайного фактора и к 1 для ошибки.</p>
+
+<p>Если вы сочтете возможным немного
+поэкспериментировать с данной программой,
+например, рассмотреть меньшее количество
+подвыборок (например, три), то вы обнаружите
+существенное отклонение вычисляемых оценок от
+тех, которые были &quot;зашиты&quot; в программу (т.е. 4
+и 1). Это иллюстрирует тот факт, что для небольшого
+количества выборок оценки <a href="../glossary/gloss_k.html#Variance Components">компонент дисперсии</a>
+недостаточно надежны, что является результатом
+увеличения ошибки. Вы можете использовать данную
+программу для исследования зависимости между
+числом уровней случайного фактора и надежностью
+оценок. </p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><a HREF="stvarcom.html#index"><font SIZE="1">В начало</font></a> </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><a NAME="estimate"></a>&nbsp;</p>
+
+<p><font size="4" color="#000080">Оценивание компонент
+дисперсии (технический обзор)</font></p>
+
+<p>Основной целью оценивания <em><a href="../glossary/gloss_k.html#Variance Components">компонент дисперсии</a></em>
+является вычисление ковариации между случайными
+факторами и зависимой переменной. В зависимости
+от метода, выбранного для оценки компонент
+дисперсии, вычисляются дисперсии случайных
+факторов, а также критерии значимости, чтобы
+проверить являются ковариации между случайными
+факторами и зависимой переменной отличными от
+нуля.<br>
+</p>
+
+<p><a NAME="estim1"></a><strong>Оценивание дисперсии случайных
+факторов.</strong> Метод дисперсионного анализа (ANOVA)
+предоставляет интегрированный подход к
+оцениванию <em><a href="../glossary/gloss_k.html#Variance Components">компонент
+дисперсии</a></em>, так как позволяет оценить
+дисперсии случайных факторов, <em>компоненты
+дисперсии</em> зависимой переменной,
+обусловленные случайными факторами, а также
+проверить, значимо или нет <em>компоненты
+дисперсии </em>отличаются от нуля. Метод ANOVA
+начинает вычислять дисперсию случайных факторов
+с построения матрицы <em>Суммы квадратов и
+смешанных произведений (SSCP)</em> для независимых
+переменных. Из матрицы <em>Суммы квадратов и
+смешанных произведений</em> для независимых
+случайных факторов затем удаляется влияние <em><a href="../glossary/gloss_f.html#Fixed Effects">фиксированных эффектов</a></em>,
+оставляя, как это требуется для смешанной модели,
+<em><a href="../glossary/gloss_s.html#Random Effects">случайные эффекты</a></em>
+независимыми от <em><a href="../glossary/gloss_f.html#Fixed Effects">фиксированных
+эффектов</a></em> (см., например, Searle, Casella и McCulloch, 1992).
+Полученная таким образом матрица <em>Сумм
+квадратов и смешанных произведений</em> для
+каждого случайного фактора затем делится на
+соответствующее число степеней свободы с целью
+получить элементы матрицы <em>Ожидаемый MS</em>.
+Ненулевые внедиагональные элементы
+рассматриваемой матрицы для случайных эффектов
+отражают степень смешивания, которая должна быть
+учтена при вычислении дисперсии для каждого
+фактора. В файле wheat.sta, рассматривая переменные <em>Сорт
+</em>и<em> Участок </em>как случайные эффекты, обратите
+внимание на то, что соответствующий элемент
+матрицы <em>Ожидаемый MS</em> для этих двух факторов
+указывает на наличие некоторой степени
+смешивания. Ниже приведена таблица <em>Ожидаемых
+средних квадратов</em>.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="5"><font size="2" color="blue">Ожидаемые средние
+    квадраты (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th align="left">&nbsp;</th>
+    <th align="left" colspan="4"><font size="2" color="blue">Тип средн. квадр.: 1</font></th>
+  </tr>
+  <tr>
+    <th align="left"><p align="center"><font size="2" color="blue">&nbsp;<br>
+    Источник</font></th>
+    <th align="center"><font size="2" color="blue">Эффект<br>
+    фикс/сл.</font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    СОРТ </font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    УЧАСТОК </font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    Ошибка</font></th>
+  </tr>
+  <tr>
+    <th align="left"><p align="left"><font size="2" color="blue">{1} СОРТ <br>
+    {2} УЧАСТОК <br>
+    Ошибка</font></th>
+    <td align="right"><font size="2" color="blue">Случайн.<br>
+    Случайн.<br>
+    &nbsp;</font></td>
+    <td align="right"><font size="2" color="blue">3.179487<br>
+    &nbsp;<br>
+    &nbsp;</font></td>
+    <td align="right"><p align="center"><font size="2" color="blue">1.000000<br>
+    1.000000<br>
+    &nbsp;</font></td>
+    <td align="right"><font size="2" color="blue">1.000000<br>
+    1.000000<br>
+    1.000000</font></td>
+  </tr>
+</table>
+
+<p>Элементы матрицы ожидаемых средних квадратов
+используются для оценки дисперсии <em><a href="../glossary/gloss_s.html#Random Effects">случайных эффектов</a></em>,
+приравниванием соответствующих значений
+дисперсий соответствующим значениям ожидаемых
+средних квадратов. Например, оценка дисперсии
+для переменной <em>Сорт</em>, используя сумму
+квадратов типа I вычислялась бы как 3.179487 умножить
+на средний квадрат для переменной <em>Сорт</em> плюс
+1, умноженная на средний квадрат для переменной <em>Участок</em>,
+плюс 1, умноженная на средний квадрат для <em>Ошибки</em>.</p>
+
+<p>Однако подход дисперсионного анализа для
+вычисления <em><a href="../glossary/gloss_k.html#Variance Components">компонент
+дисперсии</a></em>, однако такой подход не лишен
+некоторых вычислительных проблем (т.е. оценки,
+полученные при использовании метода
+дисперсионного анализа, в общем случае являются
+смещенными, а также могут быть отрицательными,
+что противоречит определению дисперсии, которая
+всегда положительна). В качестве альтернативы
+модели дисперсионного анализа для получения
+оценок используется метод <a href="../glossary/gloss_m.html#Maximum Likelihood Method">максимального
+правдоподобия</a>. Метод <a href="../glossary/gloss_m.html#Maximum Likelihood Method">максимального
+правдоподобия</a> базируется на использовании
+квадратичных форм для оценки компонент
+дисперсии и обычно, хотя и не всегда, в нем
+применяется некоторая итеративная процедура для
+поиска решения. Возможно, самой простой
+разновидностью метода максимального
+правдоподобия является метод MIVQUE(0). MIVQUE(0)
+расшифровывается как метод, в результате
+применения которого получаются квадратичные
+несмещенные оценки с минимальной дисперсией
+(Minimum Variance Quadratic Unbiased Estimators). Так как в MIVQUE(0)
+отсутствует взвешивание <a href="../glossary/gloss_s.html#Random Effects">случайных эффектов</a>
+(поэтому 0 является аргументом MIVQUE), то
+итеративный поиск решения для оценки компонент
+дисперсии применять не надо. MIVQUE(0) в первую
+очередь вычисляет элементы матрицы <em>Квадратичных
+сумм квадратов </em>(SSQ). <em>Элементы матрицы SSQ</em>
+для случайных эффектов определяются как суммы
+квадратов сумм квадратов и смешанных
+произведений для каждого <em><a href="../glossary/gloss_s.html#Random Effects">случайного эффектов</a></em>
+в рассматриваемой модели (после исключения
+влияния <em><a href="../glossary/gloss_f.html#Fixed Effects">фиксированных
+эффектов</a></em>). Элементы данной матрицы сродни
+элементам матрицы ожидаемых средних квадратов,
+которая используется для оценки ковариаций
+между случайными факторами и зависимой
+переменной. <em>Матрица SSQ</em> для файла данных wheat.sta
+показана ниже. Обратите внимание на то, что
+ненулевые внедиагональные элементы для
+переменных <em>Сорт</em> и <em>Участок</em> вновь
+демонстрируют некоторую степень смешивания.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="5"><font size="2" color="blue">MIVQUE(0) Оценивание
+    компонент дисперсии (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th align="left">&nbsp;</th>
+    <th align="left" colspan="4"><font size="2" color="blue">SSQ матр.</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">Источник</font></th>
+    <th align="center"><font size="2" color="blue">СОРТ</font></th>
+    <th align="center"><font size="2" color="blue">УЧАСТОК</font></th>
+    <th align="center"><font size="2" color="blue">Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">УЩЕБР</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">{1} СОРТ <br>
+    {2} УЧАСТОК <br>
+    Ошибка</font></th>
+    <td align="right"><p align="center"><font size="2" color="blue">31.90533<br>
+    9.53846<br>
+    9.53846</font></td>
+    <td align="right"><p align="center"><font size="2" color="blue">9.53846<br>
+    12.00000<br>
+    12.00000</font></td>
+    <td align="right"><font size="2" color="blue">9.53846<br>
+    12.00000<br>
+    12.00000</font></td>
+    <td align="right"><font size="2" color="blue">2.418964<br>
+    1.318077<br>
+    1.318077</font></td>
+  </tr>
+</table>
+
+<p>Методы <em>максимума правдоподобия</em> и <em>ограниченного
+максимума правдоподобия</em> с точки зрения
+вычисления <a href="../glossary/gloss_k.html#Variance Components">компонент
+дисперсии</a> тесно связаны с MIVQUE(0). В данной
+программе методы <em>МП </em>и <em>ограниченный МП </em>используют
+оценки, полученные в результате работы метода
+MIVQUE(0), в качестве начальных входных параметров
+для соответствующей итеративной процедуры
+вычисления компонент дисперсии. Следовательно,
+элементы <em>матрицы SSQ</em> используются как
+стартовые оценки ковариаций между случайными
+факторами и зависимой переменной в методах <em>МП</em>
+и <em>ограниченного МП</em>. </p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><a HREF="stvarcom.html#index"><font SIZE="1">В начало</font></a> </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><a NAME="estim2"></a><strong>Оценивание компонент
+дисперсии.</strong> Методы модели <a href="../glossary/gloss_k.html#Variance Components">дисперсионного
+анализа</a> для оценивания компонент дисперсии
+связаны с нахождением решения для системы
+уравнений, задающей соотношения между
+оцененными дисперсиями и ковариациями случайных
+факторов и оцененными ковариациями между
+случайными факторами и зависимой переменной.
+Решение такой системы определяет компоненты
+дисперсии. В таблице снизу показаны оценки сумм
+квадратов типа I для компонент дисперсии файла
+данных wheat.sta.</p>
+
+<table border="1" width="213">
+  <tr>
+    <th align="left" colspan="2" width="207"><font size="2" color="blue">Компоненты
+    дисперсии (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th align="left" width="85">&nbsp;</th>
+    <th align="left" width="116"><font size="2" color="blue">Тип средн. квадр.: 1</font></th>
+  </tr>
+  <tr>
+    <th align="left" width="85"><p align="center"><font size="2" color="blue">Источник</font></th>
+    <th align="center" width="116"><font size="2" color="blue">УЩЕРБ</font></th>
+  </tr>
+  <tr>
+    <th align="left" width="85"><font size="2" color="blue">{1} СОРТ <br>
+    {2} УЧАСТОК <br>
+    Ошибка</font></th>
+    <td align="center" width="116"><font size="2" color="blue">0.067186<br>
+    0.056435<br>
+    0.000000</font></td>
+  </tr>
+</table>
+
+<p>Компоненты дисперсии, полученные <em>методом
+MIVQUE(0)</em>, вычисляются обращением соответствующей
+подматрицы матрицы SSQ, которая не включает
+зависимую переменную, с последующим умножением
+полученной матрицы на вектор-столбец зависимой
+переменной. Это равносильно решению системы
+уравнений, которая связывает зависимую
+переменную со случайными независимыми
+переменными, принимая во внимание ковариации
+между независимыми переменными. Результаты
+оценивания по методу <em>MIVQUE(0)</em> для файла данных <em>wheat.sta</em>
+представлены в следующей таблице.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="2"><font size="2" color="blue">MIVQUE(0) Оценка
+    компонент дисперсии (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th align="left">&nbsp;</th>
+    <th align="left"><font size="2" color="blue">Компоненты дисперсии</font></th>
+  </tr>
+  <tr>
+    <th align="left"><p align="center"><font size="2" color="blue">Источник</font></th>
+    <th align="center"><font size="2" color="blue">УЩЕРБ</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">{1} СОРТ<br>
+    {2} УЧАСТОК<br>
+    Ошибка</font></th>
+    <td align="center"><font size="2" color="blue">0.056376<br>
+    0.065028<br>
+    0.000000</font></td>
+  </tr>
+</table>
+
+<p>Оценки компонент дисперсии для <em>МП </em>и <em>ограниченного
+МП</em> вычисляются в результате работы
+итеративной процедуры, которая последовательно
+оптимизирует оценки параметров для эффектов в
+модели. <em>Ограниченный МП</em> отличается от <em>МП</em>
+тем, что в данном методе максимум функции
+правдоподобия находится только для случайных
+эффектов, т.е. решение при ограничениях. В методах
+<em>МП </em>и <em>ограниченного МП</em> итеративное
+решение находится в результате подбора весов
+случайных эффектов, максимизирующих функцию
+правдоподобия на рассматриваемых данных.
+Результаты оценки по методу <em>MIVQUE(0)</em>
+используются как входные стартовые параметры
+для итерационных алгоритмов <em>МП </em>и <em>ограниченного
+МП</em>, поэтому данные три метода очень близки.
+Статистическая теория, лежащая в основе
+вычисления <em>компонент дисперсии</em> методом <em><a href="../glossary/gloss_m.html#Maximum Likelihood Method">максимального
+правдоподобия</a></em>, является достаточно
+продвинутой (работа Searle, Casella и McCulloch, 1992,
+рекомендуется в качестве авторитетного
+источника). Реализация алгоритмов <em><a href="../glossary/gloss_m.html#Maximum Likelihood Method">максимального
+правдоподобия</a></em> на практике связана с
+многочисленными вычислительными трудностями
+(см., например, Hemmerle &amp; Hartley, 1973, а также Jenrich &amp;
+Sampson, 1976, где описана реализация данных <a href="../glossary/gloss_a.html#Algorithm">алгоритмов</a>).
+Отметим, что трудности вычислительной
+реализации данных алгоритмов могут привести к
+получению оценок компонент дисперсии, которые
+могут лежать вне заданного пространства
+параметров, а также к сходимости к неоптимальным
+решениям или получению несостоятельных
+результатов. Milliken и Johnson (1992) отмечают все эти
+проблемы с коммерческим программным
+обеспечением, которое они использовали для
+вычисления <em>компонент дисперсии</em>.</p>
+
+<p>Основная идея, лежащая в основе методов МП и
+ограниченного МП, состоит в том, что необходимо
+подобрать веса для <em><a href="../glossary/gloss_s.html#Random Effects">случайных
+эффектов</a></em> так, чтобы минимизировался взятый
+со знаком минус натуральный логарифм функции
+правдоподобия (поскольку, функция правдоподобия
+изменяется от 0 до 1, то, найдя минимум для ее
+натурального логарифма, взятого со знаком минус,
+мы найдем максимум функции правдоподобия).
+Значения логарифма функции правдоподобия в
+методе <em>ограниченного МП</em> и соответствующие
+оценки <em>компонент дисперсии</em> на каждом шаге
+итерации для файла данных wheat.sta вы найдете в
+таблице <em>Отчет об итерациях</em>, которая
+приведена ниже.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="4"><font size="2" color="blue">Отчет об
+    итерациях (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th align="left">&nbsp;</th>
+    <th align="left" colspan="3"><font size="2" color="blue">Переменная: УЩЕРБ</font></th>
+  </tr>
+  <tr>
+    <th align="center"><font size="2" color="blue">Итер.</font></th>
+    <th align="center"><font size="2" color="blue">Лог правд.</font></th>
+    <th align="center"><font size="2" color="blue">Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">СОРТ </font></th>
+  </tr>
+  <tr>
+    <th align="center"><font size="2" color="blue">1<br>
+    2<br>
+    3<br>
+    4<br>
+    5<br>
+    6<br>
+    7</font></th>
+    <td align="center"><font size="2" color="blue">-2.30618<br>
+    -2.25253<br>
+    -2.25130<br>
+    -2.25088<br>
+    -2.25081<br>
+    -2.25081<br>
+    -2.25081</font></td>
+    <td align="center"><font size="2" color="blue">.057430<br>
+    .057795<br>
+    .056977<br>
+    .057005<br>
+    .057006<br>
+    .057003<br>
+    .057003</font></td>
+    <td align="center"><font size="2" color="blue">.068746<br>
+    .073744<br>
+    .072244<br>
+    .073138<br>
+    .073160<br>
+    .073155<br>
+    .073155</font></td>
+  </tr>
+</table>
+
+<p>Значения логарифма функции правдоподобия в
+методе <em>МП</em> и соответствующие оценки <em>компонент
+дисперсии</em> на каждом шаге итерации для файла
+данных wheat.sta вы найдете в таблице <em>Отчет об
+итерациях</em>, которая приведена ниже.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="4"><font size="2" color="blue">Отчет об
+    итерациях (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th align="left">&nbsp;</th>
+    <th align="left" colspan="3"><font size="2" color="blue">Переменная: УЩЕРБ</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">Итерация</font></th>
+    <th align="center"><font size="2" color="blue">Лог LL</font></th>
+    <th align="center"><font size="2" color="blue">Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">СОРТ </font></th>
+  </tr>
+  <tr>
+    <th align="left"><p align="center"><font size="2" color="blue">1<br>
+    2<br>
+    3<br>
+    4<br>
+    5<br>
+    6</font></th>
+    <td align="right"><font size="2" color="blue">-2.53585<br>
+    -2.48382<br>
+    -2.48381<br>
+    -2.48381<br>
+    -2.48381<br>
+    -2.48381</font></td>
+    <td align="right"><p align="center"><font size="2" color="blue">.057454<br>
+    .057427<br>
+    .057492<br>
+    .057491<br>
+    .057492<br>
+    .057492</font></td>
+    <td align="right"><p align="center"><font size="2" color="blue">.048799<br>
+    .048541<br>
+    .048639<br>
+    .048552<br>
+    .048552<br>
+    .048552</font></td>
+  </tr>
+</table>
+
+<p>Как можно видеть, оценки для <em>компонент
+дисперсии</em>, полученные с помощью различных
+методов, очень похожи. В общем, компоненты
+дисперсии, полученные различными методами,
+согласуются достаточно хорошо (см., например, Swallow
+&amp; Monahan, 1984).</p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><a HREF="stvarcom.html#index"><font SIZE="1">В начало</font></a> </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><a NAME="testing"></a><strong>Проверка значимости компонент
+дисперсии.</strong> Когда для оценивания параметров
+используются методы <em>максимального
+правдоподобия</em>, стандартные методы проверки
+значимости не применимы. В дисперсионном анализе
+для проверки значимости оценок применяется
+разложение сумм квадратов с последующим
+исследованием отношений средних квадратов,
+такая методика неприменима для квадратичных
+методов оценивания. Отметим также, что для модели
+дисперсионного анализа применяется стандартный
+метод проверки значимости оценок с учетом
+смешивания <a href="../glossary/gloss_s.html#Random Effects">случайных
+эффектов</a>.</p>
+
+<p>Для проверки значимости в смешанной и
+случайной модели оценка дисперсии ошибки должна
+быть построена так, чтобы все источники
+случайной дисперсии были бы учтены, за
+исключением дисперсии интересующего
+исследователя случайного эффекта. Такое
+построение производится методом синтеза
+знаменателя (Satterthwaite, 1946); данный метод
+осуществляет поиск линейных комбинаций
+возможных источников случайной дисперсии,
+которые выступают в качестве оценки ошибки,
+используемой для проверки значимости
+соответствующей оценки для рассматриваемого
+эффекта. В таблице, приведенной ниже, вы найдете
+коэффициенты, которые получаются в результате
+поиска выше упомянутых линейных комбинаций,
+используемые для проверки случайных эффектов <em>Сорт</em>
+и <em>Участок</em>.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="5"><font size="2" color="blue">Синтез
+    знаменателя: Коэффициенты (MS типа: 1) (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th align="left" colspan="4"><font size="2" color="blue">Объединенная MS
+    ошибок является<br>
+    комббинацией соотв.&nbsp; MS эффект</font></th>
+  </tr>
+  <tr>
+    <th align="left"><p align="center"><font size="2" color="blue">Эффект</font></th>
+    <th align="center"><font size="2" color="blue">Фикс/сл.</font></th>
+    <th align="center"><font size="2" color="blue">СОРТ </font></th>
+    <th align="center"><font size="2" color="blue">УЧАСТОК</font></th>
+    <th align="center"><font size="2" color="blue">Ошибка</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">{1} СОРТ<br>
+    {2} УЧАСТОК</font></th>
+    <td align="right"><font size="2" color="blue">Случайн.<br>
+    Случайн.</font></td>
+    <td align="center"><font size="2" color="blue">&nbsp;<br>
+    &nbsp;</font></td>
+    <td align="center"><font size="2" color="blue">1.000000<br>
+    &nbsp;</font></td>
+    <td align="center"><font size="2" color="blue">&nbsp;<br>
+    1.000000</font></td>
+  </tr>
+</table>
+
+<p>Значения этих коэффициентов указывают на то,
+что средний квадрат для Сорта должен быть
+протестирован против среднего квадрата для
+Участка, а средний квадрат для <em>Участка</em>
+должен быть протестирован против среднего
+квадрата ошибки. Возвращаясь вновь к таблице
+ожидаемых средних квадратов, становится
+очевидным, что метод синтеза знаменателя
+правильно идентифицировал ошибку для проверки
+эффектов <em>Сорт</em> и <em>Участок</em>. Хотя мы
+рассмотрели достаточно простой пример, в более
+сложных случаях при наличии множественного
+смешивания между случайными эффектами метод
+синтез знаменателя может определить не столь
+очевидные с первого взгляда компоненты ошибки
+для тестирования оценок <em><a href="../glossary/gloss_s.html#Random Effects">случайных эффектов</a></em>.</p>
+
+<p>При вычислении критериев значимости случайных
+эффектов отношения соответствующих Средних
+квадратов используются для вычисления F
+статистик и p-величин. Заметим, что в более
+сложных случаях степени свободы для <em><a href="../glossary/gloss_s.html#Random Effects">случайных эффектов</a></em>
+могут быть дробными, а не целыми, это обусловлено
+тем, что только часть источников дисперсии была
+использована для синтеза соответствующих
+компонент ошибки, при проверке значимости оценок
+случайных эффектов. Ниже представлена таблица
+результатов дисперсионного анализа (ANOVA) для
+случайных эффектов <em>Сорт</em> и <em>Участок</em>.
+Отметим, что для рассматриваемого простого
+примера результаты, полученные ранее
+дисперсионным анализом, который рассматривал <em>Участок</em>
+как <em><a href="../glossary/gloss_s.html#Random Effects">случайный
+эффект</a></em>, вложенный в <em>Сорт</em>, совпадают с
+результатами, приведенными ниже.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="8"><font size="2" color="blue">Итоги ANOVA для
+    объединенной ошибки: УЩЕРБ (wheat.sta) </font></th>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th align="left" colspan="7"><font size="2" color="blue">сс ошибка
+    вычислена по методу Саттервейта</font></th>
+  </tr>
+  <tr>
+    <th align="left"><p align="center"><font size="2" color="blue">&nbsp;<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">Эффект<br>
+    Фикс/сл.</font></th>
+    <th align="center"><font size="2" color="blue">сс<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">MS<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">сс<br>
+    Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">MS<br>
+    Ошибка</font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    F</font></th>
+    <th align="center"><font size="2" color="blue">&nbsp;<br>
+    p</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">{1} СОРТ <br>
+    {2} УЧАСТОК </font></th>
+    <td align="right"><p align="center"><font size="2" color="blue">фиксир.<br>
+    случайн.</font></td>
+    <td align="center"><font size="2" color="blue">3<br>
+    9</font></td>
+    <td align="center"><font size="2" color="blue">.270053<br>
+    .056435</font></td>
+    <td align="center"><font size="2" color="blue">9<br>
+    -----</font></td>
+    <td align="center"><font size="2" color="blue">.056435<br>
+    -----</font></td>
+    <td align="center"><font size="2" color="blue">4.785196<br>
+    -----</font></td>
+    <td align="center"><font size="2" color="blue">.029275<br>
+    -----</font></td>
+  </tr>
+</table>
+
+<p>Как показано в таблице, эффект <em>Сорт</em> значим
+с p &lt; 0.05, но, как и предполагалось, эффект <em>Участок</em>
+не может быть проверен на значимость, так как
+является основным источником подобного анализа.
+Если бы имелись данные о разновидностях
+растений, высаженных на каждом участке, то
+проверка значимости эффекта <em>Участок </em>была бы
+возможна.</p>
+
+<p>Критерии значимости <em>компонент дисперсии</em>
+для метода <em>MIVQUE(0)</em> в общем случае не могут быть
+построены, за исключением некоторых специальных
+случаев (см. Searle, Casella и McCulloch, 1992). Асимптотические
+(на больших выборках) критерии значимости
+компонент дисперсии для методов <em>МП</em> и <em>ограниченного
+МП</em> могут быть построены для оценок параметров
+на последнем шаге итерационного алгоритма. В
+таблице, представленной ниже, отображены
+результаты вычисления асимптотических (для
+больших выборок) тестов на значимость для оценок,
+полученных методом <em>ограниченного МП</em> на
+данных файла wheat.sta.</p>
+
+<table border="1">
+  <tr>
+    <th align="left" colspan="5"><font size="2" color="blue">Оценки по методу
+    ограниченного МП (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th align="left" colspan="4"><font size="2" color="blue">Переменная: УЩЕРБ<br>
+    -2*Log(Правдоподобие)=4.50162399</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">&nbsp;<br>
+    Эффект</font></th>
+    <th align="center"><font size="2" color="blue">Компон.<br>
+    дисп.</font></th>
+    <th align="center"><font size="2" color="blue">Асимпт.<br>
+    Стд.ош.</font></th>
+    <th align="center"><font size="2" color="blue">Асимпт.<br>
+    z</font></th>
+    <th align="center"><font size="2" color="blue">Асимпт.<br>
+    p</font></th>
+  </tr>
+  <tr>
+    <th align="left"><font size="2" color="blue">{1} СОРТ <br>
+    Ошибка</font></th>
+    <td align="right"><font size="2" color="blue">.073155<br>
+    .057003</font></td>
+    <td align="center"><font size="2" color="blue">.078019<br>
+    .027132</font></td>
+    <td align="center"><font size="2" color="blue">.937656<br>
+    2.100914</font></td>
+    <td align="center"><font size="2" color="blue">.348421<br>
+    .035648</font></td>
+  </tr>
+</table>
+
+<p>В таблице, представленной ниже, отображены
+результаты вычисления асимптотических (для
+больших выборок) тестов на значимость для оценок,
+полученных методом <em>МП</em> на данных файла wheat.sta.</p>
+
+<table border="1" height="129">
+  <tr>
+    <th align="left" colspan="5" height="15"><font size="2" color="blue">Оценки по
+    методу МП (wheat.sta)</font></th>
+  </tr>
+  <tr>
+    <th height="30"></th>
+    <th align="left" colspan="4" height="30"><font size="2" color="blue">Переменная
+    УЩЕРБ<br>
+    -2*Log(Правдоподобие)=4.96761616</font></th>
+  </tr>
+  <tr>
+    <th align="left" height="30"><p align="center"><font size="2" color="blue">&nbsp;<br>
+    Эффект</font></th>
+    <th align="center" height="30"><font size="2" color="blue">Компон.<br>
+    дисп.</font></th>
+    <th align="center" height="30"><font size="2" color="blue">Асимпт.<br>
+    Стд.ош.</font></th>
+    <th align="center" height="30"><font size="2" color="blue">Асимпт.<br>
+    z</font></th>
+    <th align="center" height="30"><font size="2" color="blue">Асимпт.<br>
+    p</font></th>
+  </tr>
+  <tr>
+    <th align="left" height="30"><p align="left"><font size="2" color="blue">{1} СОРТ <br>
+    Ошибка</font></th>
+    <td align="right" height="30"><font size="2" color="blue">.048552<br>
+    .057492</font></td>
+    <td align="center" height="30"><font size="2" color="blue">.050747<br>
+    .027598</font></td>
+    <td align="center" height="30"><font size="2" color="blue">.956748<br>
+    2.083213</font></td>
+    <td align="center" height="30"><font size="2" color="blue">.338694<br>
+    .037232</font></td>
+  </tr>
+</table>
+
+<p>Необходимо отметить, что асимптотические
+критерии значимости оценок компонент дисперсии,
+полученные методами <em>МП</em> и <em>ограниченного МП</em>,
+состоятельны только на больших выборках, что,
+очевидно, не так для данных файла wheat.sta. Для
+рассматриваемых данных оба теста указывают на
+то, что <em>компонента дисперсии </em>переменной <em>Сорт</em>
+не отличается значимо от нуля.</p>
+
+<p>&nbsp;</p>
+
+<p>Основные сведения об использовании
+дисперсионного в линейных моделях см. в разделе <a HREF="../esc.html"><i>Элементарные понятия статистики</i></a>.
+</p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><a HREF="stvarcom.html#index"><font SIZE="1">В начало</font></a> </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><a NAME="estim3"></a><strong>Оценка внутриклассовой
+корреляции.</strong> Заметим, что если разделить
+компоненты дисперсии для случайных эффектов в
+модели на сумму всех компонент (включая
+компоненту ошибки), то полученные числа (в виде
+процентов) являются коэффициентами
+внутриклассовой корреляции для соответствующих
+эффектов.</p>
+
+<table ALIGN="RIGHT">
+  <tr>
+    <td><a HREF="stvarcom.html#index"><font SIZE="1">В начало</font></a> </td>
+  </tr>
+</table>
+
+<p><br>
+<br>
+<br>
+</p>
+
+<hr SIZE="1">
+
+<p align="center"><br>
+<img SRC="../stathoms.jpg" ALIGN="LEFT" WIDTH="151" HEIGHT="47"> <br CLEAR="ALL">
+<font SIZE="1">(c) Copyright StatSoft, Inc., 1984-2001<br>
+STATISTICA является торговой маркой&nbsp; StatSoft, Inc. </font></p>
+
+<hr SIZE="1">
+</body>
+</html>
+<!--webbot bot="HTMLMarkup" TAG="XBOT" StartSpan --></SCRIPT><!--webbot BOT="HTMLMarkup" endspan -->

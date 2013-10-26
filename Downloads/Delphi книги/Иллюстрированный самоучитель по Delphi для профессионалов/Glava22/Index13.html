@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Объекты-агрегаты</strong> 
+  <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для вычисления агрегатных выражений для всех записей набора данных используются объекты класса
+<font face="Verdana" size="2">TAggregate</font>. Индексированный список этих объектов содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Aggregates: TAggregates;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+компонента <font face="Verdana" size="2">TClientDataSet</font>. Прямым предком класса
+<font face="Verdana" size="2"> TAggregates</font> является класс
+<font face="Verdana" size="2">TCollection</font>, поэтому для него можно использовать все основные приемы работы с коллекциями (см. гл. 7).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания нового агрегата необходимо щелкнуть на кнопке свойства в Инспекторе объектов и, в появившемся Редакторе агрегатов, выбрать пункт
+<b> Add</b> во всплывающем меню или щелкнуть на кнопке
+<b> Add New</b> (рис. 22.3).
+</font ></P>
+<P><font face="Verdana" size="3">
+Новый агрегат может быть добавлен и динамически:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var NewAgg: TAggregate;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+NewAgg := ClientDataSet.Aggregates.Add;</font>
+</font ></P>
+</blockquote>
+<p align="center">
+<div align="center"><IMG src="gl.22.3.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 22.3. </B>Редактор агрегатов 
+  компонента <font face="Verdana" size="2">TClientDataSet</font> </font ></P>
+<P><font face="Verdana" size="3"> Рассмотрим свойства класса <font face="Verdana" size="2">TAggregate</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Имя агрегата содержится в свойстве </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property AggregateName: 
+    string;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> которое может быть использовано при отображении 
+  агрегата в визуальных компонентах. </font ></P>
+<P><font face="Verdana" size="3"> Вычисляемое выражение с применением агрегатных 
+  функций должно находиться в свойстве </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Expression: 
+    String;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Например, для таблицы COUNTRY.DB из демонстрационной 
+  базы данных Delphi можно вычислять общую площадь государств Северной и Южной 
+  Америки (площадь государства содержится в поле <font face="Verdana" size="2">Area</font>): 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ClientDataSet.Aggregates[Somelndex].Expression 
+    := 'SUM(Area)';</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Вычислением агрегата управляет свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Active: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> а вычисленное значение возвращает функция </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function Value: 
+    Variant;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Если пользователь редактирует набор данных, 
+  то для всех включенных агрегатов<font face="Verdana" size="2"> (Active = True)</font> 
+  возвращаемое значение автоматически пересчитывается. </font ></P>
+<P><font face="Verdana" size="3"> Например, после сохранения изменений в наборе 
+  данных можно визуализировать новое значение агрегата: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SomeLabel.Caption 
+    := ClientDataSet.Aggregates[0].AggregateName;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SomeEdit.Text 
+    := ClientDataSet.Aggregates[0].Value;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Для проверки активности агрегата, помимо проверки 
+  значения свойства <font face="Verdana" size="2">Active</font>, можно также использовать 
+  свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property InUse: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Если оно возвращает значение <font face="Verdana" size="2"> 
+  True</font> — вычисляемое выражение агрегата рассчитывается. </font ></P>
+<P><font face="Verdana" size="3"> Видимость агрегата в визуальных компонентах 
+  управляется свойством </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Visible: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Для того чтобы снизить вычислительную нагрузку 
+  на набор данных, можно отключить все агрегаты одновременно. Для этого свойству&nbsp; 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">property AggregatesActive: 
+    Boolean;&nbsp;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> необходимо присвоить значение <font face="Verdana" size="2">False</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Если же <font face="Verdana" size="2"> AggregatesActive 
+  = True</font>, вычисляются только активные агрегаты, для которых свойство <font face="Verdana" size="2">Active</font> 
+  имеет значение <font face="Verdana" size="2">True</font>. </font ></P>
+<P><font face="Verdana" size="3"> Если вам необходимо использовать все активные 
+  агрегаты, то вместо их последовательного перебора с проверкой свойства <font face="Verdana" size="2"> 
+  Active</font> можно использовать свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property ActiveAggs[Index: 
+    Integer] : TList;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> компонента <font face="Verdana" size="2">TClientDataSet</font>, 
+  которое представляет собой список активных агрегатов. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index12.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index14.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

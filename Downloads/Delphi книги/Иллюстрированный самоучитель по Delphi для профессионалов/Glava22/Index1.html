@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P align="center"><font face="Verdana" size="3"> &nbsp; </font ><font face="Verdana" size="3"> 
+  <font size="4"><strong>ГЛАВА 22</strong></font></font></P>
+<P align="center"><strong><font face="Verdana" size="3"><font size="4"><br>
+  Клиент многозвенного распределенного приложения</font> </font></strong><font face="Verdana" size="3"><br>
+  </font> </P>
+<p align="left">
+<font face="Verdana" size="3">
+<P><font face="Verdana" size="3">
+Клиентское ПО в распределенном многозвенном приложении имеет особенности архитектуры, продиктованные его ролью — ведь большая часть бизнес-логики и функций обработки данных сосредоточены в сервере приложений (см. гл. 21).
+Такая схема призвана обеспечить более высокую эффективность обработки запросов многочисленных удаленных клиентов, а также упрощает обслуживание клиентского ПО. Клиенты, выполняющие лишь необходимый минимум операций, называются &quot;тонкими&quot;.
+</font ></P></font >
+<P><font face="Verdana" size="3">
+Клиенты многозвенных приложений обеспечивают выполнение следующих функций:
+</font ></P>
+<ul>
+  <li>&nbsp;соединение с сервером приложений, прием и передача данных;&nbsp;</li>
+  <li>&nbsp;отображение средствами пользовательского интерфейса;&nbsp;</li>
+  <li>&nbsp;простейшие операции редактирования;&nbsp;</li>
+  <li>&nbsp;сохранение локальных копий данных.</li>
+</ul>
+<P><font face="Verdana" size="3">
+При разработке клиентских частей многозвенных приложений в Delphi используются компоненты DataSnap (см. гл. 20),
+а также компонент <font face="Verdana" size="2">TClientoataSet</font>, роль которого трудно переоценить.
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо новых компонентов в процессе разработки применяются стандартные компоненты отображения данных, подробно рассматриваемые в гл. 15,
+а также обычная схема связывания визуальных компонентов с набором данных через компонент
+<font face="Verdana" size="2"> TDataSource</font> (см. гл. 11).
+</font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana, Arial, Helvetica, sans-serif">В 
+  этой главе рассматриваются следующие вопросы: </font></font ></P>
+<ul>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp;структура клиентского 
+    приложения;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif"> соединение удаленного 
+    клиента с сервером приложений;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp;набор данных клиента 
+    в компоненте <font size="2">TdientoataSet</font>, локальное кэширование данных;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp;основные операции 
+    обработки данных, выполняемые клиентским набором данных;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp;вложенные наборы 
+    данных;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp;обработка локальных 
+    ошибок клиентского набора данных и ошибок сервера приложений.</font></li>
+</ul>
+<P><font face="Verdana" size="3">&nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

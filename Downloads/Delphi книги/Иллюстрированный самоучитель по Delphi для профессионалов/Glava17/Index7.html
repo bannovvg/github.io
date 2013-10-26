@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TCustomSQLDataSet</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<p></P>
+<font face="Verdana" size="3">Так как общим предком компонентов dbExpress объявлен 
+класс <font face="Verdana" size="2">TDataSet</font>, то задачей класса <font face="Verdana" size="2"> 
+TCustomSQLDataSet</font> является не столько внесение новой </font >
+<P><font face="Verdana" size="3">
+функциональности, сколько корректное ограничение возможностей, заложенных в
+<font face="Verdana" size="2">TDataSet</font>. Непосредственно в приложениях этот класс не используется, но информация о нем полезна для понимания других компонентов dbExpress и для создания собственных компонентов на его основе.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TCustomSQLDataSet</font> является общим предком для компонентов, инкапсулирующих запросы, таблицы и хранимые процедуры. Для их поддержки используются свойства:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">TSQLCommandType = (ctQuery, ctTable,
+    ctStoredProc);&nbsp;</font>&nbsp; <font face="Verdana" size="2">property CommandType:
+    TSQLCommandType;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+определяющее тип команды, направляемой серверу;
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;property CoramandText:   string;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+содержащее текст команды.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если серверу передается запрос SQL <font face="Verdana" size="2"> (CommandType = ctQuery),
+</font> свойство <font face="Verdana" size="2"> CoramandText</font> содержит текст запроса. Если это команда на получение таблицы, свойство
+<font face="Verdana" size="2"> CommandText</font> содержит имя таблицы, а далее с использованием имени таблицы создается запрос SQL на получение всех полей этой таблицы. Если необходимо выполнить процедуру, свойство
+<font face="Verdana" size="2"> CommandText</font> содержит имя этой процедуры.
+</font ></P>
+<P><font face="Verdana" size="3">
+Текст команды, которая реально передается на сервер для выполнения, содержится в защищенном свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NativeCommand: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для использования в табличном представлении существует свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SortFieldNames: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяющее порядок сортировки записей табличного набора данных. Свойство должно содержать список полей, разделенных точкой с запятой. Это свойство используется для создания выражения ORDER BY для генерируемой команды.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для обработки исключительных ситуаций в классах — потомках может быть использовано защищенное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property LastError: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое возвращает текст последней ошибки dbExpress.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для ускорения работы набора данных можно отключить получение от сервера метаданных об объекте запроса (таблицы, процедуры, полей, индексов), которые обычно направляются клиенту вместе с результатом запроса. Для этого свойству
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NoMetadata: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+присваивается значение <font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Однако пользоваться им нужно осторожно, т. к. для некоторых видов команд метаданные необходимы (это операции с использованием индексов).
+</font ></P>
+<P><font face="Verdana" size="3">
+Разработчик может управлять процессом получения метаданных. Для этого необходимо заполнить структуру
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSchemaType = (stNoSchema, stTables, stSysTables, stProcedures,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;stColumns, stProcedureParams, stIndexes);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;TSchemalnfo = record</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+EType     : TSchemaType;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> ObjectName : String;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Pattern   : String;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которая доступна через защищенное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Schemalnfo: TSQLSchemalnfo;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а значит, может использоваться только при создании новых компонентов на
+основе<B> </B><font face="Verdana" size="2">TCustomSQLDataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2">FTуре</font> определяет тип требуемой информации. Параметр
+<font face="Verdana" size="2"> ObjectName</font> — имя таблицы или хранимой процедуры, если в параметре
+<font face="Verdana" size="2"> FType</font> указаны поля, индексы или параметры процедур.
+</font ></P>
+<P><font face="Verdana" size="3">
+<b>Внимание</b>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Если компонент должен получать результирующий 
+    набор данных, параметр <font face="Verdana" size="2"> FType</font> должен 
+    обязательно иметь значение <font face="Verdana" size="2">stNoSchema</font>. 
+    При изменении значения свойства <font face="Verdana" size="2"> CommandText</font> 
+    это условие выполняется автоматически. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> Pattern</font> определяет, какие ограничения накладываются на метаданные. Он содержит символьную маску, подобную свойству
+<font face="Verdana" size="2"> Mask</font> многих визуальных компонентов. Последовательность символов маски обозначается символом %, единичный символ определяется символом
+.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости использовать управляющие символы в качестве маскирующих, применяются двойные символы
+<font face="Verdana" size="2"> %% </font> и <font face="Verdana" size="2"> _.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Подобно свойству <font face="Verdana" size="2">Tag</font>
+класса <font face="Verdana" size="2">TComponent</font>, класс   <B>   </B><font face="Verdana" size="2">TCustomSQLDataSet</font>
+имеет строковое свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DesignerData: string</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в котором разработчик может хранить любую служебную информацию. По существу, это просто лишняя строковая переменная, которую нет необходимости объявлять.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Исключительная 
+  ситуация EAbort</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Если вы внимательно просмотрели код системной процедуры
+<font face="Verdana" size="2">HandieException</font>, то увидели там упоминание класса EAbort. ИС EAbort служит единственным — и очень важным — исключением из правил обработки. Она называется &quot;тихой&quot; (Silent) и отличается тем, что для нее обработка по умолчанию не предусматривает вывода сообщений на экран. Естественно, все сказанное касается и порожденных от нее дочерних объектных классов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Применение <font face="Verdana" size="2"> EAbort</font> оправдано во многих случаях. Вот один из примеров. Пусть разрабатывается некоторая прикладная программа или некоторое семейство объектов, не связанное с VCL. Если в них возникает ИС, то нужно как-то известить об этом пользователя. А между тем прямой вызов для этого функции
+<font face="Verdana" size="2"> showMessage</font> или даже <font face="Verdana" size="2"> MessageBox</font> не всегда оправдан. Для маленькой и компактной динамической библиотеки не нужно тащить за собой громаду VCL. С другой стороны, в большом и разнородном проекте нельзя давать каждому объекту или подпрограмме самой общаться с пользователем. Если их разрабатывают разные люди, такой проект может превратиться в вавилонскую башню. Тут и поможет
+<font face="Verdana" size="2">EAbort</font>. Эта исключительная ситуация не создается системой — ее должен создавать и обслуживать программист.
+</font ></P>
+<P><font face="Verdana" size="3">
+Применение <font face="Verdana" size="2"> EAbort</font> — реальная альтернатива многочисленным конструкциям if..then и тем более (упаси боже!)
+<font face="Verdana" size="2">goto</font>. Эта ИС не должна подменять собой другие, вроде ошибки выделения памяти или чтения из файла. Она нужна, если вы сами видите, что сложились определенные условия и пора менять логику работы программы.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+If LogicalCondition then Raise EAbort.Create('Condition 1');</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если не нужно определять сообщение, можно создать EAbort и проще — вызвав процедуру
+<font face="Verdana" size="2"> Abort</font> (без параметров), содержащуюся в модуле SYSUTILS.PAS.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index21.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index23.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Курсор набора данных </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для набора данных ADO в зависимости от его назначения можно выбрать тип и местоположение используемого курсора. Местоположение курсора задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TCursorLocation = (clUseServer, clUseClient); property CursorLocation: TCursorLocation;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Курсор   может   находиться   на   сервере (<font face="Verdana" size="2">CIUseServer</font>)   или   на   клиенте
+<font face="Verdana" size="2">(CIUseClient)</font>.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Серверный курсор используется при работе с большими 
+    наборами данных, которые нецелесообразно пересылать клиенту целиком. При этом 
+    несколько снижается скорость работы клиентского набора данных.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Клиентский курсор обеспечивает передачу набора данных 
+    клиенту. Это положительно сказывается на быстродействии, но такой курсор разумно 
+    использовать только для небольших наборов данных, не загружающих канал связи 
+    с сервером.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+При использовании клиентского курсора необходимо дополнительно установить свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMarshalOption = (moMarshalAll, moMarshalModifiedOnly); property MarshalOptions: TmarshalOption</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое управляет обменом данных клиента с сервером. Если соединение с сервером быстрое, можно использовать значение
+<font face="Verdana" size="2">moMarshalAll</font>, разрешающее возврат серверу всех записей набора данных. В противном случае для ускорения работы компонента можно применить свойство
+<font face="Verdana" size="2">moMarshalModifiedOnly</font>, обеспечивающее возврат только модифицированных клиентом записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тип курсора определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TCursorType = (ctUnspecified, CtOpenForwardOnly, ctKeyset, ctDynamic,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ctStatic);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CursorType: TCursorType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ctunspecified</font> — курсор не задан, тип курсора определяется
+возможностями источника данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ctOpenForwardOnly</font> — однонаправленный курсор, допускающий перемещение только вперед; используется при необходимости быстрого одиночного прохода по всем записям набора данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ctKeyset</font> — двунаправленный локальный курсор, не обеспечивающий просмотр добавленных и удаленных другими пользователями записей;
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;<font face="Verdana" size="2">ctDynamic</font> — двунаправленный курсор, отображает все изменения, требует наибольших затрат ресурсов;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ctStatic</font> — двунаправленный курсор, полностью игнорирует изменения, внесенные другими пользователями.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Если курсор расположен на клиенте<font face="Verdana" size="2"> 
+    (CursorType = ciusedient)</font>, то для него доступен только один тип — <font face="Verdana" size="2">ctStatic</font>. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Соответственно до и после каждого перемещения курсора в наборе данных вызываются методы -
+обработчики:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRecordsetReasonEvent = procedure(DataSet: TCustomADODataSet;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">const Reason:   TEventReason;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">   var EventStatus:   TEventStatus)   of
+object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property OnWillMove:  TRecordsetReasonEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TP.ecordsetErrorEvent = procedure(DataSet: TCustomADODataSet; const --eason:
+TEventReason;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">const Error: Error; var EventStatus: TEventStatus)
+if object;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnMoveComplete: TRecordsetErrorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где параметр Reason позволяет узнать, какой метод вызвал это перемещение.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index21.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index23.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

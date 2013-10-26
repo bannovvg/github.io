@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P align="center"><font face="Verdana" size="3"> &nbsp; </font ><font face="Verdana" size="3"> 
+  <font size="4"><strong>ГЛАВА 3</strong></font></font></P>
+<p align="center"><font size="4"><strong><font face="Verdana"><br>
+  Обработка исключительных ситуаций </font></strong><font face="Verdana"></font></font><font face="Verdana" size="3"><br>
+  </font> </P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+<P><font face="Verdana" size="3">
+Любому, кто писал более или менее сложные программы, интуитивно ясно, что такое обработка исключительных ситуаций (ИС). Всякое взаимодействие с операционной системой на предмет получения ресурсов — места на диске, в памяти, открытие файла — может завершиться неудачно. Любое вычисление может закончиться делением на ноль или переполнением. Дополнительный фактор возникновения исключительных ситуаций содержится в данных, к которым могут обращаться программы. Особенно это актуально в приложениях баз данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Платой за надежную работу программы в таких условиях служит введение многочисленных проверок, способных предотвратить некорректные действия в случае возникновения нештатной ситуации. Хорошо, если в конце очередной конструкции
+<font face="Verdana" size="2"> if..then</font> можно просто поставить оператор
+<font face="Verdana" size="2">Exit</font>. Обычно же для корректного выхода из ситуации нужно отменить целую последовательность действий, предшествующих неудачному. Все это сильно запутывает программу, маскируя четкую структуру главного алгоритма.
+</font ></P>
+<P><font face="Verdana" size="3">
+При разработке приложений в Delphi программист имеет возможность использовать несколько механизмов, обеспечивающих обработку исключительных ситуаций. Это и специальные операторы языка Object Pascal, и классы, предназначенные для программирования реакции на ошибки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Поэтому эта глава посвящена... нет, не тому, как писать безошибочно; а тому, как защищать приложения от воздействия неизбежно возникающих ошибок.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

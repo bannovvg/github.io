@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Инициализация и завершение работы DLL</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+При загрузке динамической библиотеки выполняется код инициализации, который расположен в блоке
+<font face="Verdana" size="2">begin, .end </font> (см. листинги 28.1 и 28.2). Обычно здесь выполняются операции по заданию начальных значений используемых в функциях библиотеки переменных, проверка условий функционирования DLL, создание необходимых структур и объектов и т. д.
+</font ></P>
+<P><font face="Verdana" size="3">
+При возникновении ошибок выполнения кода инициализации можно воспользоваться специальной глобальной переменной
+<font face="Verdana" size="2"> Exitcode</font> из модуля <font face="Verdana" size="2">System</font>. Если при возникновении исключительной ситуации присвоить этой переменной любое ненулевое значение, загрузка библиотеки прерывается.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>     Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Любые объявленные в DLL глобальные переменные 
+    недоступны за ее пределами. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Оказывается, что при загрузке динамической библиотеки в адресное пространство вызывавшего ее процесса, происходят важные события, знание которых позволит вам эффективно управлять инициализацией и выгрузкой DLL.
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, перед запуском кода инициализации автоматически вызывается встроенная ассемблерная процедура
+<font face="Verdana" size="2"> _initDLL</font> (она расположена в модуле
+<font face="Verdana" size="2">system</font>). Она сохраняет состояние регистров процессора; получает значение экземпляра модуля библиотеки и записывает его в глобальную переменную
+<font face="Verdana" size="2">hinstance</font>; устанавливает для глобальной переменой
+<font face="Verdana" size="2"> isLibrary</font> значение <font face="Verdana" size="2"> True</font> (по этому значению вы всегда сможете распознать код DLL); получает из стека ряд параметров; проверяет переменную процедурного типа
+<font face="Verdana" size="2">DLLProc</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var DLLProc: Pointer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Эта переменная используется для проверки вызовов операционной системой точки входа
+<font face="Verdana" size="2">DLL</font>. С этой переменной можно связать процедуру с одним целочисленным параметром. Такая процедура называется функцией обратного вызова системного уровня.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если при проверке переменной <font face="Verdana" size="2"> DLLProc</font> процедура
+<font face="Verdana" size="2"> _initDLL</font> находит связанную функцию обратного вызова, то она вызывается. При этом ей передается параметр, полученный из стека. В качестве параметра могут быть переданы четыре значения:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+const</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLL_PROCESS_DETACH = 0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;DLL_PROCESS_ATTACH = 1;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;DLL_THREAD_ATTACH = 2;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;DLL_THREAD_DETACH = 3;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Рассмотрим их.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Значение  DLL_PROCESS_DETACH 
+    передается при выгрузке  DLL из адресного пространства 
+    процесса. Это происходит при явном вызове системной функции  
+    FreeLibrary (см. ниже) или при завершении процесса.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Значение  DLL_PROCESS_ATTACH 
+    означает, что библиотека отображается в адресное пространство процесса, который 
+    загружает ее в первый раз.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Значение  DLL_THREAD_ATTACH 
+    посылается всем загруженным в процесс динамическим библиотекам при создании 
+    нового потока. Обратите внимание, что при создании процесса и первичного потока 
+    посылается только одно значение DLL_PROCESS_ATTACH.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Значение  DLL_THREAD_DETACH 
+    посылается всем загруженным в процесс динамическим библиотекам при уничтожении 
+    существующего потока.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Впоследствии, при работе процесса с загруженной
+<font face="Verdana" size="2">DLL</font>, в случае возникновения описанных событий, функция обратного вызова вызывается снова и снова. При этом ей передается одно из рассмотренных значений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Это хороший способ организовать в динамической библиотеке необходимую в каждом случае обработку. Как это сделать?
+</font ></P>
+<P><font face="Verdana" size="3">
+Во-первых, необходимо создать процедуру, подходящую для процедурного типа
+<font face="Verdana" size="2">DLLProc</font>, и написать для нее исходный код, применяемый в зависимости от переданного параметра.
+</font ></P>
+<P><font face="Verdana" size="3">
+Во-вторых, в секции инициализации нужно связать переменную
+<font face="Verdana" size="2"> DLLProc</font> и созданную процедуру.
+</font ></P>
+<P><font face="Verdana" size="3">
+Применительно к рассматриваемому нами примеру, модернизированный исходный код библиотеки
+<font face="Verdana" size="2"> DataCheck</font> будет выглядеть так:
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Листинг 28.3.</B> Часть исходного 
+  кода динамической библиотеки DataCheck c функцией обратного вызова </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{Часть исходного кода опущена (см. листинг 24.2)}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+exports</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsValidlnt,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsValidDate index 1,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsValidTime index 2 name 'ValidTime',</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DLLEntryPoint(Reason: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+case Reason of</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLL_PROCESS_ATTACH: ShowMessage('Первая загрузка DLL'); DLL_PROCESS_DETACH:;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLL_THREAD_ATTACH: ShowMessage('Создан новый поток'); DLL_THREAD_DETACH:; end; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLLProc := @DLLEntryPoint;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLLEntryPoint(DLL_PROCESS_ATTACH);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Процедура <font face="Verdana" size="2"> DLLEntryPoint</font> обеспечивает простой показ сообщения о полученном значении параметра. В коде инициализации глобальной переменной
+<font face="Verdana" size="2">DLLProc</font> передается адрес процедуры
+<font face="Verdana" size="2">DLLEntryPoint</font>. Затем эта процедура вызывается явно с параметром
+<font face="Verdana" size="2">DLL_PROCESS_ATTACH</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+У недоверчивого читателя может возникнуть вопрос — а зачем городить такие сложности, если можно просто использовать код в секции инициализации? Дело в том, что этот код выполняется только при запуске
+<font face="Verdana" size="2">DLL</font>. Поэтому, как, например, вовремя уничтожить создаваемые в библиотеке объекты при завершении ее работы? Для этого можно использовать функцию обратного вызова:
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>&nbsp;Листинг 28.4.</B> Создание 
+  и удаление объекта при загрузке и выгрузке динамической библиотеки DataCheck 
+  . </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(Часть исходного кода опущена (см. листинг 24.2)}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+exports</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsValidlnt,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsValidDate index 1,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsValidTime index 2 name 'ValidTime',</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TSomeObject = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Fieldl: String; end; var FirstObj: TSomeObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DLLEntryPoint(Reason: Word);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+case Reason of DLL_PROCESS_ATTACH:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FirstObj := TSomeObject.Create; FirstObj.Fieldl := 'Объект создан'; ShowMessage(FirstObj.Fieldl);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLL__PROCESS_DETACH: FirstObj . Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLL_THREAD_ATTACH: ShowMessage('Создан новый поток'); DLL_THREAD_DETACH:;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLLProc := @DLLEntryPoint;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DLLEntryPoint(DLL_PROCESS_ATTACH);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При завершении работы динамической библиотеки вызывается процедура, на которую указывает адрес, содержащийся в переменной
+<font face="Verdana" size="2">ExitProc</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var ExitProc: Pointer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

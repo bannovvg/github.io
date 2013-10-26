@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Вычисляемые 
+  поля</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Вычисляемые поля существенно облегчают разработку приложений баз данных, т. к. позволяют получать новые данные на основе существующих, не изменяя при этом структуру таблиц БД. Выражения для получения значений вычисляемых полей разработчик должен разместить в методе-обработчике
+<font face="Verdana" size="2"> OnCalcFields</font> набора данных. Здесь можно использовать любые арифметические, логические операции и функции, любые операторы языка, свойства и методы любых компонентов, в том числе запросы
+<font face="Verdana" size="2">SQL</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.TablelCalcFields(DataSet: TDataSet)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">; begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with Tablel do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TabielCalcFieldl.Value := Fields[0].Value + Fields[1].Value;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;with Queryl do&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Params[0].AsInteger := Tablel.Fields[0].Aslnteger;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TabielCalcFieldl.Value := Fields[0].AsString;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> OnCalcFields</font> выполняется при открытии набора данных, при переходе в режим редактирования, при передаче фокуса между компонентами отображения данных или колонок сетки, при удалении записи. Но для этого нужно, чтобы свойство
+<font face="Verdana" size="2">AutoCaicFields</font> набора данных было равно значению
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Необходимо учитывать, что сложные вычисляемые 
+    поля могут существенно замедлить работу набора данных (особенно при использовании 
+    при этом запросов <font face="Verdana" size="2">SQL</font>). Кроме того, в 
+    процессе редактирования набора данных (при изменении значения поля, сохранении 
+    изменений и переходе на следующую запись) вычисляемые поля рассчитываются 
+    несколько раз подряд. Для уменьшения числа автоматических обращений к методу 
+    <font face="Verdana" size="2"> OnCalcFields</font> нужно использовать свойство<font face="Verdana" size="2"> 
+    AutoCaicFieids := False.</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для создания вычисляемого поля достаточно в диалоге создания нового поля Редактора полей в качестве типа поля задать &quot;вычисляемое&quot;, в остальном процесс совпадает с созданием поля данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+В выражениях вычисляемых полей можно использовать другие вычисляемые поля, но они обязательно должны быть определены в методе
+<font face="Verdana" size="2">OnCalcFields</font> до этого<B>.</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+Вычисляемые поля нельзя использовать при фильтрации набора данных при помощи метода-обработчика
+<font face="Verdana" size="2">onFilterRecord</font>, т. к. он вызывается до метода-обработчика
+<font face="Verdana" size="2">OnCalcFields</font>, а вычисляемые поля не сохраняются.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

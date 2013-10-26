@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P align="center"><font face="Verdana" size="3"> &nbsp; <strong><font size="4">ГЛАВА 
+  28</font></strong></font ></P>
+<P align="center"><strong><font face="Verdana" size="3"><font size="4"><br>
+  Динамические библиотеки</font> </font></strong><font face="Verdana" size="3"><br>
+  </font> </P>
+<p align="left">
+<font face="Verdana" size="3">
+<P><font face="Verdana" size="3">
+Динамические библиотеки (DLL, Dynamic Link Library) играют важную роль в функционировании ОС Windows и прикладных программ. Они представляют собой файлы с откомпилированным исполняемым кодом, который используется приложениями и другими DLL. Реализация многих функций ОС вынесена в динамические библиотеки, которые используются по мере необходимости, обеспечивая тем самым экономию адресного пространства. DLL загружается в память только тогда, когда к ней обращается какой-либо процесс.
+</font ></P>
+<P><font face="Verdana" size="3">
+По существу динамические библиотеки отличаются от исполняемых файлов только одним, они не могут быть запущены самостоятельно. Для того чтобы динамическая библиотека начала работать, необходимо, чтобы ее вызвала уже запущенная программа или работающая DLL.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обычно в динамические библиотеки выносятся группы функций, которые применяются для решения сходных задач. Кроме этого, в них можно хранить и использовать разнообразные ресурсы — от строк локализации до форм.
+</font ></P>
+<P><font face="Verdana" size="3">
+Динамическая библиотека может использоваться несколькими приложениями, при этом не обязательно, чтобы все они были созданы при помощи одного языка программирования.
+</font ></P>
+<P><font face="Verdana" size="3">
+Разновидностью динамических библиотек являются пакеты Delphi, предназначенные для хранения кода компонентов для среды разработки и приложений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Применение динамических библиотек позволяет добиться ряда преимуществ:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">уменьшается размер исполняемого файла приложения и 
+    занимаемые им ресурсы;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;функции DLL могут использовать несколько процессов 
+    одновременно;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;управление динамическими библиотеками возлагается на 
+    операционную систему;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;внесение изменений в DLL не требует перекомпиляции 
+    всего проекта;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;одну DLL могут использовать программы, написанные на 
+    разных языках.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+При разработке динамических библиотек в среде Delphi удобно использовать группу проектов, которая включает проект приложения и проекты динамических библиотек.
+</font ></P>
+<P><font face="Verdana" size="3">
+В этой главе рассматриваются следующие вопросы:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;структура файла 
+    DLL;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;инициализация DLL;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;явная и неявная 
+    загрузка;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;вызовы функций 
+    из динамической библиотеки;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;ресурсы в динамических 
+    библиотеках.</font></li>
+</ul>
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

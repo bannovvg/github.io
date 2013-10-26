@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  ТРеn</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот класс инкапсулирует свойства пера GDI Windows. В конструкторе по умолчанию создается непрерывное
+(<font face="Verdana" size="2">pssolid</font>) черное перо шириной в один пиксел. Свойства класса приведены в табл. 10.2.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 10.2. </B>Свойства 
+  класса Tpen</font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="491" HEIGHT="361">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="239" HEIGHT="27">
+<DIV WIDTH="348" HEIGHT="27" style="width: 77; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Свойство</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="27">
+<DIV WIDTH="284" HEIGHT="27" style="width: 151; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="239" HEIGHT="33">
+<DIV WIDTH="348" HEIGHT="33" style="width: 151; height: 33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle: HPen;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="33">
+<DIV WIDTH="284" HEIGHT="33" style="width: 195; height: 33">
+<P><font face="Verdana" size="3">
+Содержит дескриптор пера
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="239" HEIGHT="31">
+<DIV WIDTH="348" HEIGHT="31" style="width: 187; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Color: TColor;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="31">
+<DIV WIDTH="284" HEIGHT="31" style="width: 161; height: 31">
+<P><font face="Verdana" size="3">
+Определяет цвет пера
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="239" HEIGHT="138">
+<DIV WIDTH="348" HEIGHT="138" style="width: 232; height: 138">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Mode: TPenMode; TPenMode = (pmBlack, pmWhite, pmNop, pmNot, pmCopy, pmNotCopy, pmMergePenNot, pmMaskPenNot, pirMergeNotPen, pmMaskNotPen, pmMerge, pmNotMerge, pmMask, pmNotMask, pmXor, piriNotXor) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="138">
+<DIV WIDTH="284" HEIGHT="138" style="width: 233; height: 138">
+<P><font face="Verdana" size="3">
+Содержит идентификатор одной из растровых операций, которые определяют взаимодействие пера с поверхностью. Эти операции соответствуют стандартным, определенным в Windows
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="239" HEIGHT="81">
+<DIV WIDTH="348" HEIGHT="81" style="width: 234; height: 81">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Style: TPenStyle; TPenStyle = (psSolid, psDash, psDot, psDashDot, psDashDotDot, psClear, psInsideFrame) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="81">
+<DIV WIDTH="284" HEIGHT="81" style="width: 246; height: 81">
+<P><font face="Verdana" size="3">
+Определяет стиль линии, рисуемой пером.  Соответствующие  стили также определены в Windows
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="239" HEIGHT="52">
+<DIV WIDTH="348" HEIGHT="52" style="width: 203; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Width: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="52">
+<DIV WIDTH="284" HEIGHT="52" style="width: 239; height: 52">
+<P><font face="Verdana" size="3">
+Содержит значение толщины пера в пикселах
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+К сожалению, пунктирные и штрихпунктирные линии (стили<font face="Verdana" size="2">
+psDash, psDot, psDashDot, psDashDotDot)</font> могут быть установлены только для линий единичной толщины. Более толстые линии должны быть сплошными — такое ограничение существует в
+Windows.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> Операция <font face="Verdana" size="2"> pmNotXor</font> 
+    подходит для рисования перемещающихся линий или фигур, например, при выделении 
+    мышью какой-либо области. Если вы два раза нарисуете одну и ту же фигуру таким 
+    пером, то после первого раза она появится, после второго — полностью сотрется. 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

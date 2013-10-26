@@ -1,0 +1,643 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TIBDataSet</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TIBDataSet</font> предназначен для представления в приложениях наборов данных от сложных запросов (свойства и методы описаны в табл. 18.5). При этом набор данных остается редактируемым. Это достигается возможностью задать дополнительные запросы на удаление, изменение и добавление данных. Аналогичным образом работает стандартный компонент
+<font face="Verdana" size="2"> TUpdateSQL</font> (см. гл. 22). Однако в компоненте
+<font face="Verdana" size="2"> TIBDataSet</font> интегрированы одновременно и сам основной запрос, и вспомогательные запросы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основной запрос содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SelectSQL: TStrings;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Создание запроса облегчает простой редактор, вызываемый при щелчке на кнопке в поле редактирования свойства в Инспекторе объектов (рис. 18.3).
+</font ></P>
+<P><font face="Verdana" size="3">
+Каждому запросу (основному и вспомогательным) соответствует собственный объект
+<font face="Verdana" size="2">TIBSQL</font>, который подробно рассматривается ниже.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 18.5. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TIBDataSet</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="480" HEIGHT="116">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="188" HEIGHT="21">
+<DIV WIDTH="288" HEIGHT="21" style="width: 91; height: 21">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="27" HEIGHT="21">
+<DIV WIDTH="44" HEIGHT="21" style="width: 25; height: 21">
+<P><font face="Verdana" size="3">
+<b>&nbsp;Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="21">
+<DIV WIDTH="304" HEIGHT="21" style="width: 82; height: 21">
+<P><font face="Verdana" size="3">
+<b>
+ Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="502" HEIGHT="31">
+<DIV WIDTH="288" HEIGHT="31" style="width: 79; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="188" HEIGHT="64">
+<DIV WIDTH="288" HEIGHT="64" style="width: 149; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Buff erChunks:   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="27" HEIGHT="64">
+<DIV WIDTH="44" HEIGHT="64" style="width: 1; height: 64">
+<P><font face="Verdana" size="3">
+ <font face="Verdana" size="2">
+ Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="64">
+<DIV WIDTH="304" HEIGHT="64" style="width: 213; height: 64">
+<P><font face="Verdana" size="3">
+Определяет число записей в буфере  набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="61">
+<DIV WIDTH="277" HEIGHT="61" style="width: 159; height: 61">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DeleteSQL: TStrings;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="61">
+<DIV WIDTH="46" HEIGHT="61" style="width: 10; height: 61">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="61">
+<DIV WIDTH="300" HEIGHT="61" style="width: 220; height: 61">
+<P><font face="Verdana" size="3">
+Содержит текст запроса, обеспечивающего удаление записей из набора данных
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="62">
+<DIV WIDTH="277" HEIGHT="62" style="width: 154; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property InsertSQL: TStrings;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="62">
+<DIV WIDTH="46" HEIGHT="62" style="width: 13; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="62">
+<DIV WIDTH="300" HEIGHT="62" style="width: 215; height: 62">
+<P><font face="Verdana" size="3">
+Содержит текст запроса, обеспечивающего добавление записей в набор данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="58">
+<DIV WIDTH="277" HEIGHT="58" style="width: 157; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ModifySQL: TStrings;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="58">
+<DIV WIDTH="46" HEIGHT="58" style="width: 2; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="58">
+<DIV WIDTH="300" HEIGHT="58" style="width: 234; height: 58">
+<P><font face="Verdana" size="3">
+Содержит текст запроса, обеспечивающего изменение записей из набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="48">
+<DIV WIDTH="277" HEIGHT="48" style="width: 134; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Params: TIBXSQLDA;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="48">
+<DIV WIDTH="46" HEIGHT="48" style="width: 1; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RO</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="48">
+<DIV WIDTH="300" HEIGHT="48" style="width: 198; height: 48">
+<P><font face="Verdana" size="3">
+Структура API, содержащая параметры запроса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="36">
+<DIV WIDTH="277" HEIGHT="36" style="width: 152; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Prepared: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="36">
+<DIV WIDTH="46" HEIGHT="36" style="width: 9; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="36">
+<DIV WIDTH="300" HEIGHT="36" style="width: 224; height: 54">
+<P><font face="Verdana" size="3">
+Позволяет определить, подготовлен ли запрос к выполнению
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="31">
+<DIV WIDTH="277" HEIGHT="31" style="width: 144; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property QDelete: TIBSQL;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="31">
+<DIV WIDTH="46" HEIGHT="31" style="width: 11; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="31">
+<DIV WIDTH="300" HEIGHT="31" style="width: 209; height: 31">
+<P><font face="Verdana" size="3">
+Объект запроса на удаление
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="31">
+<DIV WIDTH="277" HEIGHT="31" style="width: 138; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Qlnsert: TIBSQL;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="31">
+<DIV WIDTH="46" HEIGHT="31" style="width: 8; height: 57">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="31">
+<DIV WIDTH="300" HEIGHT="31" style="width: 218; height: 31">
+<P><font face="Verdana" size="3">
+Объект запроса на добавление
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="21">
+<DIV WIDTH="277" HEIGHT="21" style="width: 146; height: 21">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property QModify: TIBSQL;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="21">
+<DIV WIDTH="46" HEIGHT="21" style="width: 9; height: 21">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="21">
+<DIV WIDTH="300" HEIGHT="21" style="width: 215; height: 21">
+<P><font face="Verdana" size="3">
+ Объект запроса на изменение
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="31">
+<DIV WIDTH="277" HEIGHT="31" style="width: 151; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property QRefresh: TIBSQL;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="31">
+<DIV WIDTH="46" HEIGHT="31" style="width: 15; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="31">
+<DIV WIDTH="300" HEIGHT="31" style="width: 221; height: 31">
+<P><font face="Verdana" size="3">
+Объект запроса на обновление
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="27">
+<DIV WIDTH="277" HEIGHT="27" style="width: 143; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property QSelect: TIBSQL;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="27">
+<DIV WIDTH="46" HEIGHT="27" style="width: 12; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="27">
+<DIV WIDTH="300" HEIGHT="27" style="width: 233; height: 27">
+<P><font face="Verdana" size="3">
+ Объект запроса на отбор данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="64">
+<DIV WIDTH="277" HEIGHT="64" style="width: 166; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RefreshSQL: TStrings;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="64">
+<DIV WIDTH="46" HEIGHT="64" style="width: 6; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="64">
+<DIV WIDTH="300" HEIGHT="64" style="width: 215; height: 64">
+<P><font face="Verdana" size="3">
+ Содержит текст запроса, обеспечивающего обновление записей набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="38">
+<DIV WIDTH="277" HEIGHT="38" style="width: 157; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SelectSQL: TStrings;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="38">
+<DIV WIDTH="46" HEIGHT="38" style="width: 3; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="38">
+<DIV WIDTH="300" HEIGHT="38" style="width: 207; height: 38">
+<P><font face="Verdana" size="3">
+Содержит текст основного запроса  набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="177" HEIGHT="312">
+<DIV WIDTH="277" HEIGHT="312" style="width: 162; height: 312">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TIBSQLTypes = set of (SQLUnknown, SQLSelect, SQLInsert, SQLUpdate, SQLDelete, SQLDDL, SQLGetSegment, SQLPutSegment, SQLExecProcedure , SQLStartTransaction, SQLCommit, SQLRollback, SQLSelect ForUpdate, SQLSetGenerator) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="312">
+<DIV WIDTH="46" HEIGHT="312" style="width: 6; height: 312">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Ro</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="312">
+<DIV WIDTH="300" HEIGHT="312" style="width: 239; height: 443">
+<P><font face="Verdana" size="3">
+ Возвращает тип основного запроса  набора данных:
+</font ></P>
+<ul>
+          <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">SQLUnknown — неизвестный 
+            тип;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;SQLSelect, SQLInsert, 
+            SQLUpdate,</font> <font face="Verdana, Arial, Helvetica, sans-serif" size="3"> SQLDelete 
+            — стандартные типы;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;SQLDDL — выражение 
+            DDL;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;SQLGetSegment, SQLPutSegment 
+            — запросы с полями BLOB;</font></li>
+          <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">SQLExecProcedure, SQLStartTransaction, 
+            SQLCommit, SQLRollback — обработка транзакций;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;SQLSelectForUpdate 
+            — хранимая процедура, возвращающая набор данных;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;SQLSetGenerator 
+            — выполнение генератора</font></li>
+</ul>
+</DIV>
+</TD>
+</TR>
+
+<tr>
+
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="505" HEIGHT="31">
+<DIV WIDTH="279" HEIGHT="31" style="width: 91; height: 31">
+<P><font face="Verdana" size="3">
+<b>Методы</b>
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="179" HEIGHT="44">
+<DIV WIDTH="279" HEIGHT="44" style="width: 149; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Prepare;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="44">
+<DIV WIDTH="52" HEIGHT="44" style="width: 6; height: 44">
+<P><font face="Verdana" size="3">
+  <font face="Verdana" size="2">
+  Pu</font>    
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="44">
+<DIV WIDTH="308" HEIGHT="44" style="width: 237; height: 44">
+<P><font face="Verdana" size="3">
+Осуществляет подготовку всех запросов компонента к выполнению
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="179" HEIGHT="40">
+<DIV WIDTH="279" HEIGHT="40" style="width: 166; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure UnPrepare;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="40">
+<DIV WIDTH="52" HEIGHT="40" style="width: 4; height: 40">
+<P><font face="Verdana" size="3">
+   <font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="40">
+<DIV WIDTH="308" HEIGHT="40" style="width: 242; height: 40">
+<P><font face="Verdana" size="3">
+Возвращает все запросы набора данных к исходному состоянию
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="505" HEIGHT="29">
+<DIV WIDTH="279" HEIGHT="29">
+<P><font face="Verdana" size="3">
+<b>
+Методы-обработчики событий</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="179" HEIGHT="42">
+<DIV WIDTH="279" HEIGHT="42" style="width: 170; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DatabaseDisconnected: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="42">
+<DIV WIDTH="52" HEIGHT="42" style="width: 12; height: 42">
+<P><font face="Verdana" size="3">
+  <font face="Verdana" size="2">
+  Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="42">
+<DIV WIDTH="308" HEIGHT="42" style="width: 250; height: 42">
+<P><font face="Verdana" size="3">
+Вызывается после отключения базы данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="179" HEIGHT="48">
+<DIV WIDTH="279" HEIGHT="48" style="width: 178; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DatabaseDisconnecting: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="48">
+<DIV WIDTH="52" HEIGHT="48" style="width: 7; height: 48">
+<P><font face="Verdana" size="3">
+   <font face="Verdana" size="2">Рb</font>  
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="48">
+<DIV WIDTH="308" HEIGHT="48" style="width: 240; height: 48">
+<P><font face="Verdana" size="3">
+Вызывается во время отключения базы данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="179" HEIGHT="69">
+<DIV WIDTH="279" HEIGHT="69" style="width: 185; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DatabaseFree: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="69">
+<DIV WIDTH="52" HEIGHT="69" style="width: 6; height: 69">
+<P><font face="Verdana" size="3">
+    <font face="Verdana" size="2">
+    Pb</font>   
+</font ></P>
+<P><font face="Verdana" size="3">
+
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="69">
+<DIV WIDTH="308" HEIGHT="69" style="width: 237; height: 69">
+<P><font face="Verdana" size="3">
+Вызывается после того, как компонент соединения освобождает занимаемую память
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P><font face="Verdana" size="3"> </font >
+<p align="center"><font size="3" face="Verdana"><IMG src="gl.18.3.gif" > </font></P>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 18.3. </B>Редактор запроса 
+  компонента <font face="Verdana" size="2"> TIBDataSet</font> </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index10.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index12.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

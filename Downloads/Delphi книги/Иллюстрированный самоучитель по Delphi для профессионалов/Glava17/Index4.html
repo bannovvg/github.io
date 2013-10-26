@@ -1,0 +1,337 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Управление наборами данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TSQLConnection</font> позволяет выполнять некоторые операции с подключенными наборами данных и следить за их состоянием.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSetCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает число подключенных через данное соединение наборов данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Но это только активные наборы данных, переданные в связанные компоненты. Общее число выполняющихся в настоящий момент запросов возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ActiveStatements: LongWord;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если сервер БД установил для данного соединения максимальное число одновременно выполняющихся запросов, то оно доступно в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MaxStmtsPerConn: LongWord;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Поэтому перед открытием набора данных можно выполнять следующий код, который повысит надежность приложения:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if MyQuery.SQLConnection.ActiveStatements &lt;= MyQuery.SQLConnection.MaxStmtsPerConn</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+their MyQuery.Open</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">else MessageDlg ('Database connection is busy', mtWarning, [mbOK] , 0) ;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В случае возникновения непредвиденной ситуации все открытые через данное соединение наборы данных можно быстро закрыть методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CloseDataSets;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+без разрыва соединения.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости компонент <font face="Verdana" size="2"> TSQLConnection</font> может самостоятельно выполнять запросы SQL, не прибегая к помощи компонента
+<font face="Verdana" size="2"> TSQLQuery</font> или <font face="Verdana" size="2">TSQLDataSet</font>. Для этого предназначена функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Execute(const SQL: string; Params: TParams;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ResultSet:Pointer=nil): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если запрос должен содержать параметры, то необходимо сначала создать объект — список параметров
+<font face="Verdana" size="2"> TParams</font> и заполнить его. При этом, т. к. объект
+<font face="Verdana" size="2"> TParams</font> еще не связан с конкретным запросом, важен порядок следования параметров, который должен совпадать в списке
+<font face="Verdana" size="2"> TParams</font> и в тексте SQL.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если запрос возвращает результат, метод автоматически создает объект типа
+<font face="Verdana" size="2"> TCustomSQLDataSet</font> и возвращает указатель на него в параметр
+<font face="Verdana" size="2">Resultset</font>. Функция возвращает число обработанных запросом записей. Следующий фрагмент кода иллюстрирует применение функции
+<font face="Verdana" size="2">Execute</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.SendBtnClick(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var FParams: TParams;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FDataSet: TSQLDataSet;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FParams := TParams.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FParams.Items[0].Aslnteger := 1234; FParams.Items[1].AsInteger := 6751;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyConnection.Execute('SELECT * FROM Orders WHERE OrderNo &gt;= :Ord AND</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+EmpNo = :Emp', FParams, FDataSet);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Assigned(FDataSet) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with FDataSet do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+while Not EOF do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> {...}&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Next ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FParams.Free;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если запрос не имеет настраиваемых параметров и не возвращает набор данных, можно использовать функцию
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ExecuteDirect(const SQL: string): LongWord;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которая возвращает О в случае успешного выполнения запроса или код ошибки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetTableNames(List: TStrings; SystemTables: Boolean = False);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает список таблиц базы данных. Параметр
+<font face="Verdana" size="2"> SystemTables</font> позволяет включать в формируемый список
+<font face="Verdana" size="2"> List</font> системные таблицы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> GetTableNames</font> дополнительно управляется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TTableScope = (tsSynonym, tsSysTable, tsTable, tsView);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;TTableScopes = set of TTableScope;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property TableScope: TTableScopes;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое позволяет задать тип таблиц, имена которых попадают в список. Для каждой таблицы можно получить список полей, использовав метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetFieldNames(const TableName: String; List: TStrings);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и список индексов при помощи метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetlndexNames(const TableName: string; List: TStrings);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В обоих методах список возвращаемых значений содержится в параметре
+<font face="Verdana" size="2">List</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Аналогичным образом метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetProcedureNames(List:   TStrings);</font>&nbsp;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+ возвращает список доступных хранимых процедур, а метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetProcedureParams(ProcedureName:   String;   List:   TList);&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет параметры отдельной <B> </B>процедуры.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

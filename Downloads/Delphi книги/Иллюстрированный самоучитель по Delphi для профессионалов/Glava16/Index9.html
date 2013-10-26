@@ -1,0 +1,1342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компонент TTable</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент Tтаblе инкапсулирует таблицу реляционной базы данных, причем независимо от типа базы данных. Для доступа к данным компонент использует функции BDE (см. выше).
+</font ></P>
+<P><font face="Verdana" size="3">
+Необходимая для работы база данных задается свойством
+<font face="Verdana" size="2">DatabaseName</font>, в котором можно указать зарегистрированный в BDE псевдоним БД или полный путь к файлам БД.
+</font ></P>
+<P><font face="Verdana" size="3">
+Таблица БД, на основе которой создается набор данных, определяется свойством
+<font face="Verdana" size="2">TableName</font>. При необходимости тип таблицы задается свойством
+<font face="Verdana" size="2">TаblеТуре</font>, хотя обычно это свойство имеет значение ttDefault (см. табл. 16.4), которое включает автоматическое определение типа таблицы по расширению файла.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Свойство <font face="Verdana" size="2">ТаblеТуре</font> 
+    работает только в локальных БД. Обратите внимание, что возможные значения 
+    свойства соответствуют основным типам локальных драйверов BDE. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При помощи методов <font face="Verdana" size="2"> Open</font> и
+<font face="Verdana" size="2"> close</font> набор данных открывается и закрывается. О его состоянии можно судить по значению свойства
+<font face="Verdana" size="2">Active</font>. Более подробно о состоянии набора данных расскажет свойство state (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Записи в набор данных можно отбирать при помощи свойств<font face="Verdana" size="2"> Filter, Filtered,</font>
+<font face="Verdana" size="2">FilterOptions</font>, создающих фильтр, ограничивающий набор данных по значениям данных в одном или нескольких полях.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы <font face="Verdana" size="2">SetRangeStart, SetRangeEnd, SetRange, ApplyRange, EditRangeStart,
+EditRangeEnd </font> создают специальный диапазон включаемых в набор данных записей, отбор в диапазон проводится по задаваемым граничным значениям любых полей набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Поиск нужной записи можно осуществлять методами
+<font face="Verdana" size="2"> Lookup</font> или <font face="Verdana" size="2"> Locate</font> (достаточно просто, но не очень быстро) или, используя существующие в таблице базы данных индексы, методом FindKey (сложнее, но очень быстро).
+</font ></P>
+<P><font face="Verdana" size="3">
+От предков компонент унаследовал инструменты для работы с закладками. Это
+свойство <font face="Verdana" size="2">Bookmark</font> и
+методы <font face="Verdana" size="2">GetBookmark, FreeBookmark,
+GotoBookmark</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Работа с полями осуществляется целой группой свойств и методов, среди которых особое место занимает свойство
+<font face="Verdana" size="2">Fields</font>, представляющее собой индексированный список всех полей набора данных. Это свойство удобно использовать в процессе разработки для организации доступа к полям.
+</font ></P>
+<P><font face="Verdana" size="3">
+Использование индексов обеспечено свойствами<font face="Verdana" size="2"> indexName, indexFieids, IndexFieldNames, IndexFiles.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойства <font face="Verdana" size="2">MasterSource, MasterField, IndexName
+</font>дают возможность установить отношение типа главный/подчиненный с другой таблицей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Очень  полезны  в  практическом   использовании  методы  и  свойства для
+работы С буфером изменений (свойства <font face="Verdana" size="2"> CachedUpdates, PendingUpdates, UpdateRecordTypes, МСТОДЫ ApplyUpdates, CancelUpdates, CommitUpdate,
+RevertRecord)</font>. Буфер применяется в клиентских приложениях многоуровневых систем доступа к данным.
+</font ></P>
+<P><font face="Verdana" size="3">
+От классов <font face="Verdana" size="2"> TDataSet</font> и <font face="Verdana" size="2"> TBDEDataSet</font> унаследован обширный набор методов-обработчиков событий, позволяющий решать любые задачи по управлению набором данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+В табл. 16.8 приведена справочная информация о свойствах и методах компонента
+<font face="Verdana" size="2">ттаbl</font><font face="Verdana" size="2">e</font>. После этого рассматриваются подробности применения основных механизмов набора данных.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 16.8. </B>Свойства 
+  и методы класса <font face="Verdana" size="2">Tтаblеl</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="1" HEIGHT="135">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="190" HEIGHT="31">
+<DIV WIDTH="261" HEIGHT="31" style="width: 104; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="31">
+<DIV WIDTH="42" HEIGHT="31" style="width: 15; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="312" HEIGHT="31">
+<DIV WIDTH="333" HEIGHT="31" style="width: 84; height: 31">
+<P><font face="Verdana" size="3">
+<b>&nbsp;Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="533" HEIGHT="25">
+<DIV WIDTH="261" HEIGHT="25" style="width: 109; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="190" HEIGHT="79">
+<DIV WIDTH="261" HEIGHT="79" style="width: 115; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSource: TDataSource;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="79">
+<DIV WIDTH="42" HEIGHT="79" style="width: 13; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="312" HEIGHT="79">
+<DIV WIDTH="333" HEIGHT="79" style="width: 209; height: 79">
+<P><font face="Verdana" size="3">
+Ссылается на компонент <font face="Verdana" size="2"> TDataSource</font> главного набора данных в отношении&nbsp;
+главный/подчиненный
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="81">
+<DIV WIDTH="252" HEIGHT="81" style="width: 178; height: 81">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Defaultlndex: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="81">
+<DIV WIDTH="48" HEIGHT="81" style="width: 9; height: 81">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="81">
+<DIV WIDTH="327" HEIGHT="81" style="width: 240; height: 81">
+<P><font face="Verdana" size="3">
+Управляет сортировкой данных. При значении <font face="Verdana" size="2"> True</font> записи упорядочиваются по первичному ключу. При значении
+<font face="Verdana" size="2"> False</font> упорядочивание не производится
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="108">
+<DIV WIDTH="252" HEIGHT="108" style="width: 157; height: 108">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Exclusive: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="108">
+<DIV WIDTH="48" HEIGHT="108" style="width: 12; height: 108">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="108">
+<DIV WIDTH="327" HEIGHT="108" style="width: 243; height: 108">
+<P><font face="Verdana" size="3">
+Ограничивает доступ к таблице. При значении
+<font face="Verdana" size="2"> True</font> с таблицей может работать только одно приложение. Это свойство важно при одновременной работе нескольких приложений с данными в локальной сети
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="69">
+<DIV WIDTH="252" HEIGHT="69" style="width: 127; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Exists:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="69">
+<DIV WIDTH="48" HEIGHT="69" style="width: 13; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="69">
+<DIV WIDTH="327" HEIGHT="69" style="width: 243; height: 69">
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2"> True</font> говорит о том, что связанная с компонентом таблица базы данных существует
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="42">
+<DIV WIDTH="252" HEIGHT="42" style="width: 162; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property  IndexDef s: TindexDefs;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="42">
+<DIV WIDTH="48" HEIGHT="42" style="width: 14; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="42">
+<DIV WIDTH="327" HEIGHT="42" style="width: 252; height: 42">
+<P><font face="Verdana" size="3">
+Содержит информацию об индексах таблицы
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="50">
+<DIV WIDTH="252" HEIGHT="50" style="width: 144; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property  IndexFieldCount: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="50">
+<DIV WIDTH="48" HEIGHT="50" style="width: 12; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="50">
+<DIV WIDTH="327" HEIGHT="50" style="width: 244; height: 50">
+<P><font face="Verdana" size="3">
+Возвращает число полей в текущем индексе таблицы
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="60">
+<DIV WIDTH="252" HEIGHT="60" style="width: 139; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property  IndexFieldNames: string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="60">
+<DIV WIDTH="48" HEIGHT="60" style="width: 11; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="60">
+<DIV WIDTH="327" HEIGHT="60" style="width: 258; height: 60">
+<P><font face="Verdana" size="3">
+Разделенный запятыми список названий полей, составляющих текущий индекс. Используется для таблиц серверов SQL
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="44">
+<DIV WIDTH="252" HEIGHT="44" style="width: 169; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexFields: [Index:   Integer] :   TField;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="44">
+<DIV WIDTH="48" HEIGHT="44" style="width: 17; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="44">
+<DIV WIDTH="327" HEIGHT="44" style="width: 236; height: 44">
+<P><font face="Verdana" size="3">
+Индексированный список полей текущего индекса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="44">
+<DIV WIDTH="252" HEIGHT="44" style="width: 168; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexFiles: TStrings;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="44">
+<DIV WIDTH="48" HEIGHT="44" style="width: 12; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="44">
+<DIV WIDTH="327" HEIGHT="44" style="width: 267; height: 44">
+<P><font face="Verdana" size="3">
+Список индексных файлов для таблиц dBASE
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="62">
+<DIV WIDTH="252" HEIGHT="62" style="width: 148; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property  IndexName:   string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="62">
+<DIV WIDTH="48" HEIGHT="62" style="width: 12; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="62">
+<DIV WIDTH="327" HEIGHT="62" style="width: 250; height: 62">
+<P><font face="Verdana" size="3">
+Определяет вторичный индекс для таблицы. Используется для таблиц локальных СУБД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="83">
+<DIV WIDTH="252" HEIGHT="83" style="width: 188; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property KeyExclusive: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="83">
+<DIV WIDTH="48" HEIGHT="83" style="width: 11; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="83">
+<DIV WIDTH="327" HEIGHT="83" style="width: 261; height: 83">
+<P><font face="Verdana" size="3">
+Управляет границами диапазона, задаваемого методом
+<font face="Verdana" size="2"> SetRange</font>. При значении <font face="Verdana" size="2"> True</font> крайние записи в диапазон не включаются
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="110">
+<DIV WIDTH="252" HEIGHT="110" style="width: 162; height: 110">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property KeyFieldCount: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="110">
+<DIV WIDTH="48" HEIGHT="110" style="width: 16; height: 110">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="110">
+<DIV WIDTH="327" HEIGHT="110" style="width: 269; height: 110">
+<P><font face="Verdana" size="3">
+Содержит число полей ключа, используемых при поиске. При значении 0 применяется только первое поле, при значении 1 — два первых поля и т. д. По умолчанию устанавливается полное число полей ключа
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="71">
+<DIV WIDTH="252" HEIGHT="71" style="width: 154; height: 71">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MasterFields: string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="71">
+<DIV WIDTH="48" HEIGHT="71" style="width: 13; height: 71">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&nbsp;Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="71">
+<DIV WIDTH="327" HEIGHT="71" style="width: 267; height: 71">
+<P><font face="Verdana" size="3">
+Список имен полей главной таблицы, разделенных запятой, используемых при создании отношения главный/подчиненный
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="77">
+<DIV WIDTH="252" HEIGHT="77" style="width: 185; height: 77">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MasterSource: TDataSource;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="77">
+<DIV WIDTH="46" HEIGHT="77" style="width: 12; height: 77">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="77">
+<DIV WIDTH="332" HEIGHT="77" style="width: 268; height: 77">
+<P><font face="Verdana" size="3">
+Содержит имя компонента <font face="Verdana" size="2"> TDataSource</font>, связанного с набором данных, который является главным в отношении главный/подчиненный
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="69">
+<DIV WIDTH="252" HEIGHT="69" style="width: 179; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Readonly:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="69">
+<DIV WIDTH="46" HEIGHT="69" style="width: 20; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="69">
+<DIV WIDTH="332" HEIGHT="69" style="width: 258; height: 69">
+<P><font face="Verdana" size="3">
+Включает и отключает режим &quot;только для чтения&quot;. В некоторых случаях набор данных можно открыть только в этом режиме
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="106">
+<DIV WIDTH="252" HEIGHT="106" style="width: 157; height: 106">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StoreDef s: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="106">
+<DIV WIDTH="46" HEIGHT="106" style="width: 17; height: 106">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="106">
+<DIV WIDTH="332" HEIGHT="106" style="width: 255; height: 106">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> все сведения об индексах и структуре таблицы хранятся вместе с формой или модулем данных. В этом случае при создании набора данных одновременно создаются поля, индексы, ограничения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="46">
+<DIV WIDTH="252" HEIGHT="46" style="width: 99; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TableLevel: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="46">
+<DIV WIDTH="46" HEIGHT="46" style="width: 14; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="46">
+<DIV WIDTH="332" HEIGHT="46" style="width: 256; height: 46">
+<P><font face="Verdana" size="3">
+Содержит значение уровня таблицы, используемого в драйвере ВОЕ
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="44">
+<DIV WIDTH="252" HEIGHT="44" style="width: 159; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TableName: TFileName;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="44">
+<DIV WIDTH="46" HEIGHT="44" style="width: 16; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="44">
+<DIV WIDTH="332" HEIGHT="44" style="width: 179; height: 44">
+<P><font face="Verdana" size="3">
+Определяет имя таблицы
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="127">
+<DIV WIDTH="252" HEIGHT="127" style="width: 136; height: 127">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TTableType = (ttDefault,   ttParadox, ttDBase,   ttASCII, ttFoxPro) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TableType: TTableType;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="127">
+<DIV WIDTH="46" HEIGHT="127" style="width: 10; height: 127">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="127">
+<DIV WIDTH="332" HEIGHT="127" style="width: 268; height: 127">
+<P><font face="Verdana" size="3">
+Определяет тип таблицы для стандартного драйвера ВОЕ. Значение
+<font face="Verdana" size="2"> ttDefault</font> означает, что тип таблицы определяется по расширению файла
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="527" HEIGHT="27">
+<DIV WIDTH="252" HEIGHT="27">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="98">
+<DIV WIDTH="252" HEIGHT="98" style="width: 148; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Addlndex (const Name,   Fields:   string; Options:   TIndexOptions) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="98">
+<DIV WIDTH="46" HEIGHT="98" style="width: 12; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="98">
+<DIV WIDTH="332" HEIGHT="98" style="width: 270; height: 98">
+<P><font face="Verdana" size="3">
+Создает новый индекс. Параметр <font face="Verdana" size="2"> Name</font> определяет имя нового индекса, параметр
+<font face="Verdana" size="2"> Fields</font> — список полей индекса через запятую, параметр
+<font face="Verdana" size="2"> Options</font> задает тип индекса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="79">
+<DIV WIDTH="252" HEIGHT="79" style="width: 173; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ApplyRange;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="79">
+<DIV WIDTH="46" HEIGHT="79" style="width: 14; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="79">
+<DIV WIDTH="332" HEIGHT="79" style="width: 270; height: 79">
+<P><font face="Verdana" size="3">
+Включает в работу границы диапазона, заданные методами
+<font face="Verdana" size="2"> SetRangeStart, SetRangeEnd или EditRangeStart, EditRangeEnd</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="146">
+<DIV WIDTH="252" HEIGHT="146" style="width: 181; height: 146">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TBatchMode = (batAppend,   batUpdate, batAppendUpdate , batDelete,   batCopy) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function BatchMove (ASource: TBDEDataSet;   AMode : TBatchMode) :   Longint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="146">
+<DIV WIDTH="46" HEIGHT="146" style="width: 12; height: 146">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="146">
+<DIV WIDTH="332" HEIGHT="146" style="width: 258; height: 146">
+<P><font face="Verdana" size="3">
+Переносит записи из таблицы <font face="Verdana" size="2"> ASource</font> в набор данных. Тип операции задается параметром
+<font face="Verdana" size="2"> AMode</font>. Возвращает число обработанных записей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="86">
+<DIV WIDTH="258" HEIGHT="86" style="width: 170; height: 86">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CancelRange;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CloselndexFile (const&nbsp; IndexFileName:   string) ;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="86">
+<DIV WIDTH="44" HEIGHT="86" style="width: 13; height: 86">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="86">
+<DIV WIDTH="346" HEIGHT="86" style="width: 272; height: 86">
+<P><font face="Verdana" size="3">
+Удаляет текущий диапазон
+</font ></P>
+<P><font face="Verdana" size="3">
+Закрывает индексный файл для таблиц dBASE
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="133">
+<DIV WIDTH="258" HEIGHT="133" style="width: 101; height: 133">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CreateTable;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="133">
+<DIV WIDTH="44" HEIGHT="133" style="width: 13; height: 133">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="133">
+<DIV WIDTH="346" HEIGHT="133" style="width: 264; height: 133">
+<P><font face="Verdana" size="3">
+Создает новую таблицу, основываясь на данных о структуре таблицы, содержащихся в свойствах
+<font face="Verdana" size="2"> FieldDef</font> s и <font face="Verdana" size="2"> indexDef</font> s. Если свойство
+<font face="Verdana" size="2"> FieldDef</font> s пустое, используется свойство
+<font face="Verdana" size="2"> Fields</font>. Структура и данные существующей таблицы перезаписываются
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="50">
+<DIV WIDTH="258" HEIGHT="50" style="width: 144; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  Deletelndex (const&nbsp; Name:   string);&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="50">
+<DIV WIDTH="44" HEIGHT="50" style="width: 15; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="50">
+<DIV WIDTH="346" HEIGHT="50" style="width: 204; height: 50">
+<P><font face="Verdana" size="3">
+Удаляет вторичный индекс
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="42">
+<DIV WIDTH="258" HEIGHT="42" style="width: 138; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  DeleteTable;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="42">
+<DIV WIDTH="44" HEIGHT="42" style="width: 10; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="42">
+<DIV WIDTH="346" HEIGHT="42" style="width: 262; height: 42">
+<P><font face="Verdana" size="3">
+Уничтожает таблицу базы данных. Набор данных при этом должен быть закрыт
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="92">
+<DIV WIDTH="258" HEIGHT="92" style="width: 147; height: 92">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EditKey;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="92">
+<DIV WIDTH="44" HEIGHT="92" style="width: 6; height: 92">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="92">
+<DIV WIDTH="346" HEIGHT="92" style="width: 261; height: 92">
+<P><font face="Verdana" size="3">
+Переводит набор данных в режим редактирования буфера поиска. После использования этого метода можно изменять значения полей, которые применяются для поиска записей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="46">
+<DIV WIDTH="258" HEIGHT="46" style="width: 120; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EditRangeEnd;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="46">
+<DIV WIDTH="44" HEIGHT="46" style="width: 16; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="46">
+<DIV WIDTH="346" HEIGHT="46" style="width: 248; height: 46">
+<P><font face="Verdana" size="3">
+Разрешает редактирование нижней границы диапазона
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="44">
+<DIV WIDTH="258" HEIGHT="44" style="width: 129; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EditRangeStart;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="44">
+<DIV WIDTH="44" HEIGHT="44" style="width: 7; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="44">
+<DIV WIDTH="346" HEIGHT="44" style="width: 257; height: 44">
+<P><font face="Verdana" size="3">
+Разрешает редактирование верхней границы диапазона
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="27">
+<DIV WIDTH="258" HEIGHT="27" style="width: 135; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EmptyTable;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="27">
+<DIV WIDTH="44" HEIGHT="27" style="width: 11; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="27">
+<DIV WIDTH="346" HEIGHT="27" style="width: 267; height: 27">
+<P><font face="Verdana" size="3">
+Удаляет все записи из набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="196">
+<DIV WIDTH="258" HEIGHT="196" style="width: 135; height: 196">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FindKey (const&nbsp; KeyValues:   array of&nbsp; const) :   Boolean;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="196">
+<DIV WIDTH="44" HEIGHT="196" style="width: 8; height: 196">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="196">
+<DIV WIDTH="346" HEIGHT="196" style="width: 276; height: 228">
+<P><font face="Verdana" size="3">
+Проводит поиск записи, значения полей которой удовлетворяют условиям, заданным параметром
+<font face="Verdana" size="2"> KeyValues</font>. Значения разделяются запятыми. Для поиска можно использовать только поля, входящие в текущий индекс. Для локальных стандартных таблиц BDE это поля, определяемые свойством
+<font face="Verdana" size="2"> indexName</font>. Для таблиц серверов SQL индекс можно задать свойством
+<font face="Verdana" size="2"> indexFieldNames</font>. При успешном поиске функция возвращает значение
+<font face="Verdana" size="2"> True</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="187" HEIGHT="96">
+<DIV WIDTH="258" HEIGHT="96" style="width: 175; height: 96">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  FindNearest (const KeyValues:   array of&nbsp; const);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="96">
+<DIV WIDTH="44" HEIGHT="96" style="width: 12; height: 96">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="96">
+<DIV WIDTH="346" HEIGHT="96" style="width: 268; height: 244">
+<P><font face="Verdana" size="3">
+Проводит поиск записи, значения полей которой, заданные параметром
+<font face="Verdana" size="2"> KeyValues</font>, в минимальной степени отличаются от требуемых в большую сторону. Значения для поиска разделяются запятыми.
+Для поиска можно использовать толькополя, входящие в текущий индекс. Для&nbsp;
+локальных стандартных таблиц ВОЕ&nbsp; это поля, определяемые свойством<font face="Verdana" size="2">IndexName</font>. Для таблиц серверов SQL индекс можно задать свойством
+<font face="Verdana" size="2"> indexFieldNames</font>. При успешном поиске&nbsp;
+функция возвращает <font face="Verdana" size="2"> True</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="67">
+<DIV WIDTH="256" HEIGHT="67" style="width: 166; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetlndexNames (List : TStrings) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="67">
+<DIV WIDTH="42" HEIGHT="67" style="width: 11; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="315" HEIGHT="67">
+<DIV WIDTH="336" HEIGHT="67" style="width: 268; height: 67">
+<P><font face="Verdana" size="3">
+&nbsp;Возвращает список индексов таблицы
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="64">
+<DIV WIDTH="256" HEIGHT="64" style="width: 161; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GotoCurrent (Table: TTable) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="64">
+<DIV WIDTH="42" HEIGHT="64" style="width: 9; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="315" HEIGHT="64">
+<DIV WIDTH="336" HEIGHT="64" style="width: 242; height: 64">
+<P><font face="Verdana" size="3">Синхронизирует курсор набора данных с курсором таблицы, заданной параметром
+<font face="Verdana" size="2"> Table</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="83">
+<DIV WIDTH="256" HEIGHT="83" style="width: 131; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GotoKey:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="83">
+<DIV WIDTH="42" HEIGHT="83" style="width: 12; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="315" HEIGHT="83">
+<DIV WIDTH="336" HEIGHT="83" style="width: 258; height: 95">
+<P><font face="Verdana" size="3"> Устанавливает курсор на запись, соответствующую значениям полей, заданным&nbsp;
+при последнем применении метода
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SetKey</font> или <font face="Verdana" size="2"> EditKey</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="100">
+<DIV WIDTH="256" HEIGHT="100" style="width: 135; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GotoNearest;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="100">
+<DIV WIDTH="42" HEIGHT="100" style="width: 13; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="315" HEIGHT="100">
+<DIV WIDTH="336" HEIGHT="100" style="width: 268; height: 114">
+        <P><font face="Verdana" size="3"> Устанавливает курсор на запись, точно соответствующую 
+          значениям полей,&nbsp; заданным при последнем применении метода <font face="Verdana" size="2"> 
+          SetKey</font> или <font face="Verdana" size="2"> EditKey</font>, или 
+          следующую ближайшую к ним по значениям </font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="98">
+<DIV WIDTH="256" HEIGHT="98" style="width: 162; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TLockType = (ItReadLock,   ItWriteLock) ; procedure LockTable ( LockType : TLockType) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="98">
+<DIV WIDTH="42" HEIGHT="98" style="width: 10; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="315" HEIGHT="98">
+<DIV WIDTH="336" HEIGHT="98" style="width: 261; height: 98">
+<P><font face="Verdana" size="3">
+Закрывает доступ к таблице <font face="Verdana" size="2"> Paradox</font> или dBASE из других приложений
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="69">
+<DIV WIDTH="256" HEIGHT="69" style="width: 153; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure OpenlndexFile (const IndexFileName:   string);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="69">
+<DIV WIDTH="42" HEIGHT="69" style="width: 11; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="315" HEIGHT="69">
+<DIV WIDTH="336" HEIGHT="69" style="width: 273; height: 69">
+        <P><font face="Verdana" size="3"> Открывает индексный файл таблицы dBASE </font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="46">
+<DIV WIDTH="256" HEIGHT="46" style="width: 176; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RenameTable (const NewTableName:   string);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="46">
+<DIV WIDTH="42" HEIGHT="46" style="width: 16; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="315" HEIGHT="46">
+<DIV WIDTH="336" HEIGHT="46" style="width: 260; height: 46">
+<P><font face="Verdana" size="3">
+ Переименовывает таблицу Paradox или dBASE
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="79">
+<DIV WIDTH="256" HEIGHT="79" style="width: 144; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  SetKey;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="79">
+<DIV WIDTH="42" HEIGHT="79" style="width: 14; height: 79">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="315" HEIGHT="79">
+<DIV WIDTH="336" HEIGHT="79" style="width: 282; height: 79">
+<P><font face="Verdana" size="3">&nbsp;Очищает буфер поиска. После использования этого метода можно изменять значения полей, используемые для поиска записей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="68">
+<DIV WIDTH="256" HEIGHT="68" style="width: 101; height: 102">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  SetRange (const StartValues,   EndValues:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+array of const) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="68">
+<DIV WIDTH="42" HEIGHT="68" style="width: 16; height: 68">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="315" HEIGHT="68">
+<DIV WIDTH="336" HEIGHT="68" style="width: 262; height: 133">
+<P><font face="Verdana" size="3">
+Задает диапазон отбора записей. Параметр <font face="Verdana" size="2"> StartValues</font> определяет значения полей для верхней границы диапазона.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> EndValues</font> определяет значения полей для нижней границы диапазона. Значения диапазона задаются для полей текущего индекса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="83">
+<DIV WIDTH="252" HEIGHT="83" style="width: 87; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&nbsp;procedure SetRangeEnd;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="83">
+<DIV WIDTH="46" HEIGHT="83" style="width: 15; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="83">
+<DIV WIDTH="327" HEIGHT="83" style="width: 272; height: 83">
+<P><font face="Verdana" size="3">
+Задает нижнюю границу диапазона. После этого метода необходимо задать значения для полей текущего индекса, которые и будут нижней границей
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="75">
+<DIV WIDTH="252" HEIGHT="75" style="width: 118; height: 75">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetRangeStart;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="75">
+<DIV WIDTH="46" HEIGHT="75" style="width: 12; height: 75">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="75">
+<DIV WIDTH="327" HEIGHT="75" style="width: 266; height: 76">
+<P><font face="Verdana" size="3">
+Задает верхнюю границу диапазона. После этого метода необходимо задать значения для полей текущего индекса, которые и будут верхней границей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="100">
+<DIV WIDTH="252" HEIGHT="100" style="width: 137; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TLockType = (ItReadLock,   ItWriteLock) ; procedure UnlockTable (LockType : TLockType) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="100">
+<DIV WIDTH="46" HEIGHT="100" style="width: 17; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="100">
+<DIV WIDTH="327" HEIGHT="100" style="width: 259; height: 100">
+<P><font face="Verdana" size="3">
+Разблокирует таблицу Paradox или dBASE для доступа из других приложений
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

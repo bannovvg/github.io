@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Поиск 
+  по индексам</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для организации индексного поиска к набору данных должен быть подключен индекс (свойства
+<font face="Verdana" size="2"> IndexName</font> ИЛИ <font face="Verdana" size="2">IndexFieldNames</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> FindKey</font> проводит поиск записи по заданным в параметре значениям ключевых полей текущего индекса набора данных. В случае успеха курсор набора данных устанавливается на найденной записи, а метод возвращает значение
+<font face="Verdana" size="2">True</font>, в противном случае —
+<font face="Verdana" size="2">False</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если индекс состоит из нескольких полей, значения для поиска записываются в виде множества, причем отсутствующие значения приравниваются
+к <font face="Verdana" size="2">Null</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим простейший пример, в котором реализован поиск по вторичному индексу в таблице CUSTOLY.DB демонстрационной базы данных DBDEMOS. Индекс основан на
+полях <font face="Verdana" size="2">Last_Name</font> И <font face="Verdana" size="2"> First_Name</font> (рис. 14.3).
+</font ></P>
+<P><font face="Verdana" size="3">
+В компоненте <font face="Verdana" size="2">таblе1</font>, помимо стандартных настроек на таблицу, при помощи свойства
+<font face="Verdana" size="2"> IndexName</font> задан и вторичный индекс (его имя
+<font face="Verdana" size="2">Names</font>). Значения для поиска задаются в компонентах
+<font face="Verdana" size="2">Edit1</font> и <font face="Verdana" size="2">Edit2</font>.
+</font ></P>
+<p align="center"> 
+<div align="center"><IMG src="gl.14.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 14.3. </B>Главная форма 
+  проекта <font face="Verdana" size="2"> DemoFind</font> </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>&nbsp;Листинг 14.1. </B> Секция 
+  <font face="Verdana" size="2"> Implementation</font> главного модуля <font face="Verdana" size="2"> 
+  Main</font> проекта <font face="Verdana" size="2"> DemoFind</font>&nbsp; </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> implementation&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">{$R *.DFM}</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.FormShow(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Cust.Open;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> on E: EDBEngineError 
+    do ShowMessage('Ошибка при открытии таблицы');</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.FormClose(Sender: 
+    TObject; var Action: TCloseAction);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Gust.Close;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.FindBtnClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">try&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if not Gust.FindKey([Editl.Text, 
+    Edit2.Text])</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then ShowMessage('Запись 
+    не найдена');</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">except on E: 
+    EDatabaseError</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> do ShowMessage('Ошибка 
+    поиска');&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Набор данных открывается в методе-обработчике 
+  <font face="Verdana" size="2"> FormShow</font> при открытии формы и закрывается 
+  в методе-обработчике <font face="Verdana" size="2">Formclose</font>. При щелчке 
+  на кнопке <font face="Verdana" size="2"> FindBtn</font> в метод <font face="Verdana" size="2"> 
+  FindKey</font> передаются значения для поиска из компонентов <font face="Verdana" size="2">Edit</font><font face="Verdana" size="2">1</font> 
+  И <font face="Verdana" size="2">Edit2</font>. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

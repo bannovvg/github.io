@@ -1,0 +1,505 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Пример 
+  использования списка указателей</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим использование списков указателей на примере приложения
+<font face="Verdana" size="2">DemoList</font>. При щелчке мышью на форме приложения отображается точка, которой присваивается порядковый номер. Одновременно координаты и номер точки записываются в соответствующие свойства создаваемого экземпляра класса
+<font face="Verdana" size="2">TMypixel</font>. Указатель на этот объект передается в новый элемент списка
+<font face="Verdana" size="2">pixList</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В результате после очистки формы всю последовательность точек можно восстановить, использовав указатели на объекты точек из списка.
+</font ></P>
+<P><font face="Verdana" size="3">
+Список точек можно отсортировать по координате X в порядке возрастания.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 7.1. </B> Модуль 
+  главной формы проекта DemoList </font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+unit Main;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">interface</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uses</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Dialogs, StdCtrls, Buttons;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMainForm = class(TForm)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ListBtn: TBitBtn;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; ClearBtn: TBitBtn;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">DelBtn: TBitBtn;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; SortBtn: TBitBtn;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FormCreate(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure FormClose(Sender: TObject; var Action: TCloseAction);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FormMouseDown(Sender: TObject; Button: TMouseButton;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; Shift: TShiftState; X, Y: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ListBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ClearBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DelBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SortBtnClick(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> private</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PixList: TList;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PixNum: Integer; public</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{ Public declarations }&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMyPixel = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FX:    Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FY:    Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FText:  Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor Create(X, Y, Num: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetPixel;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MainForm: TMainForm;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+implementation</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{$R *.DFM}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+const PixColor = clRed;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var CurPixel: TMyPixel;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor TMyPixel.Create(X, Y, Num: Integer);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+inherited Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FX := X;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FY := Y;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FText := Num;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SetPixel;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMyPixel.SetPixel;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MainForm.Canvas.PolyLine([Point(FX, FY), Point(FX, FY)]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MainForm.Canvas.TextOut(FX +1, FY + 1, IntToStr(FText));&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function PixCompare(Iteml, Item2: Pointer): Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var Pixl, Pix2: TMyPixel;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pixl := Iteml;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pix2 := Item2;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := Pixl.FX — Pix2.FX;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.FormCreate(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PixList := TList.Create;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+PixNum := 1; {Счетчик точек}</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+Canvas.Pen.Color := PixColor; (Цвет точки}</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+Canvas.Pen.Width := 3; {Размер точки}</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+Canvas.Brush.Color := Color; (Цвет фона текста равен
+  цвету формы}</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">PixList.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.FormMouseDown(Sender: TObject; Button: TMouseButton;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Shift: TShiftState; X, Y: Integer);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PixList.Add(TMyPixel.Create(X, Y, PixNum));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Inc(PixNum);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.ListBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var i: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with PixList do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for i := 0 to Count — 1 do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CurPixel := Items[i]; CurPixel.SetPixel;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.ClearBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Canvas.FillRect(Rect(0, 0, Width, Height));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.DelBtnClick(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PixList.Clear;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PixNum := 1;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.SortBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var i: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PixList.Sort(PixCompare);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with PixList do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for i := 0 to Count — 1 do TMyPixel(Items[i]).FText := i + 1;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TMyPixel</font> обеспечивает хранение координат точки и ее порядковый номер в серии. Эти параметры передаются в конструктор класса. Метод
+<font face="Verdana" size="2"> setPixel</font> обеспечивает отрисовку точки на канве формы (см. гл. 10).
+</font ></P>
+<P><font face="Verdana" size="3">
+Экземпляр класса создается для каждой новой точки при щелчке кнопкой мыши в методе-обработчике
+<font face="Verdana" size="2">FormMouseDown</font>. Здесь же указатель на новый объект сохраняется в создаваемом при помощи метода
+<font face="Verdana" size="2"> Add</font> элементе списка <font face="Verdana" size="2">PixList</font>. Таким образом, программа &quot;запоминает&quot; расположение и порядок следования точек.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод-обработчик <font face="Verdana" size="2">ListBtnClick</font> обеспечивает отображение точек. Для этого в цикле текущий указатель списка передается в переменную объектного типа
+<font face="Verdana" size="2">curPixel</font>, т. е. в этой переменной по очереди &quot;побывают&quot; все созданные объекты, указатели на которые хранятся в списке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Это сделано для того, чтобы получить доступ к свойствам объектов (непосредственно через указатель этого сделать нельзя). Второй способ приведения типа рассмотрен в методе-обработчике
+<font face="Verdana" size="2">SortBtnClick</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед вторичным отображением точек необходимо очистить поверхность формы. Эту операцию выполняет метод-обработчик
+<font face="Verdana" size="2">clearBtnClick</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Список точек можно отсортировать по координате X в порядке возрастания. Для этого в методе-обработчике
+<font face="Verdana" size="2"> SortBtnClick</font> вызывается метод
+<font face="Verdana" size="2"> Sort</font> списка <font face="Verdana" size="2">PixList</font>. В параметре метода (переменная процедурного типа) передается функция
+<font face="Verdana" size="2">PixCompare</font>, которая обеспечивает инкапсулированный в методе
+<font face="Verdana" size="2"> Sort</font> механизм перебора элементов списка алгоритмом принятия решения о старшинстве двух соседних элементов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если функция возвращает положительное число, то элемент
+<font face="Verdana" size="2">item1</font> больше элемента item2. Если результат отрицательный, то
+<font face="Verdana" size="2">item1</font> меньше, чем <font face="Verdana" size="2">item2</font>. Если элементы равны, функция должна возвращать ноль.
+</font ></P>
+<P><font face="Verdana" size="3">
+В нашем случае сравнивались координаты <font face="Verdana" size="2"> X</font> двух точек. В результате такой сортировки по возрастанию объекты оказались расположены так, что первый элемент списка указывает на объект с минимальной координатой
+<font face="Verdana" size="2">X</font>, а последний — на объект с максимальной координатой
+<font face="Verdana" size="2">X</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+После сортировки осталось заново пронумеровать все точки. Это делает цикл в методе-обработчике
+<font face="Verdana" size="2">SortBtnclick</font>. Обратите внимание на примененный в этом случае способ приведения типа, обеспечивающий обращение к свойствам экземпляров класса
+<font face="Verdana" size="2">TMypixe</font><font face="Verdana" size="2">l</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод-обработчик <font face="Verdana" size="2">DeiBtnClick</font> обеспечивает полную очистку списка
+<font face="Verdana" size="2">pixList</font>.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

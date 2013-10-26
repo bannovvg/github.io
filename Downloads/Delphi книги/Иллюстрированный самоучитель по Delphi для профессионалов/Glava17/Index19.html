@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Отладка приложений с технологией dbExpress</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Наряду с обычными методами отладки исходного кода, в dbExpress существует возможность контроля запросов, проходящих на сервер через соединение. Для этого используется компонент
+<font face="Verdana" size="2">TSQLMonitor</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SQLConnection: TSQLConnection;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+компонент связывается с отлаживаемым соединением. Затем компонент включается установкой
+<font face="Verdana" size="2"> Active = True.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь во время выполнения приложения сразу после открытия соединения свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TraceList: TStrings;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+будет заполняться информацией обо всех проходящих командах. Содержимое этого списка можно сохранить в файле при помощи метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SaveToFile(AFileName: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Эту же информацию можно автоматически добавлять в текстовый файл, определяемый свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FileName:   string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+но только тогда, когда свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AutoSave: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+будет иметь значение <font face="Verdana" size="2">True</font>. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MaxTraceCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет максимальное число контролируемых команд, а также управляет процессом контроля. При значении -1 ограничения снимаются, а при значении 0 контроль останавливается. Текущее число проверенных команд содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TraceCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перед записью команды в список вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TTraceEvent = procedure(Sender: TObject; CBInfo: pSQLTRACEDesc;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var LogTrace: Boolean) of object;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnTrace: TTraceEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а сразу после записи в список вызывается
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TTraceLogEvent = procedure (Sender: TObject; CBInfo: pSQLTRACEDesc) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnLogTrace: TTraceLogEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Таким образом, разработчик получает компактный и симпатичный компонент, позволяющий без усилий получать информацию о прохождении команд в соединении.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если же компонент <font face="Verdana" size="2"> TSQLMonitor</font> не подходит, можно воспользоваться методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetTraceCallbackEvent(Event: TSQLCallbackEvent; IClientlnfo: Integer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+компонента <font face="Verdana" size="2">TSQLConnection</font>. Параметр процедурного типа
+<font face="Verdana" size="2"> Event</font> определяет функцию, которая будет вызываться при выполнении каждой команды. Параметр
+<font face="Verdana" size="2">iclientinfo</font> должен содержать любое число.
+</font ></P>
+<P><font face="Verdana" size="3">
+Он   позволяет   разработчику   самостоятельно   определить   функцию   типа
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSQLCallbackEvent:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRACECat = TypedEnum;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSQLCallbackEvent = function(CallType: TRACECat; CBInfo: Pointer): CBRType; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Эта функция будет вызываться каждый раз при прохождении команды. Текст команды будет передаваться в буфер
+<font face="Verdana" size="2">CBInfo</font>. Разработчику необходимо лишь выполнить запланированные действия с буфером внутри функции.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим в качестве примера следующий исходный код.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetTracelnfо(CallType: TRACECat; CBInfo: Pointer): CBRType;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Assigned(Forml.TraceList) then Forml.TraceList.Add(pChar(CBinfo));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.MyConnectionBeforeConnect(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TraceList := TStringList.Create;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.MyConnectionAfterDisconnect(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Assigned(TraceList) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin TraceList.SaveToFile('с:\Temp\TraceInfo.txt');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">TraceList.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.StartBtnClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyConnection.SetTraceCallbackEvent(GetTracelnfo, 8);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyConnection.Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{...}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">MyConnection.Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перед открытием соединения в методе-обработчике
+<font face="Verdana" size="2"> BeforeConnection</font> создается объект типа
+<font face="Verdana" size="2">TStringList</font>. После закрытия соединения этот объект сохраняется в файле и уничтожается.
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед открытием соединения (метод-обработчик нажатия кнопки
+<font face="Verdana" size="2">Start</font>) при помощи метода
+<font face="Verdana" size="2">SetTraceCallbackEvent</font> с соединением связывается функция
+<font face="Verdana" size="2">GetTracelnfo</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Таким образом, по мере прохождения команд информация о них будет накапливаться в списке. После закрытия соединения список сохраняется в текстовом файле.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> В своей работе компонент <font face="Verdana" size="2"> 
+    TSQLMonitor</font> также использует вызовы метода <font face="Verdana" size="2">SetTraceCallbackEvent</font>. 
+    Поэтому одновременно применять компонент и собственные функции нельзя. </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

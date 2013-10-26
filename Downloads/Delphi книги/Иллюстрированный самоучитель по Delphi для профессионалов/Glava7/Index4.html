@@ -1,0 +1,830 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TStringList</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+<P><font face="Verdana" size="3">Класс <font face="Verdana" size="2"> TStringList</font> 
+  обеспечивает реальное использование списков строк в приложении. По существу, 
+  класс представляет собой оболочку вокруг динамического массива значений списка, 
+  представленного свойством <font face="Verdana" size="2">strings</font>. Объявление 
+  свойства (унаследованное от <font face="Verdana" size="2">TStrings</font>) выглядит 
+  так: </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Strings[Index: Integer]: string read Get write Put; default;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для работы со свойством используются внутренние методы
+<font face="Verdana" size="2"> Get</font> и <font face="Verdana" size="2">Put</font>, в которых применяется внутренняя переменная
+<font face="Verdana" size="2">FList</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PStringltem = 'TStringltem;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;TStringltem = record FString: string;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">FObject: TObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PStringltemList = ^TStringItemList;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> TStringltemList = array[0..MaxListSize] of TStringltem;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FList: PStringltemList;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Из ее объявления видно, что список строк представляет собой динамический массив записей
+<font face="Verdana" size="2">TStringItem</font>. Эта запись позволяет объединить саму строку и связанный с ней объект.
+</font ></P>
+<P><font face="Verdana" size="3">
+Максимальный размер списка ограничен константой
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MaxListSize = Maxint div 16;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+значение которой после нехитрых вычислений составит 134 217 727. Таким образом, видно, что строковый список Delphi теоретически конечен, хотя на практике гораздо чаще размер списка ограничивается размером доступной памяти.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обращение к отдельному элементу списка может осуществляться через свойство
+<font face="Verdana" size="2"> strings</font> таким образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SomeStrings.Strings[i] := Editl.Text;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SomeStrings[i] := Editl.Text;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Оба способа равноценны.
+</font ></P>
+<P><font face="Verdana" size="3">
+При помощи простого присваивания можно задавать новые значения только тогда, когда элемент уже создан. Для добавления нового элемента используются методы
+<font face="Verdana" size="2"> Add</font> И <font face="Verdana" size="2">AddStrings</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Add(const S: string): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+добавляет в конец списка новый элемент, присваивая ему значение s и возвращая индекс нового элемента в списке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Append(const S: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+просто вызывает функцию <font face="Verdana" size="2">Add</font>. Единственное отличие заключается в том, что метод не возвращает индекс нового элемента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure AddStrings(Strings: TStrings);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+добавляет к списку целый набор новых элементов, которые должны быть заданы другим списком, передаваемым в параметре
+<font face="Verdana" size="2">strings</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости можно добавить новый элемент в произвольное место списка. Для этого применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Insert(Index: Integer; const S: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который вставляет элемент s на место элемента с индексом
+<font face="Verdana" size="2">index</font>. При этом все указанные элементы смещаются на одну позицию вниз.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для удаления элемента списка используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Delete(Index: Integer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Move(Curlndex, Newlndex: Integer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+перемещает элемент, заданный индексом <font face="Verdana" size="2">curindex</font>, на новую позицию, заданную
+индексом <font face="Verdana" size="2">Newlndex</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+А метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Exchange(Indexl, Index2: Integer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+меняет местами элементы с индексами <font face="Verdana" size="2">index1</font> и
+<font face="Verdana" size="2">index2</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Довольно часто в списках размешается строковая информация следующего вида:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+'Name=Value'</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В качестве примера можно привести строки из файлов INI или системного реестра. Специально для таких случаев в списке предусмотрено представление строк в двух свойствах. В свойстве
+<font face="Verdana" size="2"> Names</font> содержится текст до знака равенства. В свойстве
+<font face="Verdana" size="2"> values</font> содержится текст после знака равенства по умолчанию. Однако символ-разделитель можно заменить на любой другой, использовав свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NameValueSeparator: Char;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Доступ к значениям свойства <font face="Verdana" size="2"> values</font> осуществляется по значению. Например, если в списке есть строка
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+City=Saint-Petersburg</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+то значение свойства <font face="Verdana" size="2"> value</font> будет равно
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Value['City'] = 'Saint-Petersburg'</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Кроме этого, значение свойства <font face="Verdana" size="2"> value</font> можно получить, если известен его индекс:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ValueFormlndex[Index: Integer]: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Как видно из объявления внутреннего списка <font face="Verdana" size="2"> FList</font> (см. выше), с
+каждым элементом списка можно связать любой объект. Для этого используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Objects[Index: Integer]: TObject;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> strings</font> элемента и свойство
+<font face="Verdana" size="2"> objects</font> связанного с ним объекта имеют одинаковые индексы. Если строка не имеет связанного объекта, то свойство
+<font face="Verdana" size="2"> objects</font> равно <font face="Verdana" size="2">Nil</font>. Один объект может быть связан с несколькими строками списка одновременно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Чаще всего объекты нужны для того, чтобы хранить для каждого элемента дополнительную информацию. Например, в списке городов для каждого элемента можно дополнительно хранить население, площадь, административный статус и т. д. Для этого можно создать примерно такой класс:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TCityProps = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; Square: Longlnt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; Population: Longlnt;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Status: String/end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для того чтобы добавить к строке из списка объект, используется метод
+<font face="Verdana" size="2">AddObject</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AddObject(const S: string; AObject: TObject): Integer; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что в параметре <font face="Verdana" size="2"> AObject</font> необходимо передавать указатель на объект. Проще всего это сделать таким образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SomeStrings.AddObject('Someltem', TCityProps.Create);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Или же так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var SPb: TCityProps;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SPb := TCityProps.Create;  {Создание объекта}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;SPb.Population := 5000000;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SomeStrings.Strings[i] := 'Санкт-Петербург';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SomeStrings.Objects[i] := SPb;     (Связывание объекта и строки}</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Можно поступить и подобным образом (помните, что строка уже должна существовать):
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SomeStrings.Strings[i] := 'Санкт-Петербург';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; SomeStrings.Objects[i] :=
+TCityProps.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">(SomeStrings.Objects[i] as TCityProps).Population := 5000000;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Аналогично методу <font face="Verdana" size="2">insert</font>, элемент и связанный с ним объект можно вставить в произвольное место списка методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure InsertObject(Index: Integer; const S: string; AObject: TObject);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При перемещении методом <font face="Verdana" size="2"> Move</font> вместе с элементом переносится и указатель на связанный объект.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обратите внимание на две особенности, связанные с удалением указателей на объекты и самих связанных объектов.
+</font ></P>
+<P><font face="Verdana" size="3">
+При удалении элемента списка удаляется только указатель на объект, а сам объект остается в памяти. Для его уничтожения следует предпринять дополнительные усилия:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for i := 0 to SomeList.Count — 1 do&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SomeList.Objects[i].Destroy;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если при удалении связанного объекта необходимо выполнить некоторые действия, предусмотренные в деструкторе, приведение типов
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TCityProps(SomeList.Objects[i]).Destroy;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+выполнять не обязательно — нужный деструктор будет вызван автоматически, хотя в данном случае приведение типов ошибкой не является.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Clear; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+полностью очищает список, удаляя все его элементы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо перечисленных, класс <font face="Verdana" size="2"> TStringList</font> обладает рядом дополнительных свойств и методов. Вспомогательные свойства класса обеспечивают разработчика информацией о состоянии списка. Дополнительные методы осуществляют поиск в списке и взаимодействие с файлами и потоками.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство только для чтения
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Count: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает число элементов списка.
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как основу списка составляет динамический массив, то для него в процессе работы должна выделяться память. При добавлении в список новой строки память для нее выделяется автоматически. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Capacity: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет число строк, для которых выделена память. Вы можете самостоятельно управлять этим параметром, помня при этом, что значение
+<font face="Verdana" size="2">Capacity</font> всегда должно быть больше или равно значению
+<font face="Verdana" size="2">Count</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Duplicates: TDuplicates;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет, можно ли добавлять в список повторные значения.&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+ Тип
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDuplicates = (duplgnore, dupAccept, dupError);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет реакцию списка на добавление повторного элемента:&nbsp;
+</font ></P>
+<ul>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp;dupignore —- запрещает 
+    добавление повторных элементов;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp; dupAccept — разрешает 
+    добавление повторных элементов;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp;dupError — запрещает 
+    добавление повторных элементов и генерирует исключительную ситуацию.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TStringList</font> немыслимо представить себе без возможностей сортировки. Если вас удовлетворит обычная сортировка, то для этого можно использовать свойство
+<font face="Verdana" size="2"> sorted</font> (сортировка выполняется при значении
+<font face="Verdana" size="2">True</font>) или метод <font face="Verdana" size="2">Sort</font>. Под &quot;обычной&quot; имеется в виду сортировка по тексту строк с использованием функции
+<font face="Verdana" size="2"> Ansicomparestr</font> (т. е. с учетом национальных символов, в порядке возрастания). Если вы хотите отсортировать список по другому критерию, к вашим услугам метод:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TStringListSortCompare = function(List: TStringList; Indexl, Index2: Integer):
+Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure CustomSort(Compare: TStringListSortCompare);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Чтобы отсортировать список, вы должны описать функцию сравнения двух элементов с индексами
+<font face="Verdana" size="2"> indexl</font> и <font face="Verdana" size="2">index2</font>, которая должна возвращать следующие результаты:
+</font ></P>
+<ul>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp;1 — если элемент 
+    с индексом  indexl вы хотите поместить впереди элемента 
+    Index2;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">0 — если они равны;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">&nbsp;1 — если элемент 
+    с индексом  indexl вы хотите поместить после элемента 
+    Index2.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Для описанного выше примера с объектом-городом нужны три процедуры:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SortByStatus(List: TStringList; Indexl, Index2: Integer):</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := AnsiCompareStr((List.Objects[Indexl] as TCityProps).Status,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(List.Objects[Index2] as TCityProps).Status;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SortBySquare(List: TStringList; Indexl, Index2: Integer): Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin if (List.Objects[Indexl] as TCityProps).Square &lt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(List.Objects[Index2] as TCityProps). Square) then Result := -1</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;else if (List.Objects[Indexl] as TCityProps).Square =</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(List.Objects[Index2] as TCityProps).Square then Result := 0</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;else Result := 1;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SortByPopulation(List: TStringList; Indexl, Ir.dex2: Integer): Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (List.Objects[Indexl] as TCityProps).Population &lt; (List.Objects[Index2] as TCityProps). Population then Result := -1&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> else</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (List.Objects[Indexl] as TCityProps). Population = (List.Objects[Index2] as TCityProps). Population</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;then Result := 0</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;else Result := 1;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Передаем одну из процедур в метод <font face="Verdana" size="2">CustomSort</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Cities.CustomSort(SortByPopulation);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для поиска нужного элемента используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Find(const S: string; var Index: Integer): Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В параметре <font face="Verdana" size="2"> s</font> передается значение для поиска. В случае успеха функция возвращает значение
+<font face="Verdana" size="2">True</font>, а в параметре <font face="Verdana" size="2"> index</font> содержится индекс найденного элемента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IndexOf (const S: string): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает индекс найденного элемента <font face="Verdana" size="2">s</font>. Иначе функция возвращает — 1.&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+ Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IndexOfName(const Name: string): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает индекс найденного элемента, для которого свойство
+<font face="Verdana" size="2"> Names</font> совпадает со значением параметра
+<font face="Verdana" size="2">Name</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для поиска связанных объектов используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IndexOfObject(AObject: TObject): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В качестве параметра <font face="Verdana" size="2"> AObject</font> должна передаваться ссылка на искомый объект. А свойство
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CaseSensitive: Boolean;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+включает или отключает режим поиска и сортировки с учетом регистра символов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо свойства <font face="Verdana" size="2">strings</font>, содержимое списка можно получить при помощи свойств
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Text: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CommaText: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Они представляют все строки списка в виде одной строки. При этом в первом свойстве элементы списка разделены символами возврата каретки и переноса строки. Во втором свойстве строки заключены в
+двойные кавычки и разделены запятыми или пробелами. Так, для списка городов (Москва, Петербург, Одесса) свойство
+<font face="Verdana" size="2"> Text</font> будет равно
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Москва#$0#$АПетербург#$0#$АОдесса</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а свойство CommaText равно
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&quot;Москва&quot;,   &quot;Петербург&quot;,   &quot;Одесса&quot;.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Важно иметь в виду, что эти свойства доступны не только по чтению, но и по записи. Так что заполнить список вы сможете не только циклически,
+вызывая и используя методы <font face="Verdana" size="2"> Add</font> или
+<font face="Verdana" size="2">insert</font>, но и одним-единственным присвоением значения свойствам
+<font face="Verdana" size="2"> Text</font> или <font face="Verdana" size="2">CommaText</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Список может взаимодействовать с другими экземплярами класса
+<font face="Verdana" size="2">TstringList</font>.&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+ Широко распространенный метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;<font face="Verdana" size="2">procedure Assign(Source: TPersistent);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;полностью переносит список <font face="Verdana" size="2"> source</font> в данный.&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+ Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Equals(Strings:   TStrings):   Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает значение <font face="Verdana" size="2">True</font>, если элементы списка
+<font face="Verdana" size="2"> strings</font> полностью совпадают с элементами данного списка.
+</font ></P>
+<P><font face="Verdana" size="3">
+Список можно загрузить из файла или потока. Для этого используются методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromFile(const FileName: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromStream(Stream: TStream);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Сохранение списка выполняется методами
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SaveToFile(const FileName: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SaveToStreamfStream:   TStream);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перед изменением списка вы можете получить управление, описав обработчик события
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnChange: TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а после изменения
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnChanging:   TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+На дискете, прилагаемой к этой книге, вы можете ознакомиться с примером
+использования списков строк <font face="Verdana" size="2">DemoStrings</font>.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

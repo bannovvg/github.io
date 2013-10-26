@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Фильтры</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Наиболее эффективным способом отбора записей в набор данных (особенно из больших таблиц) является создание и выполнение соответствующего запроса SQL. Но что делать, если набор данных функционирует на базе табличного компонента? В этом случае на помощь приходит встроенный в набор данных механизм фильтрации данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Применение фильтра основано всего на двух основных свойствах и одном вспомогательном. Текст фильтра должен содержаться в свойстве
+<font face="Verdana" size="2">Filter</font>, a свойство <font face="Verdana" size="2"> Filtered</font> включает и выключает фильтр. Параметры фильтра определяются
+свойством <font face="Verdana" size="2">FilterOptions.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TQuery</font> 
+    также может использовать фильтры. Эта возможность подчас позволяет легко и 
+    изящно решать довольно сложные проблемы, которые иначе требуют изменения текста 
+    запроса или создания нового компонента запроса. </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+При использовании фильтра его текст транслируется в синтаксис SQL и передается для выполнения на сервер или через соответствующий драйвер в локальную СУБД.
+</font ></P>
+<P><font face="Verdana" size="3">
+Фильтры можно создавать двумя способами:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;при помощи 
+    свойства <font size="2">Filter</font> создаются довольно простые фильтры, 
+    для которых достаточно предоставляемого механизмом фильтрации синтаксиса;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;для создания 
+    более сложных фильтров с применением всех возможных средств языка программирования 
+    применяется метод-обработчик набора данных<B> </B><font size="2">OnFilterRecord</font>.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Фильтры можно разделить на статические и динамические.
+</font ></P>
+<P><font face="Verdana" size="3">
+Статические фильтры создаются во время разработки приложения и могут
+использовать<B> </B>как свойство<B> </B><font face="Verdana" size="2">Filter</font>,
+так и метод<B> </B><font face="Verdana" size="2">OnFilterRecord</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Динамические фильтры можно создавать и редактировать во время выполнения
+приложения, для них используется только
+свойство <font face="Verdana" size="2">Filter</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При создании текста фильтра для свойства <font face="Verdana" size="2"> Filter</font> используются имена полей соответствующей таблицы БД, а для задания отношений применяются все операторы сравнения (<font face="Verdana" size="2">&gt;, &gt;=, &lt;, &lt;=, =,
+&lt;&gt;</font>) и логические операторы (<font face="Verdana" size="2">AND, OR,
+NOT</font>):
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Fieldl&gt;100 AND Field2=20</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Сравнивать между собой два поля нельзя. Следующий фильтр вызовет ошибку при попытке использования:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ItemCount=Balance AND InputPrice&gt;OutputPrice</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При создании динамических фильтров можно изменять как выражение фильтра целиком, так и его части. Например, ограничивающее значение для поля можно задавать при помощи элементов управления формы, что позволяет пользователю приложения управлять фильтрацией набора данных:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.EditlChange(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with Tablel do begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Filtered := False;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Filter := 'Fieldl&gt;=' + TEdit(Sender).Text; Filtered := True;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В фильтрах можно производить отбор по частям строк для строковых полей, для этого используется символ звездочка:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ItemName='A*'</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Фильтр начинает работать только после того, как свойству
+<font face="Verdana" size="2"> Filtered</font> присваивается истинное значение. Перед изменением текста динамического фильтра или для отключения фильтра свойству
+<font face="Verdana" size="2"> Filtered</font> присваивается значение
+<font face="Verdana" size="2">False</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметры фильтра определяются свойством <font face="Verdana" size="2">FilterOptions</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FiiterOptions: TFilterOptions;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFilterOption = (foCaselnsensitive, foNoPartialCompare);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFilterOptions = set of TFilterOption;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2">foCaselnsensitive</font>, будучи включенным в свойстве, отключает сравнение строковых значений с учетом регистра символов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> foNoPartialCompare</font> отключает отбор строковых значений по части строки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод-обработчик <font face="Verdana" size="2">onFilterRecord</font> имеет следующее объявление:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TFilterRecordEvent = procedure(DataSet: TDataSet; var Accept:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Boolean) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnFiiterRecord: TFilterRecordEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если этот метод создан для набора данных, то он вызывается для каждой его записи. Программный код метода должен присваивать параметру
+<font face="Verdana" size="2"> Accept</font> истинное или ложное значение. В результате запись передается в набор данных или отсекается:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.TablelFilterRecord(DataSet: TDataSet;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Accept: Boolean);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Accept := ArchOrdersArchDat.AsString &gt;= DateEditl.Text;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Важнейшее преимущество метода <font face="Verdana" size="2">onFilterRecord</font>, по сравнению со свойством
+<font face="Verdana" size="2">Filter</font>, заключается в том, что в этом методе-обработчике можно сравнивать поля и производить вычисления над их значениями.
+</font ></P>
+<P><font face="Verdana" size="3">
+Недостатком метода является недостаточная гибкость, хотя такой фильтр можно модифицировать путем присвоения методу процедурной переменной, содержащей ссылку на новый метод.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

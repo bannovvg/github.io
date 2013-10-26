@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index21.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Локальные данные потока</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Интересная проблема возникает, если в приложении будет несколько одинаковых потоков. Как избежать совместного использования одних и тех же переменных несколькими потоками? Первое, что приходит на ум, — добавить и использовать поля объекта — потомка
+<font face="Verdana" size="2">TThread</font>, которые можно добавить при его создании. Каждый поток соответствует отдельному экземпляру объекта, и их данные пересекаться не будут. (Кстати, это одно из больших удобств использования класса
+<font face="Verdana" size="2">TThread</font>.) Но есть функции API, которые знать не знают об объектах Delphi и их полях и свойствах. Для поддержки разделения данных между потоками на нижнем уровне в язык Object Pascal введена специальная директива —
+<font face="Verdana" size="2">threadvar</font>, которая отличается от директивы описания переменных var тем, что применяется только к локальным данным потока. Следующее описание:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+datal: Integer; threadvar</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+data2: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+означает, что переменная <font face="Verdana" size="2"> datal</font> будет использоваться всеми потоками данного приложения, а переменная
+<font face="Verdana" size="2"> data2</font> будет у каждого потока своя.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index21.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

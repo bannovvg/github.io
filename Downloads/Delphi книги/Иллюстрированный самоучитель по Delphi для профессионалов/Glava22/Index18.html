@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Обработка ошибок</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Особенности использования компонента <font face="Verdana" size="2">TClientDataSet</font> распространяются также и на обработку ошибок. Ведь клиентский набор данных должен реагировать не только на ошибки, возникшие локально, но и на ошибки сохранения изменений на сервере.
+</font ></P>
+<P><font face="Verdana" size="3">
+В первом случае разработчик может применить стандартные способы. Это использование блоков<font face="Verdana" size="2">
+try..except</font> или методов обработчиков, унаследованных от класса
+TDa<font face="Verdana" size="2">t</font>aSet:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;property OnDeleteError: TDataSetErrorEvent; 
+    — вызывается при ошибках удаления записей;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;property OnEditError: TDataSetErrorEvent; 
+    — вызывается при ошибках редактирования записей;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">&nbsp;property OnPostError: TDataSetErrorEvent; 
+    — вызывается при ошибках локального сохранения записей.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+&nbsp;Все они используют процедурный тип
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDataSetErrorEvent = procedure(DataSet: TDataSet;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">E: EDatabaseError;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Action: TDataAction) of object;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь, помимо параметров <font face="Verdana" size="2"> DataSet</font> и
+<font face="Verdana" size="2"> Е,</font> определяющих соответственно набор данных и тип ошибки, параметром
+<font face="Verdana" size="2"> Action</font> можно задать вариант реакции на ошибку:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDataAction = (daFail, daAbort, daRetry);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">daFai</font>l — прервать операцию и показать сообщение об ошибке;&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> daAbort</font> — прервать операцию без сообщения об ошибке;
+</font ></P>
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">
+daRetry</font> <B>— </B>
+повторить операцию
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, при возникновении ошибки редактирования набора данных код обработчика может выглядеть следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.ClientDataSetEditError(DataSet: TDataSet;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+E: EDatabaseError; var Action: TDataAction);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Not (DataSet.State in [dsEdit, dslnsert]) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DataSet.Edit; Action := daRetry;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+else Action := daAbort;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь, если набор данных не находится в состоянии редактирования, это упущение исправляется и операция повторяется.
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, с локальными ошибками все обстоит достаточно просто. А как клиентский набор данных &quot;узнает&quot; об ошибке на удаленном сервере? Очевидно, при помощи своего компонента-провайдера. Действительно, компонент
+<font face="Verdana" size="2"> TDataSetProvider</font> не только возвращает клиенту несохраненные изменения в пакете
+<font face="Verdana" size="2"> Delta</font> (см. выше), но и обеспечивает генерацию события, реакцией на которое является метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TReconcileErrorEvent = procedure(DataSet: TCustomClientDataSet; E:
+EReconcileError;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">UpdateKind: TUpdateKind;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">var Action:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">TReconcileAction) of object;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnReconcileError: TReconcileErrorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что все параметры похожи на соответствующие параметры локальных обработчиков, но имеют собственные типы. Рассмотрим их.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> UpdateKind</font> содержит указание на тип операции, вызвавшей ошибку на сервере:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TUpdateKind = (ukModify, uklnsert, ukDelete);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ukModify</font> — изменение данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;<font face="Verdana" size="2">uklnsert</font> — добавление записей;&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> ukDelete</font> — удаление записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> Action</font> позволяет разработчику предусмотреть реакцию клиентского набора данных на ошибку:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type-</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TReconcileAction = (raSkip, raAbort, raMerge, raCorrect, raCancel, raRefresh);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+raSkip</font> — отменить операцию для записей, вызвавших ошибку, с их сохранением в буфере;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+raAbort</font> — отменить все изменения для операции, вызвавшей ошибку;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">raMerge</font> — совместить измененные записи с аналогичными записями сервера;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">racorrect</font> — сохранить изменения, сделанные в данном методе-обработчике;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+racancel</font> — отменить изменения, вызвавшие ошибку, заменив их исходными локальными значениями клиентского набора данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+raRefresh</font> — отменить изменения, вызвавшие ошибку, заменив их исходными значениями серверного набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как видите, выбор возможных реакций на ошибку сервера несколько шире, чем на локальные ошибки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тип ошибки возвращается параметром <font face="Verdana" size="2"> Е</font>, для которого предусмотрен специальный класс
+<font face="Verdana" size="2">EReconcileError</font>, имеющий несколько полезных свойств.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ErrorCode: DBResult;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает код ошибки. Используемые коды ошибок можно найти в файле \Source\Vcl\DSIntf.pas. Код предыдущей ошибки возвращается свойством
+<font face="Verdana" size="2">property PreviousError: DBResult;</font>
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.22.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 22.4. </B>Стандартный 
+  диалог обработки ошибок сервера </font ></P>
+<P><font face="Verdana" size="3"> Используя представленную здесь информацию, вы 
+  можете самостоятельно управлять обработкой ошибок сервера на клиенте. Но можно 
+  поступить и более просто — использовать стандартный диалог обработки удаленных 
+  ошибок (рис. 22.4). Этот диалог можно подключить к вашему проекту (он содержится 
+  в модуле \ObjRepos\RecError.pas) и вызвать при помощи процедуры: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function HandleReconcileError(DataSet: 
+    TDataSet; UpdateKind: TUpdateKind; ReconcileError: EReconcileError): TReconcileAction;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В параметры этой функции подставляются параметры 
+  метода-обработчика <font face="Verdana" size="2">OnReconciieError</font>, а 
+  возвращает данная функция действие, выбранное пользователем в диалоге (см. рис. 
+  22.4). Таким образом, ее использование очень просто: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.ClientDataSetReconcileError(DataSet: 
+    TCustomClientDataSet;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> E: EReconcileError; 
+    UpdateKind: TUpdateKind;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var Action: 
+    TReconcileAction);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Action := HandleReconcileError(DataSet, 
+    UpdateKind, E) ; end;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index17.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index19.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

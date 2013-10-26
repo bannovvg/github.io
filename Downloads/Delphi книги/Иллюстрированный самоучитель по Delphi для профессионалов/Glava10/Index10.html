@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  Tlcon</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот класс инкапсулирует значок Windows.
+</font ></P>
+<P><font face="Verdana" size="3">
+Не пытайтесь изменить размеры значка — они по определению постоянны
+(и равны <font face="Verdana" size="2">GetSystemMetrics(SM_CXICON)</font> И<font face="Verdana" size="2">
+GetSystemMetrics(SM_CYICON)</font>) , и при попытке присвоить новые значения возникает исключительная ситуация
+<font face="Verdana" size="2">EinvaiidGraphicOperation</font>. Значок нельзя также читать и писать в буфер обмена, т. к. в Windows нет соответствующего формата.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> Transparent</font> для значка всегда равно значению
+<font face="Verdana" size="2">True</font>. Изменить его нельзя — значки прозрачны также по определению.
+</font ></P>
+<P><font face="Verdana" size="3">
+В этом классе перекрываются методы класса<font face="Verdana" size="2">
+TGraphic: Assign, LoadFromStream</font> и <font face="Verdana" size="2">SaveToStream</font>. Дополнительно также определены:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property Handle: HICON</font>; <B>— 
+    </B> <font size="3" face="Verdana, Arial, Helvetica, sans-serif">дескриптор 
+    значка</font><B>;</B> </li>
+  <li>&nbsp;<font face="Verdana" size="2">function ReieaseHandie: HICON;</font> 
+    — <font size="3" face="Verdana, Arial, Helvetica, sans-serif">метод &quot;отдает&quot; 
+    дескриптор— возвращает его значение, обнуляя ссылку на него в объекте.</font></li>
+</ul>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

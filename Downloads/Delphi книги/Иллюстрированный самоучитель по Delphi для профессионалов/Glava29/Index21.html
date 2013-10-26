@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index22.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Как избежать одновременного запуска двух копий одного приложения</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Такая задача возникает очень часто. Многие, особенно начинающие, пользователи не вполне понимают, что между щелчком по значку приложения и его запуском может пройти несколько секунд, а то и десятков секунд. Они начинают щелкать по значку, запуская все новые копии. Между тем, при работе с базами данных и во многих других случаях иметь более одной копии не только не нужно, но и вредно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Идея заключается в том, чтобы первая создаваемая копия приложения захватывала некий, ресурс, а все последующие при запуске пытались сделать то же самое и в случае неудачи
+завершались.
+</font ></P>
+<P><font face="Verdana" size="3">
+Пример такого ресурса — общий блок в файле, отображаемом в память. Поскольку этот ресурс имеет имя, можно сделать его уникальным именно для вашего приложения:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var UniqueMapping : THandle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FirstWindow : THandle</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">; begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+UniqueMapping := CreateFileMapping($ffffffff,&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">nil, PAGE_READONLY, 0, 32,'MyMap');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if UniqueMapping = 0 then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ShowMessage(SysErrorMessage(GetLastError));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Halt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+else if GetLastError = ERROR_ALREADY_EXISTS then&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FirstWindow := FindWindowEx(0, 0, TfmMain.ClassName, nil);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if FirstWindowoO then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SetForegroundWindow(FirstWindow};</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Halt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+// Нет других копий — продолжение Application.Initialize;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Примерно такие строки нужно вставить в начало текста проекта до создания форм. Блок совместно используемой памяти выделяется в системном страничном файле (об этом говорит первый параметр, равный -1, см. описание функции
+<font face="Verdana" size="2">CreateFileMapping</font>). Его имя — <font face="Verdana" size="2"> муМар</font>. Если при создании блока будет получен код ошибки
+<font face="Verdana" size="2">ERROR_ALREADY__EXISTS</font>, это свидетельствует о наличии работающей копии приложения. В этом случае приложение переключает фокус на главную форму другого экземпляра и завершается; в противном случае процесс инициализации продолжается.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index22.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

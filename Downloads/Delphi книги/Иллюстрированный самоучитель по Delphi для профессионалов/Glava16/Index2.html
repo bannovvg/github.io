@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Архитектура и функции BDE</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+BDE представляет собой набор динамических библиотек, которые &quot;умеют&quot; передавать запросы на получение или модификацию данных из приложения в нужную базу данных и возвращать результат обработки. В процессе работы библиотеки используют вспомогательные файлы языковой поддержки и информацию о настройках среды.
+</font ></P>
+<P><font face="Verdana" size="3">
+В составе BDE поставляются стандартные драйверы, обеспечивающие доступ к СУБД Paradox, dBASE, FoxPro и текстовым файлам. Локальные драйверы (рис. 16.1) устанавливаются автоматически совместно с ядром процессора. Один из них можно выбрать в качестве стандартного драйвера, который имеет дополнительные настройки, влияющие на функционирование процессора БД.
+</font ></P>
+<p align="center"><p align="center">
+<div align="center"><IMG src="gl.16.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 16.1. </B>Структура процессора 
+  баз данных ВОЕ </font ></P>
+<P><font face="Verdana" size="3"> Доступ к данным серверов SQL обеспечивает отдельная 
+  система драйверов — SQL Links. С их помощью в Delphi можно без особых проблем 
+  разрабатывать приложения для серверов Oracle 8, Informix, Sybase, DB2 и, естественно, 
+  InterBase. Эти драйверы необходимо устанавливать дополнительно. </font ></P>
+<P><font face="Verdana" size="3"> Помимо этого, в BDE имеется очень простой механизм 
+  подключения любых драйверов ODBC (к примеру, Microsoft Access) и создания на 
+  их основе сокетов ODBC. </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание&nbsp;</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> С точки зрения пользователя процесс подключения 
+    локального драйвера и драйвера SQL Links практически не отличается, за исключением 
+    деталей настройки. Настройка драйверов и собственных параметров BDE осуществляется 
+    при помощи специальной утилиты — BDE Administrator и рассматривается далее 
+    в этой главе. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В состав BDE входят следующие функциональные 
+  подсистемы. </font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Администратор 
+    системных ресурсов управляет процессом подключения к данным — при необходимости 
+    устанавливает нужные драйверы, а при завершении работы автоматически освобождает 
+    занятые ресурсы. Поэтому BDE всегда использует ровно столько ресурсов, сколько 
+    необходимо.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Система 
+    обработки запросов обеспечивает выполнение запросов SQL или QBE от приложения 
+    к любым базам данных, для которых установлен драйвер, даже если сама СУБД 
+    не поддерживает прямое использование запросов SQL.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Система 
+    сортировки является запатентованной технологией и обеспечивает очень быстрый 
+    поиск по запросам SQL и через стандартные драйверы аля Paradox и dBASE.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Система 
+    пакетной обработки представляет собой механизм преобразования данных из одного 
+    формата в другой при выполнении операций над целыми таблицами. Эта система 
+    использована в качестве основы для компонента TBatcMove и утилиты DataPump 
+    (автоматического переноса структур данных между базами данных), входящей в 
+    стандартную поставку BDE.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Менеджер 
+    буфера управляет единой для всех драйверов буферной областью памяти, которую 
+    одновременно могут использовать несколько драйверов. Это позволяет существенно 
+    экономить системные ресурсы.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Менеджер 
+    памяти взаимодействует с ОС и обеспечивает эффективное использование выделяемой 
+    памяти. Ускоряет работу драйверов, которые для получения небольших фрагментов 
+    памяти обращаются к нему, а не к ОС. Дело в том, что менеджер памяти выделяет 
+    большие объемы оперативной памяти и затем распределяет ее небольшими кусками 
+    между драйверами согласно их потребностям.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">Транслятор данных 
+    обеспечивает преобразование форматов данных для различных типов БД.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Кэш BLOB 
+    используется для ускорения работы с данными в формате BLOB.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;SQL-генератор 
+    транслирует запросы в формате QBE в запросы SQL.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Система 
+    реструктуризации обеспечивает преобразование наборов данных в таблицы Paradox 
+    или dBASE.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Система 
+    поддержки драйверов SQL повышает эффективность механизма поиска при выполнении 
+    запросов SQL.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Таблицы 
+    в памяти. Этот механизм позволяет создавать таблицы непосредственно в оперативной 
+    памяти. Используется для ускорения обработки больших массивов данных, сортировки, 
+    преобразования форматов данных.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Связанные 
+    курсоры обеспечивают низкоуровневое выполнение межтабличных соединений. Позволяют 
+    разработчику не задумываться над реализацией подобных связей при работе на 
+    уровне VCL — для этого достаточно установить значения нескольких свойств.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Менеджер 
+    конфигурации обеспечивает разработчику доступ к информации о конфигурации 
+    драйверов.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Перечисленные функции реализованы в динамических 
+  библиотеках, которые, собственно, и называются процессором БД (табл. 16.1). 
+  </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 16.1. </B>Ядро процессора 
+  баз данных ВОЕ 5 </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="442" HEIGHT="666">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="33"> <DIV WIDTH="152" HEIGHT="33" style="width: 87; height: 33"> 
+        <P><font face="Verdana" size="3"> <b> Имя файла</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="33"> <DIV WIDTH="494" HEIGHT="33" style="width: 266; height: 33"> 
+        <P><font face="Verdana" size="3"> <b> Назначение</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="27"> 
+      <DIV WIDTH="152" HEIGHT="27" style="width: 69; height: 27"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDAPI32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="27"> 
+      <DIV WIDTH="494" HEIGHT="27" style="width: 306; height: 27"> 
+        <P><font face="Verdana" size="3"> Базовая динамическая библиотека ВОЕ 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="46"> 
+      <DIV WIDTH="152" HEIGHT="46" style="width: 47; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDPROV.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="46"> 
+      <DIV WIDTH="494" HEIGHT="46" style="width: 348; height: 46"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, отвечающая 
+          за работу серверной части приложения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="54"> 
+      <DIV WIDTH="152" HEIGHT="54" style="width: 45; height: 54"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> BLW32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="54"> 
+      <DIV WIDTH="494" HEIGHT="54" style="width: 339; height: 54"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, обеспечивающая 
+          поддержку драйверов национальных языков </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="48"> 
+      <DIV WIDTH="152" HEIGHT="48" style="width: 64; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDBAT32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="48"> 
+      <DIV WIDTH="494" HEIGHT="48" style="width: 301; height: 48"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека с функциями 
+          межтабличного переноса данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="40"> 
+      <DIV WIDTH="152" HEIGHT="40" style="width: 57; height: 40"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDQBE32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="40"> 
+      <DIV WIDTH="494" HEIGHT="40" style="width: 362; height: 40"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, обеспечивающая 
+          работу запросов по примеру (Query By Example, QBE) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="52"> 
+      <DIV WIDTH="152" HEIGHT="52" style="width: 58; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDSQL32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="52"> 
+      <DIV WIDTH="494" HEIGHT="52" style="width: 332; height: 52"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, обеспечивающая 
+          обработку запросов SQL </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="46"> 
+      <DIV WIDTH="152" HEIGHT="46" style="width: 69; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDASCI32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="46"> 
+      <DIV WIDTH="494" HEIGHT="46" style="width: 330; height: 46"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, обеспечивающая 
+          работу драйвера текстовых файлов </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="50"> 
+      <DIV WIDTH="152" HEIGHT="50" style="width: 35; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDPDX32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="50"> 
+      <DIV WIDTH="494" HEIGHT="50" style="width: 334; height: 50"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, обеспечивающая 
+          работу драйвера Paradox </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="50"> 
+      <DIV WIDTH="152" HEIGHT="50" style="width: 28; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDDBAS32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="50"> 
+      <DIV WIDTH="494" HEIGHT="50" style="width: 328; height: 50"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, обеспечивающая 
+          работу драйвера dBASE </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="40"> 
+      <DIV WIDTH="152" HEIGHT="40" style="width: 88; height: 40"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DODBC32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="40"> 
+      <DIV WIDTH="494" HEIGHT="40" style="width: 336; height: 40"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, обеспечивающая 
+          работу драйвера сокета ODBC </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="50"> 
+      <DIV WIDTH="152" HEIGHT="50" style="width: 31; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDR20009.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="50"> 
+      <DIV WIDTH="494" HEIGHT="50" style="width: 361; height: 50"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека ресурсов, содержащая 
+          сообщения об ошибках </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="46"> 
+      <DIV WIDTH="152" HEIGHT="46" style="width: 91; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDDA032.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="46"> 
+      <DIV WIDTH="494" HEIGHT="46" style="width: 362; height: 46"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, обеспечивающая 
+          работу драйверов Microsoft Access 95 и Jet Engine 3.0 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="52"> 
+      <DIV WIDTH="152" HEIGHT="52" style="width: 97; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDDA3532.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="52"> 
+      <DIV WIDTH="494" HEIGHT="52" style="width: 359; height: 52"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека, обеспечивающая 
+          работу драйверов Microsoft Access 97 и Jet Engine 3.5 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="97" HEIGHT="31"> 
+      <DIV WIDTH="152" HEIGHT="31" style="width: 83; height: 31"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IDDR32.DLL</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="423" HEIGHT="31"> 
+      <DIV WIDTH="494" HEIGHT="31" style="width: 345; height: 36"> 
+        <P><font face="Verdana" size="3"> Динамическая библиотека для работы с 
+          Репозиторием данных </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> Кроме этого имеется шесть дополнительных DLL, 
+  обеспечивающих работу BDE с серверами Oracle и Microsoft SQL Server. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index1.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

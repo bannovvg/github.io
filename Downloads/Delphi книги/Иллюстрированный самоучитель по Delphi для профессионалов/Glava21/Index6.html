@@ -1,0 +1,328 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Удаленный 
+  модуль данных для сервера Автоматизации</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания удаленного модуля данных <font face="Verdana" size="2">TRemoteDataModule</font> используется Репозиторий Delphi (команда <B>File | New | Other). </B>Значок класса TRemoteDataModuie находится на странице <B>Multitier </B>(см. рис. 20.3). Перед созданием экземпляра удаленного модуля данных появляется диалоговое окно (рис. 21.1), в котором необходимо предустановить три параметра.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.21.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис 21.1. </B>Мастер создания 
+  удаленного модуля данных <font face="Verdana" size="2">TRemoteDataModule</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Строка <B>CoClass Name </B>должна содержать 
+  имя нового модуля данных, которое будет также использовано для именования нового 
+  класса, создаваемого для поддержки нового модуля данных. </font ></P>
+<P><font face="Verdana" size="3"> Список <B>Instancing </B>позволяет задать способ 
+  создания модуля данных. </font ></P>
+<ul>
+  <li> <B><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Internal 
+    </font></B><font size="3" face="Verdana, Arial, Helvetica, sans-serif">— модуль 
+    данных обеспечивает функционирование лишь внутреннего сервера Автоматизации.</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Single 
+    Instance </B>— для каждого клиентского соединения создается собственный экземпляр 
+    удаленного сервера Автоматизации в собственном процессе.</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Multiple 
+    Instance </B>— для каждого клиентского соединения создается собственный экземпляр 
+    удаленного сервера Автоматизации в одном общем процессе.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Список <B>Threading Model </B>задает механизм 
+  обработки запросов клиентов. </font ></P>
+<ul>
+  <li> <B>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Single 
+    </font></B><font size="3" face="Verdana, Arial, Helvetica, sans-serif">— поток 
+    запросов клиентов обрабатывается строго последовательно.</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Apartment 
+    </B>— модуль данных одновременно обрабатывает один запрос. Однако если DLL 
+    для выполнения запросов создает экземпляры СОМ объектов, то для запросов могут 
+    создаваться отдельные нити, в которых обработка ведется параллельно.</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Free 
+    </B>— модуль данных может создавать нити для параллельного выполнения запросов.</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Both 
+    </B>— аналогична модели Free, за исключением того, что все ответы клиентам 
+    возвращаются строго один за другим.</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Neutral 
+    </B>— запросы клиентов могут направляться модулям данных в нескольких нитях 
+    одновременно. Используется только для технологии СОМ+.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> При создании нового удаленного модуля данных 
+  создается специальный класс — наследник класса <font face="Verdana" size="2">TRemoteDataModule</font>. 
+  И фабрика класса на основе класса <font face="Verdana" size="2"> TComponentFactory</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Класс <font face="Verdana" size="2"> TComponentFactory</font> 
+    представляет собой фабрику класса для компонентов Delphi, инкапсулирующих 
+    интерфейсы. Поддерживает интерфейс IClass Factory. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Создадим, например, удаленный модуль данных 
+  <font face="Verdana" size="2">simpleRDM</font>. В мастере создания модуля данных 
+  в качестве способа создания выберем <B>Single Instance, a Free </B>— как модель 
+  обработки запросов. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 21.1. </B> Исходный 
+  код нового удаленного модуля данных и его фабрики класса&nbsp; </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TSimpleRDM 
+    = class(TRemoteDataModuie, ISimpleRDM)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">private</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ( Private declarations 
+    }</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;protected</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> class procedure 
+    UpdateRegistry(Register: Boolean;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> const Classic,</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ProgID: string);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">override;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;public</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> { Public declarations 
+    }&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> implementation&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">{$R *.DFM}</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> class procedure 
+    TSimpleRDM.UpdateRegistry(Register: Boolean;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> const</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ClassID, ProgID: 
+    string);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Register 
+    then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> inherited UpdateRegistry(Register, 
+    Classic, ProgID);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EnableSocketTransport(ClassID);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EnableWebTransport(ClassID);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;else</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DisableSocketTransport(ClassID);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DisableWebTransport(ClassID);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> inherited UpdateRegistry(Register, 
+    ClassID, ProgID);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> initialization</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TComponentFactory.Create(ComServer, 
+    TSimpleRDM,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Class_SimpleRDM, 
+    ciMultilnstance, tmApartment);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Обратите внимание, что параметры модуля данных, 
+  заданные при создании, использованы в фабрике класса <B> </B><font face="Verdana" size="2">TComponentFactory</font> 
+  в секции<B> </B><font face="Verdana" size="2">initialization</font>. </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание&nbsp;</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Фабрика класса <font face="Verdana" size="2"> 
+    TComponentFactory</font> обеспечивает создание экземпляров компонентов Delphi, 
+    поддерживающих использование интерфейсов. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Метод класса <font face="Verdana" size="2"> 
+  UpdateRegistry</font> создается автоматически и обеспечивает регистрацию и аннулирование 
+  регистрации сервера Автоматизации. Если параметр <font face="Verdana" size="2"> 
+  Register</font> имеет значение <font face="Verdana" size="2">True</font>, выполняется 
+  регистрация, иначе — отмена регистрации. </font ></P>
+<P><font face="Verdana" size="3"> Разработчик не должен использовать этот метод, 
+  т. к. его вызов осуществляется автоматически. </font ></P>
+<P><font face="Verdana" size="3"> Одновременно с модулем данных создается и его 
+  интерфейс — потомок интерфейса <font face="Verdana" size="2">I</font><font face="Verdana" size="2">AppServer</font>. 
+  Его исходный код содержится в библиотеке типов проекта сервера приложения. Для 
+  удаленного модуля данных <font face="Verdana" size="2">simpleRDM</font> созданный 
+  интерфейс <font face="Verdana" size="2">isimpleRDM</font> представлен в листинге 
+  21.2. Для удобства из листинга удалены автоматически добавляемые комментарии. 
+  </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Листинг 21.2. </B> Вновь созданная 
+  библиотека типов для сервера приложения с исходным кодом интерфейса удаленного 
+  модуля данных&nbsp; </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">LIBID_SimpleAppSrvr: 
+    TGUID='(93577575-OF4F-43B5-9FBE-A5745128D9A4}';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">IID_ISimpleRDM: 
+    TGUID = '{Е2СВЕВСВ-1950-4054-В823-62906306Е840}'; CLASS_SimpleRDM: TGUID = 
+    '{DB6A6463-5F61-485F-8F23-EC6622091908}' ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ISimpleRDM 
+    = interface;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ISimpleRDMDisp 
+    = dispinterface;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SimpleRDM = 
+    ISimpleRDM;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ISimpleRDM 
+    = interface(lAppServer)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ['{E2CBEBCB-1950-4054-B823-62906306E840}']&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ISimpleRDMDisp 
+    = dispinterface</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ['{E2CBEBCB-1950-4054-B823-62906306E840}']</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function AS_ApplyUpdates(const 
+    ProviderName: WideString; Delta: OleVariant; MaxErrors: Integer; out ErrorCount: 
+    Integer; var OwnerData: OleVariant): OleVariant; dispid 20000000; function 
+    AS_GetRecords(const ProviderName: WideString; Count: Integer; out RecsOut: 
+    Integer; Options: Integer; const CommandText: WideString; var Params: OleVariant; 
+    var OwnerData: OleVariant): OleVariant; dispid 20000001;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function AS_DataRequest(const 
+    ProviderName: WideString; Data: OleVariant): OleVariant; dispid 20000002;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function AS_GetProviderNames: 
+    OleVariant; dispid 20000003;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function AS_GetParams(const 
+    ProviderName: WideString;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var OwnerData: 
+    OleVariant): OleVariant; dispid 20000004;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function AS_RowRequest(const 
+    ProviderName: WideString; Row: OleVariant; RequestType: Integer; var OwnerData: 
+    OleVariant): OleVariant; dispid 20000005;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure AS_Execute(const 
+    ProviderName: WideString; const CommandText: WideString; var Params: OleVariant; 
+    var OwnerData: OleVariant);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> dispid 20000006;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CoSimpleRDM 
+    = class</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> class function 
+    Create: ISimpleRDM;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> class function 
+    CreateRemote(const MachineName: string): ISimpleRDM;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> imp1ementation 
+    uses ComObj;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> class function 
+    CoSimpleRDM.Create: ISimpleRDM;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Result := CreateComObject(CLASS_SimpleRDM) 
+    as ISimpleRDM;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> class function 
+    CoSimpleRDM.CreateRemote(const MachineName: string): ISimpleRDM;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Result := CreateRemoteComObject(MachineName, 
+    CLASS_SimpleRDM)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> as ISimpleRDM;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Обратите внимание, что интерфейс <font face="Verdana" size="2"> 
+  ISimpleRDM</font> является потомком интерфейса <font face="Verdana" size="2">IAppServer</font>, 
+  рассмотренного выше. </font ></P>
+<P><font face="Verdana" size="3"> Так как удаленный модуль данных реализует сервер 
+  Автоматизации, дополнительно к основному дуальному интерфейсу <font face="Verdana" size="2"> 
+  ISimpleRDM</font> автоматически создан интерфейс диспетчеризации <font face="Verdana" size="2">isimpleRDMDisp</font>. 
+  При этом для интерфейса диспетчеризации созданы методы, соответствующие методам 
+  интерфейса <font face="Verdana" size="2">IAppServer</font>. </font ></P>
+<P><font face="Verdana" size="3"> Класс <font face="Verdana" size="2">coSimpleRDM</font> 
+  обеспечивает создание СОМ-объектов, поддерживающих использование интерфейса. 
+  Для него автоматически созданы два метода класса. </font ></P>
+<P><font face="Verdana" size="3"> Метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> class function 
+    Create: ISimpleRDM;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> используется при работе с локальным и внутренним 
+  сервером (in process). </font ></P>
+<P><font face="Verdana" size="3"> Метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> class function 
+    CreateRemote(const MachineName: string): ISimpleRDM;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> используется в удаленном сервере. </font ></P>
+<P><font face="Verdana" size="3"> Оба метода возвращают ссылку на интерфейс <font face="Verdana" size="2">ISimpleRDM</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Теперь, если проект с созданным модулем данных 
+  сохранить и зарегистрировать, он станет доступен в удаленных клиентских приложениях 
+  как сервер приложения. </font ></P>
+<P><font face="Verdana" size="3"> После создания удаленный модуль данных становится 
+  платформой для размещения компонентов доступа к данным и компонентов провайдеров 
+  (см. гл. 20), которые, наряду с модулем данных, реализуют основные функции сервера 
+  приложения. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

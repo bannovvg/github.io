@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index22.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Наборы 
+  данных клиентского приложения</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Каждый из компонентов <font face="Verdana" size="2">TClientDataSet</font> модуля данных
+<font face="Verdana" size="2"> DataModuie</font> связан с соответствующим компонентом-провайдером сервера.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> cdsorders</font> предназначен для просмотра данных о заказах. Вспомогательные компоненты
+<font face="Verdana" size="2"> cdsEmpioyees</font> и <font face="Verdana" size="2"> cdsCustomers</font> содержат списки заказчиков и работников, используемые в главном наборе данных. В компоненте
+<font face="Verdana" size="2"> cdsorders</font> определено агрегатное поле
+<font face="Verdana" size="2">Paidsum</font>, рассчитывающее сумму платежей по всем заказам.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> cdsParts</font> предназначен для просмотра и редактирования данных о поступлениях. Компонент
+<font face="Verdana" size="2"> cdsvendors</font> представляет список поставщиков. Так как в сервере приложения связанный с
+<font face="Verdana" size="2"> cdsvendors</font> набор данных является главным в отношении &quot;один-ко-многим&quot;. то одновременно с обычными полями для компонента
+<font face="Verdana" size="2"> cdsvendors</font> автоматически создается поле
+<font face="Verdana" size="2"> tbiParts</font> типа <font face="Verdana" size="2">TDataSetField</font>. Это поле позволяет настроить вложенный набор данных. Для этого достаточно в свойстве
+<font face="Verdana" size="2">DataSetField</font> вложенного компонента
+<font face="Verdana" size="2"> cdsParts</font> задать поле <font face="Verdana" size="2">tbiParts</font>. Теперь при перемещении по записям главного набора данных
+<font face="Verdana" size="2"> cdsvendors</font> вложенный набор данных компонента
+<font face="Verdana" size="2"> cdsParts</font> будет отображать записи, связанные с текущим поставщиком.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> В целях сохранения простоты и наглядности 
+    исходного кода редактирование предусмотрено только для одного компонента <font face="Verdana" size="2">cdsParts</font>. 
+    В реальной работе аналогичные методы могут использоваться для всех наборов 
+    данных. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для компонента <font face="Verdana" size="2"> cdsParts</font> созданы два агрегата, суммирующие данные о поступлениях и продажах. При перемещении по записям этого набора данных в методе-обработчике
+<font face="Verdana" size="2">AfterScroll</font> предусмотрено обновление значений агрегатов (см. листинг 22.1).
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как компонент <font face="Verdana" size="2"> cdsParts</font> предназначен и для редактирования данных, то для него необходимо предусмотреть обработку исключительных ситуаций, возникающих не только на клиенте, но и на сервере. Для этого используется метод-обработчик
+<font face="Verdana" size="2">cdsPartsReconclieError</font> (см. листинг 22.1). Сама операция очень проста и скорее служит лишь демонстрацией возможности создавать собственную обработку серверных исключений вместо использования стандартной функции
+<font face="Verdana" size="2">HandleReconclieError</font> (см. рис. 22.4). Здесь все изменения в проблемных записях отменяются методом
+<font face="Verdana" size="2">cancelupdates</font> и выводится сообщение об ошибке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Локальное редактирование, сохранение или отмена изменений для компонента
+<font face="Verdana" size="2"> cdsParts</font> выполняется стандартными методами набора данных (см. гл. 12).
+Дополнительно при отмене изменений используется метод
+<font face="Verdana" size="2">undoLastchange</font>, позволяющий полностью восстановить последнюю модифицированную запись даже после локального сохранения изменений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для передачи изменений серверу использован метод
+<font face="Verdana" size="2">ApllyUpdates</font>. Параметр -1 означает, что клиенту будет возвращено сообщение о первой же ошибке.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index22.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

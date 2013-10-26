@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Список 
+  описаний индексов</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Информация об индексах набора данных содержится в свойстве класса
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDataSet</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexDefs: TindexDefs;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В нем для каждого индекса создается структура
+<font face="Verdana" size="2">TindexDef</font>. Доступ к информации об индексах осуществляется через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Items[Index: Integer]: TindexDef; default;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+являющееся списком объектов <font face="Verdana" size="2">TindexDef</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Объекты типа <font face="Verdana" size="2"> TindexDef</font> можно добавлять в список при помощи метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AddlndexDef: TindexDef;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Поиск объекта описания индекса осуществляет метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Find(const Name: String): TindexDef;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который возвращает найденный объект по заданному в параметре
+<font face="Verdana" size="2"> Name</font> имени индекса.
+</font ></P>
+<P><font face="Verdana" size="3">
+Пара методов
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FindlndexForFields(const Fields: string): TindexDef;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetlndexForFields(const Fields: String;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Caselnsensitive: Boolean): TindexDef;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+находит объект описания индекса по списку полей, входящих в индекс. Если индекс не найден, ищется первый индекс, начинающийся с указанных полей. Первый из этих двух методов в случае неудачного поиска генерирует исключительную ситуацию
+<font face="Verdana" size="2">EDatabaseError</font>, а второй возвращает
+<font face="Verdana" size="2">nil</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Список <font face="Verdana" size="2"> IndexDefs</font> обновляется автоматически при открытии набора данных. Но метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Update;   reintroduce;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+обновляет список описаний индексов без открытия набора данных.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

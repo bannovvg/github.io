@@ -1,0 +1,453 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Состояния набора данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В процессе своего функционирования (от открытия методом
+<font face="Verdana" size="2"> Open</font> и до закрытия методом
+<font face="Verdana" size="2">close</font>) набор данных может выполнять самые разнообразные операции. Можно просто перемещаться по записям, можно редактировать данные и удалять записи, можно проводить поиск по различным параметрам и т. д. При этом желательно, чтобы все операции выполнялись как можно быстрее и эффективнее.
+</font ></P>
+<P><font face="Verdana" size="3">
+Набор данных в любой момент времени находится в некотором состоянии, т. е. подготовлен к выполнению действий строго определенного рода. И для каждой группы операций набор данных выполняет ряд подготовительных действий.
+</font ></P>
+<P><font face="Verdana" size="3">
+Все состояния набора данных делятся на две группы.
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;К первой группе относятся состояния, в которые набор 
+    данных переходит автоматически, а также непродолжительные по времени состояния, 
+    сопровождающие функционирование полей набора данных (табл. 12.1).</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Во вторую группу входят состояния, которыми можно управлять 
+    из приложения, например, перевод набора данных в режим редактирования (табл. 
+    12.2).</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Базовый класс <font face="Verdana" size="2">TDataSet</font>, инкапсулирующий свойства набора данных, позволяет изменять состояние, а также проверять текущее состояние набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Текущее состояние набора данных передается в свойство
+<font face="Verdana" size="2">state</font>, имеющее тип
+TDataSetState:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDataSetState = (dslnactive, dsBrowse, dsEdit, dslnsert, dsSetKey, dsCalcFields, dsFilter, dsNewValue, dsOldValue, dsCurValue, dsBlockRead, dsInternalCalc);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для управления состояниями набора данных используются методы<font face="Verdana" size="2">
+open, Close, Edit, Insert.</font>
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 12.1. </B>Автоматические 
+  состояния набора данных </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="511" HEIGHT="430">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="114" HEIGHT="27">
+<DIV WIDTH="179" HEIGHT="27" style="width: 85; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Константа состояния</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="27">
+<DIV WIDTH="490" HEIGHT="27" style="width: 90; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="114" HEIGHT="54">
+<DIV WIDTH="179" HEIGHT="54" style="width: 83; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsNewValue</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="54">
+<DIV WIDTH="490" HEIGHT="54" style="width: 341; height: 54">
+<P><font face="Verdana" size="3">
+Включается при обращении к свойству <font face="Verdana" size="2"> NewValue</font> поля набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="114" HEIGHT="54">
+<DIV WIDTH="179" HEIGHT="54" style="width: 80; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsOldValue</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="54">
+<DIV WIDTH="490" HEIGHT="54" style="width: 340; height: 54">
+<P><font face="Verdana" size="3">
+Включается при обращении к свойству <font face="Verdana" size="2"> OldValue</font> поля набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="114" HEIGHT="58">
+<DIV WIDTH="179" HEIGHT="58" style="width: 67; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsCurValue</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="58">
+<DIV WIDTH="490" HEIGHT="58" style="width: 341; height: 58">
+<P><font face="Verdana" size="3">
+Включается при обращении к свойству <font face="Verdana" size="2"> CurValue</font> поля набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="114" HEIGHT="54">
+<DIV WIDTH="179" HEIGHT="54" style="width: 86; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsInternalCalc</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="54">
+<DIV WIDTH="490" HEIGHT="54" style="width: 317; height: 57">
+<P><font face="Verdana" size="3">
+Включается при расчете значений полей, для которых
+<font face="Verdana" size="2">FindKind = fklnternalCalc</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="114" HEIGHT="25">
+<DIV WIDTH="179" HEIGHT="25" style="width: 27; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsCalcFields</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="25">
+<DIV WIDTH="490" HEIGHT="25" style="width: 356; height: 25">
+<P><font face="Verdana" size="3">
+Включается при выполнении метода <font face="Verdana" size="2"> onCalcFields</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="114" HEIGHT="58">
+<DIV WIDTH="179" HEIGHT="58" style="width: 74; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsBlockRead</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="58">
+<DIV WIDTH="490" HEIGHT="58" style="width: 338; height: 58">
+<P><font face="Verdana" size="3">
+Включается механизм ускоренного перемещения по набору данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="114" HEIGHT="52">
+<DIV WIDTH="179" HEIGHT="52" style="width: 46; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsOpening</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="52">
+<DIV WIDTH="490" HEIGHT="52" style="width: 354; height: 52">
+<P><font face="Verdana" size="3">
+Существует при открытии набора данных методом
+<font face="Verdana" size="2"> Open</font> или свойством <font face="Verdana" size="2"> Active</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="114" HEIGHT="50">
+<DIV WIDTH="179" HEIGHT="50" style="width: 33; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsFilter</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="50">
+<DIV WIDTH="490" HEIGHT="50" style="width: 267; height: 50">
+<P><font face="Verdana" size="3">
+Включается при выполнении метода <font face="Verdana" size="2"> OnFilterRecord</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 12.2. </B>Управляемые 
+  состояния набора данных </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="514" HEIGHT="233">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="98" HEIGHT="35">
+<DIV WIDTH="179" HEIGHT="35" style="width: 87; height: 35">
+<P><font face="Verdana" size="3">
+<b>
+Константа состояния</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="62" HEIGHT="35">
+<DIV WIDTH="71" HEIGHT="35">
+<P><font face="Verdana" size="3">
+<b>
+Метод</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="346" HEIGHT="35">
+<DIV WIDTH="373" HEIGHT="35" style="width: 180; height: 35">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="98" HEIGHT="27">
+<DIV WIDTH="179" HEIGHT="27" style="width: 67; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dslnactive</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="62" HEIGHT="27">
+<DIV WIDTH="71" HEIGHT="27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Close</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="346" HEIGHT="27">
+<DIV WIDTH="373" HEIGHT="27" style="width: 166; height: 27">
+<P><font face="Verdana" size="3">
+Набор данных закрыт
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="98" HEIGHT="50">
+<DIV WIDTH="179" HEIGHT="50" style="width: 42; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsBrowse</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="62" HEIGHT="50">
+<DIV WIDTH="71" HEIGHT="50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Open</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="346" HEIGHT="50">
+<DIV WIDTH="373" HEIGHT="50" style="width: 261; height: 50">
+<P><font face="Verdana" size="3">
+Данные доступны для просмотра, но недоступны для редактирования
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="98" HEIGHT="33">
+<DIV WIDTH="179" HEIGHT="33" style="width: 32; height: 33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsEdit</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="62" HEIGHT="33">
+<DIV WIDTH="71" HEIGHT="33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Edit</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="346" HEIGHT="33">
+<DIV WIDTH="373" HEIGHT="33" style="width: 217; height: 33">
+<P><font face="Verdana" size="3">
+Данные можно редактировать
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="98" HEIGHT="23">
+<DIV WIDTH="179" HEIGHT="23" style="width: 60; height: 23">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dslnsert</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="62" HEIGHT="23">
+<DIV WIDTH="71" HEIGHT="23">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Insert</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="346" HEIGHT="23">
+<DIV WIDTH="373" HEIGHT="23" style="width: 346; height: 23">
+<P><font face="Verdana" size="3">
+К набору данных можно добавлять новые записи
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="98" HEIGHT="66">
+<DIV WIDTH="179" HEIGHT="66" style="width: 50; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+dsSetKey</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="62" HEIGHT="66">
+<DIV WIDTH="71" HEIGHT="66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SetKey</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="346" HEIGHT="66">
+<DIV WIDTH="373" HEIGHT="66" style="width: 324; height: 66">
+<P><font face="Verdana" size="3">
+Включается механизм поиска по ключу. Также могут использоваться диапазоны
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Рассмотрим, как изменяется состояние набора данных при выполнении
+стандартных операций.
+</font ></P>
+<P><font face="Verdana" size="3">
+Закрытый набор данных всегда имеет неактивное состояние
+<font face="Verdana" size="2">dsinactive</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При открытии набор данных переходит в состояние просмотра данных
+<font face="Verdana" size="2">dsBrowse</font>. В этом состоянии по записям набора данных можно перемещаться и просматривать их содержимое, но редактировать данные нельзя. Это основное состояние открытого набора данных, из него можно перейти в другие состояния, но любое изменение состояния происходит через просмотр данных (рис. 12.4).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.12.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 12.4. </B>Схема изменения 
+  состояний набора данных </font ></P>
+<P><font face="Verdana" size="3"> При необходимости редактирования данных набор 
+  должен быть переведен в состояние редактирования <font face="Verdana" size="2">dsEdit</font>, 
+  для этого используется метод <font face="Verdana" size="2">Edit</font>. После 
+  выполнения метода можно изменять значения полей для текущей записи. При перемещении 
+  на следующую запись набор данных автоматически переходит в состояние просмотра. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Для того чтобы вставить в набор данных новую 
+  запись, необходимо использовать состояние вставки <font face="Verdana" size="2">dsinsert</font>. 
+  Метод <font face="Verdana" size="2"> insert</font> переводит набор данных в 
+  это состояние и добавляет на месте текущего курсора новую пустую запись. При 
+  переходе на другую запись, после проверки на уникальность первичного ключа (если 
+  он есть) набор данных возвращается в состояние просмотра. </font ></P>
+<P><font face="Verdana" size="3"> Состояние установки ключа <font face="Verdana" size="2"> 
+  dsSetKey</font> используется только в табличных компонентах при необходимости 
+  поиска методами <font face="Verdana" size="2"> FindKey</font> и <font face="Verdana" size="2">FindNext</font>, 
+  а также при использовании диапазонов (метод <font face="Verdana" size="2">setRange</font>). 
+  Это состояние сохраняется до момента вызова одного из методов поиска по ключу 
+  или метода отмены диапазона. После этого набор данных возвращается в состояние 
+  просмотра. </font ></P>
+<P><font face="Verdana" size="3"> Состояние просмотра по блокам <font face="Verdana" size="2">dsBlockRead</font> 
+  используется набором данных при реализации быстрого перемещения по большим массивам 
+  записей без показа промежуточных записей в компонентах отображения данных и 
+  без вызова обработчика события перемещения по записям. Для реализации быстрого 
+  перемещения по набору данных можно использовать методы <font face="Verdana" size="2"> 
+  DisableControls</font> И <font face="Verdana" size="2">EnableControls</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index14.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index16.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

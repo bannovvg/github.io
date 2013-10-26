@@ -1,0 +1,247 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<style type="text/css">
+table{border-collapse:collapse}
+td{padding:0}
+img{border:0;margin:0}
+.win_t{background: #FFF url(../../images/wtb/t.gif) top repeat-x}
+.win_b{background: #FFF url(../../images/wtb/b.gif) bottom repeat-x}
+.win_rt{background:url(../../images/wtb/r.gif) right repeat-y; vertical-align: top;}
+.win_lt{background:url(../../images/wtb/l.gif) left repeat-y; vertical-align: top;}
+.win_rb{background:url(../../images/wtb/r.gif) right repeat-y; vertical-align: bottom;}
+.win_lb{background:url(../../images/wtb/l.gif) left repeat-y; vertical-align: bottom;}
+
+.win_tl{background:url(../../images/wtb/tl.gif) left top no-repeat; width: 21px; height: 8px;}
+.win_tr{background:url(../../images/wtb/tr.gif) right top no-repeat; width: 21px; height: 8px;}
+.win_bl{background:url(../../images/wtb/bl.gif) left bottom no-repeat; width: 21px; height: 8px;}
+.win_br{background:url(../../images/wtb/br.gif) right bottom no-repeat; width: 21px; height: 8px;}
+
+.win_none{position: relative;display:none;}
+.win_yes{position: relative;}
+
+.h1px{height:1px;font-size:1px;line-height:1px}
+#content{font:8pt Tahoma, verdana, arial, helvetica, sans-serif; }
+#content table {font:8pt Tahoma, verdana, arial, helvetica, sans-serif;margin-top:5px; width: 100%;}
+#content th {text-align: right;padding-left:15px}
+.imagediv{background:url(prod.gif) left center no-repeat; vertical-align: center; text-align: right;}
+</style>
+
+<script>
+		var RATING_LEVEL_UNKNOWN  = 255;
+		
+	    var RATING_COLOR_RED      = 230;
+	    var RATING_COLOR_YELLOW   = 220;
+	    var RATING_COLOR_GREEN    = 210;
+	    var RATING_COLOR_UNKNOWN  = 200;
+</script>
+
+
+</head>
+
+<body style="margin: 0px; background: #00FF00;">
+
+	<script>
+		var tool = null;
+		var savedtext;
+		var curx = -1;
+		var cury = -1;
+		var needupdate = false;
+
+		function WidgetInit(t)
+		{
+			tool = t; 
+			if(needupdate)
+			{
+				needupdate = false;
+				updContent(savedtext);
+			}
+		}
+
+		function setFrameStyle( styleLeft, styleLeftDiv, styleRight, styleRightDiv ) {
+			var tdl = document.getElementById("tdl");
+			var tdr = document.getElementById("tdr");
+			var dl = document.getElementById("dl");
+			var dr = document.getElementById("dr");
+
+			tdl.setAttribute("class", styleLeft);
+			tdl.setAttribute("className", styleLeft); // Workaround for IE
+			dl.setAttribute("class", styleLeftDiv);
+			dl.setAttribute("className", styleLeftDiv); 
+			tdr.setAttribute("class", styleRight);
+			tdr.setAttribute("className", styleRight); 
+			dr.setAttribute("class", styleRightDiv);
+			dr.setAttribute("className", styleRightDiv); 			
+		}
+	
+		function moveWindow(x,y,cx,cy)
+		{
+			var el = document.getElementById("MainTable");
+			if(el)
+			{
+				if(curx == -1 && cury == -1 && x && y)
+				{
+					curx = x;
+					cury = y;
+				}
+				var posx = curx;
+				var posy = cury;
+				var width = el.offsetWidth;
+				var height = el.offsetHeight;
+				
+				if(tool.isRightOriented()) {
+					posx = curx - width - 24;
+					
+					if(tool.isTopOriented()) {
+						posy = cury - height + 34;
+						setFrameStyle( "win_lb", "win_none", "win_rb", "win_yes" );
+					} else
+						setFrameStyle( "win_lt", "win_none", "win_rt", "win_yes" );
+				} else {
+					if(tool.isTopOriented()) {
+						posy = cury - height + 34;
+						setFrameStyle( "win_lb", "win_yes", "win_rb", "win_none" );
+					} else
+						setFrameStyle( "win_lt", "win_yes", "win_rt", "win_none" );
+				}
+				tool.SetWindowPos(-1, posx + 12, posy - 17, width, height, 64);
+				tool.SetForeground();
+			}
+		}
+		
+		function changeDMeter(myhref)
+		{
+			var el = document.getElementById("klmeter");
+			if(el && myhref != "")
+				el.src = myhref;
+		}
+
+		function updContent(text)
+		{
+			var el = document.getElementById("content");
+			if(el && text != "")
+				el.innerHTML = text;
+			if(tool)
+				tool.GetWindowRect(moveWindow);
+			else
+				needupdate = true;
+		}
+
+		function numDeclension(num)
+		{
+			return (num == 1) ? ("day") : ("<b>" + num + "</b> days");
+		}
+		
+		function setLocalContent(args)
+		{
+			if(args.length < 1)
+				return;
+				
+			var reason             = args[ 0];
+			var RateColor          = args[ 1];
+			var RateLevel          = args[ 2];
+			var CommunityRateColor = args[ 3];
+			var CommunityRateLevel = args[ 4];
+			var CommunityNegVotes  = args[ 5];
+			var CommunityAffVotes  = args[ 6];
+			var SuspiciousHosts    = args[ 7];
+			var MaliciousDownloads = args[ 8];
+			var PupsDownloads      = args[ 9];
+			var UniqueMalware      = args[10];
+			var UniquePups         = args[11];
+			var Category           = args[12];
+			var BanReason          = args[13];
+			var StatDays           = args[14];
+			var StatStartDate      = args[15];
+			var StatEndDate        = args[16];
+			
+			var text = "";
+			if(reason == "loading")
+				text = "<img src=\"../../images/wtb/loader.gif\"/> Loading...";
+			else if(reason == "wmuf")
+			{
+				text = "This URL is classified as suspicious";
+				changeDMeter("../../images/wtb/bdanger.jpg");
+			}
+			else if(reason == "aphish")
+			{
+				text = "This URL is classified as phishing";
+				changeDMeter("../../images/wtb/bdanger.jpg");
+			}
+			else if(reason == "online") 
+			{
+				if(RateLevel == RATING_LEVEL_UNKNOWN)
+					text = "No information available";
+				else {
+					if(StatDays == -1 && StatStartDate != undefined && StatEndDate != undefined)
+						text = "From <b>" + StatStartDate + "</b> till <b>" + StatEndDate + "</b> at this address there were detected:";
+					else if(StatDays >= 0)
+						text = "During the last " + numDeclension(StatDays) + " at this address there were detected:";
+					text = text + "<br/><table>";
+					
+					if( SuspiciousHosts > 0 )
+						text = text + "<tr><td>URLs to suspicious hosts:</td><th>" + SuspiciousHosts + "</th></tr>";
+					if( MaliciousDownloads > 0 )
+						text = text + "<tr><td>Malware download attempts:</td><th>" + MaliciousDownloads + "</th></tr>";
+					if( PupsDownloads > 0 )
+						text = text + "<tr><td>Riskware download attempts:</td><th>" + PupsDownloads + "</th></tr>";
+					if( UniqueMalware > 0 )
+						text = text + "<tr><td>Files containing malware:</td><th>" + UniqueMalware + "</th></tr>"
+					if( UniquePups > 0 )
+						text = text + "<tr><td>Files containing riskware:</td><th>" + UniquePups + "</th></tr>";
+					text = text + "</table>";
+				}
+				
+				if(RateColor == RATING_COLOR_RED)
+					changeDMeter("../../images/wtb/dm_3.gif");
+				else 
+					changeDMeter("../../images/wtb/dm_1.gif");
+			}
+			else if(reason == "online_danger")
+			{
+				text = "Dangerous web resource (according to Kaspersky Lab reputation service).";
+				changeDMeter("../../images/wtb/bdanger.jpg");
+			}
+			else if(reason == "online_suspicious")
+			{
+				text = "No information on the web resource security (according to Kaspersky Lab reputation service).";
+				changeDMeter("../../images/wtb/bsuspic.jpg");
+			}
+
+			return text;
+		}
+
+		function setContent()
+		{
+			var text;
+			text = setLocalContent(arguments);
+			savedtext = text;
+			updContent(text);
+		}
+	</script>
+	
+	<table id="MainTable" width="320px">
+	<tr>
+		<td class="win_tl" width="21px"></td>
+		<td class="win_t"></td>
+		<td class="win_tr" width="21px"></td>
+	</tr>
+	<tr>
+		<td id="tdl" class="win_lt"><div id="dl" class="win_yes"><img src="../../images/wtb/sl.gif"></div></td>
+		<td style="background-color: #FFF; padding: 6px 8px 6px 8px;">
+			<div class="imagediv"><img id="klmeter" name="klmeter" src="../../images/wtb/bsuspic.jpg" alt=""/></div>
+			<div class="h1px" style="margin:3px 0 2px;border-top:solid 1px #006063"></div>
+			<div id="content">&nbsp;</div>
+		</td>
+		<td id="tdr" class="win_rb"><div id="dr" class="win_none"><img src="../../images/wtb/sr.gif"></div></td>
+	</tr>
+	<tr>
+		<td class="win_bl"></td>
+		<td class="win_b"></td>
+		<td class="win_br"></td>
+	</tr>
+	</table>
+
+</body>
+</html>

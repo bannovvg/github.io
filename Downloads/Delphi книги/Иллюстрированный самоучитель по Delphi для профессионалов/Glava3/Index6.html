@@ -1,0 +1,310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Использование 
+  исключительных ситуаций</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Если произошла ошибка и возбуждена исключительная ситуация, то она будет обрабатываться по такому алгоритму:
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Если ситуация возникла внутри блока<font face="Verdana" size="2">
+try..except,</font> то там она и будет обработана. Если ИС &quot;продвинута&quot; дальше при помощи оператора
+<font face="Verdana" size="2">raise</font>, а также если она возникла в блоке<font face="Verdana" size="2">
+try. .finally</font>, обработка продолжается.
+</font ></P>
+<P><font face="Verdana" size="3">
+2. Если программистом определен обработчик события
+<font face="Verdana" size="2">Application.onException</font>, то он получит управление. Обработчик объявлен следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TExceptionEvent = procedure (Sender: TObject; E: Exception) of object;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+3. Если программист никак не определил реакцию на ИС, то будет вызван стандартный метод
+<font face="Verdana" size="2">showException</font>, который сообщит о классе и месте возникновения исключительной ситуации.
+</font ></P>
+<P><font face="Verdana" size="3">
+Пункты 2 и 3 реализуются в методе<font face="Verdana" size="2">
+TAppiication.HandieException</font>. Собственно, выглядят они следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if not (ExceptObject is EAbort) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if Assigned(FOnException) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; FOnException(Sender, Exception(ExceptObject))</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+else</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; ShcwExceptior. (Exception(ExceptObject));</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обработчик <font face="Verdana" size="2">onExceptiоn</font> нужен, если требуется выполнять одно и то же действие в любой исключительной ситуации, возникшей в вашем приложении. К примеру, назвать себя, указать координаты для обращения или предупредить, что это еще бета-версия.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+program Project!;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uses&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Forms,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SysUtils, //добавлено вручную — там описан класс Exception Dialogs,&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Unitl in 'Unitl.pas' {Forml};</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+{$R *.RES}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TExceptClass = class&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> public</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure GlobalExceptionHandler(Sender: TObject; E:Exception);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TExceptClass.GlobalExceptionHandler(Sender: TObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+E:Exception);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('Произошла исключительная ситуация ' + E.ClassName</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
++ ': ' + E.Message</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
++ #13#10'Свяжитесь с разработчиками по тел. 222-33-44');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with TExceptClass.Create do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Application.OnException := GlobalExceptionHandler;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Application.Initialize;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Application.CreateFormfTForml, Forml);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Application.Run;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Free;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь класс <font face="Verdana" size="2"> TExceptClass</font> создается только для того, чтобы быть носителем метода
+<font face="Verdana" size="2">GiobaiException</font>. Обработчик любого события — метод, и он должен относиться к какому-либо объекту. Поскольку он здесь нужен еще до инициализации форм приложения и других его составных частей, то и объект класса
+<font face="Verdana" size="2"> TExceptClass</font> создается первым. Теперь пользователь знает, что благодарить за неожиданности нужно по указанному в сообщении об ошибке телефону разработчиков.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Есть и более простой способ присвоить обработчик 
+    событию <font face="Verdana" size="2">Application.OnException</font>. Для 
+    этого поместите на форму компонент типа <font face="Verdana" size="2"> TApplicationEvents</font> 
+    (страница <font face="Verdana" size="2">Additional</font> Палитры компонентов), 
+    роль которого — предоставление &quot;визуального&quot; доступа к свойствам 
+    невизуального объекта <font face="Verdana" size="2">TApplication</font>. Среди 
+    его событий есть и <font face="Verdana" size="2">OnException</font>. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но как &quot;пощупать&quot; переданный при исключительной ситуации объект? Обычная конструкция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on EExceptionType do...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+указывает на класс объекта, но не на конкретный экземпляр. Если во время обработки требуется доступ к свойствам этого экземпляра, его нужно поименовать внутри on..do, указав перед именем класса некий идентификатор:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on EZD: EZeroDivide do EZD.Message := 'Деление на ноль!';</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь возникшее исключение выступает под именем EZD. Можно изменить его свойства и отправить дальше:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var APtr : Pointer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Forml : TForm;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+APtr := Forml;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with TObject(APtr) as TBitmap do;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on EZD: EInvalidCast do EZD.Message :=. EZD.Message + 'xa-xa!';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Raise;{ теперь обработка будет сделана в другом месте }</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но как поименовать исключительную ситуацию, не попавшую ни в одну из директив
+<font face="Verdana" size="2"> on..do?</font> Или, может быть, в вашем обработчике вообще нет
+<font face="Verdana" size="2"> on. .do</font>, а поработать с объектом надо? Описанный выше путь здесь не подходит. Для этих случаев есть пара системных функций
+<font face="Verdana" size="2"> Exceptobject</font> и <font face="Verdana" size="2">ExceptAddr</font>. К сожалению, эти функции инициализируются только внутри конструкции<font face="Verdana" size="2">
+try..except</font>; в<font face="Verdana" size="2"> try..finally </font> работать с объектом— исключительной ситуацией не представляется возможным.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

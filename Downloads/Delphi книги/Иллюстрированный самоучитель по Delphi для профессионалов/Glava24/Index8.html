@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Элементы 
+  для представления текста и изображений</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+На странице <B>Standard </B>Палитры инструментов расположены элементы оформления, предназначенные для отображения текста и изображений. Рассмотрим их.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для представления однострочного текста имеется простой элемент оформления
+<font face="Verdana" size="2">Text</font>. Текст задается свойством
+<font face="Verdana" size="2">Text</font>. Другие стандартные свойства позволяют настраивать шрифт, цвет и т. д. Кроме этого, свойство
+<font face="Verdana" size="2"> Rotation</font> позволяет повернуть текст на любой угол в диапазоне от 0 до 360 градусов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для представления многострочного текста используется элемент оформления
+<font face="Verdana" size="2">Memo</font>. Текст задается свойством
+<font face="Verdana" size="2">Memo</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если вам необходимо объединить несколько элементов оформления в группу (например несколько строк текста и изображений в заголовке страницы) и использовать их на странице совместно, применяется невизуальный элемент оформления
+<font face="Verdana" size="2">Section</font>. Размещенные на нем другие элементы как бы оказываются на самостоятельной странице, ограниченной элементом
+<font face="Verdana" size="2">section</font>. Вы можете выделять и перемещать отдельные элементы, но делать это только внутри секции. А при перемещении секции по странице все расположенные на ней элементы также перемещаются вместе с ней. Выравнивание элементов тоже работает по границам секции.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для представления изображений используется элемент оформления Bitmap. Он позволяет оформлять отчеты изображениями, сохраненными в файлах в формате BMP. Для загрузки изображения используется диалог, открывающийся при щелчке на кнопке свойства
+<font face="Verdana" size="2">image</font>. Также при помощи свойства
+<font face="Verdana" size="2"> FileLink</font> можно связать элемент с файлом изображения и при печати отчета оно будет загружено. Кроме этого, изображение можно загрузить из базы данных. Для этого используются свойства
+<font face="Verdana" size="2"> Dataview</font> (определяет объект просмотра данных) и
+<font face="Verdana" size="2">DataField</font> (задает поле изображения).
+</font ></P>
+<P><font face="Verdana" size="3">
+Изображение можно масштабировать. Для этого используется свойство
+<font face="Verdana" size="2">Matchside</font>. При его значениях<font face="Verdana" size="2">
+msHeight, mswidth, msBoth </font> изображение соответственно масштабируется по горизонтали, вертикали или в двух измерениях. Естественно, при этом может произойти искажение изображения. А вот при значении
+<font face="Verdana" size="2"> msinside</font> изображение будет масштабировано пропорционально.
+</font ></P>
+<P><font face="Verdana" size="3">
+Аналогичными свойствами обладает элемент оформления
+<font face="Verdana" size="2">MetaFile</font>. Но изображение в формате WMF загружается в него при помощи свойства
+<font face="Verdana" size="2">FileLink</font> или <font face="Verdana" size="2">DataField</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Невизуальный элемент оформления <font face="Verdana" size="2"> FontMaster</font> позволяет задать единые свойства шрифта для группы элементов оформления. Его свойство
+<font face="Verdana" size="2"> Font</font> определяет шрифт. И этот шрифт будет использоваться всеми элементами, в чьих свойствах
+<font face="Verdana" size="2"> FontMirror</font> будет указан данный элемент
+<font face="Verdana" size="2">FontMaster</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Невизуальный элемент оформления <font face="Verdana" size="2"> pageNuminit</font> обеспечивает нумерацию страниц, начиная с той, на которой он расположен. Свойство
+<font face="Verdana" size="2"> initvalue</font> задает номер, с которого начинается отсчет нумерации. А при помощи свойств
+<font face="Verdana" size="2"> initoataview</font> и <font face="Verdana" size="2"> initoataFieid</font> можно загрузить это значение из базы данных<font face="Verdana" size="2">.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

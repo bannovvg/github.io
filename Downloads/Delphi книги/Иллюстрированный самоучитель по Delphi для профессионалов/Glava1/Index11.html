@@ -1,0 +1,352 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Объект изнутри</font>
+<br>
+</font>
+</P>
+<p align="left">&nbsp;</P>
+<p align="left"><font size="3" face="Verdana">Теперь, когда мы разобрались с основными 
+  определениями и механизмами ООП, настало время более подробно изучить, что представляет 
+  собой объект и как он работает. Ясно, что каждый экземпляр класса содержит отдельную 
+  копию всех его полей. Ясно, что где-то в его недрах есть указатели на таблицу 
+  виртуальных методов и таблицу динамических методов. А что еще там имеется? И 
+  как происходит вызов методов? Вернемся к примеру из разд. &quot;Полиморфизм&quot; 
+  данной главы: </font></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFirstClass = class</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FMyFieldl: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;FMyField2: Longint;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure StatMethod;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure VirtMethodl; virtual;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure VirtMethod2; virtual;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure DynaMethodl; dynamic;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure DynaMethod2; dynamic;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSecondClass = class(TMyObject)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure StatMethod;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure VirtMethodl;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;override; procedure DynaMethodl;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">override; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Objl: TFirstClass;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Obj2: TSecondClass;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+На рис. 1.1 показано, как будет выглядеть внутренняя структура рассмотренных в нем объектов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Первое поле каждого экземпляра того или иного объекта содержит указатель на его класс. Класс как структура состоит из двух частей. Начиная с адреса, на который ссылается указатель на класс, располагается таблица виртуальных методов. Напомним, что она содержит адреса всех виртуальных методов класса, включая унаследованные от предков. Длина таблиц VMT объектов
+<font face="Verdana" size="2">Оbj1</font> и <font face="Verdana" size="2"> Obj2</font> одинакова— по два элемента (8 байт). Перед таблицей виртуальных методов расположена специальная структура, содержащая дополнительную служебную информацию. В ней содержатся данные, полностью характеризующие класс: его имя, размер экземпляра, указатели на класс-предок, имя класса и т. д. На рис. 1.1 она показана одним блоком, а ее содержимое расшифровано ниже.
+</font ></P>
+<P><font face="Verdana" size="3">
+Одно из полей структуры содержит адрес таблицы динамических методов класса (DMT). Таблица имеет следующий формат — в начале слово, содержащее количество элементов таблицы; затем — слова, соответствующие индексам методов. Нумерация индексов начинается с —1 и идет по убывающей. После индексов идут собственно адреса динамических методов. Обратите внимание, что DMT объекта
+<font face="Verdana" size="2">Оbj1</font> состоит из двух элементов,
+<font face="Verdana" size="2"> Obj2</font> — из одного, соответствующего перекрытому методу
+<font face="Verdana" size="2"> DynaMethodl</font>. В случае вызова Qbj2.DynaMethod2 индекс не будет найден в таблице DMT
+<font face="Verdana" size="2">Obj2</font>, и произойдет обращение к DMT
+<font face="Verdana" size="2">Оbj1</font>. Именно так экономится память при использовании динамических методов.
+</font ></P>
+<P><font face="Verdana" size="3">
+В языке Object Pascal определены два оператора —<font face="Verdana" size="2"> is</font> и
+<font face="Verdana" size="2"> as</font>, неявно обращающиеся к таблице динамических методов. Оператор
+<font face="Verdana" size="2"> is </font> предназначен для проверки совместимости по присваиванию экземпляра объекта с заданным классом.
+</font ></P>
+<div align="center"><IMG src="gl.1.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 1.1. </B>Внутренняя структура 
+  объектов <font face="Verdana" size="2"> Objl</font> и <font face="Verdana" size="2"> 
+  Obj2&nbsp;</font> </font ></P>
+<P><font face="Verdana" size="3">
+ Выражение вида:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AnObject is TObjectType</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+принимает значение <font face="Verdana" size="2">True</font>, только если объект
+<font face="Verdana" size="2"> AnObject</font> совместим по присваиванию с классом
+<font face="Verdana" size="2">TObjectType</font>, т. е. является объектом этого класса или одного из классов, порожденных от него. Кстати, определенная проверка происходит еще при компиляции: если формально объект и класс несовместимы, то компилятор выдаст ошибку в этом операторе.
+</font ></P>
+<P><font face="Verdana" size="3">
+Оператор <font face="Verdana" size="2"> as</font> введен в язык специально для приведения объектных типов. С его помощью можно рассматривать экземпляр объекта как принадлежащий к другому совместимому типу:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with ASomeObject as TAnotherType do...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+От стандартного способа приведения типов с помощью конструкции
+<font face="Verdana" size="2"> TAnotherType (ASomeObject)</font> использование оператора
+<font face="Verdana" size="2"> as</font> отличается наличием проверки на совместимость типов во время выполнения (как в операторе<font face="Verdana" size="2">
+is</font>): попытка приведения к несовместимому типу приводит к возникновению исключительной ситуации<font face="Verdana" size="2"> EinvalidCast
+</font> (см. гл. 4). После применения оператора <font face="Verdana" size="2"> as</font> сам объект остается неизменным, но вызываются те его методы, которые соответствуют присваиваемому классу.
+</font ></P>
+<P><font face="Verdana" size="3">
+Очень полезным может быть оператор<font face="Verdana" size="2"> as</font> в методах-обработчиках событий. Для обеспечения совместимости в 99% случаев источник события
+<font face="Verdana" size="2"> sender</font> имеет тип <font face="Verdana" size="2">TObject</font>, хотя в тех же 99% случаев им является форма или другие компоненты. Поэтому, чтобы иметь возможность пользоваться их свойствами, применяют оператор
+<font face="Verdana" size="2">аs</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(Sender as TControl).Caption := &quot;Thanks!&quot;;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Вся информация, описывающая класс, создается и размещается в памяти на этапе компиляции. Возникает резонный вопрос: а нельзя ли получить доступ к ней, не создавая экземпляр объекта? Да, можно. Доступ к информации класса вне методов этого класса можно получить, описав соответствующий указатель, который называется указателем на класс,
+или указателем на объектный тип <font face="Verdana" size="2">(class
+reference)</font>. Он описывается при помощи зарезервированных слов
+<font face="Verdana" size="2"> class of</font>. Например, указатель на класс
+<font face="Verdana" size="2"> TObject</font> описан в модуле SYSTEM.PAS и называется
+<font face="Verdana" size="2">Tclass</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TObject = class;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TClass = class of TObject;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Аналогичные указатели уже описаны и для других важных классов. Вы можете
+использовать в своей программе <font face="Verdana" size="2"> TComponentClass, TControlClass</font>
+и т. п.
+</font ></P>
+<P><font face="Verdana" size="3">
+Указатели на классы тоже подчиняются правилам приведения объектных типов. Указатель на класс-предок может ссылаться и на любые дочерние классы; обратное невозможно:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> TFirst = class</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">..</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSecond = class(TFirst)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFirstClass = class of TFirst;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> TSecondClass = class of TSecond;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AFirst : TFirstClass;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ASecond : TSecondClass;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AFirst := TSecond; {допустимо}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ASecond := TFirst; {недопустимо}&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+С указателем на класс тесно связано понятие методов класса.
+Такие методы можно вызывать без создания экземпляра объекта — с указанием имени класса, в котором они описаны. Перед описанием метода класса нужно поставить зарезервированное слово
+<font face="Verdana" size="2">class</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMyObject = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+class function GetSize: string;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyObj ect: TMyObj ect;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AString: string;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AString := TMyObject.GetSize;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyObject := TMyObject.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AString := MyObject.GetSize;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Разумеется, методы класса не могут использовать значения, содержащиеся в полях класса: ведь экземпляра-то не существует. Возникает вопрос: для чего нужны такие методы?
+</font ></P>
+<P><font face="Verdana" size="3">
+Важнейшие методы класса определены в самом <font face="Verdana" size="2">TObject</font>: они как раз и позволяют, не углубляясь во внутреннюю структуру класса, извлечь оттуда практически всю необходимую информацию.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <font size="4"><strong><font size="3">Интерфейс 
+  ISQLCommand</font></strong></font> <font size="3"><strong><br>
+  </strong></font> </font> </P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Интерфейс <font face="Verdana" size="2"> isQLCommand</font> обеспечивает функционирование запроса dbExpress. Компоненты dbExpress, работающие с наборами данных, используют его для реализации своих методов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметры запроса устанавливаются методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function setParameter(ulParameter: Word; ulChildPos: Word; eParamType: TSTMTParamType; uLogType: Word; uSubType: Word; iPrecision: Integer; iScale: Integer; Length: LongWord; pBuffer: Pointer; llnd: Integer): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где <font face="Verdana" size="2"> ulParameter</font> — порядковый номер параметра; если параметр является дочерним для сложных типов данных,
+<font face="Verdana" size="2">ulchildPos</font> задает его порядковый номер;
+<font face="Verdana" size="2"> eParamType</font> задает тип параметра (входной, выходной, смешанный);
+<font face="Verdana" size="2"> uLogType</font> — тип данных параметра;
+<font face="Verdana" size="2"> uSubType</font> — вспомогательный параметр типа данных;
+<font face="Verdana" size="2"> iscale</font> — максимальный размер значения в байтах;
+<font face="Verdana" size="2"> iPrecision</font> — максимальная точность типа данных;
+<font face="Verdana" size="2"> Length</font> — размер буфера; <font face="Verdana" size="2"> pBuffer</font> — буфер, содержащий значение параметра;
+<font face="Verdana" size="2">lInd</font> — флаг, определяющий, может ли параметр иметь нулевое значение.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для каждого параметра метод вызывается снова. Информацию о параметре можно получить, используя метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function getParameter(ParameterNumber: Word; ulChildPos: Word; Value:&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pointer; Length: Integer; var IsBlank: Integer): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где <font face="Verdana" size="2"> ParameterNumber</font> — порядковый номер параметра; если параметр является дочерним для сложных типов данных,
+<font face="Verdana" size="2">ulchildPos</font> задает его порядковый номер;
+<font face="Verdana" size="2"> value</font> — указатель на буфер значения параметра;
+<font face="Verdana" size="2"> Length</font> — размер буфера; <font face="Verdana" size="2">isBlank</font> — признак незаполненного параметра.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function prepare(SQL: PChar; ParamCount: Word): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+готовит запрос к выполнению с учетом значений параметров. Выполнение запроса осуществляется методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function execute(var Cursor: ISQLCursor): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который возвращает в параметре интерфейс курсора, если запрос выполнен. Или метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function executelmmediate(SQL: PChar; var Cursor: ISQLCursor): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который выполняет запрос, не требующий подготовки (не имеющий параметров). Он также возвращает в параметре
+<font face="Verdana" size="2"> cursor</font> готовый интерфейс курсора, если запрос выполнен успешно. Текст запроса определяется параметром SQL.
+</font ></P>
+<P><font face="Verdana" size="3">
+И метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function getNextCursor(var Cursor: ISQLCursor): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет в параметре <font face="Verdana" size="2"> Cursor</font> курсор следующего набора данных, если выполнялась хранимая процедура, которая возвращает несколько наборов данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Интерфейс <font face="Verdana" size="2"> iSQLCommand</font> используется компонентом
+<font face="Verdana" size="2"> TCustomSQLDataSet</font> и недоступен потомкам.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

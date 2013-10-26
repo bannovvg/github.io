@@ -1,0 +1,444 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TIBDatabase</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как для доступа к базе данных компонентам<font face="Verdana" size="2"> InterBase Express
+</font> не требуется BDE, то для создания соединения используется всего одно свойство
+<font face="Verdana" size="2">DatabaseName</font>. В нем необходимо указать полный путь (включая имя сервера) к выбранному файлу БД с расширением gdb. Для этого можно воспользоваться стандартным диалогом выбора файла при щелчке на кнопке свойства в Инспекторе объектов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент имеет собственный редактор, который позволяет задать значения основных свойств, обеспечивающих соединение с базой данных (рис. 18.1).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.18.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 18.1. </B> Редактор компонента 
+  <B> </B><font face="Verdana" size="2">TIBDatabase</font> </font ></P>
+<P><font face="Verdana" size="3"> Настройка соединения проводится следующим образом. 
+  </font ></P>
+<P><font face="Verdana" size="3"> На панели <B>Connection </B>выбирается требуемый 
+  сервер InterBase (локальный или доступный удаленно), затем в списке <B>Protocol 
+  </B>определяется используемый сетевой протокол и при помощи кнопки <B>Browse 
+  </B>выбирается файл базы данных. </font ></P>
+<P><font face="Verdana" size="3"> На панели <B>Database Parameters </B>задаются 
+  имя пользователя, его пароль и роль. Также можно выбрать и набор шрифтов для 
+  языковой адаптации приложения (список <B>Character </B><b>Set</b>). </font ></P>
+<P><font face="Verdana" size="3"> Для задания вводимых при подключении параметров 
+  (имя пользователя, пароль, схема, роль и т. д.) также можно использовать свойства 
+  <font face="Verdana" size="2"> Params</font> и <font face="Verdana" size="2">LoginPrompt</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Путь к файлу базы данных задается свойством 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property DatabaseName: 
+    String;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Соединение включается и отключается свойством 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Connected 
+    : Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> При этом свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property AllowStreamedConnected 
+    : Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> управляет включением соединения при запуске 
+  приложения и служит дополнительным предохранителем. При значении <font face="Verdana" size="2"> 
+  False</font> свойство запрещает открытие соединения при запуске приложения, 
+  даже если свойство <font face="Verdana" size="2"> Connected</font> имело значение 
+  <font face="Verdana" size="2">True</font>. Так как часто приложение отлаживается 
+  на тестовой базе данных, а используется на реальной, то неверный путь в свойстве 
+  <font face="Verdana" size="2"> DatabaseName</font> и не отключенное на этапе 
+  разработки свойство <font face="Verdana" size="2"> connected</font> приведет 
+  к возникновению ошибки открытия соединения при запуске приложения на другом 
+  компьютере. </font ></P>
+<P><font face="Verdana" size="3"> Параметры соединения, которые нельзя задать 
+  свойствами, устанавливаются свойством </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Params: 
+    TStrings;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> в котором в каждой строке задается имя параметра 
+  и затем через знак равенства — его значение. Наиболее распространенный пример 
+  использования свойства <font face="Verdana" size="2"> Params</font> — задание 
+  имени пользователя и его пароля: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> user_name=sysdba 
+    password=masterkey</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property DBParamByDPB: 
+    [const Idx: Integer]: String;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> позволяет получить доступ к отдельным параметрам 
+  соединения, не обращаясь к свойству <font face="Verdana" size="2">Params</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> <B>&nbsp;Примечание</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Полный список индексов всех возможных параметров 
+    соединения Interbase можно найти в файле \Delphi7\Source\Vcl\IBHeader.pas. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Если соединение настроено правильно, метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TestConnected: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> возвращает значение <font face="Verdana" size="2">True</font>, 
+  иначе — <font face="Verdana" size="2">False</font>. Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property IdleTimer: 
+    Integer;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> задает временной интервал до отключения неиспользуемого 
+  соединения. </font ></P>
+<P><font face="Verdana" size="3"> В компоненте <font face="Verdana" size="2"> 
+  TiBDatabase</font> отсутствуют средства управления транзакциями, которые вынесены 
+  в отдельный компонент <font face="Verdana" size="2"> TiBTransaction</font> (см. 
+  ниже). </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property DefaultTransaction: 
+    TiBTransaction;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> позволяет задать транзакцию по умолчанию. При 
+  этом все компоненты с наборами данных, использующие данное соединение автоматически, 
+  начинают применять этот компонент транзакции. Изменяя значение этого свойства, 
+  можно в одном соединении работать с несколькими транзакциями. </font ></P>
+<P><font face="Verdana" size="3"> Общее число связанных с данным соединением транзакций 
+  возвращает свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property TransactionCount: 
+    Integer;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> а их полный перечень содержится в индексированном 
+  списке свойства </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Transactions 
+    [Index: Integer]: TIBTransaction;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Добавить к списку используемых новую транзакцию 
+  можно при помощи метода </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function AddTransaction(TR: 
+    TIBTransaction): Integer;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Отменить связь между соединением и компонентом 
+  транзакции позволяет метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure RemoveTransaction(Idx: 
+    Integer);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Но можно поступить и более радикально. Метод 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure RemoveTransactions;&nbsp;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> отменяет связи со всеми транзакциями. </font ></P>
+<P><font face="Verdana" size="3"> Используемый в методе <font face="Verdana" size="2"> 
+  RemoveTransaction</font> индекс транзакции может быть найден методом </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function FindTransaction 
+    (TR: TIBTransaction): Integer;&nbsp;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> а метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function FindDefaultTransaction: 
+    TIBTransaction;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> возвращает транзакцию по умолчанию. </font ></P>
+<P><font face="Verdana" size="3"> С компонентом соединения можно связать произвольное 
+  число объектов, отслеживающих возникновение событий в базе данных <font face="Verdana" size="2"> 
+  InterBase</font> (см. ниже). Для этого используется метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure AddEventNotifier(Notifier: 
+    IIBEventNotifier);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> который связывает с соединением либо интерфейс 
+  <font face="Verdana" size="2">IIBEventNotifier</font>, либо объект <B> </B><font face="Verdana" size="2">TIBEvents</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Парный ему метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure RemoveEventNotifier{Notifier: 
+    IIBEventNotifier);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> разрывает связь соединения с объектом-обработчиком 
+  событий. Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TTraceFlag 
+    = (tfQPrepare, tfQExecute, tfQFetch, tfError, tfStmt,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> tfConnect, 
+    tfTransact, tfBlob, tfService, tfMisc);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TTraceFlags 
+    = set of TTraceFlag;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property TraceFlags: 
+    TTraceFlags;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> позволяет управлять сведениями о выполнении 
+  запросов, возвращаемыми компонентом <font face="Verdana" size="2"> TSQLMonitor</font> 
+  (см. ниже описание этого компонента). </font ></P>
+<P><font face="Verdana" size="3"> Группа методов позволяет судить о реальном состоянии 
+  соединения во время выполнения. Все они в случае неудачи проверки генерируют 
+  исключение </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">EIBClientError.&nbsp;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Методы </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure CheckActive;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> И </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure Checklnactive;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> проверяют, функционирует или нет соединение. 
+  Метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure CheckDatabaseName;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> проверяет, заполнено ли свойство <font face="Verdana" size="2">DatabaseName</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TiBDatabase</font> 
+  позволяет выполнять некоторые операции с метаданными базы данных. </font ></P>
+<P><font face="Verdana" size="3"> При помощи метода </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure CreateDatabase;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> можно создавать новые базы данных, включая создание 
+  файла базы данных. Все параметры новой базы данных, которые разработчик посчитает 
+  нужным указать явно, должны быть включены в список свойства <font face="Verdana" size="2"> 
+  Params</font> (см. выше). </font ></P>
+<P><font face="Verdana" size="3"> Имя файла новой базы данных должно быть указано 
+  в свойстве </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure DropDatabase;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> удаляет существующую базу данных, путь к которой 
+  указан свойством </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DatabaseName.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Список <font face="Verdana" size="2"> List</font> 
+  имен таблиц, имеющихся в базе данных, возвращает метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure GetTableNames(List: 
+    TStrings; SystemTables: Boolean = False);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> При этом параметр <font face="Verdana" size="2"> 
+  SystemTables</font> управляет включением в список имен системных таблиц. </font ></P>
+<P><font face="Verdana" size="3"> Метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure GetFieldNames(const 
+    TableName: string; List: TStrings);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> аналогичным образом возвращает список полей 
+  для таблицы, заданной параметром<B> </B><font face="Verdana" size="2">TableName</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Методы-обработчики событий компонента <font face="Verdana" size="2"> 
+  TiBDatabase</font> представлены в табл. 18.1. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 18.1. </B>Методы-обработчики 
+  событий компонента <font face="Verdana" size="2"> TiBDatabase</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="470" HEIGHT="533">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="225" HEIGHT="30"> <DIV WIDTH="310" HEIGHT="29" style="width: 96; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="30"> <DIV WIDTH="46" HEIGHT="29" style="width: 1; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Тип</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="241" HEIGHT="30"> <DIV WIDTH="269" HEIGHT="29" style="width: 99; height: 29"> 
+        <P><font face="Verdana" size="3"><b>Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="225" HEIGHT="48"> 
+      <DIV WIDTH="310" HEIGHT="46" style="width: 191; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Af terConnect: TNotifyEvent;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="48"> 
+      <DIV WIDTH="46" HEIGHT="46" style="width: 7; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="241" HEIGHT="48"> 
+      <DIV WIDTH="269" HEIGHT="46" style="width: 176; height: 46"> 
+        <P><font face="Verdana" size="3"> Выполняется после открытия&nbsp; соединения 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="225" HEIGHT="50"> 
+      <DIV WIDTH="310" HEIGHT="48" style="width: 200; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          AfterDisconnect: TNotifyEvent;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="50"> 
+      <DIV WIDTH="46" HEIGHT="48" style="width: 8; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="241" HEIGHT="50"> 
+      <DIV WIDTH="269" HEIGHT="48" style="width: 173; height: 48"> 
+        <P><font face="Verdana" size="3"> Выполняется после закрытия&nbsp; соединения 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="225" HEIGHT="50"> 
+      <DIV WIDTH="310" HEIGHT="48" style="width: 193; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Bef oreConnect: TNotifyEvent;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="50"> 
+      <DIV WIDTH="46" HEIGHT="48" style="width: 5; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="241" HEIGHT="50"> 
+      <DIV WIDTH="269" HEIGHT="48" style="width: 182; height: 48"> 
+        <P><font face="Verdana" size="3"> Выполняется перед открытием&nbsp; соединения 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="225" HEIGHT="56"> 
+      <DIV WIDTH="310" HEIGHT="54" style="width: 212; height: 54"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          BeforeDisconnect: TNotifyEvent;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="56"> 
+      <DIV WIDTH="46" HEIGHT="54" style="width: 4; height: 54"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="241" HEIGHT="56"> 
+      <DIV WIDTH="269" HEIGHT="54" style="width: 192; height: 54"> 
+        <P><font face="Verdana" size="3"> &nbsp;Выполняется перед закрытием&nbsp; 
+          соединения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="225" HEIGHT="62"> 
+      <DIV WIDTH="310" HEIGHT="60" style="width: 215; height: 60"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          OnDialectDowngradeWarning: TNotifyEvent;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="62"> 
+      <DIV WIDTH="46" HEIGHT="60" style="width: 1; height: 60"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="241" HEIGHT="62"> 
+      <DIV WIDTH="269" HEIGHT="60" style="width: 192; height: 60"> 
+        <P><font face="Verdana" size="3"> &nbsp;Выполняется в случае изменения 
+          диалекта SQL при открытии соединения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="225" HEIGHT="78"> 
+      <DIV WIDTH="310" HEIGHT="65" style="width: 171; height: 65"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          OnldleTimer: TNotifyEvent;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="78"> 
+      <DIV WIDTH="46" HEIGHT="65" style="width: 7; height: 65"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="241" HEIGHT="78"> 
+      <DIV WIDTH="269" HEIGHT="65" style="width: 220; height: 73"> 
+        <P><font face="Verdana" size="3"> Вызывается по истечении&nbsp; времени, 
+          заданного свойством </font ></P>
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">dleTimer</font> 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="225" HEIGHT="117"> 
+      <DIV WIDTH="310" HEIGHT="115" style="width: 217; height: 115"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">TDatabaseLoginEvent 
+          = procedure (Database : TiBDatabase; LoginParams: TStrings) of object;</font> 
+          </font ></P>
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">property 
+          OnLogin: TDatabaseLoginEvent ;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="117"> 
+      <DIV WIDTH="46" HEIGHT="115" style="width: 6; height: 115"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Pb</font> 
+          </font ></P>
+        <P><font face="Verdana" size="3"> &nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="241" HEIGHT="117"> 
+      <DIV WIDTH="269" HEIGHT="115" style="width: 206; height: 115"> 
+        <P><font face="Verdana" size="3"> Вызывается для регистрации пользователя 
+          при открытии&nbsp; соединения </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

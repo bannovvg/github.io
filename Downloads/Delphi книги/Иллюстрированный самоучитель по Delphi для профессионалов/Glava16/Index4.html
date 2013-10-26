@@ -1,0 +1,688 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Интерфейс прикладного программирования
+ВDЕ</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Как уже говорилось выше, любое приложение Delphi, работающее с базами данных и написанное с использованием стандартных компонентов доступа к данным, обращается к данным и получает результат при помощи BDE. При этом механизм доступа к данным использует вызовы функций из API BDE.
+</font ></P>
+<P><font face="Verdana" size="3">
+Достаточно сложно представить себе такую ситуацию, когда возникает необходимость создания приложения, использующего только функции BDE, без применения компонентов доступа к данным VCL. А вот отдельные функции вполне могут понадобиться в любой программе. Поэтому рассмотрим процесс работы приложения, использующего вызовы BDE, т. к. это дает хорошую возможность понять механизм доступа к данным, который реализован в Delphi.
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, для создания приложения на основе вызовов функций BDE необходимо выполнить следующие операции:
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Инициализация BDE (функция <font face="Verdana" size="2">DbiInit</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+2. Открытие объекта базы данных (функция <font face="Verdana" size="2">DbiOpenDatabase</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+3. Определение рабочего каталога (функция <font face="Verdana" size="2">obiSetDirectory</font>), если на предыдущем этапе не задается псевдоним БД.
+</font ></P>
+<P><font face="Verdana" size="3">
+4. Определение временного каталога (функция <font face="Verdana" size="2">DbiSetPrivateoir</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+5. Открытие набора данных и создание курсора (функции
+<font face="Verdana" size="2">DbOреnТаblе</font>, <font face="Verdana" size="2">DbiQExec</font>
+и пр.; <B> </B>дескриптор курсора<B> </B><font face="Verdana" size="2">hDBICur</font>).
+</font ></P>
+<P><font face="Verdana" size="3"> 6. Заполнение структуры <font face="Verdana" size="2">cuRProps</font>, 
+  содержащей данные о курсоре и наборе данных (функция<B> </B><font face="Verdana" size="2">DbiGetCursorProps</font>). 
+  </font ></P>
+<P><font face="Verdana" size="3">
+7. Выделение памяти для буфера записи.
+</font ></P>
+<P><font face="Verdana" size="3">8.<B> </B>Навигация<B> </B>набору<B> </B>данных<B> </B>(функции
+<font face="Verdana" size="2">DbiSetToBegin</font>, <font face="Verdana" size="2">DbiSetToEnd</font>,
+<font face="Verdana" size="2">DbiSetToCursor</font> и пр.)
+</font ></P>
+<P><font face="Verdana" size="3">
+9. Чтение необходимой   записи
+<B>   (</B>функции<font face="Verdana" size="2"> DbiGetRelativeRecord,&nbsp;
+DbiGetNextRecord, DbiGetRecord, DbiGetPriorRecord</font> и др.).
+</font ></P>
+<P><font face="Verdana" size="3">
+10. Чтение   или   обновление   необходимого   поля   (функции
+<font face="Verdana" size="2">DMGetFieid, DbiPutField)</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+11. Освобождение всех ресурсов (освобождение буфера записи, закрытие курсора, таблицы, BDE).
+</font ></P>
+<P><font face="Verdana" size="3">
+При использовании в программе функций из API BDE необходимо включить в секцию
+<font face="Verdana" size="2"> uses</font> модуль BDE.
+</font ></P>
+<P><font face="Verdana" size="3">
+В прикладном программировании задачи, которые требовали бы выполнения всех описанных выше операций, практически не встречаются. Между
+тем, включение в программный код отдельных функций API BDE оправдано. В качестве примера рассмотрим приложение, которое позволяет очистить таблицу базы данных (рис. 16.4).
+</font ></P>
+<P><font face="Verdana" size="3">
+Дело в том, что при удалении записи из таблицы локальной СУБД (например
+<font face="Verdana" size="2">Paradox</font>) размер файла таблицы остается прежним, даже если удалить все записи. То есть на самом деле запись не удаляется, а только становится недоступной. При интенсивном использовании базы данных файлы таблиц могут занимать значительные объемы дискового пространства при довольно умеренном числе записей.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.16.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 16.4. </B>Главная форма 
+  проекта <font face="Verdana" size="2"> BDEEmptyTable</font> </font ></P>
+<P><font face="Verdana" size="3"> Полная очистка таблиц базы данных осуществляется 
+  функцией <font face="Verdana" size="2">DbiErr.ptyTable</font> из API BDE. Именно 
+  она используется в демонстрационном приложении для радикального уменьшения размера 
+  таблиц. </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание<U>&nbsp;</U></B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Функция <font face="Verdana" size="2"> DbiEmptyTable</font> 
+    используется в методе <font face="Verdana" size="2"> EmptyTable</font> компонентов 
+    доступа к данным (см. гл. 17). </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В листинге 16.1 приведен исходный код этого 
+  приложения. Помимо указанной функции, в нем используются функции создания списка 
+  параметров доступных баз данных и таблиц текущей базы данных. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>&nbsp;Листинг 16.1. </B> Модуль 
+  главной формы приложения <font face="Verdana" size="2"> BDEEmptyTable</font>&nbsp; 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> unit Main;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> interface</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> uses</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Windows, Messages, 
+    SysUtils, Classes, Graphics, Controls, Forms, Dialogs,&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">StdCtrls, BDE, 
+    ExtCtrls, DBCtrls, Grids, DBGrids, Db, DBTables, Buttons;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TMainForm = 
+    class(TForm)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> AliasesList: 
+    TComboBox;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TablesList: 
+    TComboBox;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> EmptyBtn: TBitBtn;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Labell: TLabel;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Label2: TLabel;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure FormClose(Sender: 
+    TObject; var Action: TCloseAction);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure FormShow(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure AliasesListChange(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure EmptyBtnClick(Sender: 
+    TObject); private</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hDB: hDBIDB;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hCursor: hDBICur;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DBDesc: DBDesc;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TblDesc : TBLBaseDesc;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;public</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> { Public declarations 
+    }&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MainForm: TMainForm;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> implementation&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">{$R *.DFM}</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.FormShow(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var Rslt: DBIResult;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">AliasesList.Items.Clear;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;TablesList.Items.Clear; 
+    hDB := Nil;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">DbiInit(Nil); 
+    // Инициалы BDE</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;BDE DbiOpenDatabaseList(hCursor) 
+    ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;repeat</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Rslt:= DbiGetNextRecord(hCursor, 
+    dbiNOLOCK, @DBDesc, nil) ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;if (Rslt 
+    0 DBIERR_EOF) then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">AliasesList.Items.Add(StrPas(DBDesc.szName));</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;until 
+    (rslt &lt;&gt; DBIERR_NONE); DbiCloseCursor(hCursor) ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> on E:EDBEngineError 
+    do ShowMessage ('OiiMSKa MHMunajiM3auMM BDE');</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.FormClose(Sender: 
+    TObject;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;var Action: 
+    TCloseAction);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> finally</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if hDB &lt;&gt; 
+    Nil then DbiCloseDatabase(hDB);// Закрытие базы данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;DbiExit; 
+    // Закрытие сеанса работы с ВОЕ&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.AliasesListChange(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if hDB &lt;&gt; 
+    Nil</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then DbiCloseDatabase(hDB);// 
+    Закрытие базы данных&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiOpenDatabase 
+    // Открытие базы данных&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> (</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PChar(AliasesList.Text), 
+    // Псевдоним базы данных&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Nil, // Тип 
+    базы данных&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">dbiReadWrite, 
+    // Режим редактирования данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;dbiOpenShared, 
+    // Режим разделения данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Nil, // 
+    Пароль</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">0, // Число 
+    дополнительных параметров&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Nil, // Перечень 
+    полей для доп. параметров Nil,&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> // Список доп. 
+    параметров hDB&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> // Дескриптор 
+    базы данных&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> );</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiSetPrivateDir('с:\temp');// 
+    Определение временного каталога</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiOpenTableList(hDb, 
+    False, False, '*.DB', hCursor);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TablesList.Items.Clear;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TablesList.Clear;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> while DbiGetNextRecord(hCursor, 
+    dbiNOLOCK, @TblDesc, nil) = dbiErr_None</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> do TablesList.Items.Add(TblDesc.szName);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;DbiCloseCursor(hCursor);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> on E:EDBEngineError 
+    do ShowMessage('Ошибка открытия базы данных');</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.EmptyBtnClick(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiEmptyTable(hDB, 
+    Nil, PChar(TablesList.Text), '');</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> on E:EDBEngineError 
+    do ShowMessage('Неверно задана таблица'};&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> При открытии главной формы (метод-обработчик 
+  <font face="Verdana" size="2">FormShow</font>) функция <font face="Verdana" size="2"> 
+  Dbiinit</font> осуществляет инициализацию BDE. Затем функция <font face="Verdana" size="2"> 
+  DbiOpenDatabaseList</font> создает в памяти временную таблицу, в которую записываются 
+  характеристики каждой зарегистрированной базы данных. Для этого применяется 
+  структура <font face="Verdana" size="2">DBDesc</font>. Курсор <font face="Verdana" size="2"> 
+  hcursor</font> обеспечивает доступ к записям о базах данных. </font ></P>
+<P><font face="Verdana" size="3"> После этого функция <font face="Verdana" size="2"> 
+  DbiGetNextRecord</font> позволяет осуществить последовательное считывание имен 
+  псевдонимов баз данных (для этого в параметре передается указатель на структуру 
+  <font face="Verdana" size="2">DBDesс</font>) и их запись в список компонента 
+  <font face="Verdana" size="2">AliasesList</font> типа <font face="Verdana" size="2">TComboBox</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> При выборе из этого списка конкретного псевдонима 
+  работает метод-обработчик <font face="Verdana" size="2">AliasesListchange</font>. 
+  В нем открывается соответствующая база данных (функция <font face="Verdana" size="2">DbiOpenDatabase</font>), 
+  доступ к которой в дальнейшем осуществляется через дескриптор <font face="Verdana" size="2">hDB</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Функция <font face="Verdana" size="2">DbiopenTableList</font> 
+  создает временную таблицу в памяти, в которую помещаются данные о таблицах выбранной 
+  базы данных в соответствии с форматом структуры <font face="Verdana" size="2">TBLBaseDesс</font>. 
+  Функция <font face="Verdana" size="2"> DbiGetNextRecord</font> позволяет передать 
+  эту информацию в список компонента <font face="Verdana" size="2">TablesList</font> 
+  типа <font face="Verdana" size="2">TCombоВох</font>. </font ></P>
+<P><font face="Verdana" size="3"> При щелчке на кнопке EmptyBtn в методе-обработчике 
+  EmptyBtndick работает функция DbiEmptyTabie, которая очищает выбранную ранее 
+  в компоненте <font face="Verdana" size="2">TablesList</font> таблицу<B>.</B> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Теперь рассмотрим пример простейшего приложения, 
+  которое может отображать два поля из таблицы COUNTRY. DВ в демонстрационной 
+  базе данных DBDEMOS. Эта база данных поставляется в комплекте Delphi. В примере 
+  использованы только функции API BDE. </font ></P>
+<P><font face="Verdana" size="3"> Проект называется <font face="Verdana" size="2"> 
+  DirectBDE</font> и имеет только одну форму, в которой отображаются сведения 
+  из таблицы COUNTRY. DB о государствах и их столицах (рис. 16.5). Кнопки в нижней 
+  части формы позволяют перемещаться по набору данных. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>&nbsp;Листинг 16.2. </B> Модуль 
+  главной формы приложения DirectBDE&nbsp; </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> unit Unitl;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> interface</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> uses</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Windows, Messages, 
+    SysUtils, Classes, Graphics, Controls, Forms, Dialogs,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;StdCtrls, 
+    Buttons, BDE, ExtCtrls;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TMainForm = 
+    class(TForm)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PriorBtn: TBitBtn;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Panel2: ТPanel;:</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> NextBtn: TBitBtn;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Label3: ТLabel;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CountryEdit: 
+    TEdit;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Label1: TLabel;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CapitalEdit: 
+    TEdit;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure PriorBtnClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure FormShow(Sender: 
+    TObject};</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure FormClose(Sender: 
+    TObject;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;var Action: 
+    TCloseAction);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure NextBtnClick(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> private</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hDB: hDBIDB;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hCur: hDBICur;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CursProps: 
+    CurProps;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> RecBuf: pByte;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> FValue: array 
+    [0 .. 255] of Char;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> IsEmpty: Bool;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure OnBDEError;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;public</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MainForm: TMainForm;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> implementation 
+    ($R *.DFM}</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.OnBDEError;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var ErrInfo: 
+    dbiErrlnfo; // Структура, содержащая информацию об ошибках</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> AStr: String;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiGetErrorlnfo(True, 
+    Errlnfo);// Функция возвращает информацию об ошибке c</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ase Errlnfo.iError 
+    of</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 9733: AStr 
+    := 'Для создания записи недостаточно параметров';&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 10024: AStr 
+    := 'Ошибка доступа к данным';&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 10245: AStr 
+    := 'База данных занята другим пользователем';</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;10038: 
+    AStr := 'Значение поля задано неверно';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 11871: AStr 
+    := 'Несоответствие типов';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 11959: AStr 
+    := 'В выражении отсутствует оператор GROUP BY';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;else</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> AStr := 'Ошибочная 
+    операция с данными';&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ShowMessage(AStr) 
+    ;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.FormShow(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hDB := Nil; 
+    hCur := Nil;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Dbilnit(Nil); 
+    // Инициализация системы&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> BDE DbiOpenDatabase 
+    // Открытие базы данных&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> (</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 'DBDEMOS', 
+    // Псевдоним базы данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Nil, // Тип 
+    базы данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> dbiReadWrite, 
+    // Режим редактирования данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> dbiOpenShared, 
+    // Режим разделения данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Nil, // Пароль</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">0, // Число 
+    дополнительных параметров</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Nil, // Перечень 
+    полей для доп. параметров</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Nil, // Список 
+    доп. параметров</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hDB // Дескриптор 
+    базы данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> );</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiSetPrivateDir('с:\temp'); 
+    // Определение временного каталога</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiOpenTable 
+    // Открытие таблицы</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> (</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hDB, // Дескриптор 
+    базы данных&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PChar('COUNTRY'), 
+    // Название таблицы</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PChar(szParadox), 
+    // Тип таблицы (только для локальных БД)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Nil, // 
+    Название индекса (необязательный)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Nil, // 
+    IndexTagName — только для dBASE&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">0, // 0 — использовать 
+    первичный индекс&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> dbiReadWrite, 
+    // Режим редактирования данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;dbiOpenShared, 
+    // Режим разделения данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;xltField, 
+    // Режим трансляции данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> False, // Признак 
+    одностороннего перемещения курсора</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Nil, // 
+    Дополнительные параметры</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;hCur // 
+    Дескриптор курсора таблицы );</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiGetCursorProps 
+    // Определение параметров курсора&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> (&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">hCur, // Дескриптор 
+    курсора таблицы</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CursProps // 
+    Структура параметров курсора</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> GetMem // Вьщеление 
+    памяти под буфер записи&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> (</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> RecBuf,</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CursProps.iRecbufSize*SizeOf(Byte) 
+    );</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiSetToBegin(hCur); 
+    // Установка курсора в начало набора данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;DbiGetNextRecord 
+    // Перемещение на первую запись</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;(</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hCur, // Дескриптор 
+    курсора таблицы&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> dbiNoLock, 
+    // Режим ограничения доступа</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;RecBuf, 
+    // Буфер записи&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Nil // Параметры 
+    записи );</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiGetField 
+    // Получение значения поля</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;(</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> hCur, // Дескриптор 
+    курсора таблицы&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> 1, // Номер 
+    поля в структуре таблицы&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> RecBuf, // 
+    Буфер записи</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> @FValue, // 
+    Переменная, в которую передается значение</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;IsEmpty 
+    // Признак пустой ячейки );</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MainForm.CountryEdit.Text 
+    := FValue;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;DbiGetField(hCur, 
+    2, RecBuf, @FValue, IsEmpty);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;MainForm.CapitalEdit.Text 
+    := FValue;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.FormClose(Sender: 
+    TObject;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var Action: 
+    TCloseAction);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin 
+    try</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> finally</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> FreeMem(RecBuf); 
+    // Освобождение памяти буфера записи DbiCloseCursor(hCur); // Закрытие курсора&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DbiCloseDatabase(hDB); 
+    // Закрытие базы данных</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;DbiExit; 
+    // Закрытие сеанса работы с ВОЕ</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.PriorBtnClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">try</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if DbiGetPriorRecord(hCur, 
+    dbiNoLock, RecBuf, Nil) = DBIERR_BOF</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then PriorBtn.Enabled 
+    := False</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> else&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Not NextBtn.Enabled 
+    then NextBtn.Enabled := True;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;DbiGetField{hCur, 
+    1, RecBuf, SFValue, IsEmpty);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MainForm.CountryEdit.Text 
+    := FValue;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;DbiGetField(hCur, 
+    2, RecBuf, @FValue, IsEmpty);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;MainForm.CapitalEdit.Text 
+    := FValue;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> OnBDEError;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.NextBtnClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if DbiGetNextRecord(hCur, 
+    dbiNoLock, RecBuf, Nil)=DBIERR_EOF</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;then NextBtn.Enabled 
+    := False</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;else</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Not PriorBtn.Enabled 
+    then PriorBtn.Enabled := True;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;DbiGetFieldfhCur, 
+    1, RecBuf, @FValue, IsEmpty);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MainForm.CountryEdit.Text 
+    := FValue;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">DbiGetField(hCur, 
+    2, RecBuf, @FValue, IsEmpty);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;MainForm.CapitalEdit.Text 
+    := FValue;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> OnBDEError;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end.</font> 
+    </font ></P>
+</blockquote>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.16.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 16.5. </B>Главная форма 
+  проекта <font face="Verdana" size="2"> DirectBDE</font> </font ></P>
+<P><font face="Verdana" size="3"> При показе главной формы приложения в процедуре 
+  <font face="Verdana" size="2"> Formshow</font> проводится инициализация BDE, 
+  открытие базы данных и таблицы. При этом создаются дескрипторы базы данных <font face="Verdana" size="2">hDB</font> 
+  и курсора таблицы <font face="Verdana" size="2">hour</font>, которые играют 
+  в дальнейшей работе приложения важную роль. Если при создании базы данных не 
+  указывать псевдоним БД, то обязательно нужно определить рабочий каталог базы 
+  данных с помощью функции <font face="Verdana" size="2">DbiSetoirectory</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> После этого отводится память под буфер записи, 
+  в который будут передаваться значения полей текущей строки таблицы. Размер буфера 
+  определяется при помощи Структуры <font face="Verdana" size="2">CURPropS</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Затем курсор устанавливается на начало набора 
+  данных и на первую запись и осуществляется чтение значений двух полей таблицы. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Навигация по набору данных реализована в методах-обработчиках 
+  на нажатие кнопок формы. Их действие аналогично за исключением направления перемещения. 
+  При щелчке на кнопке выполняется переход на следующую или предыдущую запись, 
+  данные из новой записи помещаются в буфер записи <font face="Verdana" size="2">RecBuf</font>. 
+  Оттуда при помощи функции <font face="Verdana" size="2"> DMGetFieid</font> осуществляется 
+  чтение значений полей. При достижении начала или конца набора данных кнопка 
+  деактивируется. </font ></P>
+<P><font face="Verdana" size="3"> При закрытии формы проводятся операции по освобождению 
+  памяти буфера записи, закрытию базы данных и BDE. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

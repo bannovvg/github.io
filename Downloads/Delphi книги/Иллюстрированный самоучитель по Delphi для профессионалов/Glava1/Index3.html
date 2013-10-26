@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Поля, свойства и методы</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Поля класса являются переменными, объявленными внутри класса. Они предназначены для хранения данных во время работы экземпляра класса (объекта). Ограничений на тип полей в классе не предусмотрено. В описании класса поля должны предшествовать методам и свойствам. Обычно поля используются для обеспечения выполнения операций внутри класса.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При объявлении имен полей принято к названию 
+    добавлять заглавную букву <font face="Verdana" size="2">F</font>. Например<font face="Verdana" size="2"> 
+    FSomeField.</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Итак, поля предназначены для использования внутри класса. Однако класс должен каким-либо образом взаимодействовать с другими классами или программными элементами приложения. В подавляющем большинстве случаев класс должен выполнить с некоторыми данными определенные действия и представить результат.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для получения и передачи данных в классе применяются свойства. Для объявления свойств в классе используется зарезервированное слово
+<font face="Verdana" size="2">property</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойства представляют собой атрибуты, которые составляют индивидуальность объекта и помогают описать его. Например, обычная кнопка в окне приложения обладает такими свойствами, как цвет, размеры, положение. Для экземпляра класса &quot;кнопка&quot; значения этих атрибутов задаются при помощи свойств — специальных переменных, определяемых ключевым словом
+<font face="Verdana" size="2">property</font>. Цвет может задаваться свойством
+<font face="Verdana" size="2">Color</font>, размеры — свойствами
+<font face="Verdana" size="2"> Width</font> и <font face="Verdana" size="2">Height</font>
+и т. д.
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как свойство обеспечивает обмен данными с внешней средой, то для доступа к его значению используются специальные методы класса. Поэтому обычно свойство определяется тремя элементами: полем и двумя методами, которые осуществляют его чтение/запись:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;TAnObject = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetColor: TSomeType;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetColor(ANewValue: TSomeType);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AColor: TSomeType read GetColor write SetColor;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В данном примере доступ к значению свойства
+<font face="Verdana" size="2"> AColor</font> осуществляется через вызовы методов
+<font face="Verdana" size="2"> GetColor</font> и <font face="Verdana" size="2"> SetColor</font>. Однако в обращении к этим методам в явном виде нет необходимости: достаточно написать:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AnObject.AColor := AValue;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> AVariable := AnObject.AColor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и компилятор самостоятельно оттранслирует обращение к свойству
+<font face="Verdana" size="2">AColor</font> в вызовы методов <font face="Verdana" size="2">Getcolor</font> или
+<font face="Verdana" size="2">Setcolor</font>. Tо есть внешне свойство выглядит в точности как обычное поле, но за всяким обращением к нему могут стоять нужные вам действия. Например, если у вас есть объект, представляющий собой квадрат на экране, и его свойству &quot;цвет&quot; вы присваиваете значение &quot;белый&quot;, то произойдет немедленная перерисовка, приводящая реальный цвет на экране в соответствие со значением свойства. Выполнение этой операции осуществляется методом, который связан с установкой значения свойства &quot;цвет&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+В методах, входящих в состав свойств, может осуществляться проверка устанавливаемой величины на попадание в допустимый диапазон значений и вызов других процедур, зависящих от вносимых изменений. Если же потребности в специальных процедурах чтения и/или записи нет, можно вместо имен методов применять имена полей. Рассмотрим следующую конструкцию:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TPropObject = class(TObject)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">FValue: TSomeType;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure DoSomething;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Correct(AValue: Integer):boolean;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure SetValue(NewValue: Integer);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property AValue: Integer read FValue write
+SetValue;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TPropObject.SetValue(NewValue: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (NewValueoFValue) and Correct(NewValue) then EValue := NewValue;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DoSomething;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере чтение значения свойства <font face="Verdana" size="2"> AValue</font> означает просто чтение поля
+<font face="Verdana" size="2"> rvalue</font>. Зато при присвоении значения внутри
+<font face="Verdana" size="2"> SetValue</font> вызывается сразу два метода.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если свойство должно только читаться или записываться, в его описании может присутствовать соответствующий метод:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TAnObject = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AProperty: TSomeType read GetValue;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере вне объекта значение свойства можно лишь прочитать; попытка присвоить свойству
+<font face="Verdana" size="2"> AProperty</font> значение вызовет ошибку компиляции.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для присвоения свойству значения по умолчанию используется ключевое
+слово <font face="Verdana" size="2">default</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Visible: boolean read FVisible write SetVisible default True;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Это означает, что при запуске программы свойство будет установлено компилятором
+в <font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство может быть и векторным; в этом случае оно внешне выглядит как массив:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property APoints[Index : Integer]:TPoint read GetPoint write SetPoint;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+На самом деле в классе может и не быть соответствующего поля — массива. Напомним, что вся обработка обращений к внутренним структурам класса может быть замаскирована.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для векторного свойства необходимо описать не только тип элементов массива, но также имя и тип индекса. После ключевых слов
+<font face="Verdana" size="2"> read</font> и <font face="Verdana" size="2"> write</font> в этом случае должны стоять имена методов — использование здесь полей массивов недопустимо. Метод, читающий значение векторного свойства, должен быть описан как функция, возвращающая значение того же типа, что и элементы свойства, и имеющая единственный параметр того же типа и с тем же именем, что и индекс свойства:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetPoint(Index:Integer):TPoint;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Аналогично, метод, помещающий значения в такое свойство, должен первым параметром иметь индекс, а вторым — переменную нужного типа (которая может быть передана как по ссылке, так и по значению):
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetPoint(Index:Integer; NewPoint:TPoint);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+У векторных свойств есть еще одна важная особенность. Некоторые классы в Delphi (списки т-List, наборы строк
+<font face="Verdana" size="2"> TStrings</font>) &quot;построены&quot; вокруг основного векторного свойства (см. гл. 7).
+Основной метод такого класса дает доступ к некоторому массиву, а все остальные методы являются как бы вспомогательными. Специально для облегчения работы в этом случае векторное свойство может быть описано с ключевым словом
+<font face="Verdana" size="2"> default</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMyObject = class;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Strings[Index: Integer]: string read Get write Put; default;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если у объекта есть такое свойство, то можно его не упоминать, а ставить индекс в квадратных скобках сразу после имени объекта:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var AMyObject: TMyObject;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AMyObject.Strings[1] := 'First'; {первый способ}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;AMyObject[2] := 'Second'; (второй способ}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Будьте внимательны, применяя зарезервированное слово
+<font face="Verdana" size="2"> default</font>, — как мы увидели, для обычных и векторных свойств оно употребляется в разных случаях и с различным синтаксисом.
+</font ></P>
+<P><font face="Verdana" size="3">
+О роли свойств в Delphi красноречиво говорит следующий факт: у всех имеющихся в распоряжении программиста стандартных классов 100% полей недоступны и заменены базирующимися на них свойствами. Рекомендуем при разработке собственных классов придерживаться этого же правила.
+</font ></P>
+<P><font face="Verdana" size="3">
+Внимательный читатель обратил внимание, что при объяснении терминов &quot;поле&quot; и &quot;свойство&quot; мы использовали понятие метода, и наверняка понял его общий смысл. Итак, методом называется объявленная в классе функция или процедура, которая используется для работы с полями и свойствами класса. Согласно принципам ООП (см. разд. &quot;Инкапсуляция&quot; далее в этой главе),
+обращаться к свойствам класса можно только через его методы. От обычных процедур и функций методы отличаются тем, что им при вызове передается указатель на тот объект, который их вызвал. Поэтому обрабатываться будут данные именно того объекта, который вызвал метод. На некоторых особенностях использования методов мы остановимся ниже.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

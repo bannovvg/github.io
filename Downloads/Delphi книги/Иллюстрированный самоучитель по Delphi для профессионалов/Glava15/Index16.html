@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Синхронный просмотр данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+При разработке приложений для работы с базами данных часто возникает необходимость в связывании двух наборов данных по ключевому полю. Например, в таблице
+<font face="Verdana" size="2"> Orders</font> (содержит данные о заказах) демонстрационной базы данных
+<font face="Verdana" size="2"> DBDEMOS</font> имеется поле <font face="Verdana" size="2">custNo</font>, которое содержит идентификационный номер покупателя. Под этим же номером в таблице
+<font face="Verdana" size="2"> Customers</font> хранится информация о покупателе (адрес, телефон, реквизиты и т. д.). При разработке пользовательского интерфейса приложения баз данных необходимо, чтобы при просмотре перечня заказов в форме приложения отображались не идентификационные номера покупателей, а их параметры.
+</font ></P>
+<P><font face="Verdana" size="3">
+Таким образом, в наборе данных заказов вместо поля номера покупателя должно появиться поле имени покупателя из таблицы
+<font face="Verdana" size="2">Customers</font>. Механизм связывания полей из различных наборов данных по ключевому полю называется синхронным просмотром.
+В рассмотренном примере ключевым является поле
+<font face="Verdana" size="2"> CustNo</font> из таблицы <font face="Verdana" size="2">Customers</font>, а выбор конкретного наименования производится по совпадению значений ключевого поля и заменяемого поля
+из исходного набора данных — <font face="Verdana" size="2">Orders</font>. Причем необходимо, чтобы в таблице
+<font face="Verdana" size="2"> Customers</font> поле <font face="Verdana" size="2"> custNo</font> было уникальным (составляло первичный или вторичный ключ).
+</font ></P>
+<P><font face="Verdana" size="3">
+Таблицу, в которой расположено поле, значения которого замещаются на синхронные, будем называть исходной таблицей
+(это таблица <font face="Verdana" size="2">Orders</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Таблицу, содержащую ключевое поле и поле данных для синхронного просмотра, будем называть таблицей синхронного просмотра
+(таблица <font face="Verdana" size="2">Customers</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+В Delphi механизм синхронного просмотра реализован на уровне отдельных полей и компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+В наборе данных динамически можно создать специальное поле синхронного просмотра, которое будет автоматически замещать одно значение другим в зависимости от значения ключевого поля. Такое поле можно связать с любым рассмотренным выше компонентом отображения данных (см. гл. 13).
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо простого синхронного просмотра данных может возникнуть задача редактирования данных в аналогичной ситуации. Для этого предназначены специальные компоненты синхронного просмотра данных, которые позволяют, например, выбирать покупателя из списка, а изменится при этом номер покупателя в наборе данных заказов. Использование таких компонентов делает пользовательский интерфейс значительно более удобным и наглядным. В VLC Delphi есть два таких компонента:
+<font face="Verdana" size="2"> TDBLookupListBox</font> И <font face="Verdana" size="2">TDBLookupComboBox.</font>
+</font ></P>
+<P><font face="Verdana" size="3"><B>Примечание</B>
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> На странице Win 3.1 Палитры компонентов имеются 
+    еще два компонента: <font face="Verdana" size="2"> TDBLokupList</font> и <font face="Verdana" size="2">TDBLookupCombo</font>. 
+    Они обладают тем же набором функций, используются для обеспечения совместимости 
+    с приложениями, созданными в среде разработки Delphi 1, и поэтому здесь не 
+    рассматриваются. </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

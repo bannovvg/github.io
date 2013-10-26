@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index28.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index30.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Групповые операции <br>
+  </b> </font> </P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Как уже рассказывалось выше, наборы данных ADO используют на клиентской стороне локальный кэш для хранения данных и сделанных изменений. Благодаря наличию этого кэша и появилась возможность реализовать групповые операции. В этом режиме все сделанные изменения не передаются немедленно источнику данных, а накапливаются в локальном кэше. Это повышает скорость работы и позволяет сохранять сразу группу модифицированных записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Из отрицательных сторон этого метода стоит отметить, что пока изменения находятся на клиенте, они недоступны другим пользователям. В данной ситуации могут возникать потери данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для перевода набора данных в режим групповых операций необходимо выполнить следующие условия.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Набор данных должен использовать клиентский курсор:</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ADODataSet.CursorLocation := clUseClient;</font>
+</font ></P>
+</blockquote>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Курсор должен иметь тип ctstatic:</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ADODataSet.CursorType := ctstatic;</font>
+</font ></P>
+</blockquote>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> Блокировка должна иметь значение itBatchoptimistic:</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ADODataSet.LockType := ItBatchOptimistic;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для передачи сделанных изменений в хранилище данных в компонентах ADO используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure UpdateBatch(AffectRecords: TAffectRecords = arAll);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для отмены всех сделанных, но не сохраненных методом
+<font face="Verdana" size="2"> UpdateBatch</font> изменений применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CancelBatch(AffectRecords: TAffectRecords = arAll);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Используемый в методах тип <font face="Verdana" size="2"> TAffectRecords</font> позволяет задать тип записей, к которым применяется данная операция:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TAffectRecords  =   (arCurrent,   arFiltered,   arAll,   arAHChapters);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+arcurrent</font> — операция выполняется только для текущей записи;
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;<font face="Verdana" size="2">arFiltered</font> — операция выполняется для записей из работающего фильтра;
+</font ></P>
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">rA</font><font face="Verdana" size="2">ll</font> — операция выполняется для всех записей;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">arAllchapters</font> — операция выполняется для всех записей текущего набора данных (включая невидимые из-за включенного фильтра), а также для всех вложенных наборов данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index28.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index30.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

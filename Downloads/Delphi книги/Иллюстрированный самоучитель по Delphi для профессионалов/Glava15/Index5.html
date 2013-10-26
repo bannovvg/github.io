@@ -1,0 +1,315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Навигация по набору данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Перемещение или навигация по записям набора данных может осуществляться несколькими путями. Например, в компонентах
+<font face="Verdana" size="2"> TDBGrid</font> и <font face="Verdana" size="2">TDBCtrlGrid</font>, которые отображают сразу несколько записей набора данных, можно использовать клавиши вертикального перемещения курсора или вертикальную полосу прокрутки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Но что делать, если на форме находятся только компоненты, отображающие одно поле только текущей записи набора данных
+(<font face="Verdana" size="2">TDBEdit</font>, <font face="Verdana" size="2">TDBCombоВох</font>
+и т. д.)? Очевидно, что в этом случае на форме должны быть расположены дополнительные элементы управления, отвечающие за перемещение по записям.
+</font ></P>
+<P><font face="Verdana" size="3">
+Аналогично, ни один компонент отображения данных не имеет встроенных средств для создания и удаления записей целиком.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для решения указанных задач и предназначен компонент
+<font face="Verdana" size="2">TDBNavigator</font>, который представляет собой совокупность управляющих кнопок, выполняет операции навигации по набору данных и модификации записей целиком.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDBNavigator</font> при помощи свойства
+<font face="Verdana" size="2"> DataSource</font> связывается с компонентом
+<font face="Verdana" size="2"> TDataSource</font> и через него с набором данных. Такая схема позволяет обеспечить изменение текущих значений полей сразу во всех связанных с
+<font face="Verdana" size="2"> TDataSource</font> компонентах отображения данных. Таким образом,
+<font face="Verdana" size="2"> TDBNavigator</font> только дает команду на выполнение перемещения по набору данных или другой управляющей операции, а всю реальную работу выполняют компонент набора данных и компонент
+<font face="Verdana" size="2">TDataSource</font>. Компонентам отображения данных остается только принять новые данные от своих полей.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.15.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 15.4. </B>Назначение 
+  кнопок компонента <font face="Verdana" size="2"> TDBNavigator</font> </font ></P>
+<P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TDBNavigator</font> 
+  содержит набор кнопок, каждая из которых отвечает за выполнение одной операции 
+  над набором данных. Всего имеется 10 кнопок, разработчик может оставить в наборе 
+  любое количество кнопок в любом сочетании. Видимостью кнопок управляет свойство 
+  <font face="Verdana" size="2">visibleButtons</font>: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TNavigateBtn 
+    = (nbFirst, nbPrior, nbNext, nbLast, nblnsert, nbDelete,&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">nbEdit, nbPost, 
+    nbCancel, nbRefresh);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TButtonSet 
+    = set of TNavigateBtn;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property VisibieButtons: 
+    TButtonSet;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Каждый элемент типа <font face="Verdana" size="2"> 
+  TNavigateBtn</font> представляет одну кнопку, их назначение описывается ниже: 
+  </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2"> nbFirst</font> 
+  — перемещение на первую запись набора данных;&nbsp; </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2"> nbPrior</font> 
+  — перемещение на предыдущую запись набора данных; </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2">nbNext</font> 
+  — перемещение на следующую запись набора данных; </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2">nbLast</font> 
+  — перемещение на последнюю запись набора данных;&nbsp; </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2"> nblnsert</font> 
+  — вставка новой записи в текущей позиции набора данных; </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2">nbDelete</font> 
+  — удаление текущей записи, курсор перемешается на следующую запись; </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2"> nbEdit</font> 
+  — набор данных переводится в режим редактирования; </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2">nbPost</font> 
+  — в базу данных переносятся все изменения в текущей записи; </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2">nbcancel</font> 
+  — все изменения в текущей записи отменяются; </font ></P>
+<P><font face="Verdana" size="3"> <font face="Verdana" size="2"> nbRefresh</font> 
+  — восстанавливаются первоначальные значения текущей записи, сделанные после 
+  последнего переноса изменений в базу данных. </font ></P>
+<P><font face="Verdana" size="3"> Самой критичной к возможной потере данных вследствие 
+  ошибки является операция удаления записи, поэтому при помощи свойства <font face="Verdana" size="2">confirmDelete</font> 
+  можно включить механизм контроля удаления. При каждом удалении записи нужно 
+  будет дать подтверждение выполняемой операции. </font ></P>
+<P><font face="Verdana" size="3"> Нажатие любой кнопки можно эмулировать программно 
+  при помощи метода <font face="Verdana" size="2">BtnClick</font>. </font ></P>
+<P><font face="Verdana" size="3"> В случае необходимости выполнения дополнительных 
+  действий при щелчке на любой кнопке можно воспользоваться обработчиками событий 
+  <font face="Verdana" size="2"> BeforeAction</font> и <font face="Verdana" size="2">Onciick</font>, 
+  в которых параметр <font face="Verdana" size="2"> Button</font> определяет нажатую 
+  кнопку. Свойства и методы компонента <font face="Verdana" size="2"> TDBNavigator</font> 
+  представлены в табл. 15.6. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 15.6. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TDBNavigator</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="480" HEIGHT="410">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="201" HEIGHT="35"> <DIV WIDTH="266" HEIGHT="35" style="width: 87; height: 35"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="35"> <DIV WIDTH="50" HEIGHT="35" style="width: 4; height: 35"> 
+        <P><font face="Verdana" size="3"> <b>Тип</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="35"> <DIV WIDTH="340" HEIGHT="35" style="width: 66; height: 35"> 
+        <P><font face="Verdana" size="3"> <b>Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="522" HEIGHT="23"> <DIV WIDTH="266" HEIGHT="23" style="width: 68; height: 23"> 
+        <P><font face="Verdana" size="3"> <b> Свойства</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="201" HEIGHT="50"> 
+      <DIV WIDTH="266" HEIGHT="50" style="width: 186; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          ConfirmDelete: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="50"> 
+      <DIV WIDTH="50" HEIGHT="50" style="width: 7; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="50"> 
+      <DIV WIDTH="340" HEIGHT="50" style="width: 282; height: 50"> 
+        <P><font face="Verdana" size="3"> Включает или отключает подтверждение 
+          удаления записи </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="201" HEIGHT="54"> 
+      <DIV WIDTH="266" HEIGHT="54" style="width: 156; height: 54"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Hints: TStrings;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="54"> 
+      <DIV WIDTH="50" HEIGHT="54" style="width: 3; height: 54"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="54"> 
+      <DIV WIDTH="340" HEIGHT="54" style="width: 274; height: 54"> 
+        <P><font face="Verdana" size="3"> Содержит список подсказок для каждой 
+          кнопки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="201" HEIGHT="46"> 
+      <DIV WIDTH="266" HEIGHT="46" style="width: 133; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Flat: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="46"> 
+      <DIV WIDTH="50" HEIGHT="46" style="width: 5; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="46"> 
+      <DIV WIDTH="340" HEIGHT="46" style="width: 240; height: 46"> 
+        <P><font face="Verdana" size="3"> Определяет внешний вид кнопок компонента 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="201" HEIGHT="202"> 
+      <DIV WIDTH="266" HEIGHT="202" style="width: 193; height: 230"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type 
+          TNavigateBtn = (nbFirst, nbPrior, nbNext, nbLast, nblnsert, nbDeiete, 
+          nbEdit, nbPost, nbCancel, nbRefresh);</font> </font ></P>
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TButtonSet 
+          = set of TNavigateBtn ;</font> </font ></P>
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          VisibleButtons: TButtonSet;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="202"> 
+      <DIV WIDTH="50" HEIGHT="202" style="width: 8; height: 202"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="202"> 
+      <DIV WIDTH="340" HEIGHT="202" style="width: 185; height: 202"> 
+        <P><font face="Verdana" size="3"> Список видимых кнопок </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="509" HEIGHT="29"> <DIV WIDTH="256" HEIGHT="29"> 
+      <P><font face="Verdana" size="3"> <b> Методы</b> </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="42"> 
+      <DIV WIDTH="256" HEIGHT="42" style="width: 152; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure 
+          BtnClick (Index:&nbsp; TNavigateBtn) ;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="25" HEIGHT="42"> 
+      <DIV WIDTH="44" HEIGHT="42" style="width: 6; height: 42"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pu</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="42"> 
+      <DIV WIDTH="321" HEIGHT="42" style="width: 252; height: 42"> 
+        <P><font face="Verdana" size="3"> Эмулирует щелчок на кнопке <font face="Verdana" size="2"> 
+          index</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="65"> 
+      <DIV WIDTH="256" HEIGHT="65" style="width: 181; height: 65"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure 
+          SetBounds (ALeft,&nbsp; ATop, AWidth, AHeight:&nbsp; Integer) ;&nbsp;</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="25" HEIGHT="65"> 
+      <DIV WIDTH="44" HEIGHT="65" style="width: 2; height: 65"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pu</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="65"> 
+      <DIV WIDTH="321" HEIGHT="65" style="width: 267; height: 65"> 
+        <P><font face="Verdana" size="3"> Задает положение (параметры <font face="Verdana" size="2"> 
+          ALeft, АТор</font>) и размер компонента (параметры <font face="Verdana" size="2"> 
+          AWidth, AHeight</font>) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="487" HEIGHT="31"> <DIV WIDTH="256" HEIGHT="31" style="width: 232; height: 31"> 
+        <P><font face="Verdana" size="3"> <b> Методы-обработчики событий</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="98"> 
+      <DIV WIDTH="256" HEIGHT="98" style="width: 174; height: 98"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ENavClick 
+          = procedure (Sender: TObject; Button: TNavigateBtn) of object; Iproperty 
+          BeforeAction:&nbsp; ENavClick;&nbsp;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="25" HEIGHT="98"> 
+      <DIV WIDTH="44" HEIGHT="98" style="width: 7; height: 98"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="98"> 
+      <DIV WIDTH="321" HEIGHT="98" style="width: 271; height: 98"> 
+        <P><font face="Verdana" size="3"> &nbsp;Выполняется при щелчке на кнопке 
+          <font face="Verdana" size="2"> Button</font> перед выполнением операции, 
+          связанной с кнопкой </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="106"> 
+      <DIV WIDTH="256" HEIGHT="106" style="width: 172; height: 106"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ENavClick 
+          = procedure&nbsp; (Sender: TObject; Button:&nbsp; TNavigateBtn) of object;&nbsp;</font> 
+          </font ></P>
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          OnClick:&nbsp; ENavClick;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="25" HEIGHT="106"> 
+      <DIV WIDTH="44" HEIGHT="106" style="width: 3; height: 106"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Pb</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="106"> 
+      <DIV WIDTH="321" HEIGHT="106" style="width: 260; height: 106"> 
+        <P><font face="Verdana" size="3"> Выполняется при щелчке на кнопке <font face="Verdana" size="2"> 
+          Button</font> после выполнения операции, связанной с кнопкой </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index6.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

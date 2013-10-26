@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index9.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Механизм подключения 
+  индексов</strong> <br>
+  </font> </P>
+<p align="left"> <font face="Verdana" size="3"> </font ></P>
+<P><font face="Verdana" size="3"> Для того чтобы подключить к набору данных вторичный 
+  индекс, необходимо присвоить свойству <font face="Verdana" size="2"> indexName</font> 
+  название индекса. Если свойство не имеет значения, то в наборе данных используется 
+  первичный индекс. </font ></P>
+<P><font face="Verdana" size="3"> Альтернативный способ задания индекса заключается 
+  в использовании свойства <font face="Verdana" size="2">indexFieldNames</font>, 
+  в котором задается перечень имен полей необходимого индекса, разделенных точкой 
+  с запятой. При этом в Инспекторе объектов для данного свойства список полей 
+  существующих индексов создается автоматически, разработчику остается сделать 
+  выбор. При помощи свойства <font face="Verdana" size="2"> indexFieldNames</font> 
+  можно создавать и составные индексы. Для этого необходимо, чтобы все входящие 
+  в список поля были индексированы. </font ></P>
+<P><font face="Verdana" size="3"> Список имен всех индексов можно получить при 
+  помощи метода </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">GetlndexNames.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> <B> Примечание</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Изменение текущего индекса можно осуществлять 
+    без отключения набора данных, поэтому в приложениях очень удобно делать сортировку 
+    данных по индексам. Такой метод смены индексов называется индексацией &quot;на 
+    лету&quot;. </font ></P>
+</blockquote>
+<p><font face="Verdana" size="3"> После установки индекса количество полей в индексе 
+  передается в свойство </font ></p>
+<blockquote>
+  <p><font face="Verdana" size="3"><font face="Verdana" size="2"> IndexFieldCount.</font></font > 
+  </p>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index9.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

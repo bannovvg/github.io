@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index24.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index26.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Фильтрация </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо обычной фильтрации , основанной на
+свойствах <font face="Verdana" size="2">Filter,  Filtered</font> и
+методе-обработчике <font face="Verdana" size="2">onFilterRecord</font>, класс
+<font face="Verdana" size="2"> TCustomADODataSet</font> предоставляет разработчику дополнительные возможности.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFilterGroup = (fgUnassigned, fgNone, fgPendingRecords, fgAffectedRecords, fgFetchedRecords, fgPredicate, fgConflictingRecords);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property FilterGroup: TFilterGroup;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задает групповой фильтр для записей, основываясь на информации о состоянии каждой записи набора данных, подобно рассмотренному выше свойству
+<font face="Verdana" size="2">RecordStatus</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Фильтрация возможна по следующим параметрам:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">fgUnassigned.— 
+    фильтр не задан;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fgNone — все ограничения, 
+    заданные фильтром, снимаются, отображаются все записи набора данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fgPendingRecords — отображаются 
+    измененные записи, несохраненные в хранилище данных при вызове метода  
+    updateBatch или cancelBatch;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fgAffectedRecords — показываются 
+    записи, обработанные при последнем сохранении в хранилище данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fgFetchedRecords — имеем 
+    записи, полученные при последнем обновлении из источника данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fgPredicate — видны только 
+    удаленные записи;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;fgConfiictingRecords — 
+    отображаются модифицированные записи, при сохранении которых в хранилище данных 
+    возникла ошибка.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Для того чтобы групповая фильтрация заработала, необходимы два дополнительных условия. Во-первых, фильтрация должна быть включена — свойство
+<font face="Verdana" size="2"> Filtered</font> должно иметь Значение
+<font face="Verdana" size="2">True</font>.&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+Во- вторых , свойство <font face="Verdana" size="2">LockType</font>
+должно иметь значение <font face="Verdana" size="2">I</font><font face="Verdana" size="2">tBatchOptimistic</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with ADODataSet do begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+LockType := ItbatchOptimistic;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Filtered := True;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FilterGroup := fgFetchedRecords;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FilterOnBookmarks(Bookmarks: array of const);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+включает фильтрацию по существующим закладкам. Для этого предварительно необходимо при помощи метода
+<font face="Verdana" size="2"> GetBookmark</font> установить закладки на интересующих записях. При вызове метода
+<font face="Verdana" size="2"> FilterOnBookmarks</font> автоматически очищается свойство
+<font face="Verdana" size="2">Filter</font>, а свойству <font face="Verdana" size="2"> FilterGroup</font> присваивается значение
+<font face="Verdana" size="2">gUnassigned</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index24.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index26.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

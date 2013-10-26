@@ -1,0 +1,302 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TDCOMConnection</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDCOMConnection</font> предоставляет транспорт на основе технологии Distributed COM и применяется в основном для организации транспорта в рамках локальной сети.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для настройки соединения DCOM в первую очередь необходимо задать имя компьютера, на котором функционирует сервер приложений. Для компонента
+<font face="Verdana" size="2"> TDCOMConnection</font> это должен быть зарегистрированный сервер Автоматизации. Имя компьютера задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ComputerName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если оно задано правильно, в списке свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ServerName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в Инспекторе объектов можно выбрать один из доступных серверов. При выборе сервера также автоматически заполняется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ServerGUID: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Причем для успешного соединения клиента с сервером приложений оба свойства должны быть заданы в обязательном порядке. Только имя сервера или только его GUID не обеспечат правильный доступ к удаленному объекту СОМ.
+</font ></P>
+<P><font face="Verdana" size="3">
+Открытие и закрытие соединения осуществляется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Connected: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или методами
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Open/procedure Close;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+соответственно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для организации передачи данных между клиентом и сервером компонент
+<font face="Verdana" size="2">TDCOMConnection</font> предоставляет интерфейс
+<font face="Verdana" size="2">IAppServer</font>
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AppServer:  Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который также может быть получен методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetServer: lAppServer; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ObjectBroker:   TCustomObjectBroker;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяет использовать экземпляр компонента
+<font face="Verdana" size="2">TsimpleObjectBroker</font> для получения списка доступных серверов по время выполнения (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы-обработчики компонента <font face="Verdana" size="2"> TDCOMConnection</font> представлены в табл. 20.1.&nbsp;
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 20.1. </B>Методы-обработчики 
+  событий компонента <font face="Verdana" size="2"> TDCOMConnection</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="491" HEIGHT="448">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="217" HEIGHT="33">
+<DIV WIDTH="302" HEIGHT="33" style="width: 98; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="33">
+<DIV WIDTH="317" HEIGHT="33" style="width: 74; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="217" HEIGHT="46">
+<DIV WIDTH="302" HEIGHT="46" style="width: 188; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Af terConnect: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="46">
+<DIV WIDTH="317" HEIGHT="46" style="width: 228; height: 46">
+<P><font face="Verdana" size="3">
+Вызывается после установления соединения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="217" HEIGHT="44">
+<DIV WIDTH="302" HEIGHT="44" style="width: 202; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AfterDisconnect: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="44">
+<DIV WIDTH="317" HEIGHT="44" style="width: 273; height: 44">
+<P><font face="Verdana" size="3">
+Вызывается после разрыва соединения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="217" HEIGHT="42">
+<DIV WIDTH="302" HEIGHT="42" style="width: 191; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeConnect: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="42">
+<DIV WIDTH="317" HEIGHT="42" style="width: 238; height: 42">
+<P><font face="Verdana" size="3">
+Вызывается перед установлением соединения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="217" HEIGHT="40">
+<DIV WIDTH="302" HEIGHT="40" style="width: 211; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeDisconnect: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="40">
+<DIV WIDTH="317" HEIGHT="40" style="width: 204; height: 40">
+<P><font face="Verdana" size="3">
+Вызывается перед разрывом соединения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="217" HEIGHT="134">
+<DIV WIDTH="302" HEIGHT="134" style="width: 184; height: 134">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TGetUsernameEvent = procedure ( Sender : TOb j ect ; var Username: string) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnGetUsername : TGetUsernameEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="134">
+<DIV WIDTH="317" HEIGHT="134" style="width: 262; height: 134">
+<P><font face="Verdana" size="3">
+Вызывается непосредственно перед появлением диалога удаленной авторизации пользователя. Для этого свойство
+<font face="Verdana" size="2"> LoginPrompt</font> должно иметь значение
+<font face="Verdana" size="2">True</font>. Параметр <font face="Verdana" size="2"> Username</font> может содержать имя пользователя по умолчанию, которое появится в диалоге
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="217" HEIGHT="108">
+<DIV WIDTH="302" HEIGHT="108" style="width: 190; height: 108">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TLoginEvent = procedure ( Sender: TOb j ect; Username, Password: string) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnLogin: TLoginEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="108">
+<DIV WIDTH="317" HEIGHT="108" style="width: 246; height: 108">
+<P><font face="Verdana" size="3">
+Вызывается после открытия соединения, если свойство
+<font face="Verdana" size="2"> LoginPrompt</font> имеет значение
+<font face="Verdana" size="2">True</font>. Параметры <font face="Verdana" size="2"> Username</font> и
+<font face="Verdana" size="2"> Password</font> содержат имя пользователя и пароль, введенные при авторизации
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

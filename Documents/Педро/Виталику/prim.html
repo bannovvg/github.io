@@ -1,0 +1,48 @@
+<html>
+<HEAD>
+ <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=Windows-1251">
+ <TITLE> Пример объекта radio</TITLE> 
+</HEAD> 
+<SCRIPT>
+function convertField(field) {
+   if (document.form1.conversion[0].checked) {
+      field.value = field.value.toUpperCase()}
+   else {
+   if (document.form1.conversion[1].checked) {
+      field.value = field.value.toLowerCase()}
+   }
+}
+function convertAllFields(caseChange) {
+   if (caseChange=="upper") {
+   document.form1.lastName.value = document.form1.lastName.value.toUpperCase()
+   document.form1.firstName.value = document.form1.firstName.value.toUpperCase()
+   document.form1.cityName.value = document.form1.cityName.value.toUpperCase()}
+   else {
+   document.form1.lastName.value = document.form1.lastName.value.toLowerCase()
+   document.form1.firstName.value = document.form1.firstName.value.toLowerCase()
+   document.form1.cityName.value = document.form1.cityName.value.toLowerCase()
+   }
+}
+</SCRIPT>
+<BODY>
+<FORM NAME="form1">  <B>Фамилия:</B> 
+<INPUT TYPE="text" NAME="lastName" SIZE=20 onChange="convertField(this)">
+ <BR>
+<B>Имя:</B> 
+<INPUT TYPE="text" NAME="firstName" SIZE=20 onChange="convertField(this)">
+ <BR>
+<B>Город:</B> 
+<INPUT TYPE="text" NAME="cityName" SIZE=20 onChange="convertField(this)">
+<P>
+<B>Преобразовать значение:</B> <BR>
+<INPUT TYPE="radio" NAME="conversion" VALUE="upper" onClick="if (this.checked) 
+       {convertAllFields('upper')}">
+ Верхний регистр <BR>
+<INPUT TYPE="radio" NAME="conversion" VALUE="lower" onClick="if (this.checked) 
+       {convertAllFields('lower')}">
+ Строчные буквы <BR>
+<INPUT TYPE="radio" NAME="conversion" VALUE="noChange">
+  Не преобразовывать 
+</FORM>
+</BODY>
+</html>

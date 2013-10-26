@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TIBSQLMonitor</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TIBSQLMonitor</font> позволяет получать в клиентском приложении сообщения от сервера о выполняемых им операциях. Для этого используется метод-обработчик компонента
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSQLEvent = procedure(EventText: String) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property OnSQL: TSQLEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр EventText содержит текст сообщения.
+</font ></P>
+<P><font face="Verdana" size="3">
+В компоненте соединения с БД можно установить перечень событий сервера, на которые будет реагировать компонент
+<font face="Verdana" size="2">TIBSQLMonitor</font>. Это делается при помощи свойства TraceFiags (см. выше). Вероятные значения множества означают контроль за следующими операциями:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;tfQPrepare — подготовка запроса к выполнению (вызов 
+    метода Prepare);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;tfQExecute — выполнение запроса (вызов метода ExecSQL);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;tfQFetch — вызов запроса (вызов методов<B> </B>Open, 
+    Close);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;tfError — возникновение ошибки;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;tfstmt — все операции с запросами;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> tfconnect — подключение и отключение БД;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;tfTransact — выполнение транзакций;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> tfBlob — операции с данными BLOB;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;tfService — вспомогательные операции;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> tfMisc — любые операции, не учтенные вышеперечисленными 
+    значениями.</font></li>
+</ul>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

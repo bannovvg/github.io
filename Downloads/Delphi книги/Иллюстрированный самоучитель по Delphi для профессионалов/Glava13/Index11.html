@@ -1,0 +1,1138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Типы данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В среде разработки Delphi можно создавать приложения для работы с самыми разными базами данных. Такая универсальность подразумевает необходимость применения средств, которые бы обеспечили возможность работы со многими типами данных, используемыми в этих базах данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Естественно, что существует большая группа типов данных, конкретная реализация которых практически не отличается от платформы к платформе. Это, например, строки, символы, целые и вещественные числа и т. д.
+</font ></P>
+<P><font face="Verdana" size="3">
+Есть типы данных, которые реализованы далеко не на каждой платформе. Есть, наконец, просто уникальные типы данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для удовлетворения потребностей разработчиков в Delphi применен следующий способ работы с типами данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тип данных однозначно связан с конкретным полем таблицы базы данных. Без этого поля само понятие типа данных не имеет практического смысла. В Delphi свойства абстрактного поля инкапсулирует класс
+<font face="Verdana" size="2">TField</font>, который не имеет заранее определенного типа данных. Уже от этого класса порождено целое семейство классов для типизированных полей (см. рис. 13.1), каждый из которых умеет обращаться со своим типом данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> В классе <font face="Verdana" size="2"> TField</font> 
+    имеется свойство <font face="Verdana" size="2">DataType</font>, которое отвечает 
+    за тип данных, но оно не может быть изменено. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Весь список доступных типов данных содержится в типе TFiieidType:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TFieldType = (ftUnknown, ftString, ftSmallint, ftlnteger, ftWord, ftBoolean, ftFloat, ftCurrency, ftBCD, ftDate, ftTime, ftDateTime, ftBytes, ftVarBytes, ftAutoInc, ftBlob, ftMemo, ftGraphic, ftFmtMemo, ftParadoxOle, ftDBaseOle, ftTypedBinary, ftCursor, ftFixedChar, ftWideString, ftLargeint, ftADT, ftArray, ftReference, ftDataSet, ftOraBlob, ftOraClob, ftVariant, ftlnterface, ftlDispatch, ftGuid, ftTimeStamp, ftFMTBcd);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В табл. 13.1 рассматриваются все типы данных, которые можно использовать при разработке приложений для работы с базами данных.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 13.1. </B>Типы данных 
+  </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="375" HEIGHT="540">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="136" HEIGHT="33">
+<DIV WIDTH="204" HEIGHT="33" style="width: 40; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="125" HEIGHT="33">
+<DIV WIDTH="146" HEIGHT="33" style="width: 22; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Класс</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="33">
+<DIV WIDTH="283" HEIGHT="33" style="width: 96; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="136" HEIGHT="54">
+<DIV WIDTH="204" HEIGHT="54" style="width: 86; height: 54">
+<P><font face="Verdana" size="3">
+Неизвестный (<font face="Verdana" size="2">ftUnknown</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="125" HEIGHT="54">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="54">
+<DIV WIDTH="283" HEIGHT="54" style="width: 188; height: 54">
+<P><font face="Verdana" size="3">
+Неопределенный тип данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="136" HEIGHT="50">
+<DIV WIDTH="204" HEIGHT="50" style="width: 93; height: 50">
+<P><font face="Verdana" size="3">
+Строковый (<font face="Verdana" size="2">ftString</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="125" HEIGHT="50">
+<DIV WIDTH="146" HEIGHT="50" style="width: 74; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TStringField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="50">
+<DIV WIDTH="283" HEIGHT="50" style="width: 175; height: 50">
+<P><font face="Verdana" size="3">
+Строка длиной до 8192 символов
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="136" HEIGHT="50">
+<DIV WIDTH="204" HEIGHT="50" style="width: 116; height: 50">
+<P><font face="Verdana" size="3">
+Целый короткий (<font face="Verdana" size="2">ftSmallint</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="125" HEIGHT="50">
+<DIV WIDTH="146" HEIGHT="50" style="width: 48; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSmalllntField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="50">
+<DIV WIDTH="283" HEIGHT="50" style="width: 201; height: 50">
+<P><font face="Verdana" size="3">
+16-битное целое в диапазоне от -32 768 до 32 767
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="136" HEIGHT="52">
+<DIV WIDTH="204" HEIGHT="52" style="width: 94; height: 52">
+<P><font face="Verdana" size="3">
+Целый (<font face="Verdana" size="2">ftlnteger</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="125" HEIGHT="52">
+<DIV WIDTH="146" HEIGHT="52" style="width: 58; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIntegerField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="52">
+<DIV WIDTH="283" HEIGHT="52" style="width: 207; height: 54">
+<P><font face="Verdana" size="3">
+32-битное целое в диапазоне от -2 147 483 648 до 2 147 483 647
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="136" HEIGHT="50">
+<DIV WIDTH="204" HEIGHT="50" style="width: 119; height: 57">
+<P><font face="Verdana" size="3">
+Целый положительный
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftWord</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="125" HEIGHT="50">
+<DIV WIDTH="146" HEIGHT="50" style="width: 21; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TWordField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="50">
+<DIV WIDTH="283" HEIGHT="50" style="width: 193; height: 50">
+<P><font face="Verdana" size="3">
+1 6-битное целое в диапазоне от 0 до 65535
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="136" HEIGHT="44">
+<DIV WIDTH="204" HEIGHT="44" style="width: 95; height: 44">
+<P><font face="Verdana" size="3">
+Логический (<font face="Verdana" size="2">ftBoolean</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="125" HEIGHT="44">
+<DIV WIDTH="146" HEIGHT="44" style="width: 45; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TBooleanField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="44">
+<DIV WIDTH="283" HEIGHT="44" style="width: 174; height: 44">
+<P><font face="Verdana" size="3">
+Значения <font face="Verdana" size="2"> True</font> и <font face="Verdana" size="2"> False</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="136" HEIGHT="88">
+<DIV WIDTH="204" HEIGHT="88" style="width: 103; height: 88">
+<P><font face="Verdana" size="3">
+Вещественный (<font face="Verdana" size="2">ftFloat</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="125" HEIGHT="88">
+<DIV WIDTH="146" HEIGHT="88" style="width: 22; height: 88">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFloatField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="88">
+<DIV WIDTH="283" HEIGHT="88" style="width: 220; height: 96">
+<P><font face="Verdana" size="3">
+Вещественные положительные и отрицательные числа с точностью 15 цифр после запятой в диапазоне от 5,0x1 0&quot;<SUP>324</SUP> до 1,7x1 0<SUP>308</SUP>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="136" HEIGHT="119">
+<DIV WIDTH="204" HEIGHT="119" style="width: 81; height: 119">
+<P><font face="Verdana" size="3">
+Денежный
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftCurrency</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="125" HEIGHT="119">
+<DIV WIDTH="146" HEIGHT="119" style="width: 34; height: 119">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TCurrencyField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="119">
+<DIV WIDTH="283" HEIGHT="119" style="width: 196; height: 165">
+<P><font face="Verdana" size="3">
+Вещественные положительные и отрицательные числа с точностью 15 цифр после запятой в диапазоне от 5,0x1 0&quot;<SUP>324</SUP> до 1,7x1 0<SUP>308</SUP>. Дополнительно вставляется символ валюты
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="94">
+<DIV WIDTH="192" HEIGHT="94" style="width: 109; height: 95">
+<P><font face="Verdana" size="3">
+Десятичный с двоичным кодированием (<font face="Verdana" size="2">ftBCD</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="94">
+<DIV WIDTH="140" HEIGHT="94" style="width: 36; height: 94">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TBCDField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="94">
+<DIV WIDTH="294" HEIGHT="94" style="width: 215; height: 94">
+<P><font face="Verdana" size="3">
+Вещественные числа с повышенной точностью (до 4 знаков перед запятой и до 20 знаков после запятой). Могут храниться в двоичном и десятичном форматах
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="48">
+<DIV WIDTH="192" HEIGHT="48" style="width: 77; height: 48">
+<P><font face="Verdana" size="3">
+Дата (<font face="Verdana" size="2">ftDate</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="48">
+<DIV WIDTH="140" HEIGHT="48" style="width: 38; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDateField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="48">
+<DIV WIDTH="294" HEIGHT="48" style="width: 98; height: 48">
+<P><font face="Verdana" size="3">
+Дата
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="38">
+<DIV WIDTH="192" HEIGHT="38" style="width: 90; height: 38">
+<P><font face="Verdana" size="3">
+Время (<font face="Verdana" size="2">ftTime</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="38">
+<DIV WIDTH="140" HEIGHT="38" style="width: 46; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDateTimeField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="38">
+<DIV WIDTH="294" HEIGHT="38" style="width: 80; height: 38">
+<P><font face="Verdana" size="3">
+Время
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="66">
+<DIV WIDTH="192" HEIGHT="66" style="width: 99; height: 66">
+<P><font face="Verdana" size="3">
+Календарный (<font face="Verdana" size="2">ftDateTime</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="66">
+<DIV WIDTH="140" HEIGHT="66" style="width: 47; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDateTimeField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="66">
+<DIV WIDTH="294" HEIGHT="66" style="width: 214; height: 66">
+<P><font face="Verdana" size="3">
+Комбинированный формат с одновременным хранением даты и времени
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="81">
+<DIV WIDTH="192" HEIGHT="81" style="width: 118; height: 81">
+<P><font face="Verdana" size="3">
+Фиксированный буфер
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftBytes</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="81">
+<DIV WIDTH="140" HEIGHT="81" style="width: 48; height: 81">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TBytesField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="81">
+<DIV WIDTH="294" HEIGHT="81" style="width: 200; height: 128">
+<P><font face="Verdana" size="3">
+Набор байтов фиксированного размера. Для работы с этим типом требуется выделять и освобождать память (методы
+<font face="Verdana" size="2"> GetMem</font> И <font face="Verdana" size="2">FreeMem</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="113">
+<DIV WIDTH="192" HEIGHT="113" style="width: 114; height: 113">
+<P><font face="Verdana" size="3">
+Переменный буфер
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftVarBytes</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="113">
+<DIV WIDTH="140" HEIGHT="113" style="width: 122; height: 113">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TVarBytes Field</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="113">
+<DIV WIDTH="294" HEIGHT="113" style="width: 207; height: 127">
+<P><font face="Verdana" size="3">
+Набор байтов переменного размера. Текущий размер буфера хранится в первых двух байтах. Для работы с этим типом требуется выделять и освобождать память (методы
+<font face="Verdana" size="2"> GetMem</font> И <font face="Verdana" size="2">FreeMem</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="114">
+<DIV WIDTH="192" HEIGHT="114" style="width: 127; height: 114">
+<P><font face="Verdana" size="3">
+Автоинкрементный
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftAutoInc</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="114">
+<DIV WIDTH="140" HEIGHT="114" style="width: 35; height: 114">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TAutoIncField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="114">
+<DIV WIDTH="294" HEIGHT="114" style="width: 215; height: 126">
+<P><font face="Verdana" size="3">
+Значение поля в каждой новой записи автоматически увеличивается на 1 . Целое число в диапазоне от -2 147 483 648 до 2 147 483 647. Применяется для обеспечения уникальности значений ключей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="129">
+<DIV WIDTH="192" HEIGHT="129" style="width: 61; height: 129">
+<P><font face="Verdana" size="3">
+BLOB
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftBlob</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="129">
+<DIV WIDTH="140" HEIGHT="129" style="width: 43; height: 129">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TBLOBField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="129">
+<DIV WIDTH="294" HEIGHT="129" style="width: 218; height: 164">
+<P><font face="Verdana" size="3">
+Большой двоичный массив. Используется для хранения любых данных, которые можно преобразовать в цифровой массив
+(<font face="Verdana" size="2">Memo, Graphic</font>). В базах данных такие данные хранятся в отдельных файлах, а поле содержит лишь ссылки на них
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="42">
+<DIV WIDTH="192" HEIGHT="42" style="width: 67; height: 57">
+<P><font face="Verdana" size="3">
+Memo
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftMemo</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="42">
+<DIV WIDTH="140" HEIGHT="42" style="width: 39; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMemoField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="42">
+<DIV WIDTH="294" HEIGHT="42" style="width: 210; height: 42">
+<P><font face="Verdana" size="3">
+Набор строк произвольной длины
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="48">
+<DIV WIDTH="192" HEIGHT="48" style="width: 98; height: 57">
+<P><font face="Verdana" size="3">
+Графический
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftGraphic</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="48">
+<DIV WIDTH="140" HEIGHT="48" style="width: 34; height: 48">
+<P><font face="Verdana" size="3">
+TGraphicField
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="48">
+<DIV WIDTH="294" HEIGHT="48" style="width: 173; height: 48">
+<P><font face="Verdana" size="3">
+Формат для хранения изображений
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="124" HEIGHT="50">
+<DIV WIDTH="192" HEIGHT="50" style="width: 119; height: 57">
+<P><font face="Verdana" size="3">
+Форматированный Memo
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftFmtMemo</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="119" HEIGHT="50">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="50">
+<DIV WIDTH="294" HEIGHT="50" style="width: 209; height: 50">
+<P><font face="Verdana" size="3">
+Форматированный набор строк произвольной длины
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="40">
+<DIV WIDTH="196" HEIGHT="40" style="width: 108; height: 57">
+<P><font face="Verdana" size="3">
+OLE Paradox
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftParadoxOle</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="40">
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="40">
+<DIV WIDTH="283" HEIGHT="40" style="width: 192; height: 40">
+<P><font face="Verdana" size="3">
+Поле OLE для таблиц <font face="Verdana" size="2"> Paradox</font>
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="50">
+<DIV WIDTH="196" HEIGHT="50" style="width: 85; height: 57">
+<P><font face="Verdana" size="3">
+OLE dBASE
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftDBaseOle</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="50">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="50">
+<DIV WIDTH="283" HEIGHT="50" style="width: 196; height: 50">
+<P><font face="Verdana" size="3">
+Поле OLE для таблиц <font face="Verdana" size="2"> dBASE</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="67">
+<DIV WIDTH="196" HEIGHT="67" style="width: 88; height: 76">
+<P><font face="Verdana" size="3">
+Типизированный двоичный
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftTypedBinary</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="67">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="67">
+<DIV WIDTH="283" HEIGHT="67" style="width: 201; height: 67">
+<P><font face="Verdana" size="3">
+Типизированный двоичный
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="42">
+<DIV WIDTH="196" HEIGHT="42" style="width: 108; height: 57">
+<P><font face="Verdana" size="3">
+Курсор Oracle
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftCursor</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="42">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="42">
+<DIV WIDTH="283" HEIGHT="42" style="width: 209; height: 42">
+<P><font face="Verdana" size="3">
+Курсор для хранимых процедур сервера <font face="Verdana" size="2"> Oracle</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="66">
+<DIV WIDTH="196" HEIGHT="66" style="width: 111; height: 76">
+<P><font face="Verdana" size="3">
+Фиксированный символьный
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftFixedChar</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="66">
+<DIV WIDTH="148" HEIGHT="66" style="width: 61; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TStringField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="66">
+<DIV WIDTH="283" HEIGHT="66" style="width: 214; height: 66">
+<P><font face="Verdana" size="3">
+Строка символов с нулевым символом в конце
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="65">
+<DIV WIDTH="196" HEIGHT="65" style="width: 114; height: 65">
+<P><font face="Verdana" size="3">
+Расширенный строковый
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftWideString</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="65">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="65">
+<DIV WIDTH="283" HEIGHT="65" style="width: 209; height: 65">
+<P><font face="Verdana" size="3">
+Динамически выделяемая строка 16-битных символов в кодировке
+<font face="Verdana" size="2"> Unicode</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="36">
+<DIV WIDTH="196" HEIGHT="36" style="width: 116; height: 57">
+<P><font face="Verdana" size="3">
+Целый большой
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftLargeint</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="36">
+<DIV WIDTH="148" HEIGHT="36" style="width: 78; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TLargelntField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="36">
+<DIV WIDTH="283" HEIGHT="36" style="width: 183; height: 38">
+<P><font face="Verdana" size="3">
+64-битное целое число
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="68">
+<DIV WIDTH="196" HEIGHT="68" style="width: 86; height: 68">
+<P><font face="Verdana" size="3">
+Абстрактный
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftADT</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="68">
+<DIV WIDTH="148" HEIGHT="68" style="width: 40; height: 68">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TADTField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="68">
+<DIV WIDTH="283" HEIGHT="68" style="width: 220; height: 68">
+<P><font face="Verdana" size="3">
+Произвольный тип данных, создаваемый пользователем на сервере БД и используемый в приложении
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="42">
+<DIV WIDTH="196" HEIGHT="42" style="width: 63; height: 57">
+<P><font face="Verdana" size="3">
+Массив
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftArray</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="42">
+<DIV WIDTH="148" HEIGHT="42" style="width: 49; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TArrayField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="42">
+<DIV WIDTH="283" HEIGHT="42" style="width: 205; height: 73">
+<P><font face="Verdana" size="3">
+Массив полей любого типа, кроме
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TarrayField</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="52">
+<DIV WIDTH="196" HEIGHT="52" style="width: 101; height: 57">
+<P><font face="Verdana" size="3">
+Ссылочный
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftReference</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="52">
+<DIV WIDTH="148" HEIGHT="52" style="width: 89; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TReferenceField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="52">
+<DIV WIDTH="283" HEIGHT="52" style="width: 187; height: 52">
+<P><font face="Verdana" size="3">
+Указатель на объект, содержащийся в другой таблице
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="44">
+<DIV WIDTH="196" HEIGHT="44" style="width: 101; height: 57">
+<P><font face="Verdana" size="3">
+Набор данных
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftDataSet</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="44">
+<DIV WIDTH="148" HEIGHT="44" style="width: 51; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TDataSetField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="44">
+<DIV WIDTH="283" HEIGHT="44" style="width: 216; height: 57">
+<P><font face="Verdana" size="3">
+Содержит набор данных, интегрированный в текущий набор данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="44">
+<DIV WIDTH="196" HEIGHT="44" style="width: 99; height: 57">
+<P><font face="Verdana" size="3">
+BLOB Oracle 8
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftOraBlob</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="44">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="44">
+<DIV WIDTH="283" HEIGHT="44" style="width: 192; height: 44">
+<P><font face="Verdana" size="3">
+Тип BLOB для сервера Oracle 8
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="46">
+<DIV WIDTH="196" HEIGHT="46" style="width: 104; height: 57">
+<P><font face="Verdana" size="3">
+CLOB Oracle 8
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftOraClob</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="46">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="46">
+<DIV WIDTH="283" HEIGHT="46" style="width: 216; height: 46">
+<P><font face="Verdana" size="3">
+Тип CLOB для сервера Oracle 8
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="48">
+<DIV WIDTH="196" HEIGHT="48" style="width: 82; height: 57">
+<P><font face="Verdana" size="3">
+Вариант
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftVariant</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="48">
+<DIV WIDTH="148" HEIGHT="48" style="width: 79; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TVariantField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="48">
+<DIV WIDTH="283" HEIGHT="48" style="width: 91; height: 48">
+<P><font face="Verdana" size="3">
+Вариант
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="42">
+<DIV WIDTH="196" HEIGHT="42" style="width: 80; height: 57">
+<P><font face="Verdana" size="3">
+Интерфейс
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftlnterface</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="42">
+<DIV WIDTH="148" HEIGHT="42" style="width: 73; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TInterfaceField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="42">
+<DIV WIDTH="283" HEIGHT="42" style="width: 188; height: 42">
+<P><font face="Verdana" size="3">
+Ссылка на интерфейс (потомок от <font face="Verdana" size="2">lUnknown</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="128" HEIGHT="67">
+<DIV WIDTH="196" HEIGHT="67" style="width: 116; height: 76">
+<P><font face="Verdana" size="3">
+Ссылка на интерфейс IDispatch
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftlDispatch</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="127" HEIGHT="67">
+<DIV WIDTH="148" HEIGHT="67" style="width: 54; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIDispatchField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="278" HEIGHT="67">
+<DIV WIDTH="283" HEIGHT="67" style="width: 192; height: 67">
+<P><font face="Verdana" size="3">
+Ссылка на интерфейс (потомок от <font face="Verdana" size="2">IDispatch</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="65">
+<DIV WIDTH="198" HEIGHT="65" style="width: 118; height: 65">
+<P><font face="Verdana" size="3">
+Глобальный идентификатор
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftGuid</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="115" HEIGHT="65">
+<DIV WIDTH="136" HEIGHT="65" style="width: 35; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TGuidField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="65">
+<DIV WIDTH="288" HEIGHT="65" style="width: 218; height: 65">
+<P><font face="Verdana" size="3">
+Глобальный идентификатор GUID
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="38">
+<DIV WIDTH="198" HEIGHT="38" style="width: 102; height: 57">
+<P><font face="Verdana" size="3">
+Календарный
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftTimeStamp</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="115" HEIGHT="38">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="38">
+<DIV WIDTH="288" HEIGHT="38" style="width: 222; height: 38">
+<P><font face="Verdana" size="3">
+Календарный тип для наборов данных <font face="Verdana" size="2"> dbExpress</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="130" HEIGHT="73">
+<DIV WIDTH="198" HEIGHT="73" style="width: 109; height: 76">
+<P><font face="Verdana" size="3">
+Десятичный с двоичным кодированием
+</font ></P>
+<P><font face="Verdana" size="3">
+(<font face="Verdana" size="2">ftFMTBcd</font>)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="115" HEIGHT="73">
+<DIV WIDTH="136" HEIGHT="73" style="width: 43; height: 73">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFMTBCDField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="73">
+<DIV WIDTH="288" HEIGHT="73" style="width: 186; height: 73">
+<P><font face="Verdana" size="3">
+Тип BCD повышенной точности
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+<B>       Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> В Delphi тип данных BCD напрямую не поддерживается. 
+    Его использование обеспечивает денежный тип (<font face="Verdana" size="2">ftcurrency</font>). 
+    Поэтому точность BCD ограничена 20 цифрами после запятой. Для устранения этого 
+    ограничения используется тип FMTBcd, который обладает требуемой точностью. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Как видно из таблицы, наряду с традиционными типами данных, в Delphi имеются и специальные типы, использование которых значительно расширяет функциональность приложений. В частности, типы
+<font face="Verdana" size="2"> ftinterface</font>, <font face="Verdana" size="2">ftIDispatch, ftGuid
+</font> позволяют создавать полноценные приложения БД для СОМ и OLE DB.
+</font ></P>
+<P><font face="Verdana" size="3">
+Практически на всех серверах БД пользователь имеет возможность создавать собственные типы данных. Для их использования в приложениях Delphi имеется абстрактный тип данных
+и класс <font face="Verdana" size="2"> TADTField</font>. Абстрактный тип может включать любой скалярный тип данных
+(числа, даты, ссылки, массивы, наборы данных).
+</font ></P>
+<P><font face="Verdana" size="3">
+Автоинкрементный тип данных давно используется в СУБД. Поле автоинкрементного типа для каждой новой записи автоматически увеличивает свое значение на единицу. Тем самым, каждая запись имеет собственный уникальный идентификатор, который очень часто используется в качестве первичного ключа.
+</font ></P>
+<P><font face="Verdana" size="3">
+Данные типа BLOB (Binary Large OBject) представляют собой двоичные массивы произвольной длины. В самом поле содержится лишь ссылка на отдельный файл базы данных, в котором хранится двоичный массив. Таким образом, поля типа BLOB являются универсальным носителем любых данных, которые имеют скалярную и нескалярную структуру и которые можно преобразовать в двоичное представление.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тип <font face="Verdana" size="2"> Memo</font> представляет собой набор строк произвольной длины (его разновидность — форматированный
+<font face="Verdana" size="2"> Memo</font>), основан на формате BLOB. Используется при необходимости сохранить текст из компонента тмето или из текстового редактора.
+</font ></P>
+<P><font face="Verdana" size="3">
+Графический тип данных используется для хранения в базе данных изображений, основан на формате BLOB. Поле
+<font face="Verdana" size="2"> TGraphicFieid</font> непосредственно взаимодействует с компонентом отображения данных (например
+<font face="Verdana" size="2"> TDBimage</font>). Изображения должны храниться в формате BMP.
+</font ></P>
+<P><font face="Verdana" size="3">
+Типы данных <font face="Verdana" size="2"> ParadoxOle</font> и <font face="Verdana" size="2"> dBaseOle</font> разработаны специально для использования возможностей СУБД
+<font face="Verdana" size="2"> Paradox</font> и <font face="Verdana" size="2"> dBASE</font> по работе с данными OLE. В Delphi эти типы данных основаны на формате BLOB.
+</font ></P>
+<P><font face="Verdana" size="3">
+Специально для работы с сервером Oracle 8 предназначены типы CLOB
+и BLOB.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тип <font face="Verdana" size="2"> ftArray</font> организует массив из данных любой структуры, за исключением таких же массивов. Для каждого элемента массива может создаваться собственный объект
+<font face="Verdana" size="2">TField</font>. Для управления этим механизмом используется
+свойство<B> </B><font face="Verdana" size="2">SparseArrays</font> в
+классе <B> </B><font face="Verdana" size="2">TDataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве отдельного поля в набор данных можно включить и любой другой произвольный набор данных. Для этого используется специальный тип данных и класс
+<font face="Verdana" size="2">TDataSetField</font>. Причем каждым полем из интегрированного набора данных тоже можно управлять.
+</font ></P>
+<P><font face="Verdana" size="3">Ссылочный тип данных также использует внешние наборы данных, но в этом случае можно подключать и использовать только отдельные поля.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

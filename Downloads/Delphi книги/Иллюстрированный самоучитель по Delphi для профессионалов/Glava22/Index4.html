@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <font size="4">Компонент TClientDataSet</font> 
+  <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">TclientDataSet</font> используется в клиентской части многозвенного распределенного приложения. Он инкапсулирует набор данных, переданный при помощи компонента-провайдера из удаленного набора данных. Компонент обеспечивает выполнение следующих основных функций:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;получение данных от удаленного сервера и передача ему 
+    сделанных изменений с использованием удаленного компонента-провайдера;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;представление набора данных при помощи локального буфера 
+    и поддержка основных операций, унаследованных от класса TDataSet;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;объединение записей набора данных при помощи агрегатных 
+    функций для получения суммарных данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;локальное сохранение набора данных в файле и последующее 
+    восстановление набора данных из файла;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;представление набора данных в формате XML.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Предком компонента <font face="Verdana" size="2">TclientDataSet</font> является класс
+<font face="Verdana" size="2">TDataSet</font>, поэтому <font face="Verdana" size="2">TclientDataSet</font> обладает таким же набором функций, что и обычный компонент, инкапсулирующий набор данных. Основное же отличие заключается в том, источник данных для него доступен только через удаленный компонент-провайдер. Это означает, что сохранение изменений и обновление набора данных осуществляется локально, без обращения к источнику данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, выполнение метода <font face="Verdana" size="2"> Post</font> приведет лишь к сохранению текущей записи набора данных в локальном кэше. Все изменения отсылаются на сервер только при необходимости и легко управляются разработчиком.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как и обычный компонент, компонент <font face="Verdana" size="2">TclientDataSet</font> может использоваться совместно с визуальными компонентами отображения данных. Для этого
+нужен компонент<B> </B><font face="Verdana" size="2">TDataSource</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим основные функции, реализуемые компонентом
+<font face="Verdana" size="2">TclientDataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

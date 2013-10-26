@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Сохранение отчета во внешнем файле</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+При помощи методов компонента <font face="Verdana" size="2"> TRvSystem</font> можно сохранить отчет для последующей печати в формате PRN или сохранить проект Rave Reports в формате RAV.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для реализации первого варианта необходимо в качестве источника печати указать файл:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if dlgSavePRN.Execute then begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+rsSystem.DoNativeOutput := False;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> rsSystem.DefaultDest := rdFile;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+rsSystem.SystemSetups := rsSystem.SystemSetups — [ssAllowSetup];&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> rsSystem.OutputFileName := dlgSavePRN.FileName;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> rpProj ect.Execute;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Как видите, здесь мы воспользовались методикой прямой печати, описанной в предыдущем разделе, указав в качестве приемника файл с расширением ргп, выбранный в стандартном диалоге выбора файла.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если же нужно сохранить проект отчета в файле с расширением rav, можно использовать метод
+<font face="Verdana" size="2"> SaveToFile</font> компонента <font face="Verdana" size="2">TRvproject</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if dlgSaveProject.Execute</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then RvProjectl.SaveToFile(dlgSaveProject.FileName);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Также просто выполнить и обратную операцию — загрузить в компонент
+<font face="Verdana" size="2"> TRvProject</font> проект отчета из файла, но при этом не забудьте закрыть текущий отчет:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.LoadFromFile(dlgOpenProject.FileName);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.Open;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Аналогичную функцию выполняет метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetProjectFile(Value: String);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+компонента <font face="Verdana" size="2">TRvProject</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<html>
+
+<head>
+
+<title>Программа: JavaScript для поиска данных в
+текстовых БД</title>
+</head>
+
+<body  text="#00ff99" link="#00ff00" alink="#99ff00" vlink="#00cc00">
+<script >
+
+Keyword = new Object();
+ Address = new Object();
+ Keyword[0] = 3
+ /* 223 это количество позиций в базе, оно должно соответствовать количеству позиций в Вашей базе. */
+ 
+Keyword[01] = "Карта сайта"  
+Address[01] = "../лаб%202/kar.html " 
+
+Keyword[02] = "Главная. Содержит новости о пополнении сайта"  
+Address[02] = "http://scriptic.narod.ru/index.htm"
+
+Keyword[03] = "HTML для всех. Все для HTML, тэги, таблицы спецзнаков и цветов."  
+Address[03] = "http://scriptic.narod.ru/htm.htm"
+
+
+ function contains(sub,s){
+ strlen1=sub.length
+ strlen2=s.length
+ istrue=false
+ for(i=0;i<=strlen2;i++)
+ {
+ comp=s.substring(i-1,strlen2)
+ comp=comp.substring(0,strlen1)
+ if(comp==sub){
+ istrue=true
+ break  
+    }   
+   }
+ return istrue
+  }
+
+ function dolt() {
+ loopCount=0;
+ var Found=false
+ var Item=document.forms[0].sub.value.toLowerCase();
+ 
+stats='toolbar=no,location=no,scrollbars=yes,directories=no,status=yes,menubar=no,height=400,width=600,top=0,left=0'
+stats += 'scrollbars=yes,resizable=yes'
+MsgBox = window.open ("","msgWindow",stats) 
+MsgBox.opener = window;
+MsgBox.opener.name = "opener";
+MsgBox.document.write("<head><title>Результат поиска: "+Item+"</title></head><body bgcolor='#000000' text='#00ff99' link='#00ff00' alink='#99ff00' vlink='#00cc00'>");
+
+ if(document.form1.sub.value=="")
+ MsgBox.document.write('<h5><font face="Verdana,Arial,Helvetica">Результат поиска:<font color="Red"> всех записей базы</font><HR></h5></font>');
+ else
+ MsgBox.document.write('<h5><font face="Verdana,Arial,Helvetica">Результат поиска: '+Item+'<HR></h5></font>');
+for(var i=1; i<=Keyword[0]; i++){
+contains(Item,Keyword[i].toLowerCase()) 
+if(comp==Item) {
+loopCount++;
+Found=true;
+MsgBox.document.write('<div align="center"><center><table border="0" width="100%" cellspacing="0" cellpadding="8"><tr><td width="2%" height="18" align="center"><font face="Verdana,Arial,Helvetica" size="2" color="#ffff00"><h5>'+loopCount+'. </h5></font></td><td width="150%" height="18" align="left"><font color="#ff0000"></font><font><font face="Verdana,Arial,Helvetica" size="2" color="#006600"><A HREF='+Address[i]+' target="_blank">'+Keyword[i]+'<BR></A></font></h1></font></td></tr></table></center></div>')
+  MsgBox.document.write('<script Language="JavaScript">window.status=("Всего найдено '+loopCount+' ")</'+'script'+'>');
+
+     }
+  }
+
+if(!Found)
+MsgBox.document.write('<font face="Verdana,Arial,Helvetica" size="2" color="#FF0000">По данному запросу ничего найдено</font>')
+MsgBox.document.write('<style type="text/css"><!-- @import ../style1.css; A:link{text-decoration:none} A:visited { text-decoration:none} --></style></body>')
+// Импорт и указание стилей, закрытие тела документа.
+if(loopCount==0){
+MsgBox.document.write('<script Language="JavaScript">window.status=("По данному запросу ничего найдено")</'+'script'+'>');
+      }
+    }
+
+</script>
+
+
+<table>
+  <tr>
+    <td><form method="POST" name="form1">
+      <p><input type="text" name="sub" size="20"> <input
+      style=" border-color: #60d4ff; background: #1a77f0;" type="button"
+      name="Search" value="Искать" onClick="dolt()"></p>
+    </form>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

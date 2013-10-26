@@ -1,0 +1,44 @@
+<html>
+<header><title>Фото</title></header>
+<body background="back2.jpg">
+
+<OBJECT ID = "dbcontrol" CLASSID = "CLSID:333C7BC4-460F-11D0-BC04-0080C7055A83">
+<param name = "FieldDelim" value = "|">
+<param name = "DataURL" value = "db.txt">
+<param name = "UseHeader" value = true>
+</OBJECT>
+<table >
+<tr><th> Название </th>
+<td>
+<input    type ="text" DATASRC = #dbcontrol DATAFLD="Название" width="1000" >
+</td>
+<td>
+<input name="cmdFirst"      type="button" value ="«В начало"  onclick = "First()">
+<input name="cmdPrevious"   type="button" value="<Предыдущее"   onclick = "Previous() ">
+<input name="cmdNext"       type="button" value="Следущее>"   onclick = "Next()">
+<input name="cmdLast"       type="button" value="В конец>>"  onclick = "Last() ">
+</td>
+</tr>
+
+<tr ><th>Фото</th>
+ <td ><SPAN DATASRC = #dbcontrol DATAFLD="Портрет" DATAFORMATAS="html"></SPAN>
+</td>
+<td><embed src='CARNAVAL.mp3' width='200' height='50' align='right' autostart='TRUE' loop='true'></td></tr>
+</table>
+<p>
+
+
+<SCRIPT>
+   function First() {  dbcontrol.recordset.moveFirst() }
+
+  function Previous() { if (!dbcontrol.recordset.bof) 
+                      dbcontrol.recordset.movePrevious()
+                      }
+  function Next() {   if (!dbcontrol.recordset.eof)
+                        dbcontrol.recordset.moveNext()
+                   }
+
+function Last() { dbcontrol.recordset.moveLast()}
+</SCRIPT>
+</body>
+</html>

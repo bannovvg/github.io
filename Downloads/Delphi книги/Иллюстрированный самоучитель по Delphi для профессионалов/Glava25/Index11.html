@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Преобразование форматов данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+С компонентом <font face="Verdana" size="2"> TRvNDRWriter</font> (вернее с файлами в формате NDR, которые он создает) взаимодействует ряд компонентов<font face="Verdana" size="2"> Rave
+Reports</font>, которые обеспечивают преобразование данных из этого специфического формата в более распространенные форматы.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Компонент  TRvRenderpoF 
+    обеспечивает преобразование отчета в формат PDF для дальнейшего использования 
+    в Adobe Acrobat Reader.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Компонент  TRvRenderHTML 
+    обеспечивает преобразование отчета в формат HTML.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Компонент  TRvRenderRTF 
+    обеспечивает преобразование отчета в формат RTF.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Компонент  TRvRenderText 
+    обеспечивает преобразование отчета в текстовый формат.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Все они используются по одной схеме.
+</font ></P>
+<P><font face="Verdana" size="3">
+Сначала необходимо загрузить отчет из файла NDR в поток.
+</font ></P>
+<P><font face="Verdana" size="3">
+После этого вызывается метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure PrintRender(NDRStream: TStream; OutputFileName: TFileName);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который и выполняет преобразование:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var ReportStream: TMemoryStream;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ReportStream := TMemoryStream.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ReportStream.LoadFromFile(NDRFilePath);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvRenderHTMLl.NDRStream := ReportStream;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvRenderHTMLl.PrintRender(ReportStream, 'sdf);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ReportStream.Free;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

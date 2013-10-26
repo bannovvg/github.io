@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TSQLDataSet</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TSQLDataSet</font> является универсальным и позволяет выполнять запросы SQL (подобно
+<font face="Verdana" size="2">TSQLQuery</font>), просматривать таблицы целиком (подобно
+<font face="Verdana" size="2">TSQLTable</font>)или выполнять
+хранимые процедуры (подобно <B> </B><font face="Verdana" size="2">TSQLStoredProc</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для   определения   режима   работы   компонента   используется   свойство
+<font face="Verdana" size="2">ConimandType</font> (см. выше).
+</font ></P>
+<P><font face="Verdana" size="3">
+Если ему присвоить значение <font face="Verdana" size="2">ctTable</font>, в списке свойства
+<font face="Verdana" size="2"> commandText</font> можно выбрать имя таблицы, если конечно компонент подключен к соединению. При выборе значения
+<font face="Verdana" size="2"> ctQuery</font> в свойстве <font face="Verdana" size="2"> CommandText</font> необходимо определить текст запроса SQL. Для работы в режиме хранимой процедуры для свойства
+<font face="Verdana" size="2"> commandType</font> используется значение
+<font face="Verdana" size="2">ctstoredProc</font>, а в списке свойства
+<font face="Verdana" size="2"> CommandText</font> можно выбрать нужную процедуру.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для открытия набора данных используются традиционные способы: свойство
+<font face="Verdana" size="2"> Active</font> или метод <font face="Verdana" size="2">Open</font>. Если же запрос SQL или хранимая процедура не возвращают набор данных, для их выполнения используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ExecSQL(ExecDirect: Boolean = False): Integer; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> ExecDirect</font> определяет, необходимо ли произвести подготовку параметров перед выполнением команды. Если параметры запроса или процедуры существуют, параметр
+<font face="Verdana" size="2"> ExecDirect</font> должен иметь значение
+<font face="Verdana" size="2">False</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Дополнительно для табличного режима можно использовать свойство
+<font face="Verdana" size="2">SortFieldNames</font> (см. выше), определяющее порядок сортировки записей таблицы.
+</font ></P>
+<P><font face="Verdana" size="3">
+В режиме запросов и хранимых процедур для задания параметров используются свойства<font face="Verdana" size="2"> Params И ParamCheck</font> (см.
+часть III).
+</font ></P>
+<P><font face="Verdana" size="3">
+Информация об используемых в результирующем наборе данных индексах сохраняется в свойстве
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> property IndexDefs: 
+    TIndexDefs;</font> </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TConnectionBroker</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TConnectionBroker</font> обеспечивает централизованное управление соединением клиентских наборов данных с сервером приложений. Для этого свойство
+<font face="Verdana" size="2"> connectionBroker</font> клиентских наборов данных должно ссылаться на экземпляр компонента
+<font face="Verdana" size="2">TConnectionBroker</font>. Тогда для изменения соединения (например, при переходе с транспорта HTTP на сокеты TCP/IP) нет
+необходимости изменять значение свойства <font face="Verdana" size="2"> RemoteServer</font> всех компонентов
+<font face="Verdana" size="2">TClientDataSet</font>, а достаточно изменить свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Connection: TCustomRemoteServer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+компонента <font face="Verdana" size="2">TConnectionBroker</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Доступ к интерфейсу <font face="Verdana" size="2">I</font><font face="Verdana" size="2">AppServer</font> обеспечивает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AppServer: Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetServer: lAppServer; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Методы-обработчики компонента <font face="Verdana" size="2"> TConnectionBroker</font> полностью соответствуют табл. 20.1.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>
+

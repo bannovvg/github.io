@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент TMonthCalendar 
+  </strong><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот элемент управления представляет собой панель с календарем на один месяц (рис. 5.7). Он обладает богатыми возможностями по настройке. Основные свойства компонента, отвечающие за внешний вид и управление календарем, представлены в табл. 5.6. Их назначение достаточно прозрачно и не требует особенных комментариев.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.5.7.gif"  > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 5.7. </B>Компонент <font face="Verdana" size="2"> 
+  TMonthCalendar</font> </font ></P>
+<P><font face="Verdana" size="3"> Сам календарь содержит в верхней части месяц 
+  и год, а расположенные слева и справа кнопки позволяют переходить к следующему 
+  и предыдущему месяцу. Красная окружность определяет текущую дату. Синий круг 
+  означает выбранную пользователем дату. При увеличении размеров в элементе управления 
+  отображается целое число календарей для месяцев, ближайших к текущему. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 5.6. </B> Основные 
+  свойства компонента <font face="Verdana" size="2">TMonthCalendar</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="480" HEIGHT="342">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="29"> <DIV WIDTH="319" HEIGHT="29" style="width: 101; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="29"> <DIV WIDTH="312" HEIGHT="29" style="width: 145; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="46"> 
+      <DIV WIDTH="319" HEIGHT="46" style="width: 168; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          CalColors : TMonthCalColors;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="46"> 
+      <DIV WIDTH="312" HEIGHT="46" style="width: 273; height: 46"> 
+        <P><font face="Verdana" size="3"> Определяет цвета основных элементов 
+          календаря </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="31"> 
+      <DIV WIDTH="319" HEIGHT="31" style="width: 175; height: 31"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Date: TDate;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="31"> 
+      <DIV WIDTH="312" HEIGHT="31" style="width: 200; height: 31"> 
+        <P><font face="Verdana" size="3"> Содержит выбранную дату </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="65"> 
+      <DIV WIDTH="319" HEIGHT="65" style="width: 142; height: 65"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          EndDate: TDate;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="65"> 
+      <DIV WIDTH="312" HEIGHT="65" style="width: 260; height: 65"> 
+        <P><font face="Verdana" size="3"> Содержит последнюю из выбранных дат 
+          при <font face="Verdana" size="2"> MultiSelect = True</font>. Иначе 
+          совпадает со свойством <font face="Verdana" size="2"> Date</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="114"> 
+      <DIV WIDTH="319" HEIGHT="114" style="width: 202; height: 114"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type 
+          TCalDayOfWeek = (dowMonday, dowTuesday, dowWednesday, dowThursday, dowFriday, 
+          dowSaturday, dowSunday, dowLocaleDefault) ; property FirstDayOfWeek: 
+          TCalDayOfWeek;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="114"> 
+      <DIV WIDTH="312" HEIGHT="114" style="width: 234; height: 114"> 
+        <P><font face="Verdana" size="3"> Определяет день, с которого начинается 
+          неделя. Значение по умолчанию <font face="Verdana" size="2"> dowLocaleDefault</font> 
+          соответствует установкам ОС </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="204" HEIGHT="58"> 
+      <DIV WIDTH="319" HEIGHT="58" style="width: 197; height: 58"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          MaxDate: TDate;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="58"> 
+      <DIV WIDTH="312" HEIGHT="58" style="width: 280; height: 58"> 
+        <P><font face="Verdana" size="3"> Максимальная доступная для просмотра 
+          дата </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="52"> <DIV WIDTH="315" HEIGHT="52" style="width: 194; height: 52"> 
+      <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+        MaxSelectRange: Integer;</font> </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="298" HEIGHT="52"> <DIV WIDTH="323" HEIGHT="52" style="width: 260; height: 52"> 
+      <P><font face="Verdana" size="3"> Максимальная доступная для выбора дата 
+        </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="50"> 
+      <DIV WIDTH="315" HEIGHT="50" style="width: 192; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          MinDate: TDate;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="298" HEIGHT="50"> 
+      <DIV WIDTH="323" HEIGHT="50" style="width: 281; height: 50"> 
+        <P><font face="Verdana" size="3"> Минимальная доступная для просмотра 
+          дата </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="48"> 
+      <DIV WIDTH="315" HEIGHT="48" style="width: 177; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          MultiSelect: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="298" HEIGHT="48"> 
+      <DIV WIDTH="323" HEIGHT="48" style="width: 271; height: 48"> 
+        <P><font face="Verdana" size="3"> При значении <font face="Verdana" size="2"> 
+          True</font> позволяет выбирать несколько дат одновременно </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="46"> 
+      <DIV WIDTH="315" HEIGHT="46" style="width: 155; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          ShowToday: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="298" HEIGHT="46"> 
+      <DIV WIDTH="323" HEIGHT="46" style="width: 275; height: 46"> 
+        <P><font face="Verdana" size="3"> Включает или отключает показ текущей 
+          даты в нижней части календаря </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="52"> 
+      <DIV WIDTH="315" HEIGHT="52" style="width: 201; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          ShowTodayCircle: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="298" HEIGHT="52"> 
+      <DIV WIDTH="323" HEIGHT="52" style="width: 252; height: 52"> 
+        <P><font face="Verdana" size="3"> Включает или отключает выделение текущей 
+          даты красным кругом </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="52"> 
+      <DIV WIDTH="315" HEIGHT="52" style="width: 184; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          WeekNumbers : Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="298" HEIGHT="52"> 
+      <DIV WIDTH="323" HEIGHT="52" style="width: 221; height: 52"> 
+        <P><font face="Verdana" size="3"> Включает или отключает показ номеров 
+          недель в левой части календаря </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> Результат выбора даты в календаре сохраняется 
+  в свойстве <font face="Verdana" size="2">Date</font>. При использовании возможности 
+  выбора нескольких значений одновременно в свойстве <font face="Verdana" size="2"> 
+  EndDate</font> содержится последняя дата, а в свойстве <font face="Verdana" size="2"> 
+  Date</font> — самая ранняя из выбранных. </font ></P>
+<P><font face="Verdana" size="3"> Метод-обработчик </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnGetMonthlnfo: 
+    TOnGetMonthlnfoEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> вызывается при смене месяца. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index9.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

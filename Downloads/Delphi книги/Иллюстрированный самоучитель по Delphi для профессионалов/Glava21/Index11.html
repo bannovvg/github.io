@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Дочерний 
+  удаленный модуль данных</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Дополнительно к основному модулю данных создадим дочерний модуль данных
+<font face="Verdana" size="2">secondary</font>. Для того чтобы связать главный модуль данных с дочерним, необходимо добавить к интерфейсу
+<font face="Verdana" size="2">isimpleRDM</font> метод, возвращающий ссылку на интерфейс дочернего модуля данных. В нашем примере это метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Get_Secondary.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для его создания воспользуемся библиотекой типов сервера (рис. 21.3).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.21.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 21.3. </B>Библиотека 
+  типов сервера приложения <font face="Verdana" size="2"> SimpleAppSrvr</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> В дереве в левой части окна выберем интерфейс 
+  <font face="Verdana" size="2">isimpleRDM</font> и создадим для него новое свойство 
+  только для чтения, переименуем его в <font face="Verdana" size="2">secondary</font>. 
+  Одновременно со свойством будет создан метод, обеспечивающий чтение свойства. 
+  Переименуем его в <font face="Verdana" size="2">Get_secondary</font>. Метод 
+  должен возвращать тип <font face="Verdana" size="2">secondary</font>. Для его 
+  установки воспользуемся списком <B>Туре </B>на странице <B>Attributes </B>в 
+  правой части панели окна библиотеки типов (см. рис. 21.3). </font ></P>
+<P><font face="Verdana" size="3"> После обновления исходного кода библиотеки типов 
+  (кнопка <B>Refresh Implementation) </B>описание нового свойства и метода интерфейса 
+  <font face="Verdana" size="2">isimpleRDM</font> появится в файле SimpleAppSrvr_TLB.pas. 
+  Теперь объявление интерфейса isimpieRDM выглядит так: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ISimpleRDM 
+    = interface(lAppServer)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ['{Е2СВЕВСВ-1950-4054-В823-62906306Е840}']</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;function 
+    Get_Secondary: Secondary; safecall;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;property 
+    Secondary: Secondary read Get_Secondary;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Одновременно в объявлении удаленного модуля 
+  данных <font face="Verdana" size="2">simpleRDM</font> в файле <font face="Verdana" size="2"> 
+  uSimpleRDM</font> появится метод <font face="Verdana" size="2">Get_secondary</font>. 
+  Его исходный код должен выглядеть следующим образом: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function TSimpleRDM.Get_Secondary: 
+    Secondary;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Result := FSecondaryFactory.CreateCOMObject(nil) 
+    as ISecondary;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Теперь модуль данных <font face="Verdana" size="2"> 
+  secondary</font> стал дочерним для модуля <font face="Verdana" size="2">simpleRDM</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Модуль <font face="Verdana" size="2"> secondary</font> 
+  содержит компоненты для доступа к локальному серверу InterBase. База данных 
+  mastsql.gdb, используемая в этом примере, поставляется вместе с Delphi. Соединение 
+  обеспечивается компонентом <font face="Verdana" size="2">TiBDatabase</font>, 
+  который настроен на базу данных при помощи свойства <font face="Verdana" size="2">DatabaseName</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Перед компиляцией проекта необходимо правильно 
+  настроить свойство <font face="Verdana" size="2">DatabaseName</font>, если местоположение 
+  файла mastsql.gdb отличается от обычного. </font ></P>
+<P><font face="Verdana" size="3"> Два табличных компонента <font face="Verdana" size="2">TTBTаblе</font> 
+  инкапсулируют таблицы <font face="Verdana" size="2"> Vendors</font> и <font face="Verdana" size="2"> 
+  Parts</font> из базы данных mastsql.gdb. Дополнительно между этими двумя компонентами 
+  установлено отношение &quot;один-ко-многим&quot;. Свойство <font face="Verdana" size="2"> 
+  MasterSource</font> компонента <font face="Verdana" size="2"> tbiParts</font> 
+  указывает на компонент <font face="Verdana" size="2"> dsvendors</font> (класс 
+  <font face="Verdana" size="2">TDataSource</font>), связанный с компонентом<B> 
+  </B><font face="Verdana" size="2">tblVendors</font>.Свойства<B> </B><font face="Verdana" size="2">MasterFields</font> 
+  и <font face="Verdana" size="2">indexFieidNames</font> компонента <font face="Verdana" size="2"> 
+  tbiParts</font> содержат имя общего для двух таблиц поля <font face="Verdana" size="2"> 
+  vendorNo</font> (подробнее о создании отношения &quot;один-ко-многим&quot; см. 
+  гл. 14). </font ></P>
+<P><font face="Verdana" size="3"> Отношение &quot;один-ко-многим&quot;, созданное 
+  для двух таблиц, позволит продемонстрировать в примере клиентского приложения 
+  использование вложенных наборов данных (см. гл. 22). </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index10.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index12.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Статические и динамические поля</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В Delphi предусмотрено два способа создания объектов полей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Динамические поля используются программой в случае, если разработчик не создал для них объекты явным образом на этапе разработки. Каждый не заданный явно объект поля автоматически создается при открытии набора данных в соответствии со структурой связанной таблицы БД. Любой объект поля является прямым наследником класса
+<font face="Verdana" size="2">TField</font>, а его конкретный тип зависит от типа данных поля таблицы. При этом свойства динамического поля устанавливаются в соответствии с параметрами поля таблицы базы данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент набора данных после подключения к таблице БД без дополнительных настроек использует только динамические поля. К свойствам и методам динамических полей можно обратиться программно, для этого следует использовать индексированное свойство
+<font face="Verdana" size="2"> Fields</font> компонента доступа к данным, которое объединяет все поля набора данных
+(см. выше) или метод <font face="Verdana" size="2">FieldByName.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Динамические поля используются в случаях, когда заданные характеристики полей в таблице базы данных полностью удовлетворяют разработчика и нет необходимости рассматривать какое-либо поле вне набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Статические поля создаются программистом на этапе разработки, их свойства доступны в Инспекторе объектов, а их названия можно выбрать из списка объектов активной формы в верхней части Инспектора объектов. Название статического объекта поля обычно складывается из названий таблицы и поля, например<font face="Verdana" size="2">
+ordersCUSTNO</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Создаются статические объекты полей при помощи специализированного Редактора полей, который вызывается двойным щелчком на компоненте набора данных на форме или командой <B>Fields Editor </B>из всплывающего меню этого компонента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Редактор полей представляет собой простой список уже созданных статических полей. Все управление осуществляется командами из всплывающего меню. В верхней части окна Редактора расположены кнопки навигатора для перемещения по набору данных, которые активны только при открытом наборе данных. Если набор данных имеет агрегатные поля данных (см. ниже),
+то они размещаются в отдельном списке в нижней части окна Редактора полей (рис. 13.2).
+</font ></P>
+<p align="center"> 
+<div align="center"><IMG src="gl.13.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 13.2. </B>Редактор полей 
+  с отдельным списком агрегатных полей </font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.13.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B><font face="Verdana, Arial, Helvetica, sans-serif">Рис. 
+  13.3. </font></B><font face="Verdana, Arial, Helvetica, sans-serif">Диалог создания 
+  нового статического поля Редактора полей набора данных </font></font ></P>
+<P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> Добавить к списку 
+  статических полей новое поле, существующее в таблице БД, можно при помощи команды 
+  <B>Add fields </B>из всплывающего меню Редактора. Удаление элемента из списка 
+  осуществляется клавишей &lt;Delete&gt;. Перетаскиванием элементов списка при 
+  помощи мыши можно изменить их расположение. Таким образом можно создавать произвольные 
+  комбинации статических полей. </font></P>
+<P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> <B> Примечание</B> 
+  </font></P>
+<blockquote> 
+  <P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> Как только для 
+    набора данных создан хотя бы один статический объект поля, считается, что 
+    набор данных содержит только те поля, которые имеются в списке статических 
+    полей. Эту особенность можно использовать для искусственного ограничения структуры 
+    данных таблиц. Все поля набора данных расположены в том порядке, как это указано 
+    в списке Редактора полей, независимо от их реального положения в таблице базы 
+    данных. </font></P>
+</blockquote>
+<P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> Команда <b> New</b> 
+  <B>field </B>из всплывающего меню Редактора полей позволяет создать статическое 
+  поле, которое реально не существует в структуре данных таблицы (рис. 13.3). 
+  Для выбора типа поля используется группа радиокнопок <B>Field Type:</B> </font></P>
+<ul>
+  <li> <font face="Verdana, Arial, Helvetica, sans-serif"><B> <font size="3">Data 
+    </font></B><font size="3">— поле данных;</font></font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>Calculated 
+    </B>— вычисляемое поле;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>Lookup </B>— 
+    поле синхронного просмотра.</font></li>
+</ul>
+<P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> Реже создаются 
+  поля данных, которые обязательно должны базироваться на реальных полях таблицы. 
+  Если для такого объекта соответствующее поле в таблице будет удалено или его 
+  тип данных будет изменен, то при открытии набора данных генерируется исключительная 
+  ситуация. </font></P>
+<P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> <B>&nbsp;Примечание&nbsp;</B> 
+  </font></P>
+<blockquote> 
+  <p><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> Для клиентских 
+    наборов данных многоуровневых приложений диалог создания нового поля позволяет 
+    выбрать два дополнительных типа поля — это агрегатные поля (радиокнопка Aggregate) 
+    и внутренние вычисляемые поля (радиокнопка InternalCalc). </font></p>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+    <tr> 
+      <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+        </a> </font> </td>
+      <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> 
+        <img SRC="Menu.gif" BORDER="0"> </a> </font> </td>
+      <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> 
+        <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+    </tr>
+  </table>
+
+</body>
+</html>

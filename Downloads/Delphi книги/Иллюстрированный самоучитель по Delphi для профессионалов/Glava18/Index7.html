@@ -1,0 +1,477 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Структура 
+  XSQLVAR</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотренная выше область дескрипторов содержит возвращаемый результат запроса. Массив значений каждого возвращаемого поля сохраняется в отдельной структуре
+<font face="Verdana" size="2">XSQLVAR</font>. Индексированный список таких структур в области дескрипторов представлен свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Vars: [Idx: Integer]: TIBXSQLVAR</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В целом, рассматриваемая структура соответствует объекту поля Delphi (см. гл. 13),
+о чем свидетельствует набор основных свойств и методов класса структуры, представленный в табл. 18.4.
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо представленных в таблице свойств, класс
+<font face="Verdana" size="2"> TIBXSQLVAR</font> имеет ряд свойств, возвращающих значение в определенном формате<font face="Verdana" size="2">: AsCurrency, AsDate, AsDateTime, AsDouble, AsFloat, Aslnt64, Aslnteger, AsLong, AsPointer, AsQuad, AsShort, AsString, AsTime, AsVariant.</font>
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 18.4. </B>Свойства 
+  и методы класса <font face="Verdana" size="2"> TIBXSQLVAR</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="372" HEIGHT="123">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="27">
+<DIV WIDTH="279" HEIGHT="27" style="width: 102; height: 27">
+<P><font face="Verdana" size="3">
+<B>Объявление</B>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="27">
+<DIV WIDTH="56" HEIGHT="27" style="width: 1; height: 27">
+<P><font face="Verdana" size="3">
+<B>Тип</B>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="280" HEIGHT="27">
+<DIV WIDTH="294" HEIGHT="27" style="width: 88; height: 27">
+<P><font face="Verdana" size="3">
+<B>Описание</B>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="596" HEIGHT="27">
+<DIV WIDTH="279" HEIGHT="27" style="width: 86; height: 27">
+<P><font face="Verdana" size="3">
+<B>Свойства</B>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="44">
+<DIV WIDTH="279" HEIGHT="44" style="width: 155; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AsXSQLVAR: PXSQLVAR;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="44">
+<DIV WIDTH="56" HEIGHT="44" style="width: 11; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="280" HEIGHT="44">
+<DIV WIDTH="294" HEIGHT="44" style="width: 223; height: 44">
+<P><font face="Verdana" size="3">
+Представляет значение поля как структуру <font face="Verdana" size="2"> XSQLVAR</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="279" HEIGHT="25">
+<DIV WIDTH="279" HEIGHT="25" style="width: 193; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Data: PXSQLVAR;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="25">
+<DIV WIDTH="56" HEIGHT="25" style="width: 11; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="280" HEIGHT="25">
+<DIV WIDTH="294" HEIGHT="25" style="width: 221; height: 25">
+<P><font face="Verdana" size="3">
+Ссылка на структуру <font face="Verdana" size="2"> XSQLVAR</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="44">
+<DIV WIDTH="281" HEIGHT="44" style="width: 193; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Index: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="44">
+<DIV WIDTH="48" HEIGHT="44" style="width: 9; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="44">
+<DIV WIDTH="317" HEIGHT="44" style="width: 234; height: 95">
+<P><font face="Verdana" size="3">
+Возвращает индекс структуры в области дескрипторов
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="46">
+<DIV WIDTH="281" HEIGHT="46" style="width: 204; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IsNull: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="46">
+<DIV WIDTH="48" HEIGHT="46" style="width: 19; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+<P><font face="Verdana" size="3">&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="46">
+<DIV WIDTH="317" HEIGHT="46" style="width: 235; height: 46">
+<P><font face="Verdana" size="3">
+Позволяет определить наличие данных в структуре
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="48">
+<DIV WIDTH="281" HEIGHT="48" style="width: 168; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IsNullable: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="48">
+<DIV WIDTH="48" HEIGHT="48" style="width: 6; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="48">
+<DIV WIDTH="317" HEIGHT="48" style="width: 232; height: 48">
+<P><font face="Verdana" size="3">
+ Позволяет определить, может ли&nbsp; структура иметь значение
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="54">
+<DIV WIDTH="281" HEIGHT="54" style="width: 153; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Modified: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="54">
+<DIV WIDTH="48" HEIGHT="54" style="width: 22; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">  PU</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="54">
+<DIV WIDTH="317" HEIGHT="54" style="width: 243; height: 54">
+<P><font face="Verdana" size="3">
+&nbsp;Позволяет определить, изменялось ли&nbsp; значение в структуре
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="44">
+<DIV WIDTH="281" HEIGHT="44" style="width: 187; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Size: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="44">
+<DIV WIDTH="48" HEIGHT="44" style="width: 10; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="44">
+<DIV WIDTH="317" HEIGHT="44" style="width: 237; height: 44">
+<P><font face="Verdana" size="3">
+Максимальный размер данных&nbsp; в байтах
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="31">
+<DIV WIDTH="281" HEIGHT="31" style="width: 145; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SQLType: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="31">
+<DIV WIDTH="48" HEIGHT="31" style="width: 7; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="31">
+<DIV WIDTH="317" HEIGHT="31" style="width: 243; height: 31">
+<P><font face="Verdana" size="3">
+Возвращает индекс API параметра
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="29">
+<DIV WIDTH="281" HEIGHT="29" style="width: 135; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Value: Variant;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="29">
+<DIV WIDTH="48" HEIGHT="29" style="width: 10; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="29">
+<DIV WIDTH="317" HEIGHT="29" style="width: 245; height: 29">
+<P><font face="Verdana" size="3">
+&nbsp;Содержит возвращаемое значение
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="613" HEIGHT="25">
+<DIV WIDTH="281" HEIGHT="25" style="width: 90; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="50">
+<DIV WIDTH="281" HEIGHT="50" style="width: 204; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">procedure Assign (Source: TIBXSQLVAR) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="50">
+<DIV WIDTH="48" HEIGHT="50" style="width: 18; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Pu</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="50">
+<DIV WIDTH="317" HEIGHT="50" style="width: 248; height: 50">
+<P><font face="Verdana" size="3">
+Присваивает объект, передаваемый&nbsp; в параметре, данному объекту
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="40">
+<DIV WIDTH="281" HEIGHT="40" style="width: 201; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">procedure LoadFromFile (const FileName: String);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="40">
+<DIV WIDTH="48" HEIGHT="40" style="width: 6; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="40">
+<DIV WIDTH="317" HEIGHT="40" style="width: 247; height: 40">
+<P><font face="Verdana" size="3">Загружает из файла данные&nbsp; в поле <font face="Verdana" size="2"> BLOB</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="52">
+<DIV WIDTH="281" HEIGHT="52" style="width: 191; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromStream(Stream: TStream) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="52">
+<DIV WIDTH="48" HEIGHT="52" style="width: 13; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> PU&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="52">
+<DIV WIDTH="317" HEIGHT="52" style="width: 247; height: 52">
+<P><font face="Verdana" size="3">Загружает из потока данные&nbsp; в поле <font face="Verdana" size="2"> BLOB</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="44">
+<DIV WIDTH="281" HEIGHT="44" style="width: 204; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SaveToFile (const FileName: String);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="44">
+<DIV WIDTH="48" HEIGHT="44" style="width: 7; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="44">
+<DIV WIDTH="317" HEIGHT="44" style="width: 245; height: 44">
+<P><font face="Verdana" size="3">
+Сохраняет в файле данные из поля <font face="Verdana" size="2"> BLOB</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="281" HEIGHT="54">
+<DIV WIDTH="281" HEIGHT="54" style="width: 197; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SaveToStream (Stream: TStream) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="54">
+<DIV WIDTH="48" HEIGHT="54" style="width: 9; height: 54">
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">рu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="303" HEIGHT="54">
+<DIV WIDTH="317" HEIGHT="54" style="width: 255; height: 54">
+<P><font face="Verdana" size="3">
+&nbsp;Сохраняет в потоке данные из поля <font face="Verdana" size="2"> BLOB</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

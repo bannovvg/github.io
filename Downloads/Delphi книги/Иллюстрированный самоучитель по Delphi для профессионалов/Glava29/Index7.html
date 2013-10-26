@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Пример создания многопоточного приложения в Delphi</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот раздел содержит описание шагов, необходимых для создания простого, но показательного примера многопоточного приложения. Мы будем пытаться вычислить число &quot;пи&quot; с максимальной точностью после запятой. Конечно, встроенная в Delphi константа<font face="Verdana" size="2"> Pi
+</font> имеет достаточную точность, правильнее сказать — максимальную, допускаемую самым точным 10-байтным форматом для вещественных чисел
+<font face="Verdana" size="2">Extended</font>. Так что превзойти ее нам не удастся. Но этот пример использования потоков может послужить прологом для решения реальных задач.
+</font ></P>
+<P><font face="Verdana" size="3">
+Первый  пример будет содержать два потока:  главный  (обрабатывающий ввод пользователя) и вычислительный; мы сможем изменять их свойства и наблюдать за реакцией. Итак, выполните следующую последовательность действий:
+</font ></P>
+<P><font face="Verdana" size="3">
+1.  В среде Delphi откройте меню <B>File </B>и выберите пункт
+<b> New</b> <B>Application.</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+2.  Расположите на форме пять меток и один переключатель, как показано на рис. 29.2.
+</font ></P>
+<P><font face="Verdana" size="3">
+Переименуйте главную форму в <font face="Verdana" size="2">fmMain</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+3. Откройте меню <B>File </B>и выберите пункт<b> Save Project
+As</b>. Сохраните модуль как <font face="Verdana" size="2">uMain</font>, а проект — как
+<font face="Verdana" size="2"> Threads</font> 1.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.29.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 29.2. </B>Внешний вид 
+  формы для приложения Threads'1 </font ></P>
+<P><font face="Verdana" size="3"> 4. Откройте меню <B>File </B>и выберите пункт 
+  <b>New</b>. Затем дважды щелкните на объекте типа поток (значок <B>Thread Object). 
+  </B>Откроется диалоговое окно <b> New</b> <B>Items, </B>показанное на рис. 29.3. 
+  </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.29.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 29.3. </B>Диалоговое 
+  окно <B>New Items </B>с выбранным объектом типа &quot;поток&quot; </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.29.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 29.4. </B>Диалоговое 
+  окно <B>New Thread Object</B> </font ></P>
+<P><font face="Verdana" size="3"> 5. Когда появится диалоговое окно для именования 
+  объекта поток, введите <font face="Verdana" size="2"> TPiThread</font> и нажмите 
+  клавишу &lt;Enter&gt; (рис. 29.4). Помимо этого, при желании, вы можете присвоить 
+  создаваемому потоку имя, установив флажок <B>Named Thread </B>и задав имя в 
+  поле <B>Thread Name. </B>Так как имя потока используется только для удобства 
+  обозначения, эту возможность мы использовать не будем. </font ></P>
+<P><font face="Verdana" size="3"> Delphi создаст новый модуль и поместит в него 
+  шаблон для нового потока. </font ></P>
+<P><font face="Verdana" size="3"> 6. Код, вносимый в метод <font face="Verdana" size="2">Execute</font>, 
+  вычисляет число я, используя сходимость бесконечного ряда Лейбница: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Pi = 4 - 4/3 
+    + 4/5 - 4/7 + 4/9 -...</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Разумеется, отображать новое значение после 
+  каждой итерации — это то же самое, что стрелять из пушки по воробьям. На отображение 
+  информации система потратит в десятки раз больше времени, чем на собственно 
+  вычисления. Поэтому мы ввели константу <font face="Verdana" size="2">updatePeriod</font>, 
+  которая регулирует периодичность отображения текущего значения. </font ></P>
+<P><font face="Verdana" size="3"> Код метода <font face="Verdana" size="2"> Execute</font> 
+  показан ниже: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> const</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> // Лучше использовать 
+    нечетное число для того, чтобы избежать эффекта // мерцания UpdatePeriod = 
+    1000001;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TPiThread.Execute; 
+    var sign : Integer;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PiValue, PrevValue 
+    : Extended; i : Int64;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> { Place thread 
+    code here } PiValue := 4; sign := -1; i := 0; repeat Inc(i);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PrevValue := 
+    PiValue;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PiValue := 
+    PiValue + sign * 4 / (2*i+l); sign := -sign;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if i mod UpdatePeriod 
+    = 0 then&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> GlobalPi := 
+    PiValue; GlobalCounter := i; Synchronize(fmMain.UpdatePi);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> until Terminated 
+    or (Abs(PiValue - PrevValue)&lt;1E-19); end;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> 7. Откройте меню <B>File </B>и выберите пункт 
+  <B>Save As. </B> Сохраните модуль с потоком как <font face="Verdana" size="2">uPiThread</font>.pas. 
+  </font ></P>
+<P><font face="Verdana" size="3"> 8. Отредактируйте главный файл модуля <font face="Verdana" size="2"> 
+  uMain.pas</font> и добавьте модуль <font face="Verdana" size="2"> uPiThread</font> 
+  к списку используемых модулей в секции интерфейса. Он должен выглядеть так: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> uses</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Windows, Messages, 
+    SysUtils, Variants, Classes, Graphics, Controls, Forms, StdCtrls, uPiThread;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> 9. В секции <font face="Verdana" size="2"> public</font> 
+  формы <font face="Verdana" size="2"> TfmMain</font> добавьте ссылку на создаваемую 
+  нить: <font face="Verdana" size="2"> PiThread : TPiThread;</font> </font ></P>
+<P><font face="Verdana" size="3"> 10. Добавьте в модуль uMain две глобальные переменные 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> GlobalPi : 
+    Extended;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> GlobalCounter 
+    : Int64;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> и метод <B> </B>UpdatePi: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.UpdatePi;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Islconic(Application.Handle) 
+    then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; Exit;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> LaValue.Caption 
+    := FloatToStrF(GlobalPi, ffFixed, 18, 18);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> lalterNum.Caption 
+    := IntToStr(GlobalCounter) + ' iterations';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Этот метод, если вы обратили внимание, вызывается 
+  из потока посредством процедуры <font face="Verdana" size="2">Synchronize</font>. 
+  Он отображает текущее значение приближения к числу &quot;пи&quot; и количество 
+  итераций. </font ></P>
+<P><font face="Verdana" size="3"> В случае, если главное окно приложения свернуто, 
+  отображение не производится; так что после его развертывания вам, возможно, 
+  придется подождать некоторое время для обновления. </font ></P>
+<P><font face="Verdana" size="3"> 11. Выполните двойной щелчок на свободном месте 
+  рабочей области формы, при этом создастся шаблон метода <font face="Verdana" size="2">FormCreate</font>. 
+  Здесь мы отобразим значение системной константы <font face="Verdana" size="2"> 
+  р&plusmn;:</font> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.FormCreate(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> laBuiltln.Caption 
+    := FloatToStrF(Pi, ffFixed, 18, 18); end;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> 12. Выберите на форме переключатель (его название 
+  <font face="Verdana" size="2">cbcalcuiate</font>) и назначьте событию <font face="Verdana" size="2">Onclick</font> 
+  код, создающий и уничтожающий вычислительный поток в зависимости от состояния 
+  переключателя: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.cbCalculateClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin if cbCalculate.Checked 
+    then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PiThread := 
+    TPiThread.Create(True);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PiThread.FreeOnTerminate 
+    := True;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PiThread.Priority 
+    := tpLower;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> PiThread.Resume; 
+    end else begin</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Assigned(PiThread) 
+    then PiThread.Terminate;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Таким образом, многопоточное приложение готово 
+  к запуску. Если все пройдет нормально, вы увидите картинку, подобную той, которая 
+  приведена на рис. 29.5. </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.29.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 29.5. </B>Выполняющееся 
+  приложение <font face="Verdana" size="2">Threads1</font> </font ></P>
+<P><font face="Verdana" size="3"> Пока один из авторов писал текст этого раздела, 
+  запущенное одновременно приложение <font face="Verdana" size="2"> Threadsl</font> 
+  выполнило пять миллиардов итераций и приблизилось к встроенному значению <font face="Verdana" size="2"> 
+  Pi </font> в десятом разряде. Интересно, насколько хватит терпения у вас? </font ></P>
+<P><font face="Verdana" size="3"> Этот простой пример — первый шаг в усвоении 
+  того, как от базового класса <font face="Verdana" size="2"> rrhread</font> можно 
+  порождать собственные классы. Из-за своей простоты он не лишен недостатков; 
+  более того — если бы вычислительных нитей было не одна, а более, кое-какие приемы 
+  были бы даже ошибочными. Но — об этом ниже. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index6.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index8.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

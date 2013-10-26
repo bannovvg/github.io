@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Графический 
+  формат JPEG. Класс TJPEGImage</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В 1988 году был принят первый международный стандарт сжатия неподвижных изображений. Он был назван по имени группы, которая над ним работала — JPEG (Joint Photographic Expert Group). Дело в том, что стандартные архиваторы (ZIP, ARJ) и традиционные алгоритмы сжатия в форматах GIF, TIFF и PCX не могут достаточно сильно сжать полутоновую или цветную картинку (типа фотографии) — максимум в 2—3 раза. Примененный в JPEG алгоритм позволяет достичь сжатия в десятки раз — правда, при этом изображение подвергается необратимому искажению, и из него пропадает часть деталей. Бессмысленно (и вредно!) подвергать хранению в формате JPEG чертежи, рисунки, а также любые изображения с малым числом градаций — он предназначен именно для изображений фотографического качества.
+</font ></P>
+<P><font face="Verdana" size="3">
+Поддержка   формата   JPEG   реализована   в   Delphi   посредством   класса
+<font face="Verdana" size="2">TJPEGImage</font>, который
+является потомком класса <font face="Verdana" size="2">TGraphic</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечани</B><b>е</b>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Название <font face="Verdana" size="2"> TJPEGImage</font> 
+    не совсем удачное. К <font face="Verdana" size="2"> Timage</font> этот класс 
+    не имеет ни малейшего отношения. Скорее, это &quot;двоюродный брат&quot; класса 
+    <font face="Verdana" size="2">TBitmap</font>. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+К такому объекту предъявляются двоякие требования. С одной стороны, он должен поддерживать сжатие данных для записи на диск. С другой — распакованные данные в формате DIB, чтобы по требованию системы отрисовать их. Поэтому объект класса
+<font face="Verdana" size="2"> TJPEGimage</font> может хранить оба вида данных, а также производить их взаимные преобразования, т. е. сжатие и распаковку. Для этого в нем предусмотрены методы:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Compress;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure DIBNeeded;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">procedure JPEGNeeded;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Рекомендуется вызывать метод <font face="Verdana" size="2"> DIBNeeded</font> заранее, перед отрисовкой картинки — это ускорит процесс ее вывода на экран.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме того, полезно использовать метод <font face="Verdana" size="2">Assign</font>, который позволяет поместить в класс
+<font face="Verdana" size="2"> TJPEGimage</font> объект <font face="Verdana" size="2"> TBitmap</font> и наоборот:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">MyJPEGImage.Assign(MyBitmap);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;MyBitmap.Assign(MyJPEGImage);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При этом происходит преобразование форматов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойства <font face="Verdana" size="2"> TJPEGimage</font> можно условно разделить на две группы: используемые при сжатии и при распаковке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Важнейшим из свойств, нужных при сжатии, является<font face="Verdana" size="2">
+compressionQuality:</font>
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TJPEGQualityRange = 1..100;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CompressionQuaiity: TJPEGQualityRange;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Оно определяет качество сжимаемого изображения и его размер. При малых значениях этого свойства файлы получаются очень маленькими, но с большими искажениями (напомним, что стандарт JPEG предусматривает сжатие с потерями качества). При значениях, близких к 100, потери незаметны, но и размер файла при этом максимален.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Заранее предсказать размер сжатого файла нельзя 
+    — разные картинки сжимаются по-разному, даже при одном значении <font face="Verdana" size="2">CompressionQuality.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+По умолчанию значение этого свойства равно 75, что обеспечивает разумный компромисс между размером и качеством.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме <font face="Verdana" size="2">CompressionQuality</font>, на качество отображения может повлиять и свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TJPEGPerformance = (jpBestQuality, jpBestSpeed);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property Performance: TJPEGPerformance</font>;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Оно нужно только при распаковке и отвечает за способ восстановления цветовой палитры из сжатой информации. На качество записываемого изображения оно никак не влияет.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как и у класса <font face="Verdana" size="2">TBitmap</font>, у <font face="Verdana" size="2">TJPEGimage</font> есть свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TJPEGPixelFormat = (jf24Bit, jfSBit);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property PixelFormat: TJPEGPixelForm;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для рассматриваемого объекта возможных значений всего два—
+<font face="Verdana" size="2">jf8bit</font> и jf24bit. По умолчанию используется 24-битный формат. Если информация о цвете не нужна, то можно установить свойство
+<font face="Verdana" size="2"> Grayscale</font> в значение <font face="Verdana" size="2"> True</font> — в этом случае изображение будет записано (или распаковано) в полутоновом виде (256 оттенков серого).
+</font ></P>
+<P><font face="Verdana" size="3">Свойства
+<B> </B><font face="Verdana" size="2">ProgressiveEncoding</font> и <font face="Verdana" size="2">ProgressiveDisplay</font>
+определяют <B> </B>способ показа изображения при распаковке. Первое из них отвечает за порядок записи в файл сжатых компонентов. Если
+<font face="Verdana" size="2"> ProgressiveEncoding</font> установлено в значение
+<font face="Verdana" size="2">True</font>, начинает играть роль свойство
+<font face="Verdana" size="2">ProgressiveDisplay</font>. От его значения зависит, будет ли показываться изображение по мере распаковки (при значении
+<font face="Verdana" size="2">True</font>), либо будет сначала полностью распаковано, а потом показано (при значении
+<font face="Verdana" size="2">False</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Чтобы организовать предварительный просмотр большого числа больших изображений, уместно воспользоваться свойством:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TJPEGScale = (jsFullSize, jsHalf, jsQuarter, jsEighth);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property Scale: TJPEGScale;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Искушенные в графике специалисты зададут вопрос: зачем оно? Ведь можно прочитать изображение, а затем уменьшить его масштаб стандартными способами? Представление информации в файлах JPEG таково, что можно достаточно просто извлечь изображение сразу в нужном масштабе. Таким образом достигается двойной выигрыш — на времени распаковки и на времени отображения.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Печать растровых изображений может вызвать 
+    проблемы при согласовании его размеров с размерами листа принтера и его разрешением. 
+    Большую часть из них можно снять, изучив пример, поставляемый с Delphi — jpegProj. 
+    Он находится не в папке \Demos, как обычно, а в папке Help\Examples\Jpeg. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В заключение отметим, что класс <font face="Verdana" size="2">TJPEGimage</font> не имеет своей канвы для рисования — для этого его нужно преобразовать в классе
+<font face="Verdana" size="2">TBitmap</font>.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

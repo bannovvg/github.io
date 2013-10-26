@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index22.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Набор данных </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед открытием набора данных необходимо установить тип используемой при редактировании записей блокировки. Для этого применяется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TADOLockType =   (ItUnspecified,   ItReadOnly,   ItPessimistic, ItOptimistic,   ItBatchOptimistic); property LockType:   TADOLockType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ItUnspecified</font> — блокировка задается источником данных, а не компонентом;&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> ItReadOnly</font> — набор данных откроется в режиме только для чтения;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ItPessimistic</font> — редактируемая запись блокируется на все время редактирования до момента сохранения в хранилище данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ItOptimistic</font> — запись блокируется только на время сохранения изменений в хранилище данных;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ItBatchOptimistic</font> — запись блокируется на время сохранения в хранилище данных при вызове метода
+<font face="Verdana" size="2">updateBatch</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Для того чтобы установка блокировки сработала, 
+    свойство <font face="Verdana" size="2"> LockType</font> должно быть обязательно 
+    модифицировано до открытия набора данных. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Набор данных открывается методом <font face="Verdana" size="2"> Open</font> и закрывается методом
+<font face="Verdana" size="2">close</font>. Также можно использовать свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Active: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Текущее состояние набора данных можно определить свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TObjectState = (stClosed, stOpen, stConnecting, stExecuting, stretching);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TObjectStates = set of TObjectState;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property RecordsetState: TObjectStates;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Набор данных в компонентах ADO основан на использовании объекта набора записей ADO, прямой доступ к этому объекту возможен при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Recordset: _Recordset;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но поскольку все основные методы интерфейсов объекта набора записей ADO перекрыты методами класса, в обычных случаях прямой доступ к объекту вам не понадобится. После обновления набора данных вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRecordsetEvent = procedure(DataSet: TCustomADODataSet; const Error: Error;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var EventStatus: TEventStatus) of object; property OnFetchComplete: TRecordsetEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где <font face="Verdana" size="2"> Error</font> — ссылка на объект ошибки ADO, если она возникла.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если же набор данных работает в асинхронном режиме, при обновлении
+вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFetchProgressEvent = procedure(DataSet: TCustomADODataSet;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Progress, MaxProgress: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">var EventStatus: TEventStatus) of object;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnFetchProgress: TFetchProgressEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где параметр <font face="Verdana" size="2"> Progress</font> показывает долю выполнения операции.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index22.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Базовые 
+  классы TStream и THandleStream</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В основе иерархии классов потоков лежит класс
+<font face="Verdana" size="2">Tstream</font>. Он обеспечивает выполнение основных операций потока безотносительно к реальному носителю информации. Основными из них являются чтение и запись данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> Tstream</font> порожден непосредственно от класса
+<font face="Verdana" size="2">TObject</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Потоки также играют важную роль в чтении/записи компонентов из файлов ресурсов (DFM). Большая группа методов обеспечивает взаимодействие компонента и потока, чтение свойств компонента из ресурса и запись значений свойств в ресурс.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 9.3. </B>Свойства 
+  и методы класса <font face="Verdana" size="2"> Tstream</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="471" HEIGHT="112">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="31">
+<DIV WIDTH="288" HEIGHT="31" style="width: 100; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="292" HEIGHT="31">
+<DIV WIDTH="335" HEIGHT="31" style="width: 144; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="38">
+<DIV WIDTH="288" HEIGHT="38" style="width: 220; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Position:   Longint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="292" HEIGHT="38">
+<DIV WIDTH="335" HEIGHT="38" style="width: 234; height: 38">
+<P><font face="Verdana" size="3">
+Определяет текущую позицию в потоке
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="42">
+<DIV WIDTH="288" HEIGHT="42" style="width: 193; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Size:   Longint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="292" HEIGHT="42">
+<DIV WIDTH="335" HEIGHT="42" style="width: 245; height: 42">
+<P><font face="Verdana" size="3">
+Определяет размер потока в байтах
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="69">
+<DIV WIDTH="312" HEIGHT="69" style="width: 213; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CopyFrom( Source: TStream; Count: Longint) : Longint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="69">
+<DIV WIDTH="315" HEIGHT="69" style="width: 245; height: 69">
+<P><font face="Verdana" size="3">
+Копирует из потока <font face="Verdana" size="2"> Source Count</font> байты, начиная с текущей позиции. Возвращает число скопированных байтов
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="77">
+<DIV WIDTH="312" HEIGHT="77" style="width: 212; height: 77">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Read(var Buffer; Count: Longint) : Longint; virtual; abstract;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="77">
+<DIV WIDTH="315" HEIGHT="77" style="width: 253; height: 77">
+<P><font face="Verdana" size="3">
+Абстрактный класс, перекрываемый в наследниках. Считывает из потока
+<font face="Verdana" size="2"> Count</font> байты в буфер <font face="Verdana" size="2">Buffer</font>. Возвращает число скопированных байтов
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="66">
+<DIV WIDTH="312" HEIGHT="66" style="width: 206; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Read3uffer (var Buffer; Count: Longint) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="66">
+<DIV WIDTH="315" HEIGHT="66" style="width: 251; height: 66">
+<P><font face="Verdana" size="3">
+Считывает из потока <font face="Verdana" size="2"> Count</font> байты в буфер
+<font face="Verdana" size="2">Buffer</font>. Возвращает число скопированных байтов
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="96">
+<DIV WIDTH="312" HEIGHT="96" style="width: 194; height: 96">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Seek (Off set: Longint; Origin: Word): Longint; virtual; abstract;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="96">
+<DIV WIDTH="315" HEIGHT="96" style="width: 249; height: 114">
+<P><font face="Verdana" size="3">
+Абстрактный класс, перекрываемый в наследниках. Смещает текущую позицию в реальном носителе данных на
+<font face="Verdana" size="2"> Offset</font> байтов в зависимости от условия
+<font face="Verdana" size="2"> Origin</font> (см. ниже)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="85">
+<DIV WIDTH="312" HEIGHT="85" style="width: 197; height: 85">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Write (const Buffer; Count: Longint): Longint; virtual; abstract;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="85">
+<DIV WIDTH="315" HEIGHT="85" style="width: 246; height: 85">
+<P><font face="Verdana" size="3">
+Абстрактный класс, перекрываемый в наследниках. Записывает в поток
+<font face="Verdana" size="2"> Count</font> байты из буфера <font face="Verdana" size="2">Buffer</font>. Возвращает число скопированных байтов
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="63">
+<DIV WIDTH="312" HEIGHT="63" style="width: 172; height: 63">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure WriteBuffer (const Buffer; Count: Longint);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="63">
+<DIV WIDTH="315" HEIGHT="63" style="width: 231; height: 63">
+<P><font face="Verdana" size="3">
+Записывает в поток <font face="Verdana" size="2"> Count</font> байты из буфера
+<font face="Verdana" size="2">Buffer</font>. Возвращает число скопированных байтов
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="60">
+<DIV WIDTH="312" HEIGHT="60" style="width: 192; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ReadComponent (Instance: TComponent): TComponent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="60">
+<DIV WIDTH="315" HEIGHT="60" style="width: 230; height: 60">
+<P><font face="Verdana" size="3">
+Передает данные из потока в компонент <font face="Verdana" size="2">instance</font>, заполняя его свойства значениями
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="68">
+<DIV WIDTH="312" HEIGHT="68" style="width: 208; height: 68">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ReadComponentRes (Instance: TComponent) : TComponent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="68">
+<DIV WIDTH="315" HEIGHT="68" style="width: 235; height: 68">
+<P><font face="Verdana" size="3">
+Считывает заголовок ресурса компонента <font face="Verdana" size="2"> Instance</font> и значения его свойств из потока.
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="42">
+<DIV WIDTH="312" HEIGHT="42" style="width: 194; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ReadResHeader;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="42">
+<DIV WIDTH="315" HEIGHT="42" style="width: 204; height: 42">
+<P><font face="Verdana" size="3">
+Считывает заголовок ресурса компонента из потока
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="48">
+<DIV WIDTH="312" HEIGHT="48" style="width: 200; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure WriteComponent (Instance: TComponent) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="48">
+<DIV WIDTH="315" HEIGHT="48" style="width: 205; height: 48">
+<P><font face="Verdana" size="3">
+Передает в поток значения свойств компонента
+<font face="Verdana" size="2"> Instance</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="229" HEIGHT="67">
+<DIV WIDTH="312" HEIGHT="67" style="width: 218; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure WriteComponentRes (const ResName: string; Instance: TComponent) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="272" HEIGHT="67">
+<DIV WIDTH="315" HEIGHT="67" style="width: 263; height: 67">
+<P><font face="Verdana" size="3">
+Записывает в поток заголовок ресурса компонента
+<font face="Verdana" size="2"> Instance</font> и значения его свойств
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Итак, в основе операций считывания и записи данных в потоке лежа! методы
+<font face="Verdana" size="2"> Read</font> и <font face="Verdana" size="2">Write</font>. Именно они вызываются для реального выполнения операции внутри методов
+<font face="Verdana" size="2"> ReadBuffer</font> И <font face="Verdana" size="2">WriteBuffer</font>,
+<font face="Verdana" size="2"> ReadComponent</font> И WriteComponent. Так как класс <B> </B><font face="Verdana" size="2">TStream</font>
+является абстрактным, то методы <font face="Verdana" size="2">Read</font>
+и <font face="Verdana" size="2"> write</font> также являются абстрактными. В классах-наследниках они перекрываются, обеспечивая работу с конкретным физическим носителем данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> Seek</font> используется для изменения текущей позиции в потоке. &quot;Точка отсчета&quot; позиции зависит от значения параметра
+<font face="Verdana" size="2">Origin</font>:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">soFromBeginning 
+    — смещение должно быть положительным и отсчитывается от начата потока;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;soFromCurrent — смещение 
+    относительно текущей позиции в потоке;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;soFromEnd — смещение должно 
+    быть отрицательным и отсчитывается от конца потока.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Группа методов обеспечивает чтение и запись из потока ресурса компонента. Они используются при создании компонента на основе данных о нем, сохраненных в формате файлов ресурсов. Для чтения ресурса используется метод
+<font face="Verdana" size="2">ReadComponentRes</font>, в котором последовательно вызываются:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;метод  
+    ReadResHeader — для считывания заголовка ресурса компонента из потока;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;метод  
+    ReadComponent — для считывания значений свойств компонента. Для записи 
+    ресурса в поток применяется метод writeComponentRes.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2">THandleStream</font> инкапсулирует поток, связанный с физическим носителем данных через дескриптор.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания потока используется конструктор
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">constructor Create(AHandle: Integer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в параметре которого передается дескриптор. Впоследствии доступ к дескриптору осуществляется через свойство:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Агрегатные 
+  поля</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Агрегатные поля не входят в структуру полей набора данных, т. к. агрегатные функции подразумевают объединение записей таблицы для получения результата. Следовательно, значение агрегатного поля нельзя связать с какой-то одной записью, оно относится ко всем или группе записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Агрегатные поля не отображаются вместе со всеми полями в компонентах
+<font face="Verdana" size="2">TDBGrid</font>, в Редакторе полей они расположены в отдельном списке. Для представления значения агрегатного поля можно воспользоваться одним из компонентов отображения данных, который визуализирует значение одного поля (например,
+<font face="Verdana" size="2"> TDBText</font> или <font face="Verdana" size="2">TDBEdit</font>) или свойствами самого поля:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+LabelI.Caption := MyDataSetAGGRFIELDl.AsString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Подробно вопросы создания агрегатных полей рассмотрены в гл. 13.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TAggregateField</font> предназначен для инкапсуляции свойств и методов агрегатных полей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Его свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Expression: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задает вычисляемое выражение.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вычисление значения проводится только для тех агрегатных полей, свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Active: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которых имеет значение <font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вычисление включенных свойством <font face="Verdana" size="2"> Active</font> агрегатных полей выполняется только в том случае, если булевское свойство
+<font face="Verdana" size="2"> AggregatesActive</font> клиентского компонента набора данных имеет значение
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+По умолчанию экземпляр класса <font face="Verdana" size="2"> TAggregateField</font> создается со свойством
+<font face="Verdana" size="2">Visible = False.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

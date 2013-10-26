@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"><b>Связь с родительским элементом 
+  управления </b><br>
+  </font><font face="Verdana" size="3"> </font ></P>
+<P><font face="Verdana" size="3">
+Механизм связывания визуального компонента с родительским компонентом (владельцем) позволяет автоматически задавать для нового элемента управления некоторые свойства, отвечающие за его внешний вид (см. выше).
+В результате все дочерние элементы управления для одного родительского (формы, панели) будут выглядеть одинаково оформленными.
+</font ></P>
+<P><font face="Verdana" size="3">
+Родительский компонент задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Parent: TWinControl;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для каждого дочернего элемента управления можно задать значения нескольких свойств:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParentBiDiMode: Boolean; property ParentColor: Boolean; property ParentFont: Boolean; property ParentShowHint: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Каждое из них управляет одной характеристикой визуализации элемента. Метод
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function HasParent: Boolean; override;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+используется для того, чтобы определить, имеется ли у компонента владелец вообще.
+</font ></P>
+<P><font face="Verdana" size="3">
+В классе <font face="Verdana" size="2">TControl</font> впервые появляются методы-обработчики событий, которые обеспечивают передачу в элемент действия мыши, присоединение и перетаскивание.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

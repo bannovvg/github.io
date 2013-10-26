@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index36.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index38.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Команды ADO</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Команде ADO, которой мы уделяли так много внимания в этой главе в VCL Delphi, соответствует компонент
+<font face="Verdana" size="2">TADOCormand</font>. Методы этого компонента во многом совпадают с методами класса
+<font face="Verdana" size="2">TCustomADODataSet</font>, хотя этот класс не является предком компонента (рис. 19.8). Он предназначен для выполнения команд, которые не возвращают наборы данных.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.19.8.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 19.8. </B> Иерархия классов 
+  компонента <B> </B><font face="Verdana" size="2">TADOCommand</font> </font ></P>
+<P><font face="Verdana" size="3"> Так как компоненту <font face="Verdana" size="2"> 
+  TADOCommand</font> нет необходимости обеспечивать работу набора записей, его 
+  непосредственным предком является класс <font face="Verdana" size="2">TComponent</font>. 
+  К его функциональности просто добавлен механизм соединения с БД через ADO и 
+  средства представления команды. </font ></P>
+<P><font face="Verdana" size="3"> Команда передается в хранилище данных ADO через 
+  собственное соединение или через компонент <font face="Verdana" size="2">TAOocormection</font>, 
+  аналогично другим компонентам ADO (см. выше). </font ></P>
+<P><font face="Verdana" size="3"> Текстовое представление выполняемой команды 
+  должно содержаться в свойстве </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property CommandText: 
+    WideString;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Однако команду можно задать и другим способом. 
+  Прямая ссылка на нужный объект команды ADO может быть задана свойством </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property CommandObject: 
+    _Command;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Тип команды определяется свойством </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TCommandType 
+    = (cmdUnknown, cmdText, cmdTable, cmdStoredProc, cmdFile, cmdTableDirect);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property CommandType: 
+    TCommandType;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Так как тип <font face="Verdana" size="2"> TCommandType</font> 
+  также используется в классе <font face="Verdana" size="2">TCustomADODataSet</font>, 
+  где необходимо представлять все возможные виды команд, по отношению к компоненту 
+  <font face="Verdana" size="2"> TADOcommand</font> этот тип обладает избыточностью. 
+  Здесь нельзя установить значения<B> </B>c<font face="Verdana" size="2">mdTable, 
+  cmdFile, cmdTableDirect,</font> а тип <font face="Verdana" size="2">cmdStoredProc</font> 
+  должен обозначать только те хранимые процедуры, которые не возвращают набор 
+  данных. </font ></P>
+<P><font face="Verdana" size="3"> Если команда должна содержать текст запроса 
+  SQL, свойство <font face="Verdana" size="2"> CommandType</font> должно иметь 
+  значение <font face="Verdana" size="2">cmdText</font>. </font ></P>
+<P><font face="Verdana" size="3"> Для вызова хранимой процедуры необходимо задать 
+  тип <font face="Verdana" size="2">cmdStoredProc</font>, a в свойстве <font face="Verdana" size="2"> 
+  CommandText</font> ввести имя процедуры. </font ></P>
+<P><font face="Verdana" size="3"> Если для выполнения команды необходимо задать 
+  параметры, используется свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Parameters: 
+    TParameters;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Выполнение команды осуществляется методом <font face="Verdana" size="2">Execute</font>: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function Execute: 
+    _RecordSet; overload;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function Execute(const 
+    Parameters: OleVariant): _Recordset;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">overload;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;function 
+    Execute(var RecordsAffected: Integer; var Parameters: OleVariant; ExecuteOptions: 
+    TExecuteOptions = []): _RecordSet; overload;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Разработчик может использовать любую из представленных 
+  нотаций перегружаемого метода: </font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;параметр 
+    RecordsAffected возвращает число обработанных записей;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;параметр 
+    Parameters задает параметры команды;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;параметр 
+    ExecuteOptions определяет условия выполнения команды:</font></li>
+</ul>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TExecuteOption 
+    = (eoAsyncExecute, eoAsyncFetch, eoAsyncFetchNonBlocking, eoExecuteNoRecords); 
+    TExecuteOptions = set of TExecuteOption;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> eoAsyncExecute</font> 
+    — асинхронное выполнение команды;&nbsp; </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> eoAsyncFetch</font> 
+    — асинхронная передача данных; </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> eoAsyncFetchNonBlocking</font> 
+    — асинхронная передача данных без блокирования потока; </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> eoExecuteNoRecords</font> 
+    — если команда возвращает набор записей, то они не передаются в компонент. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> При работе с компонентом <font face="Verdana" size="2"> 
+  TADOConnection</font> желательно использовать опцию <font face="Verdana" size="2">eoExecuteNoRecords</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Для прерывания выполнения команды используется 
+  метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure Cancel;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Текущее состояние команды можно определить свойством 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TObjectState 
+    = (stClosed, stOpen, stConnecting, stExecuting, stFetching);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TObjectStates 
+    = set of TObjectState; property States: TObjectStates;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index36.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index38.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

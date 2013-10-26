@@ -1,0 +1,235 @@
+<html>
+<head>
+ <title></title>
+ <meta http-equiv="Content-Type" content="text/html; Charset=windows-1251">
+ <meta name="Generator" content="HtmlReader v1.6">
+</head>
+<body background="28.jpg" bgcolor="#ffffff" text="#000000" link="#200374" vlink="#805080" alink="#FF0000">
+
+
+
+<table  bgcolor="#f01161"><tr>
+<td>Наши товары:</td></tr>
+<td>Фотоаппараты: </td>
+<tr>
+<td width="185"><a href="canon.html" target="RightFrame"><ul><li>Canon</a></td></tr>
+
+<tr>
+<td ><a href="nikon.html" target="RightFrame"><ul><li>Nikon</a></td></tr>
+<tr>
+<td ><a href="olimpys.html" target="RightFrame"><ul><li>Olimpus</a></td></tr>
+<tr>
+<td ><a href="sony.html" target="RightFrame"><ul><li>Sony</a></td></tr>
+
+<td width="78"><td>
+</table>
+<hr size=10 align="left" width=194 color="black">
+<table  bgcolor="#f01161"><tr>
+<td>Новости:</td></tr>
+<td><img src="lef.gif" border="2"> </td>
+<td width="100"><a href="2b.html" target="RightFrame">О цифровых Фотоаппаратах</a></td>
+</table>
+<hr size=10 align="left" width=194 color="black">
+<table  bgcolor="#f01161"><tr>
+<td>Новинки:</td></tr>
+<td><img src="5.jpg" border="2" width=80 heght=50> </td>
+
+<td width="100"><p size="1">Sony Cyber-shot DSC-T700</p><font size="4" color="black">13210 р.</font><p><a href="nov1.html" target="RightFrame">подробнее>></a></p></td>
+</tr>
+<td><img src="980.jpg" border="2" width=80> </td>
+
+<td width="100"><p size="1">Canon Digital IXUS 980 IS</p><font size="4" color="black">13200 р.</font><p><a href="nov2.html" target="RightFrame">подробнее>></a></p></td>
+</table>
+<hr size=10 align="left" width=194 color="black">
+<table  bgcolor="#f01161"><tr>
+<td>Полезное:</td></tr>
+<td width="190"><p><a href="otprav.html" target="RightFrame">Отправить письмо автору</a><p></td></table>
+
+<hr size=10 align="left" width=194 color="black">
+
+
+<table>
+<p><tr><td><h3 onclick="return Open()" onmouseover="this.style.color='#40caff'"  onmouseout="this.style.color='black'">Наша фотогалерея</h3></a></td></tr></p>
+</table>
+
+<script>
+var newWindow
+
+function Open(){
+
+
+window.open("foto.html")
+}
+
+
+
+function CloseWin1(){
+if (newWindow){
+newWindow.close()
+newWindow=null
+window.status=""
+}
+}
+</script>
+
+
+
+
+
+
+
+<script language="JavaScript">
+
+var firstYear= 1900                   
+var lastYear= 2010	
+
+  myDate= new Date			
+  var curMonth= myDate.getMonth ()	
+  var curYear=  myDate.getYear ()	
+  var curDate=   myDate.getDate ()	
+										
+  Years= new Array (lastYear - firstYear);
+  Month= new Array ("Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь");
+
+  daysInMonth = new Array (31,28,31,30,31,30,31,31,30,31,30,31);
+  numbTableCell = 42 
+
+  function updateCalendar(UcurYear,UcurMonth){
+
+  isLeap (UcurYear)
+  var firstDay= setFirstDay (UcurYear,UcurMonth)
+  					
+  if (firstDay == 0)
+      firstDay= 7
+  firstDay--	
+
+  tableOffset= 10; 
+  temp= 0
+  for (i=0; i < firstDay; i++){
+    calendar.all[i+ tableOffset ].innerText= " ";
+    calendar.all[i+ tableOffset ].bgColor= "#ffffff"
+    temp++
+  }
+  j= i + tableOffset
+  
+  for (i=1; i <= daysInMonth[UcurMonth];i++){
+      if (temp == 7){
+        j++
+        temp= 0
+      }
+      if (curDate != i){	
+	  calendar.all[j].innerText= i
+          calendar.all[j].bgColor= "#ffffff"     
+      }
+      else{
+          calendar.all[j].innerText= i
+	  calendar.all[j].bgColor= "#a0d4ff"
+      }
+      temp++
+      j++
+  }
+  for (i=0;i < (numbTableCell- daysInMonth[UcurMonth]-firstDay); i++){  					
+    if (temp == 7){
+      j++
+      temp= 0
+    }
+    calendar.all[j].innerText= " ";
+    calendar.all[j].bgColor= "#ffffff"
+    temp++
+    j++
+  }
+  }
+
+  function outCalendar (FcurYear,FcurMonth)
+  {
+  isLeap (FcurYear)
+  var firstDay= setFirstDay (FcurYear,FcurMonth)
+
+  if (firstDay == 0)
+      firstDay= 7
+  firstDay--	
+				
+  document.write ('<table id= "calendar"  cellspacing= 2 cellpadding= 0 border=1 Class="text">')
+  document.write ('<tr align= center bgColor="#78c850"><td>Пн</td><td>Вт</td><td>Ср</td><td>Чт</td><td>Пт</td><td bgColor="#f06c40">Сб</td><td bgColor="#f06c40">Вс</td></tr>')
+  				
+  temp= 0
+  j= 0
+  document.write ('<tr align= right>')
+  for (i=0; i < firstDay; i++){
+    document.write ('<td>&nbsp</td>')
+    temp++
+    j++
+  }
+  k= j
+				
+  for (i= 1; i <= numbTableCell - k;i++){
+    if (temp == 7){
+      temp= 0
+      document.write ('</tr><tr align= right>')
+    }
+    if (i <= daysInMonth[FcurMonth]){
+      if (curDate != i)
+          document.write ('<td>'+ i +'</td>')
+      else
+          document.write ('<td bgColor= "#a0d4ff">'+ i +'</td>')
+    }
+    else
+    {
+      document.write ('<td>&nbsp</td>')
+    }
+
+    j++
+    temp++
+  }
+  document.write ('</tr></table>')
+  }
+  
+  function setFirstDay (year,month){
+    var tempDay= new Date (year, month, 1)
+    return tempDay.getDay ()
+  }
+
+  function isLeap (year){
+    if (
+        (year % 4 == 0)&
+        ( (year % 100 != 0) ||(year % 400 == 0) )
+       )
+        daysInMonth [1]= 29
+    else
+        daysInMonth [1]= 28
+  }
+
+  function insertSpace (num){
+    for(i=0;i<num;i++)
+        document.write ('&nbsp')
+  }
+
+</script>
+</head>
+
+<body>
+  <script language= "JavaScript">
+  <!--
+   document.write ('<select name= "selMonth"  size= 1 onChange= "updateCalendar (selYears.value,selMonth.value)">')
+     for (i= 0;i < Month.length; i++)
+      {
+       document.write ('<option value='+i+'>' + Month [i])
+      }
+    document.write ('</select>')
+    selMonth.selectedIndex= curMonth
+    insertSpace (1)
+    document.write ('<select name= "selYears"  size= 1 onChange= "updateCalendar (selYears.value,selMonth.value)">')
+    for (i= firstYear ;i < lastYear; i++)
+     {
+      Years[i- firstYear]= i
+      document.write ('<option value='+i+'>'+ Years[i-firstYear])
+     }
+    document.write ('</select>')
+    selYears.selectedIndex= curYear - firstYear
+    document.write ('<br><br>')
+    outCalendar (curYear,curMonth)
+//-->  
+</script>
+
+</body>
+</html>

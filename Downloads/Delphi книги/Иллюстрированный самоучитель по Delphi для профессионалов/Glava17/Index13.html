@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Способы редактирования данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Несмотря на декларированные недостатки технологии dbExpress — однонаправленные курсоры и невозможность редактирования — существуют программные способы уменьшить масштаб проблемы или даже решить ее.
+</font ></P>
+<P><font face="Verdana" size="3">
+Во-первых, в нашем распоряжении имеется компонент
+<font face="Verdana" size="2">TSimpleDataSet</font>, который реализует двунаправленный курсор и обеспечивает редактирование данных путем их кэширования на клиентской стороне.
+</font ></P>
+<P><font face="Verdana" size="3">
+Во-вторых, редактирование можно обеспечить настройкой и выполнением запросов SQL
+I<font face="Verdana" size="2">NSERT, UPDATE и DELETE.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+У каждого способа есть свои преимущества и недостатки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">TSimpleDataSet</font> безусловно хорош. Он технологичен, относительно прост в использовании и, главное, прячет всю функциональность за
+несколькими свойствами и методами. Но локальное кэширование изменений подходит далеко не для всех приложений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, при многопользовательском интенсивном доступе к данным с их редактированием при локальном кэшировании могут возникнуть проблемы с целостностью и адекватностью данных. Самый распространенный пример: продавец в строительном супермаркете, обслуживая покупателя в пик летних ремонтов, резервирует несколько наименований ходовых товаров. Но покупатель замешкался, выбирая обои и плитку. А за это время другой продавец уже продал другому покупателю (заказ первого покупателя еще находится в локальном кэше!) часть его товаров.
+</font ></P>
+<P><font face="Verdana" size="3">
+Конечно, фиксацию изменений на сервере можно выполнять после локального сохранения каждой записи, но это приведет к загрузке соединения и снижению эффективности системы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Использование модифицирующих запросов, с одной стороны, позволяет оперативно вносить изменения в данные на сервере, а с другой — требует больших затрат на программирование и отладку. Сложность кода в этом случае существенно выше.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим небольшой пример реализации обоих способов. Приложение Demo DBX использует соединение с сервером InterBase. Подключена тестовая база данных \Borland
+Shared\Data\MastSQL.gdb.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>&nbsp;Листинг 17.1. </B> Пример 
+  приложения dbExpress с редактируемыми наборами данных </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+implementation</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;{$R *.dfm}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmDemoDBX.FormCreate(Sender: TObj ect);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+tblVens.Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cdsGusts.Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmDemoDBX.FormDestroy(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+tblVens.Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cdsCusts.Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{Editing feature with updating query}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmDemoDBX.tblVensAfterScroll(DataSet: TDataSet);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+edVenNo.Text := tblVens.FieldByName('VENDORNO').AsString;&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> edVenName.Text := tblVens.FieldByName('VENDORNAME').AsString; edVenAdr.Text :=
+  tblVens.FieldByName('ADDRESS1')AsString;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;edVenCity.Text := tblVens.FieldByName('CITY').AsString;&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> edVenPhone.Text := tblVens.FieldByName('PHONE').AsString;&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmDemoDBX.sbCancelClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+tblVens.First;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmDemoDBX.sbNextClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+tblVens.Next; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmDemoDBX.sbPostClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with quUpdate do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ParamByName(4dx').Aslnteger :=</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;tblVens.FieldByName('VENDORNO').Aslnteger;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ParamByName('No').AsString := edVenNo.Text;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ParamByName('Name').AsString := edVenName.Text;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;ParamByName('Adr').AsString :=
+edVenAdr.Text;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ParamByName('City').AsString := edVenCity.Text;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;ParamByName('Phone1).AsString := edVenPhone.Text;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ExecSQL; except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MessageDlg('Vendor''s info post error', mtError, [mbOK], 0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;tblVens.First;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{Editing feature with cached updates}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmDemoDBX.cdsCustsAfterPost(DataSet: TDataSet);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cdsCusts.ApplyUpdates(-1);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmDemoDBX.cdsCustsReconcileError(DataSet:&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">TCustomClientDataSet;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+E: EReconcileError; UpdateKind: TUpdateKind;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var Action: TReconcileAction);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MessageDlg('Customer''s info post error', mtError, [mbOK], 0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cdsCusts.CancelUpdates;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для просмотра и редактирования выбраны таблицы
+<font face="Verdana" size="2"> Vendors</font> и <font face="Verdana" size="2">Customers</font>. Первая таблица подключена через настроенное соединение (компонент
+<font face="Verdana" size="2">cnMast</font>) к компоненту <font face="Verdana" size="2"> tbivens</font> типа
+<font face="Verdana" size="2">TSQLTable</font>. Значение пяти полей отображается в обычных компонентах
+<font face="Verdana" size="2">TEdit</font>, т. к. компоненты отображения данных, связанные с компонентом dbExpress через компонент
+<font face="Verdana" size="2">TDataSource</font>, работают только в режиме просмотра, не позволяя редактировать данные (рис. 17.2).
+</font ></P>
+<P><font face="Verdana" size="3">
+Использование метода-обработчика <font face="Verdana" size="2">AfterScro</font><font face="Verdana" size="2">ll</font> позволило легко решить проблему заполнения компонентов TEdit при навигации по набору данных. Для сохранения сделанных изменений (нажатие на кнопку
+<font face="Verdana" size="2">sbPost</font>) используется компонент
+<font face="Verdana" size="2"> quupdate</font> типа <font face="Verdana" size="2">TSQLQuery</font>. В параметрах запроса передаются текущие значения полей из компонентов
+<font face="Verdana" size="2">TEdit</font>. Так как в этом случае работает однонаправленный курсор, проблема обновления набора данных после выполнения модифицирующего запроса не возникает и набор данных обновляется только при вызове метода
+<font face="Verdana" size="2"> First</font> компонента <font face="Verdana" size="2">tbivens</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вторая таблица подключена через тот же компонент
+<font face="Verdana" size="2"> cnMast</font> к компоненту <font face="Verdana" size="2"> cdsCusts</font> типа
+<font face="Verdana" size="2">TSimpleDataSet</font>. Он работает в табличном режиме. Данные отображаются в обычном компоненте
+<font face="Verdana" size="2">TDBGrid</font>.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.17.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 17.2. </B> Окно приложения<font face="Verdana" size="2"> 
+  Demo dbExpress</font> </font ></P>
+<P><font face="Verdana" size="3"> Для сохранения сделанных изменений здесь использован 
+  метод <font face="Verdana" size="2">Appiyupdates</font>, размещенный в методе-обработчике 
+  <font face="Verdana" size="2">AfterPost</font>, когда изменения уже попали в 
+  локальный кэш. Метод-обработчик вызывается каждый раз при переходе в компонент 
+  <font face="Verdana" size="2"> TDBGrid</font> на новую строку. </font ></P>
+<P><font face="Verdana" size="3"> Для компонента <font face="Verdana" size="2"> 
+  cdscusts</font> также предусмотрена простейшая обработка исключительных ситуаций, 
+  возникающих на сервере. Обратите также внимание на настройку компонента <font face="Verdana" size="2"> 
+  cnMast</font> типа <font face="Verdana" size="2">TSQLConnection</font>. Свойства<B> 
+  </B><font face="Verdana" size="2">KeepConnection И LoginPrompt </font>со значениями 
+  <font face="Verdana" size="2">False</font> обеспечивают открытие наборов данных 
+  при создании формы и автоматическое закрытие соединения при закрытии приложения 
+  с минимальным исходным кодом. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index12.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index14.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

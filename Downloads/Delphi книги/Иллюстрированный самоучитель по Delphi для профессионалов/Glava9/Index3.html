@@ -1,0 +1,885 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Операции ввода/вывода</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь рассмотрим две самые распространенные операции, выполняемые при работе с файлами. Это чтение и запись. Для их осуществления применяются специальные функции файлового ввода/вывода.
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, для выполнения операции чтения или записи необходимо произвести следующие действия:
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Объявить файловую переменную необходимого типа.
+</font ></P>
+<P><font face="Verdana" size="3">
+2.  При помощи функции <font face="Verdana" size="2">AssignFile</font> связать эту переменную с требуемым файлом.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>3. </B>   Открыть файл при помощи функций <font face="Verdana" size="2"> Append, Reset, Rewrite.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+4. Выполнить операции чтения или записи. При этом, в зависимости от сложности задачи и структуры данных, может использоваться целый ряд вспомогательных функций.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>5. </B>   Закрыть файл при помощи функции <font face="Verdana" size="2">CloseFile</font>.
+</font ></P>
+<P><font face="Verdana" size="3"><b>Внимание</b>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> По сравнению с Turbo Pascal изменились названия 
+    только двух функций: <font face="Verdana" size="2"> Assign</font> стала <font face="Verdana" size="2">AssignFile</font>, 
+    a <font face="Verdana" size="2"> Close</font> превратилась в <font face="Verdana" size="2">CloseFile</font>. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В качестве примера рассмотрим небольшой фрагмент исходного кода.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">var&nbsp; F: TextFile;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+S: string;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if OpenDlg.Execute</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then AssignFiie(F, OpenDlg.FileName)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> else Exit; Reset(F);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+while Not EOF(F) do&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Readln(F, S) ;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Memo.Lines.Add(S);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CloseFile(F);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если в диалоге открытия файла <font face="Verdana" size="2"> OpenDlg</font> был выбран файл, то его имя связывается с файловой переменной
+<font face="Verdana" size="2"> F</font> при помощи процедуры
+<font face="Verdana" size="2">AssignFiie</font>. В качестве имени файла рекомендуется всегда передавать полное имя файла (включая его маршрут). Как раз в таком виде возвращают результат выбора файла диалоги работы с файлами
+<font face="Verdana" size="2"> TOpenDialog, TOpenPictureDiaiog</font>. Затем при помощи процедуры
+<font face="Verdana" size="2"> Reset</font> этот файл открывается для чтения и записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+В цикле выполняется чтение из файла текстовых строк и запись их в компонент
+<font face="Verdana" size="2">TMemo</font>. Процедура <font face="Verdana" size="2"> Readin</font> осуществляет чтение текущей строки файла и переходит на следующую строку. Цикл выполняется, пока функция EOF не сообщит о достижении конца файла.
+</font ></P>
+<P><font face="Verdana" size="3">
+После завершения чтения файл закрывается.
+</font ></P>
+<P><font face="Verdana" size="3">
+Такой же исходный код можно использовать и для записи данных в файл. Необходимо только заменить процедуру чтения на процедуру записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь остановимся подробнее на назначении используемых для файлового ввода/вывода функций.
+</font ></P>
+<P><font face="Verdana" size="3">
+Открытие файла может осуществляться тремя процедурами — в зависимости от типа его дальнейшего использования.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Reset(var F: File [; RecSize: Word ]);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+открывает существующий файл для чтения и записи, текущая позиция устанавливается на первой строке файла.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Append(var F: Text);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+открывает файл для записи информации после его последней строки, текущая позиция устанавливается на конец файла.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Rewrite(var F: File [; RecSize: Word ]);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+создает новый файл и открывает его, текущая позиция устанавливается в начало файла. Если файл с таким именем уже существует, то он перезаписывается.
+</font ></P>
+<P><font face="Verdana" size="3">
+Переменная <font face="Verdana" size="2"> RecSize</font> используется только при работе с нетипизированными файлами и определяет размер одной записи для операции передачи данных. Если этот параметр опущен, то по умолчанию
+<font face="Verdana" size="2"> RecSize</font> равно 128 байт.
+</font ></P>
+<P><font face="Verdana" size="3">
+Чтение данных из типизированных и текстовых файлов выполняют процедуры
+<font face="Verdana" size="2"> Read И Readin.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура <font face="Verdana" size="2"> Read</font> имеет различное объявление для текстовых и других типизированных файлов:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">procedure Read([var F: Text;] VI [, V2,...,Vn]);</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+для текстовых файлов;
+</font ></P>
+</blockquote>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;procedure Read(F,   VI   [,   V2,...,Vn]);</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+для других типизированных файлов.
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При одном вызове процедуры можно читать данные в произвольное число переменных. Естественно, что тип переменных должен совпадать с типом файла. При чтении в очередную переменную читается ровно столько байтов из файла, сколько занимает тип данных. В следующую переменную читается столько же байтов, расположенных следом. После выполнения процедуры текущая позиция устанавливается на первом непрочитанном байте. Аналогично работают несколько процедур
+<font face="Verdana" size="2"> Read</font> для одной переменной, выполненных подряд.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Readln([ var F: Text; ] VI [, V2,...,Vn ]);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+считывает одну строку текстового файла и устанавливает текущую позицию на следующей строке. Если использовать процедуру без переменных vi. .vn, то она просто передвигает текущую позицию на очередную строку файла.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедуры для записи в файл <font face="Verdana" size="2"> write</font> и
+<font face="Verdana" size="2"> writein</font> описаны аналогично:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Write([var F: Text; ] PI [, P2,..., Pn]) ; procedure Writein([ var F: Text; ] PI [, P2,...,Pn ]);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметры <font face="Verdana" size="2">P1, P2, ..., Pn</font> могут быть одним из целых или вещественных типов, одним из строковых типов или логическим типом. Но у них есть возможность дополнительного форматирования при выводе. Каждый параметр записи может иметь форму:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Рn [: MinWidth [: DecPlaces ] ]</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Р</font><font face="Verdana" size="2">n</font> — выводимая переменная или выражение;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MinWidth</font> — минимальная ширина поля в символах, которая должна быть больше 0;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DecPlaces</font> — содержит количество десятичных символов после запятой при отображении вещественных чисел с фиксированной точкой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обратите внимание, что для текстовых файлов в функциях
+<font face="Verdana" size="2"> Read</font> и <font face="Verdana" size="2"> write</font> файловая переменная F может быть опущена. В этом случае чтение и запись осуществляются в стандартные файлы ввода/вывода. Когда программа компилируется как консольное приложение (флаг<font face="Verdana" size="2">
+{$APPTYPE CONSOLE}</font>), Delphi автоматически связывает входной и выходной файлы с окном консоли.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для контроля за текущей позицией в файле применяются две основные функции. Функция
+<font face="Verdana" size="2">EOF</font><font face="Verdana" size="2">(F)</font> возвращает значение
+<font face="Verdana" size="2">True</font>, если достигнут конец файла. Функция
+<font face="Verdana" size="2"> EOLN(F)</font> аналогично сигнализирует о достижении конца строки. Естественно, в качестве параметра в функции необходимо передавать файловую переменную.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Seek(var F; N: Longint);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+обеспечивает смещение текущей позиции на <font face="Verdana" size="2"> N</font> элементов. Размер одного элемента в байтах зависит от типа данных файла (от типизированной переменной).
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим теперь режим блочного ввода/вывода данных между файлом и областью адресного пространства (буфером). Этот режим отличается значительной скоростью передачи данных, причем скорость пропорциональна размеру одного передаваемого блока — чем больше блок, тем больше скорость.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для реализации этого режима необходимо использовать только нетипизированные файловые переменные. Размер блока определяется в процедуре открытия файла
+(<font face="Verdana" size="2">Reset, Rewrite</font>). Непосредственно для выполнения операций
+используются процедуры<B> </B><font face="Verdana" size="2">BlockRead</font>
+и <font face="Verdana" size="2">BlockWrite</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure BlockRead(var F: File; var Buf; Count: Integer</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;[; var AmtTransferred: Integer]);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+выполняет запись блока из файла в буфер. Параметр
+<font face="Verdana" size="2"> F</font> ссылается на нетипизированную файловую переменную, связанную с нужным файлом.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> Buf</font> определяет любую переменную (число, строку, массив, структуру), в которую читаются байты из файла. Параметр
+<font face="Verdana" size="2"> Count</font> содержит число считываемых блоков. Наконец, необязательный параметр
+<font face="Verdana" size="2"> AmtTransferred</font> возвращает число реально считанных блоков.
+</font ></P>
+<P><font face="Verdana" size="3">
+При использовании блочного чтения или записи размер блока необходимо выбирать таким образом, чтобы он был кратен размеру одного значения того типа, который хранится в файле. Например, если в файле хранятся значения типа
+<font face="Verdana" size="2"> Double</font> (8 байт), то размер блока может быть равен 8, 16, 24, 32 и т. д. Фрагмент исходного кода блочного чтения при этом выглядит следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var F: File;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DoubleArray: array [0..255] of Double;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Transfered: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if OpenDlg.Execute then AssignFile(F, OpenDlg.FileName) else Exit;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Reset(F, 64);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+BlockRead(F, DoubleArray, 32, Transferee!);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">CloseFile(F);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('Считано '+IntToStr(Transfered)+' блоков');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Как видно из примера, размер блока установлен в процедуре
+<font face="Verdana" size="2"> Reset</font> и кратен размеру элемента массива
+<font face="Verdana" size="2">DoubleArray</font>, в который считываются данные. В переменной
+<font face="Verdana" size="2"> Transfered</font> возвращается число считанных блоков. Если размер файла меньше заданного в процедуре
+<font face="Verdana" size="2">BlockRead</font> числа блоков, ошибка не возникает, а в переменной
+<font face="Verdana" size="2"> Transfered</font> передается число реально считанных блоков.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure BlockWrite(var f: File; var Buf; Count: Integer&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> [; var AmtTransferred: Integer]);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+используется аналогично.
+</font ></P>
+<P><font face="Verdana" size="3">
+Оставшиеся функции ввода/вывода, работающие с файловыми переменными, подробно описаны в табл. 9.1.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 9.1. </B>Процедуры 
+  и функции для работы с файлом </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="476" HEIGHT="354">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="29">
+<DIV WIDTH="281" HEIGHT="29" style="width: 90; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="29">
+<DIV WIDTH="368" HEIGHT="29" style="width: 156; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="68">
+<DIV WIDTH="281" HEIGHT="68" style="width: 180; height: 68">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ChangeFileExt (const FileName, Extension: string): string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="68">
+<DIV WIDTH="368" HEIGHT="68" style="width: 271; height: 68">
+<P><font face="Verdana" size="3">
+Функция   позволяет   изменить   расширение файла. При этом сам файл не переименовывается
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="48">
+<DIV WIDTH="281" HEIGHT="48" style="width: 137; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ChDir(S:   string);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="48">
+<DIV WIDTH="368" HEIGHT="48" style="width: 260; height: 48">
+<P><font face="Verdana" size="3">
+Процедура изменяет текущий каталог на другой, путь к которому описан в строке s
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="115">
+<DIV WIDTH="281" HEIGHT="115" style="width: 156; height: 115">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CloseFile (var  F) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="115">
+<DIV WIDTH="368" HEIGHT="115" style="width: 263; height: 115">
+<P><font face="Verdana" size="3">
+Вызов   процедуры   разрывает   связь   между файловой переменной и файлом на диске.
+</font ></P>
+<P><font face="Verdana" size="3">
+Имя  этой   процедуры   изменено  из-за  конфликта имен в Delphi (в Borland Pascal используется процедура
+<font face="Verdana" size="2">Close</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="94">
+<DIV WIDTH="281" HEIGHT="94" style="width: 158; height: 94">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function DeleteFile (const FileName: string): Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="94">
+<DIV WIDTH="368" HEIGHT="94" style="width: 259; height: 94">
+<P><font face="Verdana" size="3">
+Функция производит удаление файла <font face="Verdana" size="2"> FileName</font> с диска и возвращает значение
+<font face="Verdana" size="2">False</font>, если файл удалить не удалось или файл не существует
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="54">
+<DIV WIDTH="273" HEIGHT="54" style="width: 188; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ExtractFileExt (const FileName:   string):   string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="54">
+<DIV WIDTH="360" HEIGHT="54" style="width: 282; height: 54">
+<P><font face="Verdana" size="3">
+Функция возвращает расширение файла
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="52">
+<DIV WIDTH="273" HEIGHT="52" style="width: 186; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ExtractFileName (const FileName:   string) :   string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="52">
+<DIV WIDTH="360" HEIGHT="52" style="width: 258; height: 52">
+<P><font face="Verdana" size="3">
+Извлекает имя и расширение файла, содержащегося в параметре
+<font face="Verdana" size="2"> FileName</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="44">
+<DIV WIDTH="273" HEIGHT="44" style="width: 185; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ExtractFilePath( const FileName:   string):   string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="44">
+<DIV WIDTH="360" HEIGHT="44" style="width: 254; height: 44">
+<P><font face="Verdana" size="3">
+Функция возвращает полный путь к файлу
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="50">
+<DIV WIDTH="273" HEIGHT="50" style="width: 135; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Erase (var F);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="50">
+<DIV WIDTH="360" HEIGHT="50" style="width: 254; height: 50">
+<P><font face="Verdana" size="3">
+Удаляет файл, связанный с файловой переменной
+<font face="Verdana" size="2"> F</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="138">
+<DIV WIDTH="273" HEIGHT="138" style="width: 159; height: 138">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function  FileSearch (const Name,   DirList:   string) : string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="138">
+<DIV WIDTH="360" HEIGHT="138" style="width: 272; height: 152">
+<P><font face="Verdana" size="3">
+Данная процедура производит поиск в каталогах
+<font face="Verdana" size="2"> DirList</font> файла <font face="Verdana" size="2">Name</font>. Если в процессе выполнения
+<font face="Verdana" size="2"> FileSearch</font> обнаруживается искомое имя файла, то функция возвращает в строке типа
+<font face="Verdana" size="2"> string</font> полный путь к найденному файлу. Если файл не найден, то возвращается пустая строка
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="87">
+<DIV WIDTH="273" HEIGHT="87" style="width: 166; height: 87">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FileSetAttr (const FileName: string; Attr: Integer):   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="87">
+<DIV WIDTH="360" HEIGHT="87" style="width: 303; height: 87">
+<P><font face="Verdana" size="3">
+Присваивает файлу с именем <font face="Verdana" size="2"> FileName</font> атрибуты Attr. Функция возвращает 0, если присвоение атрибутов прошло успешно. В противном случае возвращается код ошибки
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="77">
+<DIV WIDTH="273" HEIGHT="77" style="width: 142; height: 77">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FilePos (var  F): Longint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="77">
+<DIV WIDTH="360" HEIGHT="77" style="width: 281; height: 77">
+<P><font face="Verdana" size="3">
+Возвращает текущую позицию файла. Функция  используется для  нетекстовых файлов. Перед вызовом
+<font face="Verdana" size="2"> FilePos</font> файл должен быть открыт
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="127">
+<DIV WIDTH="273" HEIGHT="127" style="width: 147; height: 127">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FileSize (var F): Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="127">
+<DIV WIDTH="360" HEIGHT="127" style="width: 293; height: 133">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FileSize</font> возвращает размер файла в байтах или количество записей в файле, содержащем записи. Перед вызовом данной функции файл должен быть открыт.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для текстовых файлов функция <font face="Verdana" size="2"> FileSize</font> не используется
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="198">
+<DIV WIDTH="273" HEIGHT="198" style="width: 163; height: 198">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  Flush (var  F:   Text);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="198">
+<DIV WIDTH="360" HEIGHT="198" style="width: 302; height: 198">
+<P><font face="Verdana" size="3">
+Процедура очищает буфер текстового файла, открытого для записи.  F— файловая переменная.
+</font ></P>
+<P><font face="Verdana" size="3">
+Когда   текстовый   файл   открыт  для   записи с    использованием   функции
+<font face="Verdana" size="2">   Rewrite</font>   или <font face="Verdana" size="2"> Append, Flush</font> очищает выходной буфер, связанный с файлом. После выполнения данной процедуры все символы, которые направлены для  записи   в  файл,   будут  гарантированно записаны в нем
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="284">
+<DIV WIDTH="275" HEIGHT="284" style="width: 171; height: 284">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetDir(D:   Byte; var S: string);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="323" HEIGHT="284">
+<DIV WIDTH="373" HEIGHT="284" style="width: 311; height: 342">
+<P><font face="Verdana" size="3">
+Возвращает число, соответствующее диску, на котором содержится текущий каталог s. о может принимать одно из следующих значений:
+</font ></P>
+<ul>
+  <li>
+    <P><font face="Verdana" size="3">&nbsp; 0 — по умолчанию (текущий);</font ></P>
+  </li>
+  <li>
+    <P><font face="Verdana" size="3">&nbsp; 1 -А;&nbsp;</font ></P>
+  </li>
+  <li>
+    <P><font face="Verdana" size="3">&nbsp;2 -В;&nbsp;</font ></P>
+  </li>
+  <li>
+    <P><font face="Verdana" size="3">&nbsp;3-С&nbsp;</font ></P>
+  </li>
+</ul>
+<P><font face="Verdana" size="3">
+ и т. д.
+</font ></P>
+<P><font face="Verdana" size="3">
+Процедура не генерирует код ошибки. Если имя диска в D оказывается ошибочным, то в строке S возвращается значение Х:\, как если бы текущая папка была на этом ошибочно указанном диске
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="68">
+<DIV WIDTH="275" HEIGHT="68" style="width: 146; height: 68">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function lOResult:   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="323" HEIGHT="68">
+<DIV WIDTH="373" HEIGHT="68" style="width: 284; height: 68">
+<P><font face="Verdana" size="3">
+Функция возвращает статус последней произведенной   операции   ввода/вывода,   если контроль ошибок выключен { $1- }
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="44">
+<DIV WIDTH="275" HEIGHT="44" style="width: 145; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure MkDir(S:   string);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="323" HEIGHT="44">
+<DIV WIDTH="373" HEIGHT="44" style="width: 247; height: 44">
+<P><font face="Verdana" size="3">
+Процедура создает новый каталог, который описывается в строке S
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="106">
+<DIV WIDTH="275" HEIGHT="106" style="width: 172; height: 106">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Rename (var F; NewName:   string) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="323" HEIGHT="106">
+<DIV WIDTH="373" HEIGHT="106" style="width: 269; height: 106">
+<P><font face="Verdana" size="3">
+Процедура изменяет имя файла, связанного с    файловой    переменной    F.    Переменная
+<font face="Verdana" size="2"> NewName</font> является строкой типа
+<font face="Verdana" size="2">  string</font> или <font face="Verdana" size="2"> PChar</font> (если включена поддержка расширенного синтаксиса)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="92">
+<DIV WIDTH="275" HEIGHT="92" style="width: 149; height: 92">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RmDir(S:   string);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="323" HEIGHT="92">
+<DIV WIDTH="373" HEIGHT="92" style="width: 271; height: 92">
+<P><font face="Verdana" size="3">
+Процедура  удаляет  пустой   каталог,   путь  к которому задается в строке S. Если указанный каталог не существует или он не пустой, то   возникает   сообщение   об   ошибке   ввода/вывода
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="225">
+<DIV WIDTH="275" HEIGHT="225" style="width: 160; height: 225">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  Seek (var  F; N:   Longint) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="323" HEIGHT="225">
+<DIV WIDTH="373" HEIGHT="225" style="width: 274; height: 225">
+<P><font face="Verdana" size="3">
+Перемещает текущую позицию курсора на N позиций.   Данная   процедура   используется только для открытых типизированных или нетипизированных файлов для проведения чтения/записи с нужной позиции файла. Началу файла соответствует нулевой номер позиции. Для добавления новой информации в конец существующего файла  необходимо  установить указатель на символ, следующий за последним. Для этого можно использовать выражение
+<font face="Verdana" size="2"> Seek (F,   FileSize(F))</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="96">
+<DIV WIDTH="275" HEIGHT="96" style="width: 177; height: 96">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SeekEof[(var  F: Text) ] :   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="304" HEIGHT="96">
+<DIV WIDTH="354" HEIGHT="96" style="width: 263; height: 96">
+<P><font face="Verdana" size="3">
+Возвращает значение <font face="Verdana" size="2">True</font>, если указатель текущей позиции находится на символе конца файла.
+<font face="Verdana" size="2"> SeekEof</font> может быть использован только с открытым текстовым файлом
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="100">
+<DIV WIDTH="275" HEIGHT="100" style="width: 159; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SeekEoln[ (var  F: Text) ] :   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="304" HEIGHT="100">
+<DIV WIDTH="354" HEIGHT="100" style="width: 268; height: 100">
+<P><font face="Verdana" size="3">
+Возвращает значение <font face="Verdana" size="2">True</font>, если указатель текущей позиции находится на символе конца строки.
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SeekEoln</font>   может  быть   использован   только с открытым текстовым файлом
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="365">
+<DIV WIDTH="275" HEIGHT="365" style="width: 183; height: 365">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  SetTextBuf (var  F: Text;   var Buf   [; Size: Integer] );</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="304" HEIGHT="365">
+<DIV WIDTH="354" HEIGHT="365" style="width: 281; height: 365">
+<P><font face="Verdana" size="3">
+Связывает с текстовым файлом буфер ввода/вывода. F — файловая переменная текстового типа. Каждая файловая переменная текстового типа имеет внутренний буфер емкостью 128 байт, в котором накапливаются данные при чтении и записи. Такой буфер пригоден для большинства операций. Однако при выполнении программ   с   интенсивным   вводом/выводом буфер может переполниться, что приведет к записи операций ввода/вывода на диск и, как следствие,    к   существенному   замедлению работы приложения.
+<font face="Verdana" size="2"> SetTextBuf</font> позволяет помещать в текстовый файл   F   информацию   об   операциях   ввода/вывода вместо ее размещения в буфере. Size указывает размер буфера в байтах. Если этот параметр опускается, то полагается размер, равный
+<font face="Verdana" size="2">SizeOf</font>(Buf). Новый буфер действует до тех пор, пока F не будет связана с новым файлом процедурой
+<font face="Verdana" size="2"> AssignFile</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="102">
+<DIV WIDTH="275" HEIGHT="102" style="width: 158; height: 102">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Truncate {var  F) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="304" HEIGHT="102">
+<DIV WIDTH="354" HEIGHT="102" style="width: 286; height: 102">
+<P><font face="Verdana" size="3">
+Удаляет все позиции, следующие после текущей позиции в файле. А текущая позиция становится концом файла. С переменной F может быть связан файл любого типа за исключением текстового
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

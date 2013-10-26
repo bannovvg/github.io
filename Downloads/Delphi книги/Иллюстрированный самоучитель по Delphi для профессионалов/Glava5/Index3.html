@@ -1,0 +1,611 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Многостраничный блокнот — компоненты TTabControl
+и TPageControl</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В Палитре компонентов имеется два элемента управления, обеспечивающих создание многостраничных блокнотов. Это компоненты
+<font face="Verdana" size="2"> TTabControl</font> и <font face="Verdana" size="2">TPageControl</font>. Переключение между страницами осуществляется при помощи закладок. Закладки могут выглядеть как &quot;настоящие&quot; в бумажном блокноте, а могут быть похожи на стандартные кнопки Windows. Кстати, сама Палитра компонентов Delphi является примером использования такого элемента управления.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TTabControl</font> отличается тем, что представляет собой как бы &quot;виртуальный&quot; блокнот. Это — единый объект с одной фактической страницей. При переключении закладок осуществляется вызов метода-обработчика события
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnChange: TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+соответствующий код в котором может изменить набор видимых элементов управления и создать для пользователя иллюзию &quot;переключения страниц&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">TFageControl</font> является контейнером для объектов
+<font face="Verdana" size="2">TTabSheet</font>, соответствующих отдельным страницам блокнота. Страницы в нем могут нести каждая свой набор дочерних компонентов; их можно переключать уже во время разработки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Первый подход удобен, если на разных страницах у вас должны располагаться одни и те же компоненты, &quot;начиненные&quot; различными данными. Идеальный пример приводится самими разработчиками Delphi (папка Help\Samples\TabCntrl — обязательно посмотрите пример!). Здесь
+<font face="Verdana" size="2">TTabControl</font> используется для редактирования базы данных. Закладки для страниц создаются по одной для каждой записи в таблице. А на одной-единственной странице располагаются компоненты для отображения данных. При переключении закладок происходит навигация по таблице, содержимое полей меняется, и создается впечатление перехода на другую страницу.
+</font ></P>
+<P><font face="Verdana" size="3">
+Второй подход необходим, если у вас действительно разные страницы с различными наборами компонентов на них. Компонент
+<font face="Verdana" size="2">TPageControl</font> используют для создания редакторов свойств и настроек программы, а также для разного рода мастеров
+(<font face="Verdana" size="2">Wizards</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Оба компонента в своей основе имеют общий элемент управления из библиотеки ComCtl32 (в документации Microsoft он называется
+<font face="Verdana" size="2"> Tab Control</font>). Соответственно, в иерархии классов Delphi они оба произошли от класса
+<font face="Verdana" size="2">TCustomTabcontrol</font>, от которого унаследовачи значительную часть свойств и методов. А вот механизмы работы отдельных страниц у каждого компонента свои. Поэтому сначала мы рассмотрим общие для двух компонентов свойства, а затем особенности использования страниц. Свойства и методы-обработчики класса-предка
+<font face="Verdana" size="2">TCustomTabcontrol</font> представлены в табл. 5.1 и 5.2 соответственно. Обратите внимание, что перечисленные свойства и методы в потомках объявляются как опубликованные
+(<font face="Verdana" size="2">published</font>).
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 5.1. </B>Основные 
+  свойства, общие для <font face="Verdana" size="2">TTabControl</font> и <font face="Verdana" size="2">TPageContrli</font> 
+  </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="472" HEIGHT="154">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="233" HEIGHT="29">
+<DIV WIDTH="290" HEIGHT="29" style="width: 95; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="259" HEIGHT="29">
+<DIV WIDTH="362" HEIGHT="29" style="width: 83; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="233" HEIGHT="54">
+<DIV WIDTH="290" HEIGHT="54" style="width: 221; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Tablndex: Integer</font>;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="259" HEIGHT="54">
+<DIV WIDTH="362" HEIGHT="54" style="width: 233; height: 47">
+<P><font face="Verdana" size="3">
+Задает номер текущей страницы, начиная с 0
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="233" HEIGHT="71">
+<DIV WIDTH="290" HEIGHT="71" style="width: 233; height: 26">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TabHeight:   Smallint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="259" HEIGHT="71">
+<DIV WIDTH="362" HEIGHT="71" style="width: 260; height: 55">
+<P><font face="Verdana" size="3">
+Задает  высоту  закладок  в  пикселах.   При значении 0 высота определяется автоматически так, чтобы вместить текст
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="64">
+<DIV WIDTH="271" HEIGHT="64" style="width: 230; height: 24">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TabWidth:   Smallint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="352" HEIGHT="64">
+<DIV WIDTH="352" HEIGHT="64" style="width: 247; height: 64">
+<P><font face="Verdana" size="3">
+Задает ширину закладок. При значении 0 ширина определяется автоматически так, чтобы вместить текст
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="96">
+<DIV WIDTH="271" HEIGHT="96" style="width: 214; height: 72">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TTabStyle = (tsTabs, tsButtons, tsFlatButtons);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property  Style:   TtabStyle;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="352" HEIGHT="96">
+<DIV WIDTH="352" HEIGHT="96" style="width: 273; height: 133">
+<P><font face="Verdana" size="3">
+Определяет стиль закладок компонента:&nbsp;
+</font ></P>
+<ul>
+  <li>
+    <P><font face="Verdana" size="3">&nbsp;tsTabs — стандартные закладки;&nbsp;</font ></P>
+  </li>
+  <li>
+    <P><font face="Verdana" size="3">tsButtons — объемные кнопки;&nbsp;</font ></P>
+  </li>
+  <li>
+    <P><font face="Verdana" size="3">&nbsp;tsFlatButtons — плоские кнопки</font ></P>
+  </li>
+</ul>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="81">
+<DIV WIDTH="271" HEIGHT="81" style="width: 219; height: 70">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TTabPosition = (tpTop, tpBottom, tpLeft, tpRight);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TabPosition: TTabPosition;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="352" HEIGHT="81">
+<DIV WIDTH="352" HEIGHT="81" style="width: 244; height: 81">
+<P><font face="Verdana" size="3">
+Определяет расположение закладок на компоненте.   Расположение,  отличное  от
+<font face="Verdana" size="2">tpTop</font>, возможно только для стиля
+<font face="Verdana" size="2"> tsTabs</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="64">
+<DIV WIDTH="271" HEIGHT="64" style="width: 221; height: 24">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property HotTrack:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="352" HEIGHT="64">
+<DIV WIDTH="352" HEIGHT="64" style="width: 238; height: 64">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> названия страниц выделяются цветом при перемещении над ними указателя мыши
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="44">
+<DIV WIDTH="271" HEIGHT="44" style="width: 148; height: 41">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property  Images : TCustomlmageList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="352" HEIGHT="44">
+<DIV WIDTH="352" HEIGHT="44" style="width: 257; height: 44">
+<P><font face="Verdana" size="3">
+Указывает на список картинок, появляющихся на закладках страниц
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="56">
+<DIV WIDTH="271" HEIGHT="56" style="width: 244; height: 28">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RaggedRight:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="352" HEIGHT="56">
+<DIV WIDTH="352" HEIGHT="56" style="width: 257; height: 57">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> ширина закладок изменяется таким образом, чтобы они не занимали всю сторону блокнота
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="100">
+<DIV WIDTH="271" HEIGHT="100" style="width: 229; height: 23">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MultiLine:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="352" HEIGHT="100">
+<DIV WIDTH="352" HEIGHT="100" style="width: 255; height: 100">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> закладки страниц могут располагаться в несколько рядов (если они не помещаются   в   один).   При   значении
+<font face="Verdana" size="2">   False</font> в верхнем правом углу появляются  кнопки, организующие прокрутку невидимых заголовков
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="271" HEIGHT="117">
+<DIV WIDTH="271" HEIGHT="117" style="width: 203; height: 39">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ScrollOpposite: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="352" HEIGHT="117">
+<DIV WIDTH="352" HEIGHT="117" style="width: 226; height: 117">
+<P><font face="Verdana" size="3">
+При   значении <font face="Verdana" size="2">True</font>,   если   закладки   расположены в несколько рядов,  при  переходе к закладке   следующего   ряда   все   остальные ряды    перемещаются    на    противоположную сторону блокнота. Действительно только при
+<font face="Verdana" size="2"> MultiLine=True</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 5.2. </B>Основные 
+  методы-обработчики, общие для <font face="Verdana" size="2">TTabControl</font> 
+  и <font face="Verdana" size="2">TPageControl</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="480" HEIGHT="134">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="236" HEIGHT="31">
+<DIV WIDTH="352" HEIGHT="31" style="width: 101; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="31">
+<DIV WIDTH="275" HEIGHT="31" style="width: 98; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="236" HEIGHT="104">
+<DIV WIDTH="352" HEIGHT="104" style="width: 260; height: 81">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TTabChangingEvent  = procedure (Sender:   TObject;   var AllowChange: Boolean)   of object; property OnChanging:   TTabChangingEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="302" HEIGHT="104">
+<DIV WIDTH="275" HEIGHT="104" style="width: 249; height: 95">
+<P><font face="Verdana" size="3">
+Вызывается непосредственно перед открытием новой страницы. Параметр
+<font face="Verdana" size="2">AllowChange</font>, установленный в значение
+<font face="Verdana" size="2">False</font>, запрещает открытие
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="42">
+<DIV WIDTH="325" HEIGHT="42" style="width: 259; height: 28">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnChange:   TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="235" HEIGHT="42">
+<DIV WIDTH="292" HEIGHT="42" style="width: 184; height: 42">
+<P><font face="Verdana" size="3">
+Вызывается при открытии новой страницы
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="64">
+<DIV WIDTH="325" HEIGHT="64" style="width: 205; height: 20">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnDrawTab:   TDrawTabEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="235" HEIGHT="64">
+<DIV WIDTH="292" HEIGHT="64" style="width: 232; height: 73">
+<P><font face="Verdana" size="3">
+Вызывается при перерисовке страницы, только если свойство
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+OwnerDraw = True</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="54">
+<DIV WIDTH="325" HEIGHT="54" style="width: 214; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnGetlmagelndex: TTabGetlmageEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="235" HEIGHT="54">
+<DIV WIDTH="292" HEIGHT="54" style="width: 233; height: 54">
+<P><font face="Verdana" size="3">
+Вызывается при отображении на закладке картинки
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Как видно из таблицы, большинство свойств обеспечивают различные стили представления многостраничного блокнота. При настройке стиля обратите внимание, что свойство
+<font face="Verdana" size="2"> RaggedRight</font> может не работать, т. к. вступает в противоречие со свойством
+<font face="Verdana" size="2">Tabwidth</font>. При <font face="Verdana" size="2"> Tabwidth =
+0 </font>компонент изменяет ширину закладок в соответствии с длиной текста, в противном случае ширина закладок всегда равна значению свойства
+<font face="Verdana" size="2">Tabwidth</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для того чтобы в закладках совместно с текстом показать картинки, используется свойство
+<font face="Verdana" size="2">images</font>, в котором необходимо задать требуемый экземпляр
+компонента<B> </B><font face="Verdana" size="2">TImageList</font> <B>(</B>см<B>. </B>ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2">Tabindex</font>, задающее номер текущей страницы, позволяет переключать страницы программно. Для компонента
+<font face="Verdana" size="2"> TTabControl</font> это единственный способ изменить текущую страницу на этапе разработки. При смене страниц сначала происходит событие
+<font face="Verdana" size="2"> onchanging</font> — в этот момент
+<font face="Verdana" size="2"> Tabindex</font> еще содержит индекс старой страницы (и смену можно запретить), а затем
+<font face="Verdana" size="2"> OnChange</font> — это свойство уже указывает на новую страницу.
+</font ></P>
+<P><font face="Verdana" size="3">
+В компоненте <font face="Verdana" size="2"> TTabControl</font> число и заголовки страниц полностью зависят от свойства
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Tabs: TStrings;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+В списке перечисляются заголовки страниц, для которых автоматически создаются закладки. Порядок следования страниц зависит от расположения текстов заголовков в свойстве
+<font face="Verdana" size="2">Tabs</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При этом забота о правильном чередовании элементов управления при смене страниц полностью ложится на программиста. Для этого необходимо в методе-обработчике
+<font face="Verdana" size="2"> OnChange</font> определить видимость элементов в зависимости от индекса текущей страницы:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.TabControllChange(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> with TabControll do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Editl.Visible := Tablndex = 0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Edit2.Visible := Tablndex = 1;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Edit3.Visible := Tablndex = 2;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">TPageControl</font>, в отличие от
+<font face="Verdana" size="2">TTabControl</font>, для обеспечения работы создает &quot;настоящую&quot; страницу — экземпляр класса
+<font face="Verdana" size="2">TTabSheet</font>. Список указателей на все созданные экземпляры страниц хранится в свойстве
+<font face="Verdana" size="2">Pages</font>, доступном только для чтения:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Pages[Index: Integer]: TTabSheet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Номер индекса соответствует порядковому номеру страницы. Для создания новой страницы используется команда
+<b> New</b> <B>Page </B>из всплывающего меню компонента, перенесенного на форму. Если же вы хотите создать страницу на этапе выполнения, создайте экземпляр
+<font face="Verdana" size="2"> TTabSheet</font> самостоятельно и в свойстве
+<font face="Verdana" size="2">Pagecontrol</font> укажите на родительский блокнот:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;pcMain: TPageControl;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;ts : TTabSheet;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ts := TTabSheet.Create(pcMain);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;with ts do&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PageControl := pcMain;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;ts.Caption :='New page' ;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Общее число страниц хранится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PageCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+доступном только для чтения. Текущую страницу можно задать свойством:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ActivePage: TTabSheet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если во время разработки (этой возможностью компонент
+<font face="Verdana" size="2">TPageControl</font> отличается от своего собрата) или во время выполнения переключиться на другую страницу, значение свойства
+<font face="Verdana" size="2"> ActivePage</font> изменится.
+</font ></P>
+<P><font face="Verdana" size="3">
+Также для перехода на соседнюю страницу программными средствами можно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SelectNextPage(GoForward: Boolean);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в котором параметр <font face="Verdana" size="2"> GoForward</font> при значении
+<font face="Verdana" size="2"> True</font> задает переход на следующую страницу, иначе — на предыдущую.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрев свойства блокнота, обратимся к его страницам и остановимся подробнее на возможностях класса
+<font face="Verdana" size="2">TTabSheet</font>. На владельца страницы указывает значение свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PageControl: TPageControl;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Расположение страницы в блокноте задает свойство
+<font face="Verdana" size="2">Pageindex</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Pageindex: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если в блокноте одновременно выделено несколько страниц, то положение данной страницы среди выделенных определяется свойством только для чтения
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Tablndex: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Страница может временно &quot;исчезнуть&quot; из блокнота, а затем опять появиться. Для этого применяется свойство
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> property TabVisible: 
+    Boolean;</font> </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

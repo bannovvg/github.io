@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Расширенный комбинированный список TComboBoxEx</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Такой выпадающий список знаком пользователям со времен Windows 95 (например, список всех элементов оболочки
+<font face="Verdana" size="2">Shell</font>: папки My Computer, My Documents и т. п.) Соответствующий элемент управления появился в библиотеке ComCtl32 несколько позже, а в компонент он превратился только в Delphi 7.
+</font ></P>
+<P><font face="Verdana" size="3">
+Что отличает этот &quot;продвинутый&quot; выпадающий список от обычного
+<font face="Verdana" size="2">TCоmbоВох</font>? С функциональной точки зрения основных отличий два: возможность добавлять картинки к элементам и выравнивать последние с разным отступом, имитируя иерархию.
+</font ></P>
+<P><font face="Verdana" size="3">
+Реализовано это следующим образом.
+</font ></P>
+<P><font face="Verdana" size="3">
+У компонента <font face="Verdana" size="2">TComboBoxEx</font>, помимо свойства
+<font face="Verdana" size="2">items</font>, есть свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ItemsEx: TComboExItems;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое представляет собой коллекцию элементов типа
+<font face="Verdana" size="2">TComboExitem</font>. Щелкнув на этом свойстве в Инспекторе объектов, увидим типичный редактор коллекций, где каждый элемент обладает такими опубликованными свойствами:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">свойство  
+    Caption отвечает за заголовок элемента, каким он буден виден в списке;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;свойство Data — 
+    это нетипизированный указатель на прикрепляемые к элементу данные;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;отступ от левого 
+    края списка задается свойством indent. В документации 
+    написано, что оно задается в пикселах. Это почти так: на самом деле одна единица 
+    значения свойства соответствует десятку пикселов;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;три номера картинок: 
+    обычный imageindex, номер для выбранного элемента  
+    Selected Imageindex И Overlaylmagelndex. Последнее 
+    свойство задает номер картинки, используемой как накладываемая маска для первых 
+    двух. Она должна быть черно-белой: белые области прозрачны для исходной картинки, 
+    черные — нет. Все три индекса указывают на один и тот же список картинок, 
+    задаваемый свойством  images родительского компонента.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Дополнительные опции в расширенном выпадающем списке задаются свойством
+<font face="Verdana" size="2">styleEx</font>. Это — множество из четырех флагов, установка которых сводится к разрешению или запрету перечисленных выше новых свойств.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

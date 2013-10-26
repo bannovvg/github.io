@@ -1,0 +1,315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TWinControl</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TWinControl</font> обеспечивает создание и использование оконных элементов управления (см. выше).
+Напомним, что оконный элемент управления имеет системный дескриптор окна
+<font face="Verdana" size="2"> hwnd</font>. Однако оконными элементами являются не только формы и диалоги, но и большинство стандартных элементов управления.
+</font ></P>
+<P><font face="Verdana" size="3">
+Новые механизмы, инкапсулированные в классе, обеспечивают выполнение характерных для оконных элементов функций: прием и передачу фокуса, отклик на действия мышью и ввод с клавиатуры и т. д. Рассмотрим основные свойства и методы класса.
+</font ></P>
+<P><font face="Verdana" size="3">
+Дескриптор окна содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle: HWND;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При создании оконного элемента управления вызывается метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CreateParams(var Params: TCreateParams); virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который заполняет структуру<font face="Verdana" size="2"> TCreateParams
+</font> необходимыми значениями:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TCreateParams = record&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Caption: PChar;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Style: DWORD;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ExStyle: DWORD;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+X, Y: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Width, Height: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+WndParent: HWND;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Param: Pointer</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+WindowClass: TWndClass;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+WinClassName: array[0..63] of Char;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для создания дескриптора окна для элемента управления используется метод
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CreateHandle; virtual;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Операционная система создает дескриптор окна только вместе с самим окном. Поэтому метод
+<font face="Verdana" size="2"> CreateHandle</font> только создает окно, а для присваивания свойству
+<font face="Verdana" size="2"> Handle</font> значения дескриптора окна вызывает метод
+<font face="Verdana" size="2"> createwnd</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для передачи фокуса между элементами управления на одной форме часто используется клавиша
+<font face="Verdana" size="2"> &lt;Таb&gt;</font>. Порядок перемещения фокуса между элементами определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TTabOrder = -1..32767;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property TabOrder: TTabOrder;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В первую очередь фокус передается компоненту с минимальным значением свойства. Далее — по возрастанию значения. При переносе компонента на форму это значение задается автоматически в соответствии с числом компонентов на форме.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент можно заставить не откликаться на клавишу
+<font face="Verdana" size="2"> &lt;Таb&gt;</font>. Для этого свойству
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TabStop: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+необходимо присвоить значение <font face="Verdana" size="2"> False</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для передачи фокуса прямо элементу управления применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetFocus; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Чтобы узнать, имеет ли элемент управления фокус, в настоящее время используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Focused: Boolean; dynamic;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Все оконные элементы имеют рамку по контуру (впрочем, она может быть не видна). Ее параметры задаются группой свойств:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property BevelEdges:   TBevelEdges;&nbsp;</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+ задает, какие стороны входят в рамку;
+</font ></P>
+</blockquote>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property Bevellnner: TBevelCut; property BevelOuter: TBevelCut;</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+задают внешний вид рамки;
+</font ></P>
+</blockquote>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;property BevelKind: TBevelKind;</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+определяет стиль рамки;
+</font ></P>
+</blockquote>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property BevelWidth: TBevelWidth;</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+задает размер рамки.
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Brush: TBrush;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет параметры кисти (цвет и заполнение), которой рисуется фон элемента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Оконный элемент может содержать другие компоненты. Для управления ими применяется индексированный список указателей, представляющих свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Controls[Index: Integer]: TControl;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Общее число дочерних элементов управления содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ControlCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Внешний вид оконного элемента определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Ctl3D: Boolean</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> элемент управления имеет трехмерный вид. Иначе элемент выглядит плоским.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для вызова темы контекстной помощи для конкретного элемента управления предназначено свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type THelpContext = -MaxLonglnt..MaxLonglnt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property HelpContext: THelpContext;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Значение свойства должно соответствовать номеру темы в файле помощи.
+</font ></P>
+<P><font face="Verdana" size="3">
+В классе <font face="Verdana" size="2">TwinControl</font> добавлена возможность использования редакторов способа ввода (Input Method Editor, IME). Такие редакторы позволяют приспособить стандартную раскладку клавиатуры для символьных языков для ввода нестандартных символов (иероглифов и т. д.). Редакторы
+IMЕ представляют собой специально устанавливаемое в операционной системе программное обеспечение (ПО). Имя такого редактора задается в свойстве
+<font face="Verdana" size="2">I</font><font face="Verdana" size="2">meName</font>. Режим работы редактора определяется свойством
+<font face="Verdana" size="2">I</font><font face="Verdana" size="2">meMode</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В классе <font face="Verdana" size="2">TwinControl</font> добавлено еще несколько методов-обработчиков событий, обеспечивающих реакцию на ввод с клавиатуры, получение и потерю фокуса.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

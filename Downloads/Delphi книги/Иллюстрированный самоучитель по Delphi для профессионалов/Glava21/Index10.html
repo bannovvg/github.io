@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Главный 
+  удаленный модуль данных</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Добавим в проект новый удаленный модуль данных, используя для этого Репозиторий Delphi (см. рис. 20.3). Затем в появившемся диалоге (см. рис. 21.1) зададим имя модуля —
+<font face="Verdana" size="2">simpleRDM</font> и его параметры:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;способ создания —  singleinstance 
+    — для каждого клиента создается собственный модуль данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;способ обработки запросов —  Free 
+    (см. выше).</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Метод класса <font face="Verdana" size="2"> updateRegistry</font> для модуля данных создается автоматически и обеспечивает регистрацию и аннулирование регистрации сервера Автоматизации (см. листинг 21.1).
+</font ></P>
+<P><font face="Verdana" size="3">
+Одновременно с удаленным модулем данных автоматически создается библиотека типов и в ней дуальный интерфейс
+<font face="Verdana" size="2">isimpleRDM</font> и интерфейс диспетчеризации
+<font face="Verdana" size="2"> ISimpleRDMDisp</font> (см. Листинг 21.2).
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Для каждого вновь созданного интерфейса автоматически 
+    назначается GUID. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Разместим в модуле <font face="Verdana" size="2">simpleRDM</font> компоненты для доступа к файлам демонстрационной базы данных (\Program Files\Common Files\Borland Shared\Data) через драйвер BDE и псевдоним
+<font face="Verdana" size="2">DBDEMOS</font>, который создается автоматически при инсталляции Delphi. Это компонент
+<font face="Verdana" size="2">TDatabase</font>, обеспечивающий соединение и три табличных компонента
+<font face="Verdana" size="2">TTаblе</font>, инкапсулирующих наборы данных из таблиц
+<font face="Verdana" size="2"> Orders.db, Customer.db, Employee.db.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент   соединения   настроен   на   псевдоним
+<font face="Verdana" size="2">   DBDEMOS</font>   (свойство <font face="Verdana" size="2">AliasName</font>). В параметрах соединения заданы имя пользователя и пароль, а свойство
+<font face="Verdana" size="2"> LoginPrompt = False</font> запрещает отображение диалога регистрации при открытии соединения. Каждый    табличный    компонент    связан    с    компонентом-провайдером
+TDataSetProvider. Свойство провайдера <B> </B><font face="Verdana" size="2">ResolveToDataSet =  False</font>
+запрещает передачу изменений, полученных от клиента, в набор данных связанного
+компонента. Вместо этого данные напрямую сохраняются в базе данных. Это увеличивает быстродействие приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

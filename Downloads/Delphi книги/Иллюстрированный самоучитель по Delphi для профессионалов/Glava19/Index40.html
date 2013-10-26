@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index39.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index41.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Соединение с источником данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для связывания приложения с источником данных используем компонент
+<font face="Verdana" size="2"> TADOConnection</font> и настроим соединения, щелкнув на кнопке свойства connectionstring в Инспекторе объектов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Перейдя в редактор <B>Data Link Properties, </B>выберем провайдер Microsoft OLE DB Provider for OLE DB Drivers (см. рис. 19.3). Как правило, он имеется в операционной системе, если вы не предпринимали специальных усилий по его удалению.
+</font ></P>
+<P><font face="Verdana" size="3">
+Далее, на странице <B>Connection </B>(см. рис. 19.4) выберем радиокнопку <B>Use data source name </B>и в списке — файлы dBase. Для создания соединения с провайдером ODBC этого вполне достаточно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Прокомментируем другие свойства компонента соединения ADO.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> LoginPrompt</font> должно иметь значение
+<font face="Verdana" size="2">False</font>, чтобы запретить показ диалога авторизации пользователя, ненужный для файлов dBase.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2">DefaultDatabase</font> пока останется пустым. Мы применим его для указания пути к файлам базы данных, используя элементы пользовательского интерфейса приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> CursorLocation</font> имеет значение
+<font face="Verdana" size="2">ciuseclient</font>, чтобы обеспечить использование курсоров наборов данных на стороне клиента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+<B> </B><font face="Verdana" size="2">ConnectOptions</font> имеет значение
+по умолчанию<b> </b><font face="Verdana" size="2">coConnectUnspecified</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Это означает, что все команды будут выполняться синхронно — соединение будет ожидать ответ на каждую команду.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для свойства <font face="Verdana" size="2"> Mode</font> установим значение
+<font face="Verdana" size="2">cmShareDenyNone</font>, что запрещает другим соединениям устанавливать любые ограничения — ведь в данном случае мы не планируем многопользовательскую работу с источником данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для открытия соединения после запуска приложения необходимо задать путь к хранилищу данных. Для этого предназначена кнопка и однострочный редактор на Панели управления. После выбора пути его значение заносится в переменную
+<font face="Verdana" size="2"> DefDBStr</font> и в текст редактора
+<font face="Verdana" size="2">edoefDB</font>. Переменная используется для установления соединения. Для включения соединения необходимо нажать кнопку
+<font face="Verdana" size="2">tbconnect</font>. Ее метод-обработчик проверяет состояние переменной
+<font face="Verdana" size="2"> DefDBStr</font> и заполняет свойство
+<font face="Verdana" size="2">DefaultDatabase</font> компонента соединения.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Так как во время настройки соединения выше 
+    мы не задавали путь к хранилищу данных, то свойство <font face="Verdana" size="2"> 
+    DefauitDatabase</font> сработает. Иначе его значение будет перекрыто настройками 
+    свойства <font face="Verdana" size="2">connectionString</font>. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Открытие наборов данных ADO в приложении выполняется в методе-обработчике
+<font face="Verdana" size="2">ADOConnAfterConnect</font>, который вызывается после полного открытия соединения. Аналогичным образом наборы данных закрываются перед закрытием соединения в методе-обработчике
+<font face="Verdana" size="2">ADOconnBeforeDisconnect</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Текущее значение пути к хранилищу данных сохраняется в файле DemoADO.ini и загружается при открытии приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index39.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index41.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

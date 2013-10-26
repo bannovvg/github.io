@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Событие</strong> 
+  <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Объект типа событие (<font face="Verdana" size="2">event</font>) — простейший выбор для задач синхронизации. Он подобен дверному звонку — звенит до тех пор, пока его кнопка находится в нажатом состоянии, извещая об этом факте окружающих. Аналогично, и объект может быть в двух состояниях, а &quot;слышать&quot; его могут многие потоки сразу.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TEvent</font> (модуль SYNCOBJS.PAS) имеет два метода:
+<font face="Verdana" size="2"> setEvent</font> и ResetEvent, которые переводят объект в активное и пассивное состояние соответственно. Конструктор имеет следующий вид:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor Create(EventAttributes: PSecurityAttributes;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ManualReset, InitialState: Boolean; const Name: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь параметр <font face="Verdana" size="2">initialstate</font> — начальное состояние объекта,
+<font face="Verdana" size="2"> ManualReset</font> — способ его сброса (перевода в пассивное состояние). Если этот параметр равен
+<font face="Verdana" size="2">True</font>, событие должно быть сброшено вручную. В противном случае событие сбрасывается по мере того, как стартует хоть один поток, ждавший данный объект.
+</font ></P>
+<P><font face="Verdana" size="3">
+На третьем методе:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TWaitResult = (wrSignaled, wrTimeout, wrAbandoned, wrError);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> function WaitFor(Timeout: DWORD): TWaitResult;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+остановимся подробнее. Он дает возможность ожидать активизации события в течение
+<font face="Verdana" size="2"> Timeout</font> миллисекунд. Как вы могли догадаться, внутри этого
+метода происходит вызов функции <font face="Verdana" size="2">waitFotsingieObject</font>. Типичных результатов на выходе
+<font face="Verdana" size="2"> waitFor</font> два — <font face="Verdana" size="2">wrsignaied</font>, если произошла активизация события, и
+<font face="Verdana" size="2">wrTimeout</font>, если за время тайм-аута ничего не произошло.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание<U>&nbsp;</U></B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Если нужно (и допустимо!) ждать бесконечно 
+    долго, следует установить параметр <font face="Verdana" size="2"> Timeout</font> 
+    в значение <font face="Verdana" size="2">INFINITE</font>. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Рассмотрим маленький пример. Включим в состав нового проекта объект типа
+<font face="Verdana" size="2">TThread</font>, наполнив его метод
+<font face="Verdana" size="2"> Execute</font> следующим содержимым:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Var res: TWaitResult;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TSimpleThread.Execute;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+e := TEvent.Create(nil,True,false, 'test');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+repeat</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+e.ReSetEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+res := e.WaitFor(10000);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Synchronize(Showlnfo);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+until Terminated; e.Free;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TSimpleThread.Showlnfo;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage(IntToStr(Integer (res)));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+На главной форме разместим две кнопки — нажатие одной из них запускает поток, нажатие второй активизирует событие:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.ButtonlClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSimpleThread.Create(False);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.Button2Click(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+e.SetEvent;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Нажмем первую кнопку. Тогда появившийся на экране результат (метод
+<font face="Verdana" size="2">Showlnfo</font>) будет зависеть от того, была ли нажата вторая кнопка или истекли отведенные 10 секунд.
+</font ></P>
+<P><font face="Verdana" size="3">
+События используются не только для работы с потоками — некоторые процедуры операционной системы автоматически переключают их. К числу
+</font ></P>
+<P><font face="Verdana" size="3">
+таких процедур относятся отложенный (<font face="Verdana" size="2">overlapped</font>) ввод/вывод и события, связанные с коммуникационными портами.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

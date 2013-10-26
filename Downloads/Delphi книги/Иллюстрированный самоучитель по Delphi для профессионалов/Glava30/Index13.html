@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Пример многомерного представления данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве примера использования многомерного представления данных рассмотрим демонстрационное приложение
+<font face="Verdana" size="2"> DemoMDCube</font> (рис. 30.5).
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве исходного набора данных используется запрос к таблицам
+<font face="Verdana" size="2"> SALES</font> и <font face="Verdana" size="2"> CUSTOMER</font> общедоступной базы данных EMPLOYEE.GDB в составе поставки InterBase следующего вида:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SELECT С.CUSTOMER, S.ORDERJDATE, SUM(S.DISCOUNT) FROM SALES S</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+INNER JOIN CUSTOMER С</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ON  (C.CUST_NO = S.CUST_NO) GROUP BY C.CUSTOMER, S.ORDER_DATE</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Запрос удовлетворяет всем требованиям для обеспечения многомерного представления данных. Для выполнения запроса и создания набора данных в проекте существует компонент
+<font face="Verdana" size="2">DecisionQueryl</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Набор данных компонента открыт во время разработки, поэтому все компоненты многомерного представления в проекте ведут себя так же, как и во время выполнения программы.
+</font ></P>
+<P><font face="Verdana" size="3">
+С ним связан компонент <font face="Verdana" size="2">Decisioncubel</font>, для которого свойство имеет следующее значение:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DecisionCubel.DataSet := DecisionQueryl;</font>
+</font ></P>
+</blockquote>
+<div align="center"><IMG src="gl.30.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 30.5. </B>Главная форма 
+  проекта <font face="Verdana" size="2"> DemoMDCube</font> </font ></P>
+<P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> Decisioncubel</font> 
+  выполняет всю работу по созданию многомерного представления набора данных компонента 
+  <font face="Verdana" size="2">DecisionQueryl</font>. Причем, практически все 
+  делается без вмешательства пользователя. </font ></P>
+<P><font face="Verdana" size="3"> При настройке компонента был использован специализированный 
+  редактор свойства <font face="Verdana" size="2">DecisionMap</font>. В нем были 
+  заданы названия для размерностей и значения для расчета максимального размера 
+  используемой памяти. Все заданные значения соответствуют рекомендованным. </font ></P>
+<P><font face="Verdana" size="3"> Для связывания набора данных с визуальными компонентами 
+  использован компонент <font face="Verdana" size="2">DecisionSource</font><font face="Verdana" size="2">1</font>. 
+  На него замыкаются все три визуальных компонента многомерного представления, 
+  использованные в проекте. </font ></P>
+<P><font face="Verdana" size="3"> Управление осуществляется компонентом <font face="Verdana" size="2">DecisionPivotl</font>. 
+  Основной визуальный компонент <font face="Verdana" size="2">DecisionGrid</font><font face="Verdana" size="2">1</font> 
+  представляет многомерный набор данных в табличном виде. В исходном состоянии 
+  по горизонтали расположены размерности номеров накладных и наименований, по 
+  вертикали размешаются размерности дат заказов и покупателей. </font ></P>
+<P><font face="Verdana" size="3"> Дополнительного программного кода проект не 
+  имеет. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index12.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index14.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

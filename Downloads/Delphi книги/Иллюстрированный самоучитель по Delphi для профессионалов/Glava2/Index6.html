@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Базовые классы элементов управления</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Вслед за классом <font face="Verdana" size="2"> TComponent</font> в иерархии базовых классов (см. рис. 2.1) располагается группа из трех классов, которые обеспечивают создание различных визуальных компонентов. Визуальные компоненты —
+это разнообразные стандартные для Windows и специальные (созданные разработчиками Inprise) элементы управления.
+</font ></P>
+<P><font face="Verdana" size="3">
+Понятно, что визуальные компоненты должны уметь отобразить себя на экране монитора и реагировать на целый ряд новых событий (реакция на мышь и клавиатуру, движение курсора и т. д.). Для этого в них встроен специальный механизм, обеспечивающий взаимодействие компонентов с графической
+подсистемой ОС (GUI).
+</font ></P>
+<P><font face="Verdana" size="3">
+Существует несколько типов элементов управления, которые существенно отличаются по своим возможностям и поведению. Каждому типу соответствует собственный класс иерархии.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2">TWinControl</font> обеспечивает использование в Delphi оконных элементов управления. Главное отличие оконного элемента управления от любых других — наличие дескриптора окна
+<font face="Verdana" size="2"> hwnd</font>. Дескриптор окна —
+это специальный идентификатор, который операционная система присваивает всем объектам, которые должны обладать свойствами окна. Если элемент управления имеет дескриптор окна, то он должен уметь выполнять следующие операции:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">получать и передавать фокус управления во время выполнения 
+    приложения;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;воспринимать управляющие воздействия от мыши и клавиатуры;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;уметь размещать на себе другие элементы управления.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Оконными элементами управления являются не только формы, но и практически все стандартные элементы управления Windows: и списки, и редакторы имеют дескриптор окна.
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, все визуальные компоненты происходят от класса
+<font face="Verdana" size="2">TWinControl</font>. Однако нестандартные элементы управления имеют еще одного общего предка. Это класс
+<font face="Verdana" size="2">TCustomContrl</font>. Он существенно облегчает использование элементов управления, т. к. позволяет управлять отрисовкой компонента путем использования специального класса
+<font face="Verdana" size="2"> TCanvas</font> — так называемой канвы (см. гл. 11)
+вместо обращения к системным функциям GUI.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для обеспечения создания обычных (не оконных) элементов управления непосредственно от класса
+<font face="Verdana" size="2">TControl</font> порожден класс <font face="Verdana" size="2">TGraphicControl</font>. Его потомки не могут получать фокус, но используют для визуализации канву.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

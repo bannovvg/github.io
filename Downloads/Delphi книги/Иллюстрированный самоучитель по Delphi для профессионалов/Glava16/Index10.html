@@ -1,0 +1,598 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TQuery</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TQuery</font> реализует все основные функции стандартного компонента запроса, описанные в гл. 12.
+Прямым предком компонента является класс <font face="Verdana" size="2"> TDBDataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для подключения к базе данных используется свойство
+<font face="Verdana" size="2"> DatabaseName</font>, в котором задается псевдоним BDE или путь к базе данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Текст запроса определяется свойством SQL, для задания которого применяется простой редактор, открывающийся при щелчке на кнопке свойства в Инспекторе объектов (рис. 16.6).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для управления текстом запроса во время выполнения приложения можно
+использовать возможности класса <font face="Verdana" size="2"> TStrings</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основные свойства и методы компонента <font face="Verdana" size="2"> TQuery</font> представлены в табл. 16.9.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 16.9. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TQuery</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="485" HEIGHT="137">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="172" HEIGHT="25">
+<DIV WIDTH="260" HEIGHT="25" style="width: 95; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="25">
+<DIV WIDTH="46" HEIGHT="25" style="width: 24; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="25">
+<DIV WIDTH="373" HEIGHT="25" style="width: 90; height: 25">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="487" HEIGHT="31">
+<DIV WIDTH="260" HEIGHT="31">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="172" HEIGHT="81">
+<DIV WIDTH="260" HEIGHT="81" style="width: 172; height: 81">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Constrained: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="81">
+<DIV WIDTH="46" HEIGHT="81" style="width: 7; height: 81">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="81">
+<DIV WIDTH="373" HEIGHT="81" style="width: 247; height: 81">
+<P><font face="Verdana" size="3">
+При значении True запрещает внесение в набор данных таких значений, которые не соответствуют условиям отбора запроса. Применимо для локальных БД
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="67">
+<DIV WIDTH="252" HEIGHT="67" style="width: 164; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSource: TDataSource;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="67">
+<DIV WIDTH="50" HEIGHT="67" style="width: 9; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="67">
+<DIV WIDTH="335" HEIGHT="67" style="width: 238; height: 67">
+<P><font face="Verdana" size="3">
+Ссылается на компонент <font face="Verdana" size="2">TDataSource</font>, из набора данных которого задаются значения параметров
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="46">
+<DIV WIDTH="252" HEIGHT="46" style="width: 135; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Local:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="46">
+<DIV WIDTH="50" HEIGHT="46" style="width: 9; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="46">
+<DIV WIDTH="335" HEIGHT="46" style="width: 263; height: 46">
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2"> True</font> означает, что запрос обращается к локальной таблице
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="71">
+<DIV WIDTH="252" HEIGHT="71" style="width: 166; height: 71">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamCheck: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="71">
+<DIV WIDTH="50" HEIGHT="71" style="width: 10; height: 71">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="71">
+<DIV WIDTH="335" HEIGHT="71" style="width: 268; height: 71">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> параметры запроса обновляются при изменении свойства SQL во время выполнения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="27">
+<DIV WIDTH="252" HEIGHT="27" style="width: 168; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamCount:   Word;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="27">
+<DIV WIDTH="50" HEIGHT="27" style="width: 12; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="27">
+<DIV WIDTH="335" HEIGHT="27" style="width: 276; height: 27">
+<P><font face="Verdana" size="3">
+Возвращает число параметров в запросе
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="69">
+<DIV WIDTH="252" HEIGHT="69" style="width: 134; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Params [Index : Word]TParams;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="69">
+<DIV WIDTH="50" HEIGHT="69" style="width: 14; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="69">
+<DIV WIDTH="335" HEIGHT="69" style="width: 253; height: 69">
+<P><font face="Verdana" size="3">
+Индексированный список объектов TParams, каждый из которых соответствует одному параметру запроса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="42">
+<DIV WIDTH="252" HEIGHT="42" style="width: 147; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Prepared: Boolean</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="42">
+<DIV WIDTH="50" HEIGHT="42" style="width: 17; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="42">
+<DIV WIDTH="335" HEIGHT="42" style="width: 252; height: 42">
+<P><font face="Verdana" size="3">
+Возвращает результат выполнения операции подготовки запроса к выполнению
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="98">
+<DIV WIDTH="252" HEIGHT="98" style="width: 108; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RequestLive: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="98">
+<DIV WIDTH="50" HEIGHT="98" style="width: 5; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="98">
+<DIV WIDTH="335" HEIGHT="98" style="width: 274; height: 98">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> False</font> результат запроса нельзя редактировать, независимо от того, редактируемый результат или нет. При значении True результат запроса можно редактировать, но только если он &quot;живой&quot;
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="73">
+<DIV WIDTH="252" HEIGHT="73" style="width: 112; height: 73">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RowsAffected: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="73">
+<DIV WIDTH="50" HEIGHT="73" style="width: 9; height: 73">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Ro</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="73">
+<DIV WIDTH="335" HEIGHT="73" style="width: 267; height: 73">
+<P><font face="Verdana" size="3">
+Возвращает число модифицированных записей набора данных с момента последнего выполнения запроса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="27">
+<DIV WIDTH="252" HEIGHT="27" style="width: 151; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SQL:   TStrings;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="27">
+<DIV WIDTH="50" HEIGHT="27" style="width: 15; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="27">
+<DIV WIDTH="335" HEIGHT="27" style="width: 225; height: 27">
+<P><font face="Verdana" size="3">
+Содержит текст запроса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="52">
+<DIV WIDTH="252" HEIGHT="52" style="width: 153; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SQLBinary:   PChar;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="52">
+<DIV WIDTH="50" HEIGHT="52" style="width: 13; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="52">
+<DIV WIDTH="335" HEIGHT="52" style="width: 255; height: 52">
+<P><font face="Verdana" size="3">
+Внутреннее свойство для обеспечения работы с ВОЕ
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="60">
+<DIV WIDTH="252" HEIGHT="60" style="width: 120; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StmtHandle: HDBIStmt;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="60">
+<DIV WIDTH="50" HEIGHT="60" style="width: 6; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="60">
+<DIV WIDTH="335" HEIGHT="60" style="width: 242; height: 60">
+<P><font face="Verdana" size="3">
+Возвращает экземпляр объекта, соответствующего запросу в BDE. Используется при прямом вызове функций BDE
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="69">
+<DIV WIDTH="252" HEIGHT="69" style="width: 127; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Text:   PChar;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="69">
+<DIV WIDTH="50" HEIGHT="69" style="width: 13; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="69">
+<DIV WIDTH="335" HEIGHT="69" style="width: 246; height: 69">
+<P><font face="Verdana" size="3">
+Указатель на символьный массив, содержащий передаваемый в BDE текст запроса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="42">
+<DIV WIDTH="252" HEIGHT="42" style="width: 131; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property UniDirectional: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="42">
+<DIV WIDTH="50" HEIGHT="42" style="width: 13; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="42">
+<DIV WIDTH="335" HEIGHT="42" style="width: 277; height: 42">
+<P><font face="Verdana" size="3">
+Определяет тип используемого курсора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="445" HEIGHT="31">
+<DIV WIDTH="252" HEIGHT="31" style="width: 91; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="48">
+<DIV WIDTH="252" HEIGHT="48" style="width: 146; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ExecSQL;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="48">
+<DIV WIDTH="50" HEIGHT="48" style="width: 8; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="251" HEIGHT="48">
+<DIV WIDTH="335" HEIGHT="48" style="width: 222; height: 48">
+<P><font face="Verdana" size="3">
+Выполняет запрос без открытия набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="162" HEIGHT="86">
+<DIV WIDTH="250" HEIGHT="86" style="width: 146; height: 86">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetDetailLinkFields (MasterFields, DetailFields:   TList) ; override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="86">
+<DIV WIDTH="48" HEIGHT="86" style="width: 9; height: 86">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="243" HEIGHT="86">
+<DIV WIDTH="327" HEIGHT="86" style="width: 221; height: 114">
+<P><font face="Verdana" size="3">
+Заполняет списки параметров метода экземплярами объектов полей двух таблиц запроса, находящихся в отношении &quot;один-ко-многим&quot;
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="162" HEIGHT="66">
+<DIV WIDTH="250" HEIGHT="66" style="width: 158; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ParamByName (const Value:   string) :   TParam;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="66">
+<DIV WIDTH="48" HEIGHT="66" style="width: 12; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="243" HEIGHT="66">
+<DIV WIDTH="327" HEIGHT="66" style="width: 225; height: 66">
+<P><font face="Verdana" size="3">
+Возвращает ссылку на экземпляр объекта параметра с именем, переданным в параметре Value
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="162" HEIGHT="25">
+<DIV WIDTH="250" HEIGHT="25" style="width: 152; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Prepare;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="25">
+<DIV WIDTH="48" HEIGHT="25" style="width: 17; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">PU</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="243" HEIGHT="25">
+<DIV WIDTH="327" HEIGHT="25" style="width: 217; height: 25">
+<P><font face="Verdana" size="3">
+Готовит запрос к выполнению
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="162" HEIGHT="48">
+<DIV WIDTH="250" HEIGHT="48" style="width: 164; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure UnPrepare;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="28" HEIGHT="48">
+<DIV WIDTH="48" HEIGHT="48" style="width: 8; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="243" HEIGHT="48">
+<DIV WIDTH="327" HEIGHT="48" style="width: 248; height: 48">
+<P><font face="Verdana" size="3">
+Освобождает ресурсы, занятые при подготовке запроса к выполнению
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P><font face="Verdana" size="3"> </font >
+<p align="center"> 
+  <center>
+    <font size="3" face="Verdana"><IMG src="gl.16.6.gif" > </font> 
+  </center>
+</P>
+<P align="center"><font face="Verdana" size="3"> <B>Рис 16.6. </B>Редактор свойства 
+  SQL компонента <font face="Verdana" size="2"> TQuery</font> </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index9.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index11.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

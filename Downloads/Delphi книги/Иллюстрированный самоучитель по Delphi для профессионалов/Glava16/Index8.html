@@ -1,0 +1,449 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TDBDataSet</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TDBDataSet</font> является непосредственным предком основных компонентов доступа к данным
+<font face="Verdana" size="2">ттаblе</font>, <font face="Verdana" size="2"> TQuery</font> и
+<font face="Verdana" size="2"> TstoredProc</font>. Новые свойства и методы класса обеспечивают соединение набора данных с базой данных и используют функции BDE (табл. 16.7).
+</font ></P>
+<P><font face="Verdana" size="3">
+В процессе соединения важнейшую роль играет свойство
+<font face="Verdana" size="2"> DatabaseName</font>, которое должно содержать псевдоним или полный путь к файлам БД. Для управления отдельным соединением с базой данных можно применять специальный компонент
+<font face="Verdana" size="2">TDatabase</font>. Указатель на экземпляр такого компонента содержится в свойстве
+<font face="Verdana" size="2"> Database</font><font face="Verdana" size="2">.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Многие функции API BDE используют в своей работе дескриптор специальной структуры, описывающей подключенную базу данных. Доступ к этому дескриптору можно получить через свойство
+<font face="Verdana" size="2"> DBHandie</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Приложение баз данных одновременно может использовать несколько наборов данных, каждый из которых подключен к собственной базе данных. Совокупность соединений управляется в рамках сеанса работы, который инкапсулируется компонентом
+<font face="Verdana" size="2"> TSession</font>. Указатель на экземпляр такого компонента можно использовать в наборе данных при помощи свойства
+<font face="Verdana" size="2">DBSession</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для работы с удаленными серверами в класс введено свойство
+<font face="Verdana" size="2"> Provider</font>, обеспечивающее доступ к интерфейсу
+<font face="Verdana" size="2"> iProvider</font>.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 16.7. </B>Свойства 
+  и методы класса <font face="Verdana" size="2"> TDBDataSet</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="505" HEIGHT="373">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="31">
+<DIV WIDTH="264" HEIGHT="31" style="width: 22; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="49" HEIGHT="31">
+<DIV WIDTH="48" HEIGHT="31" style="width: 1; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="282" HEIGHT="31">
+<DIV WIDTH="312" HEIGHT="31" style="width: 87; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="531" HEIGHT="27">
+<DIV WIDTH="264" HEIGHT="27" style="width: 106; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="75">
+<DIV WIDTH="264" HEIGHT="75" style="width: 168; height: 75">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AutoRefresh: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="49" HEIGHT="75">
+<DIV WIDTH="48" HEIGHT="75" style="width: 13; height: 75">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="282" HEIGHT="75">
+<DIV WIDTH="312" HEIGHT="75" style="width: 257; height: 114">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> все автоматически создаваемые значения полей (автоинкрементные, значения по умолчанию) обновляются автоматически
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="40">
+<DIV WIDTH="264" HEIGHT="40" style="width: 159; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Database:   TDatabase;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="49" HEIGHT="40">
+<DIV WIDTH="48" HEIGHT="40" style="width: 23; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="282" HEIGHT="40">
+<DIV WIDTH="312" HEIGHT="40" style="width: 230; height: 40">
+<P><font face="Verdana" size="3">
+Указатель связанного с набором данных компонента
+<font face="Verdana" size="2"> TDatabase</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="48">
+<DIV WIDTH="264" HEIGHT="48" style="width: 188; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DatabaseName: string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="49" HEIGHT="48">
+<DIV WIDTH="48" HEIGHT="48" style="width: 19; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="282" HEIGHT="48">
+<DIV WIDTH="312" HEIGHT="48" style="width: 193; height: 48">
+<P><font face="Verdana" size="3">
+Псевдоним базы данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="58">
+<DIV WIDTH="264" HEIGHT="58" style="width: 184; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type HDBISES:   Longint; property DBHandie:   HDBISES;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="49" HEIGHT="58">
+<DIV WIDTH="48" HEIGHT="58" style="width: 20; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="282" HEIGHT="58">
+<DIV WIDTH="312" HEIGHT="58" style="width: 256; height: 58">
+<P><font face="Verdana" size="3">
+Дескриптор базы данных. Используется при работе с API BDE
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="42">
+<DIV WIDTH="264" HEIGHT="42" style="width: 172; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TLocale:   Pointer; property DBLocale:   TLocale;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="49" HEIGHT="42">
+<DIV WIDTH="48" HEIGHT="42" style="width: 16; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="282" HEIGHT="42">
+<DIV WIDTH="312" HEIGHT="42" style="width: 254; height: 42">
+<P><font face="Verdana" size="3">
+Идентифицирует языковый драйвер API BDE
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="52">
+<DIV WIDTH="264" HEIGHT="52" style="width: 145; height: 52">
+<P><font face="Verdana" size="3">
+property DBSession:   TSession
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="49" HEIGHT="52">
+<DIV WIDTH="48" HEIGHT="52" style="width: 17; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="282" HEIGHT="52">
+<DIV WIDTH="312" HEIGHT="52" style="width: 259; height: 52">
+<P><font face="Verdana" size="3">
+Указатель для компонента <font face="Verdana" size="2">TSession</font>, с которым работает набор данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="40">
+<DIV WIDTH="258" HEIGHT="40" style="width: 176; height: 40">
+<P><font face="Verdana" size="3">
+property Provider:   IProvider;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="45" HEIGHT="40">
+<DIV WIDTH="44" HEIGHT="40" style="width: 14; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="295" HEIGHT="40">
+<DIV WIDTH="325" HEIGHT="40" style="width: 225; height: 40">
+<P><font face="Verdana" size="3">Идентифицирует интерфейс <font face="Verdana" size="2"> IProvider</font>
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="46">
+<DIV WIDTH="258" HEIGHT="46" style="width: 172; height: 46">
+<P><font face="Verdana" size="3">
+property SessionName:   string;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="45" HEIGHT="46">
+<DIV WIDTH="44" HEIGHT="46" style="width: 3; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu, Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="295" HEIGHT="46">
+<DIV WIDTH="325" HEIGHT="46" style="width: 260; height: 46">
+<P><font face="Verdana" size="3">
+&nbsp;Содержит имя компонента сеанса, в котором работает набор данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="534" HEIGHT="31">
+<DIV WIDTH="258" HEIGHT="31" style="width: 109; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="62">
+<DIV WIDTH="258" HEIGHT="62" style="width: 173; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CheckOpent Status: DBIResult):   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="45" HEIGHT="62">
+<DIV WIDTH="44" HEIGHT="62" style="width: 4; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="295" HEIGHT="62">
+<DIV WIDTH="325" HEIGHT="62" style="width: 249; height: 62">
+<P><font face="Verdana" size="3">&nbsp;Возвращает результат вызова BDE.&nbsp; Используется для тестирования соединения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="60">
+<DIV WIDTH="258" HEIGHT="60" style="width: 194; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CloseDatabase ( Database: TDatabase);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="45" HEIGHT="60">
+<DIV WIDTH="44" HEIGHT="60" style="width: 17; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="295" HEIGHT="60">
+<DIV WIDTH="325" HEIGHT="60" style="width: 264; height: 60">
+<P><font face="Verdana" size="3">
+&nbsp;Закрывает связь с базой данных,&nbsp; определяемой параметром
+<font face="Verdana" size="2"> Database</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="58">
+<DIV WIDTH="258" HEIGHT="58" style="width: 157; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetProviderAttributes (List: TList);   override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="45" HEIGHT="58">
+<DIV WIDTH="44" HEIGHT="58" style="width: 10; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="295" HEIGHT="58">
+<DIV WIDTH="325" HEIGHT="58" style="width: 264; height: 76">
+<P><font face="Verdana" size="3">Возвращает в списке <font face="Verdana" size="2"> List</font> параметры языкового драйвера
+</font ></P>
+<P><font face="Verdana" size="3">
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="58">
+<DIV WIDTH="258" HEIGHT="58" style="width: 173; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function OpenDatabase: TDatabase;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="45" HEIGHT="58">
+<DIV WIDTH="44" HEIGHT="58" style="width: 7; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="295" HEIGHT="58">
+<DIV WIDTH="325" HEIGHT="58" style="width: 282; height: 58">
+<P><font face="Verdana" size="3">&nbsp;Открывает связь с базой данных, определяемой свойством
+<font face="Verdana" size="2"> DatabaseName</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

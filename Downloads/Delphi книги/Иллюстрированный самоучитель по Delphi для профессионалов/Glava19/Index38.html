@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index37.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index39.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Объект ошибок ADO</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+При рассказе о компонентах ADO в данной главе мы довольно часто упоминали об объектах ошибок ADO. Эти объекты содержат информацию об ошибке, возникшей при выполнении операции каким-либо объектом ADO.
+</font ></P>
+<P><font face="Verdana" size="3">
+В Delphi для объекта ошибки не предусмотрен
+специальный тип, но разработчик может использовать его методы интерфейса
+<font face="Verdana" size="2">Error</font>, предоставляемого многими методами других объектов ADO. Например, тип
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRecordsetEvent = procedure(DataSet: TCustomADODataSet; const Error: Error;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">var EventStatus: TEventStatus) of object;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+используемый для метода-обработчика, вызываемого после обновления набора данных, содержит параметр
+<font face="Verdana" size="2">Error</font>, дающий нам искомую ссылку.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим полезные свойства объекта ошибок ADO.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Description:  WideString read Get_Description;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает описание ошибки, переданное из объекта, в котором ошибка произошла.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SQLState: WideString read Get_SQLState;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит текст команды, вызвавшей ошибку. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NativeError: Integer read Get_NativeError;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает код ошибки, переданный из объекта, в котором ошибка произошла.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index37.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index39.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Управление фокусом</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В процессе работы приложения тот или иной элемент управления получает фокус ввода в зависимости от действий пользователя. Очень часто передача фокуса между элементами управления должна быть упорядочена. Например, при вводе данных в приложениях баз данных пользователь должен иметь максимум удобств для обеспечения хорошей производительности труда. Для этого он должен работать только с клавиатурой, не отвлекаясь на лишние операции по передаче фокуса в нужный компонент при помощи мыши.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для решения подобного рода проблем все оконные элементы управления имеют два свойства. Свойство
+<font face="Verdana" size="2"> TabOrder</font> определяет порядок передачи фокуса между элементами управления одного владельца (формы, панели, группы) при нажатии клавиши &lt;Таb&gt;. Значение 0 имеет компонент, который будет получать фокус при открытии формы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для того чтобы свойство <font face="Verdana" size="2"> TabOrder</font> работало, свойство
+<font face="Verdana" size="2"> Tabstop</font> должно иметь значение
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, все кнопки (произошедшие от <font face="Verdana" size="2">TButtonControl</font>) имеют свойство Default, которое при значении
+<font face="Verdana" size="2"> True</font> заставляет кнопку реагировать на нажатие клавиши &lt;Enter&gt; как на щелчок на кнопке, даже если она не имеет фокус. Только одна кнопка на форме может иметь это свойство установленным.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для передачи фокуса любому оконному элементу управления программными средствами можно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetFocus; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+унаследованный от класса <font face="Verdana" size="2">TwinControl.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости работы в форме применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetFocusedControl(Control:   TWinControl):  Boolean;  virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+класса <font face="Verdana" size="2">TForm</font>, в параметре указывается указатель на компонент, принадлежащий форме.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

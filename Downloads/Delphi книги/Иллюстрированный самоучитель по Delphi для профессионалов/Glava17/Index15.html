@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Интерфейс 
+  ISQLDriver</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Интерфейс <font face="Verdana" size="2"> ISQLDriver</font> инкапсулирует всего три метода для обслуживания драйвера dbExpress.  Экземпляр  интерфейса создается для  соединения  и обеспечивает его связь с драйвером.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;Методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetOption(eDOption: TSQLDriverOption; PropValue: Longlnt):&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SQLResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetOption(eDOption: TSQLDriverOption; PropValue: Pointer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;MaxLength: Smalllnt; out Length: Smalllnt): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяют работать с параметрами драйвера. А метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function getSQLConnection(out pConn: ISQLConnection): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает указатель на интерфейс связанного с драйвером соединения
+<font face="Verdana" size="2">ISQLConnection</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Получить доступ к интерфейсу <font face="Verdana" size="2"> ISQLDriver</font> разработчик может, использовав защищенное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Driver: ISQLDriver read FSQLDriver;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+компонента
+<B> </B><font face="Verdana" size="2">TSQLConnection</font>.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

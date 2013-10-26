@@ -1,0 +1,396 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TDateTimePicker</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Безусловно, календарь будет очень полезен пользователям. Однако было бы желательно не только выбирать даты, но и вводить их в элементы управления. Компонент
+<font face="Verdana" size="2"> TDateTimePicker</font> совмещает календарь и однострочный текстовый редактор, причем календарь полностью совпадает с рассмотренным выше (оба компонента являются наследниками класса
+<font face="Verdana" size="2">TCommonCaiendar</font>). Свойства и методы компонента представлены в табл. 5.7.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 5.7. </B>Основные 
+  свойства и методы компонента <font face="Verdana" size="2"> TDateTimePicker</font> 
+  </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="499" HEIGHT="110">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="32">
+<DIV WIDTH="375" HEIGHT="32" style="width: 116; height: 32">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="32">
+<DIV WIDTH="260" HEIGHT="32" style="width: 123; height: 32">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="77">
+<DIV WIDTH="375" HEIGHT="77" style="width: 244; height: 77">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDTCalAlignment =   (dtaLeft,   dtaRight) ; property CalAlignment :   TDTCalAlignment;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="77">
+<DIV WIDTH="260" HEIGHT="77" style="width: 223; height: 77">
+<P><font face="Verdana" size="3">
+Выравнивает панель календаря по левой или правой стороне компонента
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="56">
+<DIV WIDTH="375" HEIGHT="56" style="width: 218; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Checked: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="56">
+<DIV WIDTH="269" HEIGHT="56" style="width: 226; height: 56">
+<P><font face="Verdana" size="3">
+Возвращает <font face="Verdana" size="2">True</font>, если флажок в редакторе включен
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="50">
+<DIV WIDTH="375" HEIGHT="50" style="width: 248; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDTDateFormat = (df Short, dfLong) ; property DateFormat: TDTDateFormat;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="50">
+<DIV WIDTH="269" HEIGHT="50" style="width: 167; height: 50">
+<P><font face="Verdana" size="3">
+Определяет формат представления даты
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="52">
+<DIV WIDTH="375" HEIGHT="52" style="width: 252; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDTDateMode = (dmComboBox, dmUpDown) ; property DateMode: TDTDateMode;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="52">
+<DIV WIDTH="269" HEIGHT="52" style="width: 178; height: 52">
+<P><font face="Verdana" size="3">
+Задает стиль компонента
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="46">
+<DIV WIDTH="375" HEIGHT="46" style="width: 241; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DroppedDown: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="46">
+<DIV WIDTH="269" HEIGHT="46" style="width: 215; height: 46">
+<P><font face="Verdana" size="3">
+Возвращает <font face="Verdana" size="2">True</font>, если панель календаря включена
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="83">
+<DIV WIDTH="375" HEIGHT="83" style="width: 243; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDateTimeKind = (dtkDate, dtkTime) ; property Kind: TDateTimeKind;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="83">
+<DIV WIDTH="269" HEIGHT="83" style="width: 215; height: 83">
+<P><font face="Verdana" size="3">
+Определяет возвращаемый результат — дату или время. Время можно вводить только в стиле
+<font face="Verdana" size="2"> dmUpDown</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="48">
+<DIV WIDTH="375" HEIGHT="48" style="width: 237; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Parselnput: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="48">
+<DIV WIDTH="269" HEIGHT="48" style="width: 223; height: 48">
+<P><font face="Verdana" size="3">
+Включает или отключает метод-обработчик <font face="Verdana" size="2"> OnUserlnput</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="29">
+<DIV WIDTH="375" HEIGHT="29" style="width: 258; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ShowCheckbox: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="29">
+<DIV WIDTH="269" HEIGHT="29" style="width: 220; height: 29">
+<P><font face="Verdana" size="3">
+Управляет видимостью флажка
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="52">
+<DIV WIDTH="375" HEIGHT="52" style="width: 231; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TTime = type TDateTime; property Time: TTime;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="52">
+<DIV WIDTH="269" HEIGHT="52" style="width: 225; height: 52">
+<P><font face="Verdana" size="3">
+Содержит установленное время
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="42">
+<DIV WIDTH="375" HEIGHT="42" style="width: 257; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnChange: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="42">
+<DIV WIDTH="269" HEIGHT="42" style="width: 211; height: 42">
+<P><font face="Verdana" size="3">
+Вызывается при вводе даты или времени
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="50">
+<DIV WIDTH="375" HEIGHT="50" style="width: 266; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnCloseUp: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="50">
+<DIV WIDTH="269" HEIGHT="50" style="width: 217; height: 50">
+<P><font face="Verdana" size="3">
+Вызывается при сворачивании панели календаря
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="52">
+<DIV WIDTH="375" HEIGHT="52" style="width: 272; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnDropDown: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="52">
+<DIV WIDTH="269" HEIGHT="52" style="width: 228; height: 52">
+<P><font face="Verdana" size="3">
+Вызывается при разворачивании панели календаря
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="160">
+<DIV WIDTH="375" HEIGHT="160" style="width: 261; height: 160">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDTParselnputEvent = procedure (Sender : TObject; const UserString: string; var DateAndTime: TDateTime; var AllowChange: Boolean) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnUser Input: TDTParselnputEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="247" HEIGHT="160">
+<DIV WIDTH="269" HEIGHT="160" style="width: 232; height: 209">
+<P><font face="Verdana" size="3">
+Вызывается при прямом вводе значения в редактор.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> UserString</font> содержит вводимое значение.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> DateAndTime</font> содержит значение даты или времени.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> AllowChange</font> управляет изменением значения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDateTimePicker</font> может обеспечивать ввод даты или времени.
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо календаря в элемент управления встроен флажок, который расположен в левой части редактора. Его видимостью можно управлять.
+</font ></P>
+<P><font face="Verdana" size="3">
+В зависимости от значения свойства <font face="Verdana" size="2"> Kind</font> элемент управления настраивается на ввод даты или времени. Результат ввода даты сохраняется в свойстве Date. Дату можно выбирать из всплывающего календаря или путем перебора. Результат ввода времени сохраняется в свойстве
+<font face="Verdana" size="2">Time</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> Parseinput</font> при значении
+<font face="Verdana" size="2"> True</font> разрешает ручной ввод значения. В этом случае разработчик может использовать метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDTParselnputEvent = procedure(Sender: TObject; const UserString: string; var DateAndTime: TDateTime; var AllowChange: Boolean) of object; property OnUserlnput: TDTParselnputEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В нем можно предусмотреть необходимые действия, например проверку введенного значения:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.DateTimePicker2UserInput(Sender: TObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;const UserString: String; var DateAndTime: TDateTime; var AllowChange: Boolean);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DateAndTime := StrToDateTime(UserString);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on E: EConvertError do ShowMessage('Неверное значение');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что здесь обязательно должно присутствовать присвоение результата ввода параметру
+<font face="Verdana" size="2">DateAndTime</font>, иначе элемент управления не получит новое значение.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

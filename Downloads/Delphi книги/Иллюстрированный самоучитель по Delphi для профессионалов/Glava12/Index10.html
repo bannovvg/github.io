@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Описание 
+  индекса</strong> <br>
+</font>
+</P>
+<p align="left">&nbsp;</P>
+<p align="left"><font face="Verdana" size="3">Параметры каждого индекса набора 
+  данных представлены в классе <font face="Verdana" size="2">TindexDef</font>, 
+  а их совокупность для набора данных содержится в свойстве IndexDefs класса <B> 
+  </B>TDataSet. </font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Name: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет название индекса.
+</font ></P>
+<P><font face="Verdana" size="3">
+Список всех полей индекса содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Fields: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Поля разделяются точкой с запятой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CaselnsFields: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит список полей, регистр символов в которых при сортировке не учитывается. Поля разделяются точкой с запятой. Все поля из этого списка должны входить в свойство
+<font face="Verdana" size="2">Fields</font>. В наборе данных по умолчанию используется сортировка записей с учетом регистра символов. Но некоторые серверы БД допускают комбинированную сортировку по полям с учетом регистра и без.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DescFields: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит список полей через точку с запятой, которые сортируются в обратном порядке. Все поля из этого списка должны входить в свойство
+<font face="Verdana" size="2">Fields</font>. По умолчанию все поля сортируются в прямом порядке. Некоторые серверы БД поддерживают одновременную сортировку полей в прямом и обратном порядке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property GroupingLevel: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяет ограничить область применения индекса. Если значение этого свойства равно нулю, индекс упорядочивает все записи набора данных. В противном случае действие индекса распространяется на группы записей, имеющих одинаковые значения для того числа полей, которое задано этим свойством.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметры индекса определяются свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Options: TIndexOptions;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для индекса возможны сочетания следующих параметров:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ixPrimary</font> 
+    — первичный индекс;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ixunique</font> 
+    — значения индекса уникальны;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ixDescending</font> 
+    — индекс сортирует записи в обратном порядке;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ixCaseinsensitive</font> 
+    — индекс сортирует записи без учета регистра символов;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ixExpression</font> 
+    — в индексе используется выражение (для индексов <font size="2">dBASE</font>);&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ixNonMaintained</font> 
+    — индекс не обновляется при открытии таблицы.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Assign(ASource: TPersistent); override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+заполняет   свойства   объекта   значениями   аналогичных   свойств   объекта
+<font face="Verdana" size="2">ASource</font>.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

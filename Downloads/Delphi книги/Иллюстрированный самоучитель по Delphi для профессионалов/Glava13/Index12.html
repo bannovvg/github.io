@@ -1,0 +1,537 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Ограничения</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Контроль вводимых в поля набора данных в Delphi возложен на объекты полей, а не на компоненты отображения данных. Именно в рамках этого вопроса мы рассмотрим работу методов-обработчиков событий базового класса
+<font face="Verdana" size="2">TField</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед сохранением значения поля в БД всегда вызывается метод-обработчик
+<font face="Verdana" size="2">onvalidate</font>, при этом автоматически проводится проверка на выполнение задаваемых ограничений и ограничений типа данных. Кроме этого, здесь можно предусмотреть свою дополнительную обработку:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.TablelSomeFieldValidate(Sender: TFieid);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (Sender as TFieid).Value &lt; 0 then&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('Значение поля не может быть отрицательным');&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> (Sender as TFieid).Value := Null;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Различают контроль значения в целом и посимвольный контроль. Метод
+<font face="Verdana" size="2">OnValidate</font> проверяет значение поля целиком. Если при проверке обнаружена ошибка, то выдается сообщение и фокус формы устанавливается на соответствующем компоненте отображения данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если метод <font face="Verdana" size="2">OnValidate</font> не вызвал исключительной ситуации, то при сохранении значения поля в БД вызывается обработчик события
+<font face="Verdana" size="2"> onchange</font>. В принципе, можно предусмотреть операции по контролю данных и в этом методе, но тогда в случае ошибки возникает нежелательная исключительная ситуация, которая может привести к серьезным сбоям в работе приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Проверить текущее значение поля перед его появлением в компоненте отображения данных можно в методе-обработчике
+<font face="Verdana" size="2"> OnGetText</font>. Если параметр <font face="Verdana" size="2"> DisplayText</font> принимает истинное значение, то в параметре
+<font face="Verdana" size="2"> Text</font> передается значение свойства
+<font face="Verdana" size="2"> DisplayText</font> (значение в строковом формате в таком виде, как оно будет показано в компоненте отображения данных — с символами форматирования). В противном случае в параметре
+<font face="Verdana" size="2"> Text</font> передается текущее значение в строковом формате.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При использовании метода-обработчика <font face="Verdana" size="2"> 
+    OnGetText</font> на разработчика ложится обязанность самостоятельно предусмотреть 
+    передачу значения в компонент отображения данных, в противном случае компонент 
+    останется незаполненным. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В методе-обработчике <font face="Verdana" size="2"> onSetText</font> можно осуществлять текущий контроль значения в строковом формате в том виде, как оно представлено в компоненте отображения данных. Напомним, что этот обработчик вызывается при каждом изменении свойства
+<font face="Verdana" size="2"> Text</font> класса <font face="Verdana" size="2">TField</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотренные методы-обработчики удобнее всего использовать для проверки текущего значения с точки зрения программной логики. Например, чтобы отпускная цена не была ниже закупочной или чтобы остаток не был больше первоначального количества товара в партии. Для проверки правильности самого значения класс
+<font face="Verdana" size="2">TField</font> имеет несколько полезных свойств.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если на сервере БД задано ограничение на некоторое поле, его можно использовать в приложении Delphi при помощи свойства
+<font face="Verdana" size="2"> importedconstraint</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания собственного ограничения можно использовать свойство
+<font face="Verdana" size="2"> Customconstraint</font>, в котором применяется синтаксис
+<font face="Verdana" size="2"> SQL</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Value&gt;10</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+ИЛИ
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+OutputPrice&gt;InputPricexl.25</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При возникновении ошибки совсем не лишним будет, если программа выдаст некое осмысленное сообщение, которое поможет пользователю исправить оплошность. При работе с методами-обработчиками это можно предусмотреть в программном коде.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для встроенного контроля предусмотрено специальное свойство —
+<font face="Verdana" size="2"> GonstraintErrorMessage</font>, которое выводится в виде сообщения при возникновении ошибки. Согласитесь, что это гораздо проще, чем исправлять и перекомпилировать соответствующие файлы ресурсов. Если приложение работает с сервером БД и возникла ошибка ограничения поля, то выводится сообщение, определяемое сервером, а не этим свойством.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если для поля заданы ограничения, то свойство
+<font face="Verdana" size="2"> HasConstraints</font> принимает истинное значение.
+</font ></P>
+<P><font face="Verdana" size="3">
+Посимвольный контроль данных осуществляется свойством
+<font face="Verdana" size="2"> validchars</font>, в котором можно определить допустимые в строковом представлении значения поля символы, и методом
+<font face="Verdana" size="2">isvalidchar</font>, который определяет допустимость использования переданного в параметре символа.
+</font ></P>
+<P><font face="Verdana" size="3">
+Еще один мощный инструмент контроля данных предоставляет свойство
+<font face="Verdana" size="2"> EditMask</font>, которое позволяет создавать шаблоны ввода данных, облегчая тем самым работу пользователя и уменьшая возможность ошибки. Рассмотрим правила создания шаблонов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Шаблон состоит из трех частей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Первая часть содержит управляющие символы собственно шаблона. Доступные для создания шаблона символы приведены в табл. 13.2.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 13.2. </B>Управляющие 
+  символы шаблона </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="494" HEIGHT="369">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="27">
+<DIV WIDTH="94" HEIGHT="27" style="width: 50; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Символ</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="27">
+<DIV WIDTH="552" HEIGHT="27" style="width: 275; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="27">
+<DIV WIDTH="94" HEIGHT="27" style="width: 31; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+!</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="27">
+<DIV WIDTH="552" HEIGHT="27" style="width: 132; height: 27">
+<P><font face="Verdana" size="3">
+
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="39">
+<DIV WIDTH="94" HEIGHT="39" style="width: 12; height: 39">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&gt;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="39">
+<DIV WIDTH="552" HEIGHT="39" style="width: 381; height: 39">
+<P><font face="Verdana" size="3">
+Все символы после этого преобразуются в заглавные
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="27">
+<DIV WIDTH="94" HEIGHT="27" style="width: 17; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="27">
+<DIV WIDTH="552" HEIGHT="27" style="width: 374; height: 27">
+<P><font face="Verdana" size="3">
+Все символы после этого преобразуются в строчные
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="42">
+<DIV WIDTH="94" HEIGHT="42" style="width: 26; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&lt;&gt;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="42">
+<DIV WIDTH="552" HEIGHT="42" style="width: 399; height: 42">
+<P><font face="Verdana" size="3">
+Все символы после этого остаются в том регистре, как это было задано пользователем
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="31">
+<DIV WIDTH="94" HEIGHT="31" style="width: 24; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+\</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="31">
+<DIV WIDTH="552" HEIGHT="31" style="width: 401; height: 38">
+<P><font face="Verdana" size="3">
+Символ, следующий за этим, считается алфавитным, а не управляющим
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="46">
+<DIV WIDTH="94" HEIGHT="46" style="width: 22; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+L</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="46">
+<DIV WIDTH="552" HEIGHT="46" style="width: 400; height: 46">
+<P><font face="Verdana" size="3">
+В позиции этого символа обязательно должен находиться только алфавитный символ
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="25">
+<DIV WIDTH="94" HEIGHT="25" style="width: 12; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+I</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="25">
+<DIV WIDTH="552" HEIGHT="25" style="width: 399; height: 25">
+<P><font face="Verdana" size="3">
+В позиции этого символа может находиться алфавитный символ
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="48">
+<DIV WIDTH="94" HEIGHT="48" style="width: 6; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+А</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="48">
+<DIV WIDTH="552" HEIGHT="48" style="width: 406; height: 48">
+<P><font face="Verdana" size="3">
+В позиции этого символа обязательно должен находиться алфавитный символ или цифра
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="60" HEIGHT="58">
+<DIV WIDTH="94" HEIGHT="58" style="width: 3; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+а</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="434" HEIGHT="58">
+<DIV WIDTH="552" HEIGHT="58" style="width: 397; height: 58">
+<P><font face="Verdana" size="3">
+В позиции этого символа может находиться алфавитный символ или цифра
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="48">
+<DIV WIDTH="71" HEIGHT="48" style="width: 14; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">C</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="48">
+<DIV WIDTH="558" HEIGHT="48" style="width: 402; height: 48">
+<P><font face="Verdana" size="3">
+В позиции этого символа обязательно должен находиться знак препинания
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="33">
+<DIV WIDTH="71" HEIGHT="33" style="width: 18; height: 33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+с</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="33">
+<DIV WIDTH="558" HEIGHT="33" style="width: 423; height: 33">
+<P><font face="Verdana" size="3">
+В позиции этого символа может находиться знак препинания
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="31">
+<DIV WIDTH="71" HEIGHT="31" style="width: 28; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+0</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="31">
+<DIV WIDTH="558" HEIGHT="31" style="width: 401; height: 31">
+<P><font face="Verdana" size="3">
+В позиции этого символа обязательно должна находиться цифра
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="25">
+<DIV WIDTH="71" HEIGHT="25" style="width: 12; height: 25">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+9</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="25">
+<DIV WIDTH="558" HEIGHT="25" style="width: 351; height: 25">
+<P><font face="Verdana" size="3">
+В позиции этого символа может находиться цифра
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="37">
+<DIV WIDTH="71" HEIGHT="37" style="width: 39; height: 37">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">#</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="37">
+<DIV WIDTH="558" HEIGHT="37" style="width: 404; height: 37">
+<P><font face="Verdana" size="3">
+В позиции этого символа может находиться цифра, плюс или минус
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="40">
+<DIV WIDTH="71" HEIGHT="40" style="width: 18; height: 40">
+<P><font face="Verdana" size="3">
+
+<font face="Verdana" size="2">:</font>
+
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="40">
+<DIV WIDTH="558" HEIGHT="40" style="width: 382; height: 40">
+<P><font face="Verdana" size="3">
+Символ разделения часов, минут и секунд (зависит от системных установок)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="52">
+<DIV WIDTH="71" HEIGHT="52" style="width: 17; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+/</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="52">
+<DIV WIDTH="558" HEIGHT="52" style="width: 394; height: 52">
+<P><font face="Verdana" size="3">
+Символ разделения дней, месяцев, годов (зависит от системных установок)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="35">
+<DIV WIDTH="71" HEIGHT="35" style="width: 27; height: 35">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="35">
+<DIV WIDTH="558" HEIGHT="35" style="width: 258; height: 35">
+<P><font face="Verdana" size="3">
+Символ разделения частей шаблона
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="38">
+<DIV WIDTH="71" HEIGHT="38" style="width: 22; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+-</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="38">
+<DIV WIDTH="558" HEIGHT="38" style="width: 375; height: 38">
+<P><font face="Verdana" size="3">
+Символ автоматического ввода в текст пробела
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+В первую часть шаблона можно включать любые алфавитные символы (для создания поясняющих надписей, слов и сокращений), если их нет среди управляющих символов. Также можно использовать в качестве алфавитных и управляющие символы, для этого перед ними нужно помещать символ &quot;\&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вторая часть состоит из одного символа и определяет, могут ли не арифметические символы быть частью вводимого текста. Если здесь расположен ноль, то можно вводить только цифры, если любой другой символ — можно использовать и алфавитные символы.
+</font ></P>
+<P><font face="Verdana" size="3">
+В третьей части содержится символ, используемый для обозначения мест, запрещенных для ввода.
+</font ></P>
+<P><font face="Verdana" size="3">
+Части шаблона разделяются точкой с запятой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, шаблон для ввода телефонного номера выглядит следующим образом:
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">!\{999\)000-0000;1;_</font> 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Структурные 
+  элементы отчета</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим структурные элементы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основой отчета, использующего просмотры баз данных, является элемент
+<font face="Verdana" size="2">Region</font>. Он создает в отчете область, предназначенную для размещения любых других элементов и определяющую часть страницы отчета, отведенную под отображение данных. Он обладает одним интересным свойством
+<font face="Verdana" size="2">Columns</font>, которое задает число колонок, в которых будет печататься отчет.
+</font ></P>
+<P><font face="Verdana" size="3">
+При создании отчета, использующего базу данных, этот элемент переносится на страницу в первую очередь. Затем приходит очередь элементов
+<font face="Verdana" size="2"> Band</font> и DataBand.
+</font ></P>
+<P><font face="Verdana" size="3">
+Элемент <font face="Verdana" size="2"> Band</font> создает полосу, на которой можно располагать стандартные элементы оформления. Он служит для оформления заголовков, сносок, врезок и других статичных фрагментов оформления отчетов, которые не изменяются при печати просмотра данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Элемент <font face="Verdana" size="2"> DataBand</font> создает полосу, моделирующую строку просмотра данных. На ней располагаются элементы отображения данных, которые будут рассмотрены ниже. При печати отчета для каждой строки печатается новый экземпляр полосы элемента
+<font face="Verdana" size="2"> DataBand</font> со всеми расположенными на ней элементами оформления. Таким образом и получается отчет, отображающий строка за строкой весь просмотр данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Важнейшее свойство <font face="Verdana" size="2"> Bandstyle</font> определяет роль и поведение полосы в отчете. С ним связано диалоговое окно <B>Band Style Editor </B>(рис. 24.6), которое отображает взаимосвязь полос в области
+<font face="Verdana" size="2"> Region</font> отчета и позволяет задать поведение текущей полосы.
+</font ></P>
+<P><font face="Verdana" size="3">
+В левой части диалога отображается список всех полос отчета с их взаимосвязями (отношениями &quot;один-ко-многим&quot;, группировкой, вложенностью
+и т. д.), текущая полоса выделяется жирным шрифтом с подчеркиванием. Имя каждой полосы отображается трижды. И это не ошибка разработчиков, а желание показать, что каждая полоса размножается для печати записей просмотра данных.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.24.6.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 24.6. </B>Редактор полос 
+  отчета <b> Band</b> <B>Style Editor</B> </font ></P>
+<P><font face="Verdana" size="3"> Группа флажков <B>Print Location </B>в правой 
+  части диалогового окна определяет назначение полосы. А группа <B>Print Occurrence 
+  </B>задает, в каком месте отчета появляется полоса: </font ></P>
+<ul>
+  <li> <B>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Body 
+    Header (В) </font></B><font size="3" face="Verdana, Arial, Helvetica, sans-serif">— 
+    заголовок отчета, печатается в начале отчета;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Group 
+    Header (G) </B>— заголовок группы, печатается в начале группы записей, объединенных 
+    в просмотре данных выражением GROUP BY;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Row 
+    Header (R) </B>— заголовок записи, печатается в начале каждой записи просмотра 
+    данных;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Detail 
+    (D) </B>— печатается в начале подчиненного набора записей, входящего в отношение 
+    &quot;один-ко-многим&quot;;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Row 
+    Footer (r) </B>— окончание строки, печатается в конце каждой записи просмотра 
+    данных;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Group 
+    Footer (g) </B>— окончание группы, печатается в конце группы записей, объединенных 
+    в просмотре данных выражением GROUP BY;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Body 
+    Footer (r) </B>— окончание отчета, печатается в конце отчета;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp; <B>First 
+    (1) </B>— печатается один раз в начале отчета (титул отчета);&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<b>New</b> 
+    <B>Page (P) </B>— печатается в начале каждой страницы отчета;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<b>New</b> 
+    <B>Column (С) </B>— печатается в начале каждой колонки отчета.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> <B>&nbsp;Примечание&nbsp;</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Для каждого из перечисленных выше типов в 
+    скобках указан символ, который используется для обозначения типа полосы на 
+    странице отчета в визуальной среде Rave Reports (рис. 24.7). Таким образом, 
+    по совокупности символов разработчик может оценить роль той или иной полосы 
+    в отчете, не обращаясь к редактору. </font ></P>
+</blockquote>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.24.7.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 24.7. </B>Элементы<font face="Verdana" size="2"> 
+  Band, DataBand</font> и <font face="Verdana" size="2"> Region</font> на странице 
+  отчета </font ></P>
+<P><font face="Verdana" size="3"> Другие свойства полос и способы создания простых 
+  и сложных отчетов рассматриваются в гл. 26. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index15.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index17.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

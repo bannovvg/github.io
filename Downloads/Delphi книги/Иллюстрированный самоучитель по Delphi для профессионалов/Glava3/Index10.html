@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Функция 
+  Assert</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Эта процедура и сопутствующая ей ИС <font face="Verdana" size="2">EAssertionFailed</font> специально перенесены в Object Pascal из языка С для удобства отладки. Синтаксис ее прост:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Assert(expr : Boolean [; const msg: string]);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При вызове функции проверяется, чему равно значение переданного в нее булевого выражения
+<font face="Verdana" size="2">ехрr</font>. Если оно равно <font face="Verdana" size="2">True</font>, то ровным счетом ничего не происходит. Если же оно равно
+<font face="Verdana" size="2">False</font>, создается ИС <font face="Verdana" size="2">EAssertionFailed</font>. Все это было бы довольно тривиально с точки зрения уже изученного, если бы не два обстоятельства:
+</font ></P>
+<P><font face="Verdana" size="3">
+1.  Предопределенный обработчик <font face="Verdana" size="2">EAssertior.Failed
+</font> устроен таким образом, что выдает не шестнадцатеричный адрес ошибки, а имя файла с исходным текстом и номер строки, где произошла ИС, как показано на рис. 3.4.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.3.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 3.4. </B>Окно сообщения 
+  обработчика исключительной ситуации <font face="Verdana" size="2"> EAssertionFailed</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> 2. При помощи специальной директивы компилятора 
+  {<font face="Verdana" size="2">$ASSERTIONS ON/OFF</font>} (или, что то же самое, 
+  <font face="Verdana" size="2"> {$с+}/{$с-}</font>) возникновение этих ИС можно 
+  централизованно запретить. То есть в отлаживаемом коде в режиме {<font face="Verdana" size="2">$с+</font>} 
+  можно расставить вызов <font face="Verdana" size="2"> Assert</font> во всех 
+  сомнительных и проверяемых местах. Когда же придет время генерации конечного 
+  варианта кода, переключением директивы на {<font face="Verdana" size="2">$c-</font>} 
+  весь отладочный вывод запрещается. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index9.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index11.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

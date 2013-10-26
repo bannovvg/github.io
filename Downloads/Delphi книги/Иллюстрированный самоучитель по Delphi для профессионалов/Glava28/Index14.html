@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Ресурсы в DLL</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Динамические библиотеки могут содержать не только исполняемый код, проводящий некоторые вычисления, но и ресурсы. Чаще всего бывает необходимо распространять вместе с
+<font face="Verdana" size="2"> DLL</font> формы, обеспечивающие работу процедур и функций. Приемы работы с формами в проектах динамических библиотек ничем не отличаются от тех же приемов в проектах обычных приложений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Единственная особенность заключается в том, что любая форма в
+<font face="Verdana" size="2"> DLL</font> должна рассматриваться как создаваемая вручную, а не автоматически. При этом в процедуру, создающую форму, должен быть передан указатель на владельца будущей формы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, процедура <font face="Verdana" size="2"> showDemoForm</font> из рассматриваемой нами библиотеки
+<font face="Verdana" size="2">DataCheck</font>, выглядит так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ShowDemoForm(AOwner: TComponent);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DemoForm := TDemoForm.Create(AOwner);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DemoForm.ShowModal;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DemoForm.Free;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Уничтожение формы можно организовать не только в самой процедуре, но и (при неоднократном применении) в другой процедуре или при выгрузке динамической библиотеки.
+</font ></P>
+<P><font face="Verdana" size="3">
+При вызове этой процедуры из приложения в параметре необходимо указать экземпляр класса приложения:
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+procedure ShowDemoForm(AOwner: TComponent); external 'DataCtrl.dll';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.BitBtnlClick(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ShowDemoForm(Application);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что в данном случае форма из динамической библиотеки рассматривается операционной системой как отдельная задача, о чем свидетельствует системная панель задач.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для распространения с приложением можно создавать специальные динамические библиотеки ресурсов, которые используются для локализации приложений. Например, в библиотеку ресурсов можно вынести все строковые константы (сообщения, тексты и т. д.), а с приложением распространять динамическую библиотеку ресурсов, строки в которой соответствуют языковым запросам заказчика.
+</font ></P>
+<P><font face="Verdana" size="3">
+Создать такую библиотеку можно, использовав Репозиторий Delphi (страница
+<b>New</b>) для проекта приложения или динамической библиотеки. Мастер создания библиотеки ресурсов проводит разработчика через все этапы создания проекта библиотеки.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Для каждого языка необходимо создавать свои 
+    варианты форм и новый проект библиотеки ресурсов. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перед началом создания проекта библиотеки ресурсов необходимо сохранить и откомпилировать базовый проект (для него создается проект локализации), а затем начать новый проект библиотеки ресурсов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Первый диалог мастера библиотеки ресурсов предоставляет справочную информацию.
+</font ></P>
+<P><font face="Verdana" size="3">
+Второй — позволяет создать список форм базового проекта, которые войдут в библиотеку (рис. 28.2). При этом можно удалить из списка ненужные формы и добавить необходимые из других проектов.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.28.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 28.2. </B>Диалог мастера 
+  библиотеки ресурсов со списком форм, включаемых в проект </font ></P>
+<P><font face="Verdana" size="3"> После этого в третьем диалоге мастера необходимо 
+  выбрать один или несколько языков локализации ресурсов (рис. 28.3). От этого 
+  выбора языка зависит расширение откомпилированного файла библиотеки и алгоритм 
+  поведения базового проекта при загрузке. </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.28.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 28.3. </B>Диалог мастера 
+  библиотеки ресурсов со списком доступных языков локализации проекта </font ></P>
+<P><font face="Verdana" size="3"> Если запускаемое приложение или DLL находит 
+  в своей папке одноименный файл с расширением, которое соответствует одной из 
+  возможных локализаций и эта локализация применяется в системе, то приложение 
+  использует ресурсы из этой библиотеки вместо собственных. Поэтому при определении 
+  имени файла библиотеки ресурсов категорически не рекомендуется изменять предложенное 
+  мастером имя. </font ></P>
+<P><font face="Verdana" size="3"> Кроме того, папку с файлом ресурсов можно задать 
+  дополнительно. Для этого на следующей странице мастера необходимо указать нужную 
+  папку для каждого языкового ресурса или принять предложенную по умолчанию (рис. 
+  28.4). </font ></P>
+<P><font face="Verdana" size="3"> Затем вы можете добавить к библиотеке ресурсов 
+  собственные файлы. Это могут быть ресурсы любого рода, используемые приложением. 
+  В окне мастера (рис. 28.5) необходимо выбрать эти файлы. </font ></P>
+<P><font face="Verdana" size="3"> В последующих диалогах мастера задается способ 
+  создания или обновления для каждого языкового ресурса и запускается процесс 
+  создания ресурса. При первоначальном создании <font face="Verdana" size="2"> 
+  DLL</font> ресурсы можно только создавать, впоследствии их можно полностью перезаписывать 
+  или изменять. </font ></P>
+<P><font face="Verdana" size="3"> По завершении работы мастера для каждого выбранного 
+  языка создается новый проект библиотеки ресурсов. Результат работы мастера выводится 
+  в информационном окне (рис. 28.6). </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.28.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 28.4. </B>Диалог мастера 
+  библиотеки ресурсов со списком папок для ресурсов локализации проекта </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.28.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 28.5. </B>Диалог мастера 
+  библиотеки ресурсов для включения в проект дополнительных файлов </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.28.6.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 28.6. </B>Окно с информацией 
+  о результате создания ресурса </font ></P>
+<P><font face="Verdana" size="3"> Каждый созданный проект необходимо откомпилировать 
+  и включить в состав дистрибутива базового приложения. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index13.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index15.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

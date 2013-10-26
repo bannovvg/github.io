@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Отношение 
+  &quot;один- ко- многим&quot;</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для установления отношения &quot;один- ко- многим&quot; в наборе данных предназначены два свойства —
+<font face="Verdana" size="2"> Mastersource</font> и <font face="Verdana" size="2">MasterFieids</font>, которые задаются для подчиненной таблицы. Набор данных главной таблицы не требует никаких дополнительных настроек и заданная связь будет работать только при перемещениях по записям главной таблицы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> Mastersource</font> определяет компонент
+<font face="Verdana" size="2">TDataSource</font>, который связан с главной таблицей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Затем при помощи свойства <font face="Verdana" size="2"> MasterFieids</font> необходимо установить отношения между полями главной и подчиненной таблицы. В нем содержится имя индексированного поля, по которому устанавливается связь. Если таких полей несколько, их имена разделяются точкой с запятой. При этом не все поля, входящие в индекс, обязаны участвовать в создании отношения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для задания свойства <font face="Verdana" size="2">MasterFields</font> можно использовать Редактор связей полей
+(<font face="Verdana" size="2">Field Link Designer</font>), который вызывается щелчком на кнопке в поле редактирования этого свойства в Инспекторе объектов (рис. 14.1).
+</font ></P>
+<p align="center"> 
+<div align="center"><IMG src="gl.14.1.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 14.1. </B>Редактор связей 
+  полей </font ></P>
+<P><font face="Verdana" size="3"> Здесь в разворачивающемся списке <B>Available 
+  Indexes </B>выбирается требуемый индекс для подчиненной таблицы. После этого 
+  в списке <B>Detail Fields </B>появляются имена всех полей, входящих в этот индекс. 
+  В списке <B>Master Fields </B>отображаются все поля главной таблицы. </font ></P>
+<P><font face="Verdana" size="3"> Теперь требуется создать связи между полями. 
+  Для этого в левом списке выбирается поле подчиненной таблицы, а затем соответствующее 
+  ему поле главной таблицы в правом списке. После этого активизируется кнопка 
+  <b>Add</b>, щелчок на которой создает отношение по двум полям главной и подчиненной 
+  таблиц. Созданная связь отображается в списке <B>Joined Fields.</B> </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> После создания связи по индексированным полям 
+    данный индекс становится текущим для набора данных. При этом в зависимости 
+    от типа СУБД автоматически заполняется свойство <font face="Verdana" size="2"> 
+    indexName</font> или <font face="Verdana" size="2">indexFieldNames</font>. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Уже созданные связи можно удалить. Кнопка <B>Delete 
+  </B>удаляет выбранную связь, кнопка <B>Clear </B>— все связи. </font ></P>
+<P><font face="Verdana" size="3"> После создания связей между полями отношение 
+  &quot;один- ко- многим&quot; считается установленным. Теперь достаточно открыть 
+  оба набора данных, чтобы увидеть работу отношения. </font ></P>
+<P><font face="Verdana" size="3"> В качестве примера рассмотрим проект DemoJoins, 
+  в котором связываются таблицы из демонстрационной базы данных DBDEMOS. Для этого 
+  использованы компоненты ADO, подробнее о которых вы можете узнать из гл. 19. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Таблица <font face="Verdana" size="2"> Customers</font> 
+  представлена в наборе данных компонента <font face="Verdana" size="2">CustTable</font>, 
+  она содержит данные о покупателях. Таблица <font face="Verdana" size="2"> Orders</font> 
+  представлена в наборе данных компонента <font face="Verdana" size="2">ordTable</font>, 
+  она содержит данные о заказах. Таблица <font face="Verdana" size="2"> Employee</font> 
+  представлена в наборе данных компонента <font face="Verdana" size="2">ЕmpТаblе</font>, 
+  она содержат данные о продавцах (табл. 14.2). </font ></P>
+<P><font face="Verdana" size="3"> <B>Примечание</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Приложение DemoJoins не содержит дополнительного 
+    исходного кода. Все отношения между таблицами заданы при помощи Инспектора 
+    объектов. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Отношение &quot;один- ко- многим&quot; задано 
+  между таблицами покупателей (<font face="Verdana" size="2">Customers</font>) 
+  и заказов (<font face="Verdana" size="2">Orders</font>). Таблица покупателей 
+  является главной. Для создания отношения установлены следующие значения свойств 
+  компонента <font face="Verdana" size="2">ordTable</font> (подчиненная таблица). 
+  </font ></P>
+<P><font face="Verdana" size="3"> Свойство <font face="Verdana" size="2"> MasterSource</font> 
+  должно указывать на компонент <font face="Verdana" size="2">custsource</font>, 
+  связанный с набором данных <font face="Verdana" size="2">CustTable</font>. </font ></P>
+<P><font face="Verdana" size="3"> Свойство <font face="Verdana" size="2"> MasterFields</font> 
+  указывает на поле <font face="Verdana" size="2"> custNo</font> таблицы <font face="Verdana" size="2">Customers</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> В наборе данных <font face="Verdana" size="2">OrdTable</font> 
+  включен вторичный индекс на основе поля <font face="Verdana" size="2">CustNo 
+  (indexName = 'CustNo').</font> </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.14.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 14.2. </B>Главная форма 
+  проекта DemoJoins </font ></P>
+<P><font face="Verdana" size="3"> Таким образом, две таблицы связаны отношением 
+  &quot;один- ко- многим&quot; по индексированным полям <font face="Verdana" size="2"> 
+  custNo</font> (номер покупателя). В результате, при перемещении по записям таблицы 
+  покупателей, в таблице заказов будут показаны только те заказы, которые относятся 
+  к текущему покупателю </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

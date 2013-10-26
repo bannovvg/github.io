@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TRvCustomConnection</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TRvCustomConnection</font> обеспечивает доступ к самым разнообразным источникам данных. Фактически через этот компонент разработчик может передать в отчет все данные, какие только сможет загрузить в приложение. Причина столь удивительной универсальности кроется в том, что:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">во-первых, компонент изначально не ориентирован ни 
+    на один конкретный вид данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;во-вторых, работа по созданию строк отчета возлагается 
+    на разработчика, который должен использовать для этого методы-обработчики 
+    событий.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Повторим банальную истину, что чудес не бывает, и, как видите, за гибкость приходится расплачиваться дополнительным объемом работы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для того чтобы настроить соединение через компонент
+<font face="Verdana" size="2">TRvCustomConnection</font>, необходимо выполнить следующие действия.
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Определить число строк отчета и установить его в компоненте.
+</font ></P>
+<P><font face="Verdana" size="3">
+2. Создать структуру данных отчета (метаданные). Здесь нужно решить, какие именно поля будут присутствовать в отчете, в каком порядке, дать им названия и определить их тип данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+3. Создать процедуру, обеспечивающую передачу данных из источника данных в текущую строку отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+4. Связать компонент соединения с объектом прямого просмотра.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обсудим эту последовательность действий более детально на простом примере. Создадим небольшое приложение, которое позволяет загружать текстовые файлы в два компонента
+<font face="Verdana" size="2">TMemo</font>. Перенесем на форму и настроим все необходимые компоненты Rave Reports.
+</font ></P>
+<P><font face="Verdana" size="3">
+Затем разработаем отчет, который печатает данные из этих двух компонентов в двух колонках. Отчет тоже несложен и состоит из полос заголовка и окончания, а также полосы данных с расположенными на ней двумя элементами Оформления
+<font face="Verdana" size="2">DataText</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наша задача сейчас — настроить компонент <font face="Verdana" size="2"> TRvCustomConnection</font> так, чтобы он мог отображать данные из двух
+<font face="Verdana" size="2"> компонентовTMemo</font>.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 26.1. </B> Методы 
+  -обработчики событий компонента <font face="Verdana" size="2">TRvCustomConnection</font>,&nbsp; 
+  обеспечивающего соединение отчета с массивами <font face="Verdana" size="2"> 
+  Memo</font> </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmMain.rcCustomOpen(Connection: TRvCustomConnection);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Connection.DataRows := Max(meLeft.Lines.Count, meRight.Lines.Count);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i := 0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmMain.rcCustomGetCols(Connection: TRvCustomConnection);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Connection.WriteField('LeftColumn', dtString, 40, 'LeftColumn', '');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Connection.WriteField('RightColumn1, dtString, 40, 'RightColumn1, '');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TfmMain.rcCustomGetRow(Connection: TRvCustomConnection);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if meLeft.Lines.Count &gt;= i</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then Connection.WriteStrData('', meLeft.Lines[i])</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;else Connection. WriteNullData; if meRight.Lines.Count &gt;= i</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then Connection.WriteStrData('', meRight.Lines[i])</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;else Connection. WriteNullData;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Inc(i);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При открытии соединения в методе-обработчике onopen рассчитывается число записей, необходимое для отображения наиболее длинного из двух файлов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод-обработчик <font face="Verdana" size="2"> onGetCols</font> вызывается, когда отчету необходимы метаданные о наборе данных соединения. Здесь создаются два поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для этого используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure WriteField(Name: String; DataType; TRPDataType; Width: Integer; FullName: String; Description: String);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который создает поле в соответствии с переданными в нем параметрами.
+</font ></P>
+<P><font face="Verdana" size="3">
+И при печати отчета для каждой строки вызывается метод-обработчик
+<font face="Verdana" size="2">OnGetRow</font>, в котором задаются значения полей. Для каждого типа данных используется свой метод:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WriteBCDData(FormatData: String; NativeData: Currency): String;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WriteBlobData(var: Buffer; Len: Longint): String;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WriteBoolData(FonnatCata: String; NativeData: Boolean): String;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WriteCurrData(FormatData: String; NativeData: Currency): String;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WriteDateTime(FormatData: String; NativeData: TDateTime);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WriteFloatData(FomatData: String; NativeData: Extended): String;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WritelntData(FormatData: String; NativeData: Integer): String;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WriteNullData;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WriteStrData(FormatData: String; NativeData: String): String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что все эти методы не определяют, какому именно полю будет присвоено значение. Поэтому присваивание осуществляется в порядке следования полей: первый по порядку метод отправляет в отчет значение для первого поля, второй для второго и т. д.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Методы-обработчики компонентов <font face="Verdana" size="2"> 
+    TRvCustomConnection</font> и <font face="Verdana" size="2">TRvDataSetConnection</font> 
+    совпадают (см. выше разд. &quot;Компонент <font face="Verdana" size="2"> TRvDataSetConnection</font>&quot; 
+    данной главы). </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Теперь осталось связать соединение с проектом отчетов. Это делается стандартным образом — при создании объекта прямого просмотра. Но здесь есть одна особенность. Как уже говорилось выше, при создании прямого просмотра в нем автоматически создаются объекты полей, соответствующие полям набора данных. И теперь мы знаем, что у компонента соединения имеется специальный метод-обработчик
+<font face="Verdana" size="2">OnGetCols</font><font face="Verdana" size="2">,</font> который вызывается при создании полей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Однако, если вы создадите объект прямого просмотра обычным способом, визуальная среда Rave Reports создаст один-единственный объект поля, не имеющего ничего общего с реальными метаданными. Для того чтобы поля импортировались в проект отчета правильно, необходимо, чтобы при создании объекта просмотра приложение, содержащее компонент
+<font face="Verdana" size="2">TRvDataSetConnection</font>, было запущено. Тогда в диалоге выбора соединений (см. рис. 26.4) необходимо включить флажок <B>Runtime, </B>и вы увидите компонент нужного соединения. В этом случае объект прямого просмотра получит все необходимые поля, которые затем следует связать с элементами оформления отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>
+

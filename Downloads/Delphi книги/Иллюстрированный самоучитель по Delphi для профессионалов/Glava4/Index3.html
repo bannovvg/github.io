@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Объектная концепция кроссплатформенного программирования</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Программирование в Delphi подразумевает использование тех или иных классов, будь то формы, невизуальные компоненты или списки. Концепция кроссплатформенного программирования в рамках одной среды разработки имеет в виду наличие общего ядра, обеспечивающего функционирование зависимой от операционной системы программной надстройки. В Delphi таким ядром стала библиотека времени выполнения (RunTime Library — RTL), с использованием классов которой созданы библиотеки компонентов VCL и CLX.
+</font ></P>
+<P><font face="Verdana" size="3">
+В соответствии с этим для обеспечения кроссплатформенной разработки в исходные коды базовых классов Delphi были внесены изменения. Общим ядром библиотек компонентов VCL и CLX является иерархия классов
+<font face="Verdana" size="2"> TObject — TFersistent — TComponent</font>, которые входят в состав RTL. Это позволяет среде разработки легко интегрировать кроссплатформенные проекты и работать со стандартными проектами для Windows.
+</font ></P>
+<P><font face="Verdana" size="3">
+Расхождения двух ветвей начинаются с класса
+<font face="Verdana" size="2">TControl</font>, который обеспечивает функциональность всех визуальных компонентов. Начиная с этого
+</font ></P>
+<P><font face="Verdana" size="3">
+класса и далее, библиотеки компонентов имеют собственные исходные коды. Многие модули CLX имеют названия, аналогичные модулям VCL, но с добавлением первой буквы<font face="Verdana" size="2">
+Q</font>, например<font face="Verdana" size="2"> QControls.pas.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+В библиотеке VCL классы <font face="Verdana" size="2">TControl</font>
+и <font face="Verdana" size="2">Twincontrol</font> являются предками всех компонентов, которые должны уметь отображать себя на экране при помощи графических средств операционной системы. В библиотеке CLX аналогичную задачу выполняют классы
+<font face="Verdana" size="2">TControl</font> и <font face="Verdana" size="2">TWidgetControl</font>. Они обеспечивают работоспособность компонентов-потомков в качестве экранных объектов
+<font face="Verdana" size="2">widget</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Большинство свойств и методов классов <font face="Verdana" size="2">Twincontrol</font> и
+<font face="Verdana" size="2">TWidgetControl</font> совпадают. Однако есть и различия, вызванные особенностями графических интерфейсов операционных систем Windows и Linux.
+</font ></P>
+<P><font face="Verdana" size="3">
+Более подробные сведения о функциональности перечисленных классов VCL и RTL содержатся в гл. 2.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для обеспечения работоспособности кроссплатформенных классов CLX применяется динамическая библиотека
+<font face="Verdana" size="2"> Qt.</font> Для использования ее методов в классах CLX в составе Delphi имеется заголовочный файл
+<font face="Verdana" size="2">Qt.pas</font>. При создании объекта CLX конструктором
+<font face="Verdana" size="2"> create</font> в исходном коде или переносом компонента на форму автоматически создается специальный объект —
+<font face="Verdana" size="2"> widget. Widget</font> связан с объектом CLX, обеспечивает взаимодействие объекта CLX с операционной системой и уничтожается вместе с ним.
+</font ></P>
+<P><font face="Verdana" size="3">
+Однако <font face="Verdana" size="2"> widget</font> может быть создан и напрямую. Такая ситуация может возникнуть, к примеру, при создании собственных компонентов. Для этого применяется функция
+<font face="Verdana" size="2"> QWidget_Create</font> динамической библиотеки
+<font face="Verdana" size="2"> Qt.</font> В этом случае <font face="Verdana" size="2"> widget</font> не привязан к объекту CLX и, соответственно, не уничтожается вместе с ним.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

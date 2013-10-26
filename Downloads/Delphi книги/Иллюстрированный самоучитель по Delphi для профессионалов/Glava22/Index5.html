@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Получение 
+  данных от компонента - провайдера</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">TClientDataSet</font> получает доступ к удаленным данным через компонент соединения
+<font face="Verdana" size="2"> DataSnap</font> (см. гл. 20). В зависимости от используемой
+технологии, это могут быть технологии <font face="Verdana" size="2">TDCOMConnection,
+TSocketConnection, TWebConnection ИЛИ TCorbaConnection.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">TClientDataSet</font> связывается с компонентом соединения при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RemoteServer: TCustomRemoteServer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если соединение настроено правильно, то ссылка на интерфейс
+<font face="Verdana" size="2">IAppServer</font> в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AppServer: IAppServer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+совпадает со свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ClientDataSet.RemoteServer.AppServer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После настройки соединения в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ProviderName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+можно выбрать один из компонентов-провайдеров, которые доступны на сервере приложений, выбранном в компоненте соединения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если провайдер был подключен правильно, свойство только для чтения
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property HasAppServer: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+автоматически принимает значение <font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь компонент готов к приему данных. При использовании метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Open;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Active: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+компонент получает от провайдера первый пакет данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Размер пакета определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PacketRecords: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое задает число записей, передаваемое в одном пакете. Если свойство имеет значение —1 (это значение по умолчанию), передаются все записи набора данных. Если оно равно 0 — клиенту передаются только метаданные о наборе данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если соединение клиента с сервером медленное, число записей в пакете можно уменьшить, но желательно так, чтобы при использовании компонентов
+<font face="Verdana" size="2"> TDBGrid</font> полученные в одном пакете записи полностью заполняли рабочую область этого компонента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Одновременно разработчик имеет возможность управлять доставкой следующих пакетов. Для этого используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetNextPacket: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Например, это можно сделать следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TDataModulel.ClientDataSetAfterScroll(DataSet: TDataSet);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if ClientDataSet.EOF then ClientDataSet.GetNextPacket; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FetchOnDemand: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+должно иметь значение <font face="Verdana" size="2">False</font>. При значении
+<font face="Verdana" size="2"> True</font> оно разрешает компоненту получать новые пакеты данных по мере надобности, например, при необходимости прокрутки записей в компоненте TDBGrid.
+</font ></P>
+<P><font face="Verdana" size="3">
+До и после получения очередного пакета соответственно выполняются обработчики событий:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TRemoteEvent = procedure(Sender: TObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var OwnerData: OleVariant) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeGetRecords: TRemoteEvent;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property AfterGetRecords: TRemoteEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Содержимое очередного пакета представлено свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Data: OleVariant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Данные в нем хранятся в транспортном формате, готовые для пересылки. Причем его можно использовать не только для чтения, но и для записи, формируя пакет данных для отправки провайдеру:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var OwnerData: OleVariant;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MaxErrors, ErrorCount: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MaxErrors := 0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ResultDataSet.Data := SourceDataSet.AppServer.AS_ApplyUpdates('', SourceDataSet.Delta, MaxErrors, ErrorCount, OwnerData);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> AS_AppiyUpdates</font> передает данные, содержащиеся в буфере
+<font face="Verdana" size="2">Delta</font>, провайдеру на сервер и возвращает записи, сохранить которые не удалось. Подробнее о методе
+<font face="Verdana" size="2"> AS_ApplyUpdates</font> см. табл. 21.1.
+</font ></P>
+<P><font face="Verdana" size="3">
+Размер буфера <font face="Verdana" size="2"> Data</font> в байтах возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSize: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

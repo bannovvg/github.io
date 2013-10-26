@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Механизм 
+  соединения с хранилищем данных ADO</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компоненты доступа к данным ADO могут использовать два варианта подключения к хранилищу данных. Это стандартный метод ADO и стандартный метод Delphi.
+</font ></P>
+<P><font face="Verdana" size="3">
+В первом случае компоненты используют свойство
+<font face="Verdana" size="2"> connectionstring</font> для прямого обращения к хранилищу данных. Во втором случае используется специальный компонент
+<font face="Verdana" size="2">TADOConnection</font>, который обеспечивает расширенное управление соединением и позволяет обращаться к данным нескольким компонентам одновременно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> connectionstring</font> предназначено для хранения информации о соединении с объектом ADO. В нем через точку с запятой перечисляются все необходимые параметры. Как минимум, это должны быть имена провайдера соединения или удаленного сервера:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Connectionstring:='Remote Server=ServerName;Provider=ProviderName';</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;При необходимости указываются путь к удаленному провайдеру:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Connectionstring:='Remote Provider=ProviderName';</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и параметры, необходимые провайдеру:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+'User Name=User_Name;Password=Password';</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Каждый компонент, обращающийся к хранилищу данных ADO самостоятельно, задавая параметры соединения в свойстве
+<font face="Verdana" size="2">Connectionstring</font>, открывает собственное соединение. Чем больше приложение содержит компонентов ADO, тем больше соединений может быть открыто одновременно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Поэтому целесообразно реализовать механизм соединения ADO через специальный компонент —
+<font face="Verdana" size="2">TADOConnection</font>. Этот компонент открывает соединение, также заданное свойством
+<font face="Verdana" size="2"> Connectionstring</font> (см. выше), и предоставляет разработчику дополнительные средства управления соединением.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компоненты, работающие с хранилищем данных ADO через данное соединение, подключаются к компоненту
+<font face="Verdana" size="2"> TADOConnection</font> при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Connection: TADOConnection;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое имеет каждый компонент, инкапсулирующий набор данных ADO.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

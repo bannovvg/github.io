@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Структура клиентского приложения</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+По своей структуре (рис. 22.1) клиентское приложение подобно обычному приложению баз данных, рассматриваемому в гл. П.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.22.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 22.1. </B>Структура клиентской 
+  части многозвенного приложения Delphi </font ></P>
+<P><font face="Verdana" size="3"> Соединение клиента с сервером приложений осуществляется 
+  специализированными компонентами DataSnap (см. гл. 20). Эти компоненты взаимодействуют 
+  с удаленным модулем данных, входящим в состав сервера, при помощи методов интерфейса 
+  <font face="Verdana" size="2">IAppServer</font>. </font ></P>
+<P><font face="Verdana" size="3"> Также в клиентском приложении могут использоваться 
+  дополнительные, определенные разработчиком, методы интерфейса удаленного модуля 
+  данных, унаследованного от интерфейса <font face="Verdana" size="2">IAppServer</font>. 
+  Подробнее об этих компонентах и способах их настройки на удаленный сервер приложений 
+  см. гл. 21. </font ></P>
+<P><font face="Verdana" size="3"> <b>Внимание</b> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Соединение с сервером приложений обеспечивает 
+    динамическая библиотека MIDAS.DLL, которая должна быть зарегистрирована на 
+    компьютере клиента. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Как и обычное приложение БД, клиент многозвенного 
+  распределенного приложения должен содержать компоненты, инкапсулирующие набор 
+  данных, которые связаны с визуальными компонентами отображения данных посредством<B> 
+  </B>компонентов <font face="Verdana" size="2">TDataSource</font>. </font ></P>
+<P><font face="Verdana" size="3"> Очевидно, что набор данных сервера должен быть 
+  скопирован клиентским приложением в некий локальный буфер. При этом должен использоваться 
+  эффективный механизм загрузки данных сравнительно небольшими порциями, что позволяет 
+  значительно разгрузить транспортный канал между клиентом и сервером приложений. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Кэширование и редактирование данных в клиентском 
+  приложении обеспечивает специализированный компонент <font face="Verdana" size="2">TclientDataSet</font>, 
+  отдаленным предком которого является класс <font face="Verdana" size="2">TDataSet</font>. 
+  Помимо унаследованных от предков методов, класс <font face="Verdana" size="2">TclientDataSet</font> 
+  инкапсулирует ряд дополнительных функций, облегчающих управление данными. </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание&nbsp;</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Подобно обычному приложению БД, в &quot;тонком&quot; 
+    клиенте для размещения невизуальных компонентов доступа к данным необходимо 
+    использовать модули данных. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Для получения набора данных сервера компонент 
+  <font face="Verdana" size="2">TclientDataSet</font> взаимодействует с компонентом 
+  <font face="Verdana" size="2">TDataSetProvider</font>, используя методы интерфейса 
+  <font face="Verdana" size="2">IProviderSupport</font> (см. гл. 21). </font ></P>
+<P><font face="Verdana" size="3"> По существу все уникальные функции клиентского 
+  приложения сосредоточены в компоненте <font face="Verdana" size="2">TclientDataSet</font>, 
+  изучением которого мы и займемся далее в этой главе. В остальном клиентское 
+  приложение не отличается от обычного приложения БД и при его разработке могут 
+  применяться стандартные методы. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<P><font face="Verdana" size="3">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

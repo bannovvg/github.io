@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Объект и класс</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед началом работы необходимо ввести основные понятия и определения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Классом в Object Pascal называется структура языка, которая может иметь в своем составе переменные, функции и процедуры. Переменные в зависимости от предназначения именуются полями
+или свойствами (см. ниже). Процедуры и функции класса — методами.
+Соответствующий классу тип будем называть объектным типом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMyObject = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyField: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function MyMethod: Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере описан класс <font face="Verdana" size="2"> TMyObject,</font> содержащий поле
+<font face="Verdana" size="2"> MyField</font> и метод
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyMethod.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Поля объекта аналогичны полям записи (record). Это данные, уникальные для каждого созданного в программе экземпляра класса. Описанный здесь класс
+<font face="Verdana" size="2"> TMyObject</font> имеет одно поле —
+<font face="Verdana" size="2">MyField</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы — это процедуры и функции, описанные внутри класса и предназначенные для операций над его полями. В состав класса входит указатель на специальную таблицу, где содержится вся информация, нужная для вызова методов. От обычных процедур и функций методы отличаются тем, что им при вызове передается указатель на тот объект, который их вызвал. Поэтому обрабатываться будут поля именно того объекта, который вызвал метод. Внутри метода указатель на вызвавший его объект доступен под зарезервированным именем
+<font face="Verdana" size="2">self</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Понятие свойства будет подробно рассмотрено ниже. Пока можно определить его как поле, доступное для чтения и записи не напрямую, а через соответствующие методы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Классы могут быть описаны либо в секции интерфейса модуля, либо на верхнем уровне вложенности секции реализации. Не допускается описание классов &quot;где попало&quot;, т. е. внутри процедур и других блоков кода.
+</font ></P>
+<P><font face="Verdana" size="3">
+Разрешено опережающее объявление классов, как в следующем примере:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFirstObject = class;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> TSecondObject = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Fist : TFirstObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFirstObject = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Чтобы использовать класс в программе, нужно, как минимум, объявить переменную этого типа. Переменная объектного типа называется экземпляром класса
+или объектом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">AMyObject: TMyObject;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+До введения термина &quot;класс&quot; в языке Pascal существовала двусмысленность определения &quot;объект&quot;, который мог обозначать и тип, и переменную этого типа. Теперь же существует четкая граница: класс — это описание, объект — то, что создано в соответствии с этим описанием.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как создаются и уничтожаются объекты?
+</font ></P>
+<P><font face="Verdana" size="3">
+Те, кто раньше использовал ООП в работе на C++ и особенно в Turbo Pascal, будьте внимательны: в Object Pascal экземпляры объектов могут быть только динамическими. Это означает, что в приведенном выше фрагменте переменная
+<font face="Verdana" size="2"> AMyObject</font> на самом деле является указателем, содержащим адрес объекта.
+</font ></P>
+<P><font face="Verdana" size="3">
+Объект &quot;появляется на свет&quot; в результате вызова специального метода, который инициализирует объект — конструктора.
+Созданный экземпляр уничтожается другим методом — деструктором:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AMyObject   := TMyObject.Create;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> {  действия с созданным объектом }</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">AMyObject.Destroy</font>;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но, скажет внимательный читатель, ведь объекта еще нет, как мы можем вызывать его методы? Справедливое замечание. Однако обратите внимание, что вызывается метод
+<font face="Verdana" size="2">TMyObject.Create</font>, а не <font face="Verdana" size="2"> AMyObject.Create.</font> Есть такие методы (в том числе конструктор), которые успешно работают до (или даже без)
+создания объекта. О подобных методах, называемых методами класса,
+пойдет речь чуть ниже.
+</font ></P>
+<P><font face="Verdana" size="3">
+В Object Pascal конструкторов у класса может быть несколько. Общепринято называть конструктор
+<font face="Verdana" size="2"> create</font> (в отличие от Turbo Pascal, где конструктор обычно назывался init, и от C++, где его имя совпадает с именем класса). Типичное название деструктора —
+<font face="Verdana" size="2">Destroy</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMyObject = class(TObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; MyField: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Constructor Create;&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> Destructor Destroy;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Function MyMethod: Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для уничтожения экземпляра объекта рекомендуется использовать метод
+<font face="Verdana" size="2">Free</font>, который первоначально проверяет указатель (не равен ли он Nil) и только затем вызывает
+<font face="Verdana" size="2">Destroy</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AMyObj ect.Free ;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+До передачи управления телу конструктора происходит собственно создание объекта — под него отводится память, значения всех полей обнуляются. Далее выполняется код конструктора, написанный программистом для инициализации экземпляров данного класса. Таким образом, хотя на первый взгляд синтаксис конструктора схож с вызовом процедуры (не определено возвращаемое значение), но на самом деле конструктор — - это функция, возвращающая созданный и инициализированный объект.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Конструктор создает новый объект только в 
+    том случае, если перед его именем указано имя класса. Если указать имя уже 
+    существующего объекта, он поведет себя по-другому: не создаст новый объект, 
+    а только выполнит код, содержащийся в теле конструктора. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Чтобы правильно инициализировать в создаваемом объекте поля, относящиеся к классу-предку, нужно сразу же при входе в конструктор вызвать конструктор предка при помощи зарезервированного слова
+<font face="Verdana" size="2">inherited</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+constructor TMyObject.Create;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> inherited Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Взяв любой из примеров, прилагаемых к этой книге или поставляемых вместе в Delphi, вы почти не увидите там вызовов конструкторов и деструкторов. Дело в том, что любой компонент, попавший при визуальном проектировании в ваше приложение из Палитры компонентов, включается в определенную иерархию. Иерархия эта замыкается на форме (класс
+<font face="Verdana" size="2">TForm</font>): для всех ее составных частей конструкторы и деструкторы вызываются автоматически, незримо для программиста. Кто создает и уничтожает формы? Это делает приложение (глобальный объект с именем
+<font face="Verdana" size="2">Application</font>). В файле проекта (с расширением dpr) вы можете увидеть вызовы метода
+<font face="Verdana" size="2"> Application.CreateForm,</font> предназначенного для этой цели.
+</font ></P>
+<P><font face="Verdana" size="3">
+Что же касается объектов, создаваемых динамически (во время выполнения приложения), то здесь нужен явный вызов конструктора и метода
+<font face="Verdana" size="2">Free</font>.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

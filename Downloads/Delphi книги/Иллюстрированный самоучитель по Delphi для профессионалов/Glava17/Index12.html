@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компонент TSimpleDataSet</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TSimpleDataSet</font> обеспечивает кэширование полученных данных и сделанных изменений на стороне клиента и последующую передачу их на сервер для фиксации. В отличие от компонента
+<font face="Verdana" size="2">TClientDataSet</font>, основным назначением которого является обслуживание набора данных, полученного
+от удаленного сервера при помощи серверных компонентов
+<font face="Verdana" size="2">DataSnap</font>, компонент <font face="Verdana" size="2">TSimpleDataSet</font> призван быть лишь средством редактирования набора данных в технологии dbExpress.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент использует двунаправленный курсор и позволяет редактировать данные, правда только в режиме кэширования (см. гл. 22).
+</font ></P>
+<P><font face="Verdana" size="3">
+Таким образом, компонент <font face="Verdana" size="2">TSimpleDataSet</font> позволяет исправить основные недостатки технологии dbExpress.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для подключения к источнику данных компонент использует свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DBConnection:   TSQLConnection;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое позволяет связать его с соединением
+<font face="Verdana" size="2"> TSQLConnection</font> (см. выше).
+или свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ConnectionName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое позволяет выбрать тип соединения dbExpress напрямую.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+При этом у компонента отсутствует механизм создания удаленного доступа к данным, представленный у компонента
+<font face="Verdana" size="2">TclientDataSet</font> свойствами <font face="Verdana" size="2">RemoteServer И ProviderName.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После создания соединения с сервером БД можно определить тип используемой команды, подобно компоненту
+<font face="Verdana" size="2">TSQLDataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тип команды определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSQLCommandType = (ctQuery, ctTable, ctStoredProc);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property CommandType: TSQLCommandType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А содержание команды задает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CoinmandText:   string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После этого компонент можно связывать с компонентами отображения данных, просматривать и редактировать данные.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для передачи на сервер сделанных и сохраненных в локальном кэше изменений используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ApplyUpdates(MaxErrors: Integer); Integer; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где параметр <font face="Verdana" size="2"> MaxErrors</font> определяет максимально возможное число ошибок при сохранении. Обычно этому параметру присваивается -1, что снимает ограничение на число ошибок. Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Reconcile(const Results: OleVariant): Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+очищает локальный кэш компонента от записей, которые успешно сохранены на сервере.
+</font ></P>
+<P><font face="Verdana" size="3">
+Отменить локальные изменения можно методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CancelUpdates;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что в компоненте действуют традиционные методы набора данных
+<font face="Verdana" size="2"> Edit, Post, Cancel, Apply, Insert, Delete.</font> Но
+они оказывают влияние только на записи, кэшированные локально. Вы можете сколько угодно редактировать набор данных при помощи перечисленных методов, но они будут изменять только содержимое кэша. Настоящее сохранение на сервере осуществляется методом
+<font face="Verdana" size="2">Appiyupdates</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Данные между сервером и компонентом пересылаются пакетами. Доступ к текущему пакету возможен при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Data: OleVariant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Сделанные изменения содержатся в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Delta: OleVariant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При этом разработчик может регулировать размер пакетов. Например, при ухудшении соединения можно уменьшить размер пакетов. Размер пакета определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PacketRecords: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое задает число записей в пакете. Автоматическое назначение пакетов включается
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PacketRecords := -1</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если значение <font face="Verdana" size="2"> PacketRecords</font> равно 0, между клиентом и сервером пересылаются только метаданные.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если свойство <font face="Verdana" size="2"> PacketRecords</font> больше нуля, то необходимо вручную организовывать подкачку данных с сервера. Для этого используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetNextPacket: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для организации такой подкачки вполне подойдут методы-обработчики событий
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeGetRecords: TRemoteEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property AfterGetRecords: TRemoteEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В компоненте <font face="Verdana" size="2">TSimpleDataSet</font> развиты средства работы с одиночными записями. Можно просмотреть общее число записей
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecordCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и номер текущей записи
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecNo: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Размер одной записи сохраняется в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecordSize: Word;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Все изменения, сделанные в текущей записи, отменяются методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RevertRecord;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обновить значение полей для текущей записи с сервера можно методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RefreshRecord;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обработка исключительных ситуаций для компонента
+<font face="Verdana" size="2">TSimpleDataSet</font> состоит из двух этапов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Во-первых, необходимо отслеживать ошибки на стороне клиента — это могут быть некорректный ввод данных, ошибки кэширования и т. д. В этом случае подходят все стандартные способы, применяемые для наборов данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Во-вторых, ошибки могут возникнуть при сохранении изменений на сервере. И поскольку само событие, приведшее к исключительной ситуации, возникает на другом компьютере или в другом процессе, для отслеживания таких ошибок используется специальный метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TReconcileErrorEvent = procedure(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind; var Action: TReconcileAction)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> of object; property OnReconcileError: TReconcileErrorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который срабатывает, если с сервера пересылается сообщение об ошибке. Информация об ошибке находится в параметре
+<font face="Verdana" size="2"> E: EReconcileError.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Более детальная информация о клиентских наборах данных содержится в гл. 22.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

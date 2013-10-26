@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index20.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index22.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Ручное 
+  редактирование коллекций панелей и действий</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Перетаскивание имеет много достоинств, однако оно не всегда удобно. Поэтому было бы странно, если бы не было предусмотрено другого способа. Хоть он напрямую и не рекомендован в документации, но в ряде случаев более эффективен.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим работу с дочерними объектами менеджера действий, которые упакованы один в другой, как матрешки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, щелкнем на свойстве <font face="Verdana" size="2"> ActionManager</font> на форме и посмотрим на содержимое Инспектора объектов. Внутри него мы обнаружим сразу две &quot;матрешки&quot; — свойство
+<font face="Verdana" size="2"> ActionBars</font> содержит коллекцию ссылок на дочерние панели, свойство
+<font face="Verdana" size="2"> LinkedActionList</font> может содержать дополнительный список действий, отданных &quot;в управление&quot; данному менеджеру — например, для централизованной установки общих свойств.
+</font ></P>
+<P><font face="Verdana" size="3">
+Щелкнем на свойстве <font face="Verdana" size="2">ActionBars</font>. Появится редактор панелей (рис. 8.7), а в Инспекторе объектов обратим внимание на следующее свойство объекта
+<font face="Verdana" size="2">ActionBars</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Customizable: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Это свойство указывает, может ли коллекция редактироваться во время выполнения.
+</font ></P>
+<P><font face="Verdana" size="3">
+В коллекции содержатся не сами панели, а их &quot;заместители&quot; — объекты типа
+<font face="Verdana" size="2">TActionBaritem</font>, которые на них указывают. Надпись на рисунке
+<b>&quot;1-ActionBar <font face="Verdana" size="2"> -&gt;</font> ActionToolBarl&quot;
+</b>показывает, что первый элемент коллекции связан с панелью ActionTooiBar2. Вы можете добавлять и удалять элементы этой коллекции, по мере необходимости связывая их через свойство
+<font face="Verdana" size="2"> ActionBar</font> с уже существующей панелью.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.8.7.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 8.7. </B>Редактор коллекции 
+  панелей компонента <font face="Verdana" size="2"> TActionManager</font> </font ></P>
+<P><font face="Verdana" size="3"> Через Инспектор объектов вы можете изменять 
+  внешний вид объектов типа <font face="Verdana" size="2">TActionBaritem</font> 
+  и соответствующих им панелей. </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Color: 
+    TColor;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> отвечает за фоновый цвет панели. Если вам изменения 
+  цвета недостаточно, в качестве фона выберите картинку </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Background: 
+    TPicture;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> которая будет расположена на панели в соответствии 
+  со значением свойства </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property BackgroundLayout: 
+    TBackgroundLayout;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TBackgroundLayout 
+    = (blNormal, blStretch, blTile, blLeftBanner, blRightBanner);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Помимо внешнего вида можно разрешить/запретить 
+  перетаскивание панелей и их дочерних элементов. Обратимся к свойству </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property ChangesAllowed: 
+    TChangesAllowedSet;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TChangesAllowed 
+    = (caModify, caMove, caDelete);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;TChangesAllowedSet 
+    = set of TChangesAllowed;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Множество из трех возможных значений позволяет 
+  запретить те или иные нежелательные изменения для дочерних элементов панели. 
+  Если в него не включен режим <font face="Verdana" size="2">caDelete</font>, 
+  то элемент нельзя убирать (перетаскивать) с панели. Если нет режима <font face="Verdana" size="2"> 
+  caMove</font> — нельзя передвигать внутри панели. Наконец, отсутствие режима 
+  <font face="Verdana" size="2"> caModify</font> означает запрет на изменение 
+  визуальных свойств (заголовка и т. п.). </font ></P>
+<P><font face="Verdana" size="3"> Внутри коллекции <font face="Verdana" size="2"> 
+  TActionBaritem</font> спрятаны еще две &quot;матрешки&quot; — свойства <font face="Verdana" size="2"> 
+  items</font> и <font face="Verdana" size="2">Contextitems</font>. Оба свойства 
+  представляют из себя коллекции объектов, указывающих на действия (класс коллекции 
+  TActionCiients, класс элемента коллекции <font face="Verdana" size="2">TActiondientitem</font>). 
+  Первое свойство указывает непосредственно на дочерние действия, второе — на 
+  действия, которые будут показаны в качестве всплывающего меню при нажатии правой 
+  кнопки мыши. </font ></P>
+<P><font face="Verdana" size="3"> У коллекции <font face="Verdana" size="2">TActionClients</font> 
+  есть заслуживающие особого упоминания свойства. </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property CaptionOptions: 
+    TCaptionOptions;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;TCaptionOptions 
+    = (coNone, coSelective, coAll);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> задает показ/отсутствие заголовков дочерних 
+  действий. В случае установки в <font face="Verdana" size="2"> coNone</font> 
+  они не показываются, COAII — показываются все, <font face="Verdana" size="2"> 
+  coSelective</font> — показываются в соответствии со значением <font face="Verdana" size="2"> 
+  showCaption</font> дочернего объекта <font face="Verdana" size="2">TActiondientitem</font>. 
+  Это свойство можно также установить на первой странице редактора менеджера действий 
+  в одноименном выпадающем списке. </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Smalllcons: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> указывает размер значков, соответствующих действиям. 
+  По умолчанию установлено в значение <font face="Verdana" size="2"> True</font> 
+  (маленькие значки). Визуально оно доступно через тот же редактор — третья страница, 
+  флажок <B>Large Icons.</B> </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property HideUnused: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> разрешает скрытие редко используемых действий, 
+  описанное в предыдущем разделе. Если вы не хотите пользоваться механизмом скрытия, 
+  на третьей странице редактора менеджера действий и диалога <font face="Verdana" size="2"> 
+  TCustomizeDig</font> есть флажок <B>Menu show recent items first. </B>Сбросьте 
+  его, и свойства <font face="Verdana" size="2"> HideUnused</font> у клиентов 
+  действий установятся в значение <font face="Verdana" size="2">False</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> И, наконец, коллекцию можно сделать нередактируемой. 
+  Для этого у нее есть<B> </B>свойство<B> </B><font face="Verdana" size="2">Customizable</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Ну вот, мы уже добрались до самой маленькой 
+  матрешки — <font face="Verdana" size="2">TActiondientitem</font>. Этот объект 
+  связывается напрямую с одним действием через свойство Action. Правда в него 
+  можно спрятать еще меньшую матрешку — у него также есть свойства <font face="Verdana" size="2"> 
+  items</font> и <font face="Verdana" size="2">contextitems</font>. Эти свойства 
+  используются при организации многоуровневых меню и меню, выпадающих из кнопок 
+  (точнее, псевдокнопок — напомним, объекты <font face="Verdana" size="2"> TActiondientitem</font> 
+  на панелях не являются ни кнопками, ни компонентами вообще). </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index20.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index22.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

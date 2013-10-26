@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Кэширование 
+  и редактирование данных</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+После получения записей от провайдера набор данных сохраняется в локальном буфере памяти. И все вносимые изменения после применения метода
+<font face="Verdana" size="2"> Post</font> также сохраняются локально и не пересылаются на сервер. Буфер изменений доступен при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Delta: OleVariant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для передачи изменений на сервер используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ApplyUpdates(MaxErrors: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Integer; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где параметр <font face="Verdana" size="2"> MaxErrors</font> задает число ошибок, которые игнорируются при сохранении данных на сервере. Если параметр равен —1, сохранение на сервере прерывается при первой же ошибке. Метод возвращает число сохраненных записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+После выполнения метода <font face="Verdana" size="2"> ApplyUpdates</font> все записи, сохранить которые не удалось, возвращаются клиенту в локальный буфер
+<font face="Verdana" size="2">Delta</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если клиентское приложение будет редко изменять свои наборы данных, сохранение изменений на сервере можно связать с методом-обработчиком
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AfterPost:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.ClientDataSetAfterPost(DataSet: TDataSet);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ClientDataSet.ApplyUpdates(-1);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство только для чтения
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ChangeCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает общее число изменений, содержащееся в буфере
+<font face="Verdana" size="2">Delta</font>. Для очистки буфера изменений используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CancelUpdates;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После вызова метода свойство <font face="Verdana" size="2"> ChangeCount</font> принимает значение 0.
+</font ></P>
+<P><font face="Verdana" size="3">
+До и после сохранения изменений на сервере соответственно вызываются методы-обработчики
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeApplyUpdates: TRemoteEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property AfterApplyUpdates: TRemoteEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Несмотря на сделанные локально многократные изменения, запись может быть восстановлена в первоначальном виде. Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RefreshRecord;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+получает от провайдера первоначальный вариант текущей записи, сохраненный на сервере.
+</font ></P>
+<P><font face="Verdana" size="3">
+При этом (и при всех других случаях, когда компонент запрашивает обновление текущей записи) вызываются методы-обработчики
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeRowRequest: TRemoteEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property AfterRowRequest: TRemoteEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но что делать, если необходимо восстановить удаленную запись? В обычном наборе данных после сохранения это невозможно. В компоненте
+<font face="Verdana" size="2">TClientDataSet</font> существует метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function UndoLastChange(FollowChange: Boolean): Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который возвращает набор данных к состоянию до последней выполненной операции редактирования, добавления или удаления записи. Если параметр
+<font face="Verdana" size="2"> FollowChange</font> имеет значение
+<font face="Verdana" size="2">True</font>, курсор набора данных будет установлен на восстановленную запись.
+</font ></P>
+<P><font face="Verdana" size="3">
+О состоянии текущей записи позволяет судить метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function UpdateStatus: TUpdateStatus; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который возвращает значение типа
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TUpdateStatus = (usUnmodified, usModified, uslnserted, usDeleted);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+означающее состояние текущей записи:
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+usUnmodified</font> — запись осталась неизменной;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+usModified</font> — запись была изменена;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uslnserted</font> — запись была добавлена;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+usDeleted</font> — запись была удалена.
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, при закрытии набора данных можно выполнить проверку:
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if ClientDataSet.UpdateStatus = usModified&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> then ShowMessage('Record was changed');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+На основе типа можно управлять видимостью записей в наборе данных. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StatusFilter: TUpdateStatusSet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет, какой тип записей будет отображаться в наборе данных. Например:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ClientDataSet.StatusFilter := usDeleted;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+отобразит в наборе данных только удаленные записи (при этом изменения не сохранены на сервере).
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

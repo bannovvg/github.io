@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Действия. Компонент TActionList</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Пользовательский интерфейс современных приложений весьма многообразен, и зачастую один и тот же результат можно получить разными способами — щелчком на кнопке на панели инструментов, выбором пункта меню, нажатием комбинации клавиш и т. п. Можно решить проблему &quot;в лоб&quot; и повторить один и тот же код два, три раза и т. д. Недостатки такого подхода, очевидно, не обязательно комментировать. Можно воспользоваться Инспектором объектов и назначить пункту меню тот же обработчик события, что и кнопке, благо событие
+oncl<font face="Verdana" size="2">i</font>ck имеет везде одинаковый синтаксис. Этот способ неплох, но при большом количестве взаимных ссылок легко запутаться.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наконец, современный способ — это воспользоваться компонентом
+<font face="Verdana" size="2"> TActionList</font> и разом решить эти проблемы. Как следует из названия, это — централизованное хранилище, где воздействия со стороны пользователя связываются с реакциями на них.
+</font ></P>
+<P><font face="Verdana" size="3">
+Действием (Action) будем именовать операцию, которую пользователь хочет произвести, воздействуя на элементы интерфейса. Тот компонент, на который он хочет воздействовать, называется целью действия
+<font face="Verdana" size="2">(Action target).</font> Компонент, посредством которого действие инициировано (кнопка, пункт меню), — клиент действия<font face="Verdana" size="2">
+(Action client</font>). Таким образом, в иерархии классов Delphi действие
+<font face="Verdana" size="2"> TAction</font> — это невизуальный компонент, который играет роль &quot;черного ящика&quot;, получающего сигнал от одного или нескольких клиентов, выполняющих действия над одной (или разными) целями.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Действия могут работать только будучи объединенными 
+    в список компонентов <font face="Verdana" size="2"> TActionList</font> или 
+    <font face="Verdana" size="2">TActionManager</font>. Вне этих компонентов 
+    применение действий невозможно. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Спроектировав на бумаге пользовательский интерфейс, начните работу с помещения на форму компонента
+<font face="Verdana" size="2">TActionList</font>. Он находится в Палитре компонентов на первой странице <B>Standard </B>(вот видите какое ему уделяется внимание!). После этого следует запустить редактор списка действий двойным щелчком мышью на компоненте или с помощью контекстного меню (рис. 8.1).
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь можно начинать добавление действий. Для программиста предусмотрен набор типовых, наиболее часто встречающихся действий, которые описаны в следующем разделе.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.8.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 8.1. </B>Внешний вид 
+  редактора действий компонента <font face="Verdana" size="2"> TActionList</font> 
+  </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.8.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 8.2. </B>Опубликованные 
+  свойства объекта <font face="Verdana" size="2"> TAction</font> </font ></P>
+<P><font face="Verdana" size="3"> Помимо них можно вставить и обычное действие, 
+  которое получит имя <font face="Verdana" size="2">Action</font><font face="Verdana" size="2">1</font>. 
+  Итак, что же из себя представляет действие? Его опубликованные свойства показаны 
+  на рис. 8.2. Рассмотрим их по группам. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index1.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

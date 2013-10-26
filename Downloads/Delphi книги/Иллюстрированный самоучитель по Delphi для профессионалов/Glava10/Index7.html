@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TGraphic</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Канва, перо, кисть и шрифт нужны, чтобы нарисовать свою картинку. Чтобы загрузить готовую, необходимы объекты, &quot;понимающие&quot; графические форматы Windows.
+</font ></P>
+<P><font face="Verdana" size="3">
+Абстрактный класс <font face="Verdana" size="2"> TGraphic</font> является родительским для трех видов изображений, общепринятых в графике Windows — значка (компонент
+<font face="Verdana" size="2">Ticon</font>), метафайла (компонент
+<font face="Verdana" size="2">TMetafile</font>) И растровой
+картинки (компонент <font face="Verdana" size="2">TBitmap</font>). Четвертым потомком
+<font face="Verdana" size="2"> TGraphic</font> является <font face="Verdana" size="2"> TuPEGimage</font> — сжатая растровая картинка в формате
+<font face="Verdana" size="2">JPEG</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Работая над приложением в Delphi, вы никогда не будете создавать объекты класса
+<font face="Verdana" size="2">TGraphic</font>, но переменной этого типа вы можете присваивать указатель на любой из перечисленных классов-потомков.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Assign(Source: TPersistenti;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+переопределяет одноименный метод предка, допуская полиморфное присваивание графических объектов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Загрузку и выгрузку графики в поток осуществляют методы:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromStream(Stream: TStream);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure SaveToStream(Stream: TStream);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а загрузку и выгрузку в файл — методы:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromFile(const Filename: string); procedure SaveToFile(const Filename: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Эти методы создают соответствующий файловый поток и затем вызывают методы
+<font face="Verdana" size="2"> LoadFromStream/SaveToStream.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Два метода осуществляют взаимодействие с буфером обмена Windows:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromClipboardFormat(AFormat: Word; AData: THandle;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">APalette: HPALETTE);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SaveToClipboardFormat(var AFormat: Word; var AData: THandle;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var APalette: HPALETTE);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь <font face="Verdana" size="2"> AFormat</font> — используемый графический формат;
+<font face="Verdana" size="2"> AData</font> и <font face="Verdana" size="2"> APalette</font> — данные и палитра (если она требуется). Потомок должен иметь свой формат представления в буфере обмена и уметь обрабатывать данные, представленные в нем.
+</font ></P>
+<P><font face="Verdana" size="3">
+Загрузка больших графических файлов может продолжаться очень долго. Чтобы скрасить пользователю ожидание, программист может обработать событие
+<font face="Verdana" size="2">OnProgress</font>!
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TProgressStage = (psStarting, psRunning, psEnding);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TProgressEvent = procedure (Sender: TObject; Stage: TProgressStage;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PercentDone: Byte; RedrawNow: Boolean; const</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+R: TRect; const Msg: string) of object; property OnProgress: TProgressEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Оно вызывается графическими объектами во время длительных операций. Параметр
+<font face="Verdana" size="2"> stage</font> означает стадию процесса (начало/протекание/завершение), a
+<font face="Verdana" size="2"> PercentDone</font> — процент сделанной работы. Сразу оговоримся, что не все из тех объектов, которые будут нами описаны, вызывают обработчик события
+<font face="Verdana" size="2">OnProgress</font>.&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Empty:   Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+устанавливается в значение <font face="Verdana" size="2">True</font>, если графический объект пуст (в него не загружены данные).
+</font ></P>
+<P><font face="Verdana" size="3">
+Высота и ширина графического объекта задаются свойствами:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Height: Integer; property Width: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для каждого дочернего типа эти параметры вычисляются своим способом. Наконец, свойство:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Modified: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+показывает, модифицировался ли данный графический объект. Это свойство устанавливается в значение
+<font face="Verdana" size="2"> True</font> внутри обработчика события
+<font face="Verdana" size="2">OnChange</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Многие графические объекты при отрисовке должны быть прозрачными. Одни из них прозрачны всегда (значок, метафайл), другие — в зависимости от значения свойства
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Transparent: 
+    Boolean;</font> </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+  <table COLS="3" WIDTH="16%">
+    <tr> 
+      <td> <font face="Verdana" size="3"> <a href="Index6.html"> <img SRC="Back.gif" BORDER="0"> 
+        </a> </font> </td>
+      <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> 
+        <img SRC="Menu.gif" BORDER="0"> </a> </font> </td>
+      <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index8.html"> 
+        <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+    </tr>
+  </table>
+
+</body>
+</html>

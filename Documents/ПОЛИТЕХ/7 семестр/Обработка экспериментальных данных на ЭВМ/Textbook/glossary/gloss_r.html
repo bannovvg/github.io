@@ -1,0 +1,376 @@
+<html>
+
+<head>
+<title>Электронный учебник - Словарь Р</title>
+</head>
+
+<body BACKGROUND="../tile1.gif">
+
+<p><a NAME="Uniform Distribution"><font SIZE="4" COLOR="navy">Равномерное
+распределение.</font></a> Дискретное равномерное
+распределение (этот термин был впервые
+использован Успенским в 1937 г.) сосредоточено в
+нескольких точках, которым приписывает равные
+вероятности:</p>
+
+<p><font color="blue">f(x) = 1/N &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x =
+1, 2, ..., N </font></p>
+
+<p>Непрерывное равномерное распределение
+сосредоточено на интервале [a, b] и имеет следующую
+функцию плотности:</p>
+
+<p><font color="blue">f(x) = 1/(b-a) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a &lt; x
+&lt; b </font></p>
+
+<p>где<br>
+<font color="blue">a</font>&nbsp;&nbsp; - верхняя граница
+интервала, из которого выбираются точки<br>
+<font color="blue">b</font>&nbsp;&nbsp; - нижняя граница интервала,
+из которого выбираются точки<br>
+</p>
+
+<p><a NAME="Radial Basis Functions"><font SIZE="4" COLOR="navy">Радиальные
+базисные функции.</font></a> Вид <a HREF="gloss_n.html#Neural Networks">нейронной
+сети</a>, имеющий <a HREF="gloss_p.html#Hidden Layers">промежуточный
+слой</a> из радиальных элементов и выходной слой
+из <a HREF="gloss_l.html#Linear Units">линейных элементов</a>. Сети
+этого типа довольно компактны и быстро
+обучаются. Предложены в работах Broomhead and Lowe (1988) и
+Moody and Darkin (1989), описаны в большинстве учебников по <a HREF="gloss_n.html#Neural Networks">нейронным сетям</a> (например,
+Bishop, 1995; Haykin, 1994). См. раздел&nbsp; <a HREF="../modules/stneunet.html">Neural
+Networks</a>.<br>
+</p>
+
+<p><a NAME="Exploratory Data Analysis"><font SIZE="4" COLOR="navy">Разведочный
+анализ данных (РАД).</font></a> В отличие от
+традиционной <em>проверки гипотез</em>,
+предназначенной для проверки <em>априорных</em>
+предположений, касающихся связей между
+переменными (например, такого рода: &quot;<em>Имеется
+положительная корреляция между возрастом
+человека и его/ее предрасположенностью к риску</em>&quot;),
+<em>разведочных анализ данных (РАД)</em> применяется
+для нахождения систематических связей между
+переменными в ситуациях, когда отсутствуют (или
+имеются недостаточные) <em>априорные</em>
+представления о природе этих связей. Как правило,
+при разведочном анализе учитывается и
+сравнивается большое число переменных, при этом
+для поиска закономерностей используются самые
+разные методы. </p>
+
+<p>Дополнительную информацию см. в разделе <a HREF="../modules/stdatmin.html#eda">Разведочный анализ данных</a>.<br>
+</p>
+
+<p><a NAME="Differencing (in Time Series)"><font SIZE="4" COLOR="navy">Разность
+(в анализе временных рядов).</font></a> В данном
+преобразовании временного ряда, ряд будет
+преобразован как: X=X-X(лаг). После взятия разности
+модифицированный ряд будет иметь длину <em>N-лаг </em>(где
+<em>N</em> - длина исходного ряда).<br>
+</p>
+
+<p><a NAME="Resolution"><font SIZE="4" COLOR="navy">Разрешение.</font></a>
+План <em>разрешения</em> <em>R</em> - это такой план, в
+котором нет <a HREF="gloss_v.html#Interactions">взаимодействий</a>
+порядка l, смешивающихся с любыми другими
+взаимодействиями порядка меньше R - l. Например, в
+плане с <em>разрешением R</em>, равным 5, нет
+взаимодействий порядка l = 2, которые смешиваются
+с любыми другими взаимодействиями порядка
+меньше, чем R - l = 3; таким образом, главные эффекты
+в этом плане не смешиваются друг с другом,
+главные эффекты не смешиваются с
+взаимодействиями порядка 2, а взаимодействия
+порядка 2 не смешиваются друг с другом. Для
+обсуждения роли разрешения в планировании
+эксперимента см. <a HREF="../modules/stexdes.html#2">2**(k-p) дробные
+факторные планы</a>&nbsp; и <a HREF="../modules/stexdes.html#2a">Поиск
+лучшего 2**(k-p) дробного факторного плана</a>. <br>
+</p>
+
+<p><a NAME="Weibull Distribution"><font SIZE="4" COLOR="navy">Распределение
+Вейбулла.</font></a> Распределение Вейбулла (Weibull, 1939
+г., 1951 г.; см. также Lieblein, 1955 г.) имеет следующую
+функцию плотности (для положительных параметров <em>b</em>,
+<em>c </em>и <img SRC="../graphics/theta.gif" ALIGN="ABSMIDDLE" WIDTH="12" HEIGHT="15">):</p>
+
+<p><font color="blue">f(x) = c/b*[(x-<img src="../graphics/thetablu.gif" align="absmiddle" WIDTH="9" HEIGHT="15">)/b]<sup>c-1</sup>
+* e^{-[(x-<img src="../graphics/thetablu.gif" align="absmiddle" WIDTH="9" HEIGHT="15">)/b]<sup>c</sup>}<br>
+<img src="../graphics/thetablu.gif" align="absmiddle" WIDTH="9" HEIGHT="15"> &lt; x, &nbsp;b &gt; 0, &nbsp;c
+&gt; 0 </font></p>
+
+<p>где<br>
+<font color="blue">b</font>&nbsp;&nbsp;&nbsp; - параметр масштаба
+распределения<br>
+<font color="blue">c</font>&nbsp;&nbsp;&nbsp; - параметр (формы)
+распределения<br>
+<img SRC="../graphics/thetablu.gif" align="bottom" WIDTH="9" HEIGHT="15">&nbsp;&nbsp;&nbsp;&nbsp; -
+параметр положения распределения<br>
+<font color="blue">e</font>&nbsp;&nbsp;&nbsp;&nbsp; - число Эйлера (2.71...) </p>
+
+<p><img SRC="../graphics/an_wei.gif" BORDER="0" WIDTH="400" HEIGHT="124"></p>
+
+<p>На рисунке показано изменение распределения
+Вейбулла при увеличении параметра формы (.5, 1, 2, 3,
+4, 5 и 10).<br>
+</p>
+
+<p><a NAME="Cauchy Distribution"><font SIZE="4" COLOR="navy">Распределение
+Коши.</font></a> Распределение Коши (этот термин был
+впервые использован Успенским в 1937 г.) имеет
+следующую функцию плотности:</p>
+
+<p><font color="blue">f(x) = 1/(<img src="../graphics/thetablu.gif" align="absmiddle" WIDTH="9" HEIGHT="15"><img src="../graphics/piblue.gif" align="absmiddle" WIDTH="15" HEIGHT="17">*{1 + [(x-<img src="../graphics/etablue.gif" align="absbottom" WIDTH="9" HEIGHT="13">)/<img src="../graphics/thetablu.gif" align="absmiddle" WIDTH="9" HEIGHT="15">]<sup>2</sup>})<br>
+0 &lt; <img src="../graphics/thetablu.gif" align="absmiddle" WIDTH="9" HEIGHT="15"></font></p>
+
+<p>где<br>
+<img SRC="../graphics/etablue.gif" WIDTH="9" HEIGHT="13">&nbsp;&nbsp;&nbsp;&nbsp; - параметр
+положения (медиана)<br>
+<img SRC="../graphics/thetablu.gif" WIDTH="9" HEIGHT="15">&nbsp;&nbsp;&nbsp;&nbsp; - параметр
+масштаба<br>
+<img SRC="../graphics/piblue.gif" WIDTH="15" HEIGHT="17">&nbsp;&nbsp;&nbsp; - число пи (3.1415...)</p>
+
+<p><img BORDER="0" SRC="../graphics/an_cauchy.gif" WIDTH="400" HEIGHT="124"></p>
+
+<p>На рисунке показано изменение формы
+распределения Коши&nbsp; в зависимости от
+различных значений параметра масштаба (1, 2, 3 и 4)
+при параметре положения равном 0 . <br>
+</p>
+
+<p><a NAME="Laplace Distribution"><font SIZE="4" COLOR="navy">Распределение
+Лапласа.</font></a> Распределение Лапласа (или
+двойное экспоненциальное) имеет следующую
+функцию плотности:</p>
+
+<p><font color="blue">f(x) = 1/(2b)*e<sup>-|x-a|/b</sup>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -<img src="../graphics/infinblu.gif" WIDTH="11" HEIGHT="7"> &lt; x &lt; <img src="../graphics/infinblu.gif" WIDTH="11" HEIGHT="7"> </font></p>
+
+<p>где<br>
+<font color="blue">a</font>&nbsp;&nbsp; - среднее распределения<br>
+<font color="blue">b</font>&nbsp;&nbsp;&nbsp;- параметр масштаба<br>
+<font color="blue">e</font>&nbsp;&nbsp;&nbsp;- число Эйлера (2.71...)</p>
+
+<p><img BORDER="0" SRC="../graphics/an_lap.gif" WIDTH="400" HEIGHT="124"></p>
+
+<p>На рисунке показано изменение формы
+распределения Лапласа в зависимости от значений
+параметра масштаба (1, 2, 3 и 4) при нулевом значении
+среднего. <br>
+</p>
+
+<p><a NAME="Pareto Distribution"><font SIZE="4" COLOR="navy">Распределение
+Парето.</font></a> Стандартное распределение Парето
+имеет следующую функцию плотности (для
+положительного параметра c ):</p>
+
+<p><font color="blue">f(x) = c/x<sup>c+1</sup> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 <img src="../graphics/lteblue.gif" align="absmiddle" WIDTH="12" HEIGHT="16">x, c &gt; 0 </font></p>
+
+<p>где<br>
+<font color="blue"><i>c</i></font>&nbsp;&nbsp;&nbsp; параметр (формы)
+распределения.</p>
+
+<p><img SRC="../graphics/an_pare.gif" BORDER="0" WIDTH="410" HEIGHT="124"></p>
+
+<p>На рисунке показан вид распределения Парето
+при различных значениях параметра (1, 2, 3, 4 и 5). <br>
+</p>
+
+<p><a NAME="Poisson Distribution"><font SIZE="4" COLOR="navy">Распределение
+Пуассона.</font></a> Распределение Пуассона (этот
+термин был впервые использован Сопером в 1914 г.)
+определяется следующим образом: </p>
+
+<p><font color="blue">f(x) = (<img src="../graphics/lambdabl.gif" align="absmiddle" WIDTH="16" HEIGHT="19"><sup><sup>x</sup></sup>
+* e<sup>-<img src="../graphics/lambdabl.gif" WIDTH="16" HEIGHT="19"></sup>)/x!<br>
+for x = 0, 1, 2, .., &nbsp;&nbsp;0 &lt; <img src="../graphics/lambdabl.gif" align="absmiddle" WIDTH="16" HEIGHT="19"></font></p>
+
+<p>где<br>
+<img SRC="../graphics/lambdabl.gif" WIDTH="16" HEIGHT="19">&nbsp;&nbsp;&nbsp; - ожидаемое
+значение <font color="blue"><i>x</i></font> (среднее) <br>
+<font color="blue">e</font>&nbsp;&nbsp;&nbsp; - число Эйлера (2.71...) <br>
+</p>
+
+<p><a NAME="Rayleigh Distribution"><font SIZE="4" COLOR="navy">Распределение
+Релея.</font></a> Распределение Релея имеет следующую
+функцию плотности:</p>
+
+<p><font color="blue">f(x) = x/b<sup>2</sup> * e<sup>-(x <sup>2</sup>/2b<sup>2</sup>)</sup><br>
+0 <img src="../graphics/lteblue.gif" align="absmiddle" WIDTH="12" HEIGHT="16"> x &lt; <img src="../graphics/infinblu.gif" align="absmiddle" WIDTH="11" HEIGHT="7"><br>
+b &gt; 0 </font></p>
+
+<p>где <br>
+<font color="blue">b</font>&nbsp;&nbsp;&nbsp; - параметр масштаба<br>
+<font color="blue">e</font>&nbsp;&nbsp;&nbsp; - число Эйлера (2.71...)</p>
+
+<p>См. также <a HREF="../modules/stprocan.html">Анализ процессов</a>.</p>
+
+<p>&nbsp;<img BORDER="0" SRC="../graphics/an_ray.gif" WIDTH="400" HEIGHT="124"></p>
+
+<p>На рисунке показано изменение формы
+распределения Релея в зависимости от значений
+параметра масштаба (1, 2 и 3). <br>
+</p>
+
+<p><a NAME="Chi-square Distribution"><font SIZE="4" COLOR="navy">Распределение
+<em>хи-квадрат</em>.</font></a> Распределение <em>хи-квадрат</em>
+определяется следующим образом:</p>
+
+<p><font color="blue">f(x) = {1/[2<sup><img src="../graphics/nublue.gif" WIDTH="11" HEIGHT="8">/2</sup> * <img src="../graphics/biggambl.gif" WIDTH="14" HEIGHT="15">(<img src="../graphics/nublue.gif" WIDTH="11" HEIGHT="8">/2)]} * [x<sup>(<img src="../graphics/nublue.gif" WIDTH="11" HEIGHT="8">/2)-1</sup> * e<sup>-x/2</sup>]<br>
+<img src="../graphics/nublue.gif" WIDTH="11" HEIGHT="8"> = 1, 2, ..., 0 &lt; x </font></p>
+
+<p>где<br>
+<img SRC="../graphics/nublue.gif" WIDTH="11" HEIGHT="8">&nbsp;&nbsp;&nbsp; - число
+степеней свободы<br>
+<font color="blue">e</font>&nbsp;&nbsp; - число Эйлера (2.71...) <br>
+<img SRC="../graphics/biggambl.gif" WIDTH="14" HEIGHT="15">&nbsp;&nbsp; -
+гамма-функция</p>
+
+<p><img BORDER="0" SRC="../graphics/an_chi.gif" WIDTH="387" HEIGHT="124"></p>
+
+<p>На рисунке показано изменение формы хи-квадрат
+распределения при увеличении числа степеней
+свободы (1, 2, 5, 10, 25 и 50). <br>
+</p>
+
+<p><a NAME="City-block (Manhattan) distance"><font SIZE="4" COLOR="navy">Расстояние
+городских кварталов (манхэттенское расстояние).</font></a>
+Это расстояние является просто средним
+разностей по координатам. В большинстве случаев
+эта мера расстояния приводит к таким же
+результатам, как и для обычного расстояния
+Евклида. Однако отметим, что для этой меры
+влияние отдельных больших разностей (<a HREF="gloss_v.html#Outliers">выбросов</a>) уменьшается (так как
+они не возводятся в квадрат). См. также раздел&nbsp; <a HREF="gloss_k.html#Cluster Analysis">Кластерный анализ</a>. <br>
+</p>
+
+<p><a NAME="Cooks distance"><font SIZE="4" COLOR="navy">Расстояния Кука.</font></a>
+Это еще одна мера влияния соответствующего
+наблюдения на уравнение <a HREF="gloss_m.html#Multiple Regression">регрессии</a>.
+Эта величина показывает разницу между
+вычисленными <a HREF="gloss_r.html#B Coefficients">B</a> -
+коэффициентами и значениями, которые получились
+бы при исключении соответствующего наблюдения. В
+адекватной модели все расстояния Кука должны
+быть примерно одинаковыми; если это не так, то
+имеются основания считать, что соответствующее
+наблюдение (или наблюдения) смещает оценки
+коэффициентов регрессии.</p>
+
+<p>См. также разделы&nbsp; <a HREF="gloss_s.html#Standard residual value">Стандартизованные
+остатки</a>, <a HREF="gloss_r.html#Mahalanobis distance">Расстояния
+Махаланобиса</a> и <a HREF="gloss_u.html#Deleted residual">Удаленные
+остатки</a>.<br>
+</p>
+
+<p><a NAME="Mahalanobis distance"><font SIZE="4" COLOR="navy">Расстояния
+Махаланобиса.</font></a> Независимые переменные в
+уравнении <a HREF="gloss_m.html#Multiple Regression">регрессии</a>
+можно представлять точками в многомерном
+пространстве (каждое наблюдение изображается
+точкой). В этом пространстве можно построить
+точку центра. Эта &quot;средняя точка&quot; в
+многомерном пространстве называется центроидом,
+т.е. центром тяжести. Расстояние <em>Махаланобиса</em>
+определяется как расстояние от наблюдаемой
+точки до центра тяжести в многомерном
+пространстве, определяемом коррелированными
+(неортогональными) независимыми переменными
+(если независимые переменные некоррелированы,
+расстояние Махаланобиса совпадает с обычным
+евклидовым расстоянием). Эта мера позволяет, в
+частности, определить является ли данное
+наблюдение <a href="gloss_v.html#Outliers">выбросом</a> по
+отношению к остальным значениям независимых
+переменных.</p>
+
+<p>См. также разделы&nbsp; <a HREF="gloss_s.html#Standard residual value">Стандартизованные
+остатки</a>, <a HREF="gloss_u.html#Deleted residual">Удаленные
+остатки</a> и <a HREF="gloss_r.html#Cooks distance">Расстояния Кука</a>.
+<br>
+</p>
+
+<p><a NAME="HTM"><font SIZE="4" COLOR="navy">Расширение HTM.</font></a> Это
+расширение используется для обозначения файлов,
+записанных в формате <a HREF="#HTML">HTML</a>.<br>
+</p>
+
+<p><a NAME="JPG"><font SIZE="4" COLOR="navy">Расширение JPG.</font></a> Это
+расширение используется для обозначения файлов,
+записанных в формате <a HREF="#JPEG">JPEG</a>.<br>
+</p>
+
+<p><a NAME="B Coefficients"><font SIZE="4" COLOR="navy">Регрессионные
+B-коэффициенты.</font></a> Линия в двумерном
+пространстве (задаваемом двумя переменными)
+определяется уравнением Y=a+b*X; или, подробнее:
+значение переменной Y может быть вычислено как
+сумма константы (a) и произведения углового
+коэффициента (b) на значение переменной X.
+Константу также часто называют свободным членом,
+а угловой коэффициент называют коэффициентом
+регрессии или <em>B-коэффициентом</em>. В общем
+случае, процедура множественной регрессии
+оценивает уравнение линейной регрессии в виде:</p>
+
+<p><font COLOR="BLUE">Y = a + b<sub>1</sub>*X<sub>1</sub> + b<sub>2</sub>*X<sub>2</sub> +
+... +b<sub>p</sub>*X<sub>p</sub> </font></p>
+
+<p>Отметим, что в этом уравнении коэффициенты
+регрессии (или <em>B коэффициенты</em>) представляют
+независимые вклады каждой независимой
+переменной в зависимую переменную. Однако, их
+значения не сравнимы, поскольку зависят от
+единиц измерения и диапазонов измерения
+соответствующих переменных. Таблица результатов
+регрессионного анализа содержит как обычные
+регрессионные коэффициенты (B-коэффициенты), так
+и <a HREF="#Beta Coefficients">бета-коэффициенты</a> (отметим,
+что коэффициенты бета являются сравнимыми для
+разных переменных).</p>
+
+<p>См. также раздел&nbsp; <a HREF="../modules/stmulreg.html">Множественная
+регрессия</a>.<br>
+</p>
+
+<p><a NAME="Beta Coefficients"><font SIZE="4" COLOR="navy">Регрессионные
+бета-коэффициенты.</font></a> Коэффициенты <em>бета</em>
+являются коэффициентами, которые были бы
+получены, если бы мы заранее стандартизовали все
+переменные, т.е. сделали их <a HREF="gloss_s.html#Mean">среднее</a>
+равным 0, а <a HREF="gloss_s.html#Standard Deviation">стандартное
+отклонение</a> равное 1. Одно из преимуществ <em>бета</em>-коэффициентов
+(по сравнению с <a HREF="#B Coefficients">B коэффициентами</a>)
+заключается в том, что <em>бета</em>-коэффициенты
+позволяют сравнить относительные вклады каждой
+независимой переменной в предсказание зависимой
+переменной.</p>
+
+<p>См. также раздел&nbsp; <a HREF="../modules/stmulreg.html">Множественная
+регрессия</a>.<br>
+</p>
+
+<p><a NAME="Regression"><font SIZE="4" COLOR="navy">Регрессия.</font></a>
+Категория задач, где цель состоит в том, чтобы
+оценить значение непрерывной выходной
+переменной по значениям входных переменных.</p>
+
+<p>См. также раздел&nbsp; <a HREF="../modules/stmulreg.html">Множественная
+регрессия</a>.<br>
+</p>
+
+<p><a NAME="Regularization"><font SIZE="4" COLOR="navy">Регуляризация (для
+нейронных сетей).</font></a> Модификация алгоритмов
+обучения, имеющая цель предотвратить пере- и
+недо-подгонку на обучающих данных за счет
+введения штрафа за сложность сети (обычно
+штрафуются большие значения весов - они означают,
+что отображение, моделируемое сетью, имеет
+большую кривизну) (Bishop, 1995). </p>
+
+<p>См. раздел&nbsp; <a HREF="../modules/stneunet.html">Neural Networks</a>.<br>
+</p>
+</body>
+</html>

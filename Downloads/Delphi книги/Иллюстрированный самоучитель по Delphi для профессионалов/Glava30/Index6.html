@@ -1,0 +1,1079 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TDecisionCube</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDecisionCube</font> осуществляет преобразование набора данных, который содержится в компоненте
+<font face="Verdana" size="2">TDecisionQuery</font>, к виду, доступному для отображения визуальными компонентами многомерного представления данных (табл. 30.2). Обычную таблицу набора данных компонент преобразует в многомерный кросстаб. Число размерностей создаваемого кросстаба зависит от числа полей данных набора данных. Значения в ячейках кросстаба зависят от типа агрегатной функции в запросе SQL.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 30.2. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TDecisionCube</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="338" HEIGHT="100">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="139" HEIGHT="29">
+<DIV WIDTH="287" HEIGHT="29" style="width: 67; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="29">
+<DIV WIDTH="50" HEIGHT="29" style="width: 22; height: 29">
+<P><font face="Verdana" size="3"><b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="29">
+<DIV WIDTH="317" HEIGHT="29" style="width: 145; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="500" HEIGHT="31">
+<DIV WIDTH="287" HEIGHT="31" style="width: 79; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="139" HEIGHT="40">
+<DIV WIDTH="287" HEIGHT="40" style="width: 132; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Active:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="40">
+<DIV WIDTH="50" HEIGHT="40" style="width: 5; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="325" HEIGHT="40">
+<DIV WIDTH="317" HEIGHT="40" style="width: 239; height: 40">
+<P><font face="Verdana" size="3">
+Разрешает или запрещает преобразование набора данных в кросстаб
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="83">
+<DIV WIDTH="282" HEIGHT="83" style="width: 81; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BinData:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="83">
+<DIV WIDTH="54" HEIGHT="83" style="width: 4; height: 83">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="83">
+<DIV WIDTH="286" HEIGHT="83" style="width: 252; height: 83">
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2"> True</font> означает, что хотя бы одна размерность находится в свернутом состоянии (данные не отображаются)
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="40">
+<DIV WIDTH="282" HEIGHT="40" style="width: 145; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Capacity: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="40">
+<DIV WIDTH="54" HEIGHT="40" style="width: 4; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="40">
+<DIV WIDTH="286" HEIGHT="40" style="width: 203; height: 40">
+<P><font face="Verdana" size="3">
+Определяет число байтов, используемых для хранения многомерного массива
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="38">
+<DIV WIDTH="282" HEIGHT="38" style="width: 124; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CurrentSuramary:   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="38">
+<DIV WIDTH="54" HEIGHT="38" style="width: 3; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="38">
+<DIV WIDTH="286" HEIGHT="38" style="width: 235; height: 38">
+<P><font face="Verdana" size="3">
+Содержит индекс текущей суммы кросстаба
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="44">
+<DIV WIDTH="282" HEIGHT="44" style="width: 140; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSet: TDataSet;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="44">
+<DIV WIDTH="54" HEIGHT="44" style="width: 9; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="44">
+<DIV WIDTH="286" HEIGHT="44" style="width: 262; height: 44">
+<P><font face="Verdana" size="3">
+Ссылка на экземпляр набора данных, который отображается в кросстабе
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="202">
+<DIV WIDTH="282" HEIGHT="202" style="width: 174; height: 202">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TCubeDesignState = (dsNoData, dsMetaData, dsDimensionData, dsAHData);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DesignState: TCubeDesignState;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="202">
+<DIV WIDTH="54" HEIGHT="202" style="width: 15; height: 202">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="202">
+<DIV WIDTH="286" HEIGHT="202" style="width: 271; height: 209">
+<P><font face="Verdana" size="3">
+Задает режим отображения данных в кросстабе:
+</font ></P>
+<ul>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;dsNoData — во время разработки 
+            данные не видны;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;dsMetaData — видны 
+            названия размерностей;</font></li>
+          <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;dsDimensionData 
+            — видны названия размерностей и значения, суммы не видны;</font></li>
+          <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">dsAHData — видны 
+            все данные</font></li>
+</ul>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="29">
+<DIV WIDTH="282" HEIGHT="29" style="width: 123; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DimensionCount: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="29">
+<DIV WIDTH="54" HEIGHT="29" style="width: 9; height: 29">
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="29">
+<DIV WIDTH="286" HEIGHT="29" style="width: 222; height: 29">
+<P><font face="Verdana" size="3">
+Возвращает число размерностей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="42">
+<DIV WIDTH="282" HEIGHT="42" style="width: 112; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DimensionMap:   TCubeDims;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="42">
+<DIV WIDTH="54" HEIGHT="42" style="width: 1; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="42">
+<DIV WIDTH="286" HEIGHT="42" style="width: 259; height: 43">
+<P><font face="Verdana" size="3">
+Индексированный список ссылок на объекты параметров размерностей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="36">
+<DIV WIDTH="282" HEIGHT="36" style="width: 156; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DimensionMapCount: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="36">
+<DIV WIDTH="54" HEIGHT="36" style="width: 8; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="36">
+<DIV WIDTH="286" HEIGHT="36" style="width: 248; height: 38">
+<P><font face="Verdana" size="3">
+Общее число полей набора данных, включая поля размерностей и сумм
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="40">
+<DIV WIDTH="282" HEIGHT="40" style="width: 145; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MaxCells: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="40">
+<DIV WIDTH="54" HEIGHT="40" style="width: 5; height: 40">
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="40">
+<DIV WIDTH="286" HEIGHT="40" style="width: 232; height: 40">
+<P><font face="Verdana" size="3">
+Задает максимальное число ячеек кросстаба
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="38">
+<DIV WIDTH="282" HEIGHT="38" style="width: 118; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MaxDimensions: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="38">
+<DIV WIDTH="54" HEIGHT="38" style="width: 1; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="38">
+<DIV WIDTH="286" HEIGHT="38" style="width: 194; height: 38">
+<P><font face="Verdana" size="3">
+Задает максимальное число размерностей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="27">
+<DIV WIDTH="282" HEIGHT="27" style="width: 110; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MaxSummaries: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="27">
+<DIV WIDTH="54" HEIGHT="27" style="width: 3; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="27">
+<DIV WIDTH="286" HEIGHT="27" style="width: 227; height: 27">
+<P><font face="Verdana" size="3">
+Задает максимальное число сумм
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="48">
+<DIV WIDTH="282" HEIGHT="48" style="width: 156; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ShowProgressDialog: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="48">
+<DIV WIDTH="54" HEIGHT="48" style="width: 3; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="48">
+<DIV WIDTH="286" HEIGHT="48" style="width: 251; height: 48">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> при подготовке кросстаба отображается индикатор
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="38">
+<DIV WIDTH="282" HEIGHT="38" style="width: 116; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SummaryCount: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="38">
+<DIV WIDTH="54" HEIGHT="38" style="width: 1; height: 38">
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="38">
+<DIV WIDTH="286" HEIGHT="38" style="width: 234; height: 38">
+<P><font face="Verdana" size="3">
+Возвращает число активных сумм кросстаба
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="503" HEIGHT="31">
+<DIV WIDTH="282" HEIGHT="31" style="width: 110; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="96">
+<DIV WIDTH="282" HEIGHT="96" style="width: 184; height: 96">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetDetailSQL (ValueArray : TSmalllntArray;   SelectList: string;   bActive:   Boolean) :
+string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="19" HEIGHT="96">
+<DIV WIDTH="54" HEIGHT="96" style="width: 17; height: 96">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="96">
+<DIV WIDTH="286" HEIGHT="96" style="width: 247; height: 96">
+<P><font face="Verdana" size="3">
+Возвращает текст запроса SQL, который может быть использован для создания набора данных, включающего данные из кросстаба без сумм
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="80">
+<DIV WIDTH="281" HEIGHT="80" style="width: 164; height: 80">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetSQL(ValueArray: TSrralllntArray; bActive: Boolean): string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="80">
+<DIV WIDTH="54" HEIGHT="80" style="width: 16; height: 80">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="80">
+<DIV WIDTH="290" HEIGHT="80" style="width: 243; height: 80">
+<P><font face="Verdana" size="3">
+Возвращает текст запроса SQL, который может быть использован для создания набора данных, включающего данные из кросстаба без сумм
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="48">
+<DIV WIDTH="281" HEIGHT="48" style="width: 122; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ShowCubeDialog;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="48">
+<DIV WIDTH="54" HEIGHT="48" style="width: 3; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="48">
+<DIV WIDTH="290" HEIGHT="48" style="width: 233; height: 48">
+<P><font face="Verdana" size="3">
+Вызывает специализированный редактор компонента
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="42">
+<DIV WIDTH="281" HEIGHT="42" style="width: 146; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Refresh (DimensionMap : TCubeDims; bForce: Boolean) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="42">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="42">
+<DIV WIDTH="290" HEIGHT="42" style="width: 270; height: 42">
+<P><font face="Verdana" size="3">
+Обновляет список объектов параметров размерностей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="526" HEIGHT="33">
+<DIV WIDTH="281" HEIGHT="33" style="width: 231; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Методы-обработчики событий</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="131">
+<DIV WIDTH="281" HEIGHT="131" style="width: 183; height: 163">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TCubeRefreshEvent = procedure (DataCube: TCustomDataStore; DimMap: TCubeDims) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnRefresh: TCubeRefreshEvent; property AfterClose: TCubeNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="131">
+<DIV WIDTH="54" HEIGHT="131" style="width: 10; height: 131">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="131">
+<DIV WIDTH="290" HEIGHT="131" style="width: 237; height: 131">
+<P><font face="Verdana" size="3">
+Вызывается сразу после закрытия
+</font ></P>
+<P><font face="Verdana" size="3">
+компонента <font face="Verdana" size="2"> (Active := False)</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="48">
+<DIV WIDTH="281" HEIGHT="48" style="width: 171; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AfterOpen: TCubeNot if yEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="48">
+<DIV WIDTH="54" HEIGHT="48" style="width: 2; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="48">
+<DIV WIDTH="290" HEIGHT="48" style="width: 238; height: 57">
+<P><font face="Verdana" size="3">
+Вызывается сразу после открытия компонента
+<font face="Verdana" size="2"> (Active := False)</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="48">
+<DIV WIDTH="281" HEIGHT="48" style="width: 168; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeClose: TCubeNotif yEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="48">
+<DIV WIDTH="54" HEIGHT="48" style="width: 3; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="48">
+<DIV WIDTH="290" HEIGHT="48" style="width: 226; height: 48">
+<P><font face="Verdana" size="3">
+Вызывается перед закрытием компонента <font face="Verdana" size="2">(Active := False)</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="46">
+<DIV WIDTH="281" HEIGHT="46" style="width: 166; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeOpen: TCubeNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="46">
+<DIV WIDTH="54" HEIGHT="46" style="width: 1; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="46">
+<DIV WIDTH="290" HEIGHT="46" style="width: 229; height: 46">
+<P><font face="Verdana" size="3">
+Вызывается перед открытием компонента <font face="Verdana" size="2">(Active := False)</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="144">
+<DIV WIDTH="281" HEIGHT="144" style="width: 197; height: 150">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TErrorAction = (eaFail, eaContinue) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TCapacityErrorEvent = procedure (var EAction: TErrorAction) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnLowCapacity: TCapacityErrorEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="24" HEIGHT="144">
+<DIV WIDTH="54" HEIGHT="144" style="width: 6; height: 144">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="144">
+<DIV WIDTH="290" HEIGHT="144" style="width: 242; height: 144">
+<P><font face="Verdana" size="3">
+Вызывается после того, как занимаемый кросстабом объем памяти превысит заданный предел
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+При помощи методов <font face="Verdana" size="2">GetDetailsQL</font> и
+<font face="Verdana" size="2"> GetSQL</font> можно получить тексты запросов, которые возвращают набор данных, соответствующий кросстабу с заданным параметрами состояниями. Массив
+<font face="Verdana" size="2"> vaiueArray</font> содержит условия для полей размерностей. Первой размерности соответствует первый элемент массива, второй размерности — второй элемент и т. д. Если значение элемента меньше нуля, то в результат запроса попадают все значения поля размерности. Значение элемента, равное или больше нуля, определяет индекс значения поля размерности. Параметр
+<font face="Verdana" size="2">selectList</font> содержит разделенный запятыми список дополнительных полей, которые нужно включить в запрос. Параметр
+<font face="Verdana" size="2"> bActive</font> накладывает дополнительное ограничение на размерности. При значении
+<font face="Verdana" size="2"> True</font> в результат запроса автоматически (без использования параметра
+<font face="Verdana" size="2">selectList</font>) попадают только активные размерности.
+</font ></P>
+<P><font face="Verdana" size="3">
+Ключевым свойством компонента является свойство
+<font face="Verdana" size="2">DecisionMap</font>, которое позволяет установить параметры размерностей и максимальный размер используемой памяти. Для этих целей применяется специализированный редактор (см. рис. 30.4).
+</font ></P>
+<P><font face="Verdana" size="3">
+Это свойство представляет собой экземпляр класса
+<font face="Verdana" size="2">TCubeDims</font>, который инкапсулирует индексированный список экземпляров объектов
+<font face="Verdana" size="2">TCubeDim</font>, каждый из которых содержит информацию о параметрах одной размерности. Основные свойства этого класса представлены в табл. 30.3.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 30.3. </B>Основные 
+  свойства класса <font face="Verdana" size="2"> TCubeDim</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="270" HEIGHT="598">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="32">
+<DIV WIDTH="294" HEIGHT="32" style="width: 95; height: 32">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="32">
+<DIV WIDTH="48" HEIGHT="32" style="width: 11; height: 32">
+<P><font face="Verdana" size="3">
+<b>Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="32">
+<DIV WIDTH="290" HEIGHT="32" style="width: 78; height: 32">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="89">
+<DIV WIDTH="294" HEIGHT="89" style="width: 169; height: 89">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TActiveFlags = (diActive, diAsNeeded, dilnactive);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ActiveFlag: TActiveFlags;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="89">
+<DIV WIDTH="48" HEIGHT="89" style="width: 2; height: 89">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="89">
+<DIV WIDTH="290" HEIGHT="89" style="width: 225; height: 89">
+<P><font face="Verdana" size="3">Определяет режим отображения данных размерности
+</font ></P>
+<P><font face="Verdana" size="3">
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="44">
+<DIV WIDTH="294" HEIGHT="44" style="width: 148; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BaseName: string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="44">
+<DIV WIDTH="48" HEIGHT="44" style="width: 2; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="44">
+<DIV WIDTH="290" HEIGHT="44" style="width: 256; height: 44">
+        <P><font face="Verdana" size="3"> Содержит имя поля размерности&nbsp; в таблице 
+          базы данных </font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="44">
+<DIV WIDTH="294" HEIGHT="44" style="width: 159; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BinFormat: string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="44">
+<DIV WIDTH="48" HEIGHT="44" style="width: 6; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="44">
+<DIV WIDTH="290" HEIGHT="44" style="width: 252; height: 44">
+<P><font face="Verdana" size="3">
+Определяет способ форматирования диапазона значений размерности
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="88">
+<DIV WIDTH="294" HEIGHT="88" style="width: 178; height: 115">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TBinType = (binNone, binYear, binQuarter, binMonth, binSet, binCustom) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BinType: TBinType;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="88">
+<DIV WIDTH="48" HEIGHT="88" style="width: 2; height: 88">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="88">
+<DIV WIDTH="290" HEIGHT="88" style="width: 240; height: 88">
+<P><font face="Verdana" size="3">
+Определяет способ группирования данных в размерности
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="113">
+<DIV WIDTH="294" HEIGHT="113" style="width: 209; height: 113">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDimFlags = (dimDimension, dimSum, dimCount, dimAverage, dimMin, dimMax, dimGenericAgg, dimUnknown) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DimensionType: TDimFlags ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="113">
+<DIV WIDTH="48" HEIGHT="113" style="width: 25; height: 113">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="113">
+<DIV WIDTH="290" HEIGHT="113" style="width: 199; height: 113">
+<P><font face="Verdana" size="3">
+Определяет тип размерности
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="39">
+<DIV WIDTH="294" HEIGHT="39" style="width: 157; height: 39">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FieldName: String;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="39">
+<DIV WIDTH="48" HEIGHT="39" style="width: 3; height: 39">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="39">
+<DIV WIDTH="290" HEIGHT="39" style="width: 202; height: 39">
+<P><font face="Verdana" size="3">
+Содержит имя поля в наборе данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="27">
+<DIV WIDTH="294" HEIGHT="27" style="width: 159; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FieldType: TFieldType;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="27">
+<DIV WIDTH="48" HEIGHT="27" style="width: 6; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="27">
+<DIV WIDTH="290" HEIGHT="27" style="width: 153; height: 27">
+<P><font face="Verdana" size="3">
+Определяет тип поля
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="54">
+<DIV WIDTH="294" HEIGHT="54" style="width: 198; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Format: String;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="54">
+<DIV WIDTH="48" HEIGHT="54" style="width: 9; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="54">
+<DIV WIDTH="290" HEIGHT="54" style="width: 222; height: 54">
+<P><font face="Verdana" size="3">
+Задает форматирование данных размерности
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="67">
+<DIV WIDTH="294" HEIGHT="67" style="width: 206; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Loaded: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="67">
+<DIV WIDTH="48" HEIGHT="67" style="width: 5; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="263" HEIGHT="67">
+<DIV WIDTH="290" HEIGHT="67" style="width: 233; height: 67">
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2"> True</font> говорит о том, что данный элемент загружен в многомерный набор данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="38">
+<DIV WIDTH="298" HEIGHT="38" style="width: 158; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StartDate:   TDate;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="38">
+<DIV WIDTH="34" HEIGHT="38" style="width: 1; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="38">
+<DIV WIDTH="302" HEIGHT="38" style="width: 254; height: 38">
+<P><font face="Verdana" size="3">
+Определяет начальный элемент&nbsp; для группировки по дате
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="48">
+<DIV WIDTH="298" HEIGHT="48" style="width: 165; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StartValue: String;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="48">
+<DIV WIDTH="34" HEIGHT="48" style="width: 1; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="48">
+<DIV WIDTH="302" HEIGHT="48" style="width: 253; height: 48">
+<P><font face="Verdana" size="3">Определяет начальный элемент : для
+группировки по значению
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="46">
+<DIV WIDTH="298" HEIGHT="46" style="width: 165; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ValueCount: Integer;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="46">
+<DIV WIDTH="34" HEIGHT="46" style="width: 25; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="46">
+<DIV WIDTH="302" HEIGHT="46" style="width: 250; height: 46">
+<P><font face="Verdana" size="3">
+Возвращает число уникальных&nbsp; элементов в размерности
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,651 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Соединение с сервером баз данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания соединения с сервером в рамках технологии dbExpress приложение должно использовать компонент<font face="Verdana" size="2">
+TSQLConnection.</font> Это обязательный компонент, все остальные компоненты связаны с ним и используют его для получения данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+После переноса этого компонента в модуль данных или на форму необходимо выбрать тип сервера и настроить параметры соединения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ConnectionName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяет выбрать из выпадающего списка конкретное настроенное соединение. По умолчанию разработчику доступно по одному настроенному соединению для каждого сервера БД. После выбора соединения автоматически устанавливаются значения свойств:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property DriverName:   string;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+определяет используемый драйвер;&nbsp;
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property LibraryName:   string;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+задает динамическую библиотеку драйвера
+dbExpress;
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;property VendorLib: string;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+определяет динамическую библиотеку клиентского ПО сервера (табл. 17.1);&nbsp;
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2"> property Params:   TStrings;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+список этого свойства содержит настройки для выбранного соединения.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости все перечисленные свойства можно установить дополнительно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Разработчик может дополнять и изменять список настроенных соединений. Для этого используется специализированный Редактор соединений <B>dbExpress Connections </B>(рис. 17.1). Он открывается после двойного щелчка на компоненте
+<font face="Verdana" size="2"> TSQLConnection</font> или выбора команды <B>Edit Connection Properties </B>из всплывающего меню компонента.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.17.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 17.1. </B>Окно редактора 
+  настроенных соединений компонента <font face="Verdana" size="2"> TSQLConnection</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> В списке слева располагаются существующие соединения. 
+  В правой части для выбранного соединения отображаются текущие настройки. При 
+  помощи кнопок на Панели инструментов можно создавать, переименовывать и удалять 
+  соединения. Настройки также можно редактировать. </font ></P>
+<P><font face="Verdana" size="3"> Список соединений в левой части соответствует 
+  списку выбора свойства <font face="Verdana" size="2"> ConnectionName</font> 
+  в Инспекторе объектов. Настройки соединения из правой части отображаютсяв свойствее 
+  <font face="Verdana" size="2">Params</font>. </font ></P>
+<P><font face="Verdana" size="3"> Настроенные соединения и их параметры сохраняются 
+  в файле \Borland Shared\DBExpress\dbxconnections.ini. </font ></P>
+<P><font face="Verdana" size="3"> <b>Примечание</b> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> При установке Delphi 7 поверх Delphi 6 сведения 
+    о соединениях из старого файла dbxconnections.ini добавляются в новый. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Конкретные значения настроек соединений зависят 
+  от используемого сервера БД и требований приложения (табл. 17.2). </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 17.2. </B>Настройка 
+  соединения dbExpress </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="461" HEIGHT="717">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="27"> <DIV WIDTH="212" HEIGHT="27" style="width: 80; height: 27"> 
+        <P><font face="Verdana" size="3"> <b> Параметр</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="27"> <DIV WIDTH="413" HEIGHT="27" style="width: 84; height: 27"> 
+        <P><font face="Verdana" size="3"> <b> Значение</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="563" HEIGHT="31"> <DIV WIDTH="212" HEIGHT="31" style="width: 133; height: 31"> 
+        <P><font face="Verdana" size="3"> <b> Общие настройки</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="52"> 
+      <DIV WIDTH="212" HEIGHT="52" style="width: 73; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">BlobSize</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="52"> 
+      <DIV WIDTH="413" HEIGHT="52" style="width: 334; height: 52"> 
+        <P><font face="Verdana" size="3"> Задает ограничение на объем пакета данных 
+          для данных BLOB </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="25"> 
+      <DIV WIDTH="212" HEIGHT="25" style="width: 85; height: 25"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">DriverName</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="25"> 
+      <DIV WIDTH="413" HEIGHT="25" style="width: 143; height: 25"> 
+        <P><font face="Verdana" size="3"> Имя драйвера </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="31"> 
+      <DIV WIDTH="212" HEIGHT="31" style="width: 131; height: 31"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ErrorResourceFile</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="31"> 
+      <DIV WIDTH="413" HEIGHT="31" style="width: 223; height: 31"> 
+        <P><font face="Verdana" size="3"> Файл сообщений об ошибках </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="46"> 
+      <DIV WIDTH="212" HEIGHT="46" style="width: 71; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">LocaleCode</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="46"> 
+      <DIV WIDTH="413" HEIGHT="46" style="width: 332; height: 46"> 
+        <P><font face="Verdana" size="3"> Код локализации, определяющий влияние 
+          национальных символов на сортировку данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="23"> 
+      <DIV WIDTH="212" HEIGHT="23" style="width: 78; height: 32"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">User Name</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="23"> 
+      <DIV WIDTH="413" HEIGHT="23" style="width: 144; height: 23"> 
+        <P><font face="Verdana" size="3"> Имя пользователя </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="29"> 
+      <DIV WIDTH="212" HEIGHT="29" style="width: 70; height: 29"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Password</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="29"> 
+      <DIV WIDTH="413" HEIGHT="29" style="width: 76; height: 29"> 
+        <P><font face="Verdana" size="3"> Пароль </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="563" HEIGHT="27"> <DIV WIDTH="212" HEIGHT="27"> 
+        <P><font face="Verdana" size="3"> <b> DB2</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="27"> 
+      <DIV WIDTH="212" HEIGHT="27" style="width: 71; height: 27"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Database</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="27"> 
+      <DIV WIDTH="413" HEIGHT="27" style="width: 171; height: 27"> 
+        <P><font face="Verdana" size="3"> Имя клиентского ядра </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="25"> 
+      <DIV WIDTH="212" HEIGHT="25" style="width: 124; height: 25"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DB2 Translsolation</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="25"> 
+      <DIV WIDTH="413" HEIGHT="25" style="width: 220; height: 25"> 
+        <P><font face="Verdana" size="3"> Уровень изоляции транзакций </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="563" HEIGHT="32"> <DIV WIDTH="212" HEIGHT="32" style="width: 75; height: 32"> 
+        <P><font face="Verdana" size="3"> <b> Informix</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="27"> 
+      <DIV WIDTH="212" HEIGHT="27" style="width: 71; height: 27"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> HostName</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="27"> 
+      <DIV WIDTH="413" HEIGHT="27" style="width: 289; height: 36"> 
+        <P><font face="Verdana" size="3"> Имя компьютера, на котором работает 
+          сервер Informix </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="29"> 
+      <DIV WIDTH="212" HEIGHT="29" style="width: 114; height: 29"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Informix 
+          Translsolation</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="29"> 
+      <DIV WIDTH="413" HEIGHT="29" style="width: 226; height: 29"> 
+        <P><font face="Verdana" size="3"> Уровень изоляции транзакции </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="60"> 
+      <DIV WIDTH="212" HEIGHT="60" style="width: 74; height: 60"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Trim 
+          Char</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="60"> 
+      <DIV WIDTH="413" HEIGHT="60" style="width: 329; height: 72"> 
+        <P><font face="Verdana" size="3"> Определяет, нужно ли удалять из строковых 
+          значений полей пробелы, дополняющие значение до полной строки, заданной 
+          размером поля данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="563" HEIGHT="27"> <DIV WIDTH="212" HEIGHT="27" style="width: 78; height: 27"> 
+        <P><font face="Verdana" size="3"> <b> Interbase</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="65"> 
+      <DIV WIDTH="212" HEIGHT="65" style="width: 101; height: 65"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CommitRetain</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="65"> 
+      <DIV WIDTH="413" HEIGHT="65" style="width: 320; height: 65"> 
+        <P><font face="Verdana" size="3"> Задает поведение курсора по завершении 
+          транзакции. При значении <font face="Verdana" size="2"> True</font> 
+          курсор обновляется, иначе — удаляется </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="31"> 
+      <DIV WIDTH="212" HEIGHT="31" style="width: 73; height: 31"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Database</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="31"> 
+      <DIV WIDTH="413" HEIGHT="31" style="width: 253; height: 31"> 
+        <P><font face="Verdana" size="3"> Имя файла базы данных (файл GDB) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="29"> 
+      <DIV WIDTH="212" HEIGHT="29" style="width: 118; height: 29"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> InterBase 
+          Translsolation</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="29"> 
+      <DIV WIDTH="413" HEIGHT="29" style="width: 216; height: 29"> 
+        <P><font face="Verdana" size="3"> Уровень изоляции транзакции </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="29"> 
+      <DIV WIDTH="212" HEIGHT="29" style="width: 74; height: 29"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> RoleName</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="29"> 
+      <DIV WIDTH="413" HEIGHT="29" style="width: 244; height: 29"> 
+        <P><font face="Verdana" size="3"> Роль пользователя </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="143" HEIGHT="46"> 
+      <DIV WIDTH="212" HEIGHT="46" style="width: 84; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SQLDialect</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="420" HEIGHT="46"> 
+      <DIV WIDTH="413" HEIGHT="46" style="width: 308; height: 46"> 
+        <P><font face="Verdana" size="3"> Используемый диалект SQL. Для IntreBase 
+          5 возможно только одно значение -1 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="64"> <DIV WIDTH="215" HEIGHT="64" style="width: 81; height: 64"> 
+      <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Trim Char</font> 
+        </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="64"> <DIV WIDTH="433" HEIGHT="64" style="width: 330; height: 72"> 
+      <P><font face="Verdana" size="3"> Определяет, нужно ли удалять из строковых 
+        значений полей пробелы, дополняющие значение до полной строки, заданной 
+        размером поля данных </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="25"> 
+      <DIV WIDTH="215" HEIGHT="25" style="width: 93; height: 25"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> WaitOnLocks</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="25"> 
+      <DIV WIDTH="433" HEIGHT="25" style="width: 272; height: 36"> 
+        <P><font face="Verdana" size="3"> Разрешение на ожидание занятых ресурсов 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="586" HEIGHT="35"> <DIV WIDTH="215" HEIGHT="35" style="width: 195; height: 35"> 
+        <P><font face="Verdana" size="3"> <b> Microsoft SQL Server 2000</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="25"> 
+      <DIV WIDTH="215" HEIGHT="25" style="width: 69; height: 25"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Database</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="25"> 
+      <DIV WIDTH="433" HEIGHT="25" style="width: 142; height: 25"> 
+        <P><font face="Verdana" size="3"> Имя базы данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="44"> 
+      <DIV WIDTH="215" HEIGHT="44" style="width: 72; height: 44"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> HostName</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="44"> 
+      <DIV WIDTH="433" HEIGHT="44" style="width: 320; height: 44"> 
+        <P><font face="Verdana" size="3"> Имя компьютера, на котором работает 
+          сервер MS SQL Server 2000 </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="31"> 
+      <DIV WIDTH="215" HEIGHT="31" style="width: 119; height: 31"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MSSQL 
+          Translsolation</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="31"> 
+      <DIV WIDTH="433" HEIGHT="31" style="width: 222; height: 31"> 
+        <P><font face="Verdana" size="3"> Уровень изоляции транзакции </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="56"> 
+      <DIV WIDTH="215" HEIGHT="56" style="width: 120; height: 56"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> OS Autenification</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="56"> 
+      <DIV WIDTH="433" HEIGHT="56" style="width: 305; height: 73"> 
+        <P><font face="Verdana" size="3"> Использование учетной записи текущего 
+          пользователя операционной системы (домена или<font face="Verdana" size="2"> 
+          Active Directory</font>) при доступе к ресурсам сервера </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="586" HEIGHT="23"> <DIV WIDTH="215" HEIGHT="23"> 
+        <P><font face="Verdana" size="3"> <b> MySQL</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="31"> 
+      <DIV WIDTH="215" HEIGHT="31" style="width: 55; height: 31"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Database</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="31"> 
+      <DIV WIDTH="433" HEIGHT="31" style="width: 163; height: 31"> 
+        <P><font face="Verdana" size="3"> Имя базы данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="25"> 
+      <DIV WIDTH="215" HEIGHT="25" style="width: 64; height: 25"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> HostName</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="25"> 
+      <DIV WIDTH="433" HEIGHT="25" style="width: 296; height: 36"> 
+        <P><font face="Verdana" size="3"> Имя компьютера, на котором работает 
+          сервер MySQL </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="586" HEIGHT="35"> <DIV WIDTH="215" HEIGHT="35"> 
+        <P><font face="Verdana" size="3"> <b> Oracle</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="44"> 
+      <DIV WIDTH="215" HEIGHT="44" style="width: 61; height: 44"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> AutoCommit</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="44"> 
+      <DIV WIDTH="433" HEIGHT="44" style="width: 334; height: 44"> 
+        <P><font face="Verdana" size="3"> Флаг завершения транзакции. Устанавливается 
+          только сервером </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="85"> 
+      <DIV WIDTH="215" HEIGHT="85" style="width: 94; height: 85"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> BlockingMode</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="85"> 
+      <DIV WIDTH="433" HEIGHT="85" style="width: 307; height: 91"> 
+        <P><font face="Verdana" size="3"> Задает режим завершения запроса. При 
+          значении <font face="Verdana" size="2"> True</font> соединение дожидается 
+          окончания запроса (синхронный режим), иначе — начинает выполнение следующего 
+          (асинхронный режим) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="25"> 
+      <DIV WIDTH="215" HEIGHT="25" style="width: 61; height: 25"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Database</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="25"> 
+      <DIV WIDTH="433" HEIGHT="25" style="width: 304; height: 25"> 
+        <P><font face="Verdana" size="3"> Запись базы данных в файле <font face="Verdana" size="2"> 
+          TNSNames.ora</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="50"> 
+      <DIV WIDTH="215" HEIGHT="50" style="width: 94; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Multiple 
+          Transaction</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="50"> 
+      <DIV WIDTH="433" HEIGHT="50" style="width: 284; height: 50"> 
+        <P><font face="Verdana" size="3"> Поддержка управлением несколькими транзакциями 
+          в одной сессии </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="31"> 
+      <DIV WIDTH="215" HEIGHT="31" style="width: 115; height: 31"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Oracle 
+          Translsolation</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="31"> 
+      <DIV WIDTH="433" HEIGHT="31" style="width: 214; height: 31"> 
+        <P><font face="Verdana" size="3"> Уровень изоляции транзакций </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="66"> 
+      <DIV WIDTH="215" HEIGHT="66" style="width: 103; height: 66"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> OS Autenification</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="66"> 
+      <DIV WIDTH="433" HEIGHT="66" style="width: 300; height: 73"> 
+        <P><font face="Verdana" size="3"> Использование учетной записи текущего 
+          пользователя операционной системы (домена или <font face="Verdana" size="2"> 
+          Active Directory</font>) при доступе к ресурсам сервера </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="146" HEIGHT="56"> 
+      <DIV WIDTH="215" HEIGHT="56" style="width: 66; height: 56"> 
+        <P><font face="Verdana" size="3"> Trim Char </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="440" HEIGHT="56"> 
+      <DIV WIDTH="433" HEIGHT="56" style="width: 326; height: 72"> 
+        <P><font face="Verdana" size="3"> Определяет, нужно ли удалять из строковых 
+          значений полей пробелы, дополняющие значение до полной&nbsp; строки, 
+          заданной размером поля данных </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> После выыбора настроенного соединения или выбора 
+  типа сервера и настройки параметров соединения компонент <font face="Verdana" size="2">TSQLConnection</font> 
+  готов к работе. </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">property Connected: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> открывает соединение с сервером при значении 
+  <font face="Verdana" size="2">True</font>. Аналогичную операцию выполняет метод 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure Open;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> После открытия соединения все компоненты dbExpress, 
+  инкапсулирующие наборы данных и связанные с открытым компонентом <font face="Verdana" size="2">TSQLConnection</font>, 
+  получают доступ к базе данных. </font ></P>
+<P><font face="Verdana" size="3"> Соединение закрывается тем же свойством <font face="Verdana" size="2"> 
+  connected</font> или методом </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure Close;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> При открытии и закрытии соединения разработчик 
+  может использовать обработчики событий </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property BeforeConnect: 
+    TNotifyEvent;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property AfterConnect: 
+    TNotifyEvent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">property BeforeDisconnect: 
+    TNotifyEvent;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property AfterDisconnect: 
+    TNotifyEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Например, на стороне клиента можно организовать 
+  проверку пользователя приложения: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.MyConnectionBeforeConnect(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if MyConnection.Params.Values['User_Name']) 
+    &lt;&gt; DefaultUser then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MessageDlg('Wrong 
+    user name', mtError, [mbOK], 0);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Abort;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property LoginPrompt: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> определяет, нужно ли отображать диалог авторизации 
+  пользователя перед открытием соединения. </font ></P>
+<P><font face="Verdana" size="3"> О текущем состоянии соединения можно судить 
+  по значению свойства </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TConnectionState 
+    = (csStateClosed, csStateOpen, csStateConnecting, csStateExecuting, csStateFetching, 
+    csStateDisconnecting);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;property 
+    ConnectionState: TConnectionState;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Параметры соединения можно настраивать на этапе 
+  разработки в Инспекторе объектов или Редакторе соединений (см. рис. 17.1). Также 
+  это можно сделать и непосредственно перед открытием соединения, используя свойство 
+  <font face="Verdana" size="2">Params</font> или метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;procedure 
+    LoadParamsFromlniFile(AFileName : String = '');</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> который загружает заранее подготовленные параметры 
+  из INI-файла. Проверить успешность этой операции можно при помощи свойства </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Params 
+    Loaded: Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> значение <font face="Verdana" size="2"> True</font> 
+  которого сигнализирует об успехе загрузки. </font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.StartBtnClickfSender: 
+    TObject);</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> if MyConnection.Params.Values['DriverName'] 
+    = &quot; then</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">MyConnection.LoadParamsFromlniFile</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">('c:\Temp\dbxalarmconnections.ini');</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> if MyConnection.ParamsLoaded 
+    then</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> try MyConnection.Open;</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> except MessageDlgt'Database 
+    connection error', mtError, [mbOK], 0);</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> end;&nbsp;</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+  <table COLS="3" WIDTH="16%">
+    <tr> 
+      <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+        </a> </font> </td>
+      <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> 
+        <img SRC="Menu.gif" BORDER="0"> </a> </font> </td>
+      <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> 
+        <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+    </tr>
+  </table>
+
+</body>
+</html>

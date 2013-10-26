@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Что такое библиотека ComCtl32</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Изменив внешний вид &quot;окон&quot; в Windows 95, менеджеры Microsoft задумались о том, чтобы дать независимым разработчикам средства для создания приложений, внешне похожих на системные утилиты и использующих единые типовые элементы управления. Например, все эти элементы автоматически поддерживают установленные в системе цветовое оформление, размер, шрифт и т. п.
+</font ></P>
+<P><font face="Verdana" size="3">
+Все элементы, проверенные и обкатанные в Windows, объединялись в библиотеке ComCtl32.dll, документировались и публиковались для использования разработчиками. С 1995 года сменилось много версий библиотеки, элементы добавлялись и совершенствовались. Соответственно росла и страница <B>Win32 </B>в Палитре инструментов Delphi. Все компоненты, представленные там, взяты из библиотеки ComCtl32.
+</font ></P>
+<P><font face="Verdana" size="3">
+Специально отметим, что эти элементы управления не являются ActiveX. Это — обычные специализированные разновидности окон Windows, установка свойств которых происходит через посылку специализированных сообщений. Полная документация по всем сообщениям и применяемым в них константам и структурам есть в MSDN. Для большинства сообщений предусмотрены специальные функции оболочки, которые описаны в модуле CommCtrl.pas. Сами &quot;дельфийские&quot; классы компонентов работают с их использованием; классы компонентов описаны в модуле
+ComCtrls.pas.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>       Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Своими свойствами компоненты Delphi покрывают 
+    лишь 70—80% возможностей соответствующих элементов управления. Так что для 
+    решения некоторых специфических задач иногда приходится обращаться к функциям 
+    модуля ComCtrls.pas. Примеры этого имеются как в настоящей, так и в последующих 
+    главах данной книги. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если вы распространяете свое приложение, содержащее компоненты со страницы <B>Win32 </B>Палитры компонентов, не забудьте позаботиться о проблеме совместимости. Если версия библиотеки ComCtl32 на компьютере пользователя старее той, что использовалась вами при разработке, то в лучшем случае вы получите проблемы с правильной отрисовкой и поведением элементов управления, а в худшем — фатальную ошибку и неработающее приложение.
+</font ></P>
+<P><font face="Verdana" size="3">
+Проблема эта решается включением в дистрибутив и запуском на машине клиента приложения 50comupd.exe, которое находится на дистрибутивном диске Delphi 7 в папке \info\extras\comctl\ и обновляет библиотеку, или его можно скачать с сервера Microsoft
+<B>. </B>Ни в коем случае не пытайтесь просто (&quot;руками&quot;) заменить ComCtl32.dll на более новую версию — это запрещено Microsoft и последствия могут вас серьезно огорчить.
+</font ></P>
+<P><font face="Verdana" size="3">
+Размер 50comupd.exe составляет около 500 Кбайт, так что если оно и &quot;утяжелит&quot; ваш дистрибутив, то ненамного. Есть и более масштабный способ решения этой проблемы — установить последнюю версию Internet Explorer, который включает в себя новую библиотеку ComCtl32. Если у вас дело упирается только в элементы управления, то этот способ избыточен. Но если вы используете в распространяемом приложении другие решения от Microsoft, привязанные к IE (скажем, криптографическую библиотеку CryptoAPI или стек протоколов Internet в динамической библиотеке Winlnet.dll — на нем базируется большинство сетевых технологий в Delphi 7), то он может оказаться необходимым.
+</font ></P>
+<P><font face="Verdana" size="3">
+Проверка версии библиотеки элементов управления делается с использованием функции из модуля ComCtrls.pas:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetComCtlVersion: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Она возвращает номер установленной версии библиотеки в виде пары цифр. Каждая версия выходит обычно вместе со следующей версией обозревателя Internet. Вот константы, описанные также в модуле ComCtrls.pas:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+const</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ComCtlVersionIE3 = $00040046;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> ComCtlVersionIE4 = $00040047;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> ComCtlVersionIE401 = $00040048;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;ComCtlVersionIE5 = $00050050;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> ComCtlVersionlESOl = $00050051;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;ComCtlVersionIE6 = $00060000;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В Windows 2000 и ME библиотека элементов управления имеет версию $00050051 (5.81). Наконец, в следующей ОС от Microsoft — Windows XP (ex-Whistler) — сделаны кардинальные изменения внешних возможностей интерфейса пользователя. И основой их станет 6-я версия библиотеки ComCtl32.
+</font ></P>
+<P><font face="Verdana" size="3">
+И о совместимости. Не нужно быть мудрецом, чтобы понять, что компоненты со страницы <B>Win32 </B>работают только в среде Win32. Когда вы создаете Kylix-совместимое приложение (CLX Application), вместо страницы <B>Win32 </B>в Палитре компонентов появляется страница <B>Common Controls. </B>Находящиеся там компоненты сделаны на основе библиотеки QT <B>(www.trolltech.com) </B>и лицензированы Borland. Во многом они повторяют методы и свойства элементов управления, соответствующих им в Windows, но далеко не всегда. Поэтому, если вы пишете переносимые приложения, забудьте о библиотеке ComCtl32 и странице Палитры компонентов <B>Win32 </B>и пропустите эту главу.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

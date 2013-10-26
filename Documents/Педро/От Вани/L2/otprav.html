@@ -1,0 +1,30 @@
+<html>
+ <title>Отправка почты автору</title>
+<body background="back2.jpg">
+
+</body>
+<form id="myform" method=post enctype="text/plain">
+<h2>Отправка почты автору</h2>
+От кого:
+<input name="email_from" type="text" value="">
+<p>
+Сообщение:<br>
+<textarea  name="Сообщение" type="text" value="Сообщение"></textarea>
+<p>
+<input name="Отправить"type="submit" type="text" value="Отправить">
+</form>
+ <script language="JavaScript">
+ var first="buival", second="mail"
+ functuon myform.onsubmit(){
+ if (!myform.Niiauaiea.value){
+ event.returnValue=false
+ alert("Нет текста сообщения\n Письмо не отправлено")
+ }else
+ myform.action="mailto:"+first+@+second+".ru"
+ }
+ </script>
+
+<table>
+<tr>
+<td ><a href="2.html">На главную</a></td></tr></table>
+</html>

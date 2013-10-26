@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TSQLStoredProc</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">   TSQLStoredProc</font>   инкапсулирует   функциональность   хранимых процедур для их выполнения в рамках технологии dbExpress. Он подобен другим своим аналогам.  Подробнее  о функциях компонентов хранимых процедур см. часть III.
+Имя хранимой процедуры определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StoredProcName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для работы с входными и выходными параметрами предназначено свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Params: TParams;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<b>Внимание</b>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При работе с параметрами желательно использовать 
+    обращение к конкретному параметру по имени при помощи метода <font face="Verdana" size="2">ParamByName</font>. 
+    При работе с некоторыми серверами порядок следования параметров до выполнения 
+    процедуры и после может изменяться. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Процедура выполняется методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ExecProc: Integer; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+если она не возвращает набор данных. Иначе используются свойство
+<font face="Verdana" size="2"> Active</font> или метод <font face="Verdana" size="2">open</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если хранимая процедура возвращает несколько связанных наборов данных (подобно иерархическим запросам ADO), доступ к следующему набору данных осуществляет метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function NextRecordSet: TCustomSQLDataSet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+автоматически создавая объект типа <font face="Verdana" size="2"> TCustomSQLDataSet</font> для инкапсуляции новых данных. Возврат к предыдущему набору данных возможен, если вы определили объектные переменные для каждого набора данных:
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> var SecondSet: 
+    TCustomSQLDataSet;</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> MyProc.Open;</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> while Not MyProc.Eof 
+    do</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> {...}</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> Next; end;</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> SecondSet := 
+    MyProc.NextRecordSet;&nbsp;</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">SecondSet.Open; 
+    {...}</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> SecondSet.Close;&nbsp;</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">MyProc.Close;</font> 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TSQLTable</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TSQLTable</font> предназначен для просмотра таблиц целиком и по основным функциям подобен своим аналогам
+<font face="Verdana" size="2">TTаblе, TADOтаblе</font>,<font face="Verdana" size="2">TIBTаblе</font> (подробнее о функциях компонентов таблиц см. часть III).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для получения табличного набора данных компонент
+<font face="Verdana" size="2"> TSQLTable</font> самостоятельно формирует запрос на сервер, используя для этого возможности, унаследованные от предка
+<font face="Verdana" size="2">TCustomSQLDataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure PrepareStatement; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+генерирует для выбранной таблицы текст запроса, который формируется компонентом для передачи на сервер.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для определения имени таблицы используется свойство
+<font face="Verdana" size="2">TableName</font>, и, если компонент подключен к соединению, имя таблицы можно выбрать из списка.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для подключения простых или составных индексов используются свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IndexFieldNames, IndexFields, IndexName.</font>&nbsp;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+ А метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetlndexNames(List:   TStrings);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает в параметр <font face="Verdana" size="2"> List</font> список используемых индексов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Связь между двумя наборами данных главный/подчиненный организуется
+свойствами<font face="Verdana" size="2"> MasterFields,
+MasterSource.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2">TSQLTable</font> предоставляет разработчику некоторое подобие функций редактирования. Для удаления всех записей из связанной с компонентом таблицы на сервере используется метод
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure DeleteRecords;</font> 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

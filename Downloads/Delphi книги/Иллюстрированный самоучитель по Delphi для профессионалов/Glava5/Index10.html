@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Панель состояния TStatusBar</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот вид элементов управления применяется уже достаточно давно. Его роль заключается в отображении различного рода справочной информации. Панель состояния инкапсулирована в компоненте
+<font face="Verdana" size="2">TStatusBar</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обычно панель состояния размещается в нижней части окна. Поэтому при переносе на форму свойство
+<font face="Verdana" size="2"> Align</font> всегда имеет значение
+<font face="Verdana" size="2">alBottom</font>. Панель состояния можно разделить на произвольное число самостоятельных частей. Каждая часть описывается объектом
+<font face="Verdana" size="2">TStatusPanel</font>. Коллекция всех таких объектов находится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Panels: TStatusPanels;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Например, для того чтобы показать на панели состояния текущую дату и время, в методе-обработчике
+<font face="Verdana" size="2"> OnTimer</font> компонента <font face="Verdana" size="2"> TTimer</font> достаточно предусмотреть следующий код:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.TimerITimer(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+StatusBar1.Panels[0].Text := DateToStr(Now);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+StatusBarl.Panels[1].Text := TimeToStr(Now);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Впрочем, панель состояния можно сделать сплошной. Для этого свойство
+<font face="Verdana" size="2">SimplePane</font><font face="Verdana" size="2">l</font> должно иметь значение
+<font face="Verdana" size="2">True</font>. В данном случае текст панели должен содержаться в свойстве
+<font face="Verdana" size="2">SimpleText</font>.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

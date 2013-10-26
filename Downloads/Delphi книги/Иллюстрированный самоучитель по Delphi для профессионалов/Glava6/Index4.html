@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TXPManifest</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+На странице <B>Win32 </B>Палитры компонентов Delphi 7 имеется компонент
+<font face="Verdana" size="2">TXPManifest</font>. Будучи добавленным в проект, он обеспечивает компиляцию манифеста Windows XP в исполняемый файл приложения. В качестве основы используется стандартный манифест Delphi для Windows XP, содержащийся в файле ресурсов Delphi7\Lib\WindowsXP.res (листинг 6.2).
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 6.2.</B> Манифест 
+  Delphi для Windows XP </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;assembly xmlns=&quot;urn:schemas-microsoft-com:asm.vl&quot; manifestVersion=&quot;l.0&quot;&gt;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> &lt;assemblyIdentity&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">type=&quot;win32&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+name=&quot;DelphiApplication&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;version=&quot;3.2.0.0&quot;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">processorArchitecture=&quot;*&quot;/&gt;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> &lt;dependency&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;dependentAssembly&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Ossemblyldentity type=&quot;win32&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+name=&quot;Microsoft.Windows.Common-Controls&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;version=&quot;6.0.0.0&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;publicKeyToken=&quot;6595b64144ccfldf</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&quot; language=&quot;*&quot;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+processorArchitecture=&quot;*&quot;/&gt;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> &lt;/dependentAs sembly&gt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;&lt;/dependency&gt;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> &lt;/assembly&gt;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+К сожалению, версия профаммного продукта (ProductVersion), а также любая другая информация о версии, содержащаяся в проекте (файлы DOF и RES) и настраиваемая в диалоге <B>Project Options </B>среды разработки Delphi, никак не влияет на содержимое манифеста. Поэтому при настройке манифеста в соответствии с потребностями приложения вам придется предварительно отредактировать файл WindowsXP.res или поправить манифест прямо в исполняемом файле. (Ввиду частых перекомпиляций проекта второй вариант представляется довольно обременительным.)
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Отложенный (асинхронный) ввод/вывод</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Эта принципиально новая возможность введена впервые в Win32 с появлением реальной многозадачности. Вызывая функции чтения и записи данных, вы на самом деле передаете исходные данные одному из потоков
+(<font face="Verdana" size="2">threads</font>) операционной системы, который и осуществляет фактические обязанности по работе с устройством. Время доступа всех периферийных устройств гораздо больше доступа к ОЗУ, и ваша программа, вызвавшая
+<font face="Verdana" size="2"> Read</font> или <font face="Verdana" size="2"> write</font>, будет дожидаться окончания операции ввода/вывода. Замедление работы программы налицо.
+</font ></P>
+<P><font face="Verdana" size="3">
+Выход был найден в использовании отложенного
+(<font face="Verdana" size="2">overlapped</font>) ввода/вывода. До начала отложенного ввода/вывода инициализируется дескриптор объекта типа события (функция
+<font face="Verdana" size="2"> createEvent</font>) и структура типа
+<font face="Verdana" size="2"> TOveriapped</font>. Вы вызываете функцию
+<font face="Verdana" size="2">ReadFile</font> или <font face="Verdana" size="2">writeFile</font>, в которой последним параметром указываете на TOveriapped. Эта структура содержит дескриптор события Windows (<font face="Verdana" size="2">event</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+ОС начинает операцию (ее выполняет отдельный программный поток, скрытый от программиста) и немедленно возвращает управление; вы можете не тратить время на ожидание. Признак того, что операция началась и продолжается — получение кода возврата
+<font face="Verdana" size="2"> ERROR_IO_PENDING.</font> Пусть вас не пугает слово &quot;<font face="Verdana" size="2">error</font>&quot; в названии — это совершенно нормально. Если операция продолжается долго (а чтение и запись файлов на дискете, да и на диске, именованных каналов можно отнести к &quot;длинным&quot; операциям), то программа может спокойно выполнять последующие операторы. Событие будет &quot;взведено&quot; ОС тогда, когда ввод/вывод закончится.
+</font ></P>
+<P><font face="Verdana" size="3">
+Когда, по мнению программиста, ввод/вывод должен быть завершен, можно
+проверить это, использовав функцию<B> </B><font face="Verdana" size="2">WaitForSingleObject.</font>
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function WaitForSingleObject(hHandle: THandle; dwMilliseconds: DWORD): DWORD;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Объект ожидания (параметр <font face="Verdana" size="2">hHandle</font>) в этом случае — тот самый, который создан нами, указан в структуре
+<font face="Verdana" size="2"> TOveriapped</font> и передан в качестве параметра в функцию
+<font face="Verdana" size="2">ReadFile</font> или <font face="Verdana" size="2">WriteFile</font>. Можно указать любое время ожидания, в том числе бесконечное (параметр
+<font face="Verdana" size="2"> Timeout</font> при этом равен константе
+<font face="Verdana" size="2">INFINITE</font>). Признаком нормального завершения служит получение кода возврата
+<font face="Verdana" size="2"> WAIT_OBJECT_0.</font>
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 9.2. </B> Пример 
+  отложенной операции чтения&nbsp; </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function TMyClass.Read(var Buffer; Count: Longint): Longint;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var succ : boolean;nb : Cardinal;LastError : Longint;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Overlap: TOveriapped;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FillChar(Overlap,SizeOf(Overlap),0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Overlap.hEvent := CreateEvent(nil, True, False, nil);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := Maxlnt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+succ := ReadFiie(FHandle, Buffer, Count, nb, SOverlapRd);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+//</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+// Здесь можно вставить любые операторы, которые // могут быть выполнены до окончания ввода/вывода&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> //</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if not succ then&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+LastError := GetLastError;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if LastError = ERROR_IO_PENDING&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> then&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if WaitForSingleObject(OverlapRd.hEvent, INFINITE)=WAIT_OBJECT_0 then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+GetOverlappedResult(FHandle, OverlapRd, nb, TRUE);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> end&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> else</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+raise EAbort.Create(Format('Read failed, error %d',[LastError]));&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := nb;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;CloseHandle(hEvent);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если вы задали конечный интервал в миллисекундах, а операция еще не закончена,
+<font face="Verdana" size="2"> waitForSingieObject</font> вернет код завершения
+<font face="Verdana" size="2">WAIT_TIMEOUT</font>. Функция <font face="Verdana" size="2"> GetOverlappedResult</font> возвращает в параметре nb число байтов, действительно прочитанных или записанных во время отложенной операции.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

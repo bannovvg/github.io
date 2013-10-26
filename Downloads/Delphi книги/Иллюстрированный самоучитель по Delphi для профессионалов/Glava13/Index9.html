@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Агрегатные 
+  поля</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Агрегатные поля предназначены для выполнения вычислительных операций со значениями полей набора данных с использованием агрегатных функций
+<font face="Verdana" size="2">SQL</font>. К таким функциям относятся:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="2">AVG</font><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> 
+    — вычисляет среднее значение;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">COUNT</font> 
+    — возвращает число записей;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">MIN</font> 
+    — вычисляет минимальное значение;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">МАХ</font> 
+    — вычисляет максимальное значение;&nbsp;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="2">SUM</font><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> 
+    — вычисляет сумму.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Агрегатные поля не входят в структуру полей набора данных, т. к. агрегатные функции подразумевают объединение записей таблицы для получения результата. Следовательно, значение агрегатного поля нельзя связать с какой-то одной записью, оно относится ко всем или группе записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Использование агрегатных полей возможно только в компоненте
+<font face="Verdana" size="2">TClientDataSet</font> и его аналогах, т. к. он обеспечивает кэширование данных, необходимое для проведения вычислений (см. гл. 22).
+</font ></P>
+<P><font face="Verdana" size="3">
+Агрегатные поля не отображаются вместе со всеми полями в компонентах
+<font face="Verdana" size="2">TDBGrid</font>, в Редакторе полей они расположены в отдельном списке, а их свойство index (см. выше)
+всегда имеет значение —1. Для представления значения агрегатного поля можно воспользоваться одним из компонентов отображения данных, который визуализирует значение одного поля (например,
+<font face="Verdana" size="2"> TDBText</font> или <font face="Verdana" size="2">TDBEdit</font>), или свойствами самого поля:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Labell.Caption := MyDataSetAGGRFIELDl.AsString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для создания агрегатного поля необходимо использовать команду
+<b> New</b> <B>field </B>из всплывающего меню Редактора полей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для    представления    агрегатных    полей    имеется    специальный    класс
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TAggregateField.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Его свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Expression: string</font>;&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+ задает вычисляемое выражение.
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В его состав могут входить агрегатные функции, имена полей набора данных и простейшие арифметические операции:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SUM(Pirce*ItemCount) - SUM(Balance)</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Вычисление значения проводится только для тех агрегатных полей, свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Active: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;которых <B> </B>имеет значение <B> </B><font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вычисление включенных свойством <font face="Verdana" size="2"> Active</font> агрегатных полей выполняется только в том случае, если булевское свойство
+<font face="Verdana" size="2"> AggregatesActive</font> клиентского компонента набора данных имеет значение
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+По умолчанию экземпляр класса <font face="Verdana" size="2"> TAggregateFieid</font> создается со свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Visible = False.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property GroupingLevel: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задает уровень группировки полей набора данных при вычислении. При значении 0 расчет проводится для всех записей набора данных. При значении 1 записи группируются по первому полю набора данных и расчет осуществляется для каждой группы. При значении 2 записи разбиваются на группы по первому и второму полям и т. д.
+</font ></P>
+<P><font face="Verdana" size="3">
+Однако группировка по уровням выше нулевого возможна, только если в наборе данных используется индекс по группирующим полям. Например, если свойство
+<font face="Verdana" size="2"> GroupingLevel = 2 </font> и набор данных начинаются с полей
+<font face="Verdana" size="2">С</font><font face="Verdana" size="2">ustNo</font> и
+<font face="Verdana" size="2">orderNo</font>, в свойстве <font face="Verdana" size="2"> indexName</font> компонента набора данных и свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexName: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+объекта агрегатного поля должно быть имя индекса, включающего оба эти поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+По причине необходимости подключения индексов, уровень группировки выше нулевого возможен только в табличных компонентах.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

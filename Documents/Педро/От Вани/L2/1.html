@@ -1,0 +1,53 @@
+<html>
+<h3>Фильтр:</h3>
+Поле
+<select NAME = "FLD">
+<option value = "Фирма">Фирма</option>
+<option value = "Наименование">Наименование</option>
+</select>
+<br>
+Значение
+
+<INPUT NAME = "INP" VALUE ="" TYPE = "text">
+<p>
+<BUTTON onclick = "filter()">Применить</BUTTON>
+<hr>
+<! Элемент управления STD>
+<OBJECT ID = "mydbcontrol"
+CLASSID = "CLSID:333C7BC4-460F-11D0-BC04-0080C7055A83">
+<PARAM NAME ="FieldDelim" VALUE="|">
+<PARAM NAME = "DataURL" VALUE = "mydb.txt">
+<PARAM NAME = "UseHeader" VALUE = true>
+</OBJECT>
+<! Таблица для вывода данных>
+<table DATASRC = #mydbcontrol border = 5>
+<thead>
+<th>Фирма</th>
+<th>Наименование</th>
+<th>Цена</th>
+</thead>
+<tr>
+<td><SPAN DATAFLD = "Фирма"></SРАN></td>
+<td><SPAN DATAFLD = "Наименование"></SPAN></td>
+<td><SPAN DATAFLD = "Цена" DATAFORMATAS="html"></SPAN></td>
+</tr>
+</table>
+<SCRIPT>
+
+var obj = "<OBJECT ID = 'mydbcontrol' "
+obj+= "CLASSID='CLSID:333C7BC4-460F-11D0-BC04-0080C7055A83'>"
+obj+="<PARAM NAME='FieldDelim' Value = '|'>"
+obj+= "<PARAM NAME='DataURL' Value = 'mydb.txt'>"
+obj+= "<PARAM NAME='UseHeader' value = true>"
+function filter() { 
+var cpar = "" 
+if (INP.value){
+cpar="<param    name='FilterColumn' value = '"+FLD.value+"'>"
+cpar+= " <param name='FilterValue' value =  '"+ INP.value+"'>"
+cpar+= " <param name='FilterCriterion' value = '=' >"
+cpar+="  <PARAM NAME='CaseSensitive' VALUE = false>"
+}
+document.all.mydbcontrol.outerHTML = obj + cpar + "</OBJECT>"
+}
+</SCRIPT>
+</HTML>

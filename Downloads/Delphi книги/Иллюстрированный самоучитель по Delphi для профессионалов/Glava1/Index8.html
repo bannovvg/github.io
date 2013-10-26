@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Методы</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Из предыдущего материала читатели узнали, что функционирование объектов обеспечивается различными типами методов, которые различаются особенностями реализации механизма наследования. Теперь настало время рассмотреть эти методы более подробно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Абстрактными называются методы, которые определены в классе, но не содержат никаких действий, никогда не вызываются и обязательно должны быть переопределены в потомках класса. Абстрактными могут быть только виртуальные и динамические методы. В Object Pascal такие методы объявляются с помощью одноименной директивы. Она указывается при описании метода:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure NeverCallMe; virtual; abstract;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При этом никакого кода для этого метода писать не нужно. Вызов метода
+<font face="Verdana" size="2">NeverCallMe</font> приведет <B> </B>к
+созданию исключительной<B>&nbsp; </B>ситуации <B> </B><font face="Verdana" size="2">EAbstractError</font>
+(исключительным ситуациям посвящена гл. 4).
+</font ></P>
+<P><font face="Verdana" size="3">
+Пример с классом <font face="Verdana" size="2">TField</font> из разд. &quot;Полиморфизм&quot; этой главы
+поясняет, для чего нужно использование абстрактных методов. В данном случае класс
+<font face="Verdana" size="2">TField</font> не используется сам по себе; его основное предназначение — быть родоначальником иерархии конкретных классов
+-&quot;полей&quot; и дать возможность абстрагироваться от частностей. Хотя параметр процедуры
+<font face="Verdana" size="2"> showData</font> и описан как <font face="Verdana" size="2">TField</font>, но, если передать в нее объект этого класса, произойдет исключительная ситуация вызова абстрактного метода.
+</font ></P>
+<P><font face="Verdana" size="3">
+Статические методы, а также любые поля в объектах-потомках ведут себя одинаково: вы можете без ограничений перекрывать старые имена и при этом изменять тип методов. Код нового статического метода полностью перекрывает (заменяет собой) код старого метода:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TlstObj = class</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i : Extended;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetData(AValue: Extended);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;T2ndObj = class (TlstObj)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i : Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetData(AValue: Integer);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TlstObj.SetData;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i := 1.0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure T2ndObj.SetData;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i := 1;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+inherited SetData (0.99);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере разные методы с именем <font face="Verdana" size="2"> SetData</font> присваивают значения разным
+полям с именем i. Перекрытое (одноименное) поле предка недоступно в потомке; поэтому, конечно, два одноименных поля с именем i — это нонсенс; так сделано только для примера.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> В практике программирования принято присваивать 
+    всем идентификаторам в программе (в том числе полям объектов) осмысленные 
+    названия. Это существенно облегчит работу с исходным кодом не только другим 
+    разработчикам, но и вам. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В отличие от поля, внутри других методов перекрытый метод доступен при указании зарезервированного слова
+<font face="Verdana" size="2"> inherited</font>. По умолчанию все методы объектов являются статическими — их адрес определяется еще на стадии компиляции проекта, поэтому они вызываются быстрее всего. Может быть, читателю еще не ясно, для чего упоминается этот факт. Просто запомните его, он понадобится при сравнении статических и виртуальных методов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Принципиально отличаются от статических виртуальные
+и динамические методы. Они должны быть объявлены путем добавления соответствующей директивы
+<font face="Verdana" size="2"> virtual</font> или <font face="Verdana" size="2"> dynamic</font>. Обе эти категории существовали и в прежних версиях языка Pascal. С точки зрения наследования методы этих двух видов одинаковы: они могут быть перекрыты в дочернем классе только одноименными методами, имеющими тот же тип.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если задуматься над рассмотренным выше примером, становится ясно, что у компилятора нет возможности определить класс объекта, фактически переданного в процедуру
+<font face="Verdana" size="2"> showData</font>. Нужен механизм, позволяющий определить это прямо во время выполнения. Такой механизм называется поздним связыванием
+(<font face="Verdana" size="2">late binding)</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Естественно, что этот механизм должен быть каким-то образом связан с передаваемым объектом. Для этого используются таблица виртуальных методов
+(Virtual Method Table, VMT) и таблица динамических методов
+(Dynamic Method Table, DMT).
+</font ></P>
+<P><font face="Verdana" size="3">
+Разница между виртуальными и динамическими методами заключается в особенности поиска адреса. Когда компилятор встречает обращение к виртуальному методу, он подставляет вместо прямого вызова по конкретному адресу код, который обращается к VMT и извлекает оттуда нужный адрес.
+</font ></P>
+<P><font face="Verdana" size="3">
+Такая таблица есть для каждого класса (объектного типа). В ней хранятся адреса всех
+виртуальных методов класса, независимо от того, унаследованы ли они от предка или перекрыты в данном классе. Отсюда и достоинства, и недостатки виртуальных методов: они вызываются сравнительно быстро, однако для хранения указателей на них в таблице VMT требуется большое количество памяти.
+</font ></P>
+<P><font face="Verdana" size="3">
+Динамические методы вызываются медленнее, но позволяют более экономно расходовать память. Каждому динамическому методу системой присваивается уникальный индекс. В таблице динамических методов класса хранятся индексы и адреса только тех
+динамических методов, которые описаны в данном классе. При вызове динамического метода происходит поиск в этой таблице; в случае неудачи просматриваются таблицы DMT всех классов-предков в порядке иерархии и, наконец, класс
+<font face="Verdana" size="2"> TObject</font>, где имеется стандартный обработчик вызова динамических методов. Экономия памяти налицо.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для перекрытия и виртуальных, и динамических методов служит директива
+<font face="Verdana" size="2"> override</font>, с помощью которой (и только с ней!) можно переопределять оба этих типа методов. Приведем пример:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFirstClass = class</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; FMyFieldl: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;FMyField2: Longint;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure StatMethod;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure VirtMethodl; virtual;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure VirtMethod2; virtual;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure DynaMethodl; dynamic;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure DynaMethod2; dynamic;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSecondClass = class(TMyObject)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure StatMethod;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure VirtMethodl; override;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DynaMethodl; override;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Objl: TFirstClass;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Obj2: TSecondClass;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Первый из методов в примере создается заново, остальные два — перекрываются. Попытка применить директиву
+<font face="Verdana" size="2"> override</font> к статическому методу вызовет ошибку компиляции.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote> 
+  <p><font face="Verdana" size="3"> Будьте внимательны: попытка перекрытия с директивой 
+    не <font face="Verdana" size="2"> override</font>, a <font face="Verdana" size="2"> 
+    virtual</font> или <font face="Verdana" size="2"> dynamic</font> приведет 
+    на самом деле к созданию нового одноименного метода. </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

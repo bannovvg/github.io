@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Модуль данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для размещения компонентов доступа к данным в приложении баз данных желательно использовать специальную &quot;форму&quot; — модуль данных (класс
+<font face="Verdana" size="2">TDataModule</font>). Обратите внимание, что модуль данных не имеет ничего общего с обычной формой приложения, ведь его непосредственным предком является класс
+<font face="Verdana" size="2">TComponent</font>. В модуле данных можно размещать только невизуальные компоненты. Модуль данных доступен разработчику, как и любой другой модуль проекта, на этапе разработки. Пользователь приложения не может увидеть модуль данных во время выполнения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания модуля данных можно воспользоваться Репозиторием объектов или главным меню Delphi. Значок модуля данных <B>Data Module </B>расположен на странице
+<b>New</b>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как уже говорилось, модуль данных имеет мало общего со стандартной формой, хотя бы потому, что класс
+<font face="Verdana" size="2">TDataModule</font> происходит непосредственно от класса
+<font face="Verdana" size="2">TComponent</font>. У него почти полностью отсутствуют свойства и методы-обработчики событий, ведь от платформы для других невизуальных компонентов почти ничего не требуется, хотя потомки модуля данных, работающие в распределенных приложениях, выполняют весьма важную работу.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания структуры (модели, диаграммы) данных, с которой работает приложение, можно воспользоваться возможностями, предоставляемыми страницей <B>Diagram </B>Редактора кода. Любой элемент из иерархического дерева компонентов модуля данных можно перенести на страницу диаграммы и задать связи между ними.
+</font ></P>
+<P><font face="Verdana" size="3">
+При помощи управляющих кнопок можно задавать между элементами диаграммы отношения синхронного просмотра и главный/подчиненный. При этом производится автоматическая настройка свойств соответствующих компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания модуля данных (рис. 11.2) можно воспользоваться Репозиторием объектов или главным меню Delphi. Значок модуля данных <B>Data Module </B>расположен на странице
+<b>New</b>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для обращения компонентов доступа к данным, расположенным в модуле данных, из других модулей проекта необходимо включить имя модуля в секцию
+<font face="Verdana" size="2">uses</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+unit InterfaceModule;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;implementation</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uses  DataModule;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">DataModule.Tablel.Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+</blockquote>
+<p align="center">
+<div align="center"><IMG src="gl.11.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 11.2. </B>Модуль данных 
+  </font ></P>
+<P><font face="Verdana" size="3"> Преимуществом размещения компонентов доступа 
+  к данным в модуле данных является то, что изменение значения любого свойства 
+  проявится сразу же во всех обычных модулях, к которым подключен этот модуль 
+  данных. Кроме этого, все обработчики событий этих компонентов, т. е. вся логика 
+  работы с данными приложения, собраны в одном месте, что тоже весьма удобно. 
+  </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

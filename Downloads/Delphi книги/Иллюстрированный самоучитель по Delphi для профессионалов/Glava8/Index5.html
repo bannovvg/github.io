@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Прочие 
+  свойства</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Чтобы связать с действием комбинацию &quot;горячих&quot; клавиш, выберите одну из возможных комбинаций в редакторе свойства
+<font face="Verdana" size="2">shortcut</font>. Более того, в Delphi 7 существует возможность добавлять не одну, а множество комбинаций &quot;горячих&quot; клавиш. Вторая и последующие должны быть заданы в свойстве
+<font face="Verdana" size="2">secondaryshortcuts</font>. Когда вызывается редактор этого свойства, пользователь видит обычный редактор набора строк. И вводить комбинации нужно по принципу &quot;как слышится, так и пишется&quot;: например &lt;Ctrl&gt;+&lt;F12&gt;, &lt;Shift&gt;+&lt;Alt&gt;+&lt;0&gt; и т. п., по одной комбинации на каждой строке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для упорядочивания все действия разбиты на категории:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Category: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Это свойство содержит условное название категории, к которой относится действие, например, <B>File, Edit, Help </B>и т. п. Роль категории сводится к тому, чтобы объединить сходные действия при показе в
+<font face="Verdana" size="2"> ActionList</font> или <font face="Verdana" size="2">ActionManager</font>. Названия категорий вы видите на панели меню на самом верхнем уровне.
+</font ></P>
+<P><font face="Verdana" size="3">
+Иногда программисту все-таки необходимо знать, какой конкретно клиент — меню, кнопка — привел к выполнению действия. Узнать это можно, воспользовавшись значением свойства компонента
+<font face="Verdana" size="2">TAction</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ActionComponent: TComponent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перед вызовом <font face="Verdana" size="2"> onExecute</font> это свойство содержит указатель на клиента, инициировавшего действие. После вызова значение свойства очищается.
+</font ></P>
+<P><font face="Verdana" size="3">
+После того как определены действия и написан код, реагирующий на них, осталось поставить завершающую точку и связать их с пользовательским интерфейсом. У большого числа элементов управления (например, всех кнопок и пунктов меню) есть опубликованное свойство
+<font face="Verdana" size="2">Action</font>. Если действия к этому моменту описаны, то на панели инструментов из выпадающего списка среди возможных значений этого свойства достаточно выбрать нужное действие.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

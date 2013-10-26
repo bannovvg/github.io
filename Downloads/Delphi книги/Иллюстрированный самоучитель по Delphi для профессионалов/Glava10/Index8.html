@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TPicture</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Это класс-надстройка над <font face="Verdana" size="2">TGraphic</font>, точнее — над его потомками. Он имеет поле Graphic, которое может содержать объекты классов
+<font face="Verdana" size="2"> TBitmap, Ticon, TMetafile и TJPEGimage. </font> Предназначение класса
+<font face="Verdana" size="2"> TPicture</font> — управлять вызовами соответствующих методов, скрывая при этом хлопоты с определением типа графического объекта и детали его реализации.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме того, на уровне <font face="Verdana" size="2"> TPicture</font> определены возможности регистрации и использования других — определенных пользователем — классов графических объектов, порожденных от
+<font face="Verdana" size="2">TGraphic</font>. Доступ к графическому объекту осуществляется посредством свойства:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Graphic: TGraphic;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если графический объект имеет один из трех предопределенных типов, то к нему можно обратиться и как к одному из свойств:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Bitmap: TBitmap; property Icon: Ticon;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property Metafile: TMetafile;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обращаясь к этим функциям, нужно быть осторожным. Если в поле
+<font face="Verdana" size="2"> Graphic</font> хранился объект одного класса, а затребован объект другого класса, то прежний объект уничтожается, а вместо него создается пустой объект требуемого класса. Например:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Imagel.Picture.LoadFromFile('myicon.ico'); //Создан и загружен объект</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+класса Ticon</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyBitmap := Imagel.Picture.Bitmap; // прежний Ticon уничтожается</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если же вы описали свой класс (допустим, <font face="Verdana" size="2">TGiFimage</font>), то к его методам и свойствам следует обращаться так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(Graphic as TGIFImage).MyProperty := MyValue;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перечислим остальные методы и свойства.
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;procedure LoadFromFile(const Filename: string);</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Анализирует расширение имени файла <font face="Verdana" size="2"> FileName</font> и если оно известно (зарегистрировано), то создается объект нужного класса и вызывается его метод
+<font face="Verdana" size="2">LoadFromFile</font>. В противном случае возникает исключительная ситуация
+<font face="Verdana" size="2">EinvaiidGraphic</font>. Стандартными расширениями являются ico, wmf
+(emf) и bmp. Если подключить к приложению модуль JPEG.PAS, то можно будет загрузить и файлы с расширениями jpg и
+jpeg.
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;procedure SaveToFile(const Filename:
+    string);</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Сохраняет графику в файле, вызывая соответствующий метод объекта
+<font face="Verdana" size="2">Graphic</font>.
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;procedure LoadFromClipboardFormat(AFormat: Word; AData: THandle; APalette: HPALETTE);</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Во многом аналогичен методу <font face="Verdana" size="2">LoadFromFile</font>. Если формат
+<font face="Verdana" size="2"> AFormat</font> найден среди зарегистрированных, то
+<font face="Verdana" size="2"> AData</font> и <font face="Verdana" size="2"> APalette</font> передаются для загрузки методу соответствующего объекта. Изначально зарегистрированных форматов три: битовое изображение
+<font face="Verdana" size="2">CF_BITMAP</font>, метафайлы <font face="Verdana" size="2">CF_METAFILEPICT И
+CF_ENHMETAFILE.</font>
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">procedure SaveToClipboardFormat(var AFormat: Word; var AData: THandle; var APalette: HPALETTE);</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Сохраняет графику в буфере обмена, вызывая метод объекта
+<font face="Verdana" size="2">Graphic</font>.
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">procedure Assign(Source: TPersistent);</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> Assign</font> переписан таким образом, чтобы присваиваемый объект мог принадлежать как классу
+<font face="Verdana" size="2">TPicture</font>, так и <font face="Verdana" size="2"> TGraphic</font> или любого его потомка. Кроме того, он может быть равен
+<font face="Verdana" size="2"> nil</font> — в этом случае поле
+<font face="Verdana" size="2"> Graphic</font> очищается с удалением прежнего объекта.
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">class function SupportsClipboardFormat(AFormat: Word): Boolean;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Метод класса возвращает значение <font face="Verdana" size="2">True</font>, если формат
+<font face="Verdana" size="2"> AFormat</font> поддерживается классом
+<font face="Verdana" size="2"> TPicture</font> (зарегистрирован в системе). Напомним, что методы класса можно вызывать через ссылку на класс без создания экземпляра объекта.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="2" face="Verdana, Arial, Helvetica, sans-serif">class procedure RegisterFileFormat(const AExtension, 
+    ADescription: string; AGraphicClass: TGraphicClass); class procedure RegisterClipboardFormat(AFormat: 
+    Word; AGraphicClass: TGraphicClass);</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Предназначены для создателей новых графических классов. Они позволяют зарегистрировать формат файла и буфера обмена и связать их с созданным классом — потомком
+<font face="Verdana" size="2">TGraphic</font>, который умеет читать и записывать информацию в этом формате.
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property Width: Integer; property Height: Integer;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Ширина и высота картинки. Значения этого свойства всегда те же, что и у объекта из свойства
+<font face="Verdana" size="2">Graphic</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Все три разновидности графических объектов имеют свои системы кэширования. Это означает, что на один реально существующий в системе (и занимающий долю ресурсов!) дескриптор могут одновременно ссылаться несколько объектов. Реализуется такое связывание через метод Assign. Выражение:
+</font ></P>
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">
+Iconl.Assign(Icon2) ;</font></font ></P>
+<P><font face="Verdana" size="3">
+означает, что два этих объекта разделяют теперь один, фактически находящийся в памяти, значок.
+</font ></P>
+<P><font face="Verdana" size="3">
+Более простым является кэширование для классов
+<font face="Verdana" size="2">TIсоn</font> и <font face="Verdana" size="2">TMetafile</font>, которые умеют только отображать себя и не предназначены для редактирования (создатели Delphi считают, что дескриптор графического объекта дается программисту не для того, чтобы &quot;ковыряться&quot; в нем на уровне двоичных кодов). Гораздо сложнее устроен механизм кэширования для канала
+<font face="Verdana" size="2">TBitmap</font>, который имеет свою канву для рисования.
+</font ></P>
+<P><font face="Verdana" size="3">
+Внутреннее представление информации в графических объектах двоякое — она может храниться как поток типа
+<font face="Verdana" size="2"> TMemoryStream</font> (в него загружается содержимое соответствующего файла), как область памяти с дескриптором (структура которой зависит от типа графического объекта) и одновременно в двух этих видах, содержимое которых автоматически синхронизируется. Поэтому будьте готовы, что загрузка изображения потребует вдвое большего объема памяти — особенно это актуально для больших картинок.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кого-то может удивить отсутствие объявленных методов рисования, вроде метода
+<font face="Verdana" size="2"> Draw</font> для классов <font face="Verdana" size="2"> Ticon, TMetafile
+</font> и <font face="Verdana" size="2">TBitmap</font>. Объяснение простое — в процессе рисования они играют пассивную роль; рисуют не они — рисуют их. Все рисование должно осуществляться через вызовы методов
+<font face="Verdana" size="2"> Draw</font> и <font face="Verdana" size="2"> stretchDraw</font> канвы, содержащей графику, ибо канва соответствует тому контексту, в котором должна осуществляться операция.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим предопределенные графические классы.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TCollection</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TCollection</font> является оболочкой коллекции, обеспечивая разработчика набором свойств и методов для управления ею (табл. 7.3).
+</font ></P>
+<P><font face="Verdana" size="3">
+Сама коллекция содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Items[Index: Integer]: TCollectionltem;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Полное объявление свойства в классе выглядит следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Items[Index: Integer]: TCollectionltem read Getltem write Setltem;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Методы <font face="Verdana" size="2"> Getitem</font> и <font face="Verdana" size="2"> Setltem</font> обращаются к внутреннему полю
+<font face="Verdana" size="2">Fitems</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FItems: TList;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Именно оно хранит коллекцию объектов во время выполнения. Отсюда следует, что коллекция представляет собой список указателей на экземпляры класса
+<font face="Verdana" size="2"> TCollectionltem</font> или его наследника. Класс
+TCollect<font face="Verdana" size="2">i</font>on обеспечивает удобство использования элементов списка.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 7.3. </B>Свойства 
+  и методы класса <font face="Verdana" size="2"> TCollection</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="450" HEIGHT="300">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="27">
+<DIV WIDTH="356" HEIGHT="27" style="width: 94; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="27">
+<DIV WIDTH="300" HEIGHT="27" style="width: 122; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="48">
+<DIV WIDTH="356" HEIGHT="48" style="width: 194; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Count: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="48">
+<DIV WIDTH="300" HEIGHT="48" style="width: 275; height: 48">
+<P><font face="Verdana" size="3">
+Возвращает число элементов коллекции
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="63">
+<DIV WIDTH="356" HEIGHT="63" style="width: 184; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TcollectionltemClass = class of Tcollectionltem;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ItemClass: TcollectionltemClass;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="63">
+<DIV WIDTH="300" HEIGHT="63" style="width: 277; height: 76">
+<P><font face="Verdana" size="3">
+Возвращает класс-наследник
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">TCollectionltem</font>, экземпляры которого собраны в коллекции
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="52">
+<DIV WIDTH="356" HEIGHT="52" style="width: 182; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Items [Index: Integer]: Tcollectionltem;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="52">
+<DIV WIDTH="300" HEIGHT="52" style="width: 220; height: 52">
+<P><font face="Verdana" size="3">
+Коллекция экземпляров класса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="48">
+<DIV WIDTH="356" HEIGHT="48" style="width: 134; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Add: Tcollectionltem;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="48">
+<DIV WIDTH="300" HEIGHT="48" style="width: 283; height: 48">
+<P><font face="Verdana" size="3">
+Добавляет к коллекции новый экземпляр класса
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="200" HEIGHT="62">
+<DIV WIDTH="356" HEIGHT="62" style="width: 169; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Assign (Source: TPersistent) ; override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="289" HEIGHT="62">
+<DIV WIDTH="300" HEIGHT="62" style="width: 274; height: 62">
+<P><font face="Verdana" size="3">
+Копирует коллекцию из объекта <font face="Verdana" size="2"> Source</font> в данный объект
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="186" HEIGHT="65">
+<DIV WIDTH="342" HEIGHT="65" style="width: 187; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure BeginUpdate;   virtual;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="65">
+<DIV WIDTH="286" HEIGHT="65" style="width: 271; height: 65">
+<P><font face="Verdana" size="3">
+Отменяет перерисовку коллекции. Используется при внесении изменений в коллекцию
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="186" HEIGHT="60">
+<DIV WIDTH="342" HEIGHT="60" style="width: 133; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  Clear;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="60">
+<DIV WIDTH="286" HEIGHT="60" style="width: 252; height: 60">
+<P><font face="Verdana" size="3">
+Удаляет из коллекции все элементы
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="186" HEIGHT="44">
+<DIV WIDTH="342" HEIGHT="44" style="width: 163; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EndUpdate;   virtual;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="44">
+<DIV WIDTH="286" HEIGHT="44" style="width: 189; height: 57">
+<P><font face="Verdana" size="3">
+Отменяет действие метода <font face="Verdana" size="2">BeginUpdate</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="186" HEIGHT="50">
+<DIV WIDTH="342" HEIGHT="50" style="width: 186; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FindItemID(ID:   Integer): TCollectionltem;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="50">
+<DIV WIDTH="286" HEIGHT="50" style="width: 233; height: 50">
+<P><font face="Verdana" size="3">
+Возвращает объект коллекции с номером ID
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="186" HEIGHT="102">
+<DIV WIDTH="342" HEIGHT="102" style="width: 142; height: 102">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetNamePath:   string;   override;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="102">
+<DIV WIDTH="286" HEIGHT="102" style="width: 255; height: 102">
+<P><font face="Verdana" size="3">
+Возвращает имя класса коллекции во время выполнения, если коллекция не имеет владельца. Иначе возвращает название свойства класса, владеющего коллекцией
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="186" HEIGHT="52">
+<DIV WIDTH="342" HEIGHT="52" style="width: 188; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function  Insert (Index:   Integer): TCollectionltem;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="52">
+<DIV WIDTH="286" HEIGHT="52" style="width: 260; height: 52">
+<P><font face="Verdana" size="3">
+Вставляет в коллекцию новый объект на место с номером
+<font face="Verdana" size="2"> Index</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

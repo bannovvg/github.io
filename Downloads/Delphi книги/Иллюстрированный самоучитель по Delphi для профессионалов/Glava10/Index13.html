@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компонент TImage</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот компонент служит надстройкой над классом
+<font face="Verdana" size="2"> TPicture</font> и замыкает всю иерархию графических объектов VCL. Именно на его поверхности и будут отображаться графические объекты, содержащиеся в свойстве:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Picture: TPicture;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В качестве канвы компонента (свойство <font face="Verdana" size="2">canvas</font>) используется канва объекта из свойства
+<font face="Verdana" size="2">Picture.Graphic</font>, но только если поле
+<font face="Verdana" size="2"> Graphic</font> ссылается на объект класса
+<font face="Verdana" size="2">TBitmap</font>. Если это не так, то попытка обращения к свойству вызовет исключительную ситуацию
+<font face="Verdana" size="2"> EinvaiidOperation,</font> т. к. рисовать на метафайле или значке нельзя.
+</font ></P>
+<P><font face="Verdana" size="3">
+Следующие три свойства определяют, как именно графический объект располагается в клиентской области компонента:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property AutoSize: Boolean;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Означает, что размеры компонента настраиваются по размерам содержащегося в нем графического объекта. Устанавливать его в значение
+<font face="Verdana" size="2"> True</font> нужно перед загрузкой изображения из файла или буфера обмена.
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property Stretch:   Boolean;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Если это свойство установлено в значение <font face="Verdana" size="2">True</font>, то изображение &quot;натягивается&quot; на клиентскую область, при необходимости уменьшая или увеличивая свои размеры. Если оно установлено в
+<font face="Verdana" size="2">False</font>, то играет роль следующее
+свойство <font face="Verdana" size="2">Center</font>.
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;property Center: Boolean;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Если это свойство установлено в значение <font face="Verdana" size="2">True</font>, изображение центрируется в пределах клиентской области. В противном случае оно располагается в ее верхнем левом углу.
+</font ></P>
+<P><font face="Verdana" size="3">
+Несмотря на то, что описанию свойств и методов графических объектов здесь отведено уже довольно много места, работа с ними проста и удобна. Программу для просмотра изображений в среде Delphi можно создать буквально &quot;в три счета&quot;:
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Поместите на форму следующие компоненты: область прокрутки
+<font face="Verdana" size="2">TScrollBox</font>, на нее — компонент
+<font face="Verdana" size="2"> Timage</font> (их верхние левые углы должны совпадать), любую кнопку (например,
+<font face="Verdana" size="2">TButton</font>) и диалог открытия файлов
+<font face="Verdana" size="2"> TOpenPictureDialog.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+2.  Подключите к главному модулю создаваемого приложения модуль JPEG (в предложении
+<font face="Verdana" size="2">uses</font>); свойство <font face="Verdana" size="2"> AutoSize</font> компонента
+<font face="Verdana" size="2"> Timage</font> установите в значение
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+3. Дважды щелкните мышью на кнопке. В появившемся обработчике события
+<font face="Verdana" size="2">oncдick</font> напишите такой код:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.BitBtnlClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+OpenPictureDialogl.Filter := GraphicFilter(TGraphic);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if OpenPictureDialogl.Execute</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then Imagel.Picture.LoadFromFile</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+(OpenPictureDialogl.FileName);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Приложение готово. Обратите внимание на роль полиморфизма в методе
+<font face="Verdana" size="2"> LoadFromFile</font> — по расширению файла определяется его формат и в зависимости от этого создается нужный графический объект.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

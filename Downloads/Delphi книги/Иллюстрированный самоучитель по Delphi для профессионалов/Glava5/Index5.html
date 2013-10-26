@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компонент TlmageList</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+С ростом возможностей пользовательского интерфейса Windows все больше и больше элементов управления стали оснащаться значками и картинками. И вот для централизованного управления этими картинками появился элемент управления
+<font face="Verdana" size="2">TImageList</font>. Он представляет собой оболочку для создания и использования коллекции одинаковых по размеру и свойствам изображений. На этапе разработки ее &quot;начиняют&quot; картинками (с Delphi для этих целей поставляется целая подборка, находящаяся в каталоге \Images). Компонент
+<font face="Verdana" size="2">TImageList</font> обладает двумя свойствами —
+<font face="Verdana" size="2"> Images</font> И <font face="Verdana" size="2">Imagelndex</font>. Первое
+указывает на список (компонент <font face="Verdana" size="2">TlmageList</font>), второе — на конкретную картинку в этом списке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Проще всего заполнить список при помощи встроенного редактора (рис. 5.2), выполнив двойной щелчок на компоненте или выбрав пункт <B>Image List Editor </B>в его контекстном меню.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.5.2.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 5.2. </B> Редактор списка 
+  изображений <B> </B><font face="Verdana" size="2">TImageList</font> </font ></P>
+<P><font face="Verdana" size="3"> Пользоваться редактором очень просто, но нужно 
+  обратить внимание на одну тонкость. Только что выбранное изображение можно отредактировать, 
+  изменив его положение относительно отведенного ему прямоугольника: <B>Crop </B>(размещение, 
+  начиная с точки (0, 0)), <B>Stretch </B>(масштабирование) или <B>Center </B>(центровка). 
+  Кроме того, можно изменить прозрачный цвет <B>(Transparent Color). </B>Точки 
+  с этим цветом при отрисовке не будут видны (прозрачны). Изображение можно выбрать 
+  либо из списка, либо мышью, щелкнув в нужном месте на увеличенной картинке в 
+  верхнем левом углу редактора. Если редактор уже записал изображение в список, 
+  редактирование этих свойств становится невозможным. Запись происходит, например, 
+  при закрытии редактора. Стало быть, размер картинок (свойства <font face="Verdana" size="2"> 
+  Height</font> и <font face="Verdana" size="2">width</font>) нужно установить 
+  заранее. Если компонент настроен на размер 16x16, а вы пытаетесь наполнить его 
+  картинками 32x32, они будут сжаты и потеряют во внешнем виде. </font ></P>
+<P><font face="Verdana" size="3"> Можно сильно упростить подбор картинок для <font face="Verdana" size="2">TimageList</font>. 
+  Если просмотреть ресурсы приложений из состава MS Office, да и многих других 
+  пакетов, то можно обнаружить, что картинки, которые встречаются на панелях инструментов, 
+  &quot;склеены&quot; между собой. Для просмотра ресурсов можно использовать, 
+  к примеру, приложение Resxplor, поставляемое в качестве примера с Delphi 7. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Такие картинки удобно использовать и в собственных 
+  программах. Кроме того, со времен Delphi 3 известна следующая ошибка разработчиков 
+  Microsoft: в разных версиях библиотеки ComCtl32.dll запись и чтение картинок 
+  при сохранении осуществлялась по-разному; если вы заполнили список во время 
+  разработки, скомпилировали приложение и запустили его на машине с другой версией 
+  библиотеки ComCtl32, вполне вероятно, что список окажется пустым. </font ></P>
+<P><font face="Verdana" size="3"> Таким образом, с любой точки зрения правильнее 
+  явно читать картинки из ресурсов. Последовательность действий для этого следующая: 
+  </font ></P>
+<P><font face="Verdana" size="3"> 1. Создать исходный файл ресурсов, куда нужно 
+  включить и поименовать требуемые файлы с расширением bmp, к примеру: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">inout BITMAP 
+    &quot;inout.bmp&quot;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;tools 
+    BITMAP &quot;tools.bmp&quot;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Сохранить этот файл с расширением rс, скажем, 
+  bitmap.rс. </font ></P>
+<P><font face="Verdana" size="3"> 2. Скомпилировать ресурсы при помощи утилиты 
+  brcc32.exe, поставляемой с Delphi: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> C:\Program Files\Borland\Delphi7\bin\brcc32 
+    bitmap.rc</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> 3. Появившийся файл bitmap.res нужно включить 
+  в состав проекта. Для этого используется директива <font face="Verdana" size="2">$R</font>: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">{$R bitmap.res}</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> 4. Теперь картинка содержится в ресурсах и будет 
+  включена в состав исполняемого файла. Осталось загрузить ее в компонент <font face="Verdana" size="2">TimageList</font>. 
+  Для этого используется метод <font face="Verdana" size="2">ResourceLoad</font>: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ImageListl.ResourceLoad(rtBitmap, 
+    'bitmaps',TColor(0));</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> При этом произойдет автоматическая &quot;нарезка&quot; 
+  картинок в соответствии со свойствами <font face="Verdana" size="2"> width</font> 
+  и <font face="Verdana" size="2">Height</font>. Если размер большой картинки, 
+  к примеру, 256x16 пикселов, а ширина, заданная свойством <font face="Verdana" size="2">TimageList</font>, 
+  равна 16 пикселам, то в список будут включены 16 элементов размером 16x16. Поэтому 
+  еще во время разработки нужно правильно настроить размеры в компоненте <font face="Verdana" size="2">TimageList</font>, 
+  иначе после загрузки ресурса картинки будут разрезаны как попало. </font ></P>
+<P><font face="Verdana" size="3"> Есть и другой метод загрузки — <font face="Verdana" size="2">FileLoad</font>: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function FileLoad(ResType: 
+    TResType; Name: string; MaskColor: TColor): Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Аналогичным путем он позволяет загружать картинки 
+  из любого пригодного файла. Но загрузка из файла менее надежна — нет гарантии, 
+  что у пользователя вашего приложения нужный файл всегда находится на месте и 
+  он не изменен. </font ></P>
+<P><font face="Verdana" size="3"> Описанный выше редактор списка картинок &quot;умеет&quot; 
+  делать их прозрачными еще во время разработки. Часто бывает необходимо сделать 
+  прозрачными картинки, загружаемые из файлов во время исполнения. Для этого нужно 
+  использовать их свойство <font face="Verdana" size="2">Transparent</font>: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Var bmp: TBitmap;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> bmp.LoadFromFile('с:\test.bmp');</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> bmp.Transparent 
+    := True;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ImageListl.AddMasked(bmp, 
+    bmp.TransparentColor);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В методе <font face="Verdana" size="2"> AddMasked</font> 
+  нужно вторым параметром указать &quot;прозрачный&quot; (фоновый) цвет, который 
+  в данном случае равен <font face="Verdana" size="2">bmp</font>.<font face="Verdana" size="2">TransparentColor</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Как элемент управления <B>Win32, </B>компоннет 
+  <font face="Verdana" size="2"> TimageList</font> имеет собственный дескриптор: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Handle: 
+    HImageList;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Не следует путать этот дескриптор с дескрипторами 
+  растровых картинок, входящих в состав списка. В файле CommCtrl.pas приведены 
+  прототипы всех функций для работы с этим элементом управления, и для их вызова 
+  необходимо значение свойства <font face="Verdana" size="2">Handle</font>. Обратитесь 
+  к ним, если опубликованных свойств <font face="Verdana" size="2"> TimageList</font> 
+  вам недостаточно. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index6.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

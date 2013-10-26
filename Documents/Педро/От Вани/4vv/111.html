@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<TITLE>Чтение файла</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var filepath = "1.txt";
+var fso = new ActiveXObject("Scripting.FileSystemObject");
+var myfile = fso.OpenTextFile(filepath, 1); // Оъект файла
+
+function window.onload()
+{
+  //Функция выполняется после загрузки документа.
+  //Здесь загружается содержимое файла в текстовую область.
+  document.frm1.txt1.value = myfile.ReadAll();
+  //Перемещение указателя в начало файла
+  myfile.Close();
+  myfile = fso.OpenTextFile(filepath, 1);
+}
+
+function f1(x)
+{
+  myfile.Skip(x);
+  alert ("Новая строка: "+myfile.Line+", новый столбец: "+myfile.Column);
+  //Получение нового содержимого файла
+  document.frm1.txt1.value = "";
+  document.frm1.txt1.value = myfile.ReadAll();
+  //Перемещение указателя в начало файла
+  myfile.Close();
+  myfile = fso.OpenTextFile(filepath, 1);
+}  
+//-->
+</SCRIPT>
+</HEAD>
+<BODY>
+<embed src=1.swf>
+<H2>Как выбрать обьектив?</H2>
+<FORM NAME="frm1">
+
+<TEXTAREA COLS=100% ROWS=100% WRAP=soft NAME="txt1"></TEXTAREA><BR>
+
+</FORM>
+</BODY>
+</HTML>

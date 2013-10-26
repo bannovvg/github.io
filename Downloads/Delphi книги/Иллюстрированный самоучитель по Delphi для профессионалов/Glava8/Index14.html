@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Категория 
+  List</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В этой категории выделяются две группы действий. Первые пять из них (табл. 8.3) автоматизируют работу с выделенными элементами списков. Оставшиеся два —
+<font face="Verdana" size="2"> TStaticListAction</font> И <font face="Verdana" size="2"> TVirtualListAction</font> — требуют
+отдельного рассмотрения.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 8.3. </B>Действия 
+  по работе с выделенными элементами списков </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="444" HEIGHT="204">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="33">
+<DIV WIDTH="244" HEIGHT="33" style="width: 83; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Действие</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="242" HEIGHT="33">
+<DIV WIDTH="385" HEIGHT="33" style="width: 121; height: 33">
+<P><font face="Verdana" size="3">
+<b>
+Назначение</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="64">
+<DIV WIDTH="244" HEIGHT="64" style="width: 167; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TListControlSelectAll</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="242" HEIGHT="64">
+<DIV WIDTH="385" HEIGHT="64" style="width: 214; height: 64">
+<P><font face="Verdana" size="3">
+Выделяет все элементы списка. Активно, только если у списка свойство
+<font face="Verdana" size="2"> MultiSelect</font> установлено в значение
+<font face="Verdana" size="2"> True</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="27">
+<DIV WIDTH="244" HEIGHT="27" style="width: 199; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TListControlClearSelection</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="242" HEIGHT="27">
+<DIV WIDTH="385" HEIGHT="27" style="width: 220; height: 27">
+<P><font face="Verdana" size="3">
+Отменяет выделение элементов в списке
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="29">
+<DIV WIDTH="244" HEIGHT="29" style="width: 201; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TListControlDeleteSelection</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="242" HEIGHT="29">
+<DIV WIDTH="385" HEIGHT="29" style="width: 216; height: 29">
+<P><font face="Verdana" size="3">
+Удаляет выделенные элементы
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="52">
+<DIV WIDTH="244" HEIGHT="52" style="width: 165; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TListControlCopySelection</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="242" HEIGHT="52">
+<DIV WIDTH="385" HEIGHT="52" style="width: 227; height: 57">
+<P><font face="Verdana" size="3">
+Копирует выделенные элементы списка в список
+<font face="Verdana" size="2">Destination</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="209" HEIGHT="54">
+<DIV WIDTH="231" HEIGHT="54" style="width: 146; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TListControlMoveSelection</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="242" HEIGHT="54">
+<DIV WIDTH="385" HEIGHT="54" style="width: 236; height: 54">
+<P><font face="Verdana" size="3">
+Переносит выделенные элементы списка в список
+<font face="Verdana" size="2"> Destination</font>
+</font ></P>
+</DIV>
+</TD>
+</TABLE>
+<P><font face="Verdana" size="3">
+Действия работают с компонентом <font face="Verdana" size="2">TListBox</font>, а в среде Kylix — еще и с
+<font face="Verdana" size="2"> TListview</font> (не путать с одноименным компонентом для Windows — он не годится для данной категории). Подходит также и
+<font face="Verdana" size="2">TCоmbовох</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В отличие от многих других действий члены этой категории могут явно связываться с нужным вам списком. Если задано значение свойства
+<font face="Verdana" size="2">Listcontrol</font>, то все действия производятся над ним. Если нет, то выбирается активный список из числа имеющихся на форме.
+</font ></P>
+<P><font face="Verdana" size="3">
+Особняком стоят два действия
+<B> </B>—<font face="Verdana" size="2"> TStaticListAction</font> И <font face="Verdana" size="2"> TVirtualListAction</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+По замыслу разработчиков они являются централизованными хранилищами элементов для многих списков. Причем элементы списка могут храниться сразу с заданными картинками (т. е. свойствами
+<font face="Verdana" size="2">imageindex</font>) и указателями на сопутствующие данные.
+</font ></P>
+<P><font face="Verdana" size="3">
+Дальнейшее просто — разработчик выбирает нужные компоненты
+<font face="Verdana" size="2">TListBox</font>, <font face="Verdana" size="2"> TComboBox</font> и т. п. и в их свойстве
+<font face="Verdana" size="2"> Action</font> указывает на действие — хранилище. Опубликовано свойство
+<font face="Verdana" size="2"> Action</font> у компонента <font face="Verdana" size="2">TCоmbовохЕх</font> (впервые появившегося в Delphi 6). У остальных потомков
+<font face="Verdana" size="2">TControl</font> это свойство относится к группе видимости
+<font face="Verdana" size="2">public</font>, поэтому вы можете сделать присвоение при запуске приложения (в методе
+<font face="Verdana" size="2"> onCreate</font> главной формы).
+</font ></P>
+<P><font face="Verdana" size="3">
+Если действие и компонент-список связаны, то должны происходить две вещи:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;при изменении текущего элемента в любом из компонентов 
+    происходит синхронное изменение во всех остальных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;когда пользователь выбирает один из элементов списка, 
+    выполняется действие, связанное с этим списком, и вызывается метод-обработчик</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TItemSelectedEvent = procedure(Sender: TCustomListAction;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Control: TControi) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnltemSelected: TItemSelectedEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс TParam </strong><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TParam</font> инкапсулирует свойства отдельного параметра. Имя параметра определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Name: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Тип данных параметра задает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataType: TFieldType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Тип данных параметра и связанного поля должны совпадать.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тип параметра определяется множеством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TParamType = (ptUnknown, ptInput, ptOutput, ptlnputOutput, ptResult); TParamTypes = set of TParamType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое имеет следующие значения:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ptUnknown</font> 
+    — тип неизвестен;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ptinput</font> 
+    — параметр предназначен для передачи значения из приложения;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ptOutput</font> 
+    — параметр предназначен для передачи значения в приложение;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ptlnputOutput</font> 
+    — параметр предназначен для передачи и приема значения;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">ptResult</font> 
+    — параметр предназначен для передачи в приложения информации о статусе операции.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamType: TParamType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет тип параметра.
+</font ></P>
+<P><font face="Verdana" size="3">
+При работе с параметрами довольно часто бывает необходимо определить, имеет ли параметр ненулевое значение. Для этого используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IsNull: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство возвращает значение <font face="Verdana" size="2">True</font>, если параметр не имеет значения или имеет значение
+<font face="Verdana" size="2">Null</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Bound: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает значение <font face="Verdana" size="2"> True</font> только тогда, когда параметру не присваивалось значение вообще.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Clear;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+присваивает параметру значение <font face="Verdana" size="2">Null</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Само значение параметра задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Value: Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но использование вариантов не очень эффективно, когда требуется обеспечить максимальную скорость. В таких случаях можно обратиться к целому набору свойств
+<font face="Verdana" size="2"> AS ...,</font> которые не только возвращают значение, но и приводят его к некоторому типу. Например, свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Aslnteger: Longlnt;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает целочисленное значение поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Необходимо осторожно использовать свойства 
+    с приведением типа, т. к. попытка преобразования неверного значения вызовет 
+    исключительную ситуацию. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для чтения из буфера и записи в буфер значения параметра соответственно используются методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetData(Buffer: Pointer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">procedure GetData(Buffer: Pointer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а необходимый размер при записи в буфер позволит определить метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetDataSize: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Можно скопировать тип данных, имя и значение параметра прямо из поля данных. Для этого применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure AssignField(Field: TField);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а для присвоения типа данных и значения используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure AssignFieldValue(Field: TField; const Value: Variant);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Общее число знаков для числовых значений определяет свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Precision: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NumericScale:   Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задает число знаков после запятой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для строковых параметров размер задает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Size: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

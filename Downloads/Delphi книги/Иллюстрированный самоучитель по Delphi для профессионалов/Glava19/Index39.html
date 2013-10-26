@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index38.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index40.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Пример приложения ADO</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь попробуем применить на практике представленную в этой главе информацию о реализации ADO в Delphi. В качестве примера создадим простое приложение ADO Demo, которое &quot;умеет&quot; отображать пару таблиц БД, сохранять изменения при помощи групповых операций, сортировать записи и устанавливать фильтры на выбранные записи (рис. 19.9).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.19.9.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 19.9. </B>Главное окно 
+  приложения ADO Demo </font ></P>
+<P><font face="Verdana" size="3"> В качестве источника данных выберем файлы dBase, 
+  имеющиеся в демонстрационной базе данных Delphi \Program Files\Common Files\Borland 
+  Shared \Data. Для использования в приложении выберем две таблицы: <font face="Verdana" size="2"> 
+  INDUSTRY</font> и <font face="Verdana" size="2">MASTER</font>. Они связаны между 
+  собой внешним ключом по полям <font face="Verdana" size="2"> IND_CODE </font> 
+  и <font face="Verdana" size="2"> INDUSTRY</font> соответственно. </font ></P>
+<P><font face="Verdana" size="3"> Таблицу <font face="Verdana" size="2"> INDUSTRY</font> 
+  можно редактировать, она инкапсулирована в компоненте <font face="Verdana" size="2">tbiIndustry</font> 
+  типа <font face="Verdana" size="2">TADOTable</font> и отображается в левом компоненте 
+  <font face="Verdana" size="2">TDBGrid</font>. А таблица <font face="Verdana" size="2"> 
+  MASTER</font> инкапсулирована в компоненте <font face="Verdana" size="2">tbIMaster</font>, 
+  предназначена только для просмотра. Эти два компонента связаны отношением &quot;ОДИН-КО-МНОГИМ&quot; 
+  При помощи свойств <font face="Verdana" size="2">MasterSource</font> И <font face="Verdana" size="2">MasterFields</font>. 
+  </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 19.2. </B> Секция 
+  <font face="Verdana" size="2">implementation</font> модуля <font face="Verdana" size="2">uMain</font> 
+  приложения ADO Demo&nbsp; </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> implementation</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> uses IniFiles, 
+    FileCtrl;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> const slniFileName: 
+    String = 'ADODemo.ini';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> sEmptyDefDB: 
+    String = 'Database path is empty';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> sEmptyFilter: 
+    String = 'Records for filter is not selected';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> {$R *.dfm}</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.FormShow(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with TIniFile.Create(slniFileName) 
+    do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DefDBStr := 
+    ReaDString('DefDB', 'DefDBStr1, &quot;);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> edDefDB.Text 
+    := DefDBStr;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;finally</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Free; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SetLength(Bookmarks, 
+    0);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.FormClose(Sender: 
+    TObject; var Action: TCloseAction);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with TIniFile.Create(slniFileName) 
+    do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> WriteStringCDefDB', 
+    'DefDBStr', edDefDB.Text);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> finally</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Free ;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.sbDefDBClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin 
+    if SelectDirectory(DefDBStr, [], 0)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then edDefDB.Text 
+    := DefDBStr;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.tbConnectClick(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ADOConn.Close;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ADOConn.DefaultDatabase 
+    := ''; if DefDBStr = '' then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MessageDlg(sEmptyDefDB, 
+    mtError, [mbOK], 0);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Abort;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> else&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ADOConn.DefaultDatabase 
+    := DefDBStr;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ADOConn.Open;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.tbSaveClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> tbllndustry.UpdateBatch();&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.tbFilterClick(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var i: Integer;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if dbglndustry.SelectedRows.Count 
+    &gt; 0 then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> SetLength(Bookmarks, 
+    dbglndustry.SelectedRows.Count);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;for i 
+    := 0 to dbglndustry.SelectedRows.Count — 1 do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Bookmarks[i].VType 
+    := vtPointer;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Bookmarks[i].VPointer 
+    := pointer(dbglndustry.SelectedRows[i]);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> tbllndustry.FilterOnBookmarks(Bookmarks);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end else</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> MessageDlgtsEmptyFilter, 
+    mtWarning, [mbOK], 0);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.tbUnFilterClick(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> tbllndustry.Filtered 
+    := False;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">dbglndustry.SelectedRows.Clear;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.dbglndustryTitleClick(Column: 
+    TColumn);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin if tbllndustry.Active 
+    then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if (Pos(Column.FieldName, 
+    tbllndustry.Sort) &gt; 0</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">}and(Pos('ASC', 
+    tbllndustry.Sort) &gt; 0)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then tbllndustry.Sort 
+    := Column.FieldName + ' DESC' else tbllndustry.Sort := Column.FieldName + 
+    ' ASC';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.ADOConnAfterConnect(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var i: Integer;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> for i := 0 
+    to adoConn.DataSetCount - 1 do ADOConn.DataSets [i] .Open/end;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TfmMain.ADOConnBeforeDisconnect(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var i: Integer;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> for i := 0 
+    to adoConn.DataSetCount — 1 do ADOConn.DataSets[i].Close;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index38.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index40.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  хранимой процедуры</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент хранимой процедуры предназначен для определения процедуры, установки ее параметров, выполнения процедуры и возвращения результатов в компонент.
+</font ></P>
+<P><font face="Verdana" size="3">
+В зависимости от выбранной технологии доступа к данным, каждый компонент хранимой процедуры имеет собственный способ соединения с сервером. После подключения к источнику данных имя хранимой процедуры можно выбрать из списка свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StoredProcName: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После этого свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Params: TParams;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+предназначенное для хранения параметров процедуры, автоматически заполняется.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для хранимых процедур важно деление параметров на входные и выходные. Первые содержат исходные данные, а вторые передают результаты выполнения процедуры.
+</font ></P>
+<P><font face="Verdana" size="3">
+Детально класс <font face="Verdana" size="2"> TParams</font> описывается ниже. Общее число параметров возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamCount: Word;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для подготовки хранимой процедуры используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Prepare;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Prepared:   Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое должно получить значение <font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure UnPrepare;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или свойство <font face="Verdana" size="2"> Prepared := False </font> выполняют обратное действие.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме того, проверка значения свойства <font face="Verdana" size="2"> Prepared</font> позволяет установить, осуществлялась ли подготовка процедуры к выполнению или нет.
+</font ></P>
+<p><font face="Verdana" size="3"> <b>Внимание</b> </font ></p>
+<blockquote> 
+  <P><font face="Verdana" size="3"> После выполнения хранимой процедуры исходный 
+    порядок следования параметров в списке <font face="Verdana" size="2"> Params</font> 
+    может измениться. Поэтому для доступа к конкретному параметру рекомендуется 
+    использовать метод </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function ParamByName(const 
+    Value: String): TParam;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если хранимая процедура возвращает набор данных, компонент можно открывать методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Open;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Active:   Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В противном случае для выполнения процедуры используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+procedure ExecProc;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и после этого выходные параметры получат вычисленные значения.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

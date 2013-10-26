@@ -1,0 +1,596 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Приоритеты 
+  потоков</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Интерфейс Win32 API позволяет программисту управлять распределением времени между потоками; это распространяется и на приложения, написанные на Delphi. Операционная система планирует время процессора в соответствии с приоритетами потоков.
+</font ></P>
+<P><font face="Verdana" size="3">
+Приоритет потока — величина, складывающаяся из двух составных частей: приоритета породившего поток процесса и собственно приоритета потока. Когда поток создается, ему назначается приоритет, соответствующий приоритету породившего его процесса.
+</font ></P>
+<P><font face="Verdana" size="3">
+В свою очередь, процессы могут иметь следующие классы приоритетов.
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Real time;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Normal;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;High;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Below normal;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Above normal;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Idle</font>.</li>
+</ul>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Классы <font face="Verdana" size="2"> Above 
+    normal</font> и <font face="Verdana" size="2"> Below normal</font> появились 
+    впервые в Windows 2000. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Класс реального времени задает приоритет даже больший, чем у многих процессов операционной системы. Такой приоритет нужен для процессов, обрабатывающих высокоскоростные потоки данных. Если такой процесс не завершится за короткое время, пользователь почувствует, что система перестала откликаться, т. к. даже обработка событий мыши не получит времени процессора.
+</font ></P>
+<P><font face="Verdana" size="3">
+Использование класса <font face="Verdana" size="2"> High</font> ограничено процессами, которые должны завершаться за короткое время, чтобы не вызвать сбойной ситуации. Пример — процесс, который посылает сигналы внешнему устройству; причем устройство отключается, если не получит своевременный сигнал. Если у вас возникли проблемы с производительностью вашего приложения, было бы неправильно решать их просто за счет повышения его приоритета до
+h<font face="Verdana" size="2">i</font>gh — такой процесс также влияет на всю ОС. Возможно, в этом случае следует модернизировать компьютер.
+</font ></P>
+<P><font face="Verdana" size="3">
+Большинство процессов запускается в рамках класса с нормальным приоритетом. Нормальный приоритет означает, что процесс не требует какого-либо специального внимания со стороны операционной системы.
+</font ></P>
+<P><font face="Verdana" size="3">
+И наконец, процессы с фоновым приоритетом запускаются лишь в том случае, если в очереди Диспетчера задач нет других процессов. Обычные виды приложений, использующие такой приоритет, — это программы сохранения экрана и системные агенты
+(<font face="Verdana" size="2">system agents</font>). Программисты могут использовать фоновые процессы для организации завершающих операций и реорганизации данных. Примерами могут служить сохранение документа или резервное копирование базы данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Приоритеты имеют значения от 0 до 31. Процесс, породивший поток, может впоследствии изменить его приоритет; в этой ситуации программист имеет возможность управлять скоростью отклика каждого потока.
+</font ></P>
+<P><font face="Verdana" size="3">
+Базовый приоритет нити складывается из двух составляющих, однако это не означает, что он просто равен их сумме. Взгляните на соответствующие величины, которые показаны в табл. 29.1. Для потока, имеющего собственный приоритет
+<font face="Verdana" size="2">THREAD_PRIORITY_IDLE</font>, базовый приоритет будет равен 1, невзирая на приоритет породившего его процесса.
+</font ></P>
+<P><font face="Verdana" size="3">
+И еще для класса <font face="Verdana" size="2"> Normal</font> приведены по два приоритета, снабженные буквами
+<font face="Verdana" size="2"> В (Background)</font> и <font face="Verdana" size="2"> F
+(Foreground)</font>. Объяснение этому дается ниже.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 29.1. </B>Классы процессов 
+  и приоритеты их потоков (для Windows 2000 и ХР) </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="538" HEIGHT="594">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="78" HEIGHT="84">
+</TD>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="84">
+<DIV WIDTH="86" HEIGHT="84" style="width: 21; height: 84">
+<P><font face="Verdana" size="3">
+<font face="Courier New" size="2">
+IDLE_ PRIORITY CLASS</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="84">
+<DIV WIDTH="86" HEIGHT="84" style="width: 9; height: 84">
+<P><font face="Verdana" size="3">
+<font face="Courier New" size="2">
+BELOW_ NORMAL PRIORITY CLASS</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="84">
+<DIV WIDTH="90" HEIGHT="84" style="width: 59; height: 84">
+<P><font face="Verdana" size="3">
+<font face="Courier New" size="2">
+NORMAL_ PRIORITY_ CLASS</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="84">
+<DIV WIDTH="85" HEIGHT="84" style="width: 68; height: 84">
+<P><font face="Verdana" size="3">
+<font face="Courier New" size="2">
+ABOVE_ NORMAL_ PRIORITY_ CLASS</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="84">
+<DIV WIDTH="86" HEIGHT="84" style="width: 46; height: 84">
+<P><font face="Verdana" size="3">
+<font face="Courier New" size="2">
+HIGH PRIORITY CLASS</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="72" HEIGHT="84">
+<DIV WIDTH="108" HEIGHT="84" style="width: 63; height: 84">
+<P><font face="Verdana" size="3">
+<font face="Courier New" size="2">
+REALTIME PRIORITY CLASS</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<font face="Arial, Helvetica, sans-serif" size="3">
+
+
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="78" HEIGHT="62">
+<DIV WIDTH="94" HEIGHT="62" style="width: 45; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+THREAD_ PRIORITY_</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IDLE</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="62">
+<DIV WIDTH="86" HEIGHT="62" style="width: 3; height: 62">
+<P><font face="Verdana" size="3">
+1
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="62">
+<DIV WIDTH="86" HEIGHT="62" style="width: 3; height: 62">
+<P><font face="Verdana" size="3">
+1
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="62">
+<DIV WIDTH="90" HEIGHT="62" style="width: 2; height: 62">
+<P><font face="Verdana" size="3">
+1
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="62">
+<DIV WIDTH="85" HEIGHT="62" style="width: 4; height: 62">
+<P><font face="Verdana" size="3">
+1
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="62">
+<DIV WIDTH="86" HEIGHT="62" style="width: 2; height: 62">
+<P><font face="Verdana" size="3">
+1
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="72" HEIGHT="62">
+<DIV WIDTH="108" HEIGHT="62" style="width: 8; height: 62">
+<P><font face="Verdana" size="3">
+16
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="78" HEIGHT="58">
+<DIV WIDTH="94" HEIGHT="58" style="width: 4; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+THREAD_ PRIORITY LOWEST</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="58">
+<DIV WIDTH="86" HEIGHT="58" style="width: 5; height: 58">
+<P><font face="Verdana" size="3">
+2
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="58">
+<DIV WIDTH="86" HEIGHT="58" style="width: 8; height: 58">
+<P><font face="Verdana" size="3">
+4
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="58">
+<DIV WIDTH="90" HEIGHT="58" style="width: 23; height: 58">
+<P><font face="Verdana" size="3">
+5(B)&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+7(F)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="58">
+<DIV WIDTH="85" HEIGHT="58" style="width: 14; height: 58">
+<P><font face="Verdana" size="3">
+8
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="58">
+<DIV WIDTH="86" HEIGHT="58" style="width: 2; height: 58">
+<P><font face="Verdana" size="3">
+11
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="72" HEIGHT="58">
+<DIV WIDTH="108" HEIGHT="58" style="width: 30; height: 58">
+<P><font face="Verdana" size="3">
+22
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="78" HEIGHT="77">
+<DIV WIDTH="94" HEIGHT="77" style="width: 6; height: 77">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+THREAD_ PRIORITY_ BELOW NORMAL</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="77">
+<DIV WIDTH="86" HEIGHT="77" style="width: 6; height: 77">
+<P><font face="Verdana" size="3">
+3
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="77">
+<DIV WIDTH="86" HEIGHT="77" style="width: 7; height: 77">
+<P><font face="Verdana" size="3">
+5
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="77">
+<DIV WIDTH="90" HEIGHT="77" style="width: 3; height: 77">
+<P><font face="Verdana" size="3">
+6(B)&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+8(F)&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="77">
+<DIV WIDTH="85" HEIGHT="77" style="width: 1; height: 77">
+<P><font face="Verdana" size="3">
+9
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="77">
+<DIV WIDTH="86" HEIGHT="77" style="width: 1; height: 77">
+<P><font face="Verdana" size="3">
+12
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="72" HEIGHT="77">
+<DIV WIDTH="108" HEIGHT="77" style="width: 9; height: 77">
+<P><font face="Verdana" size="3">
+23
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="78" HEIGHT="27">
+<DIV WIDTH="94" HEIGHT="67" style="width: 1; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+THREAD_ PRIORITY_ NORMAL</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="27">
+<DIV WIDTH="86" HEIGHT="67" style="width: 2; height: 67">
+<P><font face="Verdana" size="3">
+ 4
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="27">
+<DIV WIDTH="86" HEIGHT="67" style="width: 5; height: 67">
+<P><font face="Verdana" size="3">
+6
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="27">
+<DIV WIDTH="90" HEIGHT="67" style="width: 4; height: 59">
+<P><font face="Verdana" size="3">
+7(B)&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+ 9(F)&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="27">
+<DIV WIDTH="85" HEIGHT="67" style="width: 6; height: 67">
+<P><font face="Verdana" size="3">
+10
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="27">
+<DIV WIDTH="86" HEIGHT="67" style="width: 3; height: 67">
+<P><font face="Verdana" size="3">
+13
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="72" HEIGHT="27">
+<DIV WIDTH="108" HEIGHT="67" style="width: 2; height: 67">
+<P><font face="Verdana" size="3">
+24
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="78" HEIGHT="81">
+<DIV WIDTH="94" HEIGHT="81" style="width: 72; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+THREAD PRIORITY_ ABOVE_ NORMAL</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="81">
+<DIV WIDTH="86" HEIGHT="81" style="width: 9; height: 36">
+<P><font face="Verdana" size="3">
+5
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="81">
+<DIV WIDTH="86" HEIGHT="81" style="width: 1; height: 29">
+<P><font face="Verdana" size="3">
+7
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="81">
+<DIV WIDTH="90" HEIGHT="81" style="width: 35; height: 38">
+<P><font face="Verdana" size="3">
+8(В)&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+10(F)
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="81">
+<DIV WIDTH="85" HEIGHT="81" style="width: 2; height: 81">
+<P><font face="Verdana" size="3">
+11
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="81">
+<DIV WIDTH="86" HEIGHT="81" style="width: 1; height: 81">
+<P><font face="Verdana" size="3">
+14
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="72" HEIGHT="81">
+<DIV WIDTH="108" HEIGHT="81" style="width: 1; height: 81">
+<P><font face="Verdana" size="3">
+25
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="78" HEIGHT="58">
+<DIV WIDTH="94" HEIGHT="58" style="width: 2; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+THREAD_ PRIORITY_ HIGHEST</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="58">
+<DIV WIDTH="86" HEIGHT="58" style="width: 5; height: 58">
+<P><font face="Verdana" size="3">
+6
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="58">
+<DIV WIDTH="86" HEIGHT="58" style="width: 1; height: 58">
+<P><font face="Verdana" size="3">
+8
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="58">
+<DIV WIDTH="90" HEIGHT="58" style="width: 33; height: 58">
+<P><font face="Verdana" size="3">
+&nbsp;9(B)&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+11(F)&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="58">
+<DIV WIDTH="85" HEIGHT="58" style="width: 2; height: 58">
+<P><font face="Verdana" size="3">
+12
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="58">
+<DIV WIDTH="86" HEIGHT="58" style="width: 1; height: 58">
+<P><font face="Verdana" size="3">
+15
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="72" HEIGHT="58">
+<DIV WIDTH="108" HEIGHT="58" style="width: 2; height: 58">
+<P><font face="Verdana" size="3">
+26
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="78" HEIGHT="86">
+<DIV WIDTH="94" HEIGHT="86" style="width: 3; height: 86">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+THREAD_ PRIORITY TIME CRITICAL</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="86">
+<DIV WIDTH="86" HEIGHT="86" style="width: 3; height: 86">
+<P><font face="Verdana" size="3">
+15
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="74" HEIGHT="86">
+<DIV WIDTH="86" HEIGHT="86" style="width: 4; height: 86">
+<P><font face="Verdana" size="3">
+15
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="86">
+<DIV WIDTH="90" HEIGHT="86" style="width: 2; height: 86">
+<P><font face="Verdana" size="3">
+15
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="86">
+<DIV WIDTH="85" HEIGHT="86" style="width: 1; height: 86">
+<P><font face="Verdana" size="3">
+15
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="83" HEIGHT="86">
+<DIV WIDTH="86" HEIGHT="86" style="width: 1; height: 86">
+<P><font face="Verdana" size="3">
+15
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="72" HEIGHT="86">
+<DIV WIDTH="108" HEIGHT="86" style="width: 3; height: 86">
+<P><font face="Verdana" size="3">
+31
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</font></TABLE>
+<P><font face="Verdana" size="3">
+Помимо базового приоритета, описываемого в этой таблице, планировщик заданий
+(<font face="Verdana" size="2">scheduler</font>) может назначать так называемые динамические приоритеты. Для процессов класса
+<font face="Verdana" size="2"> NORMAL_PRIORITY_CLASS</font> при переключении из фонового режима в режим переднего плана и в ряде других случаев приоритет потока, с которым создано окно переднего плана, повышается. Так работают все клиентские операционные системы от Microsoft. Серверные операционные системы оптимизированы для выполнения фоновых приложений. Впрочем, Windows NT и более поздние ОС на этом ядре позволяют переключать режим оптимизации, используя переключатель
+<font face="Verdana" size="2"><b>Application response</b></font> <B> </B>апплета
+<font face="Verdana" size="2"> System</font> панели управления Windows (рис. 29.1).
+</font ></P>
+<P><font face="Verdana" size="3">
+К тому же Windows 2000 Professional и Windows 2000 Server имеют разные алгоритмы выделения квантов времени. Первая — клиентская — операционная система выделяет время короткими квантами переменной длины для ускорения реакции на приложения переднего плана (foreground). Для сервера же более важна стабильная работа системных служб, поэтому во второй ОС система распределяет длинные кванты постоянной длины.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.29.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 29.1. </B> С помощью 
+  диалога <B>Performance Options</B> можно управлять алгоритмом назначения приоритетов 
+  </font ></P>
+<P><font face="Verdana" size="3"> Теперь, разобравшись в приоритетах потоков, 
+  нужно обязательно сказать о том, как же их использует планировщик заданий для 
+  распределения процессорного времени. </font ></P>
+<P><font face="Verdana" size="3"> Операционная система имеет различные очереди 
+  готовых к выполнению потоков — для каждого уровня приоритета свой. В момент 
+  распределения нового кванта времени она просматривает очереди — от высшего приоритета 
+  к низшему. Готовый к выполнению поток, стоящий первым в очереди, получает этот 
+  квант и перемещается в хвост очереди. Поток будет исполняться всю продолжительность 
+  кванта, если не произойдет одно из двух событий: </font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;выполняющийся 
+    поток остановился для ожидания;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;появился 
+    готовый к выполнению поток с более высоким приоритетом.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Теперь, наверное, вам более ясна опасность, 
+  исходящая от неоправданного завышения приоритетов. Ведь, если есть активные 
+  потоки с высоким приоритетом, ни один поток с более низким приоритетом ни разу 
+  не получит времени процессора. Эта проблема может подстерегать вас даже на уровне 
+  вашего приложения. Предположим, вы назначили вычислительному потоку приоритет 
+  <font face="Verdana" size="2">THREAD_PRIORITY_ABOVE_NORMAL</font>, а потоку, 
+  где обрабатывается ввод пользователя, — <font face="Verdana" size="2">THREAD_PRIORITY_BELOW_NORMAL</font>. 
+  Тогда вместо запланированного результата — совместить вычисления с нормальной 
+  реакцией приложения — вы получите строго обратный. Приложение вообще перестанет 
+  откликаться на ввод, и снять его будет возможно только с помощью средств ОС. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Так что нормальная практика для асимметричных 
+  потоков — это назначение потоку, обрабатывающему ввод, более высокого приоритета, 
+  а всем остальным — более низкого или даже приоритета <font face="Verdana" size="2">idle</font>, 
+  если этот поток должен выполняться только во время простоя системы. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index6.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

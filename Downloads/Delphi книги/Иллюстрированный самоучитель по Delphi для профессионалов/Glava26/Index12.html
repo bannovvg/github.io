@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Простой 
+  табличный отчет</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания отчетов, использующих данные из источников, предоставленных объектами соединений и просмотров, используются элементы оформления со страницы <B>Report </B>Палитры инструментов Rave Reports.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основой, без которой нельзя использовать полосы (элементы
+<font face="Verdana" size="2"> Band</font> и <font face="Verdana" size="2">DataBand</font>), является элемент
+<font face="Verdana" size="2">Region</font>. Он ограничивает часть страницы, на которой будут печататься данные.
+</font ></P>
+<P><font face="Verdana" size="3"> Главную роль в отчетах для приложений баз данных 
+  играют полосы. Это невизуальные элементы оформления, моделирующие горизонтальную 
+  область или строку отчета. На странице <B>Report </B>доступны два таких элемента. 
+  Обычная полоса <font face="Verdana" size="2"> Band</font> создает горизонтальную 
+  область, которая не изменяет свое абсолютное или относительное положение на 
+  странице. Например, </font ><font face="Verdana" size="3">созданная на основе 
+  элемента <font face="Verdana" size="2"> Band</font> полоса <font face="Verdana" size="2">TitleBand</font> 
+  всегда располагается в начале первой страницы отчета и оформляет заголовок таблицы 
+  (рис. 26.5). Полоса <font face="Verdana" size="2"> FooterBand</font> будет напечатана 
+  сразу после основной таблицы — но ее конкретное положение на странице зависит 
+  от размера набора данных. </font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.26.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <strong>Рис. 26.5. </strong>Страница 
+  простого табличного отчета в визуальной среде Rave Reports </font ></P>
+<P><font face="Verdana" size="3"> Элемент оформления <font face="Verdana" size="2"> 
+  DataBand</font> обеспечивает размножение строк отчета в соответствии с числом 
+  строк набора данных. Для этого полосу данных <font face="Verdana" size="2"> 
+  MainDataview</font> необходимо связать с просмотром при помощи свойства <font face="Verdana" size="2">Dataview</font>. 
+  В нашем примере это прямой просмотр <font face="Verdana" size="2">countryview</font>, 
+  связанный с компонентом соединения <font face="Verdana" size="2"> TRvDataSetConnection</font> 
+  в приложении. </font ></P>
+<P><font face="Verdana" size="3"> На полосе данных <font face="Verdana" size="2"> 
+  MainDataview</font> необходимо разместить элементы оформления <font face="Verdana" size="2">DataText</font>. 
+  Каждый из этих элементов связывается с объектом просмотра и полем данных такого 
+  просмотра. Для этого используются свойства <font face="Verdana" size="2"> Dataview</font> 
+  и <font face="Verdana" size="2">DataField</font> соответственно. Таким образом, 
+  каждый элемент оформления <font face="Verdana" size="2"> DataText</font> размножается 
+  вместе с полосой данных и формирует в отчете колонку значений поля набора данных. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Расположив на полосах горизонтальные и вертикальные 
+  линии, можно легко оформить данные в табличном виде. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index11.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index13.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>
+

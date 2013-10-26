@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index32.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index34.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TADODataSet</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TADODataSet</font> предназначен для представления набора данных из хранилища данных ADO. Он прост в использовании, имея только несколько собственных свойств и методов, и применяет функции своего предка —класса
+<font face="Verdana" size="2">TCustomADODataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Это единственный компонент ADO, инкапсулирующий набор данных, для которого опубликованы свойства, позволяющие управлять командой ADO. Это свойства (см. выше)
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CommandText: WideString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CommandType: TCommandType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В результате компонент представляет собой гибкий инструмент, который позволяет (в зависимости от типа команды и ее текста) получать данные из таблиц, запросов SQL, хранимых процедур, файлов и т. д. Например, вы выбираете нужное значение свойства<font face="Verdana" size="2"> CommandType = cmdText</font> и заносите в свойство
+<font face="Verdana" size="2"> CommandText</font> текст запроса SQL из редактора:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ADODataSet,CommandType = cmdText;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ADODataSet. CommandText := Memol.Lines.Text;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И запрос SQL готов к выполнению.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Для запросов SQL можно применять только язык 
+    Data Manipulation Language (использовать только <font face="Verdana" size="2">SELECT</font>). 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Соединение с базой данных задается свойством
+<font face="Verdana" size="2"> Connectionstring</font> или <font face="Verdana" size="2"> Connection</font> (см. выше).
+</font ></P>
+<P><font face="Verdana" size="3">
+Набор данных открывается и закрывается свойством
+<font face="Verdana" size="2"> Active</font> или методами <font face="Verdana" size="2">Open</font>
+и <font face="Verdana" size="2">Close</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В приложениях компонент можно применять как все обычные компоненты доступа к данным, связывая инкапсулированный в нем набор данных с визуальными компонентами отображения данных через компонент
+<font face="Verdana" size="2">TDataSource</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index32.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index34.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

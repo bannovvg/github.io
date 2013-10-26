@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Соединение 
+  через драйвер Rave Reports</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Проект, отчеты которого используют соединение через драйверы Rave Reports, должен содержать два объекта доступа к данным (в дереве проекта они отображаются в ветви <B>Data View Dictionary).</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+В первую очередь нужно создать объект соединения (компонент
+<font face="Verdana" size="2">Database</font>). Для этого используется команда <B>File | New Data Object </B>главного меню. В появившемся диалоге <B>Data Connections </B>(см. рис. 24.4) необходимо выбрать <B>Database Connection </B>и нажать кнопку
+<b> Next</b> — появится список <B>Database Connection Type </B>(рис. 26.2). В нем представлены все доступные в визуальной среде типы соединений. Элементы списка соответствуют файлам RDV драйверов соединений. В стандартную поставку входят драйверы для соединений ADO, BDE, dbExpress. Эти файлы по умолчанию устанавливаются в папке \Delphi7\Rave5\DataLinks.
+</font ></P>
+<P><font face="Verdana" size="3">
+После нажатия кнопки <B>Finish </B>появляется специализированный диалог настройки параметров соединения, типовой для выбранной технологии доступа к данным (см. часть IV),
+и создается новый объект соединения. В его свойствах
+<font face="Verdana" size="2"> AuthDesign</font> и <font face="Verdana" size="2"> AuthRun</font> содержатся настройки соединения, которые используются при его открытии на этапах разработки и выполнения отчета соответственно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь, когда соединение готово, необходимо создать просмотр данных. Он формирует набор данных, который будет передан в отчет и там связан с элементами оформления (см. рис. 26.1).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.26.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 26.2. </B>Диалог выбора 
+  драйвера соединения </font ></P>
+<P><font face="Verdana" size="3"> В диалоге выбора объекта доступа к данным (см. 
+  рис. 24.4) используются два объекта просмотра. Но с соединением на основе драйвера 
+  Rave Reports умеет взаимодействовать только один из них — <B>Driver Data View. 
+  </B>Для него необходимо выбрать соединение из созданных ранее в этом проекте 
+  (рис. 26.3). </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.26.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 26.3. </B>Список выбора 
+  соединения для просмотра <B>Driver Data View</B> </font ></P>
+<P align="left"><font face="Verdana" size="3"> После этого в редакторе <B>Query 
+  Advanced Designer </B>(см. рис. 24.5) создается запрос SQL, используемый для 
+  создания набора данных просмотра. Подробнее о пользовательском интерфейсе этого 
+  редактора рассказывается в гл. 24. </font ></P>
+<P><font face="Verdana" size="3"> После создания объекта просмотра (компонент 
+  <font face="Verdana" size="2">DriverDataview</font>) в его свойстве <font face="Verdana" size="2"> 
+  Database</font> появляется ссылка на объект выбранного соединения, а свойство 
+  <font face="Verdana" size="2"> Query</font> позволяет редактировать запрос SQL 
+  просмотра. Для этого используется все тот же редактор <B>Query Advanced Designer. 
+  </B>Соединение просмотра можно изменить, выбрав новое в списке свойства Database, 
+  однако при этом может потребоваться частично или полностью переписать запрос 
+  SQL. </font ></P>
+<P><font face="Verdana" size="3"> В состав объекта просмотра входят объекты всех 
+  полей, определенных на этапе разработки для запроса SQL. </font ></P>
+<P><font face="Verdana" size="3"> Теперь подготовленный в просмотре набор данных 
+  можно подключить к элементам оформления нужного отчета (см. разд. &quot;Типы 
+  отчетов&quot; ниже в данной главе). </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>
+

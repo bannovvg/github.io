@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Настройка 
+  соединения</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед открытием соединения необходимо задать его параметры. Для этого предназначено свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ConnectionString: WideString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое подробно рассматривалось в разд. &quot;Компонент
+<font face="Verdana" size="2"> TADOConnection</font>&quot;. Добавим лишь, что набор параметров изменяется в зависимости от типа провайдера и может настраиваться как вручную, так и при помощи специального редактора параметров соединения, который вызывается двойным щелчком на компоненте
+<font face="Verdana" size="2">TADOConnection</font>, перенесенным на форму, или щелчком на кнопке в поле редактирования свойства
+<font face="Verdana" size="2"> ConnectionString</font> в Инспекторе объектов (рис. 19.2).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.19.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 19.2.</B>Редактор настройки 
+  соединения ADO </font ></P>
+<P><font face="Verdana" size="3"> Здесь можно настроить соединение через свойство 
+  <font face="Verdana" size="2"> ConnectionString</font> (радиокнопка <B>Use Connection 
+  String) </B>или загрузить параметры соединения из файла с расширением udl (радиокнопка 
+  <B>Use Data Link File).</B> </font ></P>
+<P><font face="Verdana" size="3"> Файл UDL (листинг 19.1) представляет собой обычный 
+  текстовый файл, в котором указывается название параметра и через знак равенства 
+  его значение. Параметры разделяются точкой с запятой. </font ></P>
+<P align="center"><font face="Verdana" size="3"><B>Листинг 19.1&nbsp;</B> Демонстрационный 
+  файл DBDEMOS.UDL </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">[oledb]</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Everything 
+    after this line is an OLE DB initstring</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Provider=Microsoft.Jet.OLEDB.4.0;Data 
+    Source=C:\Program Files\Common Files\Borland Shared\Data\DBDEMOS.mdb</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Если файл параметров соединения отсутствует, 
+  настройку придется осуществлять вручную. Для этого следует нажать кнопку <B>Build. 
+  В </B>результате появляется диалоговое окно <B>Data Link Properties, </B>в котором 
+  можно настроить параметры соединения вручную. Оно представляет собой четырехстраничный 
+  блокнот, позволяющий вам этап за этапом задать все необходимые параметры (рис. 
+  19.3). </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.19.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 19.3. </B>Диалоговое 
+  окно настройки параметров соединения на странице выбора провайдера </font ></P>
+<P><font face="Verdana" size="3"> Первая страница <B>Provider </B>позволяет выбрать 
+  провайдер OLE DB для конкретного типа источника данных из числа провайдеров, 
+  установленных в системе. Здесь вы видите провайдеры не только для серверов БД, 
+  но и служб, установленных в операционной системе. Состав элементов управления 
+  следующих страниц зависит от типа источника данных, но различается не так уж 
+  сильно. Далее практически везде необходимо задать источник данных (имя сервера, 
+  базу данных, файл и т. д.), режим аутентификации пользователя, а также определить 
+  имя и пароль пользователя. </font ></P>
+<P><font face="Verdana" size="3"> Рассмотрим процесс настройки на примере провайдера 
+  OLE DB для сервера Microsoft SQL Server. </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.19.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 19.4. </B>Диалоговое 
+  окно настройки параметров соединения на странице выбора источника данных </font ></P>
+<P><font face="Verdana" size="3"> Следующая страница <B>Connection </B>(рис. 19.4) 
+  настраивает источник данных. </font ></P>
+<P><font face="Verdana" size="3"> На первом этапе требуется выбрать имя сервера 
+  из доступных для данного компьютера. </font ></P>
+<P><font face="Verdana" size="3"> Второй этап определяет режим аутентификации 
+  пользователя. Это либо система безопасности Windows, либо собственная система 
+  аутентификации сервера. Здесь же надо определить имя и пароль пользователя. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Третий этап предназначен для выбора базы данных 
+  сервера. </font ></P>
+<P><font face="Verdana" size="3"> По окончании настройки источника данных вы можете 
+  проверить соединение, нажав кнопку <B>Test Connection.</B> </font ></P>
+<P><font face="Verdana" size="3"> Теперь перейдем на следующую страницу. </font ></P>
+<P><font face="Verdana" size="3"> Страница <B>Advanced </B>(рис. 19.5) задает 
+  дополнительные параметры соединения. В зависимости от типа хранилища данных 
+  некоторые элементы этой страницы могут быть недоступны. </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.19.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 19.5. </B>Диалоговое 
+  окно настройки параметров соединения на странице дополнительных параметров </font ></P>
+<P><font face="Verdana" size="3"> Список <B>Impersonation level </B>определяет 
+  возможности клиентов при подключении в соответствии с полномочиями их ролей. 
+  В списке могут быть выбраны следующие значения: </font ></P>
+<ul>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Anonymous 
+    </B>— роль клиента недоступна серверу;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Identify 
+    </B>— роль клиента опознается сервером, но доступ к системным объектам заблокирован;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Impersonate 
+    </B>— процесс сервера может быть представлен защищенным контекстом клиента;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<b>Delegate</b> 
+    — процесс сервера может быть представлен защищенным контекстом клиента, при 
+    этом сервер может осуществлять другие подключения.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Список <B>Protection level </B>позволяет задать 
+  уровень защиты данных. В списке могут быть выбраны следующие значения: </font ></P>
+<ul>
+  <li>&nbsp;<b><font size="3" face="Verdana, Arial, Helvetica, sans-serif">None</font></b><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> 
+    — подтверждение не требуется;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Connect 
+    </B>— подтверждение необходимо только при подключении;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp; <B>Call 
+    </B>— подтверждение источника данных при каждом запросе;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<b>Pkt</b> 
+    — подтверждение получения от клиента всех данных;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Pkt 
+    Integrity </B>— подтверждение получения от клиента всех данных с соблюдением 
+    целостности;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Pkt 
+    Privacy </B>— подтверждение получения от клиента всех данных с соблюдением 
+    целостности и защита шифрованием.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> В поле <B>Connect timeout </B>можно задать время 
+  ожидания соединения в секундах. По истечении этого времени процесс прерывается. 
+  </font ></P>
+<P><font face="Verdana" size="3"> При необходимости список <b> Access</b> <B>permissions 
+  </B>задает права доступа к отдельным видам выполняемых операций. В списке можно 
+  выбрать следующие значения: </font ></P>
+<ul>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B> Read </B>— 
+    только чтение;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B> ReadWrite 
+    </B>— чтение и запись;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Share 
+    Deny None </B>— полный доступ всем на чтение и запись;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp; <B>Share 
+    Deny Read </B>— чтение запрещено всем;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Share 
+    Deny Write </B>— запись запрещена всем;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Share 
+    Exclusive </B>— чтение и запись запрещена всем;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;Write 
+    </B>— только запись.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Последняя страница <b> All</b> (рис. 19.6) позволяет 
+  просмотреть и при необходимости изменить все сделанные настройки (для этого 
+  предназначена кнопка <B>Edit Value...) </B>для выбранного провайдера. </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.19.6.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 19.6. </B>Диалоговое 
+  окно настройки параметров соединения на странице просмотра настроек </font ></P>
+<P><font face="Verdana" size="3"> После подтверждения сделанных в диалоге настроек 
+  из них формируется значение свойства <font face="Verdana" size="2">Connectionstring</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index13.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index15.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

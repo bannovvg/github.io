@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Этапы создания отчета и включение его в приложение</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Процесс создания отчета с использованием генератора отчетов Rave Reports состоит из трех этапов. Первый выполняется в визуальной среде Rave Reports, второй и третий — в среде разработки Delphi.
+</font ></P>
+<P><font face="Verdana" size="3">
+1. На первом этапе в визуальной среде Rave Reports создается проект отчета и в нем необходимые страницы, объекты доступа к данным (см. гл. 24).
+На страницах располагаются элементы оформления, при необходимости к ним подключаются просмотры данных (если отчет отображает информацию из таблиц базы данных) и объекты аутентификации пользователей отчетов. Создаются обработчики событий. И в завершение этапа готовый проект отчета сохраняется в файле с расширением rav.
+</font ></P>
+<P><font face="Verdana" size="3">
+2.  На втором этапе в проект приложения в Delphi переносятся компоненты
+<font face="Verdana" size="2"> TRvProject и TRvSystem</font> (см. г/?. 23)
+со страницы <B>Rave </B>Палитры компонентов. При этом в состав приложения автоматически включается ядро генератора отчета. Первый компонент связывается с файлом проекта отчета и представляет в приложении отчет со всеми его свойствами, страницами, элементами оформления и т. д. Второй компонент связывается с первым, взаимодействует с ядром генератора отчетов и обеспечивает печать отчета из приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+3. На третьем этапе создается программный код, обеспечивающий выполнение функций приложения, связанных с отчетом. Наряду со стандартными операциями предварительного просмотра и печати отчета это могут быть загрузка из файла и сохранение в файле, преобразование формата данных отчета, изменение содержания отчета в зависимости от выполненных пользователем действий и т. д. На этом этапе используются свойства, методы и методы-обработчики событий компонентов
+<font face="Verdana" size="2"> TRvProject</font> и <font face="Verdana" size="2"> TRvSystem</font> и других компонентов со страницы <B>Rave </B>Палитры компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Далее в этой главе мы подробно рассмотрим перечисленные этапы и различные аспекты программирования, связанные с ними.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

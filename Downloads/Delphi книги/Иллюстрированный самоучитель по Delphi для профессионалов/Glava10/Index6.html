@@ -1,0 +1,703 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TCanvas</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот класс — сердцевина графической подсистемы Delphi. Он объединяет в себе и &quot;холст&quot; (контекст конкретного устройства GDI), и &quot;рабочие инструменты&quot; (перо, кисть, шрифт), и даже &quot;подмастерьев&quot; (набор функций по рисованию типовых геометрических фигур). Будем называть его канвой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Канва не является компонентом, но она присутствует в качестве свойства во многих других компонентах, которые должны уметь нарисовать себя и отобразить какую-либо информацию.
+</font ></P>
+<P><font face="Verdana" size="3">
+Читатели, знакомые с графикой Windows, узнают в <font face="Verdana" size="2"> TCanvas</font> объектно-ориентированную надстройку над контекстом устройства Windows
+(<font face="Verdana" size="2">Device Context, DC</font>). Дескриптор устройства, над которым &quot;построена&quot; канва, может быть востребован для различных низкоуровневых операций. Он задается свойством:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle: HDC;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для рисования канва включает в себя шрифт, перо и кисть:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Font: TFont; property Pen: TPen; property Brush: TBrush;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Кроме того, можно рисовать и поточечно, получив доступ к каждому пикселу. Значение свойства:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Pixels[X, Y: Integer]: TColor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+соответствует цвету точки с координатами X, Y.
+</font ></P>
+<P><font face="Verdana" size="3">
+Необходимость отрисовывать каждую точку возникает нередко. Однако, если нужно модифицировать все или хотя бы многие точки изображения, свойство
+<font face="Verdana" size="2"> Pixels</font> надо сразу отбросить — настолько оно неэффективно. Гораздо быстрее редактировать изображение при помощи свойства
+<font face="Verdana" size="2"> scanLine</font> объекта <font face="Verdana" size="2">TBitmap</font>; об этом рассказано ниже.
+</font ></P>
+<P><font face="Verdana" size="3">
+Канва содержит методы-надстройки над всеми основными функциями рисования GDI Windows и свойства, которые приведены в табл. 10.4 и 10.5. При их рассмотрении имейте в виду, что все геометрические фигуры рисуются текущим пером. Те из них, которые можно закрашивать, закрашиваются с помощью текущей кисти. Кисть и перо при этом имеют текущий цвет.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 10.4.&nbsp; </B>Методы 
+  класса <font face="Verdana" size="2">TCanvas</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="487" HEIGHT="215">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="32">
+<DIV WIDTH="252" HEIGHT="32" style="width: 59; height: 32">
+<P><font face="Verdana" size="3">
+<b>
+Метод</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="32">
+<DIV WIDTH="394" HEIGHT="32" style="width: 31; height: 32">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="183">
+<DIV WIDTH="252" HEIGHT="183" style="width: 178; height: 99">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Arc (XI,   Yl,   Х2, Y2,   ХЗ,   Y3,   Х4,   Y4:Integer) </font> ;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="311" HEIGHT="183">
+<DIV WIDTH="394" HEIGHT="183" style="width: 299; height: 209">
+<P><font face="Verdana" size="3">
+Метод рисует сегмент эллипса. Эллипс определяется   описывающим   прямоугольником   (X1.Y1)— (Х2, Y2); его размеры должны лежать в диапазоне от 2 до 32 767 точек. Начальная точка сегмента лежит на пересечении эллипса и луча, проведенного из его центра через точку (ХЗ, Y3). Конечная точка сегмента лежит на пересечении эллипса и луча, проведенного из его центра через точку (Х4, Y4). Сегмент рисуется против часовой стрелки
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="63">
+<DIV WIDTH="258" HEIGHT="63" style="width: 160; height: 63">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Chord (XI,   Yl,   X2, Y2,   X3,   Y3,   X4,   Y4: Integer) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="63">
+<DIV WIDTH="373" HEIGHT="63" style="width: 280; height: 63">
+<P><font face="Verdana" size="3">
+Рисует хорду и заливает отсекаемую ею часть эллипса. Эллипс, начальная и конечная точки определяются, как в методе
+<font face="Verdana" size="2"> Arc</font>
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="48">
+<DIV WIDTH="258" HEIGHT="48" style="width: 184; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Ellipse (XI,   Yl,   X2, Y2 : Integer);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="48">
+<DIV WIDTH="373" HEIGHT="48" style="width: 290; height: 48">
+<P><font face="Verdana" size="3">
+Рисует  и  закрашивает  эллипс,   вписанный  в прямоугольник (Х1, Y1) - (Х2, Y2)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="42">
+<DIV WIDTH="258" HEIGHT="42" style="width: 176; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  LineTo(X,   Y: Integer) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="42">
+<DIV WIDTH="373" HEIGHT="42" style="width: 254; height: 42">
+<P><font face="Verdana" size="3">
+Проводит линию текущим  пером  из текущей точки в (X, Y)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="46">
+<DIV WIDTH="258" HEIGHT="46" style="width: 181; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure MoveTo (X,Y: Integer);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="46">
+<DIV WIDTH="373" HEIGHT="46" style="width: 261; height: 46">
+<P><font face="Verdana" size="3">
+Перемещает текущее положение пера (свойство
+<font face="Verdana" size="2"> PenPos</font>) в точку (X, Y)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="211">
+<DIV WIDTH="258" HEIGHT="211" style="width: 171; height: 211">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure BrushCopy (const Dest:   TRect;   Bitmap: TBitmap;   const Source: TRect;   Color:   TColor) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="211">
+<DIV WIDTH="373" HEIGHT="211" style="width: 276; height: 211">
+<P><font face="Verdana" size="3">
+Производит специальное копирование. Прямоугольник
+<font face="Verdana" size="2"> Source</font> из битовой карты <font face="Verdana" size="2"> Bitmap</font>
+копируется в прямоугольник <font face="Verdana" size="2"> Dest</font> на канве; при этом цвет Color заменяется на цвет текущей
+кисти (<font face="Verdana" size="2">Brush. Color</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+С  помощью  этого  метода  можно  нарисовать &quot;прозрачную&quot;  картинку. Для этого нужно выбрать соответствующий фону цвет кисти и затем заменить на него фоновый или наиболее часто встречающийся цвет битовой карты (см.
+<font face="Verdana" size="2"> Bitmap</font>. <font face="Verdana" size="2"> TransparentColor</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="73">
+<DIV WIDTH="258" HEIGHT="73" style="width: 169; height: 73">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CopyRect (const Dest:   TRect;   Canvas: TCanvas;   const  Source: TRect ) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="73">
+<DIV WIDTH="373" HEIGHT="73" style="width: 272; height: 73">
+<P><font face="Verdana" size="3">
+Производит      копирование      прямоугольника
+<font face="Verdana" size="2"> Source</font> из канвы <font face="Verdana" size="2"> Canvas</font> в прямоугольник
+<font face="Verdana" size="2"> Dest</font> в области самого объекта
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="48">
+<DIV WIDTH="258" HEIGHT="48" style="width: 166; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  FillRect (const Rect: TRect);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="48">
+<DIV WIDTH="373" HEIGHT="48" style="width: 256; height: 48">
+<P><font face="Verdana" size="3">
+Производит заливку прямоугольника (текущей кистью)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="44">
+<DIV WIDTH="258" HEIGHT="44" style="width: 172; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  FrameRect (const Rect: TRect);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="44">
+<DIV WIDTH="373" HEIGHT="44" style="width: 233; height: 44">
+<P><font face="Verdana" size="3">
+Осуществляет рисование контура прямоугольника цветом текущей кисти (без заполнения)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="60">
+<DIV WIDTH="258" HEIGHT="60" style="width: 166; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  Draw(X,   Y:   Integer; Graphic:   Tgraphic) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="60">
+<DIV WIDTH="373" HEIGHT="60" style="width: 272; height: 60">
+<P><font face="Verdana" size="3">
+Осуществляет рисование графического объекта
+<font face="Verdana" size="2"> Graphic</font> (точнее, вызов метода его рисования) в области с верхним левым углом (X, Y)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="65">
+<DIV WIDTH="258" HEIGHT="65" style="width: 176; height: 65">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  StretchDraw (const Rect:   TRect;   Graphic: TGraphic) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="65">
+<DIV WIDTH="373" HEIGHT="65" style="width: 259; height: 65">
+<P><font face="Verdana" size="3">
+Осуществляет   рисование  объекта <font face="Verdana" size="2">   Graphic</font>  в заданном прямоугольнике
+<font face="Verdana" size="2"> Rect</font>. Если их размеры не совпадают,
+<font face="Verdana" size="2"> Graphic</font> масштабируется
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="191" HEIGHT="119">
+<DIV WIDTH="258" HEIGHT="119" style="width: 188; height: 119">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DrawFocusRect (const Rect:   TRect);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="290" HEIGHT="119">
+<DIV WIDTH="373" HEIGHT="119" style="width: 274; height: 119">
+<P><font face="Verdana" size="3">
+Производит отрисовку прямоугольной рамки из точек (как на элементе, имеющем фокус ввода).  Поскольку метод использует логическую операцию ХОР (исключающее ИЛИ), повторный вызов для того же прямоугольника приводит изображение к начальному виду
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="129">
+<DIV WIDTH="256" HEIGHT="129" style="width: 189; height: 129">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  FloodFill (X,   Y: Integer;   Color:   TColor; FillStyle:   Tf illStyle) ; TFillStyle =
+(fsSurface, fsBorder);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="129">
+<DIV WIDTH="379" HEIGHT="129" style="width: 275; height: 129">
+<P><font face="Verdana" size="3">
+Производит заливку области текущей кистью. Процесс начинается с точки (X, Y). Если режим
+<font face="Verdana" size="2"> FillStyle</font> равен <font face="Verdana" size="2"> fsSurface</font>, то он продолжается до тех пор, пока есть соседние точки с цветом
+<font face="Verdana" size="2"> Color</font>. В режиме <font face="Verdana" size="2"> fsBorder</font> закрашивание,  наоборот,   прекращается  при  выходе  на границу с цветом
+<font face="Verdana" size="2"> Color</font>
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="81">
+<DIV WIDTH="256" HEIGHT="81" style="width: 174; height: 81">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  Pie (XI,   Yl,   X2,   Y2, X3,   Y3,   X4,   Y4:   Integer);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="81">
+<DIV WIDTH="379" HEIGHT="81" style="width: 266; height: 81">
+<P><font face="Verdana" size="3">
+Рисует сектор эллипса, описываемого прямоугольником (Х1, Y1) — (Х2, Y2). Стороны сектора лежат на лучах, проходящих из центра эллипса через точки (ХЗ, Y3) и (Х4, Y4)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="73">
+<DIV WIDTH="256" HEIGHT="73" style="width: 163; height: 73">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  Polygon (const Points:   array of TPoint);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="73">
+<DIV WIDTH="379" HEIGHT="73" style="width: 255; height: 73">
+<P><font face="Verdana" size="3">
+Строит многоугольник, используя массив координат точек
+<font face="Verdana" size="2"> Points</font>. При этом последняя точка соединяется  с  первой  и  внутренняя  область закрашивается
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="48">
+<DIV WIDTH="256" HEIGHT="48" style="width: 183; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Polyline (const Points:   array of  TPoint);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="48">
+<DIV WIDTH="379" HEIGHT="48" style="width: 248; height: 48">
+<P><font face="Verdana" size="3">
+Строит ломаную линию, используя массив координат точек
+<font face="Verdana" size="2"> Points</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="46">
+<DIV WIDTH="256" HEIGHT="46" style="width: 169; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure  PolyBezier (const Points:   array of TPoint);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="46">
+<DIV WIDTH="379" HEIGHT="46" style="width: 295; height: 57">
+<P><font face="Verdana" size="3">
+Строит кривую Безье (кубический сплайн), используя массив координат точек
+<font face="Verdana" size="2"> Points</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="60">
+<DIV WIDTH="256" HEIGHT="60" style="width: 182; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure PolyBezierTo (const Points:   array of TPoint);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="60">
+<DIV WIDTH="379" HEIGHT="60" style="width: 286; height: 60">
+<P><font face="Verdana" size="3">
+Строит кривую Безье (кубический сплайн), используя массив координат точек
+<font face="Verdana" size="2"> Points</font>. Текущая точка используется в качестве первой
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="46">
+<DIV WIDTH="256" HEIGHT="46" style="width: 157; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Rectangle (XI,   Yl, X2,   Y2:   Integer);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="46">
+<DIV WIDTH="379" HEIGHT="46" style="width: 277; height: 46">
+<P><font face="Verdana" size="3">
+Рисует прямоугольник с верхним левым углом в (Х1, Y1) и нижним правым в (Х2, Y2)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="94">
+<DIV WIDTH="256" HEIGHT="94" style="width: 167; height: 94">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RoundRect (XI,   Yl, X2,   Y2,   X3,   Y3:   Integer) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="94">
+<DIV WIDTH="379" HEIGHT="94" style="width: 278; height: 95">
+<P><font face="Verdana" size="3">
+Рисует прямоугольник с закругленными углами. Координаты вершин — те же, что и в методе
+<font face="Verdana" size="2"> Rectangle</font>. Закругления рисуются как сегменты эллипса с размерами осей по горизонтали и вертикали ХЗ и Y3
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="42">
+<DIV WIDTH="256" HEIGHT="42" style="width: 177; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function TextHeight (const Text:   string):   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="42">
+<DIV WIDTH="379" HEIGHT="42" style="width: 263; height: 42">
+<P><font face="Verdana" size="3">
+Задает высоту строки <font face="Verdana" size="2"> Text</font> в пикселах
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="44">
+<DIV WIDTH="256" HEIGHT="44" style="width: 171; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function TextWidth (const Text:   string):   Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="44">
+<DIV WIDTH="379" HEIGHT="44" style="width: 265; height: 44">
+<P><font face="Verdana" size="3">
+Задает ширину строки <font face="Verdana" size="2"> Text</font> в пикселах
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="54">
+<DIV WIDTH="256" HEIGHT="54" style="width: 178; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TextOut (X,   Y: Integer;   const  Text: string) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="54">
+<DIV WIDTH="379" HEIGHT="54" style="width: 275; height: 54">
+<P><font face="Verdana" size="3">
+Производит вывод строки <font face="Verdana" size="2"> Text</font>. Левый верхний угол помещается в точку канвы (X, Y)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="100">
+<DIV WIDTH="256" HEIGHT="100" style="width: 162; height: 100">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TextRect (Rect : TRect;   X,   Y:   Integer; const  Text:   string);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="296" HEIGHT="100">
+<DIV WIDTH="379" HEIGHT="100" style="width: 286; height: 100">
+<P><font face="Verdana" size="3">
+Производит вывод текста с отсечением. Как и в
+<font face="Verdana" size="2"> TextOut</font>, строка <font face="Verdana" size="2"> Text</font> выводится с позиции (X, Y); при этом часть текста, лежащая вне пределов прямоугольника
+<font face="Verdana" size="2"> Rect</font>, отсекается и не будет видна
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 10.5. </B>Свойства 
+  класса <font face="Verdana" size="2"> TCanvas</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="460" HEIGHT="98">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="159" HEIGHT="31">
+<DIV WIDTH="242" HEIGHT="31" style="width: 123; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Свойство</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="31">
+<DIV WIDTH="425" HEIGHT="31" style="width: 123; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="159" HEIGHT="32">
+<DIV WIDTH="242" HEIGHT="112" style="width: 149; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property  ClipRect:   TRect;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="32">
+<DIV WIDTH="425" HEIGHT="112" style="width: 289; height: 112">
+<P><font face="Verdana" size="3">
+Определяет область отсечения канвы. То, что при рисовании   попадает  за   пределы   этого   прямоугольника, не будет изображено. Свойство доступно только для чтения — его значение переустанавливается системой в контексте устройства, с которым связана канва
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="159" HEIGHT="36">
+<DIV WIDTH="242" HEIGHT="50" style="width: 153; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Per.Pos :   TPoint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="36">
+<DIV WIDTH="425" HEIGHT="50" style="width: 289; height: 50">
+<P><font face="Verdana" size="3">
+Содержит текущую позицию пера канвы (изменяется посредством метода
+<font face="Verdana" size="2">MoveTo</font>)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Refresh;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+сбрасывает текущие шрифт, перо и кисть, заменяя их на стандартные, заимствованные из установок Windows
+(<font face="Verdana" size="2">BLACK PEN, HOLLOW_BRUSH, SYSTEM_FONT).</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Предусмотрено два события для пользовательской реакции на изменение канвы:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnChange: TNotifyEvent; property OnChanging: TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Эти события возникают при изменении свойств и вызове методов
+<font face="Verdana" size="2">TCanvas</font>, меняющих вид канвы (т. е. при любом рисовании. В методе
+<font face="Verdana" size="2">MoveTo</font>, например, они не возникают). Отличие их в том, что событие
+<font face="Verdana" size="2"> OnChanging</font> вызывается до начала изменений, а событие
+<font face="Verdana" size="2"> OnChange</font> — после их завершения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Идентификатор (код) растровой операции при копировании прямоугольных блоков содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CopyMode: TCopyMode; TCopyMode = Longint;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и определяет правило сочетания пикселов, копируемых на канву, с ее текущим содержимым. При этом можно создавать разные изобразительные эффекты. В Delphi определены следующие константы кодов:
+<font face="Verdana" size="2">cmBiackness</font>, <font face="Verdana" size="2">craDstlnvert, cmMergeCopy, cmMergePaint, cmNotSrcCopy, cmNotSrcErase, cmPatCopy, cmPatlnvert, cmPatPaint, cmSrcAnd, cmSrcCopy, cmSrcErase, cmSrdnvert, cmSrcPaint, cmWhiteness.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Все они стандартно определены в Windows, и подробное их описание можно найти в документации по GDI. Значением свойства
+<font face="Verdana" size="2"> CopyMode</font> по умолчанию является
+<font face="Verdana" size="2"> cmSrcCopy</font> — копирование пикселов источника поверх существующих.
+</font ></P>
+<P><font face="Verdana" size="3">
+Из возможностей, появившихся в классе <font face="Verdana" size="2">TCanvas</font>, следует отметить поддержку рисования кривых (полиномов) Безье. Эта возможность впервые
+</font ></P>
+<P><font face="Verdana" size="3">
+появилась в API Windows NT. Для построения одной кривой нужны минимум четыре точки — начальная, конечная и две опорные. По ним будет построена кривая второго порядка. Если задан массив точек, они используются для построения последовательных кривых, причем последняя точка одной кривой является первой для следующей кривой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Хорошей иллюстрацией использования объекта
+<font face="Verdana" size="2"> TCanvas</font> может служить пример
+<font face="Verdana" size="2">GraphEx</font>, поставляемый вместе с Delphi (папка \Demos\Doc\GraphEx). Есть только одно &quot;но&quot; — он приводится в неизменном виде, начиная с версии Delphi 1.0. Поэтому сделаем часть работы за программистов Borland. В нашем примере модернизированы Панели инструментов — они выполнены на компонентах
+<font face="Verdana" size="2">TToolBar</font> и <font face="Verdana" size="2">TControlBar</font>; добавлена поддержка файлов JPEG; и, наконец, добавлена возможность рисования кривых Безье. Обновленный внешний вид главной формы примера
+<font face="Verdana" size="2"> GraphEx</font> показан на рис. 10.1.
+</font ></P>
+<div align="center"><IMG src="gl.10.1.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 10.1. </B>Так теперь 
+  выглядит главная форма примера <font face="Verdana" size="2"> GraphEx</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Где же найти ту канву, на которой предстоит 
+  рисовать? Во-первых, ею снабжены все потомки классов <font face="Verdana" size="2">TGraphicContro</font><font face="Verdana" size="2">l</font> 
+  и <font face="Verdana" size="2">TCustomControl</font>, т. е. почти все визуальные 
+  компоненты из Палитры компонентов; в том числе и форма. Во-вторых, канву имеет 
+  растровая картинка (класс <font face="Verdana" size="2">TBitmap</font>); вы 
+  можете писать и рисовать не на пустом месте, а на готовом изображении (об этом 
+  см. ниже в разд. &quot;Класс <font face="Verdana" size="2"> TBitmap</font>&quot; 
+  данной главы). Но иногда нужно рисовать и прямо на экране. В этом случае придется 
+  прибегнуть к использованию функций API. Функция <font face="Verdana" size="2"> 
+  Getoc</font> возвращает контекст устройства заданного окна, если ей передается 
+  параметр 0 — то всего экрана: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ScreenCanvas 
+    := TCanvas.Create;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ScreenCanvas.Handle 
+    :=GetDC{0);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;// Рисование 
+    на ScreenCanvas</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;ReleaseDC(0, 
+    ScreenCanvas.Handle);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;ScreenCanvas.Free;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Пример необходимости рисования на экране — программы 
+  сохранения экрана (<font face="Verdana" size="2">Screen savers</font>). </font ></P>
+<P><font face="Verdana" size="3"> Когда и где следует рисовать? Этот вопрос далеко 
+  не риторический, как может показаться с первого взгляда. </font ></P>
+<P><font face="Verdana" size="3"> Помимо графических примитивов, таких как линии 
+  и фигуры, на канве можно разместить готовые изображения. Для их описания создан 
+  класс <font face="Verdana" size="2">TGraphic</font>. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TSimpleObjectBroker</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TSimpleObjectBroker</font> инкапсулирует список серверов, доступных для клиентов данного многозвенного распределенного приложения. Список серверов создается на этапе разработки. При необходимости (отключение
+</font ></P>
+<P><font face="Verdana" size="3">
+сервера, его перегрузка и т. д.) компонент соединения клиентского ПО может использовать один из запасных серверов из списка компонента
+<font face="Verdana" size="2">TsimpleobjectBroker</font> непосредственно во время выполнения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для этого необходимо заполнить список серверов компонента
+<font face="Verdana" size="2">TSimpleobjectBroker</font> и указать ссылку на него в свойстве
+<font face="Verdana" size="2"> objectBroker</font> компонента соединения (см. выше).
+И тогда при &quot;переоткрытии&quot; соединения имя сервера будет запрашиваться из списка компонента
+<font face="Verdana" size="2">TsimpleobjectBroker</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Список серверов задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Servers: TServerCollection;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+На этапе разработки список серверов заполняется специализированным редактором (рис. 20.6), который вызывается при щелчке на кнопке свойства в Инспекторе объектов.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.20.6.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 20.6. </B>Редактор списка 
+  серверов компонента <font face="Verdana" size="2"> TSimpleObjectBroker</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Свойство <font face="Verdana" size="2"> servers</font> 
+  представляет собой коллекцию (см. гл. 7) объектов класса <font face="Verdana" size="2">TServeritem</font>. 
+  Этот класс имеет несколько свойств, позволяющих описать основные параметры сервера 
+  (табл. 20.3). При использовании в соединении значения этих свойств подставляются 
+  в соответствующие свойства компонента соединения. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 20.3. </B>Свойства 
+  класса <font face="Verdana" size="2"> TServeritem</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="480" HEIGHT="198">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="27"> <DIV WIDTH="269" HEIGHT="27" style="width: 91; height: 27"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="27"> <DIV WIDTH="375" HEIGHT="27" style="width: 79; height: 27"> 
+        <P><font face="Verdana" size="3"> <b> Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="40"> 
+      <DIV WIDTH="269" HEIGHT="40" style="width: 177; height: 40"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          ComputerName: string;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="40"> 
+      <DIV WIDTH="375" HEIGHT="40" style="width: 312; height: 40"> 
+        <P><font face="Verdana" size="3"> Имя компьютера, на котором функционирует 
+          сервер </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="46"> 
+      <DIV WIDTH="269" HEIGHT="46" style="width: 171; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          DisplayName: String;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="46"> 
+      <DIV WIDTH="375" HEIGHT="46" style="width: 308; height: 46"> 
+        <P><font face="Verdana" size="3"> Содержит имя сервера для представления 
+          в списке серверов </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="84"> 
+      <DIV WIDTH="269" HEIGHT="84" style="width: 143; height: 84"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Enabled: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="297" HEIGHT="84"> 
+      <DIV WIDTH="375" HEIGHT="84" style="width: 309; height: 95"> 
+        <P><font face="Verdana" size="3"> Управляет доступностью записи о сервере 
+          для выбора при подключении. При значении <font face="Verdana" size="2"> 
+          True</font> компоненты соединений могут использовать данную запись списка 
+          для подключения </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="165" HEIGHT="85"> <DIV WIDTH="264" HEIGHT="85" style="width: 155; height: 85"> 
+      <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+        HasFailed: Boolean;</font> </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="85"> <DIV WIDTH="365" HEIGHT="85" style="width: 298; height: 85"> 
+      <P><font face="Verdana" size="3"> После неудачной попытки использовать данную 
+        запись списка при подключении свойству присваивается значение <font face="Verdana" size="2"> 
+        True</font> и в дальнейшем эта запись не используется </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="165" HEIGHT="46"> 
+      <DIV WIDTH="264" HEIGHT="46" style="width: 128; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Port: Integer;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="318" HEIGHT="46"> 
+      <DIV WIDTH="365" HEIGHT="46" style="width: 300; height: 46"> 
+        <P><font face="Verdana" size="3"> Содержит номер порта, используемого 
+          при подключении к серверу </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> Помимо списка серверов компонент имеет лишь 
+  несколько вспомогательных свойств и методов. </font ></P>
+<P><font face="Verdana" size="3"> Метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function GetComputerForGUID(GUID: 
+    TGUID): string; override;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> возвращает имя компьютера, на котором зарегистрирован 
+  сервер с GUID, заданным параметром. </font ></P>
+<P><font face="Verdana" size="3"> Метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function GetComputerForProgID(const 
+    ProgID): string; override;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> возвращает имя компьютера, на котором зарегистрирован 
+  сервер с именем, заданным параметром <font face="Verdana" size="2">Progio</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property LoadBalanced: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> управляет выбором сервера из списка. При значении 
+  True запись о сервере выбирается случайным образом, иначе для соединения предлагается 
+  первая доступная запись о сервере. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index11.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index13.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>
+

@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Визуальные 
+  стили в Delphi</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В гл. 8 мы детально поговорим о роли действий
+при разработке пользовательского интерфейса приложения и специальном компоненте для управления действиями —
+<font face="Verdana" size="2">TActionManager</font>. Немного забегая вперед скажем, что этот компонент является своего рода &quot;командным пунктом&quot;, из которого должны управляться элементы управления приложения. Сейчас же нас интересует только одно свойство этого компонента
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Style: TActionBarStyle;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+По умолчанию среда разработки Delphi предлагает к использованию два
+стиля:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">standard 
+    — приложение использует системную библиотеку ComCtl32.dll версии 5;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;windows 
+    XP — приложение использует системную библиотеку ComCtl32.dll</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+версии 6 и единственный стандартный визуальный стиль Windows XP.
+</font ></P>
+<P><font face="Verdana" size="3">
+Эти стили применимы только к элементам управления, размещенным на панелях инструментов
+(<font face="Verdana" size="2">TActionToolBar</font>), созданных в компоненте
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">TActionManager</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Однако не торопитесь возмущаться явной ограниченностью выбора. Вы можете создать собственный стиль самостоятельно. Правда, это потребует очень много
+усилий — ведь на основе базовых классов элементов управления вам потребуется создать собственные классы с нужным вам поведением и внешним видом.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для этого необходимо создать класс нового визуального стиля на основе класса
+<font face="Verdana" size="2">TActionBarstyieEx</font>. Затем новый стиль регистрируется при помощи процедуры
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure RegisterActnBarStyle(AStyle:
+TActionBarStyleEx)</font>;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После этого ваш стиль становится доступным для свойства
+<font face="Verdana" size="2"> style</font> компонента <font face="Verdana" size="2">TActionManager</font>. Чтобы отменить стиль, используйте процедуру
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure UnRegisterActnBarStyle(AStyle: TActionBarStyleEx);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Например, обе эти операции удобно выполнить при инициализации и деинициализации модуля, описывающего класс стиля:
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>&nbsp;Листинг 6.3. </B> Вариант 
+  регистрации и отмены собственного визуального стиля&nbsp; </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var MyStyle: TMyStyleActionBars;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+initialization</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyStyle := TMyStyleActionBars.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;RegisterActnBarStyle(MyStyle);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+finalization</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+UnregisterActnBarStyle(MyStyle);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">MyStyle.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для смены стиля приложения можно использовать глобальную переменную нового стиля (см. листинг 6.3). Ее достаточно присвоить свойству
+<font face="Verdana" size="2">style</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ActionManagerl.Style := MyStyle;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При смене стиля все элементы управления, расположенные на панелях компонента
+<font face="Verdana" size="2">ActionManagerl</font>, будут уничтожены и созданы заново с использованием настроек нового стиля.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TActionBarstyieEx</font> имеет всего несколько методов, которые необходимо перекрыть при создании собственного стиля. Все они возвращают классы объектов, используемых при создании пользовательского интерфейса. Рассмотрим их.
+</font ></P>
+<P><font face="Verdana" size="3">
+Функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetStyleName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает имя стиля.&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+ Функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetColorMapClass(ActionBar: TCustomActionBar): TCustomColorMapClass;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяет получить ссылку на класс компонента настройки цветовой палитры (см. разд. &quot;Компоненты настройки цветовой палитры&quot; далее в этой главе),
+используемый панелью инструментов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Следующие три метода дают информацию о классах различных типов элементов управления, используемых при проектировании пользовательского интерфейса с помощью компонента
+<font face="Verdana" size="2">TActionManager</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для того чтобы получить доступ к элементам управления, связанным со стилем, предназначен метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetControlClass(ActionBar: TCustomActionBar; AnItem:&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">TActionClientltem): TCustomActionControlClass;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Он возвращает класс элемента управления из панели
+<font face="Verdana" size="2">ActionBar</font>, связанного с элементом управления
+<font face="Verdana" size="2">Anitem</font>. Именно эта функция вызывается при создании элементов управления в панелях инструментов компонента&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">TAct ionManager.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Как уже говорилось выше, при присвоении свойству
+<font face="Verdana" size="2"> style</font> компонента <font face="Verdana" size="2"> TActionManager</font> нового значения (экземпляра класса разработанного вами
+визуального стиля) уничтожаются все существующие элементы управления и затем создаются новые. И в процессе создания каждого визуального компонента вызывается функция
+<font face="Verdana" size="2">Getcontrolciass</font> нового стиля, а возвращенное ею значение используется для вызова конструктора соответствующего класса.
+</font ></P>
+<P><font face="Verdana" size="3">
+Аналогично, для получения класса, используемого в панели меню, применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetPopupClass(ActionBar: TCustorrActionBar) : TGetPopupClass;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и для классов кнопок панели инструментов применяется функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetScrollBtnClass: TCustomToolScrollBtnClass;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А класс самой панели инструментов возвращает функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetAddRemoveltemClass(ActionBar: TCustomActionBar): TCustomAddRemoveltemClass;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Итак, после разработки и отладки собственных классов элементов управления с заданными свойствами вам потребуется создать потомка от класса
+<font face="Verdana" size="2"> TActionBarstyieEx</font> и перекрыть все перечисленные выше функции так, чтобы они возвращали нужные классы для используемых типов элементов управления.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

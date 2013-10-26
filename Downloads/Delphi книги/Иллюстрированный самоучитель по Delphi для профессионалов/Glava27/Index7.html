@@ -1,0 +1,353 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Ярлыки</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Пользовательский интерфейс трудно представить без ярлычков с оперативной подсказкой
+(<font face="Verdana" size="2">Hints</font>). Если задержать курсор, например, над кнопкой или компонентом палитры самой среды Delphi, появляется маленький прямоугольник яркого цвета (окно подсказки), в котором одной строкой сказано о названии этого элемента или связанном с ним действии. Delphi поддерживает механизмы создания и отображения таких ярлычков в создаваемых программах.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство, определяющее активность системы подсказки у элемента управления:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ShowHint: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если свойство <font face="Verdana" size="2"> ShowHint</font> установлено в
+<font face="Verdana" size="2">True</font>, и во время выполнения курсор задержался над компонентом на некоторое время, в окне подсказки высвечивается текстовая строка с подсказкой, которая задана свойством:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Hint: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Подсказка компонента может быть пустой строкой — в этом случае система ищет в цепочке первый родительский компонент с непустой подсказкой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если в строке <font face="Verdana" size="2"> Hint</font> встречается специальный символ-разделитель &quot;Г, то часть строки до него (&quot;короткая&quot;) передается в окно подсказки, а после (&quot;длинная&quot;) — присваивается свойству
+<font face="Verdana" size="2"> Hint</font> объекта <font face="Verdana" size="2">Application</font>. Ее можно использовать, например, в строке состояния внизу главной формы приложения (см. пример ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Система оперативных подсказок имеет свойства и методы, общие для всех форм в приложении. Не удивительно, что они сосредоточены в
+<font face="Verdana" size="2"> Application</font> — глобальном объекте, соответствующем работающему приложению. Все описанные ниже в этом разделе свойства относятся не к компоненту, показывающему подсказку, а именно к
+<font face="Verdana" size="2">Application</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Фоновый цвет окна подсказки можно изменить посредством свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property HintColor: TColor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+У объекта <font face="Verdana" size="2"> Application</font> значение свойства
+<font face="Verdana" size="2"> showHint</font> нужно устанавливать во время выполнения, например, в обработчике
+<font face="Verdana" size="2"> OnCreate</font> главной формы приложения. Оно является главенствующим для всей системы подсказок: если оно установлено в значение
+<font face="Verdana" size="2">False</font>, ярлычки не возникают.
+</font ></P>
+<P><font face="Verdana" size="3">
+Есть еще один способ получения подсказки. При смене текущего элемента управления (т. е. при смене текста в свойстве
+<font face="Verdana" size="2">Hint</font>) в объекте <font face="Verdana" size="2"> Application</font> возникает событие
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnHint:   TNotifyEvent;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Пример:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.AppHint(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Panell.Caption:= Application.Hint;:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.FormCreate(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Application.OnHint   := AppHint;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере текст подсказки будет отображаться в строке состояния
+<font face="Verdana" size="2"> Panell</font> независимо от значения
+<font face="Verdana" size="2"> showHint</font> у любого объекта — лишь бы этот текст был в наличии. Для этого разделяйте подсказку у элементов управления вашего приложения на две части при помощи символа &quot; |&quot; — краткая информация появится рядом с элементом, а более полная — в строке состояния.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetLongHint(const Hint: string): string; function GetShortHint(const Hint: string): string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+У других компонентов свойство <font face="Verdana" size="2"> ShowHint</font> интерпретируется системой так: когда курсор мыши останавливается над элементом управления или пунктом меню, и приложение не занято обработкой сообщения, происходит проверка, и если свойство
+<font face="Verdana" size="2"> showHint</font> у элемента или у одного из его родительских элементов в иерархии равно
+<font face="Verdana" size="2">True</font>, то начинается ожидание.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если в данный момент другие ярлычки не показываются, то интервал времени задается свойством
+<font face="Verdana" size="2">HintPause</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property HintPause: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Интервал времени по умолчанию равен 500 мс. Если в данный момент уже виден ярлычок другого компонента, то интервал времени ожидания задается свойством:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property HintShortPause: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+По истечении этого времени, если мышь осталась над тем же элементом управления, наступает момент инициализации окна подсказки. При этом программист может получить управление, предусмотрев обработчик события
+объекта <font face="Verdana" size="2">Application</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnShowHint: TShowHintEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TShowHintEvent = procedure (var HintStr: string;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var CanShow: Boolean;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Hintlnfo: THintlnfo) of object;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Рассмотрим параметры обработчика события <font face="Verdana" size="2">OnShowHint</font>:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif"> Hintstr — отображаемый 
+    текст;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;CanShow — необходимость 
+    (возможность) появления подсказки. Если в переменной  
+    CanShow обработчик вернет значение False, 
+    то окно подсказки высвечиваться не будет;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Hintinfo — структура, несущая 
+    всю информацию о том, какой элемент управления, где и как собирается показать 
+    подсказку. Ее описание:</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+THintlnfo = record</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+HintControl: TControl;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+HintPos: TPoint;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+HintMaxWidth: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+HintColor: TColor;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CursorRect: TRect;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+CursorPos: TPoint;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для показа окна подсказки необходимо еще, чтобы у элемента управления или у его предков в цепочке строка
+<font face="Verdana" size="2"> Hint</font> была непустой. Впрочем, это можно исправить в обработчике
+<font face="Verdana" size="2">OnShowHint</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.AppShowHint(var HintStr: string;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var CanShow: Boolean;var Hintlnfo: THintlnfo);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin if HintStr='' then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+HintStr := Hintlnfo.HintControl.Name; Hintlnfo.HintColor := clRed; CanShow := True;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Присвоив этот метод обработчику <font face="Verdana" size="2">Application</font>.<font face="Verdana" size="2">OnShowHint</font>, установив
+<font face="Verdana" size="2"> Form.showHint:=True </font> и очистив все строки
+<font face="Verdana" size="2">Hint</font>, получим в качестве подсказки имя каждого элемента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Длительность показа ярлычка задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property HintHidePause: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+По умолчанию его значение равно 2500 мс.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property HintShortCuts: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+отвечает за показ вместе с текстом ярлычка описания &quot;горячих&quot; клавиш данного элемента управления.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наконец, можно вручную &quot;зажечь&quot; и &quot;потушить&quot; ярлычок. При помощи
+метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ActivateHint(CursorPos: TPoint);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+ярлычок показывается в точке <font face="Verdana" size="2"> CursorPos</font> (система координат — экранная). &quot;Спрятать&quot; окно подсказки можно с помощью метода:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CancelHint;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Без повторного перемещения мыши на текущий элемент оно более не возникнет.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

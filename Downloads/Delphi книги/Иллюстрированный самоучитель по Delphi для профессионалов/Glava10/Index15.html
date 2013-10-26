@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Класс TClipboard</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2">TClipboard</font> предоставляет программисту интерфейс с буфером (папкой) обмена
+(<font face="Verdana" size="2">Clipboard</font>) Windows. При включении в проект модуля CLIPBRD.PAS глобальный объект
+<font face="Verdana" size="2"> clipboard</font> создается автоматически и доступен приложению в течение всего времени его работы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы открытия и закрытия буфера обмена:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Open; procedure Close;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+вызываются во всех остальных методах <font face="Verdana" size="2">TClipboard</font>, поэтому программист редко нуждается в обращении к ним. В объекте ведется счетчик числа обращений к этим функциям, так что соответствующие функции API Windows вызываются только при первом открытии и последнем закрытии.
+</font ></P>
+<P><font face="Verdana" size="3">
+Очистка содержимого буфера (для всех форматов) производится вызовом метода:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Clear;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+О доступных форматах можно узнать, пользуясь следующими свойствами и методами:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="2" face="Verdana, Arial, Helvetica, sans-serif">property FormatCount: Integer;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Содержит число форматов в буфере на данный момент.
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;property Formats[Index: Integer]: Word;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Содержит их полный список.
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;function HasFormat(Format: Word): Boolean.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Проверяет, содержится ли в данный момент формат
+<font face="Verdana" size="2">Format</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Волею разработчиков различаются способы обмена графической и текстовой информацией через буфер обмена. Рассмотрим их независимо.
+</font ></P>
+<P><font face="Verdana" size="3">
+Через вызов метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Assign(Source: TPersistent);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в буфер обмена помешаются данные классов <font face="Verdana" size="2">TGraphic</font>, точнее, его потомков — классов
+<font face="Verdana" size="2"> TBitmap</font> (формат <font face="Verdana" size="2">CF_BITMAP</font>) и
+<font face="Verdana" size="2"> TMetafile (CF_ENHMETAFILE)</font>, а также данные класса
+<font face="Verdana" size="2">TPicture</font>. Данные класса <font face="Verdana" size="2"> Ticon</font> не имеют своего формата и с классом
+<font face="Verdana" size="2">Tclipboard</font> несовместимы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Допустимо и обратное: в <font face="Verdana" size="2">Tclipboard</font> есть специальные (скрытые) методы для присваивания содержимого объектам классов
+<font face="Verdana" size="2"> TPicture, TBitmap и TMetafile</font>. Допустимы выражения вида:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">MyImage.Picture.Assign(Clipboard);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Clipboard.Assign(MyImage.Picture);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для работы с текстом предназначены методы:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">function GetTextBuf(Buffer: PChar; BufSize: Integer): Integer;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Читает текст из буфера обмена в буфер <font face="Verdana" size="2">Buffer</font>, длина которого ограничена значением
+<font face="Verdana" size="2">Bufsize</font>. Функция возвращает истинную длину прочитанного текста.
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">procedure SetTextBuf(Buffer: PChar);</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Помещает текст из <font face="Verdana" size="2"> Buffer</font> в буфер обмена в формате
+<font face="Verdana" size="2">CF_TEXT</font>. Впрочем, можно поступить проще. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AsText: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+соответствует содержимому буфера обмена в текстовом формате
+<font face="Verdana" size="2">CF_TEXT</font> (приведенному к типу
+<font face="Verdana" size="2">string</font>). При отсутствии в буфере данных этого формата возвращается пустая строка.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы:
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">
+function GetAsHandle(Format: Word): THandle;</font></li>
+  <li><font face="Verdana" size="2">procedure SetAsHandle(Format: Word; Value: THandle);</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+соответственно читают и пишут данные в буфер в заданном формате
+<font face="Verdana" size="2">Format</font>. При чтении возвращается дескриптор находящихся в буфере данных (или
+0 при отсутствии данных). Для дальнейшего использования эти данные должны быть скопированы. При записи данные, передаваемые в параметре
+<font face="Verdana" size="2">value</font>, в дальнейшем должны быть уничтожены системой (а не программой пользователя).
+</font ></P>
+<P><font face="Verdana" size="3">
+Два метода предназначены для обмена компонентами через буфер обмена (в специально зарегистрированном формате
+<font face="Verdana" size="2">CF_COMPONENT</font>):
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetComponent(Owner, Parent: TComponent): TComponent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">procedure SetComponent(Component: TComponent);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Они используются составными частями среды Delphi.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

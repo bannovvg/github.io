@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Вычисляемые 
+  значения по одному источнику</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для вычисления агрегатного значения одного или нескольких полей одного источника данных используются два элемента оформления.
+</font ></P>
+<P><font face="Verdana" size="3">
+Элемент <font face="Verdana" size="2">CalcText</font> позволяет отобразить результат вычисления на полосе отчета. Так же, как и обычный элемент
+<font face="Verdana" size="2">DataText</font>, его необходимо связать с
+просмотром и полем<B>. </B>Для этого
+используются свойства<B> </B><font face="Verdana" size="2">DataView</font>
+и <font face="Verdana" size="2">DataField</font> соответственно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, элемент <font face="Verdana" size="2">CalcText</font> должен быть связан со специализированным элементом
+<font face="Verdana" size="2">CaicController</font> (см. ниже), который будет управлять процессом вычисления. Связывание осуществляется при помощи свойства
+<font face="Verdana" size="2">Controller</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В свойстве <font face="Verdana" size="2">CalcType</font> задается одна из пяти перечисленных выше агрегатных
+функций.
+</font ></P>
+<P><font face="Verdana" size="3">
+Дополнительно, для функции COUNT можно настроить еще три свойства. При необходимости включить или отключить подсчет нулевых значений или пробелов используются булевские свойства
+<font face="Verdana" size="2">countNulls</font> и <font face="Verdana" size="2"> countBianks</font> соответственно. А свойство
+<font face="Verdana" size="2"> Countvalue</font> позволяет задать значение поля, которое будет учитываться при расчете функции, все остальные значения будут игнорироваться.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вычисленное значение при сохранении может быть отформатировано в соответствии с шаблоном, заданным свойством
+<font face="Verdana" size="2">DisplayFormat</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для всех агрегатных функций можно задать момент начала вычислений. Для этого в свойстве
+<font face="Verdana" size="2"> initializer</font> необходимо указать элемент оформления отчета, и при его печати начнется вычисление. Это может быть любой элемент, расположенный с элементом
+<font face="Verdana" size="2">CalcText</font> на одной полосе. Но желательно использовать для этого специализированный элемент
+<font face="Verdana" size="2">calccontroller</font> (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Пример использования элемента оформления <font face="Verdana" size="2">CalcText</font> 
+    имеется в отчетах, рассмотренных нами выше. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Элемент <font face="Verdana" size="2">CalcTota</font><font face="Verdana" size="2">l</font> является невизуальным аналогом элемента
+<font face="Verdana" size="2">CalcText</font>. Поэтому он обладает всеми свойствами, о которых рассказывается выше для элемента
+<font face="Verdana" size="2">CalcText</font>. Вычисленное при его печати значение разработчик может использовать по своему усмотрению после того, как оно сохранено. Приемником вычисленного значения может быть один из параметров объекта отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> DestParam</font> позволяет выбрать один из предопределенных или созданных разработчиком параметров отчета (свойство
+<font face="Verdana" size="2"> Parameters</font> объекта отчета).
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> DestPiVar</font> задает переменную отчета, в которую будет передано вычисленное значение (свойство
+<font face="Verdana" size="2"> pivars</font> объекта отчета).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.26.8.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 26.8. Редактор свойства 
+  </B>DataField </font ></P>
+<P><font face="Verdana" size="3"> Затем параметр или переменная может быть использована 
+  для дальнейших вычислений или напечатана при помощи элемента <font face="Verdana" size="2">DataText</font>. 
+  В редакторе свойства <font face="Verdana" size="2">DataField</font> этого элемента 
+  (рис. 26.8) параметры и переменные отчета можно выбрать из списков <B>Project 
+  Parameters и Post Initialize Variables.</B> </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index15.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index17.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>
+

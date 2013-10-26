@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Классификация компонентов отображения данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Все компоненты отображения данных можно разделить на группы по нескольким критериям (рис. 15.1).
+</font ></P>
+<P><font face="Verdana" size="3">
+Большинство компонентов предназначены для работы с отдельным полем, т. е. при перемещении по записям набора данных такие компоненты показывают текущие значения только одного поля. Для соединения с набором
+
+
+данных через компонент <font face="Verdana" size="2"> TDataSource</font> предназначено свойство
+<font face="Verdana" size="2">DataSource</font>. Поле задается свойством
+<font face="Verdana" size="2">DataField</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компоненты <font face="Verdana" size="2"> TDBGrid</font> и <font face="Verdana" size="2"> TDBCtrlGrid</font> обеспечивают просмотр наборов данных целиком или в произвольном сочетании полей. В них присутствует только
+свойство <font face="Verdana" size="2">DataSource</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Особенную роль среди компонентов отображения данных играет компонент
+<font face="Verdana" size="2">TDBNavigator</font>. Он не показывает данные и не предназначен для их редактирования, зато обеспечивает навигацию по набору данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наиболее часто в практике программирования используются компоненты
+<font face="Verdana" size="2">TDBGrid, TDBEdit И TDBNavigator.</font>
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.15.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 15.1. </B>Классификация 
+  компонентов отображения данных </font ></P>
+<P><font face="Verdana" size="3"> Для представления и редактирования информации, 
+  содержащейся в полях типа <font face="Verdana" size="2">Memo</font>, используются 
+  специальные компоненты <font face="Verdana" size="2">TDBMemo</font> и <font face="Verdana" size="2">TDBRichEdit</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Для просмотра (без редактирования) изображений 
+  предназначен компонент <font face="Verdana" size="2">TDBImage</font>. </font ></P>
+<P><font face="Verdana" size="3"> Отдельную группу составляют компоненты синхронного 
+  просмотра данных. Они обеспечивают показ значений поля из одной таблицы в соответствии 
+  со значениями поля из другой таблицы. </font ></P>
+<P><font face="Verdana" size="3"> Наконец, данные можно представить в виде графика. 
+  Для этого предназначен компонент <font face="Verdana" size="2">TDBChart</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Как видите, набор компонентов отображения данных 
+  весьма разнообразен и позволяет решать задачи по созданию любых интерфейсов 
+  для приложений баз данных. </font ></P>
+<P><font face="Verdana" size="3"> Ввиду общности решаемых задач, компоненты отображения 
+  данных имеют несколько важных общих свойств, которые представлены в табл. 15.1 
+  и в дальнейшем изложении опущены. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 15.1. </B>Общие свойства 
+  компонентов отображения данных </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="511" HEIGHT="227">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="226" HEIGHT="31"> <DIV WIDTH="294" HEIGHT="31" style="width: 112; height: 31"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="31"> <DIV WIDTH="346" HEIGHT="31" style="width: 118; height: 31"> 
+        <P><font face="Verdana" size="3"> <b> Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="226" HEIGHT="46"> 
+      <DIV WIDTH="294" HEIGHT="46" style="width: 218; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          DataField: string;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="46"> 
+      <DIV WIDTH="346" HEIGHT="46" style="width: 273; height: 46"> 
+        <P><font face="Verdana" size="3"> Поле связанного с компонентом набора 
+          данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="226" HEIGHT="36"> 
+      <DIV WIDTH="294" HEIGHT="36" style="width: 170; height: 36"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          DataSource: TDataSource;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="36"> 
+      <DIV WIDTH="346" HEIGHT="36" style="width: 281; height: 57"> 
+        <P><font face="Verdana" size="3"> Связываемый с компонентом компонент 
+          </font ></P>
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TDataSource</font> 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="226" HEIGHT="62"> 
+      <DIV WIDTH="294" HEIGHT="62" style="width: 185; height: 62"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Field: Tfield;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="62"> 
+      <DIV WIDTH="346" HEIGHT="62" style="width: 277; height: 62"> 
+        <P><font face="Verdana" size="3"> Обеспечивает доступ к классу <font face="Verdana" size="2">TField</font>, 
+          который соответствует полю набора данных, заданному свойством <font face="Verdana" size="2"> 
+          DataField</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="226" HEIGHT="52"> 
+      <DIV WIDTH="294" HEIGHT="52" style="width: 220; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Readonly: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="287" HEIGHT="52"> 
+      <DIV WIDTH="346" HEIGHT="52" style="width: 273; height: 52"> 
+        <P><font face="Verdana" size="3"> Управляет работой режима &quot;только 
+          для чтения&quot; </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index1.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

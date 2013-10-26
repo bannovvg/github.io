@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Интерфейс 
+  ISQLConnection</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Интерфейс <font face="Verdana" size="2"> ISQLConnection</font> обеспечивает работу соединения. Он передает запросы серверу и возвращает результаты, создавая экземпляры интерфейса
+<font face="Verdana" size="2">iSQLCommand</font>; управляет транзакциями; поддерживает передачу метаданных при
+помощи интерфейса <font face="Verdana" size="2">ISQLMetaData</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для открытия соединения используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function connect(ServerName: PChar; UserName: PChar; Password: PChar): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где <font face="Verdana" size="2"> ServerName</font> — имя базы данных,
+<font face="Verdana" size="2"> UserName И Password </font> — имя и пароль
+пользователя.
+</font ></P>
+<P><font face="Verdana" size="3">
+Закрывает соединение метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function disconnect: SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметры соединения управляются методами
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SetOption(eConnectOption: TSQLConnectionOption; lvalue: Longlnt): SQLResult; stdcall;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetOption(eDOption: TSQLConnectionOption; PropValue: Pointer; MaxLength: Smalllnt; out Length: Smalllnt): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для обработки запроса, проходящего через соединение, создается интерфейс
+<font face="Verdana" size="2"> ISQLCommand</font>&nbsp;
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">function getSQLCommand(out pComm: ISQLCommand):
+SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;Обработка транзакций осуществляется тремя <B> </B>методами:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function beginTransaction(TranID: LongWord): SQLResult;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;stdcall; function commit(TranID: LongWord):
+SQLResult;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;stdcall; function rollback(TranID: LongWord): SQLResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При помощи метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function getErrorMessage(Error: PChar): SQLResult; overload; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+организована обработка исключительных ситуаций в компоненте
+<font face="Verdana" size="2">TSQLConnection</font>. В нем реализована защищенная процедура
+<font face="Verdana" size="2">SQLError</font>, которую можно использовать в собственных компонентах и при необходимости дорабатывать.
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, можно написать собственную процедуру контроля ошибок примерно по такому образцу:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CheckError(IConn: ISQLConnection);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var FStatus: SQLResult;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FSize:SmallInt;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FMessage: pChar;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FStatus := IConn.getErrorMessageLen(FSize);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> if (FStatus = SQL_SUCCESS)and(FSize &gt; 0) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FMessage := AllocMem(FSize + I);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;FStatus := IConn.getErrorMessage(FMessage);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if FStatus = SQL_SUCCESS</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then MessageDlg (FMessage, mtError, [rnbOK] , 0)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;else</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;MessageDlg('Checking error', mtWarning, [mbOK], 0) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if Assigned(FMessage)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then FreeMem(FMessage);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Доступ к интерфейсу <font face="Verdana" size="2"> isQLConnection</font> можно получить через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property SQLConnection: ISQLConnection;</font>&nbsp;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+компонента <B> </B><font face="Verdana" size="2">TSQLConnection.</font>
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

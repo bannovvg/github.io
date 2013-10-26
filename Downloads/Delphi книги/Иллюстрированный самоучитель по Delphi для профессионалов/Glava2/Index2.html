@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Иерархия базовых классов</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В основе всего многообразия классов и компонентов, используемых в Delphi, лежат всего лишь пять базовых классов (рис. 2.1). Они обеспечивают выполнение основных функций любого объекта — будь это стандартный компонент VCL или специализированный объект, выполняющий некоторые операции в приложении.
+</font ></P>
+<center><IMG src="gl.2.1.gif">
+<P><font face="Verdana" size="3">
+<B>Рис. 2.1. </B>Иерархия базовых классов VCL
+</font ></P></center>
+<P><font face="Verdana" size="3">
+Благодаря механизму наследования свойств и методов, потомки базовых классов умеют &quot;общаться&quot; друг с другом; работают в среде разработки, взаимодействуя с Палитрой компонентов и Инспектором объектов; распознаются операционной системой как элементы управления и окна.
+</font ></P>
+<P><font face="Verdana" size="3">
+В основе иерархии классов лежит класс <font face="Verdana" size="2">TObject</font>. Он обеспечивает выполнение важнейших функций &quot;жизнедеятельности&quot; любого объекта. Благодаря ему, каждый класс получает в наследство механизмы создания экземпляра объекта и его уничтожения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обычно разработчик даже не задумывается о том, как объект будет создан и что необходимо сделать для его корректного уничтожения. Компоненты VCL создаются и освобождают занимаемые ресурсы автоматически. Иногда разработчику приходится создавать и удалять объекты самостоятельно. Но даже в этом случае ему достаточно вызвать соответствующие конструктор и деструктор:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var SomeList: TStrings;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;SomeList := TStrings.Create;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SomeList.Free;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+За кажущейся простотой этих операций скрывается довольно сложная реализация указанных процессов. Практически весь исходный код класса
+<font face="Verdana" size="2">TObject</font> написан на ассемблере для обеспечения наибольшей эффективности операций, которые будут выполняться в каждом его потомке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, класс <font face="Verdana" size="2"> TObject</font> обеспечивает создание и хранение информации об экземпляре объекта и обслуживание очереди сообщений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TPersistent</font> происходит непосредственно от класса
+<font face="Verdana" size="2">TObject</font>. Он обеспечивает своих потомков возможностью взаимодействовать с другими объектами и процессами на уровне данных. Его методы позволяют передавать данные в потоки, а также обеспечивают взаимодействие объекта с Инспектором объектов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TComponent</font> является важнейшим для всех компонентов. Непосредственно от него можно создавать любые невизуальные компоненты. Механизмы, реализованные в классе
+<font face="Verdana" size="2">TComponent</font>, обеспечивают взаимодействие компонента со средой разработки, главным образом с Палитрой компонентов и Инспектором объектов. Благодаря возможностям этого класса, компоненты начинают работать на форме проекта уже на этапе разработки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2">TControl</font> происходит от класса
+<font face="Verdana" size="2">TComponent</font>. Его основное назначение — обеспечить функционирование визуальных компонентов. Каждый визуальный компонент, произошедший от
+<font face="Verdana" size="2">TControl</font>, наделяется основными признаками элемента управления. Благодаря этому, каждый визуальный компонент умеет работать с GUI (Graphic User Interface — графический интерфейс пользователя ОС) и отображать себя на экране.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2">TWinControl</font> расширяет возможности разработчиков по созданию элементов управления. Он наследуется от класса
+<font face="Verdana" size="2">TControl</font> и обеспечивает создание оконных элементов управления.
+</font ></P>
+<P><font face="Verdana" size="3">
+На основе класса <font face="Verdana" size="2">TWinContro</font><font face="Verdana" size="2">l</font> создан еще один дополнительный класс —
+<font face="Verdana" size="2">TCustomControl</font>. Он обеспечивает создаваемые на его основе компоненты возможностями по использованию канвы — специального объекта, предназначенного для отображения графики (подробнее о канве см. гл. Л).
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TCustomControl</font> является общим предком для целой группы классов, обеспечивающих создание различных нестандартных типов оконных (получающих фокус) элементов управления Windows: редакторов, списков и т. д.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания неоконных (не получающих фокус) элементов управления используется класс
+<font face="Verdana" size="2">TGraphicControl</font>, являющийся потомком класса
+<font face="Verdana" size="2">TControli</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В целом иерархия базовых классов обеспечивает полноценную работу разработчиков в Delphi, позволяя проектировать любые типы приложений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Ниже мы остановимся на основных свойствах и методах базовых классов, выделяя только те, которые могут пригодиться в реальной работе. Часть из них доступна в Инспекторе объектов, часть может быть использована в программном коде.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

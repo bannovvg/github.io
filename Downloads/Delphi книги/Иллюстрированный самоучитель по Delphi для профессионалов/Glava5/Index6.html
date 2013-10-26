@@ -1,0 +1,1150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компоненты TTreeView w TListView</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Эти компоненты известны каждому, кто хоть раз видел Windows 98 или Windows 2000. Именно на их базе создано ядро пользовательского интерфейса — оболочка Explorer, да и большинство других утилит Windows. Они включены в библиотеку ComCtl32.dll и доступны программистам.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TTreeView</font> называют деревом
+(рис. 5.3).
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TTreeView</font> — правопреемник компонента
+<font face="Verdana" size="2">TOutiine</font>, разработанного Borland еще для Delphi 1 и предназначен для отображения иерархической информации. Его &quot;сердцем&quot; является свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Items: TTreeNodes;</font>
+</font ></P>
+</blockquote>
+<p align="center">
+<div align="center"><IMG src="gl.5.3.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 5.3. </B>Внешний вид 
+  компонента <font face="Verdana" size="2"> TTreeView</font> </font ></P>
+<P><font face="Verdana" size="3"> Данное свойство — это список всех вершин дерева, 
+  причем список, обладающий дополнительными полезными свойствами. Каждый из элементов 
+  списка — это объект типа <font face="Verdana" size="2">TTreeNode</font>. Свойства 
+  его сведены в табл. 5.3. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 5.3. </B>Список свойств 
+  объекта <font face="Verdana" size="2"> TTreeNode</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="418" HEIGHT="439">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="29"> <DIV WIDTH="279" HEIGHT="29" style="width: 119; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="29"> <DIV WIDTH="354" HEIGHT="29" style="width: 123; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="32"> 
+      <DIV WIDTH="279" HEIGHT="32" style="width: 190; height: 32"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          HasChildren: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="32"> 
+      <DIV WIDTH="354" HEIGHT="32" style="width: 270; height: 32"> 
+        <P><font face="Verdana" size="3"> Равно <font face="Verdana" size="2">True</font>, 
+          если узел имеет дочерние узлы </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="25"> 
+      <DIV WIDTH="279" HEIGHT="25" style="width: 196; height: 25"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Count: Integer;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="25"> 
+      <DIV WIDTH="354" HEIGHT="25" style="width: 272; height: 25"> 
+        <P><font face="Verdana" size="3"> Счетчик числа дочерних узлов данного 
+          узла </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="46"> 
+      <DIV WIDTH="279" HEIGHT="46" style="width: 181; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Item [Index: Integer] : TTreeNode;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="46"> 
+      <DIV WIDTH="354" HEIGHT="46" style="width: 172; height: 46"> 
+        <P><font face="Verdana" size="3"> Список дочерних узлов </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="50"> 
+      <DIV WIDTH="279" HEIGHT="50" style="width: 201; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Parent: TTreeNode;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="50"> 
+      <DIV WIDTH="354" HEIGHT="50" style="width: 278; height: 50"> 
+        <P><font face="Verdana" size="3"> Ссылка на объект — родительский узел 
+          (верхнего уровня) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="64"> 
+      <DIV WIDTH="279" HEIGHT="64" style="width: 195; height: 64"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Level: Integer;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="64"> 
+      <DIV WIDTH="354" HEIGHT="64" style="width: 290; height: 64"> 
+        <P><font face="Verdana" size="3"> Уровень, на котором находится узел. 
+          Для корневого узла это свойство равно 0; его потомки имеют значение 
+          <font face="Verdana" size="2"> Level=l</font> и т. д. </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="33"> 
+      <DIV WIDTH="279" HEIGHT="33" style="width: 182; height: 33"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Text: string;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="33"> 
+      <DIV WIDTH="354" HEIGHT="33" style="width: 159; height: 33"> 
+        <P><font face="Verdana" size="3"> Текст узла </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="27"> 
+      <DIV WIDTH="279" HEIGHT="27" style="width: 191; height: 27"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Data: Pointer;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="27"> 
+      <DIV WIDTH="354" HEIGHT="27" style="width: 200; height: 27"> 
+        <P><font face="Verdana" size="3"> Данные, связанные с узлом </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="46"> 
+      <DIV WIDTH="279" HEIGHT="46" style="width: 147; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          TreeView: TCustomTreeView;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="46"> 
+      <DIV WIDTH="354" HEIGHT="46" style="width: 256; height: 46"> 
+        <P><font face="Verdana" size="3"> Ссылка на компонент <font face="Verdana" size="2">TTreeView</font>, 
+          в котором отображается данный узел </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="46"> 
+      <DIV WIDTH="279" HEIGHT="46" style="width: 178; height: 46"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Handle: HWND;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="46"> 
+      <DIV WIDTH="354" HEIGHT="46" style="width: 282; height: 46"> 
+        <P><font face="Verdana" size="3"> Дескриптор окна компонента <font face="Verdana" size="2">TTreeView</font>, 
+          в котором отображается данный узел </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="238" HEIGHT="56"> 
+      <DIV WIDTH="279" HEIGHT="56" style="width: 204; height: 56"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Owner: TTreeNodes;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="328" HEIGHT="56"> 
+      <DIV WIDTH="354" HEIGHT="56" style="width: 253; height: 56"> 
+        <P><font face="Verdana" size="3"> Ссылка на компонент <font face="Verdana" size="2">TTreeNodes</font>, 
+          которому принадлежит данный узел </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="27"> <DIV WIDTH="286" HEIGHT="27" style="width: 200; height: 27"> 
+      <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+        Index: Longint;</font> </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="27"> <DIV WIDTH="333" HEIGHT="27" style="width: 262; height: 27"> 
+      <P><font face="Verdana" size="3"> Индекс узла в списке своего родителя </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="48"> 
+      <DIV WIDTH="286" HEIGHT="48" style="width: 210; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          IsVisible: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="48"> 
+      <DIV WIDTH="333" HEIGHT="48" style="width: 256; height: 48"> 
+        <P><font face="Verdana" size="3"> Равно <font face="Verdana" size="2">True</font>, 
+          если узел видим (все его родительские узлы развернуты) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="50"> 
+      <DIV WIDTH="286" HEIGHT="50" style="width: 205; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Itemld: HTreeltem;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="50"> 
+      <DIV WIDTH="333" HEIGHT="50" style="width: 246; height: 50"> 
+        <P><font face="Verdana" size="3"> Дескриптор узла (применяется при вызове 
+          некоторых методов) </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="48"> 
+      <DIV WIDTH="286" HEIGHT="48" style="width: 192; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Absolutelndex: Integer;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="48"> 
+      <DIV WIDTH="333" HEIGHT="48" style="width: 251; height: 48"> 
+        <P><font face="Verdana" size="3"> Абсолютный индекс узла в списке корневого 
+          узла </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="48"> 
+      <DIV WIDTH="286" HEIGHT="48" style="width: 179; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Imagelndex: Integer;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="48"> 
+      <DIV WIDTH="333" HEIGHT="48" style="width: 256; height: 48"> 
+        <P><font face="Verdana" size="3"> Индекс картинки, соответствующей невыбранному 
+          узлу в нормальном состоянии </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="44"> 
+      <DIV WIDTH="286" HEIGHT="44" style="width: 189; height: 44"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Selectedlndex: Integer;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="44"> 
+      <DIV WIDTH="333" HEIGHT="44" style="width: 254; height: 44"> 
+        <P><font face="Verdana" size="3"> Индекс картинки, соответствующей выбранному 
+          узлу </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="40"> 
+      <DIV WIDTH="286" HEIGHT="40" style="width: 179; height: 40"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Overlaylndex: Integer;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="40"> 
+      <DIV WIDTH="333" HEIGHT="40" style="width: 228; height: 40"> 
+        <P><font face="Verdana" size="3"> Индекс картинки, которая может накладываться 
+          поверх основной </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="37"> 
+      <DIV WIDTH="286" HEIGHT="52" style="width: 169; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Statelndex: Integer;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="37"> 
+      <DIV WIDTH="333" HEIGHT="52" style="width: 241; height: 52"> 
+        <P><font face="Verdana" size="3"> Индекс дополнительной картинки, отражающей 
+          состояние узла </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="48"> 
+      <DIV WIDTH="286" HEIGHT="48" style="width: 193; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Selected: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="48"> 
+      <DIV WIDTH="333" HEIGHT="48" style="width: 267; height: 48"> 
+        <P><font face="Verdana" size="3"> Равно <font face="Verdana" size="2">True</font>, 
+          если данный узел выбран пользователем </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="67"> 
+      <DIV WIDTH="286" HEIGHT="67" style="width: 209; height: 67"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Focused: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="67"> 
+      <DIV WIDTH="333" HEIGHT="67" style="width: 294; height: 67"> 
+        <P><font face="Verdana" size="3"> Равно <font face="Verdana" size="2">True</font>, 
+          если данный узел выбран пользователем для редактирования текста узла 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="48"> 
+      <DIV WIDTH="286" HEIGHT="48" style="width: 196; height: 48"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Expanded: Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="48"> 
+      <DIV WIDTH="333" HEIGHT="48" style="width: 279; height: 48"> 
+        <P><font face="Verdana" size="3"> Равно <font face="Verdana" size="2">True</font>, 
+          если данный узел развернут (показываются его дочерние узлы) </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> Очень важным является свойство <font face="Verdana" size="2">Data</font>. 
+  Вместе с каждым узлом можно хранить не только текст, но и любые данные. Необходимо 
+  только помнить, что при удалении узла они автоматически не освобождаются, и 
+  это придется сделать вручную. </font ></P>
+<P><font face="Verdana" size="3"> Для добавления узлов в дерево используются десять 
+  методов объекта <font face="Verdana" size="2">TTreeNode</font> <B>(табл. 5.4).</B> 
+  </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 5.4. </B>Методы, позволяющие 
+  добавлять узлы в объект TTreeNode </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="482" HEIGHT="79">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="236" HEIGHT="29"> <DIV WIDTH="312" HEIGHT="29" style="width: 125; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Метод</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="258" HEIGHT="29"> <DIV WIDTH="321" HEIGHT="29" style="width: 90; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="236" HEIGHT="50"> 
+      <DIV WIDTH="312" HEIGHT="50" style="width: 243; height: 50"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          Add (Node: TTreeNode; const S: string) : TTreeNode;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="258" HEIGHT="50"> 
+      <DIV WIDTH="321" HEIGHT="50" style="width: 218; height: 50"> 
+        <P><font face="Verdana" size="3"> Узел добавляется последним в тот же 
+          список, что и узел <font face="Verdana" size="2"> Node</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="62"> <DIV WIDTH="321" HEIGHT="62" style="width: 219; height: 62"> 
+      <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+        AddObject (Node: TTreeNode; const S: string; Ptr: Pointer) : TTreeNode 
+        ;</font> </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="62"> <DIV WIDTH="317" HEIGHT="62" style="width: 243; height: 62"> 
+      <P><font face="Verdana" size="3"> To же, что и метод <font face="Verdana" size="2">Add</font>, 
+        но с узлом связываются данные из параметра <font face="Verdana" size="2"> 
+        Ptr</font> </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="52"> 
+      <DIV WIDTH="321" HEIGHT="52" style="width: 229; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          AddFirst (Node: TTreeNode; const S: string): TTreeNode;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="52"> 
+      <DIV WIDTH="317" HEIGHT="52" style="width: 237; height: 52"> 
+        <P><font face="Verdana" size="3"> Узел добавляется первым в тот же список, 
+          что и узел <font face="Verdana" size="2"> Node</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="64"> 
+      <DIV WIDTH="321" HEIGHT="64" style="width: 213; height: 64"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          AddObjectFirst (Node: TTreeNode; const S: string; Ptr: Pointer) : TTreeNode;</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="64"> 
+      <DIV WIDTH="317" HEIGHT="64" style="width: 234; height: 64"> 
+        <P><font face="Verdana" size="3"> То же, что и метод <font face="Verdana" size="2">AddFirst</font>, 
+          но с узлом связываются данные из параметра <font face="Verdana" size="2">Ptr</font> 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="52"> 
+      <DIV WIDTH="321" HEIGHT="52" style="width: 228; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          AddChildfNode: TTreeNode; const S: string): TTreeNode;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="52"> 
+      <DIV WIDTH="317" HEIGHT="52" style="width: 231; height: 52"> 
+        <P><font face="Verdana" size="3"> Узел добавляется последним в список 
+          дочерних узлов узла <font face="Verdana" size="2"> Node</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="69"> 
+      <DIV WIDTH="321" HEIGHT="69" style="width: 209; height: 69"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          AddChildObject (Node: TTreeNode; const S: string; Ptr: Pointer) : TTreeNode;</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="69"> 
+      <DIV WIDTH="317" HEIGHT="69" style="width: 233; height: 69"> 
+        <P><font face="Verdana" size="3"> То же, что и метод <font face="Verdana" size="2">AddChild</font>, 
+          но с узлом связываются данные из параметра <font face="Verdana" size="2">Ptr</font> 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="60"> 
+      <DIV WIDTH="321" HEIGHT="60" style="width: 234; height: 60"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          AddChildFirst (Node: TTreeNode; const S: string): TTreeNode;</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="60"> 
+      <DIV WIDTH="317" HEIGHT="60" style="width: 240; height: 60"> 
+        <P><font face="Verdana" size="3"> Узел добавляется первым в список дочерних 
+          узлов узла <font face="Verdana" size="2"> Node</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="69"> 
+      <DIV WIDTH="321" HEIGHT="69" style="width: 229; height: 69"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          AddChildObjectFirst (Node: TTreeNode; const S: string; Ptr: Pointer) 
+          : TTreeNode;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="69"> 
+      <DIV WIDTH="317" HEIGHT="69" style="width: 241; height: 69"> 
+        <P><font face="Verdana" size="3"> То же, что и метод <font face="Verdana" size="2">AddChildFirst</font>, 
+          но с узлом связываются данные из параметра <font face="Verdana" size="2"> 
+          Ptr</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="52"> 
+      <DIV WIDTH="321" HEIGHT="52" style="width: 232; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          Insert (Node: TTreeNode; const S: string): TTreeNode;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="52"> 
+      <DIV WIDTH="317" HEIGHT="52" style="width: 241; height: 52"> 
+        <P><font face="Verdana" size="3"> Узел добавляется непосредственно перед 
+          узлом <font face="Verdana" size="2"> Node</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="245" HEIGHT="60"> 
+      <DIV WIDTH="321" HEIGHT="60" style="width: 229; height: 60"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          InsertObject (Node: TTreeNode; const S: string; Ptr: Pointer) : TTreeNode;</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="254" HEIGHT="60"> 
+      <DIV WIDTH="317" HEIGHT="60" style="width: 232; height: 60"> 
+        <P><font face="Verdana" size="3"> То же, что и метод <font face="Verdana" size="2">insert</font>, 
+          но с узлом связываются данные из параметра <font face="Verdana" size="2"> 
+          Ptr</font> </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> Во всех этих методах параметр <font face="Verdana" size="2"> 
+  s</font> — это текст создаваемого узла. Место появления узла (первый или последний) 
+  также зависит от состояния свойства <font face="Verdana" size="2"> TTreeView.SortType:</font> 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TSortType 
+    = (stNone, stData, stText, stBoth); property SortType: TSortType;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Если узлы дерева как-либо сортируются, то новые 
+  узлы появляются сразу в соответствии с правилом сортировки. По умолчанию значение 
+  этого свойства равно stNone. </font ></P>
+<P><font face="Verdana" size="3"> Добавляя к дереву сразу несколько узлов, следует 
+  воспользоваться парой методов <font face="Verdana" size="2"> BeginUpdate</font> 
+  И <font face="Verdana" size="2"> EndUpdate</font>: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TreeViewl.Items.BeginUpdate;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ShowSubKeys(Root,1);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">TreeViewl.Items.EndUpdate;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Они позволяют отключать и снова включать перерисовку 
+  дерева на экране на момент добавления (удаления, перемещения) узлов и тем самым 
+  сэкономить подчас очень много времени. </font ></P>
+<P><font face="Verdana" size="3"> Помимо добавления узлов в дерево программным 
+  способом можно сделать это и вручную во время разработки. При щелчке в Инспекторе 
+  объектов на свойстве <font face="Verdana" size="2"> items</font> запускается 
+  специальный редактор (рис. 5.4). </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.5.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 5.4. </B>Внешний вид 
+  редактора узлов компонента <font face="Verdana" size="2"> TTreeView</font> </font ></P>
+<P><font face="Verdana" size="3"> Внешний вид компонента <font face="Verdana" size="2">TTreeview</font> 
+  может быть весьма основательно настроен под нужды пользователя. Свойство <font face="Verdana" size="2">showButtor</font>.s 
+  отвечает за то, будут ли отображаться кнопки со знаком &quot;+&quot; и &quot;—&quot; 
+  перед узлами, имеющими &quot;потомство&quot; (дочерние узлы). Щелчок на этих 
+  кнопках позволяет сворачивать/разворачивать дерево дочерних узлов. В противном 
+  случае делать это нужно двойным щелчком на узле или установить свойство <font face="Verdana" size="2"> 
+  AutoExpand</font> в значение <font face="Verdana" size="2"> True</font> — тогда 
+  сворачивание и разворачивание будет происходить автоматически при выделении 
+  узлов. Свойство <font face="Verdana" size="2"> showLines</font> определяет, 
+  будут ли родительские и дочерние узлы соединяться видимыми линиями. Аналогично, 
+  свойство <font face="Verdana" size="2"> showRoot</font> определяет, будут ли 
+  на рисунке соединяться между собой линиями корневые узлы (если их несколько). 
+  При помощи свойства <font face="Verdana" size="2"> HotTrack</font> можно динамически 
+  отслеживать положение текущего узла: если оно установлено в значение <font face="Verdana" size="2">True</font>, 
+  то текущий узел (не выделенный, а именно текущий — тот, над которым находится 
+  курсор мыши) подчеркивается синей линией. </font ></P>
+<P><font face="Verdana" size="3"> Наконец, для оформления дерева можно использовать 
+  наборы картинок. Наборов два — в свойствах <font face="Verdana" size="2"> images</font> 
+  и <font face="Verdana" size="2">stateimages</font>. Напомним, что у каждого 
+  узла-объекта <font face="Verdana" size="2">TTreeNode</font> есть свойства <B> 
+  </B><font face="Verdana" size="2">Imagelndex</font> И <font face="Verdana" size="2">Statelndex</font>, 
+  а вдобавок еще и <font face="Verdana" size="2">seiectedindex</font>. Первая 
+  картинка предназначена для отображения типа узла, а вторая — его состояния. 
+  Можно сразу (при добавлении) указать номера изображений для того или иного случая, 
+  а можно делать это динамически. Для этого существуют события: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TTVExpandedEvent 
+    = procedure(Sender: TObject; Node: TTreeNode)of object;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnGetlmagelndex: 
+    TTVExpandedEvent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnGetSelectedlndex: 
+    TTVExpandedEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Пример их использования дан в листинге 5.1 ниже 
+  — в момент возникновения этих событий следует переопределить свойство <font face="Verdana" size="2"> 
+  imageindex</font> или <font face="Verdana" size="2"> Seiectedindex</font> передаваемого 
+  в обработчик события объекта <font face="Verdana" size="2">TTreeNode</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Свойства <font face="Verdana" size="2"> stateindex</font> 
+  и <font face="Verdana" size="2"> stateimages</font> можно порекомендовать для 
+  имитации множественного выбора. Дело в том, что в отличие от <font face="Verdana" size="2">TListview</font>, 
+  в <font face="Verdana" size="2"> TTreeView</font> невозможно одновременно выбрать 
+  несколько узлов. Вы можете отслеживать щелчки на узлах, и для выбранных устанавливать 
+  значение <font face="Verdana" size="2"> stateindex</font> в 1; под этим номером 
+  в <font face="Verdana" size="2">stateimages</font> поместите, например, галочку. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Изложенная информация будет неполной, если не 
+  рассказать, на какие события реагирует компонент <font face="Verdana" size="2">TTreeView</font>. 
+  Большинство из них происходит парами — до наступления какого-то изменения и 
+  после него. К примеру, возникновение события <font face="Verdana" size="2"> 
+  onChanging</font> означает начало перехода фокуса от одного узла к другому, 
+  a <font face="Verdana" size="2"> Onchange</font> — его завершение. </font ></P>
+<P><font face="Verdana" size="3"> Четверка событий </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TTVCollapsingEvent 
+    = procedure(Sender: TObject; Node: TTreeNode;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var AllowCollapse: 
+    Boolean) of object;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TTVExpandingEvent 
+    = procedure(Sender: TObject; Node: TTreeNode;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var AllowExpansion: 
+    Boolean) of object;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnExpanding: 
+    TTVExpandingEvent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnExpanded: 
+    TTVExpandedEvent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnCollapsing: 
+    TTVCollapsingEvent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnCollapsed: 
+    TTVExpandedEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> сопровождает процесс свертывания/развертывания 
+  узла, а пара </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TTVEditingEvent 
+    = procedure(Sender: TObject; Node: TTreeNode;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var AllowEdit: 
+    Boolean) of object;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnEditing: 
+    TTVEditingEvent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TTVEditedEvent 
+    = procedure(Sender: TObject; Node: TTreeNode;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var S: string) 
+    of object;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnEdited: 
+    TTVEditedEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> сопровождает редактирование его текста. Событие 
+  <font face="Verdana" size="2">onDeletion</font> происходит при удалении узла. 
+  Иногда нужно сравнивать узлы между собой — если вы хотите сделать это по своим 
+  правилам, используйте событие <font face="Verdana" size="2">oncompare</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Наконец, те, кому и приведенных возможностей 
+  мало, могут сами рисовать на компоненте <font face="Verdana" size="2">TTreeView</font>. 
+  У него есть свойство <font face="Verdana" size="2"> Canvas</font> и четыре события<B> 
+  </B>— <font face="Verdana" size="2"> OnCustomDraw, OnCustomDrawItem, OnAdvancedCustomDraw, 
+  OnAdvancedCustomDrawItem.</font> </font ></P>
+<P><font face="Verdana" size="3"> Перейдем теперь к компоненту <font face="Verdana" size="2">TListview</font>. 
+  Его еще называют расширенным списком. Действительно, в этот компонент заложено 
+  столько, что он перекрывает все мыслимые и немыслимые задачи по отображению 
+  упорядоченной однородной информации. </font ></P>
+<P><font face="Verdana" size="3"> Начнем со свойства <font face="Verdana" size="2">viewstyie</font>: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type TViewStyle 
+    = (vslcon, vsSmalllcon, vsList, vsReport);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;property 
+    ViewStyle: TViewStyle;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В зависимости от значения этого свойства кардинально 
+  меняется внешний вид компонента. Описание значений приведено в табл. 5.5. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 5.5. </B>Режимы отображения 
+  компонента <font face="Verdana" size="2"> TListview</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="485" HEIGHT="308">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="94" HEIGHT="33"> <DIV WIDTH="121" HEIGHT="33" style="width: 31; height: 33"> 
+        <P><font face="Verdana" size="3"> <b> Значение</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="33"> <DIV WIDTH="523" HEIGHT="33" style="width: 112; height: 33"> 
+        <P><font face="Verdana" size="3"> <b> Внешний вид</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="94" HEIGHT="67"> 
+      <DIV WIDTH="121" HEIGHT="67" style="width: 53; height: 40"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> vslcon</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="67"> 
+      <DIV WIDTH="523" HEIGHT="67" style="width: 370; height: 67"> 
+        <P><font face="Verdana" size="3"> Элементы списка появляются в виде больших 
+          значков с надписью под ними. Картинки для больших значков хранятся в 
+          свойстве <font face="Verdana" size="2">Largelmages</font>. Возможно 
+          их перетаскивание </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="94" HEIGHT="58"> 
+      <DIV WIDTH="121" HEIGHT="58" style="width: 87; height: 58"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> vsSmalllcon</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="58"> 
+      <DIV WIDTH="523" HEIGHT="58" style="width: 374; height: 58"> 
+        <P><font face="Verdana" size="3"> Элементы списка появляются в виде маленьких 
+          значков с надписью справа. Картинки для маленьких значков хранятся в 
+          свойстве <font face="Verdana" size="2">Smallimages</font>. Возможно 
+          их перетаскивание </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="94" HEIGHT="52"> 
+      <DIV WIDTH="121" HEIGHT="52" style="width: 14; height: 52"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> vsList</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="52"> 
+      <DIV WIDTH="523" HEIGHT="52" style="width: 346; height: 52"> 
+        <P><font face="Verdana" size="3"> Элементы списка появляются в колонке 
+          один под другим с надписью справа. Перетаскивание невозможно </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="94" HEIGHT="98"> 
+      <DIV WIDTH="121" HEIGHT="98" style="width: 64; height: 34"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2">vsReport</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="391" HEIGHT="98"> 
+      <DIV WIDTH="523" HEIGHT="98" style="width: 365; height: 98"> 
+        <P><font face="Verdana" size="3"> Элементы списка появляются в нескольких 
+          колонках один под другим. В первой содержится маленький значок и надпись, 
+          в остальных — определенная программистом информация. Если свойство <font face="Verdana" size="2">ShowColumnHeaders</font> 
+          установлено в значение <font face="Verdana" size="2">True</font>, колонки 
+          снабжаются заголовками </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> Как и для предыдущего компонента, элементы списка 
+  содержатся в свойстве <font face="Verdana" size="2">items</font>. Это и есть 
+  собственно список; ничего необычного, кроме методов добавления/удаления, там 
+  нет. Каждый элемент списка (объект <font face="Verdana" size="2">TListitem</font>) 
+  в свою очередь похож на компонент <font face="Verdana" size="2">TTreeNode</font>. 
+  Но у него есть и важное отличие — он может стать носителем большого количества 
+  дополнительной информации. Помимо свойства Data у него есть и свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Subltems: 
+    TStrings;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> При помощи этого свойства с каждым элементом 
+  списка может быть связан целый набор строк и объектов. Но как эти строки показать 
+  пользователю? </font ></P>
+<P><font face="Verdana" size="3"> Именно они должны, по замыслу разработчиков 
+  этого элемента управления, отображаться в режиме отображения <font face="Verdana" size="2">vsReport</font>. 
+  Сначала следует создать необходимое количество заголовков колонок (заполнив 
+  свойство <font face="Verdana" size="2">columns</font>), учитывая, что первая 
+  из них будет отведена под сам текст элемента списка (свойство <font face="Verdana" size="2">caption</font>). 
+  Последующие же колонки будут отображать текст строк ИЗ свойства <font face="Verdana" size="2"> 
+  Items . Subltems </font> (рис. 5.5). </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.5.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 5.5. </B>Так будет располагаться 
+  информация компонента <font face="Verdana" size="2"> TListView</font> в режиме 
+  <font face="Verdana" size="2"> vsReport</font> </font ></P>
+<P><font face="Verdana" size="3"> Элементы в списке могут быть отсортированы — 
+  за это отвечает свойство <font face="Verdana" size="2">SortType</font>. Можно 
+  отсортировать элементы не только по названию (это возможно при значении <font face="Verdana" size="2">SortType</font>, 
+  равном <font face="Verdana" size="2">stText</font>), но и по данным (значения 
+  <font face="Verdana" size="2"> stData</font> и <font face="Verdana" size="2">stBoth</font>), 
+  как это сделано в утилите <font face="Verdana" size="2">Explorer</font>. Для 
+  реализации такой сортировки нужно обработать события <font face="Verdana" size="2">OnColumnClick</font> 
+  И <font face="Verdana" size="2"> OnComparel</font> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var ColNum 
+    : Integer;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.ListViewlColumnClick(Sender: 
+    TObject; Column:</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TListColumn);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ColNum := Column.Index;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ListViewl.AlphaSort;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.ListViewlCompare(Sender: 
+    TObject; Iteml, Item2:</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TListltem; 
+    Data: Integer; var Compare: Integer);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if ColNum = 
+    0 then // Заголовок</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Compare := 
+    CompareStr(Iteml.Caption, Item2 .Caption);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;else</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Compare := 
+    CompareStr(Iteml.Subltems[ColNum-1],&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Item2 .Subltems[ColNum-1]); 
+    end;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Рассмотрим пример использования компонентов 
+  <font face="Verdana" size="2"> TTreeview</font> и <font face="Verdana" size="2">TListview</font>. 
+  Где их совместное применение будет полезным? Выберем для этого отображение данных 
+  системного реестра. С одной стороны, ключи в реестре упорядочены иерархически. 
+  С другой, каждый из них может иметь несколько </font ></P>
+<P><font face="Verdana" size="3"> разнотипных значений. Таким образом, мы почти 
+  пришли к тому же решению, что и разработчики из Microsoft, создавшие утилиту 
+  <font face="Verdana" size="2"> Registry Editor</font> — слева дерево ключей, 
+  справа — расширенный список их содержимого. </font ></P>
+<P><font face="Verdana" size="3"> Конечно, нет смысла дублировать их труд. Здесь 
+  мы ограничимся только просмотром реестра, затратив на это совсем немного усилий 
+  — четыре компонента и пару десятков строк кода. Так выглядит главная (и единственная) 
+  форма приложения <font face="Verdana" size="2"> Mini-Registry browser</font> 
+  (рис. 5.6). </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.5.6.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. </B><strong>5.6.</strong> 
+  Приложение Mini-Registry browser А вот и весь его исходный код:&nbsp; </font ></P>
+<P align="center"><font face="Verdana" size="3"><B>Листинг 5.1. Приложение Mini-Registry-browser, 
+  главный модуль&nbsp;</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> unit main;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">interface</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> uses</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Windows, Messages, 
+    SysUtils, Classes, Graphics, Controls, Forms, Dialogs,</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">StdCtrls, Grids, 
+    Outline, ComCtrls, ImgList, ExtCtrls;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> type</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TForml = class(TForm)&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">TreeViewl: TTreeView;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ListViewl: TListView;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; ImageListl: 
+    TImageList;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Splitterl: TSplitter;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure FormCreate(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> procedure TreeViewlChange(Sender: 
+    TObject; Node: TTreeNode);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure FormDestroy(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TreeViewlExpanded(Sender: 
+    TObject; Node: TTreeNode);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TreeViewlGetlmagelndex(Sender: 
+    TObject; Node: TTreeNode);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> private</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">{ Private declarations 
+    }</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;public</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">{ Public declarations 
+    }</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure ShowSubKeys(ParentNode: 
+    TTreeNode;depth: Integer);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;function 
+    GetFullNodeName(Node: TTreeNode):string;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Forml: TForml;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> implementation</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> uses registry;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> {$R *.DFM}</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var reg : TRegistry;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.FormCreate(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;var root 
+    : TTreeNode;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Reg := TRegistry.Create;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;ListViewl.ViewStyle 
+    := vsReport;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with ListViewl 
+    do&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with Columns.Add 
+    do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Width := ListViewl.Width 
+    div 3-2;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Caption := 
+    'Name';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with Columns.Add 
+    do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Width := ListViewl.Width 
+    div 3*2-2;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Caption := 
+    'Value';</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">TreeViewl.Items.Clear;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Reg.RootKey 
+    := HKEY_LOCAL_MACHINE;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Root := TreeViewl.Items.Add(nil,'HKEY_LOCAL_MACHINE');</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;TreeViewl.Items.AddChildtroot,'');</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.FormDestroy(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Reg.Free;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function TForml.GetFullNodeName(Node: 
+    TTreeNode):string;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var CurNode 
+    : TTreeNode;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Result:=''; 
+    CurNode := Node;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> while CurNode.Parentonil 
+    do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Result:= '\'+CurNode.Text 
+    + Result;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CurNode := 
+    CurNode.Parent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.TreeViewlChange(Sender: 
+    TObject; Node: TTreeNode);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;var s: 
+    string;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Keylnfo : TRegKeylnfo;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ValueNames 
+    : TStringList;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;i : Integer;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DataType : 
+    TRegDataType;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ListViewl.Items.Clear;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; s:= GetFullNodeName(Node);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;if not 
+    Reg.OpenKeyReadOnly(s) then Exit;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Reg.GetKeylnfo(Keylnfo);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Keylnfo.NumValues&lt;=0 
+    then Exit;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ValueNames 
+    := TStringList.Create;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Reg.GetValueNames(ValueNames);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;for i 
+    := 0 to ValueNames.Count-1 do&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with ListViewl.Items.Add 
+    do&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Caption := 
+    ValueNames[i];</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> DataType := 
+    Reg.GetDataType(ValueNames[i]);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;Case DataType 
+    of</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> rdString: s 
+    := Reg.ReadString(ValueNames[i]);</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">rdlnteger: s:= 
+    '0x'+IntToHex(Reg.Readlnteger(ValueNames[i]),8);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">rdBinary: s:='Binary';&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> else s:= '???';&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">end;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Subltems.Add(s);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Imagelndex 
+    :=1;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ValueNames.Free;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.ShowSubKeys(ParentNode: 
+    TTreeNode;depth: Integer);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var ParentKey: 
+    string;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> KeyNames : 
+    TStringList;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;KeyInfo 
+    : TRegKeylnfo;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CurNode : TTreeNode; 
+    i : Integer;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Cursor := crHourglass;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; TreeViewl.Items.BeginUpdate;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ParentKey := 
+    GetFullNodeName(ParentNode);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if ParentKeyO1' 
+    then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Reg.OpenKeyReadOnly(ParentKey)</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;else</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Reg.OpenKeyReadOnly('\') 
+    ;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Reg.GetKeylnfo(Keylnfo) 
+    ;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if KeyInfo.NumSubKeys&lt;=0 
+    then Exit;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;KeyNames 
+    := TStringList.Create;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; Reg.GetKeyNames(KeyNames);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> While ParentNode.GetFirstChildonil 
+    do ParentNode.GetFirstChild.Delete;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if (KeyNames.Count&gt;0) 
+    then for i:=0 to KeyNames.Count-1 do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Reg.OpenKeyReadOnly(ParentKey+'\'-t-KeyNames[ 
+    i ]) ;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; Reg.GetKeylnfo(Keylnfo);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> CurNode := 
+    TreeViewl.Items.AddChild(ParentNode,KeyNames[i];</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;if KeyInfo.NumSubKeys&gt;0 
+    then&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TreeViewl.Items.AddChild(CurNode, 
+    '');&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">KeyNames.Free;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; TreeViewl.Items.EndUpdate;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Cursor := crDefault;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp; end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.TreeViewlExpanded(Sender: 
+    TObject; Node: TTreeNode);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ShowSubKeys(Node,1);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.TreeViewlGetlmagelndex(Sender: 
+    TObject; Node: TTreeNode);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with Node do</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Expanded 
+    then Imagelndex := 2</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> else Imagelndex 
+    := 3;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">end.</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Для работы с системным реестром используется 
+  объект <font face="Verdana" size="2"> VCL TRegistry</font>, удачно инкапсулирующий 
+  все предназначенные для этого функции Windows API. В обработчике события <font face="Verdana" size="2"> 
+  OnCreate</font> главной формы создается объект <font face="Verdana" size="2"> 
+  Reg</font>, а также к списку <font face="Verdana" size="2">Listview1</font> 
+  добавляются два заголовка (свойство <font face="Verdana" size="2"> Columns</font>). 
+  </font ></P>
+<P><font face="Verdana" size="3"> Пояснений требует принцип построения дерева 
+  ключей. Во-первых, это приложение отображает только один из системных ключей 
+  (а именно <font face="Verdana" size="2">HKEY_LOCAL_MACHINE)</font>; при желании 
+  его можно заменить или добавить остальные. Во-вторых, попытка построить все 
+  &quot;развесистое&quot; дерево ключей сразу займет слишком много времени и наверняка 
+  не понравится пользователям. Вспомним, ведь утилита <font face="Verdana" size="2"> 
+  Registry</font> <font face="Verdana" size="2"> Editor</font> работает довольно 
+  быстро. Значит, придется строить дерево динамически — создавать и показывать 
+  дочерние узлы в момент развертывания родительского узла. Для этого используется 
+  событие<B> </B><font face="Verdana" size="2">OnExpand</font> компонента <B> 
+  </B><font face="Verdana" size="2">TreeView1</font>. </font ></P>
+<P><font face="Verdana" size="3"> Остановимся на секунду. А какие узлы помечать 
+  кнопкой разворачивания (с пометкой &quot;+&quot;), ведь у родительского узла 
+  еще нет потомков? Выход из положения такой — в момент построения ключа проверить, 
+  есть ли у него дочерние. Если да, то к нему добавляется один (фиктивный) пустой 
+  ключ. Его единственная роль — дать системе поставить &quot;+&quot; против родительского 
+  узла. </font ></P>
+<P><font face="Verdana" size="3"> Когда же пользователь щелкнул на кнопке, отмеченной 
+  знаком &quot;+&quot;, и родительский узел разворачивается, фиктивный дочерний 
+  узел удаляется и вместо него создаются узлы настоящие, полученные путем сканирования 
+  реестра (см. метод <font face="Verdana" size="2">ShowSubKeys</font>). </font ></P>
+<P><font face="Verdana" size="3"> Снабдим узлы картинками. Для этого в компонент 
+  <font face="Verdana" size="2">imageList1</font> поместим картинки, соответствующие 
+  открытой и закрытой папкам. Напомним, что для отрисовки и смены картинок есть 
+  специальные события — <font face="Verdana" size="2">OnGetlmageIndex</font> И 
+  <font face="Verdana" size="2">OnGetSelectedIndex</font>. В данном примере у 
+  двух ЭТИХ событий один обработчик: развернутому узлу он сопоставляет картинку 
+  раскрытой папки, а свернутому — закрытой. </font ></P>
+<P><font face="Verdana" size="3"> В заключение нужно сказать об очень важной особенности 
+  компонента <font face="Verdana" size="2">TListview</font>. Когда он отображает 
+  большой объем информации, обработка данных может затянуться очень и очень надолго 
+  и занять слишком много памяти. Выход — перевести список в так называемый виртуальный 
+  режим. Он применяется для тех случаев, когда элементов в списке слишком много 
+  и хранить их там невозможно из соображений экономии времени или памяти. Выход 
+  из положения прост: </font ></P>
+<P><font face="Verdana" size="3"> 1. Переводим компонент в виртуальный режим установкой 
+  свойства <font face="Verdana" size="2">OwnerData</font> в значение <B> </B><font face="Verdana" size="2">True</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> 2. Сообщаем списку сколько в нем должно быть 
+  элементов установкой нужного значения <font face="Verdana" size="2"> items.Count.</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> 3. Чтобы предоставить нужные данные, программист 
+  должен предусмотреть обработку событий<font face="Verdana" size="2"> OnData, 
+  OnDataFind, OnDataHint </font>и <font face="Verdana" size="2">OnDataStateChange</font>. 
+  Как минимум нужно описать обработчик события <font face="Verdana" size="2">OnData</font>. 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> TLVOwnerDataEvent 
+    = procedure(Sender: TCbject; Item: TListltem) of object;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Вам передается объект <font face="Verdana" size="2">TListitem</font>, 
+  и внутри обработчика события <font face="Verdana" size="2">OnData</font><font face="Verdana" size="2"> 
+  </font> необходимо динамически &quot;оформить&quot; его — полностью, от заголовка 
+  до картинок. </font ></P>
+<P><font face="Verdana" size="3"> Возникает это событие перед каждой перерисовкой 
+  списка. Так что, если сбор данных для вашего списка занимает более или менее 
+  продолжительное время, лучше не связывать его с событием <font face="Verdana" size="2"> 
+  OnData</font> — перерисовка сильно затянется. К тому же в виртуальном режиме 
+  сортировать список невозможно. </font ></P>
+<P><font face="Verdana" size="3"> Borland прилагает к Delphi 7 прекрасный пример 
+  к вышесказанному — <font face="Verdana" size="2"> Virtual</font> <font face="Verdana" size="2">Listview</font>. 
+  К нему и отсылаем заинтересованного читателя. </font ></P>
+<P><font face="Verdana" size="3"> <B>&nbsp;Примечание&nbsp;</B> </font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> Ответы на вопросы по компоненту <font face="Verdana" size="2"> 
+    TListview</font> можно найти сразу в двух местах: &quot;родном&quot; файле 
+    справки d7vcl.hlp и файле справки Windows Win32.hip. Во втором из них информация 
+    содержится в виде описания сообщений, посылаемых окну класса <font face="Verdana" size="2">Listview</font>, 
+    и соответствующих им макросов. Некоторые из них позволят вам расширить функциональные 
+    возможности компонента <font face="Verdana" size="2">TListview</font>. Эти 
+    макросы содержатся в файле CommCtrl.pas. </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+  <table COLS="3" WIDTH="16%">
+    <tr> 
+      <td> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="Back.gif" BORDER="0"> 
+        </a> </font> </td>
+      <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> 
+        <img SRC="Menu.gif" BORDER="0"> </a> </font> </td>
+      <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index7.html"> 
+        <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+    </tr>
+  </table>
+
+</body>
+</html>

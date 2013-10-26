@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Блок try..except</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для реакции на конкретный тип ситуации применяется блок try..except. Синтаксис его следующий:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+try</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+&lt;Оператор&gt;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;&lt;Оператор&gt;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on EExceptionl do &lt; Оператор обработки ИС типа EExceptionl &gt;;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">on EException2 do &lt; Оператор &gt;;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+else { }</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&lt;0ператор&gt; {обработчик прочих ИС}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Выполнение блока начинается с секции <font face="Verdana" size="2">try</font>. При отсутствии исключительных ситуаций только она и выполняется. Секция
+<font face="Verdana" size="2"> except</font> получает управление в случае возникновения ИС. После обработки происходит выход из защищенного блока, и управление обратно в секцию
+<font face="Verdana" size="2"> try</font> не передается; выполняются операторы, стоящие после
+<font face="Verdana" size="2">end</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если вы хотите обработать любую ИС одинаково, независимо от ее класса, вы можете писать код прямо между операторами
+<font face="Verdana" size="2"> except</font> и <font face="Verdana" size="2">end</font>. Но если обработка отличается, здесь можно применять набор директив<font face="Verdana" size="2">
+on. .do,</font> определяющих реакцию приложения на определенную ситуацию. Каждая директива связывает ситуацию<font face="Verdana" size="2">
+(on...)</font>, заданную своим именем класса, с группой операторов
+<font face="Verdana" size="2">(do...)</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">U := 220.0;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> R := 0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+I := U / R;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on EZeroDivide do MessageBox('Короткое замыкание!');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере замена<font face="Verdana" size="2"> if. .then
+</font> на <font face="Verdana" size="2"> try. .except,</font> может быть, не дала очевидной экономии кода. Однако если при решении, допустим, вычислительной задачи проверять на возможное деление на ноль приходится не один, а множество раз, то выигрыш от нового подхода неоспорим — достаточно одного блока<font face="Verdana" size="2">
+try. .except </font> на все вычисления.
+</font ></P>
+<P><font face="Verdana" size="3">
+При возникновении ИС директивы просматриваются последовательно, в порядке их описания. Каждый тип исключительной ситуации, описанный
+после ключевого слова <font face="Verdana" size="2">on</font>, обрабатывается именно этим блоком: только то, что предусмотрено в нем, и будет являться реакцией на данную ситуацию.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если при этом обработчик родительского класса стоит перед дочерним, последний никогда не получит управления.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">i:=l;j:=0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; k:=i div j;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on EIntError do ShowMessage('IntError');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;on EDivByZero do ShowMessage('DivByZero');&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере, хотя в действительности будет иметь место деление на ноль
+<font face="Verdana" size="2">(EDivByZero)</font>, вы увидите сообщение, соответствующее родительскому классу
+<font face="Verdana" size="2">EintError</font>. Но стоит поменять две конструкции
+<font face="Verdana" size="2"> on. .do</font> местами, и все придет в норму.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если возникла ситуация, не определенная ни в одной из директив, выполняются те операторы, которые стоят после
+<font face="Verdana" size="2">else</font>. Если и их нет, то ИС считается не обработанной и будет передана на следующий уровень обработки. Этим следующим уровнем может быть другой оператор
+<font face="Verdana" size="2"> try..except,</font> который содержит в себе данный блок.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Мы детально обсудили, что и как помещают в 
+    блок <font face="Verdana" size="2"> try. .except.</font> Но в ряде случаев 
+    можно... не размещать там ничего. Пустой блок применяют, когда хотят просто 
+    проигнорировать возникновение некоторых ситуаций. Скажем, у вас в программе 
+    предусмотрена некая обработка данных, которая может завершиться неудачно, 
+    но это не повлияет на дальнейшую работу, и пользователь может об этом не знать. 
+    В этой ситуации вполне уместно изолировать ее в пустом блоке<font face="Verdana" size="2"> 
+    try..except. </font> Важно только не поместить туда больше кода, чем нужно 
+    — иначе &quot;с водой можно выплеснуть и ребенка&quot;. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если вы не предусмотрели блоков обработки ИС в своем коде, это не должно привести к аварийному завершению всего приложения. Все места в VCL, где управление передается коду разработчика (в том числе, конечно, все обработчики событий всех компонентов), заключены в такие блоки. Но, увы, в Borland не знают о конкретных проблемах вашей программы, и максимум, что они могут сделать для вас, — это проинформировать о типе и месте возникновения ИС. Стандартная обработка подразумевает вывод на экран панели текстового сообщения (из свойства
+<font face="Verdana" size="2"> Exception.Message)</font> с указанием типа ошибки. Можно получить и развернутую информацию с именем модуля и адреса, где она имела место (рис. 3.2).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.3.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 3.2. </B>Типовое окно 
+  сообщения об ошибке Для этого нужно вызвать процедуру </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure ShowException(ExceptObject: 
+    TObject; ExceptAddr: Pointer);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> имеющуюся в модуле SYSUTILS.PAS. </font ></P>
+<P><font face="Verdana" size="3"> Если предусмотренной вами обработки ИС недостаточно, 
+  то можно продолжить ее дальше программно при помощи оператора <font face="Verdana" size="2">raise</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Этот оператор уже встречался нам при описании 
+  создания пользовательских ИС. Там за ним следовал вызов конструктора ИС. Здесь 
+  же конструктор опущен: возбуждаться будет уже существующий объект ИС, приведший 
+  нас в блок: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">...</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">sl:= TStringList. 
+    Create;</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">try</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">s1.LoadFromFile(AFileName);&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> sl.Free;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">raise;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">...</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> В этом примере в случае возникновения исключительной 
+  ситуации созданный список строк должен быть уничтожен. Сама же обработка предоставляется 
+  &quot;вышестоящим инстанциям&quot;. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс TGraphicControl 
+  </strong><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TGraphicControl</font> предназначен для создания на его основе визуальных компонентов, не получающих фокус в процессе выполнения приложения. Так как непосредственным предком класса является класс
+<font face="Verdana" size="2">TControl</font>, то потомки <font face="Verdana" size="2"> TGraphicControl</font> умеют реагировать на управляющие воздействия мышью.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наглядный пример элемента управления, которому не нужно получать фокус, — это компонент
+<font face="Verdana" size="2"> TLabel</font>, предназначенный для отображения текста, или компонент
+<font face="Verdana" size="2"> Timage</font>, предназначенный для визуализации изображений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для визуализации элементов управления на основе этого класса используется канва, инкапсулированная в классе
+<font face="Verdana" size="2"> TCanvas</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Доступ к канве осуществляется через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Canvas: TCanvas;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Отрисовка элемента управления осуществляется методом
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure PaintWindow(DC: HDC); override;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+после получения сообщения <font face="Verdana" size="2"> WM_PAINT.</font>
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

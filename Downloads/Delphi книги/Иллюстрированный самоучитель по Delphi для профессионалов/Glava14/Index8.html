@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Поиск 
+  по произвольным полям</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для поиска по произвольной выборке полей можно использовать методы
+<font face="Verdana" size="2">Locate</font> и <font face="Verdana" size="2">Lookup</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Locate(const KeyFields: string; const KeyValues: Variant; Options; TLocateOptions): Boolean;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Lookup(const KeyFields: string; const KeyValues: Variant; const ResultFields: string): Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В метод <font face="Verdana" size="2"> Locate</font> необходимо передать список полей, по которым будет идти поиск (параметр
+<font face="Verdana" size="2">KeyFields</font>, имена полей разделяются точкой с запятой), их требуемые значения (параметр
+<font face="Verdana" size="2">KeyValues</font>, значения разделяются запятой) и настройки поиска (параметр
+<font face="Verdana" size="2">options</font>). В настройках можно задать опцию
+<font face="Verdana" size="2">loCaseinsensitive</font>, которая отключает проверку на регистр символов, и опцию
+<font face="Verdana" size="2">loPartiaiKey</font>, которая включает поиск с минимальными отличиями. В случае успеха поиска курсор набора данных устанавливается на найденной записи, а метод возвращает значение
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Tablel.Locate('Last__Name;First_Name', VarArrayOf(['Editl.Text',</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;'Edit2.Text']), []};</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В метод <font face="Verdana" size="2"> Lookup</font> передается список полей для поиска (параметр
+<font face="Verdana" size="2">KeyFields</font>, имена полей разделяются точкой с запятой) и их требуемые значения (параметр
+<font face="Verdana" size="2">KeyValues</font>, значения разделяются запятой). В случае успешного поиска функция возвращает массив значений типа вариант для полей, названия которых содержатся в параметре
+<font face="Verdana" size="2">ResultFields</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Tablel.Lookup('Last_Name;First_Name',</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">VarArrayOf(['Editl.Text',
+1Edit2.Text']), 'Last_Name;First_Name');</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Оба эти метода автоматически используют быстрый индексный поиск в случае, если в параметре
+<font face="Verdana" size="2"> KeyFields</font> задать поля индекса.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

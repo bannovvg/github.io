@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компонент отчета TRvProject</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TRvProject</font> обеспечивает представление в приложении отчета. Для того чтобы связать проект отчета Rave Reports с компонентом, используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ProjectFile: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+До начала печати необходимо связать компонент
+<font face="Verdana" size="2"> TRvProject</font> с компонентом управления отчетом
+<font face="Verdana" size="2">TRvSystem</font>. Для этого достаточно передать в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Engine: TRpComponent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;ссылку на компонент <font face="Verdana" size="2">TRvSystem</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости вы можете загрузить отчет из внешнего файла или потока:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LoadFromFile(FileName: String);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure LoadFromStream(Stream: TStream);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Загруженный отчет становится текущим.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого существует и пара методов для сохранения отчета:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SaveToFile(FileName: String);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure SaveToStream(Stream: TStream);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В процессе работы приложения может потребоваться напечатать несколько различных отчетов. Для этого можно использовать требуемое число компонентов
+<font face="Verdana" size="2"> TRvProject</font> или загружать нужные отчеты по мере необходимости.
+</font ></P>
+<P><font face="Verdana" size="3">
+Забегая немного вперед (см. гл. 24), скажем, что один файл проекта отчета может содержать несколько независимых отчетов. Каждый из них идентифицируется в компоненте
+<font face="Verdana" size="2"> TRvProject</font> тремя свойствами. Имя, полное имя и описание отчета содержатся соответственно в трех свойствах только для чтения:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ReportName: String;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property ReportFullName: String;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property ReportDesc: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При этом эти три свойства возвращают параметры текущего отчета. Сразу после загрузки из файла текущим становится отчет, являющийся отчетом по умолчанию в среде разработки. При необходимости сменить текущий отчет используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function SelectReport(ReportName: string; FullName: boolean): boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В параметре <font face="Verdana" size="2"> ReportName</font> передается имя нужного отчета. Если параметр
+<font face="Verdana" size="2"> FullName</font> имеет значение <font face="Verdana" size="2">True</font>, то это полное имя отчета, иначе — имя отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+В случае, если проект содержит несколько отчетов, их имена доступны при помощи метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetReportList(ReportList: TStrings;FullName: boolean);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Список имен будет возвращен в список строк <font face="Verdana" size="2">ReportList</font>, а параметр
+<font face="Verdana" size="2"> FullName</font> определяет, какие именно имена будут занесены в список. При значении параметра
+<font face="Verdana" size="2"> True</font> метод возвращает полные имена отчетов (соответствует свойству
+<font face="Verdana" size="2">ReportFullName</font>), иначе — имена (соответствует свойству&nbsp;
+<font face="Verdana" size="2">ReportlName</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, код
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var ReportList: TStringList; i: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ReportList := TStringList.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.GetReportList(ReportList, False);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for i := 0 to ReportList.Count - 1</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+do RvProjectl.ExecuteReport(ReportList[I]);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvProjectl.Close;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ReportList.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+последовательно печатает все отчеты, входящие в состав файла проекта отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+Файл проекта отчета можно включить в состав исполняемого файла приложения. Для этого используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StoreRAV: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При щелчке на кнопке в строке этого свойства в
+Инспекторе объектов открывается специализированный редактор <B>Load Into exe </B>(рис. 23.2).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.23.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 23.2. </B>Редактор свойства 
+  StoreRAV компонента <font face="Verdana" size="2"> TRvProject</font> </font ></P>
+<P><font face="Verdana" size="3"> Здесь можно задать файл проекта отчета. После 
+  этого в Инспекторе объектов в строке свойства <font face="Verdana" size="2"> 
+  storeRAv</font> появятся дата и время загрузки проекта отчета. Это же время 
+  и дата будут сохранены в свойстве </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property RaveBlobDateTime: 
+    TDateTime;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Отправить отчет на печать можно методом </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure Execute;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> или же методом </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure ExecuteReport(ReportName: 
+    string);</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> который позволяет направить на печать отчет, 
+  заданный параметром <font face="Verdana" size="2">ReportName</font>. Он должен 
+  соответствовать имени отчета, хранящемуся в свойстве <font face="Verdana" size="2"> 
+  ReportName</font> компонента <font face="Verdana" size="2">TRvProject</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Отчет, содержащийся в компоненте <font face="Verdana" size="2">Trvproject</font>, 
+  может быть открыт для редактирования методом </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure Open;</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Не открывая отчет, вы не сможете использовать 
+  большинство свойств и методов компонента. Дело в том, что при открытии компонент 
+  загружает отчет из файла проекта или прикомпилированного кода (в случае использования 
+  свойства <font face="Verdana" size="2">StoreRAV</font>). </font ></P>
+<P><font face="Verdana" size="3"> Сохранение и закрытие отчета соответственно 
+  выполняются методами </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure Save; 
+    procedure Close;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Кроме этого, действия, аналогичные методам <font face="Verdana" size="2"> 
+  open</font> и <font face="Verdana" size="2">close</font>, выполняются свойством 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Active: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Если свойству присвоить значение <font face="Verdana" size="2"> 
+  True</font> — отчет открывается, иначе — закрывается. </font ></P>
+<P><font face="Verdana" size="3"> До и после открытия и закрытия отчета вызывается 
+  четверка методов-обработчиков: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property aeforeOpen: 
+    TNotifyEvent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">property AfterOpen: 
+    TNotifyEvent;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">property BeforeClose: 
+    TNotifyEvent;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property AfterClose: 
+    TNotifyEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index6.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

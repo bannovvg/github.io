@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TMetafile</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Инкапсулирует свойства метафайла Windows. С появлением Windows 95 к стандартному метафайлу (формат WMF) добавился расширенный (формат EMF), обладающий расширенными возможностями. Соответственно в объекте
+<font face="Verdana" size="2"> TMetafile</font> имеется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Enhanced: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Внутреннее представление метафайла всегда новое (EMF), и устанавливать свойство
+<font face="Verdana" size="2"> Enhanced</font> в значение <font face="Verdana" size="2"> False</font> следует только для обеспечения совместимости со старыми программами.
+</font ></P>
+<P><font face="Verdana" size="3">В    классе <font face="Verdana" size="2">TMetafile</font> перекрываются    <B>    </B>методы<font face="Verdana" size="2">
+Assign, LoadFromStream, SaveToStream, LoadFromClipboardFormat,
+SaveToClipboardFormat</font>. В буфер обмена объект помещает свое содержимое в формате
+<font face="Verdana" size="2">CF_ENHMETAFILE</font>. Помимо общих, класс имеет следующие свойства:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">дескриптор метафайла</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle: HMETAFILE;</font>
+</font ></P>
+</blockquote>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">свойство</font> 
+    <font face="Verdana" size="2"> property inch: Word.</font><font size="3" face="Verdana, Arial, Helvetica, sans-serif">Число 
+    точек на дюйм в координатной системе метафайла. Связано с установленным режимом 
+    отображения;</font></li>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">свойства</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MMHeight: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property MMWidth: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+это настоящие высота и ширина метафайла в единицах, равных 0,01 мм. Свойства
+<font face="Verdana" size="2"> Height</font> и <font face="Verdana" size="2"> width</font> задаются в пикселах;
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">в метафайл можно добавить свою палитру:</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Palette: HPalette;</font>
+</font ></P>
+</blockquote>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;вы можете увековечить себя, установив два свойства 
+    метафайла:</font></li>
+</ul>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Description: string;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property CreatedBy: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Содержащаяся в них информация записывается в файл и может быть прочитана благодарными потомками.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>ABLAS Library</title>
+<style type="text/css">
+<!--
+h1 { font-family: Tahoma,sans-serif; font-size : larger; }
+h2 { font-family: Arial,sans-serif; font-size : 11pt; }
+h3 { font-family: Arial,sans-serif; font-size : 9pt; }
+.cond  { color:blue; }
+.const { color:#222222; }
+.func  { color:#111111; }
+-->
+</style>
+</head>
+<body>
+
+<h1>ABLAS Library</h1>
+
+<p align=justify>
+This document describes the ABLAS library — a lightweight basic linear algebra subroutines library with SSE2 support. The ABLAS library is used by programs that are parts of ALGLIB project to speed up the linear algebra algorithms. At the moment only C++ version of ALGLIB can use ABLAS. However, in the future it is planned to add ABLAS into ALGLIB versions based on other languages.
+</p>
+
+<h1>The language, the compiler and the OS</h1>
+
+<p align=justify>
+The library is written on Pascal. The compiler used - FreePascal (version 2.2.0 was used for compiling). Current library version supports only Win32.
+</p>
+
+<h1>Distribution and licensing</h1>
+
+<p align=justify>
+The ABLAS library is distributed under BSD license. It is distributed as precompiled binary files and as source code. These files may be downloaded from ABLAS page: <a href="http://www.alglib.net/projects/ablas/">http://www.alglib.net/projects/ablas/</a> (or <a href="http://alglib.sources.ru/projects/ablas/">http://alglib.sources.ru/projects/ablas/</a> in Russian).
+</p>
+
+<h1>Features</h1>
+
+<p align=justify>
+The library supports vector operations with double precision real numbers. Their elements should be allocated in memory sequentially with no spaces between them. Such vectors correspond to one-dimensional arrays and rows in 2D arrays in most high-level languages. The following operations are available:
+</p>
+
+<ul>
+<li>scalar product - subroutine <code>ASMDotProduct1</code></li>
+<li>copying - subroutine <code>ASMMove1</code></li>
+<li>copying and multiplying by a scalar - subroutine <code>ASMMoveS1</code></li>
+<li>copying and multiplying by -1 - subroutine <code>ASMMoveNeg1</code></li>
+<li>adding a vector - subroutine <code>ASMAdd1</code></li>
+<li>adding vector and multiplying the added vector by number - subroutine <code>ASMAddS1</code></li>
+<li>subtracting vector - subroutine <code>ASMSub1</code></li>
+<li>inplace-multiplying the vector by number - subroutine <code>ASMMulS1</code></li>
+</ul>
+
+<p align=justify>
+Each operation allows the following implementation types, chosen automatically depending on the processor and operands:
+</p>
+
+<ul>
+<li>Fully aligned SSE2 implementation. It is used if both operands are aligned on a 64-bit boundary (which is equivalent to alignment on a 128-bit boundary after data preprocessing). This implementation provides maximum speed.</li>
+<li>Partially aligned SSE implementation. It is used if only one operand is aligned on a 64-bit boundary. This implementation is slower than the previous one.</li>
+<li>FPU implementation - it is used if none of the operands is aligned on a 64-bit boundary or CPU does not support SSE2.</li>
+</ul>
+
+<h1>Using ABLAS in C++</h1>
+
+<p align=justify>
+To be able to use ABLAS programs with ALGLIB library, two actions are required. First, set in the compiler options (or define with the <code>define</code> directive) the <code>AP_WIN32</code> symbol. This symbol notifies the ALGLIB package that it is working under Windows and can use the corresponding operating system functions to find and load additional libraries. Second, put the library file (<code>ablas.dll</code>) in the same directory as your program executable. After these two steps the library will be detected and loaded automatically.
+</p>
+
+<h1>Using ABLAS in other programming languages</h1>
+
+<p align=justify>
+At the moment there are no ABLAS interfaces for other programming languages.
+</p>
+
+</body>
+</html>

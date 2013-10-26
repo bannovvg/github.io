@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Структура сервера приложения</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, сервер приложения — это ПО промежуточного слоя трехзвенного распределенного приложения (см. рис. 20.2). Его основой является удаленный модуль данных. В Delphi предусмотрено использование удаленных модулей данных пяти типов (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+Далее в этой главе мы детально рассмотрим вопросы использования удаленных модулей данных, инкапсулирующих функции серверов Автоматизации. Другие типы удаленных модулей данных рассматриваются в следующих частях книги.
+</font ></P>
+<P><font face="Verdana" size="3">
+Каждый удаленный модуль данных инкапсулирует интерфейс
+<font face="Verdana" size="2">IAppServer</font>, методы которого используются в механизме удаленного доступа клиентов к серверу БД (см. гл. 20).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для обмена данными с сервером БД модуль данных может содержать некоторое количество компонентов доступа к данным (компонентов соединений и компонентов, инкапсулирующих набор данных).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для обеспечения передачи данных клиентам удаленный модуль данных обязательно должен содержать необходимое количество компонентов
+<font face="Verdana" size="2">TDataSetProvider</font>, каждый из которых должен быть связан с соответствующим набором данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+<b>Внимание</b>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Обмен данными сервера приложения с клиентами 
+    обеспечивает динамическая библиотека MIDAS.DLL, которая должна быть зарегистрирована 
+    на компьютере сервера приложения. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для создания нового сервера приложения достаточно выполнить несколько простых операций.
+</font ></P>
+<P><font face="Verdana" size="3">
+1. Создать новый проект, выбрав в качестве типа проекта обычное приложение (пункт меню <B>File | New | Application) </B>и сохранить его.
+</font ></P>
+<P><font face="Verdana" size="3">
+2. В зависимости от используемой технологии, выбрать из Репозитория Delphi необходимый тип удаленного модуля данных (см. рис. 20.3). Удаленные модули данных располагаются на страницах <B>Multitier, WebSnap и WebServices.</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+3. Настроить параметры создаваемого удаленного модуля данных (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+4. Разместить в удаленном модуле данных компоненты доступа к данным и настроить их. Здесь разработчик может выбрать один из имеющихся
+</font ></P>
+<P><font face="Verdana" size="3">
+наборов  компонентов   (см. часть IV) в  зависимости  от  используемого сервера БД и требуемых характеристик создаваемого приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+5. Разместить в удаленном модуле данных необходимое число компонентов
+<font face="Verdana" size="2"> TDataSetProvider</font> и связать их с компонентами, инкапсулирующими наборы данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+6. При необходимости создать для потомка интерфейса
+<font face="Verdana" size="2">IAppServer</font>, используемого в удаленном модуле данных, дополнительные методы. Для этого создается новая библиотека типов (см. низке).
+</font ></P>
+<P><font face="Verdana" size="3">
+7. Скомпилировать проект и создать исполняемый файл сервера приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+8. Зарегистрировать сервер приложения и при необходимости настроить дополнительное ПО.
+</font ></P>
+<P><font face="Verdana" size="3">
+Весь механизм удаленного доступа, инкапсулированный в удаленных модулях данных и компонентах-провайдерах, работает автоматически, без создания разработчиком дополнительного программного кода.
+</font ></P>
+<P><font face="Verdana" size="3">
+Далее в этой главе на простом примере рассматриваются все перечисленные этапы создания сервера приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

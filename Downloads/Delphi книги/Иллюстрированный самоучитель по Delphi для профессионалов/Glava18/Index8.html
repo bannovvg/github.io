@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TIBTable</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TIBTable</font> реализует все возможности стандартного компонента, инкапсулирующего таблицу (см. гл. 12).
+Дополнительно к ним можно обратить внимание на несколько полезных свойств и методов.
+</font ></P>
+<P><font face="Verdana" size="3">
+При выборе таблицы (свойство <font face="Verdana" size="2">TableName</font>) свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIBTableType = (ttSystem, ttview);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIBTableTypes = set of TIBTableType;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property TableTypes: TIBTableTypes;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет, какие таблицы доступны для выбора:
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2"> <font size="3" face="Verdana, Arial, Helvetica, sans-serif">ttsystem</font></font><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> 
+    — доступны системные таблицы и просмотры;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> ttview — доступны определенные 
+    пользователем просмотры.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+При   открытии   набора данных  упорядочивание  записей   осуществляется в соответствии со значением свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Defaultlndex: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> записи располагаются в порядке, определяемом первичным индексом таблицы БД.
+</font ></P>
+<P><font face="Verdana" size="3">
+Во время выполнения свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Exists: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяет определить, существует ли в базе данных таблица, имя которой
+определено свойством<B> </B><font face="Verdana" size="2">TableName</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GotoCurrent(Table: TIBTable);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+синхронизирует курсоры текущего набора данных и набора данных компонента, заданного параметром
+<font face="Verdana" size="2">Table</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы-обработчики событий полностью соответствуют классу
+<font face="Verdana" size="2">TiBCustom</font>-<font face="Verdana" size="2">DataSet</font> (см. табл. 18.2).
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

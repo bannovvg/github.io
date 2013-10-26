@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Команды</strong> 
+  <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Программные средства ADO были бы неполными, если бы не имели возможности использовать для работы с данными язык SQL. Операторы DML и DDL, ряд специальных операторов ADO носят общее название текстовых команд.
+</font ></P>
+<P><font face="Verdana" size="3">
+Объект-команда инкапсулирует саму текстовую команду и механизм обработки и передачи команды. Объект команды выполняет следующие операции:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;разбор текста команды;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;связывание команды с источником данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;оптимизацию команды;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> передачу команды источнику данных.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Главный интерфейс объекта команды <font face="Verdana" size="2"> icommand</font> имеет три метода:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">function Cancel: HResult; stdcall;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+отменяет выполнение команды;
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;function Execute(const punkOuter: lUnknown; const riid: TGUID; var pParams:
+    DBPARAMS;</font> <font face="Verdana" size="2">pcRowsAffected: PInteger; ppRowset: PlUnknown): HResult;
+    stdcall;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+исполняет команду;
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;function GetDBSession(const riid: TGUID; out ppSession: lUnknown): HResult; stdcall;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+возвращает ссылку на интерфейс сессии, вызвавший данную команду.
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо основного, объект команды обеспечивает доступ к дополнительным интерфейсам:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" size="3">ICommandPrepare 
+    — содержит два метода (Prepare И Unprepare) для 
+    подготовки команды;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;icommandProperties — задает 
+    для команды свойства, которые должны поддерживаться возвращаемым командой 
+    набором данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;iCommandText — управляет 
+    текстом команды (этот интерфейс обязателен для объекта команды);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;icommandwithParameters 
+    — обеспечивает работу с параметрами команды.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TList</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Основой класса <font face="Verdana" size="2"> TList</font> является список указателей. Сам список представляет собой динамический массив указателей, к которому можно обратиться через индексированное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Items[Index: Integer]: Pointer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Нумерация элементов начинается с нуля.
+</font ></P>
+<P><font face="Verdana" size="3">
+Прямой доступ к элементам массива возможен через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PPointerList = ^TPointerList;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TPointerList = array[0..MaxListSize-1] of Pointer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property List: PPointerList;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое имеет атрибут &quot;только для чтения&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как элементы списка являются указателями на некоторые структуры, прямое обращение к составным частям этих структур через свойство
+<font face="Verdana" size="2"> items</font> невозможно. Как это можно сделать, рассказывается ниже в примере.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> В списке могут содержаться указатели на разнородные 
+    структуры. Не обязательно хранить в списке только указатели на объекты или 
+    указатели на записи. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Реализованные в классе <font face="Verdana" size="2"> TList</font> операции со списком обеспечивают потребности разработчика и совпадают с операциями списка строк.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для добавления в конец списка нового указателя используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Add(Item: Pointer): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Прямое присваивание значения элементу, который еще не создан при помощи метода
+<font face="Verdana" size="2">Add</font>, вызовет ошибку времени выполнения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Новый указатель можно добавить в нужное место списка. Для этого используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Insert(Index: Integer; Item: Pointer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В параметре <font face="Verdana" size="2"> index</font> указывается необходимый порядковый номер в списке.
+</font ></P>
+<P><font face="Verdana" size="3">
+Перенос существующего элемента на новое места осуществляется методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Move(Curlndex, Newlndex: Integer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2">CurIndex</font>   определяет   старое   положение   указателя.   Параметр
+<font face="Verdana" size="2">NewIndex</font> задает новое его положение.
+</font ></P>
+<P><font face="Verdana" size="3">
+Также можно поменять местами два элемента, определяемые параметрами
+<font face="Verdana" size="2">Indexl</font> и <font face="Verdana" size="2">Index2</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Exchange(Indexl,   Index2:   Integer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для удаления указателей из списка используются два метода. Если известен индекс, применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Delete(Index: Integer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если известен сам указатель, используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Remove(Item: Pointer): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Эти методы не уменьшают объем памяти, выделенной под список. При необходимости сделать это следует использовать свойство
+<font face="Verdana" size="2">capacity</font>. Также существует метод
+<font face="Verdana" size="2">Expand</font>, который увеличивает отведенную память автоматически в зависимости от текущего размера списка.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Expand: TList;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для того чтобы метод сработал, необходимо, чтобы
+<font face="Verdana" size="2"> count = Capacity.</font> Алгоритм работы метода представлен в табл. 7.1.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 7.1. </B>Алгоритм 
+  увеличения памяти списка </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="515" HEIGHT="131">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="207" HEIGHT="33">
+<DIV WIDTH="258" HEIGHT="33" style="width: 206; height: 33">
+<P><font face="Verdana" size="3">
+<B>Значение свойства Capacity</B>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="33">
+<DIV WIDTH="387" HEIGHT="33" style="width: 310; height: 33">
+<P><font face="Verdana" size="3">
+<B>На сколько увеличится свойство Capacity</B>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="207" HEIGHT="30">
+<DIV WIDTH="258" HEIGHT="30" style="width: 58; height: 30">
+<P><font face="Verdana" size="3">
+&lt;4
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="30">
+<DIV WIDTH="387" HEIGHT="30" style="width: 121; height: 30">
+<P><font face="Verdana" size="3">
+4
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="207" HEIGHT="31">
+<DIV WIDTH="258" HEIGHT="31" style="width: 70; height: 31">
+<P><font face="Verdana" size="3">
+4..8
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="31">
+<DIV WIDTH="387" HEIGHT="31" style="width: 77; height: 31">
+<P><font face="Verdana" size="3">
+8
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="207" HEIGHT="37">
+<DIV WIDTH="258" HEIGHT="37" style="width: 71; height: 37">
+<P><font face="Verdana" size="3">
+&gt;8
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="317" HEIGHT="37">
+<DIV WIDTH="387" HEIGHT="37" style="width: 120; height: 37">
+<P><font face="Verdana" size="3">
+16
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Clear; dynamic</font>;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+используется для удаления всех элементов списка сразу. Для поиска указателя по его значению используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IndexOf(Item: Pointer): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод возвращает индекс найденного элемента в списке. При неудачном поиске возвращается — 1.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для сортировки элементов списка применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TListSortCompare = function (Iteml, Item2: Pointer): Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure Sort(Compare: TListSortCompare);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Так как состав структуры, на которую указывает элемент списка, невозможно заранее обобщить, разработка процедуры, осуществляющей сортировку, возлагается на программиста. Метод
+<font face="Verdana" size="2"> Sort</font> лишь обеспечивает попарное сравнение указателей на основе созданного программистом алгоритма (пример сортировки см. выше в разд. &quot;Класс
+<font face="Verdana" size="2"> TStringList</font>&quot;).
+</font ></P>
+<P><font face="Verdana" size="3">
+Полностью все свойства и методы класса <font face="Verdana" size="2"> TList</font> представлены в табл. 7.2.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 7.2. </B>Свойства 
+  и методы класса <font face="Verdana" size="2"> TList</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="481" HEIGHT="815">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="31">
+<DIV WIDTH="394" HEIGHT="31" style="width: 96; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="31">
+<DIV WIDTH="246" HEIGHT="31" style="width: 79; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="44">
+<DIV WIDTH="394" HEIGHT="44" style="width: 220; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Capacity: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="44">
+<DIV WIDTH="246" HEIGHT="44" style="width: 199; height: 44">
+<P><font face="Verdana" size="3">
+Определяет число строк, для которых выделена память
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="42">
+<DIV WIDTH="394" HEIGHT="42" style="width: 193; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Count: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="42">
+<DIV WIDTH="246" HEIGHT="42" style="width: 230; height: 42">
+<P><font face="Verdana" size="3">
+Возвращает число строк в списке
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="35">
+<DIV WIDTH="394" HEIGHT="35" style="width: 201; height: 35">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Items [Index: Integer]: Pointer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="35">
+<DIV WIDTH="246" HEIGHT="35" style="width: 131; height: 35">
+<P><font face="Verdana" size="3">
+Список указателей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="106">
+<DIV WIDTH="394" HEIGHT="106" style="width: 237; height: 118">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TPointerList = array [0 . .MaxListSize-i ] of Pointer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PPointerList = ATPointerList; property List: PPointerList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="106">
+<DIV WIDTH="246" HEIGHT="106" style="width: 233; height: 106">
+<P><font face="Verdana" size="3">
+Динамический массив указателей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="42">
+<DIV WIDTH="394" HEIGHT="42" style="width: 238; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Add (Item: Pointer): Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="42">
+<DIV WIDTH="246" HEIGHT="42" style="width: 183; height: 42">
+<P><font face="Verdana" size="3">
+Добавляет к списку новый указатель
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="33">
+<DIV WIDTH="394" HEIGHT="33" style="width: 206; height: 33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Clear; dynamic;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="33">
+<DIV WIDTH="246" HEIGHT="33" style="width: 193; height: 33">
+<P><font face="Verdana" size="3">
+Полностью очищает список
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="42">
+<DIV WIDTH="394" HEIGHT="42" style="width: 200; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Delete (Index: Integer:;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="42">
+<DIV WIDTH="246" HEIGHT="42" style="width: 202; height: 57">
+<P><font face="Verdana" size="3">
+Удаляет указатель с индексом
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Index</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="118">
+<DIV WIDTH="394" HEIGHT="118" style="width: 209; height: 118">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+class procedure Error (const Ksg: string; Data: Integer); virtual;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="118">
+<DIV WIDTH="246" HEIGHT="118" style="width: 226; height: 133">
+<P><font face="Verdana" size="3">
+Генерирует исключительную
+</font ></P>
+<P><font face="Verdana" size="3">
+Ситуацию <font face="Verdana" size="2">EListError</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Сообщение об ошибке создается из форматирующей строки
+<font face="Verdana" size="2"> Msg</font> и числового параметра
+<font face="Verdana" size="2"> Data</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="44">
+<DIV WIDTH="394" HEIGHT="44" style="width: 223; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Exchange (Indexl, Index2: Integer);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="44">
+<DIV WIDTH="246" HEIGHT="44" style="width: 200; height: 44">
+<P><font face="Verdana" size="3">
+Меняет местами указатели с индексами <font face="Verdana" size="2"> Indexl</font> и
+<font face="Verdana" size="2"> Index2</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="44">
+<DIV WIDTH="394" HEIGHT="44" style="width: 197; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Expand: TList;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="44">
+<DIV WIDTH="246" HEIGHT="44" style="width: 200; height: 44">
+<P><font face="Verdana" size="3">
+Увеличивает размер памяти, отведенной под список
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="46">
+<DIV WIDTH="394" HEIGHT="46" style="width: 196; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function First: Pointer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="46">
+<DIV WIDTH="246" HEIGHT="46" style="width: 225; height: 46">
+<P><font face="Verdana" size="3">
+Возвращает первый указатель из списка
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="48">
+<DIV WIDTH="394" HEIGHT="48" style="width: 189; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IndexOf (Item: Pointer): Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="48">
+<DIV WIDTH="246" HEIGHT="48">
+<P><font face="Verdana" size="3">
+Возвращает индекс указателя, заданного параметром
+<font face="Verdana" size="2"> Item</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="42">
+<DIV WIDTH="394" HEIGHT="42" style="width: 209; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Insert (Index: Integer; Item: Pointer) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="42">
+<DIV WIDTH="246" HEIGHT="42" style="width: 222; height: 42">
+<P><font face="Verdana" size="3">
+Вставляет новый элемент <font face="Verdana" size="2"> Items</font> позицию
+<font face="Verdana" size="2"> Index</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="42">
+<DIV WIDTH="394" HEIGHT="42" style="width: 191; height: 42">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Last: Pointer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="42">
+<DIV WIDTH="246" HEIGHT="42" style="width: 240; height: 42">
+<P><font face="Verdana" size="3">
+Возвращает последний указатель в списке
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="270" HEIGHT="56">
+<DIV WIDTH="394" HEIGHT="56" style="width: 201; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Move (Curlndex, Newlndex: Integer);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="56">
+<DIV WIDTH="246" HEIGHT="56" style="width: 213; height: 56">
+<P><font face="Verdana" size="3">
+Перемещает элемент списка на новое место
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="259" HEIGHT="54">
+<DIV WIDTH="383" HEIGHT="54" style="width: 128; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Pack;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="54">
+<DIV WIDTH="246" HEIGHT="54">
+<P><font face="Verdana" size="3">
+Удаляет из списка все пустые (<font face="Verdana" size="2">Nil</font>) указатели
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="259" HEIGHT="48">
+<DIV WIDTH="383" HEIGHT="48" style="width: 177; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Remove (Item: Pointer): Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="48">
+<DIV WIDTH="246" HEIGHT="48" style="width: 188; height: 57">
+<P><font face="Verdana" size="3">
+Удаляет из списка указатель
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Item</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="259" HEIGHT="71">
+<DIV WIDTH="383" HEIGHT="71" style="width: 204; height: 99">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TListSortCompare = function (Iteml, Item2 : Pointer): Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Sort (Compare: TListSortCompare);</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="262" HEIGHT="71">
+<DIV WIDTH="246" HEIGHT="71" style="width: 196; height: 71">
+<P><font face="Verdana" size="3">
+Сортирует элементы списка
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

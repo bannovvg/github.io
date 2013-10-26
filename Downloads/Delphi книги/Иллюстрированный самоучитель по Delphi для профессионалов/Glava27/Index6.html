@@ -1,0 +1,783 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Управление мышью</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Каждый элемент управления обладает набором свойств и методов, обеспечивающих управление мышью. Понятно, что это важный и нужный механизм. Рассмотрим кратко его устройство.
+</font ></P>
+<P><font face="Verdana" size="3">
+Воздействие мышью на интерфейсные элементы приложения разработчик может отслеживать при помощи целой группы методов-обработчиков.
+</font ></P>
+<P><font face="Verdana" size="3">
+На нажатие кнопки мыши реагирует метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMouseEvent = procedure (Sender: TObject;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Button: TMouseButton;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Shift: TShiftState; X, Y: Integer) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property OnMouseDown: TMouseEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В параметре But<font face="Verdana" size="2">t</font>on передается признак нажатой кнопки:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TMouseButton = (mbLeft, mbRight, mbMiddle);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> shift</font> определяет нажатие дополнительной клавиши на клавиатуре:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TShiftState = set of   (ssShift,   ssAlt,   ssCtrl,   ssLeft,   ssRight, ssMiddle,   ssDouble);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметры <font face="Verdana" size="2"> х</font> и у возвращают координаты курсора.
+</font ></P>
+<P><font face="Verdana" size="3">
+На отпускание кнопки мыши реагирует метод:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMouseEvent = procedure (Sender: TObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Button: TMouseButton;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Shift: TShiftState; X, Y: Integer) of object;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnMouseUp: TMouseEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Его параметры описаны выше.
+</font ></P>
+<P><font face="Verdana" size="3">
+При перемещении мыши можно вызывать метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMouseMoveEvent = procedure(Sender: TObject;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;Shift: TShiftState; X, Y: Integer) of
+  object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property OnMouseMove: TMouseMoveEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если у разработчика нет необходимости так подробно отслеживать состояние мыши, можно воспользоваться двумя другими методами:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnClick: TNotifyEvent;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnDblClick: TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Первый реагирует на щелчок кнопкой, второй — на двойной щелчок.
+</font ></P>
+<P><font face="Verdana" size="3">
+Каждый элемент управления может изменять внешний вид указателя мыши, перемещающейся над ним. Для этого используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Cursor: TCursor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для управления дополнительными возможностями мыши для работы в
+<font face="Verdana" size="2"> Internet (ScrollMouse)</font> предназначены три метода обработчика, реагирующие на прокрутку:
+</font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;property OnMouseWheel:
+    TMouseWheelEvent;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+&nbsp;вызывается при прокрутке;
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property OnMouseWheelUp:   TMouseWheelUpDownEvent;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+вызывается при прокрутке вперед;
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property OnMouseWheelDown: TMouseWheelUpDownEvent;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+вызывается при прокрутке назад.
+</font ></P>
+<P><font face="Verdana" size="3">
+В VCL имеется класс <font face="Verdana" size="2">TMouse</font>, содержащий свойства мыши, установленной на компьютере. Обращаться к экземпляру класса, который создается автоматически, можно при помощи глобальной переменной
+<font face="Verdana" size="2">Mouse</font>. Свойства класса представлены в табл. 27.1.
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве примера обработки управляющих воздействий от мыши рассмотрим пример
+<font face="Verdana" size="2">DemoMouse</font>. Он очень прост. Перемещение мыши с нажатой левой кнопкой обеспечивает выделение прямоугольного фрагмента. Такую функцию вы можете наблюдать в любом графическом редакторе, а исходный код проекта использовать в собственных разработках (листинг 27.2).
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 27.1. </B>Свойства 
+  и методы класса <font face="Verdana" size="2"> mouse</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="495" HEIGHT="414">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="199" HEIGHT="29">
+<DIV WIDTH="308" HEIGHT="29" style="width: 95; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="29">
+<DIV WIDTH="60" HEIGHT="29" style="width: 12; height: 29">
+<P><font face="Verdana" size="3">
+<b>Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="29">
+<DIV WIDTH="269" HEIGHT="29" style="width: 109; height: 29">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="199" HEIGHT="66">
+<DIV WIDTH="308" HEIGHT="66" style="width: 141; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Capture: HWND;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="66">
+<DIV WIDTH="60" HEIGHT="66" style="width: 5; height: 66">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="66">
+<DIV WIDTH="269" HEIGHT="66" style="width: 241; height: 66">
+<P><font face="Verdana" size="3">
+Дескриптор элемента управления, над которым находится мышь
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="199" HEIGHT="48">
+<DIV WIDTH="308" HEIGHT="48" style="width: 155; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CursorPos: TPoint;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="48">
+<DIV WIDTH="60" HEIGHT="48" style="width: 16; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="48">
+<DIV WIDTH="269" HEIGHT="48" style="width: 225; height: 48">
+<P><font face="Verdana" size="3">
+Содержит координаты указателя мыши
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="199" HEIGHT="62">
+<DIV WIDTH="308" HEIGHT="62" style="width: 118; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Draglmmediate: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="62">
+<DIV WIDTH="60" HEIGHT="62" style="width: 10; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Ro</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="62">
+<DIV WIDTH="269" HEIGHT="62" style="width: 243; height: 62">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> реакция на нажатие выполняется немедленно
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="199" HEIGHT="31">
+<DIV WIDTH="308" HEIGHT="31" style="width: 115; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DragThreshold: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="31">
+<DIV WIDTH="60" HEIGHT="31" style="width: 2; height: 31">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="31">
+<DIV WIDTH="269" HEIGHT="31" style="width: 206; height: 31">
+<P><font face="Verdana" size="3">
+Задержка реакции на нажатие
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="199" HEIGHT="29">
+<DIV WIDTH="308" HEIGHT="29" style="width: 103; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MousePresent: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="29">
+<DIV WIDTH="60" HEIGHT="29" style="width: 14; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="29">
+<DIV WIDTH="269" HEIGHT="29" style="width: 190; height: 29">
+<P><font face="Verdana" size="3">
+Определяет наличие мыши
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="199" HEIGHT="56">
+<DIV WIDTH="308" HEIGHT="56" style="width: 148; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type UINT = LongWord; property RegWheelMessage: UINT;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="56">
+<DIV WIDTH="60" HEIGHT="56" style="width: 13; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="56">
+<DIV WIDTH="269" HEIGHT="56" style="width: 247; height: 56">
+<P><font face="Verdana" size="3">
+Задает сообщение, посылаемое при прокрутке в
+<font face="Verdana" size="2"> ScrollMouse</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="199" HEIGHT="46">
+<DIV WIDTH="308" HEIGHT="46" style="width: 186; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property WheelPresent: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="46">
+<DIV WIDTH="60" HEIGHT="46" style="width: 2; height: 51">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="46">
+<DIV WIDTH="269" HEIGHT="46" style="width: 145; height: 46">
+<P><font face="Verdana" size="3">
+Определяет наличие <font face="Verdana" size="2"> ScrollMouse</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="199" HEIGHT="48">
+<DIV WIDTH="308" HEIGHT="48" style="width: 199; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property WheelScrollLines : Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="37" HEIGHT="48">
+<DIV WIDTH="60" HEIGHT="48" style="width: 4; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">  Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="260" HEIGHT="48">
+<DIV WIDTH="269" HEIGHT="48" style="width: 211; height: 48">
+<P><font face="Verdana" size="3">
+Задает число прокручиваемых линий
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P align="center"><font face="Verdana" size="3"> <B>&nbsp;Листинг 27.2.</B> Модуль 
+  главной формы проекта DemoMouse <B>&nbsp;</B> </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+unit Main;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> interface</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uses</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ExtCtrls, ComCtrls;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TMainForm = class(TForm) ColorDlg: TColorDialog;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">StatusBar: TStatusBar; Timer: TTimer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure FormMouseDown(Sender: TObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Button: TMouseButton;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Shift: TShiftState; X, Y: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FormMouseUp(Sender: TObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Button: TMouseButton;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Shift: TShiftState; X, Y: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TimerTimer(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;private</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MouseRect: TRect;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsDown: Boolean;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RectColor: TColor;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;public</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{ Public declarations }</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MainForm: TMainForm;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+implementation {$R *.DFM}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.FormMouseDown(Sender: TObject; Button: TMouseButton;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Shift: TShiftState; X, Y: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Button = mbLeft then with MouseRect do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsDown := True; Left := X; Top := Y; Right := X; Bottom := Y;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Canvas.Pen.Color := RectColor;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (Button = mbRight) and ColorDlg.Execute then RectColor := ColorDlg.Color;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.FormMouseUp(Sender: TObject;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Button: TMouseButton;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Shift: TShiftState; X, Y: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsDown := False;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Canvas.Pen.Color := Color;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with MouseRect do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Canvas.Polyline([Point(Left, Top), Point(Right, Top), Point(Right,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Bottom), Point(Left, Bottom), Point(Left, Top)]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with StatusBar do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Panels[4].Text := ''; Panels [5] .Text := &quot;;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.FonnMouseMove(Sender: TObject; Shift: TShiftState; X,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Y: Integer);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with StatusBar do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Panels[2].Text := 'X: ' + IntToStr(X);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Panels[3].Text := 'Y: ' + IntToStr(Y);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Not IsDown then Exit; Canvas.Pen.Color := Color; with mouserect do&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Canvas.Polyline([Point(Left, Top), Point(Right, Top),</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Point(Right, Bottom), Point(Left, Bottom), Point(Left, Top)]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Right := X;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Bottom := Y;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Canvas.Pen.Color := RectColor;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Canvas.Polyline([Point(Left, Top), Point(Right, Top),</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Point(Right, Bottom), Point(Left, Bottom), Point(Left, Top)]);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with StatusBar do begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Panels [4] .Text := 'IHwpMHa: ' + IntToStr(Abs(MouseRect.Right - MouseRect.Left));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Panels[5].Text := 'BacoTa: ' + IntToStr(Abs(MouseRect.Bottom - MouseRect.Top));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TMainForm.TimerTimer(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with StatusBar do&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Panels[0].Text := 'flaTa: ' + DateToStr(Now); Panels[1].Text := 'BpeMH: ' +
+TimeToStr(Now);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При нажатии левой кнопки мыши в методе-обработчике
+<font face="Verdana" size="2"> FormMouseDown</font> включается режим рисования прямоугольника<font face="Verdana" size="2">
+(isDown := True) </font> и задаются его начальные координаты.
+</font ></P>
+<P><font face="Verdana" size="3">
+При перемещении мыши по форме проекта вызывается метод-обработчик
+<font face="Verdana" size="2">FormMouseMove</font>, в котором координаты курсора и размеры прямоугольника передаются на панель состояния. Если левая кнопка мыши нажата
+<font face="Verdana" size="2"> (isDown = True)</font>, то осуществляется перерисовка прямоугольника.
+</font ></P>
+<P><font face="Verdana" size="3">
+При отпускании кнопки мыши в методе <font face="Verdana" size="2"> FormMouseUp</font> рисование прямоугольника прекращается
+<font face="Verdana" size="2"> (isDown := False).</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Если была нажата правая кнопка мыши, то метод-обработчик
+<font face="Verdana" size="2"> FormMouseDown</font> обеспечивает отображение диалога выбора цвета, который позволяет сменить цвет линий прямоугольника.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод-обработчик <font face="Verdana" size="2"> TimerTimer</font> обеспечивает отображение на панели состояния текущей даты и времени.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Для рисования прямоугольника использовался 
+    метод <font face="Verdana" size="2">PolyLine</font>, который работает при 
+    перемещении курсора влево и вверх относительно начальной точки. Для стирания 
+    старого прямоугольника желательно использовать режимы <font face="Verdana" size="2"> 
+    XOR</font> и <font face="Verdana" size="2">NOTXOR</font>, которые обеспечивают 
+    восстановление рисунка под линией. Подробно об этом см. гл. 10. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

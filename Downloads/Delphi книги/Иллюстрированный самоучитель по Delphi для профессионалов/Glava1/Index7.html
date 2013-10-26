@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Полиморфизм</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим внимательно следующий пример. Пусть у нас имеются некое обобщенное поле для хранения данных — класс
+<font face="Verdana" size="2"> TFieid</font> и три его потомка — для хранения строк, целых и вещественных чисел:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> TField = class</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetData:string; virtual; abstract;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TStringFieid = class(TField)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FData : string;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetData: string; override;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIntegerField = class(TField)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FData : Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetData: string;override;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TExtendedField = class(TField)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FData : Extended;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetData: string;override;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+function TStringFieid.GetData;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+Result := FData</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function TIntegerField.GetData;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := IntToStr(FData);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function TExtendedField.GetData;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; Result:= FloatToStrF(FData, ffFixed, 7, 2);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ShowData(AField : TField);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Forml.Label!.Caption := AField.GetData;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере классы содержат разнотипные поля данных
+<font face="Verdana" size="2"> FData</font> и только-то и &quot;умеют&quot;, что сообщить о значении этих данных текстовой строкой (при помощи метода
+<font face="Verdana" size="2"> GetData</font>). Внешняя по отношению к ним процедура
+<font face="Verdana" size="2"> ShowData</font> получает объект в виде параметра и показывает эту строку.
+</font ></P>
+<P><font face="Verdana" size="3">
+Правила контроля соответствия типов (<font face="Verdana" size="2">typecasting</font>) языка Object Pascal гласят, что объекту как указателю на экземпляр объектного типа может быть
+</font ></P>
+<P><font face="Verdana" size="3">
+присвоен адрес любого экземпляра любого из дочерних типов.
+В процедуре <font face="Verdana" size="2"> showData</font> параметр описан как
+<font face="Verdana" size="2"> TFieid</font> — это значит, что в нее можно передавать объекты классов
+и <font face="Verdana" size="2">TStringField,</font>и <font face="Verdana" size="2"> TIntegerField</font>,
+и <font face="Verdana" size="2">TExtendedField</font>,и любого другого потомка класса
+<font face="Verdana" size="2"> TFieid</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Но какой (точнее, чей) метод <font face="Verdana" size="2"> GetData</font> при этом будет вызван? Тот, который соответствует классу фактически
+переданного объекта. Этот принцип называется полиморфизмом,
+и он, пожалуй, представляет собой наиболее важный козырь ООП.
+</font ></P>
+<P><font face="Verdana" size="3">
+Допустим, вы имеете дело с некоторой совокупностью явлений или процессов. Чтобы смоделировать их средствами ООП, нужно выделить их самые общие, типовые черты. Те из них, которые не изменяют своего содержания, должны быть реализованы в виде статических методов. Те же, которые изменяются при переходе от общего к частному, лучше облечь в форму виртуальных методов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основные, &quot;родовые&quot; черты (методы) нужно описать в классе-предке и затем перекрывать их в классах-потомках. В нашем примере программисту, пишущему процедуру вроде
+<font face="Verdana" size="2"> showData</font>, важно лишь, что любой объект, переданный в нее, является потомком
+<font face="Verdana" size="2"> TFieid</font> и он умеет сообщить о значении своих данных (выполнив метод
+<font face="Verdana" size="2"> GetData</font>). Если, к примеру, такую процедуру скомпилировать и поместить в динамическую библиотеку, то эту библиотеку можно будет раз и навсегда использовать без изменений, хотя будут появляться и новые, неизвестные в момент ее создания классы-потомки
+<font face="Verdana" size="2">TFieid</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наглядный пример использования полиморфизма дает среда Delphi. В ней имеется класс
+<font face="Verdana" size="2"> TComponent</font>, на уровне которого сосредоточены определенные &quot;правила&quot; взаимодействия компонентов со средой разработки и с другими компонентами. Следуя этим правилам, можно порождать от класса
+<font face="Verdana" size="2"> TComponent</font> свои компоненты, настраивая Delphi на решение
+специальных задач.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь, надеемся, стало более или менее ясно, какие преимущества ООП позволили ему стать основным способом разработки серьезного программного обеспечения. Те, кто начинал программировать еще для Windows 3.0, наверняка помнят, сколько усилий требовалось при написании совершенно тривиального кода. Сейчас для того же самого в Delphi достаточно буквально пары щелчков мышью. На самом деле именно сложность программирования для Windows стала катализатором внедрения ООП.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

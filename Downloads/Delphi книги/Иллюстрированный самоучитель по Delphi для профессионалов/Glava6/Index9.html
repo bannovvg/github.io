@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компоненты настройки цветовой палитры</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо создания собственных визуальных стилей, что является делом довольно трудоемким и хлопотным, вы можете изменить внешний вид пользовательского интерфейса приложения более легким способом. Впервые в составе Палитры компонентов Delphi 7 появились специализированные компоненты, позволяющие настраивать цветовую палитру всех возможных деталей пользовательского интерфейса одновременно. Эти компоненты расположены на странице <B>Additional:</B>
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;TstandardColorMap — по 
+    умолчанию настроен на стандартную цветовую палитру Windows;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;TXPColorMap — по умолчанию 
+    настроен на стандартную цветовую палитру Windows XP;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;TTwilightColorMap — по 
+    умолчанию настроен на стандартную полутоновую (черно-белую) палитру Windows.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Все они представляют собой контейнер, содержащий цвета для раскраски различных деталей элементов управления. Разработчику необходимо лишь настроить эту цветовую палитру и по мере необходимости подключать к пользовательскому интерфейсу приложения. Для этого снова используется компонент
+<font face="Verdana" size="2">TActionManager</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Все панели инструментов (класс <font face="Verdana" size="2">TActionToolBar</font>), созданные в этом компоненте (см. гл. 8),
+имеют свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ColorMap: TCustomActionBarColorMap;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в котором и задается необходимый компонент цветовой палитры. Сразу после подключения все элементы управления на такой панели инструментов перерисовываются в соответствии с цветами новой палитры.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обратите внимание, что в компоненте <font face="Verdana" size="2">TToolBar</font>, перенесенном из Палитры компонентов на форму вручную, это свойство отсутствует.
+</font ></P>
+<P><font face="Verdana" size="3">
+Все компоненты настройки цветовой палитры имеют один метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnColorChange: TnotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который вызывается при изменении любого цвета палитры.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

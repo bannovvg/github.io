@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Атрибуты файла. Поиск файла</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Еще одна часто выполняемая с файлом операция — поиск файлов в заданном каталоге. Для организации поиска и отбора файлов используются специальные процедуры, а также структура, в которой сохраняются результаты поиска.
+</font ></P>
+<P><font face="Verdana" size="3">
+Запись
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFileName = string;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSearchRec = record</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Time: Integer;     {Время и дата создания}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Size: Integer;     {Размер файла}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Attr: Integer;     {Параметры файла}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Name: TFileName;     {Полное имя файла}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ExcludeAttr: Integer;   (He используется}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FindHandle: THandle;   {Дескриптор файла}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FindData: TWin32FindData; {He используется}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+обеспечивает хранение характеристик файла после удачного поиска. Дата и время создания файла хранятся в формате MS-DOS, поэтому для получения
+этих параметров в принятом в Delphi формате <font face="Verdana" size="2"> TDateTime</font> необходимо использовать следующую функцию:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FileDateToDateTime(FileDate: Integer): TDateTime;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратное преобразование выполняет функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function DateTimeToFileDate(DateTime: TDateTime): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> Attr</font> может содержать комбинацию следующих флагов-значений:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;faReadOnly — только для 
+    чтения;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;faDirectory — каталог;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;faHidden — скрытый;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;faArchive — архивный;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;faSysFile — системный;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;faAnyFile — любой.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;favoiumeio — метка тома;</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Для определения параметров файла используется оператор
+<font face="Verdana" size="2">AND</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if (SearchRec.Attr AND faReadOnly) &gt; 0</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then ShowMessage('Файл только для чтения');</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Непосредственно для поиска файлов используются функции
+<font face="Verdana" size="2"> FindFirst</font> и <font face="Verdana" size="2">FindNext</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FindFirst(const Path: string; Attr: Integer; var F: TSearchRec): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+находит первый файл, заданный полным маршрутом
+<font face="Verdana" size="2"> Path</font> и параметрами <font face="Verdana" size="2"> Attr</font> (см. выше).
+Если заданный файл найден, функция возвращает 0, иначе — код ошибки Windows. Параметры найденного файла возвращаются<B> </B>в<B> </B>записи<B> </B><font face="Verdana" size="2"> F</font>
+типа<B> </B><font face="Verdana" size="2">TSearchRec</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Функция
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FindNext(var F: TSearchRec): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+применяется для повторного поиска следующего файла, удовлетворяющего критерию поиска. При этом используются те параметры поиска, которые заданы последним вызовом функции
+<font face="Verdana" size="2">FindFirst</font>. В случае удачного поиска возвращается 0.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для освобождения ресурсов, выделенных для выполнения поиска, применяется функция:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure FindClose(var F: TSearchRec);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В качестве примера организации поиска файлов рассмотрим фрагмент исходного кода, в котором маршрут поиска файлов задается в однострочном текстовом редакторе
+<font face="Verdana" size="2">DirEdit</font>, а список найденных файлов передается в компонент
+<font face="Verdana" size="2">TListBox</font>.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.FindBtnClick(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ListBox.Items.Clear;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FindFirst(DirEdit.Text, faArchive + faHidden, SearchRec);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+while FindNext(SearchRec) = 0 do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ListBox.Iterns.Add(SearchRec.Name);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">FindClose(SearchRec);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

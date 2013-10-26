@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Выравнивание элемента управления 
+  </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+<P><font face="Verdana" size="3">Для выравнивания компонента в рабочей области 
+  его владельца (обычно это форма) применяется свойство </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Align: TAlign;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Тип <font face="Verdana" size="2"> TAlign</font> объявлен следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TAlign = (alNone, alTop, alBottom, alLeft, alRight, alClient);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> alNone</font> выравнивание отсутствует. При следующих четырех значениях выравнивание осуществляется по соответствующей стороне. Значение
+<font face="Verdana" size="2">alclient</font> приводит к тому, что элемент управления изменяет свои размеры до размеров рабочей области владельца.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Anchors: TAnchors;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TAnchors = set of TAnchorKind;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TAnchorKind = (akTop, akLeft, akRight, akBottom);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+обеспечивает фиксацию элемента управления по сторонам владельца. &quot;Якорь&quot; можно установить по одной, двум, трем или четырем сторонам. При задании якоря по любой стороне расстояние между стороной и элементом управления сохраняется неизменным. Комбинируя якоря для сторон, можно добиться различных вариантов поведения компонента при изменении размеров владельца.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если по вертикали или горизонтали якорь не установлен вообще, то при изменении размеров владельца компонент остается на том же месте с учетом изменившегося размера.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если по вертикали или горизонтали установлены оба якоря, то при изменении размеров владельца размер элемента управления изменяется таким образом, чтобы расстояния до сторон владельца остатись неизменными.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AutoSize: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+обеспечивает изменение размеров компонента в соответствии с размерами его содержимого (текста, изображения, списка, иерархического дерева
+и т. д.).
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P align="center"><font face="Verdana" size="3"> &nbsp;<strong> </strong></font ><strong><font face="Verdana" size="3"> 
+  <font size="4">ГЛАВА 20</font></font></strong></P>
+<P align="center"><strong><font face="Verdana" size="3"><font size="4"><br>
+  Технология DataSnap. Механизмы удаленного доступа</font> </font></strong><font face="Verdana" size="3"><br>
+  </font> </P>
+<p align="left">
+<font face="Verdana" size="3">
+<P><font face="Verdana" size="3">
+В главах части IV мы рассматривали вопросы создания обычных приложений БД, работающих с базами данных на локальных компьютерах или в пределах локальной сети. Однако, как быть, если необходимо создать приложение, которое может с одинаковым успехом работать как в локальной сети, так и на удаленном компьютере.
+</font ></P>
+<P><font face="Verdana" size="3">
+Очевидно, что в этом случае модель доступа к данным должна быть расширена, т. к. наличие большого числа удаленных клиентов делает традиционные схемы создания приложений БД малоэффективными.
+</font ></P>
+<P><font face="Verdana" size="3">
+В этой главе мы рассмотрим модель распределенного приложения БД, которая называется многозвенной
+(multitiered), и, в частности, ее наиболее простой вариант — трехзвенное распределенное приложение.
+Тремя частями такого приложения являются:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">собственно сервер базы данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;сервер приложений (серверная часть приложения);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;клиентская часть приложения.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Все они объединены в единое целое единым механизмом взаимодействия (транспортный уровень) и обработки данных (уровень бизнес-логики).
+</font ></P>
+<P><font face="Verdana" size="3">
+Компоненты и объекты Delphi, обеспечивающие разработку многозвенных приложений, объединены общим названием
+DataSnap.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> В предыдущих версиях Delphi (Delphi 4 и 5) 
+    эти компоненты объединялись под названием MIDAS (Multi-tier Distributed Applications 
+    Services— сервисы многозвенных распределенных приложений). </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Палитра компонентов Delphi содержит специальную страницу <B>DataSnap, </B>на которой доступно большинство рассматриваемых в главах этой части компонентов. Однако при разработке многозвенных приложений нам понадобятся и многие другие компоненты, которым также уделено достаточное внимание.
+</font ></P>
+<P><font face="Verdana" size="3">
+В этой главе рассматриваются следующие вопросы:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">структура многозвенных приложений;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;механизм удаленного доступа к данным DataSnap;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;удаленные модули удаленных данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;компоненты-провайдеры;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;транспортные компоненты удаленных соединений DataSnap;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;вспомогательные компоненты — брокеры соединений.</font></li>
+</ul>
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

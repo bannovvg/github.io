@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Проект DLL</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания динамической библиотеки в Репозитории Delphi имеется специальный шаблон. Его значок <B>DLL Wizard </B>расположен на странице New Репозитория. В отличие от проекта обычного приложения, проект DLL состоит всего из одного исходного файла. Впоследствии к нему можно добавлять отдельные модули и формы.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 28.1. </B> Исходный 
+  файл проекта динамической библиотеки </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+library Projectl;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{ Important note about DLL memory management: ShareMem must be the first unit in your library's USES clause AND your project's (select Project-View Source) USES clause if your DLL exports any procedures or functions that pass strings as parameters or function results. This applies to all strings passed to and from your DLL-even those that are nested in records and classes. ShareMem is the interface unit to the BORLNDMM.DLL shared memory manager, which must be deployed along with your DLL. To avoid using BORLNDMM.DLL, pass string information using PChar or ShortString parameters. }</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uses</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SysUtils, Classes;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+{$R *.res}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+end.
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Обширный комментарий в каждом проекте DLL 
+    касается использования модуля <font face="Verdana" size="2">ShareMem</font>. 
+    О нем рассказывается ниже. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для определения типа проекта используется ключевое слово
+<font face="Verdana" size="2"> library</font> (вместо <font face="Verdana" size="2"> program</font> в обычном проекте). При компиляции такого проекта динамической библиотеки создается файл с расширением
+dll.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как и в любом другом проекте, в проекте динамической библиотеки можно использовать иные модули. Это могут быть просто модули с исходным кодом и модули форм. При этом динамическая библиотека может экспортировать функции, описанные не только в главном файле, но и в присоединенных модулях.
+</font ></P>
+<P><font face="Verdana" size="3">
+Блок <font face="Verdana" size="2"> begin..end </font> называется блоком инициализации библиотеки
+и предназначен для размещения кода, который автоматически выполняется при загрузке DLL.
+</font ></P>
+<P><font face="Verdana" size="3">
+Между секцией <font face="Verdana" size="2"> uses</font> и блоком инициализации можно располагать исходный код функций динамической библиотеки и их объявления. При этом можно использовать любые конструкции языка Object Pascal, а также применять формы и компоненты.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При создании динамических библиотек очень 
+    удобно использовать группы проектов. В группу помещается проект приложения 
+    и проект (проекты) необходимой для его работы динамической библиотеки (библиотек). 
+    Для переключения между проектами удобно использовать Диспетчер проектов (команда 
+    Project Manager из меню <font face="Verdana" size="2">View</font>). Его можно 
+    поместить в окно Редактора кода. </font ></P>
+  <P><font face="Verdana" size="3"> Еще один способ удобной работы с проектами 
+    динамических библиотек заключается в задании для DLL вызывающей программы. 
+    Это делается в диалоге команды <font face="Verdana" size="2"> Parameters</font> 
+    из меню Run (рис. 28.1). Вызывающее приложение задается в группе Host Application. 
+    В результате после компиляции динамической библиотеки вызывается использующее 
+    ее приложение. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для того чтобы приложения могли применять функции динамической библиотеки, необходимо, во-первых, экспортировать их из DLL; во-вторых, объявить функции в самом приложении как внешние. Ниже рассматриваются способы решения этих задач.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.28.1.gif"> </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 28.1. </B>Диалог команды 
+  <B>Parameters </B>меню <b> Run</b> </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index1.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

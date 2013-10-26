@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Области видимости </font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+При описании нового класса важен разумный компромисс. С одной стороны, требуется скрыть от других методы и поля, представляющие собой внутреннее устройство класса (для этого и придуманы свойства). Маловажные детали на уровне пользователя объекта будут бесполезны и только помешают целостности восприятия.
+</font ></P>
+<P><font face="Verdana" size="3">
+С другой стороны, если слишком ограничить того, кто будет порождать классы-потомки, и не обеспечить ему достаточный набор
+инструментальных средств и свободу маневра, то он и не станет использовать ваш класс.
+</font ></P>
+<P><font face="Verdana" size="3">
+В модели объектов языка Object Pascal существует механизм доступа к составным частям объекта, определяющий области, где ими можно пользоваться (области видимости).
+Поля и методы могут относиться к четырем
+группам (секциям), отличающимся областями видимости. Методы и свойства могут быть общими
+(секция <font face="Verdana" size="2"> public</font>), личными (секция
+<font face="Verdana" size="2"> private</font>), защищенными (секция
+<font face="Verdana" size="2"> protected</font>) и опубликованными
+(секция published). Есть еще и пятая группа, <font face="Verdana" size="2"> automated</font>, она ранее использовалась для создания объектов СОМ; теперь она присутствует в языке только для обратной совместимости с программами на Delphi версий 3—5.
+</font ></P>
+<P><font face="Verdana" size="3">
+Области видимости, определяемые первыми тремя директивами, таковы.
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">Поля, свойства и методы секции  
+    public не имеют ограничений на видимость. Они доступны из других функций 
+    и методов объектов как в данном модуле, так и во всех прочих, ссылающихся 
+    на него.</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Поля, свойства и методы, находящиеся в секции  
+    private, доступны только в методах класса и в функциях, содержащихся 
+    в том же модуле, что и описываемый класс. Такая директива позволяет полностью 
+    скрыть детали внутренней реализации класса. Свойства и методы из секции  
+    private можно изменять, и это не будет сказываться на программах, работающих 
+    с объектами этого класса. Единственный способ для кого-то другого обратиться 
+    к ним — переписать заново созданный вами модуль (если, конечно, доступны исходные 
+    тексты).</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Поля, свойства и методы секции protected также доступны 
+    только внутри модуля с описываемым классом. Но — и это главное — они доступны 
+    в классах, являющихся потомками данного класса, в том числе и в других модулях. 
+    Такие элементы особенно необходимы для разработчиков новых компонентов — потомков 
+    уже существующих. Оставляя свободу модернизации класса, они все же скрывают 
+    детали реализации от того, кто только пользуется объектами этого класса.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Рассмотрим пример, иллюстрирующий три варианта областей видимости.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 1.1. </B> Пример 
+  задания областей видимости методов </font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+unit  First;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp; unit Second;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">interface&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp; interface</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp; uses First;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp; type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFirstObj   = class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp; TSecondObj   =class(TFirstObj}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+private&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp; procedure Method4;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Methodl;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">protected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Method2;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">public&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Methods;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">end;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  |</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TestProcl;&nbsp;&nbsp;&nbsp; |&nbsp; procedure TestProc2;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+implementation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp; implementation</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uses dialogs;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp; varAFirstObj :TFirstObj;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">var AFirstObj: TFirstObj;|ASecondObj:
+TSecondObj;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TestProcl;&nbsp;&nbsp;&nbsp; |&nbsp; procedure TSecondObj.Method4;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp; begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AFirstCbj := TFirstObj.Create;  |    Methodl; {недопустимо -</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AFirstObj.Methodl;(допустимо)|</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|произойдет ошибка компиляции}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AFirstObj.Method2; {допустимо}| Method2; {допустимо}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AFirstObj.MethodS; {допустимо}| Methods,- {допустимо}</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">AFirstObj.Free;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  | end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| procedure TestProc2;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TFirstObj.Methodl;&nbsp; | begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|AFirstObj:=TFirstObj.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('1');&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |AFirstObj.Methodl;{недопустимо}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|AFirstObj.Method2;{недопустимо}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TFirstObj.Method2;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|AFirstObj.Method3;{допустимо}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|AFirstObj.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">ShowMessage('2');</font></font>
+</P>
+<font face="Arial, Helvetica, sans-serif" size="3">
+
+
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Methodl;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|ASecondCbj:= TSecondObj.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|ASecondObj.Methodl;{недопустимо}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedureTFirstObj.Method3;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+|ASecondObj.Method2;{допустимо}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|ASecondObj.MethodS;{допустимо}</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('3');&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |ASecondObj.Free;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+Method2;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  | end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|<font face="Verdana" size="2">end.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;</font>
+</font ></P>
+</font></blockquote><font face="Arial, Helvetica, sans-serif" size="3">
+<P><font face="Verdana" size="3">
+Если к этому примеру добавить модуль <font face="Verdana" size="2"> Third</font> и попробовать вызвать методы классов
+<font face="Verdana" size="2"> TFirstObj</font> и <font face="Verdana" size="2"> TSecondObj</font> оттуда, то к числу недоступных будет отнесен и Method2 — он доступен только в том модуле, в котором описан.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наконец, область видимости, определяемая четвертой директивой —
+<font face="Verdana" size="2"> published</font>, имеет особое значение для интерфейса визуального проектирования Delphi. В этой секции должны быть собраны те свойства объекта, которые будут видны не только во время исполнения приложения, но и из среды разработки. Публиковать можно свойства большинства типов, за исключением старого типа
+<font face="Verdana" size="2"> real</font> (теперь он называется
+<font face="Verdana" size="2">rеаl48</font>), свойств типа &quot;массив&quot; и некоторых других. Все свойства компонентов, доступные через
+</font ></P>
+<P><font face="Verdana" size="3">
+Инспектор объектов, являются их опубликованными свойствами. Во время выполнения такие свойства общедоступны, как и
+<font face="Verdana" size="2"> public</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Три области видимости — <font face="Verdana" size="2"> private, protected, public</font> — как бы упорядочены по возрастанию видимости методов. В классах-потомках можно повысить видимость методов и свойств, но не понизить ее. При описании дочернего класса можно переносить методы и свойства из одной сферы видимости в другую, не переписывая их заново и даже не описывая — достаточно упомянуть о нем в другом месте:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TFirstObj = class&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> private</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FNumber: Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> protected</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Number: Integer read: FNumber;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TSecondObj = class(TFirstObj)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> published</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Number;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если какое-либо свойство объекта из состава VCL принадлежит к области
+<font face="Verdana" size="2"> public</font>, вернуть его в <font face="Verdana" size="2"> private</font> невозможно. Напротив, обратная процедура широко практикуется в Delphi. У многих компонентов (например,
+<font face="Verdana" size="2"> TEdit</font>) есть предок (в данном случае
+<font face="Verdana" size="2"> TCustomEdit</font>), который отличается только отсутствием опубликованных свойств. Так что, если вы хотите создать новый редактирующий компонент, порождайте его на базе
+<font face="Verdana" size="2"> TCustomEdit</font> и публикуйте только те свойства, которые считаете нужными. Разумеется, если вы поместили свойство в область
+<font face="Verdana" size="2"> private</font>, &quot;достать&quot; его оттуда в потомках возможности уже нет.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</font></body>
+</html>

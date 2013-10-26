@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Пример простого сервера приложения</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве примера рассмотрим процесс создания простого сервера приложения на основе удаленного модуля данных
+<font face="Verdana" size="2">TRemoteDataModule</font>. Для начала создадим новый проект — простое исполняемое приложение и сохраним его под именем
+<font face="Verdana" size="2">simpleAppSrvr</font> (табл. 21.2). Этот проект входит в состав группы проектов
+<font face="Verdana" size="2">simpleRemote</font>, в нее впоследствии будет добавлено клиентское приложение.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 21.2. </B> Файлы проекта 
+  <B> </B><font face="Verdana" size="2">simpieAppSrvr</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="454" HEIGHT="110">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="173" HEIGHT="31">
+<DIV WIDTH="188" HEIGHT="31" style="width: 52; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Файл</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="330" HEIGHT="31">
+<DIV WIDTH="442" HEIGHT="31" style="width: 126; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Назначение</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="173" HEIGHT="33">
+<DIV WIDTH="188" HEIGHT="33" style="width: 152; height: 33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uSimpleAppSrvr.pas</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="330" HEIGHT="33">
+<DIV WIDTH="442" HEIGHT="33" style="width: 212; height: 33">
+<P><font face="Verdana" size="3">
+Стандартный файл проекта
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="173" HEIGHT="46">
+<DIV WIDTH="188" HEIGHT="46" style="width: 172; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SimpleAppSrvr_TLB.pas</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="330" HEIGHT="46">
+<DIV WIDTH="442" HEIGHT="46" style="width: 320; height: 46">
+<P><font face="Verdana" size="3">
+Библиотека типов. Содержит объявления всех используемых в проекте интерфейсов
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="162" HEIGHT="29">
+<DIV WIDTH="188" HEIGHT="29" style="width: 118; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uSimpleRDM.pas</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="329" HEIGHT="29">
+<DIV WIDTH="438" HEIGHT="29" style="width: 306; height: 29">
+<P><font face="Verdana" size="3">
+Файл главного удаленного модуля данных <font face="Verdana" size="2"> SimpleRDM</font>
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="162" HEIGHT="33">
+<DIV WIDTH="188" HEIGHT="33" style="width: 122; height: 33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+uSecondary.pas</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="329" HEIGHT="33">
+<DIV WIDTH="438" HEIGHT="33" style="width: 313; height: 33">
+<P><font face="Verdana" size="3">
+Файл дочернего удаленного модуля данных <font face="Verdana" size="2"> Secondary</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Пример создания клиента для сервера приложения simpieAppSrvr рассматривается в гл. 22.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

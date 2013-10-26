@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компонент TRvNDRWriter</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TRvNDRWriter</font> предназначен для сохранения отчетов в файлах. При этом используется двоичный формат NDR.
+</font ></P>
+<P><font face="Verdana" size="3">
+Приемник данных определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TStreamMode = (smMemory, smTempFile, smFile, smUser); property StreamMode: TStreamMode;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+smMemory</font> — для вывода данных используется поток в памяти (объект типа
+<font face="Verdana" size="2">TMemoryStream</font>);
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+smTempFile</font> — данные сохраняются во временном файле, в папке, определенной в операционной системе для хранения временных файлов;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+smFile</font> — данные сохраняются в файле;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+smUser</font> — данные передаются в поток, заданный разработчиком.
+</font ></P>
+<P><font face="Verdana" size="3">
+Имя файла, в котором будет сохранен отчет, определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FileName: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А для определения потока используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Stream:   TStream;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Таким образом, если вы хотите использовать для сохранения отчета файл, перед использованием компонент настраивается, например, так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvNDRWriterl.StreamMode := smFile; RvNDRWriterl.FileName := ReportFilePath;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если вы планируете использовать поток, сделайте следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var ReportStreara: TMemoryStreain;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ReportStream := TMemoryStream.Create/try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvNDRWriterl.StreamMode := smUser;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+RvNDRWriterl.Stream := ReportStream;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ReportStream.Free; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но сначала этот отчет необходимо создать. Для этого используется обширный набор методов, позволяющих отображать текст и графику, создавать таблицы и заполнять их данными. Перед началом работы следует вызвать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Start;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а по окончании создания отчета использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Finish;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Например, следующий фрагмент кода создает в отчете текст с заданным положением:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with RvNDRWriterl do&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Start;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Units := unMM;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SetFont('Times New Roman', 14);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Bold := True;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+OriginX := 0.0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+OriginY := 0.0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+GotoXY(1.0, 12.0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Print('Заголовок ttl');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+GotoXY(6.0, 18.0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Println('Заголовок 12');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+GotoXY(6.0, 24.0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Println('Заголовок 13');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+GotoXY(6.0, 30.0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PrintIn('Заголовок #4');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Finish;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А вот так можно нарисовать прямоугольник и разместить в нем изображение:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with RvNDRWriterl do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Start;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Units := unMM;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SetBrush(clBlue, bsSolid, nil);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Rectangle (5.0, 35.0, 65.0, 95.0);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Bitmap := TBitmap.Create;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Bitmap.LoadFromFile('factory.BMP');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+PrintBitmapRect(10.0, 40.0, 60.0, 90.0, Bitmap);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Bitmap.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Finish;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В данном фрагменте кода метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure PrintBitmapRect(XI,Y1,X2,Y2: double;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Bitmap: TBitmap);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+отображает растровое изображение <font face="Verdana" size="2"> Bitmap</font> в прямоугольнике, обеспечивая его масштабирование в соответствии с размерами прямоугольника.
+</font ></P>
+<P><font face="Verdana" size="3">
+<b>Внимание</b>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TRvNDRWriter</font> 
+    имеет свойство <font face="Verdana" size="2"> canvas</font> (см. гл. 10), 
+    но использовать его нельзя — любые операции с канвой не возымеют действия 
+    и ваши труды не будут сохранены. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При использовании пары методов <font face="Verdana" size="2"> start</font> и
+<font face="Verdana" size="2"> Finish</font> не нужно предпринимать никаких дополнительных усилий для сохранения отчета — это будет сделано Методом
+<font face="Verdana" size="2">Finish</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Множество других свойств и методов компонента (мы не будем останавливаться на них специально, т. к. их использование достаточно прозрачно) обеспечивают оформление отчета, управление страницами, настройку принтера и т. д.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

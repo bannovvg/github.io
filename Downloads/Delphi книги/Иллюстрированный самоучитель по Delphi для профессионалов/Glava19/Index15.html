@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Управление 
+  соединением</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Соединение с хранилищем данных ADO открывается и закрывается при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Connected: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или методов
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Open; overload;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Openfconst UserlD: WideString; const Password: WideString); overload;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Close;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод open является перегружаемым при необходимости использования удаленного или локального соединения. Для удаленного соединения применяется вариант с параметрами
+<font face="Verdana" size="2">UserID</font> и <font face="Verdana" size="2">Password</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+До и после открытия и закрытия соединения разработчик может использовать соответствующие стандартные методы-обработчики событий:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeConnect: TNotifyEvent;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property BeforeDisconnect: TNotifyEvent;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property AfterConnect: TNotifyEvent;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property AfterDisconnect: TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Кроме этого, компонент <font face="Verdana" size="2"> TADOConnection</font> имеет дополнительные методы-обработчики. После получения подтверждения от провайдера о том, что соединение будет открыто, перед его реальным открытием вызывается метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TWillConnectEvent = procedure(Connection: TADOConnection; var Connectionstring, UserlD, Password: WideString; var ConnectOptions: TConnectOption;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> var EventStatus: TEventStatus) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property OnWillConnect: TWillConnectEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> Connection</font> содержит указатель на вызвавший обработчик компонент.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметры <font face="Verdana" size="2">Connectionstring</font>, <font face="Verdana" size="2">userID и Password
+</font> определяют строку параметров, имя и пароль пользователя.
+</font ></P>
+<P><font face="Verdana" size="3">
+Соединение может быть синхронным или асинхронным, что и определяется
+параметром<B> </B><font face="Verdana" size="2">ConnectOptions</font>
+типа <B> </B><font face="Verdana" size="2">TConnectOption</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TConnectOption = (coConnectUnspecified, coAsyncConnect);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+coConnectunspecified</font> — синхронное соединение всегда ожидает результат последнего запроса;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+coAsyncConnect</font> — асинхронное соединение может выполнять новые запросы, не дожидаясь ответа от предыдущих запросов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Наконец, параметр <font face="Verdana" size="2"> Eventstatus</font> позволяет определить успешность выполнения посланного запроса на соединение:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+type
+</font ></P>
+<P><font face="Verdana" size="3">
+TEventStatus = (esOK, esErrorsOccured, esCantDeny, esCancel, esUnwantedEvent);
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">esOK</font> — запрос на соединение выполнен успешно;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">esErrorsOccured</font> — в процессе выполнения запроса возникла ошибка;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">esCantDeny</font> — соединение не может быть прервано;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">esCancel</font> — соединение было прервано до открытия;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+esUnwantedEvent</font> <B>— </B>
+ внутренний флаг ADO.
+</font ></P>
+<P><font face="Verdana" size="3">
+Например, в случае успешного соединения можно выбрать синхронный режим работы компонента:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.ADOConnectionWillConnect(Connection: TADOConnection;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var ConnectionString, UserlD, Password:
+WideString;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var ConnectOptions: TConnectOption;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Eventstatus: TEventStatus);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin if Eventstatus = esOK</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then ConnectOptions := coConnectunspecified;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Кстати, параметр синхронности/асинхронности можно также задать при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ConnectOptions property ConnectOptions: TConnectOption;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После открытия соединения для выполнения собственного кода можно использовать метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TConnectErrorEvent = procedure(Connection:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; TADOConnection; Error: Error;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Eventstatus: TEventStatus) of object;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property OnConnectComplete: TConnectErrorEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь, если в процессе открытия соединения возникла ошибка, параметр
+<font face="Verdana" size="2"> Eventstatus</font> будет равен <font face="Verdana" size="2">esErrorsOccured</font>, а параметр
+<font face="Verdana" size="2"> Error</font> содержит объект ошибки ADO.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь перейдем к вспомогательным свойствам и методам компонента
+<font face="Verdana" size="2">TADOConnection</font>, обеспечивающим соединение.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для ограничения времени открытия соединения для медленных каналов связи используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ConnectionTimeout: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задающее время ожидания открытия соединения в секундах. По умолчанию оно равно 15 сек.
+</font ></P>
+<P><font face="Verdana" size="3">
+Также можно определить реакцию компонента на неиспользуемое соединение. Если через соединение не подключен ни один активный компонент, свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property KeepConnection: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в значении <font face="Verdana" size="2"> True</font> сохраняет соединение открытым. Иначе, после закрытия последнего связанного компонента ADO, соединение закрывается.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости провайдер соединения ADO определяется напрямую свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Provider: WideString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Имя источника данных по умолчанию задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DefaultDatabase: WideString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но если этот же параметр указан в строке соединения, то он перекрывает собой значение свойства.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости прямой доступ к объекту соединения OLE DB обеспечивает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ConnectionObject: _Connection;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При открытии соединения необходимо вводить имя пользователя и его пароль. Появление стандартного диалога управляется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property LoginPrompt: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Без этого диалога для задания данных параметров можно использовать свойство
+<font face="Verdana" size="2">Connectionstring</font>, метод <font face="Verdana" size="2"> open</font> (см. выше)
+или метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TLoginEvent = procedure(Sender:TObject;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Username, Password: string)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnLogin: TLoginEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TConnectMode = (cmUnknown, cmRead, cmWrite, cinReadWrite, cmShareDenyRead, cmShareDenyWrite, cmShareExclusive,
+cmShareDenyNone);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property Mode: TConnectMode;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задает доступные для соединения операции:
+</font ></P>
+<ul>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">cmUnknown 
+    — разрешение неизвестно или не может быть установлено;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">cmRead 
+    — разрешение на чтение;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">cmwrite 
+    — разрешение на запись;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">cmReadWrite 
+    — разрешение на чтение и запись;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">cmshareDenyRead 
+    — разрешение на чтение для других соединений запрещено;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">cmshareoenywrite 
+    — разрешение на запись для других соединений запрещено;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">cmShareExciusive 
+    — разрешение на открытие для других соединений запрещено;</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">cmshareDenyNone 
+    — открытие других соединений с разрешениями запрещено.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

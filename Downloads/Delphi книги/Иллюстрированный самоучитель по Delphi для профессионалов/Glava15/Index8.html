@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TDBEdit</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент представляет собой стандартный однострочный текстовый редактор, в котором отображаются и изменяются данные из поля связанного набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Прямой предок компонента — класс <font face="Verdana" size="2">TCustomMaskEdit</font>, который также является прямым предком компонента
+<font face="Verdana" size="2">TEdit</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент может осуществлять проверку редактируемых данных по заданной для поля маске. Непосредственно для редактора задать маску нельзя, т. к. содержащее маску свойство
+<font face="Verdana" size="2"> EditMask</font> в классе <font face="Verdana" size="2"> TCustomMaskEdit</font> является защищенным, а в
+<font face="Verdana" size="2"> TDBEdit</font> не перекрыто. Тем не менее механизм контроля полностью унаследован. Саму же маску можно задать в связанном с редактором поле. Объект
+<font face="Verdana" size="2"> TField</font> имеет собственное свойство
+<font face="Verdana" size="2">EditMask</font>, которое и используется при проверке данных в редакторе (см. гл. 13).
+</font ></P>
+<P><font face="Verdana" size="3">
+Проверка редактируемого текста на соответствие маске осуществляется методом
+<font face="Verdana" size="2"> validateEdit</font> после каждого введенного или измененного символа. В случае ошибки генерируется исключение
+<font face="Verdana" size="2">validateError</font> и курсор устанавливается на первый ошибочный символ.
+</font ></P>
+<P><font face="Verdana" size="3">
+В компоненте можно использовать буфер обмена. Это делается средствами операционной системы пользователем или программно при помощи методов<font face="Verdana" size="2">
+CopyToClipboard, CutToClipboard, PasteFromCiipboard.</font>
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

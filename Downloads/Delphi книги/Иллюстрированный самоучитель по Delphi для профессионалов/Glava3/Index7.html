@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Протоколирование 
+  исключительных ситуаций</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Часто нужно иметь подробный материал для анализа причин возникновения ИС. Разумно было бы записывать все данные о них в файл, чтобы потом прогнозировать ситуацию. Такой подход важен для программ, которые
+ так или иначе будут отчуждены от разработчика: в случае возникновения непредвиденной ситуации это позволит ответить на вопросы &quot;кто виноват?&quot; и &quot;что делать?&quot;. В следующем примере предложен вариант реализации протоколирования ИС.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+const LogName : string = 'c:\appexc.log';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure LogException;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var fs: TFileStream; m : word;buf : array[0..511] of char;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+begin
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if FileExists(LogName) then m := fmOpenReadWrite else m := fmCreate;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+fs := TFileStream.Create(LogName,m);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+fs.Seek(0,soFromEnd);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+StrPCopy(Buf,DateTimeToStr(Mow)+' . ');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ExceptionErrorMessage</font>
+</font ></P>
+
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;(ExceptObject,ExceptAddr,@buf[StrLenfbuf)],</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">SizeOf(Buf)-StrLen(buf));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">StrCat(Buf,#13#10);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;fs.WriteBuffer (Buf, StrLer. ;buf) ) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;fs.Free;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.ButtonlClick(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var x,y,z: real;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+x:=1.0;y:=0.0;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+z := x/y;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">LogException;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;raise;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on E:EIntError do ShowMessage('IntError');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+on E:EMathError do ShowMessage('MathError');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь задачу записи информации об ИС решает процедура
+<font face="Verdana" size="2">LogException</font>. Она открывает файловый поток и пишет туда информацию, отформатированную При
+помощи уже упоминавшейся функции <font face="Verdana" size="2">ExceptionErrorMessage</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В качестве ее параметров выступают значения функций
+<font face="Verdana" size="2"> Exceptobject</font> и <font face="Verdana" size="2">ExceptAddr</font>. К сформированной строке добавляется время возникновения ИС. Для каждого защищаемого блока кода создаются две вложенные конструкции
+<font face="Verdana" size="2"> try. .except.</font> Первая, внутренняя — для вас; в ней ИС протоколируется и продвигается дальше. Внешняя — для пользователя; именно в ней проводится анализ типа ИС и готовится сообщение.
+</font ></P>
+<P><font face="Verdana" size="3">
+В Object Pascal существует и расширенный вариант употребления оператора
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+raise:</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+raise окземпляр объекта типа Exception&gt;   [at &lt;адрес&gt;]</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Естественно, объектный тип должен быть порожден от
+<font face="Verdana" size="2"> Exception. To</font>, что в таком типе ничего не переопределено, не столь важно — главное, что в обработчике ИС можно отследить именно этот тип.
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ELoginError = class (Exception);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+If LoginAttemptsNo &gt; MaxAttempts then raise ELoginError.Create('Ошибка регистрации пользователя');</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Конструкция <font face="Verdana" size="2"> at &lt;адрес&gt; </font> используется для того, чтобы изменить адрес, к которому привязывается возникшая ИС, в пределах одного блока обработки ИС.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

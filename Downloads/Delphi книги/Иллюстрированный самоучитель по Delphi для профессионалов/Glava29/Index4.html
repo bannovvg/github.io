@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Фоновые 
+  процедуры, или способ обойтись без потоков</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Здесь мы рассмотрим возможность для организации фоновых действий
+(<font face="Verdana" size="2">job</font>) внутри однопоточной программы с сохранением реакции этого потока на события от мыши и клавиатуры.
+</font ></P>
+<P><font face="Verdana" size="3">
+Еще не столь давно программисты пытались эмулировать потоки, запуская процедуры внутри цикла обработки сообщений Windows. Цикл обработки сообщений
+(или цикл ожидания) — это особый фрагмент кода в программе, управляемой событиями. Он исполняется тогда, когда программа находит в очереди события, которые нужно обработать; если таковых нет, программа может выполнить в это время &quot;фоновую процедуру&quot;. Такой способ имитации потоков весьма сложен, т. к. вынуждает программиста, во-первых, сохранять состояние фоновой процедуры между ее вызовами, а во-вторых, определять момент, когда она вернет управление обработчику событий. Если такая процедура выполняется долго, то у пользователя может сложиться впечатление, что приложение
+перестало реагировать на внешние события. Использование потоков снимает проблему переключения контекста, теперь контекст (стек и регистры) сохраняет операционная система.
+</font ></P>
+<P><font face="Verdana" size="3">
+В Delphi возможность создать фоновую процедуру реализована через событие
+<font face="Verdana" size="2"> Onldle</font> .объекта <font face="Verdana" size="2">Application</font>!
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TIdleEvent = procedure (Sender: TObject;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;var Done: Boolean)</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Onldle: TIdleEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обработчик этого события вы можете написать, поместив на форму компонент
+<font face="Verdana" size="2"> TApplicationEvents</font> со
+страницы <font face="Verdana" size="2">Additional</font> Палитры
+компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Чтобы сделать в фоновом режиме какую-то работу, следует разбить ее на кванты и выполнять по одному кванту каждый вызов
+<font face="Verdana" size="2"> Onldle</font> — иначе приложение будет плохо реагировать на внешние воздействия.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

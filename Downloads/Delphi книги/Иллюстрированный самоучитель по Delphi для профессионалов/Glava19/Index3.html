@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Перечислители</strong> 
+  <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Объекты- перечислители обеспечивают поиск любых объектов ADO, которые имеют доступ к источникам данных. При этом другие перечислители также видны в данном перечислителе.
+</font ></P>
+<P><font face="Verdana" size="3">
+Первичный поиск источников данных осуществляется в провайдере ADO. Перечислители могут отбирать только источники данных конкретных типов, поэтому провайдер обеспечивает доступ к конкретному типу хранилища данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+В составе ADO имеется системный корневой перечислитель, который выполняет начальный поиск других перечислителей и источников данных. Его можно использовать, зная его идентификатор класса
+<font face="Verdana" size="2">CLSID_OLEDB_ENUMERATOR</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> В Delphi GUID глобального перечислителя содержится 
+    в файле \Delphi7\Source \Vcl\OleDB.pas. </font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">CLSID_OLEDB_ENrjMERATOR: TGUID= '{C8B522DO-5CF3-11CE-ADE5-OOAA0044773D}</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Функции перечислителя содержатся в интерфейсе
+<font face="Verdana" size="2">isourcesRowset</font>. Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetSourcesRowset(const punkOuter: lUnknown; const riid: TGUID; cPropertySets: UINT; rgProperties: PDBPropSetArray; out ppSourcesRowset: lUnknown): HResult; stdcall;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает ссылку на объект набора рядов (см. выше),
+содержащий сведения о найденных источниках данных или перечислителях.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>
+

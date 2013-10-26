@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Отчет в приложении Delphi</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Завершив обзор нового генератора отчетов, давайте обратимся к деталям программирования и посмотрим, что нужно сделать, чтобы приложение могло работать с отчетами.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основой отчета является файл отчета с расширением rav. Он создается в визуальной среде разработки Rave Reports и может содержать произвольное число страниц. Каждая страница может быть оформлена графическими или текстовыми элементами или отображать данные из какой-либо базы данных. Другими словами, файл RAV — это проект будущего отчета, содержащий общую информацию об отчете, оформление его страниц и правила их заполнения.
+</font ></P>
+<P><font face="Verdana" size="3">
+После создания проект отчета необходимо связать с приложением Delphi. Для этого используется компонент
+<font face="Verdana" size="2"> TRvProject</font> (рис. 23.1). Этот компонент обеспечивает представление отчета в приложении.
+</font ></P>
+<P><font face="Verdana" size="3">
+Но этого недостаточно, чтобы просмотреть или напечатать отчет. Для выполнения этих операций используется код ядра генератора отчета, который автоматически прикомпилируется к исполняемому коду приложения при переносе на любую форму проекта компонентов
+<font face="Verdana" size="2"> TRvProject</font> и <font face="Verdana" size="2">TRvSystem</font>. Для управления операциями печати и просмотра в проекте должен присутствовать компонент
+<font face="Verdana" size="2"> TRvSystem</font> (рис. 23.1).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.23.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 23.1. </B>Компоненты 
+  Rave Reports в приложении Delphi </font ></P>
+<P><font face="Verdana" size="3"> Для того чтобы приложение Delphi могло выполнять 
+  функции печати отчетов, разработчик должен выполнить следующий набор операций. 
+  </font ></P>
+<P><font face="Verdana" size="3"> 1. При помощи визуальной среды разработки Rave 
+  Reports необходимо создать проект отчета и сохранить его (см. гл. 24). </font ></P>
+<P><font face="Verdana" size="3"> 2. Перенести в проект приложения в Delphi компонент 
+  <font face="Verdana" size="2"> TRvProject</font> и связать его с файлом проекта 
+  отчета (см. ниже) при помощи свойства <font face="Verdana" size="2">ProjectFile</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> 3. Перенести в проект приложения в Delphi компонент 
+  <font face="Verdana" size="2"> TRvSystem</font> и связать его<B> </B>с компонентом<B> 
+  </B><font face="Verdana" size="2">TRvProject</font>. ля этого используется свойство 
+  <font face="Verdana" size="2">Engine</font> компонента <font face="Verdana" size="2"> 
+  TRvProject</font> (см. ниже). </font ></P>
+<P><font face="Verdana" size="3"> 4. Написать код приложения, обеспечивающий просмотр 
+  и печать отчета (при необходимости и другие операции), используя методы компонента 
+  <font face="Verdana" size="2"> TRvProject</font> (см. ниже). </font ></P>
+<P><font face="Verdana" size="3"> Конечно же, это наиболее простой способ включения 
+  отчета в приложения. Для решения более сложных задач необходимо изучить использованные 
+  выше компоненты более детально. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

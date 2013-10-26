@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Группа свойств Visual. 
+  Местоположение и размер элемента управления</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для определения местоположения и размеров визуального компонента введены два опубликованных свойства для задания координат левого верхнего
+угла:
+</font ></P>
+<div align="center"><IMG src="gl.2.2.gif" > </div>
+<P align="center"> 
+<div align="center"><font size="3" face="Verdana"><B>Рис. 2.2. </B>Категории свойств 
+  визуального компонента. </font><font size="3" face="Verdana"> </font> </div>
+<P></P>
+<font size="3" face="Verdana">Для представления их в таком виде нужно отметить 
+флажок By Category в пункте меню Arrange всплывающего меню Инспектора объектов 
+</font>
+<p></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Top: 
+    Integer;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Left: 
+    Integer;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> и два опубликованных свойства для определения 
+  размеров: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Height: 
+    Integer;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Width: 
+    Integer;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Значения свойств задаются в пикселах. Для определения 
+  местоположения используется система координат рабочей области владельца данного 
+  компонента. Начало отсчета находится в левом верхнем углу. Оси направлены вправо 
+  и вниз. Под рабочей областью понимается та часть площади владельца (формы, панели), 
+  которая предназначена для размещения дочерних элементов. Эти свойства можно 
+  использовать как на этапе разработки, так и во время выполнения. </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property ClientOrigin: 
+    TPoint;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> содержит координаты левого верхнего угла элемента 
+  управления в системе координат экрана. Координаты любой точки можно пересчитать 
+  в экранные при помощи метода </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function ClientToScreen(const 
+    Point: TPoint): TPoint;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> и наоборот: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function ScreenToClient(const 
+    Point: TPoint): TPoint;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Для приведения компонента в соответствие текущим 
+  значениям указанных выше свойств используется метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure AdjustSize; 
+    dynamic;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Параметры рабочей области компонента определяются 
+  следующими свойствами: </font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">property ClientHeight: Integer;</font></li>
+</ul>
+<P><font face="Verdana" size="3"> определяет высоту рабочей области в пикселах. 
+  </font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;property ClientWidth: Integer;</font></li>
+</ul>
+<P><font face="Verdana" size="3"> определяет ширину рабочей области в пикселах. 
+  </font ></P>
+<ul>
+  <li><font face="Verdana" size="2">&nbsp;property ClientRect: TRect;</font></li>
+</ul>
+<P><font face="Verdana" size="3"> значение которого есть не что иное, как (<font face="Verdana" size="2">0, 
+  0, .clientwidth, ClientHeight</font>). Кому-то будет удобнее пользоваться этим 
+  свойством. </font ></P>
+<P><font face="Verdana" size="3"> Если разработчику неизвестны текущие параметры 
+  рабочей области, то он может воспользоваться следующими методами. </font ></P>
+<P><font face="Verdana" size="3"> Функция </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function GetClientOrigin: 
+    TPoint; virtual;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> возвращает координаты левого верхнего угла рабочей 
+  области. Функция </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function GetClientRect: 
+    TRect; virtual;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> возвращает размеры прямоугольника рабочей области. 
+  </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index9.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

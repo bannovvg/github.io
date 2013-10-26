@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TIBTransaction</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TIBTransaction</font> инкапсулирует средства управления транзакцией при работе с сервером InterBase. Для этого он должен быть связан с компонентом
+<font face="Verdana" size="2"> TiBDatabase</font> при помощи своего свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DefaultDatabase: TiBDatabase;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Один компонент транзакции может быть связан с несколькими компонентами
+<font face="Verdana" size="2">TiBDatabase</font>. Для этого необходимо задать один компонент транзакции в свойствах
+<font face="Verdana" size="2">DefaultTransaction</font> всех необходимых компонентов соединений (см. выше).
+Список всех связанных компонентов соединений содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Databases[Index: Integer]: TiBDatabase;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а их общее число возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DatabaseCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Во время выполнения новое соединение может быть связано с транзакцией методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AddDatabase(db: TIBDatabase): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Или же, связь может быть отменена:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RemoveDatabase(Idx: Integer);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RemoveDatabases;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+разрывает все установленные связи с компонентом
+<font face="Verdana" size="2">TIBDatabase</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Индекс связанного соединения в списке <B>Databases </B>транзакции можно получить при помощи метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FindDatabase (db: TIBDatabase): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Например, если вам не известно ничего, кроме имени компонента, можно поступить так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var i, FIndex: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for i := 0 to Forml.ComponentCount — 1 do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;if Forml.Components[i].Name = 'IBDatabasel'</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then FIndex :=&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">IBTransactionl.FindDatabase(TIBDatabase(Forml.
+Components[i]));</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Соединение, заданное по умолчанию свойством
+<font face="Verdana" size="2">DefaultDatabase</font>, возвращает метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FindDefaultDatabase: TIBDatabase;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Транзакция может иметь набор параметров, задать которые можно при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Params: TStrings;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+аналогично компоненту <font face="Verdana" size="2">TIBDatabase</font>. Прямой доступ для чтения к буферу параметров транзакции Transaction Parameters Buffer (TPB) типа
+<font face="Verdana" size="2"> pchar</font> обеспечивает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TPB: PChar;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Длина буфера содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TPBLength: Short;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Дескриптор транзакции представлен свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle: TISC_TR_HANDLE;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После того как транзакция настроена, ее можно начать, сохранить или отменить.
+</font ></P>
+<P><font face="Verdana" size="3">
+Транзакция стартует при помощи метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure StartTransaction;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При необходимости сохранить все сделанные в рамках текущей транзакции изменения используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Commit;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если выполненные действия нужно отменить, применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Rollback;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для открытия и сохранения транзакции можно использовать традиционное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Active: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После начала новой транзакции свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property InTransaction: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+принимает значение <font face="Verdana" size="2">True</font>, а после фиксации или отката — значение
+<font face="Verdana" size="2">False</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При работе с сервером InterBase 6.0 можно использовать методы
+<font face="Verdana" size="2"> commit-Retaining и RollbackRetaining</font>. В отличие от стандартных операций фиксации и отката транзакций, эти методы после передачи или отмены изменений оставляют текущую транзакцию открытой.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если сервер перегружен и не откликается на транзакцию, то по истечении времени, заданного свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IdleTimer: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;выполняется действие, заданное свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TTransactionAction =   (taRollback,   taCommit,   taRollbackRetaining,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+taCommitRetaining);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DefaultAction:   TTransactionAction;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+taRollback</font> — откат транзакции;&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> taCommit</font> — фиксация транзакции;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">taRollbackRetaining</font> — отмена изменений без завершения транзакции (для сервера InterBase 6.0);
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;<font face="Verdana" size="2">taCommitRetaining</font> — фиксация изменений без завершения транзакции (для сервера InterBase 6.0).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для компонента транзакции можно настроить ее автоматическое завершение при закрытии последнего открытого компонента, инкапсулирующего набор данных, связанного с тем же соединением, что и транзакция.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для этого свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TAutoStopAction = (saNone, saRollback, saCoramit,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;saRollbackRetaining, saCommitRetaining); property AutoStopAction :
+TAutoStopAction</font>;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+не должно иметь значение <font face="Verdana" size="2">saNone</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Остальные значения свойства выполняют следующие действия:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;saRollback — откат транзакции;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;saCommit — фиксация транзакции;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;saRollbackRetaining — отмена 
+    изменений без завершения транзакции (для сервера InterBase 6.0);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;saCommitRetaining — фиксация 
+    изменений без завершения транзакции (для сервера InterBase 6.0).</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CheckAutoStop;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+выполняет    действие,    предусмотренное    текущим    значением    свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+AutoStopAction.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Диагностика состояния транзакции во время выполнения осуществляется группой специальных методов. В случае отрицательного результата все они генерируют исключение
+<font face="Verdana" size="2">EiBClientError</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CheckDatabasesInList;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+проверяет, имеются ли в списке <B>Databases </B>связанные соединения. Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ChecklnTransaction;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+проверяет, открыта ли в данный момент транзакция. Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CheckNotlnTransaction;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+проверяет, закрыта ли в данный момент транзакция.
+</font ></P>
+<P><font face="Verdana" size="3">
+Единственный метод-обработчик транзакции
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnldleTimer: TNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+вызывается по истечении срока ожидания выполнения транзакции, заданного
+свойством <font face="Verdana" size="2">IdleTimer</font>.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

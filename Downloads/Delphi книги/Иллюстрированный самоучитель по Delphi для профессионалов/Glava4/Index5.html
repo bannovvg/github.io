@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Сходства и различия визуальных компонентов CLX и VCL</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Большинство свойств и методов компонентов VCL и CLX идентичны. А существующие различия вызваны необходимостью использования специальных объектов —
+<font face="Verdana" size="2"> widget</font> и особенностями представления визуальных элементов в Linux.
+</font ></P>
+<P><font face="Verdana" size="3">
+Базовые классы CLX — <font face="Verdana" size="2">TControl</font> и
+<font face="Verdana" size="2">Twidgetcontrol</font> для обеспечения прорисовки обращаются к динамической библиотеке Qt через заголовочный файл Qt.pas.
+</font ></P>
+<P><font face="Verdana" size="3">
+Таким образом, разработчик избавлен от необходимости работы с графическим интерфейсом Linux на низком уровне.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для компонента CLX существует свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Handle: QWidgetH;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое является указателем на связанный объект
+<font face="Verdana" size="2"> widget</font> и позволяет вызывать его методы напрямую.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если экземпляр <font face="Verdana" size="2"> widget</font> не создан, метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CreateHandle; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+не только создает и инициализирует <font face="Verdana" size="2">widget</font>, но и устанавливает указатель
+<font face="Verdana" size="2">Handle</font>, создает объекты-перехватчики (см. ниже)
+и задает настройки по умолчанию для этого визуального компонента. При необходимости в классах-потомках метод
+<font face="Verdana" size="2"> CreateHandle</font> перекрывается и в него добавляется новая функциональность.
+</font ></P>
+<P><font face="Verdana" size="3">
+Уничтожение созданного <font face="Verdana" size="2"> widget</font> осуществляется методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DestroyHandle;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который уничтожает все дочерние <font face="Verdana" size="2"> widget</font> и объекты-перехватчики, а также
+обнуляет свойства
+<B> </B><font face="Verdana" size="2">Handle</font> И <font face="Verdana" size="2">Hooks</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости для простого создания и инициализации
+<font face="Verdana" size="2"> widget</font> можно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CreateWidget; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который сделает это, вызвав внешнюю функцию
+<font face="Verdana" size="2"> Qwidget_Create,</font> и метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure InitWidget; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который определяет визуальные параметры <font face="Verdana" size="2">widget</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Также в классах CLX доступен указатель на родительский
+<font face="Verdana" size="2"> widget</font> за счет использования свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParentWidget: QWidgetH;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если это свойство не определено, можно использовать свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ChildHandle: QWidgetH;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+родительского класса, например, таким образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Not Assigned(ParentWidget) then if Assigned(Parent) then</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Result := Parent.ChildHandle;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В классах CLX иначе реализована обработка событий. В Linux все события делятся на два вида — системные и события
+<font face="Verdana" size="2">widget</font>. Системные события обрабатываются процедурой — аналогом процедуры
+<font face="Verdana" size="2"> wndProc</font> для компонентов VCL.
+</font ></P>
+<P><font face="Verdana" size="3">
+События, генерируемые widget, перехватываются и обрабатываются специальными объектами, взаимодействующими с объектом widget. Затем они передаются связанному объекту CLX, который вызывает необходимые обработчики событий.
+</font ></P>
+<P><font face="Verdana" size="3">
+Объекты-перехватчики создаются при вызове метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure HookEvents; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а непосредственно для создания перехватчиков используется библиотечная функция<font face="Verdana" size="2">
+Qwidget_hook_create</font>. Метод <font face="Verdana" size="2"> HookEvents</font> вызывается автоматически при создании
+<font face="Verdana" size="2">widget</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Доступ к объекту-перехватчику возможен при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Hooks: QWidget_hookH;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое объявлено в секции <font face="Verdana" size="2"> protected</font> и может быть использовано только при создании новых компонентов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Классы CLX имеют очень интересное и важное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Style: TWidgetStyle;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое позволяет управлять внешним видом и процессом отрисовки компонента.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDefaultStyle = (dsWindows, dsMotif, dsMotifPlus, dsCDE, dsQtSGI, dsPlatinum, dsSystemDefault); property DefaultStyle: TDefaultStyle;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+класса <font face="Verdana" size="2"> TWidgetStyle</font> определяет стиль визуального компонента, задающий его внешний вид по умолчанию. Естественно, операционная система должна поддерживать выбранный стиль.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме того, класс <font face="Verdana" size="2"> Twidgetstyle</font> определяет некоторые наиболее общие параметры визуальных компонентов и обладает огромным числом обработчиков событий, которые вызываются при отрисовке всех возможных компонентов и экранных элементов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Таким образом, свойство <font face="Verdana" size="2"> style</font> является прекрасным инструментом для создания собственных компонентов с нестандартной функциональностью.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для использования в Linux модернизирована система контекстной помощи для компонентов CLX. Теперь статья подсказки для визуального компонента может быть вызвана двумя способами.
+</font ></P>
+<P><font face="Verdana" size="3">
+Традиционно, путем определения уникального номера статьи в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property HelpContext: THelpContext;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и дополнительно, путем определения ключевого слова подсказки в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property HelpKeyword: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Способ вызова помощи определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type THelpType = (htKeyword, htContext);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property HelpType: THelpType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Свойства контекстной подсказки являются новыми 
+    в Delphi 7 и имеются у компонентов CLX и VCL. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Кроме того, отдельные компоненты CLX имеют дополнительные свойства и методы, определяющие их дополнительную функциональность в Linux.
+</font ></P>
+<P><font face="Verdana" size="3">
+В то же время некоторые привычные для программирования в Windows свойства компонентов отсутствуют в компонентах CLX. Это свойства обрамления компонента
+<font face="Verdana" size="2"> (BevelEdges, Bevellnner, BevelKind, BevelOuter);</font> ВОЗМОЖНОСТЬ двунаправленной печати текстов (свойство BioiMode); свойства для обратной совместимости с Windows 3.x
+(<font face="Verdana" size="2">C</font><font face="Verdana" size="2">tl3D</font> и
+<font face="Verdana" size="2">Parent</font><font face="Verdana" size="2">Ctl3D</font>); механизм присоединения и свойства<font face="Verdana" size="2">
+Drag-and-Drop,</font> хотя сам механизм Drag-and-Drop остался (свойства<font face="Verdana" size="2">
+DockSite, DragKind, DragCursor).</font>
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

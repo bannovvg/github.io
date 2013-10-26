@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index22.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index24.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Локальный буфер </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+После передачи клиенту записи набора данных размещаются в локальном
+буфере, размер которого определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">property CacheSize: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Значение свойства есть число записей, помещаемых в локальный буфер, и
+оно не может быть меньше 1. Очевидно, что при достаточно большом размере буфера компонент будет обращаться к источнику данных не так часто, но при этом большой буфер заметно замедлит открытие набора данных. Кроме этого, при выборе размера локального буфера необходимо учитывать доступную компоненту память. Это можно сделать путем несложных вычислений:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+&quot;acheSizelnMem := ADODataSet.CacheSize * ADODataSet.RecordSize;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где <font face="Verdana" size="2"> RecordSize</font> — свойство
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;property RecordSize: Word;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+возвращающее размер одной записи в байтах.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как видите, компоненты ADO не избежали общей проблемы клиентских данных — при плохом качестве соединения работа приложения замедляется. Однако кое-что все-таки сделать можно. Если при навигации по записям вам не требуется отображать данные в визуальных компонентах пользовательского интерфейса, свойство
+<font face="Verdana" size="2"> property BlockReadSize: Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+позволяет организовать блочную пересылку данных. Оно задает число записей, помещаемых в один блок. При этом набор данных переходит в состояние
+<font face="Verdana" size="2">dsBlockRead</font>. По умолчанию блочная пересылка не используется и значение свойства равно 0. Также можно ограничить максимальный размер набора данных. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property MaxRecords: Integer</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+задает максимальное число записей набора данных. По умолчанию свойство имеет значение 0 и набор данных не ограничен.
+</font ></P>
+<P><font face="Verdana" size="3">
+Общее число записей набора данных на этот момент возвращает свойство только для чтения
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecordCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При достижении последней записи набора данных вызывается метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TEndOfRecordsetEvent = procedure (DataSet: TCustomADODataSet;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">var MoreData: WordBool;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">var EventStatus: TEventStatus) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnEndOfRecordset: TEndOfRecordsetEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При этом параметр <font face="Verdana" size="2"> MoreData</font> показывает, действительно ли достигнут конец набора данных. Если
+<font face="Verdana" size="2"> MoreData = True</font>, то это означает, что в хранилище данных еще имеются записи, не переданные клиенту.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index22.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index24.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

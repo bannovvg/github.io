@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Механизм 
+  синхронного просмотра</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Непосредственным предком компонентов синхронного просмотра данных является класс
+<font face="Verdana" size="2">TDBLookupControl</font>, который инкапсулирует список значений для просмотра и сам механизм синхронного просмотра.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как и в любом другом компоненте отображения данных, в компонентах синхронного просмотра должны присутствовать средства связывания с требуемым полем некоторого набора данных (табл. 15.7). Это уже известные свойства:
+<font face="Verdana" size="2"> Datasource</font> — применяется для задания набора данных через компонент
+<font face="Verdana" size="2"> TDataSource</font> и <font face="Verdana" size="2">DataField</font> — для определения требуемого поля набора данных. Для синхронного просмотра следует выбирать такое поле, значения которого не дают пользователю полной информации об объекте и совпадают с ключевым полем в таблице синхронного просмотра. Название этого
+поля может не совпадать с названием ключевого поля, но типы данных должны быть одинаковыми.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>      Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При проектировании баз данных желательно, 
+    чтобы такие поля все же носили одинаковые названия. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Теперь необходимо задать таблицу синхронного просмотра, ключевое поле и поле синхронного просмотра.
+</font ></P>
+<P><font face="Verdana" size="3">
+Набор данных, содержащий указанные поля, определяется через соответствующий
+rомпонент <font face="Verdana" size="2"> TDataSource</font> в <font face="Verdana" size="2">свойстве
+ListSource.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Ключевое поле задается свойством <font face="Verdana" size="2">KeyField</font>. Во время работы компонента в свойстве
+<font face="Verdana" size="2"> KeyValue</font> содержится текущее значение, которое связывает между собой два набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Поле синхронного просмотра определяется свойством
+<font face="Verdana" size="2">ListField</font>. Здесь можно задавать сразу несколько полей, которые будут отображаться в компоненте синхронного просмотра. Названия полей разделяются точкой с запятой. Если свойство не определено, то в компоненте будут отображаться значения ключевого поля. Свойство
+<font face="Verdana" size="2">ListFieldindex</font> служит для выбора основного поля из списка. Дело в том, что компоненты синхронного просмотра поддерживают механизм наращиваемого поиска, который позволяет быстро находить нужное значение в больших списках. Свойство
+<font face="Verdana" size="2">ListFieldindex</font> определяет, какое поле используется при наращиваемом поиске. В компоненте
+<font face="Verdana" size="2"> TDBiookupComboBox</font> свойство <font face="Verdana" size="2">ListFieldindex</font> также определяет, какое поле будет передано в строку редактирования.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 15.7. </B>Основные 
+  свойства, включающие механизм синхронного просмотра </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="479" HEIGHT="300">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="31">
+<DIV WIDTH="244" HEIGHT="31" style="width: 60; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="48" HEIGHT="31">
+<DIV WIDTH="50" HEIGHT="31" style="width: 27; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="31">
+<DIV WIDTH="331" HEIGHT="31" style="width: 96; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="44">
+<DIV WIDTH="244" HEIGHT="44" style="width: 145; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property KeyFieid:   string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="48" HEIGHT="44">
+<DIV WIDTH="50" HEIGHT="44" style="width: 26; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="44">
+<DIV WIDTH="331" HEIGHT="44" style="width: 267; height: 44">
+<P><font face="Verdana" size="3">
+Ключевое поле таблицы синхронного просмотра
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="52">
+<DIV WIDTH="244" HEIGHT="52" style="width: 161; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property KeyValue : Variant;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="48" HEIGHT="52">
+<DIV WIDTH="50" HEIGHT="52" style="width: 18; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="52">
+<DIV WIDTH="331" HEIGHT="52" style="width: 250; height: 52">
+<P><font face="Verdana" size="3">
+Текущее значение ключевого поля
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="50">
+<DIV WIDTH="244" HEIGHT="50" style="width: 160; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ListFieid: string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="48" HEIGHT="50">
+<DIV WIDTH="50" HEIGHT="50" style="width: 5; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="50">
+<DIV WIDTH="331" HEIGHT="50" style="width: 260; height: 50">
+<P><font face="Verdana" size="3">
+Поле или список полей синхронного просмотра в таблице синхронного просмотра
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="67">
+<DIV WIDTH="244" HEIGHT="67" style="width: 122; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ListFieidindex: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="48" HEIGHT="67">
+<DIV WIDTH="50" HEIGHT="67" style="width: 5; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="67">
+<DIV WIDTH="331" HEIGHT="67" style="width: 284; height: 67">
+<P><font face="Verdana" size="3">
+Номер основного поля синхронного просмотра (используется, когда свойство
+<font face="Verdana" size="2">ListField</font> содержит список полей)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="56">
+<DIV WIDTH="244" HEIGHT="56" style="width: 160; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ListSource: TDataSource;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="48" HEIGHT="56">
+<DIV WIDTH="50" HEIGHT="56" style="width: 5; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="293" HEIGHT="56">
+<DIV WIDTH="331" HEIGHT="56" style="width: 273; height: 56">
+<P><font face="Verdana" size="3">
+Указывает на компонент <font face="Verdana" size="2">TDataSource</font>, связанный с таблицей синхронного просмотра
+</font ></P>
+</DIV>
+</TD>
+</TR>
+
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="168" HEIGHT="63">
+<DIV WIDTH="248" HEIGHT="63" style="width: 159; height: 63">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NullValueKey:&nbsp; TShortCut;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="40" HEIGHT="63">
+<DIV WIDTH="42" HEIGHT="63" style="width: 8; height: 63">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="300" HEIGHT="63">
+<DIV WIDTH="338" HEIGHT="63" style="width: 254; height: 63">
+<P><font face="Verdana" size="3">
+Определяет комбинацию клавиш, нажатие которых задает нулевое значение поля
+</font ></P>
+</DIV>
+</TD>
+</TABLE>
+<P><font face="Verdana" size="3">
+В качестве примера рассмотрим приложение <font face="Verdana" size="2"> Demo Lookup</font> (рис. 15.5), в котором с набором данных таблицы
+<font face="Verdana" size="2"> Orders</font> из базы данных <font face="Verdana" size="2"> DBDEMOS</font> связаны компоненты
+<font face="Verdana" size="2"> TDBGrid и TDBLооkupрСоmbоВох.</font> Во втором компоненте при перемещении по записям набора данных отображается имя покупателя, оформившего текущий заказ.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.15.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 15.5. </B>Главная форма 
+  проекта <font face="Verdana" size="2"> DemoLookup</font> </font ></P>
+<P><font face="Verdana" size="3"> Ключевые свойства компонента настроены следующим 
+  образом. </font ></P>
+<P><font face="Verdana" size="3"> Свойство <font face="Verdana" size="2"> Listsource</font> 
+  указывает на компонент <font face="Verdana" size="2"> custsource</font> типа 
+  <font face="Verdana" size="2">TDataSource</font>, который связан с набором данных 
+  синхронного просмотра <font face="Verdana" size="2">custTable</font>. </font ></P>
+<P><font face="Verdana" size="3"> Свойство <font face="Verdana" size="2"> ListFieid</font> 
+  указывает на поле <font face="Verdana" size="2">company</font>, все значения 
+  которого доступны в списке компонента. </font ></P>
+<P><font face="Verdana" size="3"> Свойство <font face="Verdana" size="2">KeyField</font> 
+  указывает на поле <font face="Verdana" size="2">custNo</font>, которое имеется 
+  в двух таблицах и по которому осуществляется связь. </font ></P>
+<P><font face="Verdana" size="3"> Рассмотрим основные свойства и методы самих 
+  компонентов отображения данных, за исключением тех, которые представлены в табл. 
+  15.7 и полностью идентичны для двух компонентов. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index16.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index18.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

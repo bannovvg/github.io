@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index21.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Графическое представление данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для представления данных из некоторого набора данных в виде графиков различных видов предназначен компонент
+<font face="Verdana" size="2"> TDBChart</font> (табл. 15.8). В нем можно одновременно показывать графики для нескольких полей данных. Графики строятся на основе всех имеющихся в наборе данных значений полей. Функционально компонент ничем не отличается от компонента
+<font face="Verdana" size="2">TChart</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Настройка параметров компонента осуществляется специальным редактором, который можно открыть двойным щелчком на перенесенном на форму компоненте.
+</font ></P>
+<P><font face="Verdana" size="3">
+Здесь мы не будем подробно останавливаться на богатейших изобразительных возможностях этого компонента, рассмотрим только процесс подключения к нему набора данных и построение графиков.
+</font ></P>
+<P><font face="Verdana" size="3"> Основой любого графика в компоненте <font face="Verdana" size="2"> 
+  TDBChart</font> является так называемая серия, свойства которой представлены 
+  классом T<font face="Verdana" size="2">chartseries</font>. Для того чтобы построить 
+  график значений некоторого поля набора данных, необходимо </font ><font face="Verdana" size="3">выполнить 
+  следующие действия, большинство из которых выполняется в специализированном 
+  редакторе компонента. </font ></P>
+<P><font face="Verdana" size="3">
+1.  Создать новую серию и определить ее тип.
+</font ></P>
+<P><font face="Verdana" size="3">
+2. Задать для серии набор данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+3.  Связать с осями координат нужные поля набора данных и, в зависимости от типа серии, задать дополнительные параметры.
+</font ></P>
+<P><font face="Verdana" size="3">
+4. Открыть набор данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Редактор имеет две главные страницы — <B>Chart и Series. </B>Страница <B>Chart </B>содержит многостраничный блокнот и предназначена для настройки параметров самого графика. Страница <B>Series </B>также содержит многостраничный блокнот и используется для настройки серий значений данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания новой серии необходимо в редакторе перейти на главную страницу <B>Chart, </B>а на ней открыть страницу <B>Series </B>(рис. 15.6). На этой странице нужно щелкнуть на кнопке
+<b>Add</b>, а затем в появившемся диалоге выбрать тип серии. После этого в списке на странице <B>Series </B>появляется строка новой серии. Здесь можно переопределить тип, цвет и видимость серии, щелкнув на соответствующей зоне строки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Все остальные страницы блокнота на главной странице <B>Chart </B>предназначены для настройки параметров графика.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь необходимо перейти на главную страницу <B>Series </B>и на ней из списка названий серий выбрать необходимую. После этого на странице <B>Data Source </B>из списка выбирается строка <B>DataSet. </B>Далее в появившемся списке <B>DataSet </B>выбирается нужный набор данных.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.15.6.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 15.6. </B>Специализированный 
+  редактор компонента TDBChart </font ></P>
+<P><font face="Verdana" size="3"> Список <font face="Verdana" size="2"> X</font> 
+  позволяет выбрать поле набора данных, значения которого будут последовательно 
+  откладываться по оси абсцисс. Список <font face="Verdana" size="2"> Y</font> 
+  позволяет выбрать поле набора данных, значения которого будут отложены по оси 
+  ординат. Соответствие между значениями полей по двум осям определяется принадлежностью 
+  к одной записи набора данных. Выбор поля в списке <B>Labels </B>привязывает 
+  его значения в виде меток к оси абсцисс. </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание&nbsp;</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Здесь описан набор элементов управления для 
+    линейного типа серии. Для других типов элементы управления могут отличаться. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Теперь осталось только открыть набор данных 
+  и компонент <font face="Verdana" size="2"> TDBChart</font> построит график. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Аналогичным образом на этот же компонент можно 
+  поместить и другие графики. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 15.8. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TDBChart</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="463" HEIGHT="515">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="39"> <DIV WIDTH="317" HEIGHT="39" style="width: 80; height: 39"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="39"> <DIV WIDTH="308" HEIGHT="39" style="width: 95; height: 39"> 
+        <P><font face="Verdana" size="3"> <b> Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="497" HEIGHT="25"> <DIV WIDTH="317" HEIGHT="25" style="width: 80; height: 25"> 
+        <P><font face="Verdana" size="3"> <b> Свойства</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="57"> 
+      <DIV WIDTH="317" HEIGHT="56" style="width: 184; height: 56"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          AutoRefresh : Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="57"> 
+      <DIV WIDTH="308" HEIGHT="56" style="width: 261; height: 57"> 
+        <P><font face="Verdana" size="3"> Разрешает или запрещает обновление данных 
+          в серии при открытии связанного набора данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="65"> 
+      <DIV WIDTH="317" HEIGHT="65" style="width: 211; height: 65"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          Refreshlnterval : Longlnt;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="65"> 
+      <DIV WIDTH="308" HEIGHT="65" style="width: 269; height: 65"> 
+        <P><font face="Verdana" size="3"> Задает временной интервал в секундах 
+          между обновлениями данных в сериях из связанных наборов данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="40"> 
+      <DIV WIDTH="317" HEIGHT="40" style="width: 212; height: 40"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          ShowGlassCursor : Boolean;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="40"> 
+      <DIV WIDTH="308" HEIGHT="40" style="width: 248; height: 40"> 
+        <P><font face="Verdana" size="3"> Разрешает показ курсора &quot;песочные 
+          часы&quot; при обновлении данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="497" HEIGHT="29"> <DIV WIDTH="317" HEIGHT="29" style="width: 80; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Методы</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="35"> 
+      <DIV WIDTH="317" HEIGHT="35" style="width: 216; height: 35"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure 
+          CheckDataSource;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="35"> 
+      <DIV WIDTH="308" HEIGHT="35" style="width: 201; height: 35"> 
+        <P><font face="Verdana" size="3"> Обновляет данные в сериях </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="64"> 
+      <DIV WIDTH="317" HEIGHT="58" style="width: 212; height: 58"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function 
+          IsValidDataSource (ASeries : TChartSeries; AComponent: TComponent) : 
+          Boolean; virtual;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="64"> 
+      <DIV WIDTH="308" HEIGHT="58" style="width: 251; height: 58"> 
+        <P><font face="Verdana" size="3"> Проверяет, связан ли набор данных <font face="Verdana" size="2"> 
+          AComponent</font> с серией <font face="Verdana" size="2">ASeries</font>. 
+          В случае успеха проверки возвращает <font face="Verdana" size="2"> True</font> 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="33"> 
+      <DIV WIDTH="317" HEIGHT="33" style="width: 185; height: 33"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure 
+          RefreshData;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="33"> 
+      <DIV WIDTH="308" HEIGHT="33" style="width: 238; height: 33"> 
+        <P><font face="Verdana" size="3"> Обновляет данные во всех сериях </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="76"> 
+      <DIV WIDTH="317" HEIGHT="60" style="width: 206; height: 60"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure 
+          Ref reshDataSet (ADataSet : TDataSet; ASeries: TChartSeries);</font> 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="76"> 
+      <DIV WIDTH="308" HEIGHT="60" style="width: 240; height: 76"> 
+        <P><font face="Verdana" size="3"> Считывает все записи в наборе данных 
+          <font face="Verdana" size="2"> AdataSet</font> и переносит их в серию 
+          <font face="Verdana" size="2">ASeries</font> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="2" ALIGN="LEFT" VALIGN="TOP" WIDTH="497" HEIGHT="29"> <DIV WIDTH="317" HEIGHT="29" style="width: 227; height: 29"> 
+        <P><font face="Verdana" size="3"> <b> Методы-обработчики событий</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="1"> 
+      <DIV WIDTH="317" HEIGHT="81" style="width: 213; height: 33"> 
+        <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property 
+          OnProcessRecord : TProcessRecordEvent;</font> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="275" HEIGHT="1"> 
+      <DIV WIDTH="308" HEIGHT="81" style="width: 254; height: 81"> 
+        <P><font face="Verdana" size="3"> Вызывается при переносе данных из отдельной 
+          записи набора данных в серию </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index19.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index21.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

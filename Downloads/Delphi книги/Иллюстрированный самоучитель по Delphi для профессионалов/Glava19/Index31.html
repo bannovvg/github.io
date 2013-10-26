@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index30.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index32.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Класс TParameters </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Главное, для чего предназначен класс <font face="Verdana" size="2">TParameters</font>, — содержать список параметров. Индексированный список параметров представлен свойством
+<font face="Verdana" size="2"> property Items[Index:   Integer]:   TParameter;</font> Текущие значения параметров можно получить из индексированного свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamValues[const ParamName: String]: Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При этом доступ к конкретному значению осуществляется по имени параметра:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Editl.Text := ADODataSet.Parameters.ParamValues['ParamOne'];</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Список параметров можно обновлять при помощи методов
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function AddParameter: TParameter;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> и</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CreateParameter(const Name: WideString; DataType: TDataType;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; Direction: TParameterDirection; Size:
+Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; Value: OleVariant): TParameter;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Первый  метод просто создает новый  объект параметра и добавляет его к списку. Затем необходимо задать все свойства нового параметра:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var NewParam: TParameter;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+NewParam := ADODataSet.Parameters.AddParameter; NewParam.Name := 'ParamTwo';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">NewParam.DataType := ftlnteger;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> NewParam.Direction := pdlnput; NewParam.Value := 0;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Метод <font face="Verdana" size="2"> CreateParameter</font> создает новый параметр и определяет его свойства:&nbsp;
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Name — имя параметра;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;DataType — тип данных параметра, 
+    соответствующий типу поля таблицы БД (тип TFieldType);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Direction — тип параметра, 
+    в дополнение к стандартным типам dUnknown, pdlnput, pdOutput, 
+    pdlnputOutput,тип  TParameterDirection 
+    имеет дополнительный тип pdReturnValue, определяющий 
+    любое возвращаемое значение;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;size — максимальный размер 
+    значения параметра;&nbsp;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;value — значение параметра.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+При работе с параметрами полезно вызывать их, используя имена, а не абсолютные индексы в списке. Для этого можно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ParamByName(const Value: WideString): TParameter;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Список параметров всегда должен соответствовать запросу или хранимой процедуре. Для обновления списка используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Refresh;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Также вы можете создать список параметров для не связанного с данным объектом параметров запроса. Для этого используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ParseSQL(SQL: String; DoCreate: Boolean): String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где <font face="Verdana" size="2">DoCreate</font> определяет, удалять ли перед анализом существующие параметры.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index30.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index32.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

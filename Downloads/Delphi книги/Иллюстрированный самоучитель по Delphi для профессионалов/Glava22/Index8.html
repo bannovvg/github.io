@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Использование 
+  индексов</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Обычно использование индексов — прерогатива сервера БД. Из компонентов Delphi только табличные компоненты могут в какой-то степени управлять использованием индексов. Очевидно, что удаленное соединение не способствует эффективному управлению индексами набора данных на сервере. Поэтому компонент
+<font face="Verdana" size="2">TclientDataSet</font> предоставляет разработчику возможность создавать и использовать локальные индексы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Правильно созданные и используемые локальные индексы могут существенно ускорить выполнение операций с набором данных. В то же время их невозможно сохранить вместе с набором данных локально, их необходимо перестраивать при каждом новом открытии набора данных и его обновлении с сервера.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для создания локального индекса используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Addlndex(const Name, Fields: string;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Options: TIndexOptions;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+const DescFields: string = '';&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> const CaselnsFields: string = '';</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+const GroupingLevel: Integer = 0);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> Name</font> определяет имя нового индекса. Параметр
+<font face="Verdana" size="2"> Fields</font> должен содержать имена полей, которые разработчик хочет включить в индекс. Имена полей должны разделяться точкой с запятой. Параметр
+<font face="Verdana" size="2"> options</font> позволяет задать тип индекса:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIndexOption = (ixPrimary, ixUnique, ixDescending, ixCaselnsensitive, ixExpression, ixNonMaintained);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIndexOptions = set of TIndexOption;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ixPrimary</font> <B>— </B>
+первичный индекс<B>;</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ixUnique</font> — значения индекса уникальны;&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> ixDescending</font> — индекс сортирует записи в обратном порядке;
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;<font face="Verdana" size="2">ixCaselnsensitive</font> — индекс сортирует записи без учета регистра символов;
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;<font face="Verdana" size="2">ixExpression</font> — в индексе используется выражение (для индексов
+dBASE);
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;<font face="Verdana" size="2">ixNonMaintained</font> — индекс не обновляется при открытии таблицы.
+</font ></P>
+<P><font face="Verdana" size="3">
+При этом можно задать поля, порядок сортировки которых будет обратным. Для этого их необходимо перечислить через точку с запятой в параметре
+<font face="Verdana" size="2">DescFields</font>. Параметр <font face="Verdana" size="2"> CaselnsFields</font> аналогичным образом позволяет задать поля, на сортировку которых не влияет регистр символов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметры <font face="Verdana" size="2">   DescFields</font>   и <font face="Verdana" size="2">   CaselnsFields</font>   используются   вместо   параметра
+<font face="Verdana" size="2">Options</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> GroupingLevel</font> задает уровень группировки полей индекса. Подробнее об этом см. ниже в разд. &quot;Агрегаты&quot; этой главы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основные свойства компонента, обеспечивающие управление индексами, совпадают с аналогичными свойствами табличных компонентов (подробнее об этом см. гл. 12).
+Поэтому лишь кратко перечислим их.
+</font ></P>
+<P><font face="Verdana" size="3">
+При работе с компонентом разработчик имеет возможность управлять индексами.
+</font ></P>
+<P><font face="Verdana" size="3">
+Созданный индекс подключается к набору данных свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexName: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое должно включать имя индекса или использовать свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexFieldNames: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в котором можно задать произвольное сочетание имен индексированных полей таблицы. Имена полей разделяются точкой с запятой. Свойства
+<font face="Verdana" size="2">IndexName</font> и <font face="Verdana" size="2">IndexFieldNames</font>
+нельзя использовать одновременно<B>.</B>
+</font ></P>
+<P><font face="Verdana" size="3">
+Число полей, используемых в текущем индексе табличного компонента, возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexFieldCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexFields:    [Index:   Integer]:   TField;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+представляет собой индексированный список полей, входящих в текущий индекс.
+</font ></P>
+<P><font face="Verdana" size="3">
+Параметры созданных индексов доступны в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property IndexDefs: TIndexDefs;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TIndexDefs</font> подробно рассматривается в гл. 12.
+</font ></P>
+<P><font face="Verdana" size="3">
+После создания и подключения индекса записи набора данных &quot;переупорядочиваются&quot; в соответствии со значениями индексированных долей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Удаление локального индекса обеспечивает метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Deletelndex(const Name: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После удаления текущего индекса или его отмены (обнуления свойства
+<font face="Verdana" size="2">IndexName</font>) записи набора данных &quot;переупорядочиваются&quot; в исходном порядке, соответствующем порядку записей набора данных на сервере.
+</font ></P>
+<P><font face="Verdana" size="3">
+Имена всех существующих в наборе данных индексов можно загрузить в список при помощи метода
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetlndexNames(List: TStrings);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Например:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Memol.Lines.Clear;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ClientDataSet.GetlndexNames(Memol.Lines);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

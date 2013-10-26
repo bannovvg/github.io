@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TParams</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TParams</font> представляет собой список параметров.
+</font ></P>
+<P><font face="Verdana" size="3">
+Доступ к элементам списка возможен через индексированное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Items[Index: Word]: TParam;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а к значениям параметров — через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamValues[const ParamName: String]: Variant;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Добавить новый параметр можно методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure AddParam(Value: TParam);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но для него необходимо создать объект параметра. Это можно сделать методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function CreateParamfFldType: TFieldType; const ParamName: string; ParamType: TParamType): TParam;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где <font face="Verdana" size="2"> FidType</font> — тип данных параметра,
+<font face="Verdana" size="2"> ParamName</font> — имя параметра и
+<font face="Verdana" size="2"> ParamType</font> — тип параметра (см. ниже).
+</font ></P>
+<P><font face="Verdana" size="3">
+И оба метода можно использовать в связке:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">MyParams.AddParam(MyParams.CreateParam(ftInteger, 'Paraml', ptInput));</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Вместо того, чтобы заполнять параметры по одному, можно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ParseSQL(SQL: String; DoCreate: Boolean): String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который при <font face="Verdana" size="2"> DoCreate = True</font> анализирует текст запроса из свойства
+<font face="Verdana" size="2"> SQL</font> и создает новый список параметров.
+</font ></P>
+<P><font face="Verdana" size="3">
+Или же, для присвоения значений сразу всем параметрам используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure AssignValues(Value: TParams);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для удаления параметра из списка применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure RemoveParam(Value: TParam);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При работе с параметрами для их идентификации полезно использовать обращение по имени, т. к. при работе с хранимыми процедурами после их выполнения порядок следования может измениться. Также и при использовании динамических запросов (их текст
+<font face="Verdana" size="2"> SQL</font> может изменяться во время выполнения).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для обращения к параметру по имени используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ParamByName(const Value: String): TParam;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В сложных запросах <font face="Verdana" size="2"> SQL</font> или после многочисленных исправлений разработчик может допустить ошибку и создать два разных параметра с одним именем. В этом случае при выполнении запроса одноименные параметры считаются одним и им присваиваются значение первого по порядку запроса. Для контроля повторных имен в списке параметра используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IsEqual(Value: TParams): Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который возвращает значение <font face="Verdana" size="2">True</font>, если для параметра
+<font face="Verdana" size="2"> value</font> найден дубликат.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index14.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

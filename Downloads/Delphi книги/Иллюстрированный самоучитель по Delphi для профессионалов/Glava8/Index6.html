@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Стандартные действия</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Те, кто собирается пропустить этот раздел, считая, что в нем описаны очевидные вещи, сильно ошибаются. Как раз в применении стандартных действий разработчики Borland продвинулись очень сильно. Кто хочет в этом убедиться, может открыть пример WordPad, поставляемый с Delphi 7. Полнофункциональный текстовый редактор, построенный полностью на стандартных действиях, содержит всего две строчки кода.
+</font ></P>
+<P><font face="Verdana" size="3">
+Шаблоны и заготовки для типовых меню и кнопок появились еще в самой первой версии Delphi. Но в шестой версии действия действительно стали действиями. Это значит, что раньше заготовка содержала только подходящий заголовок. Теперь они содержат в себе все субкомпоненты, весь программный код и делают всю необходимую работу сами.
+</font ></P>
+<P><font face="Verdana" size="3">
+Возьмем, например, действие <font face="Verdana" size="2">TFlieOpen</font>. Оно уже содержит внутри компонент типа
+<font face="Verdana" size="2">TOpenDialog</font>, показывающий список открываемых файлов. Вместо ручного программирования процедуры задания имени файла теперь нужно написать обработчик события
+<font face="Verdana" size="2"> TFiieOpen.onAccept </font> (если пользователь ввел в диалоге кнопку <B>ОК) </B>или
+<font face="Verdana" size="2"> OnCancel</font> (если отказался от открытия файла). Вот так выглядит весь программный код приложения WordPad:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.FileOpenlAccept(Sender: TObject);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">RichEditl.Lines.LoadFromFile</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">(FileOpenl.Dialog.FileName);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure TForml.FileSaveAslAccept(Sender: TObject);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">RichEditl.Lines.SaveToFile</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">(FileSaveAsl.Dialog.FileName);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<p align="center">
+<div align="center"><IMG src="gl.8.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 8.4. </B>Окно выбора 
+  стандартных действий </font ></P>
+<P><font face="Verdana" size="3"> С точки зрения программирования стандартное 
+  действие — это класс-потомок <font face="Verdana" size="2">TCustomAction</font>. 
+  Классы действий описаны в трех модулях: более распространенные в <font face="Verdana" size="2">stdActns</font>, 
+  менее — в <font face="Verdana" size="2">ExtActns</font>, действия с наборами 
+  данных содержатся в <font face="Verdana" size="2">DBActns</font>. Наконец, два 
+  действия, работающие со списками, — <font face="Verdana" size="2"> TStaticListAction</font> 
+  И <font face="Verdana" size="2"> TVirtualLitAction</font> — описаны в отдельном 
+  модуле <font face="Verdana" size="2">ListActns</font><font face="Verdana" size="2">.</font> 
+  </font ></P>
+<P><font face="Verdana" size="3"> Для выполнения ряда стандартных действий нужно 
+  определить понятие &quot;цели&quot; действия (<font face="Verdana" size="2">Action 
+  Target</font>). Под целью понимается компонент, в отношении которого будет совершаться 
+  данное действие. Так, операции редактирования могут выполняться, когда на форме 
+  активен текстовый элемент управления (<font face="Verdana" size="2">TEdit, TMemo</font> 
+  И Т. П.). У любого <B> </B>действия потомка <font face="Verdana" size="2">TBasicAction)</font> 
+  есть три метода: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function HandlesTarget(Target: 
+    TObject): Boolean; virtual;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure UpdateTarget(Target: 
+    TObject); virtual;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;procedure 
+    ExecuteTarget(Target: TObject); virtual;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Метод <font face="Verdana" size="2"> HandiesTarget</font> 
+  проверяет, применимо ли действие к цели <font face="Verdana" size="2">Target</font>. 
+  Если да, то действие производится вызовом метода <font face="Verdana" size="2">ExecuteTarget</font>. 
+  Если нет, поиск подходящей цели продолжается. </font ></P>
+<P><font face="Verdana" size="3"> Цель в Delphi 7 определяется по следующему правилу: 
+  </font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">первым 
+    кандидатом является активный элемент управления на форме (свойство ActiveControl);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;если такового 
+    нет или он не является подходящим (метод HandiesTarget вернул значение False), 
+    целью становится текущая форма, получившая сигнал о действии;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;если и 
+    она не подходит, происходит рекурсивный перебор всех компонентов на форме 
+    в поисках первого подходящего.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> В ряде случаев вы можете произвести действие 
+  над желаемым компонентом, вызвав метод <font face="Verdana" size="2"> ExecuteTarget</font> 
+  и передав в него в качестве параметра этот компонент. </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Стандартные действия редактирования, чьи имена 
+    начинаются с <font face="Verdana" size="2">TEdit</font>, и поиска<font face="Verdana" size="2"> 
+    (TSearch...) </font> применимы только к потомкам компонента <font face="Verdana" size="2">TCustomEdit</font>. 
+    Стандартные действия расширенного редактирования, имена которых начинаются 
+    с <font face="Verdana" size="2">TRichEdit</font>, применимы только к потомкам 
+    <font face="Verdana" size="2">TCustomRichEdit</font>. Оконные стандартные 
+    действия (упорядочивание, смена, закрытие дочерних окон; имена начинаются 
+    с <font face="Verdana" size="2">TWindow</font>) применимы только к формам 
+    многодокументного интерфейса, чье свойство <font face="Verdana" size="2"> 
+    FormStyle</font> установлено в <font face="Verdana" size="2"> fsMDiForm</font> 
+    (рис. 8.4). </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Многие классы стандартных действий не требуют 
+  элемента управления — цели. Так устроены все действия, вызывающие стандартные 
+  диалоговые окна (выбор файла, цвета, шрифта, настройка принтера и т. п.). Чтобы 
+  отреагировать на такое действие, нужно написать обработчики следующих событий: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property BeforeExecute: 
+    TNotifyEvent;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnAccept: 
+    TNotifyEvent;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property OnCancel: 
+    TNotifyEvent;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Первое возникает до показа диалога, второе — 
+  после нажатия пользователем кнопки <B>ОК, </B>третье — после нажатия <B>Cancel.</B> 
+  </font ></P>
+<P><font face="Verdana" size="3"> <B> Примечание</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Поскольку диалоги входят в действия в качестве 
+    дочерних компонентов, вы можете реагировать и на все &quot;дочерние&quot; 
+    события, которые происходят в соответствующем диалоге (<font face="Verdana" size="2">OnShow, 
+    OnCanClose, OnClose </font> и т. п.) </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Поместив на форму стандартные действия, вы заметите, 
+  что все они имеют предопределенное значение свойства <font face="Verdana" size="2">imageindex</font>. 
+  Если так, то где изображение, на которое эти индексы указывают? Вы можете раздобыть 
+  его, открыв демонстрационный проект WordPad (папка Demos\ActionBands в поставке 
+  Delphi 7). Откройте редактор компонента <font face="Verdana" size="2">imageList1</font> 
+  и экспортируйте весь список в виде одного большого файла формата BMP. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

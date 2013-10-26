@@ -1,0 +1,586 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Абстрактный набор данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В основе иерархии классов, обеспечивающих функционирование наборов данных в приложениях баз данных Delphi, лежит класс
+<font face="Verdana" size="2">TDataSet</font>. Хотя он почти не содержит методов, реально обеспечивающих работоспособность основных механизмов набора данных, тем не менее его значение трудно переоценить.
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот класс задает структурную основу функционирования набора данных. Другими словами, это скелет набора данных, к методам которого необходимо лишь добавить требуемые вызовы соответствующих функций реальных технологий.
+</font ></P>
+<P><font face="Verdana" size="3">
+При решении наиболее распространенных задач программирования в процессе создания приложений баз данных класс
+<font face="Verdana" size="2"> TDataSet</font> не нужен. Тем не менее знание основных принципов работы набора данных всегда полезно. Кроме этого, класс
+<font face="Verdana" size="2"> TDataSet</font> может использоваться разработчиками в качестве основы для создания собственных компонентов. Поэтому рассмотрим основные механизмы, реализованные в наборе данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Набор данных открывается и закрывается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Active: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которому соответственно необходимо присвоить значение True или False. Аналогичные действия выполняют методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Open;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure Close;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После открытия набора данных можно перемещаться по его записям.
+</font ></P>
+<P><font face="Verdana" size="3">
+На одну запись вперед и назад перемещают курсор соответственно методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Next;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure Prior;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+На первую и последнюю запись можно попасть, используя соответственно методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure First;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">procedure Last;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Признаком того, что достигнута последняя запись набора, является свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Eof: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое в этом случае имеет значение <font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Аналогичную функцию для первой записи выполняет свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Bof: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Перемещение вперед и назад на заданное число записей выполняет метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function MoveBy(Distance: Integer): Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметр <font face="Verdana" size="2"> Distance</font> определяет число записей. Если параметр отрицательный — перемещение осуществляется к началу набора данных, иначе — к концу.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для ускоренного перемещения по набору данных можно отключить все связанные компоненты отображения данных. Это делается методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DisableControls;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратная операция выполняется методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure EnableControls;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Общее число записей набора данных возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecordCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+однако использовать его нужно аккуратно, т. к. каждое обращение к этому свойству приводит к обновлению набора данных, что может вызвать проблемы для больших таблиц или сложных запросов. Если вам нужно определить, не является ли набор данных пустым (часто используемая операция), можно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IsEmpty: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который возвращает значение <font face="Verdana" size="2">True</font>, если набор данных пуст, или уже упоминавшиеся свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if MyTable.Bof and MyTable.Eof</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;then ShowMessage('DataSet is empty');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Номер текущей записи позволяет узнать свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecNo: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Размер записи в байтах возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RecordSize: Word;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Каждая запись набора данных представляет собой совокупность значений полей таблицы. В зависимости от типа компонента и его настройки, число полей в наборе данных может изменяться. И совсем не обязательно набор данных должен содержать все поля таблицы базы данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Совокупность полей набора данных инкапсулирует свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Fields: TFields;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а все необходимые параметры полей содержатся в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FieldDefs: TFieldDefs;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Общее число полей набора данных возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FieldCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а общее число полей типа BLOB содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BlobFieldCount: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Доступ к значениям полей текущей записи предоставляет свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FieldValues[const FieldName: string]: Variant; default;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+где в параметре <font face="Verdana" size="2"> FieldName</font> задается имя поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+В процессе программирования разработчик очень часто обращается к полям набора данных. Если структура полей набора данных жестко задана и не изменяется, это можно сделать так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+for i := 0 to MyTable.FieldCount - 1 do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyTable.Fields[i].DiplayFormat := '#.###';</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Иначе, если порядок следования полей и их состав меняется, можно использовать метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function FieldByName(const FieldName: string): TField;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И делается это следующим образом:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+MyTable.FieldByName('VENDORNO').Aslnteger := 1234;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Имя поля, передаваемое в параметре <font face="Verdana" size="2">FieldName</font>, не чувствительно к регистру символов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetFieldNames(List: TStrings);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+вернет в параметр <font face="Verdana" size="2"> List</font> полный список имен полей набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Более подробная информация о полях и способах работы с ними содержится в гл. 13.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> TDataSet</font> содержит ряд свойств и методов, которые обеспечивают редактирование набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Но сначала бывает полезно поинтересоваться, можно ли редактировать набор данных вообще. Это можно сделать при помощи свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CanModify: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое принимает значение <font face="Verdana" size="2"> True</font> для редактируемых наборов. Перед началом редактирования набор данных нужно перевести в режим редактирования, использовав метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Edit;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для сохранения сделанных изменений применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Post; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Разработчик может вызывать его самостоятельно, или же метод
+<font face="Verdana" size="2"> Post</font> вызывается самим набором данных при переходе на другую запись.
+</font ></P>
+<P><font face="Verdana" size="3">
+При необходимости все сделанные после последнего вызова метода
+<font face="Verdana" size="2"> Post</font> изменения можно отменить методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Cancel; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Новая пустая запись добавляется в конец набора данных методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Append;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Новая пустая запись добавляется на место текущей методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Insert;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+а текущая запись и все нижеследующие смещаются на одну позицию вниз.
+</font ></P>
+<P><font face="Verdana" size="3">
+<b>Внимание</b>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При использовании методов <font face="Verdana" size="2"> 
+    Append</font> и <font face="Verdana" size="2"> insert</font> набор данных 
+    переходит в режим редактирования самостоятельно. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Дополнительно, у вас есть возможность добавить или вставить новую запись уже с заполненными полями. Для этого применяются методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure AppendRecord(const Values: array of const); procedure InsertRecord(const Values: array of const);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+А делается это примерно так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">МуТаblе.AppendRecord([2345, 'New customer', '+7(812)4569012', 0, '']);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+После вызова этих методов и их завершения набор данных автоматически возвращается в состояние просмотра.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для существующей записи аналогичным образом можно заполнить все поля, использовав метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure SetFields(const Values: array of const);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Текущая запись удаляется методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Delete;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При этом набор данных не выдает никаких предупреждений, а просто делает это.
+</font ></P>
+<P><font face="Verdana" size="3">
+Очистить содержимое всех полей текущей записи может метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ClearFields;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Обратите внимание, что поля становятся пустыми (NULL), а не сбрасываются в нулевое значение.
+</font ></P>
+<P><font face="Verdana" size="3">
+О том, редактировалась ли текущая запись, сообщает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Modified: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+если оно имеет значение <font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Набор данных можно обновить, не закрывая и не открывая его снова. Для этого применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Refresh;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Однако он сработает только для таблиц и тех запросов, которые нельзя редактировать.
+</font ></P>
+<P><font face="Verdana" size="3">
+В каждый момент времени набор данных находится в определенном состоянии (о состояниях см. ниже в этой главе).
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDataSetState =   (dslnactive,   dsBrowse,   dsEdit,   dslnsert,   dsSetKey, dsCalcFields,   dsFilter,   dsNewValue,   dsOldValue,   dsCurValue,   dsBlockRead, dsInternalCalc,   dsOpening); property State:   TDataSetState;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+дает информацию о текущем состоянии набора.
+</font ></P>
+<P><font face="Verdana" size="3">
+Методы-обработчики класса <font face="Verdana" size="2"> TDataSet</font> предоставляют разработчику широчайшие возможности по отслеживанию событий, происходящих с набором данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+По паре методов-обработчиков (до и после события) предусмотрено для следующих событий в наборе данных:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;открытие и закрытие набора данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;переход в режим редактирования;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;переход в режим вставки новой записи;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;сохранение сделанных изменений;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;отмена сделанных изменений;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;перемещение по записям набора данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;обновление набора данных.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Обратите внимание, что помимо методов-обработчиков режима вставки существует дополнительный метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnNewRecord: TDataSetNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который вызывается непосредственно при вставке или добавлении записи. Дополнительно к этому могут использоваться методы-обработчики возникающих ошибок. Они предусмотрены для ошибок удаления, редактирования и сохранения изменений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnCalcFields: TDataSetNotifyEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+очень важен для задания значений вычисляемых полей. Он вызывается для каждой записи, которая отображается в визуальных компонентах, связанных с набором данных каждый раз, когда необходимо перерисовать значения полей в визуальных компонентах.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если в методе-обработчике <font face="Verdana" size="2"> OnCalcFields</font> производятся слишком сложные вычисления, частота его вызовов может быть уменьшена за счет свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AutoCalcFields: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+По умолчанию оно равно значению <font face="Verdana" size="2"> True</font> и расчет вычисляемых полей производится при каждой перерисовке. При значении
+<font face="Verdana" size="2"> False</font> метод-обработчик <font face="Verdana" size="2"> OnCalcFields</font> вызывается только при открытии, переходе в состояние редактирования и обновлении набора данных. Все перечисленные выше обработчики имеют одинаковый тип
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDataSetNotifyEvent = procedure(DataSet: TDataSet) of object;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И метод-обработчик
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TFilterRecordEvent = procedure(DataSet: TDataSet;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var Accept: Boolean) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnFilterRecord: TFilterRecordEvent;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+вызывается для каждой записи набора данных при свойстве
+<font face="Verdana" size="2"> Filtered = True.</font> (Подробнее об этих свойствах и методе-обработчике см. гл. 14.)
+Помимо перечисленных, класс <font face="Verdana" size="2"> TDataSet</font> содержит еще много свойств и методов, которые обеспечивают работоспособность многих полезных в практическом программировании приложений баз данных функций. Подробно они рассмотрены в гл. 14.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index1.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

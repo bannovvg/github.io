@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TStoredProc</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TStoredProc</font> обеспечивает использование в приложениях BDE хранимых процедур. Прямым предком компонента является класс
+<font face="Verdana" size="2">TDBDataSet</font>. Поэтому результатом выполнения хранимой процедуры может быть не только одиночный результат, но и полноценный набор данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Основные функции компонента <font face="Verdana" size="2"> TStoredProc</font> соответствуют возможностям стандартного компонента хранимой процедуры, описанного в гл. 12.
+Свойства и методы компонента <font face="Verdana" size="2"> TStoredProc</font> представлены в табл. 16.10.
+</font ></P>
+<P><font face="Verdana" size="3">
+Средствами классов-предков выполняется и подключение компонента к базе данных. Свойство
+<font face="Verdana" size="2"> DatabaseName</font> определяет базу данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> storedProcName</font> задает имя хранимой процедуры.
+</font ></P>
+<P><font face="Verdana" size="3">
+Перед выполнением хранимую процедуру необходимо подготовить. В частности, на этом этапе осуществляется передача параметров и выделение ресурсов. Эта операция выполняется автоматически при использовании методов
+<font face="Verdana" size="2"> ЕхесРгос</font> и <font face="Verdana" size="2">Open</font>,
+или задается явно методом <font face="Verdana" size="2">Prepare</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Явная подготовка процедуры полезна при неоднократном вызове хранимой процедуры. Если перед первым вызовом процедуры выполнить метод Prepare, то все последующие вызовы будут осуществляться без подготовки, которая уже была сделана. В противном случае подготовка будет производиться автоматически перед каждым выполнением хранимой процедуры.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 16.10. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TstoredProc</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="196" HEIGHT="677">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="30">
+<DIV WIDTH="250" HEIGHT="30" style="width: 82; height: 30">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="30">
+<DIV WIDTH="48" HEIGHT="30" style="width: 4; height: 30">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="30">
+<DIV WIDTH="338" HEIGHT="30" style="width: 130; height: 30">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="563" HEIGHT="30">
+<DIV WIDTH="250" HEIGHT="31">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="44">
+<DIV WIDTH="250" HEIGHT="44" style="width: 147; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Overload:   Word;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="44">
+<DIV WIDTH="48" HEIGHT="44" style="width: 15; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="44">
+<DIV WIDTH="338" HEIGHT="44" style="width: 270; height: 44">
+<P><font face="Verdana" size="3">
+Идентификатор процедуры. Используется только для сервера
+<font face="Verdana" size="2"> Oracle</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="133">
+<DIV WIDTH="250" HEIGHT="110" style="width: 159; height: 110">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TParamBindMode = (pbByName,   pbByNumber) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamBindMode: TParamBindMode ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="133">
+<DIV WIDTH="48" HEIGHT="110" style="width: 1; height: 110">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="133">
+<DIV WIDTH="338" HEIGHT="110" style="width: 280; height: 114">
+<P><font face="Verdana" size="3">
+Определяет порядок присваивания значений параметров:
+</font ></P>
+<ul>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif" size="3">pbByName — по именам параметров;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;pbByNumber — по номерам параметров в списке свойства
+     Params</font></li>
+</ul>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="36">
+<DIV WIDTH="250" HEIGHT="36" style="width: 163; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamCount:   Word;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="36">
+<DIV WIDTH="48" HEIGHT="36" style="width: 6; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="36">
+<DIV WIDTH="338" HEIGHT="36" style="width: 224; height: 36">
+<P><font face="Verdana" size="3">
+Возвращает общее число параметров
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="27">
+<DIV WIDTH="250" HEIGHT="27" style="width: 135; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Params:   TParams;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="27">
+<DIV WIDTH="48" HEIGHT="27" style="width: 1; height: 27">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="27">
+<DIV WIDTH="338" HEIGHT="27" style="width: 231; height: 27">
+<P><font face="Verdana" size="3">
+Индексированный список параметров
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="52">
+<DIV WIDTH="250" HEIGHT="52" style="width: 149; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Prepared:   Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="52">
+<DIV WIDTH="48" HEIGHT="52" style="width: 6; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="52">
+<DIV WIDTH="338" HEIGHT="52" style="width: 267; height: 52">
+<P><font face="Verdana" size="3">
+Возвращает значение <font face="Verdana" size="2">True</font>, если подготовка процедуры уже проводилась
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="40">
+<DIV WIDTH="250" HEIGHT="40" style="width: 160; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StmtHandle: HDBIStmt;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="40">
+<DIV WIDTH="48" HEIGHT="40" style="width: 12; height: 40">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="40">
+<DIV WIDTH="338" HEIGHT="40" style="width: 241; height: 40">
+<P><font face="Verdana" size="3">
+Дескриптор выражения ВОЕ. Используется при прямом вызове функций BDE
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="56">
+<DIV WIDTH="250" HEIGHT="56" style="width: 136; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property StoredProcName: string;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="56">
+<DIV WIDTH="48" HEIGHT="56" style="width: 2; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="56">
+<DIV WIDTH="338" HEIGHT="56" style="width: 256; height: 56">
+<P><font face="Verdana" size="3">
+Содержит имя хранимой процедуры
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="563" HEIGHT="19">
+<DIV WIDTH="250" HEIGHT="19">
+<P><font face="Verdana" size="3">
+<b>
+Методы</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="46">
+<DIV WIDTH="250" HEIGHT="46" style="width: 153; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure CopyParams (Value : TParams) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="46">
+<DIV WIDTH="48" HEIGHT="46" style="width: 14; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="46">
+<DIV WIDTH="338" HEIGHT="46" style="width: 265; height: 46">
+<P><font face="Verdana" size="3">
+Копирует параметры из списка <font face="Verdana" size="2"> Value</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="69">
+<DIV WIDTH="250" HEIGHT="69" style="width: 175; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function DescriptionsAvailable : Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="69">
+<DIV WIDTH="48" HEIGHT="69" style="width: 1; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="69">
+<DIV WIDTH="338" HEIGHT="69" style="width: 272; height: 69">
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> параметры хранимой процедуры доступны из приложения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="48">
+<DIV WIDTH="250" HEIGHT="48" style="width: 158; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ExecProc;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="36" HEIGHT="48">
+<DIV WIDTH="48" HEIGHT="48" style="width: 1; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="345" HEIGHT="48">
+<DIV WIDTH="338" HEIGHT="48" style="width: 256; height: 48">
+<P><font face="Verdana" size="3">
+Передает на сервер сигнал для запуска хранимой процедуры
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="172" HEIGHT="66">
+<DIV WIDTH="252" HEIGHT="64" style="width: 170; height: 64">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure GetResults;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="66">
+<DIV WIDTH="50" HEIGHT="64" style="width: 22; height: 64">
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">PU&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="66">
+<DIV WIDTH="327" HEIGHT="64" style="width: 277; height: 64">
+<P><font face="Verdana" size="3">
+Возвращает выходные параметры в приложение (используется только для сервера
+<font face="Verdana" size="2">Sybase</font>)
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="172" HEIGHT="50">
+<DIV WIDTH="252" HEIGHT="50" style="width: 172; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Pa ramByName (const Value:   string) : TParam;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="50">
+<DIV WIDTH="50" HEIGHT="50" style="width: 1; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Рu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="50">
+<DIV WIDTH="327" HEIGHT="50" style="width: 260; height: 50">
+<P><font face="Verdana" size="3">
+Возвращает параметр с именем <font face="Verdana" size="2"> Value</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="172" HEIGHT="29">
+<DIV WIDTH="252" HEIGHT="29" style="width: 147; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Prepare;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="29">
+<DIV WIDTH="50" HEIGHT="29" style="width: 7; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Pu&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="29">
+<DIV WIDTH="327" HEIGHT="29" style="width: 244; height: 29">
+<P><font face="Verdana" size="3">
+Готовит процедуру к выполнению
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="172" HEIGHT="44">
+<DIV WIDTH="252" HEIGHT="44" style="width: 163; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure UnPrepare;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="44">
+<DIV WIDTH="50" HEIGHT="44" style="width: 4; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Рu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="306" HEIGHT="44">
+<DIV WIDTH="327" HEIGHT="44" style="width: 276; height: 44">
+<P><font face="Verdana" size="3">
+Освобождает ресурсы, использованные во время подготовки процедуры
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index12.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

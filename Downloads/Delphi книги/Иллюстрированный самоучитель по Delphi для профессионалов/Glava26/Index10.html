@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Аутентификация пользователя в отчете</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Два объекта Rave Reports позволяют включить в проекте отчета механизм проверки имени пользователя и пароля. Это объекты <B>Simple Security Controller </B>(элемент
+<font face="Verdana" size="2">simpleSecurity</font>) и <B>Data Lookup Security Controller </B>(элемент
+<font face="Verdana" size="2">LookupSecurity</font>), которые доступны для выбора в диалоге создания объектов доступа к данным визуальной среды Rave Reports (см. рис. 24.4). Создается новый объект командой <B>File | New Data Object </B>главного меню Rave Reports. Созданный объект появляется в ветви <B>Data View Dictionary </B>дерева проекта.
+</font ></P>
+<P><font face="Verdana" size="3">
+Элемент <font face="Verdana" size="2">SimpleSecurity</font> предназначен для хранения списка пользователей и их паролей. Он имеет свойство
+<font face="Verdana" size="2">userList</font>, в котором в формате
+<font face="Verdana" size="2"> userName = Password</font> заносятся имена и пароли пользователей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Элемент LookupSecurity обеспечивает загрузку имен пользователей и паролей из таблицы базы данных. Для этого к нему через свойство
+<font face="Verdana" size="2"> Dataview</font> должен быть подключен соответствующий просмотр данных. В свойстве
+<font face="Verdana" size="2">userField</font> необходимо указать поле, которое содержит имена пользователей, а в свойстве
+<font face="Verdana" size="2">PasswordField</font> задать поле с паролями.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь несколько слов о том, как подключить созданные объекты.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вы можете организовать аутентификацию на двух уровнях — уровне проекта и уровне отчета. В обоих случаях используется свойство
+<font face="Verdana" size="2">securityContro</font><font face="Verdana" size="2">l</font> объекта проекта или отчета. В нем необходимо выбрать нужный объект аутентификации.
+</font ></P>
+<P><font face="Verdana" size="3">
+Однако это действие не сделает ваши отчеты сколько-нибудь
+защищеннее — все необходимые проверочные операции придется написать самому в исходном коде приложения Delphi. Единственное отличие в аутентификации по уровням в том, где именно вы сможете получить доступ к объекту аутентификации — из компонента проекта или отчета.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для организации простейшей проверки имени пользователя и пароля на уровне проекта в приложении нужно написать примерно такой код:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+rpReport.Open; if rpReport.ProjMan.SecurityControi.IsValidUser(</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+edUserName.Text, edPassword.Text}&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> then rpReport.Execute</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;else ShowMessage('Доступ запрещен');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; rpReport.Close;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В данном случае доступ к объекту аутентификации
+<font face="Verdana" size="2">SecurityContro</font>д (класс <font face="Verdana" size="2">TRaveBaseSecurity</font>) осуществляется через объект менеджера проекта
+<font face="Verdana" size="2"> projMan</font> (класс <font face="Verdana" size="2">TRaveProjectManager</font>).
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function IsValidUser(AUserName: string;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">APassword: string): Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+этого объекта возвращает значение <font face="Verdana" size="2">True</font>, если переданные в параметрах имя и пароль не совпадают со значениями из списка или базы данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для уровня отчета код выглядит так:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+rpReport.Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if rpReport.ProjMan.ActiveReport.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SecurityControl.IsValidUser(</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+edUserName.Text, edPassword.Text)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> then rpReport.Execute</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;else  ShowMessage('Доступ запрещен');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">rpReport.Close;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Здесь объект <font face="Verdana" size="2"> ActiveReport</font> (класс
+<font face="Verdana" size="2">TRaveReport</font>) представляет текущий отчет.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>
+

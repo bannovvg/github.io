@@ -1,0 +1,409 @@
+<html>
+<head>
+ <title></title>
+ <meta http-equiv="Content-Type" content="text/html; Charset=windows-1251">
+ <meta name="Generator" content="HtmlReader v1.6">
+</head>
+<body background="back2.jpg" bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+
+<table  width="100%">
+  <tr>
+    <td width="100%" bgcolor="#990080"><p align="center"><font color="#FFFFFF"
+    face="Times New Roman"><strong><big><big>Главная</big></big> <big><big>страница</big></big></strong></font></td>
+  </tr>
+
+</table>
+</center></div>
+<table  width="100%">
+  <tr>
+    <td width="100%" bgcolor="#123672">
+<marquee scrollamount="20"><big><big><font size=+30 color=#ffffff>Цифровые фотоаппараты</font></big></big></marquee></td>
+</tr>
+</table>
+<!-- Скрипт показывает текущую дату -->
+<script language="JavaScript">
+function getDateNow()
+{
+ var now = new Date();
+ var e =  now.getDate();
+ d = e + ' ';
+ var month = new Array(13);
+     month[1] = "января";
+     month[2] = "февраля";
+     month[3] = "марта";
+     month[4] = "апреля";
+     month[5] = "мая";
+     month[6] = "июня";
+     month[7] = "июля";
+     month[8] = "августа";
+     month[9] = "сентября";
+     month[10] = "октября";
+     month[11] = "ноября";
+     month[12] = "декабря";
+ var day = new Array(7);
+     day[0]= "воскресенье";
+     day[1]= "понедельник";
+     day[2]= "вторник";
+     day[3]= "среда";
+     day[4]= "четверг";
+     day[5]= "пятница";
+     day[6]= "суббота";
+ nday=day[now .getDay()]
+ nmonths =month[ (now.getMonth() + 1)];
+ d += nmonths + ', ' +nday ;
+ return 'Сегодня ' + d+'&nbsp; ' ;
+}
+
+//Time town
+//---------
+var times = new Array(96);
+    times[0] = "0:00";
+    times[1] = "0:15";
+    times[2] = "0:30";
+    times[3] = "0:45";
+    times[4] = "1:00";
+    times[5] = "1:15";
+    times[6] = "1:30";
+    times[7] = "1:45";
+    times[8] = "2:00";
+    times[9] = "2:15";
+    times[10] = "2:30";
+    times[11] = "2:45";
+    times[12] = "3:00";
+    times[13] = "3:15";
+    times[14] = "3:30";
+    times[15] = "3:45";
+    times[16] = "4:00";
+    times[17] = "4:15";
+    times[18] = "4:30";
+    times[19] = "4:45";
+    times[20] = "5:00";
+    times[21] = "5:15";
+    times[22] = "5:30";
+    times[23] = "5:45";
+    times[24] = "6:00";
+    times[25] = "6:15";
+    times[26] = "6:30";
+    times[27] = "6:45";
+    times[28] = "7:00";
+    times[29] = "7:15";
+    times[30] = "7:30";
+    times[31] = "7:45";
+    times[32] = "8:00";
+    times[33] = "8:15";
+    times[34] = "8:30";
+    times[35] = "8:45";
+    times[36] = "9:00";
+    times[37] = "9:15";
+    times[38] = "9:30";
+    times[39] = "9:45";
+    times[40] = "10:00";
+    times[41] = "10:15";
+    times[42] = "10:30";
+    times[43] = "10:45";
+    times[44] = "11:00";
+    times[45] = "11:15";
+    times[46] = "11:30";
+    times[47] = "11:45";
+    times[48] = "12:00";
+    times[49] = "12:15";
+    times[50] = "12:30";
+    times[51] = "12:45";
+    times[52] = "13:00";
+    times[53] = "13:15";
+    times[54] = "13:30";
+    times[55] = "13:45";
+    times[56] = "14:00";
+    times[57] = "14:15";
+    times[58] = "14:30";
+    times[59] = "14:45";
+    times[60] = "15:00";
+    times[61] = "15:15";
+    times[62] = "15:30";
+    times[63] = "15:45";
+    times[64] = "16:00";
+    times[65] = "16:15";
+    times[66] = "16:30";
+    times[67] = "16:45";
+    times[68] = "17:00";
+    times[69] = "17:15";
+    times[70] = "17:30";
+    times[71] = "17:45";
+    times[72] = "18:00";
+    times[73] = "18:15";
+    times[74] = "18:30";
+    times[75] = "18:45";
+    times[76] = "18:00";
+    times[77] = "19:15";
+    times[78] = "19:30";
+    times[79] = "19:45";
+    times[80] = "20:00";
+    times[81] = "20:15";
+    times[82] = "20:30";
+    times[83] = "20:45";
+    times[84] = "21:00";
+    times[85] = "21:15";
+    times[86] = "21:30";
+    times[87] = "21:45";
+    times[88] = "22:00";
+    times[89] = "22:15";
+    times[90] = "22:30";
+    times[91] = "22:45";
+    times[92] = "23:00";
+    times[93] = "23:15";
+    times[94] = "23:30";
+    times[95] = "23:45";
+    times[96] = "42:00";
+
+function CTime(form)
+{
+	var day = ', этого дня';
+	var baseCityTime = 30 * parseInt(form.timeChoice.options[form.timeChoice.selectedIndex].value);
+	var offset = parseInt(form.firstCity.options[form.firstCity.selectedIndex].value ) -
+		parseInt(form.secondCity.options[form.secondCity.selectedIndex].value);
+	var selectedCityTime = (baseCityTime - offset) / 30;
+	var targetTime = parseInt(form.timeChoice.options[form.timeChoice.selectedIndex].value ) +
+		selectedCityTime;
+
+	if (selectedCityTime < 0)
+	{
+		selectedCityTime = 48 + selectedCityTime;
+		day = ', предыдущего дня';
+	} 
+	
+	else if (selectedCityTime > 47)
+	{
+		selectedCityTime = selectedCityTime - 48;
+		day = ', следующего дня';
+	}
+
+	if (selectedCityTime < 0)
+		selectedCityTime=selectedCityTime * -1;
+
+	form.time.value = times[selectedCityTime * 2] + day;
+	
+	return false;
+}
+</script>
+
+<script language="JavaScript">document.write('<font>'+getDateNow()+'</font>')</script>
+
+
+<p align="left">
+Полезные ссылки:
+<select id="mymenu" onchange="myselection()">
+
+<OPTION value=" " selected>
+<option value="http://www.yandex.ru/" selected>Яндекс
+<option value="http://www.sunrise.ru/" selected>SUNRISE
+<option value="http://www.mvideo.ru/" selected>М-Видео
+<option value="http://www.foto.ru/" selected>Интернет магазин
+<OPTION value=" " selected>Выберите сайт
+</select>
+<script>
+function myselection(){
+var i=document.getElementById("mymenu").selectedIndex;
+if (i>0)
+window.location.href=document.getElementById("mymenu").options[i].value ;
+}
+</script>
+
+</p>
+<p class="head" style="padding-bottom:18px;">СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</p>
+
+<table width="100%" cellpadding=0 cellspacing=0 border="3">
+
+    <tr>
+        <td width="50%" valign="top">
+            <table cellpadding=0 cellspacing=0 border="3">
+
+    <tr>
+        <td colspan="2">
+            <p><font size="4" color=blue>Canon EOS 1Ds Mark III</font></p>
+        </td>
+    </tr>
+
+    <tr>
+        <td width="100%">
+            <p style="padding-bottom:10px;"><span class="head">280000 руб.</span></p>
+            <div style="float:left;"><img src="g/35124.jpg">&nbsp;</div>
+        </td>
+        <td ></td>
+    </tr>
+    <tr>
+        <td colspan=2>
+            <p class="text" style="padding-top:5px;">21.1 млн. пикселов, 5616 x 3744, 3200 ISO, сменный объектив, ручные настройки выдержки/диафрагмы, баланс белого по листу, крепление...</p>
+        </td>
+    </tr>
+</table>
+        </td>
+         <td></td>
+        <td></td>
+        <td></td>
+       
+        
+        <td width="50%" valign="top">
+            <table cellpadding=0 cellspacing=0 border="3">
+
+    <tr>
+        <td colspan="2">
+            <p><font size="4" color=blue>Nikon D700 Body</font></p>
+        </td>
+    </tr>
+
+    <tr>
+        <td width="100%">
+		 <p style="padding-bottom:10px;"><span class="head">99001 руб.</span></p>
+            <div style="float:left;"><img src="g/35387.jpg">&nbsp;</div>
+            
+        </td>
+        <td ></td>
+    </tr>
+	
+    <tr>
+	
+        <td colspan=2>
+            <p class="text" style="padding-top:5px;">12.9 млн. пикселей, 4256 x 2832 пикселей, система АФ 51-ой точки Multi-CAM3500FX, 200-6400 ISO с повышением до 25600 ISO, сменный объектив,...</p>
+        </td>
+    </tr>
+</table>
+        </td>
+    </tr>
+    
+    <tr><td colspan=5 height="12"></td></tr>
+    
+    <tr>
+        <td height="1" width="50%"></td>
+        <td colspan=3></td>
+        <td height="1" width="50%"></td>
+    </tr>
+    
+    <tr><td colspan=5 height="12"></td></tr>
+    <tr>
+        <td width="50%" valign="top">
+            <table cellpadding=0 cellspacing=0 border="3">
+
+    <tr>
+        <td colspan="2">
+		<p><font size="4" color=blue>Nikon D300</font></p>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <td width="100%">
+		 <p style="padding-bottom:10px;"><span class="head">46550 руб.</span></p>
+            <div style="float:left;"><img src="g/35105.jpg">&nbsp;</div>
+        
+        </td>
+        <td ></td>
+    </tr>
+    <tr>
+        <td colspan=2>
+            <p class="text" style="padding-top:5px;">D300 — 12,3 мегапикселя, 4288 x 2848, чувствительности 3200 единиц ISO, СMOS-матрица, модуль самоочистки от пыли, система обработки...</p>
+        </td>
+    </tr>
+</table>
+        </td>
+
+        <td></td>
+        <td ></td>
+        <td></td>
+        
+        <td width="50%" valign="top">
+            <table cellpadding=0 cellspacing=0 border="3">
+
+    <tr>
+        <td colspan="2">
+		<p><font size="4" color=blue>Nikon D60 Body</font></p>
+           
+        </td>
+    </tr>
+
+    <tr>
+        <td width="100%">
+            <p ><span class="head">15999 руб.</span></p>
+        
+            <div style="float:left;"><img src="g/35373.jpg">&nbsp;</div>
+        </td>
+        <td ></td>
+    </tr>
+    <tr>
+        <td colspan=2>
+            <p class="text" style="padding-top:5px;">10.2 млн. пикселей, 3872x2592 пикселей, размер матрицы: 23.6x 15.8 мм, видоискатель зеркальный (TTL), сменный объектив, ручные настройки...</p>
+        </td>
+    </tr>
+</table>
+        </td>
+    </tr>
+</table>
+                    </td>
+                </tr>
+            </table><br><br>
+            
+            <table width="100%" cellpadding="21" cellspacing=0 style="border:solid 1px #e6e6e6;" border="0">
+                <tr>
+                    <td>
+                        <p class="head" style="padding-bottom:18px;">ПУБЛИКАЦИИ</p>
+<table width="100%" cellpadding=0 cellspacing=0 border="0">
+    <tr>
+        <td valign="top">
+<hr size=10 align="left" width=100% color="123672">
+<table width="100%" cellpadding=10 cellspacing=0>
+    <tr>
+        <td>
+           
+            <font color=blue>Как выбрать объектив?</font>
+            <p class="text">От характеристик выбранного объектива (светосилы, фокусного расстояния, качества стекол и т.п.) сильно зависит качество получаемой фотографии, поэтому к процессу выбора объектива для зеркальной фотокамеры следует отнестись со всей внимательностью и осторожностью.</p>
+            <p><a href="p1.html">читать целиком>></a></p>
+        </td>
+    </tr>
+</table>
+        </td>
+    </tr>
+   
+<table width="100%" cellpadding=10 cellspacing=0>
+    <hr size=10 align="left" width=100% color="123672">
+	<tr>
+        <td>
+            
+            <font color="blue">Характеристики зеркальных камер</font>
+            <p class="text">Многие, наверно, спрашивают себя: "Зачем мне нужна цифровая зеркальная камера? У меня же есть 6 -мегапиксельная "мыльница" с зумом и огромным количеством функций, большинство из которых я даже не использую". Количество пикселей (разрешение матрицы) - это только один из многих факторов, которые обеспечивают хорошее качество снимка. Основной причиной выбора цифровой зеркальной камеры является качество изображения, скорость работы и возможность изменения настроек по своему усмотрению.</p>
+            <p><a href="p4.html">читать целиком>></a></p>
+        </td>
+    </tr>
+</table>
+        </td>
+    </tr>
+    
+		
+<table width="100%" cellpadding=10 cellspacing=0>
+    <hr size=10 align="left" width=100% color="123672">
+	<tr>
+        <td>
+            
+            <p ><font color="blue">Выбор зеркального цифрового фотоаппарата</font></p>
+            <p class="text">В настоящее время рынок фототоваров перенасыщен различного рода недорогими цифровыми устройствами, которые позволяют получить фотографии достаточно приличного качества, однако для профессионалов и активных фотолюбителей выбор, пожалуй, всегда останется за цифровыми зеркальными фотоаппаратами</p>
+            <p><a href="p2.html">читать целиком>></a></p>
+        </td>
+    </tr>
+</table>
+        </td>
+    </tr>
+   
+		
+<table width="100%" cellpadding=10 cellspacing=0>
+   <hr size=10 align="left" width=100% color="123672">
+    <tr>
+        <td>
+           
+            <p ><font color="blue">Выбор цифрового фотоаппарата</font></p>
+            <p class="text">Как выбрать достаточно качественную и недорогую «мыльницу»? Без минимальных знаний теории фотографии тут не обойтись, и в этой статье мы постараемся эти знания Вам преподнести.</p>
+            <p><a href="p3.html">читать целиком>></a></p>
+        </td>
+    </tr>
+</table>
+<hr size=10 align="left" width=100% color="123672">
+</body>
+
+</html>

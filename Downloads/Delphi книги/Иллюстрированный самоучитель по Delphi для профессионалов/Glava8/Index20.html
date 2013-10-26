@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index21.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Изменение 
+  и настройка внешнего вида панелей</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Мы подошли к совсем новому свойству панелей —
+<font face="Verdana" size="2">TActionMainMenuBar</font>. Теперь — как в Microsoft Office — возможно прятать редко используемые пункты меню. В самом деле, интерфейс программ подчас настолько сложен, что используют его на 100% минимальное количество пользователей. Поэтому элементы интерфейса, которые пользователь не задействовал в каком-то числе предыдущих запусков, автоматически прячутся.
+</font ></P>
+<P><font face="Verdana" size="3">
+Что и когда прятать, определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PrioritySchedule: TStringList;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+значение которого по умолчанию приведено в табл. 8.4. В левой колонке содержится общее количество запусков приложения, в течение которых
+пользователь применял данное действие; в правой колонке — число запусков, прошедших со времени последнего его использования. По истечении этого числа запусков клиенты действия маскируются. Например, в меню они доступны не сразу, а после нажатия специального пункта с двумя стрелочками, обращенными вниз.
+</font ></P>
+<P><font face="Verdana" size="3">
+Естественно, чем чаще пользователь обращался к действию, тем дольше оно удержится на виду. Впрочем, если у вас другие взгляды на интерфейс, вы можете изменить значение
+<font face="Verdana" size="2">priorityScedule</font>.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 8.4. </B>Условия скрытия 
+  элементов панелей действий </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="393" HEIGHT="273">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="44">
+<DIV WIDTH="300" HEIGHT="44" style="width: 253; height: 57">
+<P><font face="Verdana" size="3">
+<b>
+Количество запусков приложения с обращением к действию</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="44">
+<DIV WIDTH="319" HEIGHT="44" style="width: 173; height: 57">
+<P><font face="Verdana" size="3">
+<b>
+Количество запусков приложения после последнего обращения</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="31">
+<DIV WIDTH="300" HEIGHT="31" style="width: 46; height: 38">
+<P><font face="Verdana" size="3">
+0, 1
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="31">
+<DIV WIDTH="319" HEIGHT="31" style="width: 34; height: 31">
+<P><font face="Verdana" size="3">
+3
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="29">
+<DIV WIDTH="300" HEIGHT="29" style="width: 31; height: 29">
+<P><font face="Verdana" size="3">
+2
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="29">
+<DIV WIDTH="319" HEIGHT="29" style="width: 33; height: 29">
+<P><font face="Verdana" size="3">
+6
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="27">
+<DIV WIDTH="300" HEIGHT="27" style="width: 68; height: 27">
+<P><font face="Verdana" size="3">
+3
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="27">
+<DIV WIDTH="319" HEIGHT="27" style="width: 53; height: 27">
+<P><font face="Verdana" size="3">
+9
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="25">
+<DIV WIDTH="300" HEIGHT="25" style="width: 52; height: 25">
+<P><font face="Verdana" size="3">
+4,5
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="25">
+<DIV WIDTH="319" HEIGHT="25" style="width: 49; height: 25">
+<P><font face="Verdana" size="3">
+12
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="29">
+<DIV WIDTH="300" HEIGHT="29" style="width: 59; height: 29">
+<P><font face="Verdana" size="3">
+6-8
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="29">
+<DIV WIDTH="319" HEIGHT="29" style="width: 36; height: 29">
+<P><font face="Verdana" size="3">
+17
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="25">
+<DIV WIDTH="300" HEIGHT="25" style="width: 74; height: 25">
+<P><font face="Verdana" size="3">
+9-13
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="25">
+<DIV WIDTH="319" HEIGHT="25" style="width: 42; height: 25">
+<P><font face="Verdana" size="3">
+23
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="27">
+<DIV WIDTH="300" HEIGHT="27" style="width: 73; height: 27">
+<P><font face="Verdana" size="3">
+14-24
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="27">
+<DIV WIDTH="319" HEIGHT="27" style="width: 46; height: 27">
+<P><font face="Verdana" size="3">
+29
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="222" HEIGHT="36">
+<DIV WIDTH="300" HEIGHT="36" style="width: 85; height: 36">
+<P><font face="Verdana" size="3">
+Более 25
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="184" HEIGHT="36">
+<DIV WIDTH="319" HEIGHT="36" style="width: 52; height: 36">
+<P><font face="Verdana" size="3">
+31
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Для подсчета величин, указанных в этой таблице, введены такие свойства:&nbsp;
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;у объекта  
+    TActionBars (дочерний объект TActionManager) 
+    есть свойство&nbsp;</font></li>
+</ul>
+<blockquote>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">property SessionCount: Intege</font>r;</font ></P>
+<P><font face="Verdana" size="3">
+которое представляет собой глобальный счетчик запусков приложения;&nbsp;
+</font ></P>
+</blockquote>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;у каждого объекта TActionclientitem 
+    есть два свойства:</font></li>
+</ul>
+<blockquote>
+  <ul>
+    <li>&nbsp;<font face="Verdana" size="2">property LastSession: Integer;</font></li>
+  </ul>
+<P><font face="Verdana" size="3">
+в этом свойстве хранится номер последнего запуска приложения, в течение которого использовался данный элемент (нумерация совпадает
+с<font face="Verdana" size="2">SessionCount</font>);
+</font ></P>
+  <ul>
+    <li>&nbsp; <font face="Verdana" size="2">property UsageCount:   Integer;&nbsp;</font></li>
+  </ul>
+  <blockquote>
+    <P><font face="Verdana" size="3"> счетчик использования элемента.</font ></P>
+  </blockquote>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но для того, чтобы оперировать данными о количестве запусков, их надо где-то хранить. Организована система хранения следующим образом. У самого менеджера действий есть свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FileName: TFileName;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое указывает на файл, содержащий все настройки панелей, связанных с данным менеджером. Он имеет формат двоичной формы и считывается/записывается при запуске и выходе из приложения. Впрочем, можно это сделать и в любой момент при помощи методов
+<font face="Verdana" size="2"> LoadFormFile</font> и <font face="Verdana" size="2">SaveToFile</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Все эти величины меняются автоматически, и их описание приведено для понимания сути происходящего. Сбросить же счетчик статистики запусков можно следующим образом: на этапе разработки на странице <B>Options </B>редактора свойств менеджера действий есть кнопка <B>Reset Usage Count. </B>На этапе выполнения точно такая кнопка есть в диалоге
+<font face="Verdana" size="2">TCustomizeDlg</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Помимо данных для подсчета запусков в этом файле хранится и вся прочая информация о настройках. Последний из не упоминавшихся нами компонентов — диалог настройки
+<font face="Verdana" size="2">TCustomizeDlg</font>. Он представляет собой точную копию редактора свойств
+<font face="Verdana" size="2">TActionManager</font>, но позволяет делать все операции с действиями в режиме выполнения. Вызвать его просто — вызовом метода
+<font face="Verdana" size="2">show</font>. А можно поступить еще проще — есть стандартное действие
+<font face="Verdana" size="2"> Customize</font> (категория <B>Tools), </B>которое и подразумевает вызов этого диалога.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index21.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

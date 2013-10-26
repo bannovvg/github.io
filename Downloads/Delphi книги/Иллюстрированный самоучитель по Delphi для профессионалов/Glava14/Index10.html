@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Быстрый переход к помеченным записям</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Закладки, как инструмент работы с записями набора данных, позволяют осуществлять быстрое перемещение на нужную запись. Набор данных может содержать неограниченное число закладок, каждая из которых представляет собой указатель. Закладку можно создать только для текущей записи набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+При работе с закладками используются три основных метода:
+</font ></P>
+<ul>
+  <li>&nbsp;<font size="3" face="Verdana, Arial, Helvetica, sans-serif">метод 
+    <font size="2">GetBookmark</font> создает новую закладку для текущей записи;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;метод 
+    <font size="2">GotoBookmark</font> осуществляет переход к закладке, переданной 
+    в параметре;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;метод 
+    <font size="2">FreeBookmark</font> удаляет закладку, переданную в параметре.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Кроме этого, можно использовать метод <font face="Verdana" size="2">Bookmarkvalid</font>, который проверяет, указывает ли закладка на реально существующую запись. Метод
+<font face="Verdana" size="2"> compareBookmark</font> позволяет сравнить между собой две закладки:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">var Bookmarkl,   Bookmark2: TBookmark;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Tablel.CompareBookmark(Bookmarkl,   Bookmark2)   =  1</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;then ShowMessage (' Закладки одинаковы') ;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В наборе данных имеется свойство <font face="Verdana" size="2">Bookmark</font>, которое содержит название текущей закладки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Рассмотрим небольшой пример, где право управлять закладками предоставлено пользователю (рис. 14.4). На форме, помимо других элементов управления (среди которых есть компонент
+<font face="Verdana" size="2">TDBGrid</font>), имеются две кнопки. Кнопка
+<font face="Verdana" size="2"> startBookmark</font> помечает текущую запись, кнопка
+<font face="Verdana" size="2"> stopBookmark</font> переходит к закладке, а затем уничтожает ее.
+</font ></P>
+<p align="center"> 
+<div align="center"><IMG src="gl.14.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 14.4. </B>Главная форма 
+  проекта DemoBookmark<B>&nbsp;</B> </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B> Листинг 14.2. </B> Пример 
+  использования закладок <B> .</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> implementation</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> {$R *.DFM}</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var SaveRecPos: 
+    TBookMark;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.FormShow(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> try</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Cust.Open;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> BookmarkControl.Brush.Color 
+    := clBtnFace;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;except</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> ShowMessage('Ошибка 
+    открытия набора данных');</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.FormClose(Sender: 
+    TObject; var Action: TCloseAction);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">Cust.Close;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.StartBookmarkClick(Sender: 
+    TObject);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Not Cust.BookmarkValid(SaveRecPos)&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then SaveRecPos 
+    := Cust.GetBookmark;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> BookmarkControl.Brush.Color 
+    := cILime</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TMainForm.StopBookmarkClick(Sender: 
+    TObject);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with Cust do 
+    begin if Not BookmarkValid(SaveRecPos)</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> then Exit;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">GotoBookmark(SaveRecPos);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;FreeBookmark(SaveRecPos);</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;SaveRecPos 
+    := Nil;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> BookmarkControl.Brush.Color 
+    := clBtnFace;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> end.</font> 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Использование метода <font face="Verdana" size="2"> 
+  Bookmarkvaiid</font> позволяет корректно переопределять закладку, если она уже 
+  установлена, и избежать ошибок при произвольных нажатиях кнопок. Компонент <font face="Verdana" size="2"> 
+  BookmarkControl</font> типа <font face="Verdana" size="2"> TShape</font> сигнализирует 
+  о том, что закладка установлена или удалена. </font ></P>
+<P><font face="Verdana" size="3"> <B>&nbsp;Примечание</B> </font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> Закладки также используются в компоненте <font face="Verdana" size="2">TDBGrid</font>. 
+    Он имеет свойство <font face="Verdana" size="2"> SelectedRows</font> типа 
+    <font face="Verdana" size="2">TBookmarkList</font>, которое представляет собой 
+    список закладок, указывающих на одновременно выделенные записи. </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+  <table COLS="3" WIDTH="16%">
+    <tr> 
+      <td> <font face="Verdana" size="3"> <a href="Index9.html"> <img SRC="Back.gif" BORDER="0"> 
+        </a> </font> </td>
+      <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> 
+        <img SRC="Menu.gif" BORDER="0"> </a> </font> </td>
+      <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index11.html"> 
+        <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+    </tr>
+  </table>
+
+</body>
+</html>

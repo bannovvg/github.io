@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  запроса</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент запроса предназначен для создания запроса SQL, подготовки его параметров, передачи запроса на сервер БД и представления результата запроса в наборе данных. При этом набор данных может быть редактируемым или нет.
+</font ></P>
+<P><font face="Verdana" size="3">
+Любой компонент запроса, каждая строка набора данных которого однозначно связывается с одной строкой таблицы БД, может редактироваться. Например, запрос
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SELECT * FROM Country</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+редактировать можно. Если же приведенное правило не выполняется, то набор данных можно использовать только для просмотра, и, конечно, возможности компонентов здесь ни при чем. Куда, к примеру, записывать результаты редактирования записей следующего запроса:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SELECT CustNo, SUM(AmountPaid)&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> FROM Orders</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;GROUP BY CustNo</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Ведь в таком запросе каждая запись есть результат суммирования неизвестного заранее числа других записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Тем не менее компоненты запросов предоставляют разработчику мощный и гибкий механизм работы с данными. С помощью компонентов запросов можно решать гораздо более сложные задачи, чем с табличными компонентами.
+</font ></P>
+<P><font face="Verdana" size="3">
+В целом компонент запроса работает быстрее, т. к. структура возвращаемых запросом полей может изменяться, то экземпляры класса
+<font face="Verdana" size="2">TFieldDef</font>, хранящие информацию о свойствах полей, создаются по необходимости при запуске приложения. Табличный компонент создает все классы для описания полей в любом случае, поэтому в приложениях клиент-сервер табличный компонент может открываться медленнее, чем запрос. Рассмотрим общие свойства и методы компонентов запросов. Текст запроса определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SQL:   TStrings;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Text:   PChar;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержится окончательно подготовленный текст запроса перед пересылкой
+его на сервер.
+</font ></P>
+<P><font face="Verdana" size="3">
+Выполнение запроса возможно тремя способами.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если запрос возвращает результат в набор данных, то применяется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Open;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Active:   Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которому присваивается значение <font face="Verdana" size="2">True</font>. После выполнения запроса открывается набор данных компонента. Закрывается такой запрос методом
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Close;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+или тем же свойством <font face="Verdana" size="2">Active</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если запрос не возвращает результат в набор данных (например, использует
+операторы <font face="Verdana" size="2">INSERT, DELETE, UPDATE</font>), то используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure ExecSQL;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+и после выполнения запроса набор данных компонента не открывается.
+</font ></P>
+<P><font face="Verdana" size="3">
+Попытка использовать для такого запроса метод
+<font face="Verdana" size="2"> open</font> или свойство <font face="Verdana" size="2"> Active</font>
+приведет к ошибке создания указателя на курсор данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+После выполнения запроса в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RowsAffected: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращается число обработанных при выполнении запроса записей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для того чтобы разрешить редактирование набора данных запроса, необходимо свойству
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RequestLive: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+присвоить значение <font face="Verdana" size="2">True</font>. Это свойство устанавливается, но не работает для запроса, результат которого не модифицируется из-за самого запроса.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для подготовки запроса к выполнению предназначен метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure Prepare;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+который обеспечивает выделение необходимых ресурсов на сервере и проведение оптимизации.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure UnPrepare;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+освобождает занятые при подготовке запроса ресурсы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Результат выполнения этих двух операций отражается в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Prepared: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Значение <font face="Verdana" size="2"> True</font> данного свойства говорит о том, что запрос подготовлен для выполнения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Вызов методов <font face="Verdana" size="2"> Prepare</font> и <font face="Verdana" size="2">UPРrераrе</font> не является обязательным, т. к. компонент делает это автоматически. Однако если запрос будет выполняться несколько раз подряд, то подготовку необходимо провести перед первым выполнением запроса вручную. Тогда при последующих выполнениях сервер не будет тратить время на проведение бесполезной операции — ведь ресурсы под запрос уже были выделены.
+</font ></P>
+<P><font face="Verdana" size="3">
+Часто запросы имеют настраиваемые параметры, значения которых определяются непосредственно перед выполнением запроса.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Params: TParams;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+представляет собой список объектов <font face="Verdana" size="2">TParams</font>, каждый из которых содержит настройки одного параметра. Свойство
+<font face="Verdana" size="2"> Params</font> обновляется автоматически при изменении текста запроса. Подробнее о классе
+<font face="Verdana" size="2"> TParams</font> рассказывается ниже в этой главе.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>      Примечание&nbsp;</B>
+</font ></P>
+<blockquote> 
+  <p><font face="Verdana" size="3"> В компоненте <font face="Verdana" size="2"> 
+    TADOQuery</font> свойство, аналогичное описанному свойству <font face="Verdana" size="2">Params</font>, 
+    называется <font face="Verdana" size="2">Parameters</font>. </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamCount: Word</font>;&nbsp;
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+ возвращает число параметров запроса.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamCheck: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет, необходимо ли обновлять свойство
+<font face="Verdana" size="2"> Params</font> при изменении текста запроса во время выполнения. При значении
+<font face="Verdana" size="2"> True</font> обновление осуществляется.
+</font ></P>
+<P><font face="Verdana" size="3">
+Кроме этого, компоненты запросов содержат некоторые свойства и методы, описываемые в гл. 14.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

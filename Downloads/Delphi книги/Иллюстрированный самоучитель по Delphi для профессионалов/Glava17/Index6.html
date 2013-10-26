@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Использование компонентов наборов данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Набор компонентов dbExpress, инкапсулирующих набор данных, вполне обычен и сравним с аналогичными компонентами
+BDE, ADO, InterBase Express<B>. </B> Это компоненты<B> </B><font face="Verdana" size="2">TSQLDataSet,
+TSQLTable, TSQLQuery, TSQLStoredProc.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TSimpleDataSet</font> 
+    также относится к рассматриваемой группе, но т. к. он обладает рядом специфических 
+    возможностей, его описание вынесено в отдельный пункт. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Однако необходимость создания легкой технологии доступа к данным, какой является dbExpress, наложила на эти компоненты ряд ограничений.
+</font ></P>
+<P><font face="Verdana" size="3">
+Хотя общим предком всех рассматриваемых здесь компонентов является класс
+<font face="Verdana" size="2"> TDataSet</font> (см. рис. 12.1), который обладает полным инструментарием для работы с набором данных, компоненты dbExpress используют только однонаправленные курсоры и не позволяют редактировать данные. Однонаправленные курсоры ограничивают навигацию по набору данных и обеспечивают перемещение только на следующую запись и возврат на первую. Также здесь недоступны любые операции, требующие буферизации данных — это поиск, фильтрация, синхронный просмотр.
+</font ></P>
+<P><font face="Verdana" size="3">
+Таким образом, для выключения ряда механизмов класса
+<font face="Verdana" size="2"> TDataSet</font> понадобился еще
+один Промежуточный класс <font face="Verdana" size="2">TCustomSQLDataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Отображение данных при помощи компонентов со страницы <B>Data Controls </B>также ограничено. Нельзя использовать компоненты
+<font face="Verdana" size="2"> TDBGrid</font> и <font face="Verdana" size="2">TDBCtrlGrid</font>, а в компоненте
+<font face="Verdana" size="2"> TDBNavigator</font> не забудьте отключить кнопки возврата на одну позицию назад и перехода на последнюю запись. Также ничего хорошего не получится из попытки применить компоненты синхронного просмотра. Остальные компоненты можно использовать обычным способом (см. гл. 15).
+</font ></P>
+<P><font face="Verdana" size="3">
+Основные способы применения компонентов dbExpress остаются стандартными и подробно описаны в части III.
+</font ></P>
+<P><font face="Verdana" size="3">
+Доступ к данным во всех рассматриваемых компонентах осуществляется одинаково — через соединение, инкапсулированное компонентом
+<font face="Verdana" size="2">TSQLConnection</font>. Привязывание к соединению выполняет свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SQLConnection: TSQLConnection;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Рассмотрим теперь компоненты dbExpress подробнее.
+</font ></P>
+<P><font face="Verdana" size="3">
+</font ></P>
+<P><font face="Verdana" size="3"> </font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

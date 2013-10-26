@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index16.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index18.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Вычисляемые 
+  значения по нескольким источникам</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Вычислительный элемент <font face="Verdana" size="2"> calcOp</font> позволяет проводить вычислительные операции над значениями из двух различных источников.
+</font ></P>
+<P><font face="Verdana" size="3">
+Разработчик должен задать исходные значения и источники данных, используя два набора свойств (табл. 26.1). Назначение части этих свойств вам уже знакомо (см. разд. &quot;Вычисляемые значения по одному источнику&quot; выше).
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 26.1. </B>Свойства 
+  элемента <font face="Verdana" size="2"> СаlсОр</font> для определения двух источников 
+  данных </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="504" HEIGHT="356">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="44">
+<DIV WIDTH="131" HEIGHT="44" style="width: 74; height: 44">
+<P><font face="Verdana" size="3">
+<b>
+Первый источник</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="111" HEIGHT="44">
+<DIV WIDTH="134" HEIGHT="44" style="width: 73; height: 44">
+<P><font face="Verdana" size="3">
+<b>
+Второй источник</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="44">
+<DIV WIDTH="366" HEIGHT="44" style="width: 161; height: 44">
+<P><font face="Verdana" size="3">
+<b>
+Назначение свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="54">
+<DIV WIDTH="131" HEIGHT="54" style="width: 60; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SrclCalcVar</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="111" HEIGHT="54">
+<DIV WIDTH="134" HEIGHT="54" style="width: 1; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Src2CalcVar</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="54">
+<DIV WIDTH="366" HEIGHT="54" style="width: 228; height: 54">
+<P><font face="Verdana" size="3">
+Определяет вычисляемый элемент,  результат которого берется в качестве исходного
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="56">
+<DIV WIDTH="131" HEIGHT="56" style="width: 59; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SrclDataField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="111" HEIGHT="56">
+<DIV WIDTH="134" HEIGHT="56" style="width: 70; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Src2DataField</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="56">
+<DIV WIDTH="366" HEIGHT="56" style="width: 258; height: 73">
+<P><font face="Verdana" size="3">
+Задает поле просмотра, над значениями которого проводятся вычисления. Игнорируется при заданном свойстве
+<font face="Verdana" size="2"> SrcXCalcVar</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="62">
+<DIV WIDTH="131" HEIGHT="62" style="width: 18; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SrclDataView</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="111" HEIGHT="62">
+<DIV WIDTH="134" HEIGHT="62" style="width: 9; height: 62">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Src2DataView</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="62">
+<DIV WIDTH="366" HEIGHT="62" style="width: 258; height: 73">
+<P><font face="Verdana" size="3">
+Задает поле просмотра, над значениями  которого проводятся вычисления. Игнорируется при заданном свойстве
+<font face="Verdana" size="2"> SrcXCalcVar</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="92">
+<DIV WIDTH="131" HEIGHT="92" style="width: 18; height: 92">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SrclFunction</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="111" HEIGHT="92">
+<DIV WIDTH="134" HEIGHT="92" style="width: 31; height: 92">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Src2Function</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="92">
+<DIV WIDTH="366" HEIGHT="92" style="width: 247; height: 126">
+<P><font face="Verdana" size="3">
+Позволяет выбрать математическую функцию (их список гораздо шире, чем просто агрегатные функции),  которая будет выполнена над исходным значением перед вычислением основной операции элемента
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="105" HEIGHT="48">
+<DIV WIDTH="131" HEIGHT="48" style="width: 14; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+SrclValue</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="111" HEIGHT="48">
+<DIV WIDTH="134" HEIGHT="48" style="width: 44; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Src2Value</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="291" HEIGHT="48">
+<DIV WIDTH="366" HEIGHT="48" style="width: 241; height: 54">
+<P><font face="Verdana" size="3">
+Задает фиксированное значение, над которым производится вычислительная операция
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Собственно функция, которая должна обработать значения из двух заданных источников, задается свойством
+<font face="Verdana" size="2">operator</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+После выполнения основной операции  результат может быть обработан еще   один  раз,   если   вы  зададите  математическую  функцию   в  свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ResultFunction.</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Таким образом, при помощи элемента <font face="Verdana" size="2"> CalcOp</font> разработчик может реализовывать довольно сложные вычисления.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если задать в качестве двух источников данных:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;два фиксированных значения (свойства srcivalue 
+    и Src2value);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;два поля из одного или двух просмотров данных (свойства 
+    SrciDataField и Src2DataField);</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;комбинацию первых двух вариантов</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+&nbsp;то их значения будут последовательно обработаны вычислительной операцией, которую вы зададите свойствами:
+</font ></P>
+<ul>
+  <li>&nbsp;<font face="Verdana" size="2">SrclFunction;</font></li>
+  <li><font face="Verdana" size="2">&nbsp;SrclFunction;</font></li>
+  <li><font face="Verdana" size="2">&nbsp;Operator;</font></li>
+  <li><font face="Verdana" size="2">&nbsp;ResultFunction.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Кроме этого, элемент <font face="Verdana" size="2"> CalcOp</font> позволяет создавать вычислительные цепочки, если использовать в качестве одного или двух источников другие вычислительные элементы (рис. 26.9).
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.26.9.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 26.9. </B>Пример вычислительной 
+  цепочки на основе элементов <font face="Verdana" size="2"> CalcOp</font> </font ></P>
+<P><font face="Verdana" size="3"> Это могут быть как простые элементы <font face="Verdana" size="2">CalcText</font> 
+  и <font face="Verdana" size="2">calcTota</font><font face="Verdana" size="2">l</font>, 
+  так и другие элементы <font face="Verdana" size="2">calcOp</font>, которые, 
+  в свою очередь, могут содержать сколь угодно сложные вычислительные цепи. </font ></P>
+<P><font face="Verdana" size="3"> Пример использования элемента <font face="Verdana" size="2">CalcOp</font> 
+  имеется в демонстрационном приложении <font face="Verdana" size="2"> DemoReports</font> 
+  на дискете, прилагаемой к этой книге. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index16.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index18.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>
+

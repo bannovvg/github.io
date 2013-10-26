@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компонент TToolBar</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Возможность создать панель инструментов появилась у разработчика давно, начиная с первых версий Delphi. Тогда она была реализована с помощью сочетания компонентов
+<font face="Verdana" size="2">TPanel</font> и <font face="Verdana" size="2">TSpeedButton</font>. Так можно было поступить и сейчас; но панель инструментов получила развитие с появлением стандартного элемента управления
+<font face="Verdana" size="2">TToolBar</font>, который объединяет расположенные на нем кнопки и другие элементы управления и централизованно управляет ими.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Для других элементов управления, помещаемых 
+    на <font face="Verdana" size="2">TToolBar</font>, создается невидимая кнопка, 
+    обеспечивающая взаимодействие между ними и панелью. Но не со всеми из них 
+    &quot;все гладко&quot;. Например, компонент <font face="Verdana" size="2"> 
+    TSpinEdit</font> масштабируется и позиционируется неправильно. Вместо него 
+    следует применять пару <font face="Verdana" size="2">TEdit+TUpDown</font>. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Все кнопки (класс <font face="Verdana" size="2">TToolButton)</font> на панели инструментов имеют одинаковый размер, задаваемый свойствами:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ButtonWidth: Integer;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property ButtonHeight: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но эти свойства срабатывают только тогда, когда свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ShowCaptions: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+имеет значение <font face="Verdana" size="2">False</font>. Оно отвечает за видимость надписей на кнопках компонента. И если эти надписи должны быть видимы, то размер кнопок автоматически подстраивается под размер кнопки с самым длинным текстом.
+</font ></P>
+<P><font face="Verdana" size="3">
+На каждой кнопке могут отображаться два ее атрибута — текст (заголовок кнопки, свойство
+<font face="Verdana" size="2">Caption</font>) и картинка. Показ текста можно запретить установкой свойства
+<font face="Verdana" size="2"> ShowCaptions</font> В значение <font face="Verdana" size="2">False</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Панель инструментов тяжело себе представить без украшающих ее картинок. У компонента
+<font face="Verdana" size="2">TToolBar</font> целых три свойства, ссылающихся на списки картинок:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Images: TCustomlmageList;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property Disabledlmages: TCustomlmageList;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> property Hotlmages: TCustomlmageList;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В обычном состоянии на кнопках отображаются картинки из набора, указанного свойством
+<font face="Verdana" size="2">images</font>. Если кнопка неактивна (свойство
+<font face="Verdana" size="2"> Enabled</font> обращено в <font face="Verdana" size="2">False</font>), надпись на кнопке отображается серым цветом и на ней показывается картинка ИЗ свойства
+<font face="Verdana" size="2">Disabledlmages</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Flat: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+установлено в значение <font face="Verdana" size="2">True</font>, внешний вид панели инструментов становится более &quot;модным&quot; — плоским. В этом случае границы кнопок не видны, и все они выглядят как набор надписей и рисунков на единой плоской панели. Границы становятся видны, только когда над кнопкой находится указатель мыши. Можно при этом изменить и внешний вид кнопки. Если задано значение свойства
+<font face="Verdana" size="2">Hotlmages</font>, то на текущей кнопке обычная картинка из images меняется на картинку из
+<font face="Verdana" size="2">Hotlmages</font>. Посмотрите, например, на панель Microsoft Internet Explorer 4 и старшей версии — там все картинки на кнопках серые, но кнопка, к которой подведен указатель мыши, становится цветной.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Возможность сделать панель инструментов плоской 
+    появилась в версии 4.70 библиотеки ComCtl32.dll. Распространяя приложение, 
+    не забудьте поставить с дистрибутивами эту библиотеку нужной версии. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Текст и картинка на кнопке могут располагаться друг относительно друга двумя способами, в зависимости от значения свойства
+<font face="Verdana" size="2">List</font>. Если свойство <font face="Verdana" size="2"> List</font> равно значению
+<font face="Verdana" size="2"> False</font> (установка по умолчанию), то картинка располагается сверху, текст — снизу. В противном случае вы увидите текст справа от картинки.
+</font ></P>
+<P><font face="Verdana" size="3">
+Панели инструментов — это контейнеры, но и они часто располагаются на контейнерах — компонентах
+<font face="Verdana" size="2">TCoolBar</font> и <font face="Verdana" size="2">TControlBar</font>. Те, как правило, имеют свою фоновую картинку, и располагающийся сверху компонент
+<font face="Verdana" size="2">TToolBar</font> можно сделать прозрачным. За это отвечает свойство:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Transparent: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Особенно удобно использовать его, если установлен режим плоской панели — в этом случае прозрачен не только фон самой панели, но и всех кнопок на ней.
+</font ></P>
+<P><font face="Verdana" size="3">
+Перейдем к рассмотрению функциональных возможностей кнопок. Вы думаете, что &quot;функциональные возможности&quot; — это громко сказано? С одной стороны, да: кнопка — это то, на что нажимает пользователь, и не более того. Главное событие и для кнопки
+<font face="Verdana" size="2">TToolButton</font>, и для панели <font face="Verdana" size="2">TToolBar</font> — событие
+<font face="Verdana" size="2">onclick</font>. Кроме него они могут отреагировать только на перемещение мыши и на процессы перетаскивания/присоединения (Drag-and-Drop, Drag-and-Dock; описанные ниже в этой главе).
+</font ></P>
+<P><font face="Verdana" size="3">
+С другой стороны, кнопки можно нажимать в разнообразных вариантах и сочетаниях. Ключ к выбору варианта — свойство
+<font face="Verdana" size="2"> style</font> объекта <font face="Verdana" size="2">TToolButton</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TToolButtonStyle = (tbsButton, tbsCheck, tbsDropDown, tbsSeparator, tbsDivider);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Style: TToolButtonStyle;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Стили <font face="Verdana" size="2"> tbsSeparator</font> и <font face="Verdana" size="2"> tbsDivider</font> предназначены для оформления панели и представляют собой пустое место и вертикальный разделитель соответственно. Обычная кнопка — это, понятное дело, стиль
+<font face="Verdana" size="2">tbsButton</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если вы хотите создать одну или несколько кнопок, &quot;залипающих&quot; после нажатия, выберите стиль
+<font face="Verdana" size="2">tbsCheck</font>. После щелчка такая кнопка остается в нажатом состоянии до следующего нажатия. Об ее состоянии говорит свойство:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Down: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если нужна группа кнопок, из которых только одна может пребывать в нажатом состоянии, следует воспользоваться свойством:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Grouped: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Такая группа называется группой с зависимым нажатием.
+Если на панели инструментов есть ряд расположенных подряд кнопок с<font face="Verdana" size="2">
+style=tbscheck </font> и <font face="Verdana" size="2">Grouped=True</font>, то этот ряд будет обладать свойствами группы с зависимым нажатием. Если групп зависимых кнопок должно быть две и более, разделить ИХ Между собой
+можно кнопкой другого стиля (например, <font face="Verdana" size="2"> tbsSeparator</font>
+или <font face="Verdana" size="2">tbsDivider</font>) или любым другим элементом управления (рис. 5.1).
+</font ></P>
+<P><font face="Verdana" size="3">
+В такой группе всегда должна быть нажата хотя бы одна кнопка; на этапе разработки установите ее свойство
+<font face="Verdana" size="2"> Down</font> в значение <font face="Verdana" size="2">True</font>. Но если это вам не подходит, можно установить свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AllowAllUp: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+в значение <font face="Verdana" size="2"> True</font> — и можно отжимать все кнопки. Значение этого свойства всегда одинаково для всех кнопок в группе.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.5.1.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 5.1. </B>Несколько групп 
+  кнопок с зависимым нажатием на панели инструментов </font ></P>
+<P><font face="Verdana" size="3"> Если в какой-то ситуации одна или несколько 
+  кнопок должны стать недоступными, для этого можно установить свойство <font face="Verdana" size="2"> 
+  Enabled</font> в значение <font face="Verdana" size="2">False</font>. Но у кнопок 
+  в группе есть еще и третье состояние — неопределенное: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Indeterminate: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Такие кнопки выделяются серым цветом, чтобы 
+  показать пользователю, что их выбирать не следует. Переход в состояние <font face="Verdana" size="2"> 
+  indeterminate=True</font> все еще позволяет кнопке обрабатывать событие <font face="Verdana" size="2">onclick</font>, 
+  но при этом она переходит в отжатое состояние<font face="Verdana" size="2"> 
+  (Down=False</font>). Но — только до следующего нажатия. После него кнопка выходит 
+  из состояния <font face="Verdana" size="2">I</font><font face="Verdana" size="2">ndeterminate</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Marked: 
+    Boolean;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> отображает поверхность кнопки синим цветом (точнее, 
+  цветом <font face="Verdana" size="2">clHighlight</font>), как у выделенных объектов. 
+  В отличие от предыдущего случая с <font face="Verdana" size="2"> indeterminate</font> 
+  кнопка остается в состоянии <font face="Verdana" size="2"> Marked</font> независимо 
+  от нажатий вплоть до присвоения этому свойству значения <font face="Verdana" size="2">False</font>. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Ниже приведен фрагмент программы, с помощью 
+  которого можно выделить кнопки на панели при помощи мыши. Приведенные ниже обработчики 
+  событий нужно присвоить всем кнопкам панели и самой панели <font face="Verdana" size="2">TToolBar</font>: 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> var StartingPoint 
+    : TPoint;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Selecting : 
+    boolean;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.ToolBarlMouseDown(Sender: 
+    TObject; Button: TMouseButton;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Shift: TShiftState; 
+    X, Y: Integer);&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> StartingPoint 
+    := (Sender as TControl).ClientToScreen(Point(X,Y));</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Selecting := 
+    True;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure TForml.ToolBarlMouseUp(Sender: 
+    TObject; Button: TMouseButton;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Shift: TShiftState; 
+    X, Y: Integer);</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">&nbsp;var i: 
+    Integer;r,r0 : TRect;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Selecting 
+    then&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> begin</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> r.TopLeft := 
+    StartingPoint;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> r.BottomRight 
+    := (Sender as TControl).ClientToScreen(Point(X,Y));&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> with ToolBarl 
+    do for i := 0 to ButtonCount-1 do</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;begin</font></font> 
+  </P>
+  <font face="Arial, Helvetica, sans-serif" size="3"> 
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">r0 :=Buttons[i].ClientRect;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">OffsetRect(r0,Buttons[i].</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">ClientOrigin.X,Buttons[i]. 
+    ClientOrigin.Y);</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;if IntersectRect(r0,r,r0) 
+    then</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> Buttons[i].Marked 
+    := True;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;end;&nbsp;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> Selecting := 
+    False;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></P>
+  </font></blockquote>
+<font face="Arial, Helvetica, sans-serif" size="3"> 
+<P><font face="Verdana" size="3"> Наличие обработчиков событий <font face="Verdana" size="2"> 
+  onMouseDown/onMouseUp</font> не мешает нажатию кнопок — нажатие все равно вызывает 
+  событие <font face="Verdana" size="2">onclick</font>. </font ></P>
+<P><font face="Verdana" size="3"> Компонент <font face="Verdana" size="2"> TToolBar</font> 
+  может стать полноценной заменой главного меню (взгляните хотя бы на приложения 
+  из состава MS Office 97 или 2000). К каждой из кнопок можно присоединить меню 
+  — и не одно, а целых два: </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property DropdownMenu: 
+    TPopupMenu;&nbsp;</font> </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">property PopupMenu: 
+    TPopupMenu;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Для того чтобы по нажатии левой кнопки мыши 
+  выпадало меню <font face="Verdana" size="2">DropdownMenu</font>, нужно установить 
+  один из стилей кнопок — <font face="Verdana" size="2"> tbsButton</font> или 
+  <font face="Verdana" size="2">tbsDropdown</font>. В первом случае меню появится 
+  при нажатии в любой части кнопки. При этом событие <font face="Verdana" size="2">onclick</font> 
+  не возникает; кнопка из-за этого становится &quot;неполноценной&quot; — она 
+  пригодна только для показа меню. Второй случай — стиль <font face="Verdana" size="2"> 
+  tbsDropdown</font> — специально предназначен для удобства работы с выпадающими 
+  меню. Меню появляется при щелчке на специальной области с изображением треугольника 
+  в правой части кнопки. А вот щелчок на остальной части кнопки, как обычно, вызовет 
+  событие <font face="Verdana" size="2">onclick</font>. </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index3.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index5.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</font>
+</body>
+</html>

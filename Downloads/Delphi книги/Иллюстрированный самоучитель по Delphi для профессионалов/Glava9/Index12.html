@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TStringStream</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как строковые константы и переменные широко применяются при разработке приложений, то для удобства работы с ними создан специальный класс
+<font face="Verdana" size="2">TStringStream</font>. Он обеспечивает хранение строки и доступ к ней во время выполнения приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Он обладает стандартным для потоков набором свойств и методов, добавляя к ним еще несколько, упрощающих использование строк.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство только для чтения
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataString: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+обеспечивает доступ к хранимой строке. Методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Read(var Buffer; Count: Longint): Longint; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+И
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function Write(const Buffer; Count: Longint): Longint; override;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+реализуют обычный для потоков способ чтения и записи строки для произвольной переменной
+<font face="Verdana" size="2">Buffer</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function ReadString(Count: Longint): string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+обеспечивает чтение <font face="Verdana" size="2"> count</font> байтов строки потока, начиная с текущей позиции.
+</font ></P>
+<P><font face="Verdana" size="3">
+Метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure WriteString(const AString: string);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+дописывает к строке строку <font face="Verdana" size="2">AString</font>, начиная с текущей позиции.
+</font ></P>
+<P><font face="Verdana" size="3">
+При работе с файлами и потоками используются дополнительные классы исключительных ситуаций.
+</font ></P>
+<P><font face="Verdana" size="3">
+Класс <font face="Verdana" size="2"> EFCreateError</font> возникает при ошибке создания файла, a<font face="Verdana" size="2"> EFOpenError</font> —
+при открытии файла.
+</font ></P>
+<P><font face="Verdana" size="3">
+При  чтении/записи данных  в  поток  могут  возникнуть  исключительные
+ситуации <font face="Verdana" size="2">EReadError</font> И <font face="Verdana" size="2">EWriteError</font>.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index13.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

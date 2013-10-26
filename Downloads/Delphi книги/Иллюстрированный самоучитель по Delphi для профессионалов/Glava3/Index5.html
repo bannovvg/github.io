@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Блок try...finally</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Параллельно с блоком <font face="Verdana" size="2"> try..except</font> в языке существует и<font face="Verdana" size="2">
+try. .finally</font>. Он соответствует случаю, когда необходимо возвратить выделенные программе ресурсы даже в случае аварийной ситуации. Синтаксис блока
+<font face="Verdana" size="2"> try..finally</font> таков:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+try</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+&lt;Оператор&gt;&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> &lt;Оператор&gt;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">...</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">
+finally&nbsp;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2"> &lt;Оператор&gt;</font>
+</font ></P>
+  <P><font face="Verdana" size="3"><font face="Verdana" size="2">...</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Смысл этой конструкции можно описать одним предложением: операторы, стоящие после
+<font face="Verdana" size="2">finally</font>, выполняются всегда.
+</font ></P>
+<P><font face="Verdana" size="3">
+Следующие за <font face="Verdana" size="2"> try</font> операторы исполняются в обычном порядке. Если за это время не возникло никаких ИС, далее следуют те операторы, которые стоят после
+<font face="Verdana" size="2">finally</font>. В случае, если между
+<font face="Verdana" size="2"> try</font> и <font face="Verdana" size="2"> finally</font> произошла ИС, управление немедленно передается на операторы после
+<font face="Verdana" size="2">finally</font>, которые называются кодом очистки.
+Допустим, вы поместили после <font face="Verdana" size="2"> try</font> операторы, которые должны выделить вам ресурсы системы (дескрипторы блоков памяти, файлов, контекстов устройств и т. п.). Тогда операторы, освобождающие их, следует поместить после
+<font face="Verdana" size="2">finally</font>, и ресурсы будут освобождены в любом случае. Блок<font face="Verdana" size="2">
+try...finally</font>, как можно догадаться, еще называется блоком защиты ресурсов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Важно обратить внимание на такой факт: данная конструкция ничего не делает с самим объектом — исключительной ситуацией. Задача<font face="Verdana" size="2">
+try...finally </font> — только прореагировать на факт нештатного поведения программы и проделать определенные действия. Сама же ИС продолжает &quot;путешествие&quot; и вопрос ее обработки остается на повестке дня.
+</font ></P>
+<P><font face="Verdana" size="3">
+Блоки защиты ресурсов и обработчики ИС, как и другие блоки, могут быть вложенными. В этом простейшем примере каждый вид ресурсов системы защищается в отдельном блоке:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">AllocatelstResource;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Allocate2ndResource;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;SolveProblem;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Free2ndResource;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;finally</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+FreelstResource;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Можно также вкладывать обработчики друг в друга, предусмотрев в каждом специфическую реакцию на ту или иную ошибку:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+var i,j,k : Integer;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+i := Round(Random);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+j := 1 - i;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+k := 1 div i; try</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+k := 1 div j;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+On EDivByZero do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('Вариант 1: j=0');&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;except</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+On EDivByZero do</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+ShowMessage('Вариант 2: i=0');</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;end;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp; end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Но все же идеально правильный случай — это сочетание блоков двух типов. В один из них помещается общее (освобождение ресурсов в
+<font face="Verdana" size="2">finally</font>), в другой — особенное (конкретная реакция внутри
+<font face="Verdana" size="2">except</font>).
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

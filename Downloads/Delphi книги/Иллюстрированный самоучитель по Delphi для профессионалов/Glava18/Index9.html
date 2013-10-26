@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index8.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index10.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TIBQuery</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TIBQuery</font> выполняет все стандартные функции компонента запроса и наследует возможности класса
+<font face="Verdana" size="2">TiBCustomDataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Как и у остальных компонентов запросов, свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SQL: TStrings;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит текст запроса и позволяет редактировать его. С этим свойством связан специализированный редактор (рис. 18.2).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для просмотра текста запроса можно использовать свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Text: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Параметры запроса хранятся в стандартном свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Params: TParams;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Общее число параметров запроса возвращает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ParamCount: Word;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При создании новых записей в редактируемых наборах данных компонентов запросов возникает проблема присвоения значений полям первичных индексов. Очевидно, что при сохранении новой записи в базе данных поле первичного индекса будет инкрементировано средствами сервера InterBase (соответствующими генератором и триггером). Однако получить это значение в приложении можно только сохранив изменения и обновив набор данных, что зачастую требует больших затрат ресурсов.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для решения этой проблемы в компоненте <font face="Verdana" size="2"> TiBQuery</font> используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property GeneratorField: TIBGeneratorField;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Редактор свойства (рис. 18.2) позволяет связать генератор с инкрементируемым полем.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.18.2.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 18.2. </B>Редактор свойства 
+  <font face="Verdana" size="2"> GeneratorField</font> компонента <font face="Verdana" size="2"> 
+  TiBQuery</font> </font ></P>
+<P><font face="Verdana" size="3"> Список <B>Generator </B>позволяет выбрать один 
+  из доступных генераторов базы данных. Список <B>Field </B>задает инкрементируемое 
+  поле набора данных. В строке <B>Increment By </B>определяется шаг прибавляемого 
+  значения поля. </font ></P>
+<P><font face="Verdana" size="3"> Группа радиокнопок <B>Apply Event </B>определяет 
+  событие, при котором срабатывает генератор: </font ></P>
+<ul>
+  <li> <B><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;On 
+    New Record </font></B><font size="3" face="Verdana, Arial, Helvetica, sans-serif">— 
+    при создании новой записи;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;On 
+    Post </B>— при сохранении новой записи;</font></li>
+  <li> <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><B>&nbsp;On 
+    Server </B>— генератор управляется сервером.</font></li>
+</ul>
+<P><font face="Verdana" size="3"> Редактор свойства <font face="Verdana" size="2"> 
+  GeneratorField</font> попросту присваивает значения полям экземпляра класса<B> 
+  </B><font face="Verdana" size="2">TIBGeneratorField</font>. </font ></P>
+<P><font face="Verdana" size="3"> Методы-обработчики событий полностью соответствуют 
+  классу <font face="Verdana" size="2"> TiBCustom-DataSet </font> (см. табл. 18.2). 
+  </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index8.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index10.html"> 
+      <img SRC="For.gif" BORDER="0"> </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

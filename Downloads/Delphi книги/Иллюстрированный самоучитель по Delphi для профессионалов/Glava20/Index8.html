@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index7.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TSocketConnection</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TSocketConnection</font> обеспечивает соединение клиента с сервером приложений за счет использования сокетов TCP/IP. Для успешного открытия соединения на стороне сервера должен работать сокет-сервер (приложение ScktSrvr.exe, рис. 20.4).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для успешного соединения свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Host: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+должно содержать имя компьютера сервера.
+</font ></P>
+<p align="center">
+<div align="center"><IMG src="gl.20.4.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 20.4. </B>Сокет-сервер 
+  ScktSrvr.exe&nbsp; </font ></P>
+<P><font face="Verdana" size="3"> Дополнительно, свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Address: 
+    String;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> должно содержать IP-адрес сервера. </font ></P>
+<P><font face="Verdana" size="3"> Для открытия соединения должны быть заданы оба 
+  этих свойства. </font ></P>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Port: 
+    Integer;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> устанавливает номер используемого порта. По 
+  умолчанию это порт 211, но разработчик волен изменить порт, например, для использования 
+  различными категориями пользователей или для создания защищенного канала. </font ></P>
+<P><font face="Verdana" size="3"> После правильного выбора компьютера в списке 
+  свойства </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property ServerName: 
+    string;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> в Инспекторе объектов появляется перечень доступных 
+  серверов Автоматизации. И после выбора сервера свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property ServerGUID: 
+    string;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> которое содержит имя компьютера GUID зарегистрированного 
+  сервера, задается автоматически, хотя его можно задать и вручную. </font ></P>
+<P><font face="Verdana" size="3"> Метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">function GetServerList: 
+    OleVariant; virtual;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> возвращает список зарегистрированных серверов 
+  Автоматизации. Открытие и закрытие соединения осуществляется свойством </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property Connected: 
+    Boolean;&nbsp;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> или методами </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> procedure Open;</font> 
+    </font ></P>
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;procedure 
+    Close;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> соответственно. </font ></P>
+<P><font face="Verdana" size="3"> Канал сокета TCP/IP может быть зашифрован. Для 
+  этого используется свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property InterceptName: 
+    string;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> содержащее программный идентификатор объекта 
+  СОМ, обеспечивающего шифрование/дешифрование данных в канале, и свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property InterceptGUID: 
+    string;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> содержащее имя компьютера GUID этого объекта. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Этот объект СОМ перехватывает данные в канале 
+  и осуществляет их обработку, предусмотренную собственным программным кодом. 
+  Это может быть шифрование, сжатие, обработка шумов и т. д. </font ></P>
+<P><font face="Verdana" size="3"> <B>&nbsp;Примечание</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Создание объекта СОМ, обеспечивающего дополнительную 
+    обработку данных в канале, ложится на плечи разработчика. Объект-перехватчик 
+    должен поддерживать стандартный интерфейс <font face="Verdana" size="2">IDataintercept</font>. 
+    </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Естественно, на стороне сервера должен быть 
+  зарегистрирован объект СОМ, выполняющий обратную операцию. Для этого также используется 
+  сокет-сервер (рис. 20.5). Строка <B>Interceptor </B>на странице должна содержать 
+  имя компьютера GUID объекта-перехватчика СОМ. </font ></P>
+<p align="center">
+ 
+<div align="center"><IMG src="gl.20.5.gif" > </div>
+<P align="center"><font face="Verdana" size="3"> <B>Рис. 20.5. </B>Регистрация 
+  объекта-перехватчика СОМ в сокет-сервере </font ></P>
+<P><font face="Verdana" size="3"> Метод </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function GetlnterceptorList: 
+    OleVariant; virtual;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> возвращает список зарегистрированных на сервере 
+  объектов-перехватчиков. </font ></P>
+<P><font face="Verdana" size="3"> Для организации передачи данных между клиентом 
+  и сервером компонент <font face="Verdana" size="2">TSocketConnection</font> 
+  предоставляет <B> </B>интерфейс <font face="Verdana" size="2">IAppServer</font>&nbsp; 
+  </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property AppServer: 
+    Variant;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> который также может быть получен методом </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> function GetServer: 
+    lAppServer; override;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> Свойство </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> <font face="Verdana" size="2"> property ObjectBroker: 
+    TCustomObjectBroker;</font> </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> позволяет использовать экземпляр компонента 
+  <font face="Verdana" size="2"> TSimpieObjectBroker</font> для получения списка 
+  доступных серверов во время выполнения (см. ниже). </font ></P>
+<P><font face="Verdana" size="3"> Методы-обработчики событий компонента <font face="Verdana" size="2"> 
+  TSocketConnection</font> полностью совпадают с методами-обработчиками компонента 
+  <font face="Verdana" size="2"> TDCOMConnection</font> (см. табл. 20.1). </font ></P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index7.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index9.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

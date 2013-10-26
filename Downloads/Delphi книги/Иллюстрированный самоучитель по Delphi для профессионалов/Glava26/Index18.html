@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Управляющие 
+  вычислительные элементы</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Выше мы упоминали о свойстве <font face="Verdana" size="2"> Controller</font> элементов
+<font face="Verdana" size="2">CalcText</font> и <font face="Verdana" size="2">calcTota</font><font face="Verdana" size="2">l</font>, которое позволяет определить момент начала вычислений. Для этого используется специальный невизуальный элемент
+<font face="Verdana" size="2">CalcController</font>. Обычно он располагается на той же полосе, что и вычислительные элементы и инициализирует процесс вычисления в момент своей печати. Хотя на самом деле невизуальный элемент
+<font face="Verdana" size="2">CalcController</font> не печатается, тем не менее событие
+<font face="Verdana" size="2"> onBeforePrint</font> он получает исправно вместе со всеми элементами, расположенными на данной полосе. А значит и с инициализацией вычислений он справится вполне.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обладая несколькими специфическими свойствами, он позволяет определить момент начала вычислений более точно. И так же, как элемент
+<font face="Verdana" size="2"> FontMaster</font> используется для централизованного управления шрифтами, этот элемент может быть центром управления вычислениями.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> initcaicvar</font> должно ссылаться на другой вычислительный элемент. И вычисленное им значение будет использовано в качестве начального.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2">initDataField</font> задает поле данных, значение которого используется в качестве начального. Работает, если свойство
+<font face="Verdana" size="2"> initcaicvar</font> не задано.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> initvalue</font> задает начальное значение, если предыдущие два свойства не заданы.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для того чтобы эти свойства работали и задавали начальное значение, ссылка на элемент
+<font face="Verdana" size="2">CalcController</font> должна присутствовать в свойстве
+<font face="Verdana" size="2">Initializer</font> элементов
+оформления <B> </B><font face="Verdana" size="2">Ca</font>l или
+<font face="Verdana" size="2">CalcTotal</font>.
+</font ></P>
+<P align="left">
+Элемент <font face="Verdana" size="2">DataCycle</font> используется для дополнительной фильтрации, сортировки и просмотра данных, поля которого используются для вычислений. С его помощью можно получить нужное для вычислений подмножество записей набора данных, не изменяя просмотра данных.
+</P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> oataview</font> задает просмотр данных, с которым будет работать элемент
+<font face="Verdana" size="2">DataCycle</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При помощи свойств<B> </B><font face="Verdana" size="2">MasterDataView</font>,
+<font face="Verdana" size="2"> MasterKey</font> и <font face="Verdana" size="2">DetailKey</font>
+можно получить подмножество записей для отношения &quot;один-ко-многим&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство <font face="Verdana" size="2"> sortKey</font> позволяет отсортировать записи по заданному полю.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index19.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>
+

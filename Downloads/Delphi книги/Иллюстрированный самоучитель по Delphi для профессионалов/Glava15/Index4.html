@@ -1,0 +1,600 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Компонент 
+  TDBCtrlGrid</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент <font face="Verdana" size="2"> TDBCtrlGrid</font> внешне напоминает компонент
+<font face="Verdana" size="2">TDBGrid</font>, но никак не связан с классом
+<font face="Verdana" size="2">TCustomDBGrid</font>, а наследуется напрямую от класса
+<font face="Verdana" size="2">TWinControl</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Этот компонент позволяет отображать данные в строках в произвольной форме. Компонент представляет собой набор панелей, каждая из которых служит платформой для размещения данных отдельной записи набора данных. На панели могут размещаться любые компоненты отображения данных, предназначенные для работы с отдельным полем. С каждым таким компонентом можно связать нужное поле набора данных. При открытии набора данных в компоненте
+<font face="Verdana" size="2"> TDBCtrlGrid</font> на каждой новой панели создается набор компонентов отображения данных, аналогичный тому, который был создан на одной панели во время разработки.
+</font ></P>
+<P><font face="Verdana" size="3">
+На панель можно переносить только те компоненты отображения данных, которые показывают значение одного поля для единственной записи набора
+данных<B>. </B>Нельзя использовать компоненты<font face="Verdana" size="2">
+TDBGrid, TDBCtrlGrid, TDBRichEdit, TDBListBox, TDBRadioGroup, TDBLookupListBox.</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+После того, как для компонента <font face="Verdana" size="2"> TDBCtrlGrid</font> задано значение свойства
+<font face="Verdana" size="2">DataSource</font>, все переносимые на панель компоненты отображения данных автоматически связываются с указанным компонентом
+<font face="Verdana" size="2"> TdataSource</font> (табл. 15.5). Самостоятельное задание свойства
+<font face="Verdana" size="2"> DataSource</font> для дочерних компонентов отображения данных не допускается. В них требуется определить только поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+Компонент может отображать панели в одну или несколько колонок. Для задания числа колонок панелей используется свойство
+<font face="Verdana" size="2">colcount</font>. Число видимых строк панелей определяется свойством
+<font face="Verdana" size="2">RowCount</font>. Вертикальное или горизонтальное размещение колонок панелей зависит от значения свойства
+<font face="Verdana" size="2">Orientation</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+При использовании нескольких колонок панелей курсор перемещается по колонке сверху вниз с последующим переходом на следующую колонку. Направление движения курсора не зависит от значения свойства
+<font face="Verdana" size="2">Orientation</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Размеры одной панели определяются свойствами
+<font face="Verdana" size="2"> panelHeight</font> и <font face="Verdana" size="2">Panelwidth</font>. Они взаимосвязаны с размерами самого компонента. При изменении значений свойств
+<font face="Verdana" size="2"> PanelHeight</font> и <font face="Verdana" size="2">Panelwidth</font> размеры компонента изменяются таким образом, чтобы в нем помещалось указанное в свойствах
+<font face="Verdana" size="2">colcount</font> и <font face="Verdana" size="2"> RowCount</font> число панелей и наоборот.
+</font ></P>
+<P><font face="Verdana" size="3">
+Не рекомендуется размещать на панели компоненты
+<font face="Verdana" size="2">TDBMemo</font> и <font face="Verdana" size="2">TDBimage</font>, т. к. это может привести к значительному снижению производительности.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 15.5. </B>Свойства 
+  и методы компонента <font face="Verdana" size="2"> TDBCtrlGrid</font> </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="498" HEIGHT="846">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="31">
+<DIV WIDTH="263" HEIGHT="31" style="width: 82; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="31">
+<DIV WIDTH="60" HEIGHT="31" style="width: 8; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Тип</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="31">
+<DIV WIDTH="310" HEIGHT="31" style="width: 86; height: 31">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="501" HEIGHT="30">
+<DIV WIDTH="263" HEIGHT="30" style="width: 83; height: 30">
+<P><font face="Verdana" size="3">
+<b>
+Свойства</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="46">
+<DIV WIDTH="263" HEIGHT="46" style="width: 173; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AllowDelete: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="46">
+<DIV WIDTH="60" HEIGHT="46" style="width: 18; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="46">
+<DIV WIDTH="310" HEIGHT="46" style="width: 241; height: 46">
+<P><font face="Verdana" size="3">
+Разрешает или запрещает удаление текущей записи
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="52">
+<DIV WIDTH="263" HEIGHT="52" style="width: 173; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Allowlnsert: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="52">
+<DIV WIDTH="60" HEIGHT="52" style="width: 9; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="52">
+<DIV WIDTH="310" HEIGHT="52" style="width: 228; height: 52">
+<P><font face="Verdana" size="3">
+Разрешает или запрещает вставку новой записи
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="34">
+<DIV WIDTH="263" HEIGHT="34" style="width: 137; height: 34">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Canvas: TCanvas;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="34">
+<DIV WIDTH="60" HEIGHT="34" style="width: 11; height: 34">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="34">
+<DIV WIDTH="310" HEIGHT="34" style="width: 140; height: 34">
+<P><font face="Verdana" size="3">
+Канва компонента
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="38">
+<DIV WIDTH="263" HEIGHT="38" style="width: 155; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ColCount: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="38">
+<DIV WIDTH="60" HEIGHT="38" style="width: 12; height: 38">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="38">
+<DIV WIDTH="310" HEIGHT="38" style="width: 265; height: 38">
+<P><font face="Verdana" size="3">
+Определяет число колонок с панелями
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="52">
+<DIV WIDTH="263" HEIGHT="52" style="width: 150; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property EditMode: Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="52">
+<DIV WIDTH="60" HEIGHT="52" style="width: 8; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="52">
+<DIV WIDTH="310" HEIGHT="52" style="width: 183; height: 52">
+<P><font face="Verdana" size="3">
+Разрешает или запрещает редактирование данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="106">
+<DIV WIDTH="263" HEIGHT="106" style="width: 155; height: 106">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDBCtrlGridOrientation = (goVertical, goHorizontal);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Orientation: TDBCtrlGridOrientation;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="106">
+<DIV WIDTH="60" HEIGHT="106" style="width: 20; height: 106">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="106">
+<DIV WIDTH="310" HEIGHT="106" style="width: 249; height: 106">
+<P><font face="Verdana" size="3">
+Определяет порядок следования записей — по горизонтали или по вертикали
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="98">
+<DIV WIDTH="263" HEIGHT="98" style="width: 178; height: 98">
+<P><font face="Verdana" size="3">
+t<font face="Verdana" size="2">ype TDBCtrlGridBorder = (gbNone, gbRaised) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PanelBorder: TDBCtrlGridBorder;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="98">
+<DIV WIDTH="60" HEIGHT="98" style="width: 17; height: 98">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="98">
+<DIV WIDTH="310" HEIGHT="98" style="width: 229; height: 98">
+<P><font face="Verdana" size="3">
+Определяет способ отображения границы панели
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="50">
+<DIV WIDTH="263" HEIGHT="50" style="width: 161; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PanelCount: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="50">
+<DIV WIDTH="60" HEIGHT="50" style="width: 16; height: 50">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Ro</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="50">
+<DIV WIDTH="310" HEIGHT="50" style="width: 232; height: 50">
+<P><font face="Verdana" size="3">
+Содержит число видимых одновременно панелей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="48">
+<DIV WIDTH="263" HEIGHT="48" style="width: 170; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PanelHeight: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="48">
+<DIV WIDTH="60" HEIGHT="48" style="width: 3; height: 48">
+<P><font face="Verdana" size="3"><font face="Verdana" size="2">Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="48">
+<DIV WIDTH="310" HEIGHT="48" style="width: 226; height: 48">
+<P><font face="Verdana" size="3">
+Определяет высоту панелей в пикселах
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="58">
+<DIV WIDTH="263" HEIGHT="58" style="width: 168; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Panellndex: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="58">
+<DIV WIDTH="60" HEIGHT="58" style="width: 1; height: 58">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pu</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="58">
+<DIV WIDTH="310" HEIGHT="58" style="width: 254; height: 58">
+<P><font face="Verdana" size="3">
+Определяет индекс панели текущей записи
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="54">
+<DIV WIDTH="263" HEIGHT="54" style="width: 161; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PanelWidth: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="54">
+<DIV WIDTH="60" HEIGHT="54" style="width: 8; height: 54">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="54">
+<DIV WIDTH="310" HEIGHT="54" style="width: 224; height: 54">
+<P><font face="Verdana" size="3">
+Определяет ширину панелей в пикселах
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="52">
+<DIV WIDTH="263" HEIGHT="52" style="width: 148; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property RowCount: Integer;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="52">
+<DIV WIDTH="60" HEIGHT="52" style="width: 1; height: 52">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="52">
+<DIV WIDTH="310" HEIGHT="52" style="width: 233; height: 52">
+<P><font face="Verdana" size="3">
+Определяет число строк видимых панелей
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="48">
+<DIV WIDTH="263" HEIGHT="48" style="width: 182; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property SelectedColor: TColor;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="48">
+<DIV WIDTH="60" HEIGHT="48" style="width: 2; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="48">
+<DIV WIDTH="310" HEIGHT="48" style="width: 238; height: 48">
+<P><font face="Verdana" size="3">
+Определяет фоновый цвет панели текущей записи
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="195" HEIGHT="48">
+<DIV WIDTH="263" HEIGHT="48" style="width: 168; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ShowFocus : Boolean;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="48">
+<DIV WIDTH="60" HEIGHT="48" style="width: 4; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Pb</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="276" HEIGHT="48">
+<DIV WIDTH="310" HEIGHT="48" style="width: 259; height: 48">
+<P><font face="Verdana" size="3">
+Разрешает или запрещает выделение вокруг панели текущей записи
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="495" HEIGHT="31">
+<DIV WIDTH="250" HEIGHT="31" style="width: 67; height: 31">
+<P><font face="Verdana" size="3">
+Методы
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="214">
+<DIV WIDTH="250" HEIGHT="214" style="width: 173; height: 214">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TDBCtrlGridKey = (gkNull, gkEditMode, gkPriorTab, gkNextTab, gkLeft,
+gkRight, gkUp, gkDown, gkScrollUp, gkScrollDown, gkPageUp, gkPageDown, gkHome,
+gkEnd,&nbsp; gklnsert, gkAppend, gkDelete, gkCancel) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure DoKey(Key: TDBCtrlGridKey) ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="214">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="214">
+<DIV WIDTH="317" HEIGHT="214" style="width: 252; height: 214">
+<P><font face="Verdana" size="3">
+Выполняет операцию, заданную при помощи параметра
+<font face="Verdana" size="2">Key</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Доступны операции навигации по записям, перевода в режим редактирования, вставки, удаления записей, отмены изменений
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="56">
+<DIV WIDTH="250" HEIGHT="56" style="width: 158; height: 56">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure KeyDown (var Key: Word; Shift: TShiftState) ; override;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="56">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="56">
+<DIV WIDTH="317" HEIGHT="56" style="width: 250; height: 56">
+<P><font face="Verdana" size="3">
+Используется при нажатии клавиши для трансляции кодов клавиш
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="495" HEIGHT="27">
+<DIV WIDTH="250" HEIGHT="27" style="width: 250; height: 27">
+<P><font face="Verdana" size="3">
+<b>
+Методы-обработчики событий</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="182" HEIGHT="127">
+<DIV WIDTH="250" HEIGHT="127" style="width: 164; height: 127">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TPaintPanelEvent =&nbsp; procedure (DBCtrlGrid: TDBCtrlGrid; Index: Integer) of
+object;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnPaintPanel :&nbsp; TPaintPanelEvent;&nbsp;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="30" HEIGHT="127">
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="283" HEIGHT="127">
+<DIV WIDTH="317" HEIGHT="127" style="width: 268; height: 127">
+<P><font face="Verdana" size="3">
+Вызывается при перерисовке панели. Параметр
+<font face="Verdana" size="2"> Index</font> соответствует индексу панели
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

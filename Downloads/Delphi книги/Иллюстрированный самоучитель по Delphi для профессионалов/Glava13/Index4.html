@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <strong>Класс 
+  TField</strong> <br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Как уже говорилось выше, в большой иерархии классов для полей различных типов данных класс
+<font face="Verdana" size="2"> TField</font> является базовым (см. рис. 13.1), он инкапсулирует свойства и методы абстрактного поля данных. Именно от него происходят все классы типизированных полей. В реальной работе класс
+<font face="Verdana" size="2"> TField</font> не используется, но его значение трудно переоценить. Практически все основные свойства классов типизированных полей унаследованы от класса
+<font face="Verdana" size="2"> TField</font> без каких-либо изменений, а дополнительные свойства и методы обеспечивают работу конкретного типа данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Что касается методов-обработчиков событий, то четыре метода, определенные в классе
+<font face="Verdana" size="2">TField</font>, наследуются всеми потомками без изменения и дополнения.
+</font ></P>
+<P><font face="Verdana" size="3">
+Ниже приведены свойства и методы класса <font face="Verdana" size="2">TField</font>. Имя объекта содержит свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Name: TComponentName;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При создании объекта поля на этапе разработки имя объекта складывается из имени соответствующего компонента набора данных и имени поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FieldName: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает имя поля таблицы базы данных. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FullName: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+используется, если текущее поле является дочерним для другого поля. В этом случае свойство содержит имена всех родительских полей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Название поля в таблице базы данных содержится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Origin:   String;&nbsp;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+ Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property  FieldNo:   Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает исходный порядковый номер поля в наборе данных. Если объекты полей являются статическими, их фактический порядок может быть изменен в Редакторе полей.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Index:   Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит индекс объекта поля в списке <font face="Verdana" size="2">Fields</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Функциональное назначение поля определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TFieldKind = (fkData, fkCalculated, fkLookup, fklnternalCalc,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+fkAggregate);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property FieldKind: TFieldKind;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В большинстве случаев его значение определяется автоматически в момент создания объекта поля. Да и впоследствии вряд ли возникнет необходимость сделать реальное поле данных вычисляемым. Обычно попытка изменить значение свойства
+<font face="Verdana" size="2"> FieldKind</font> вызывает ошибку. Рассмотрим возможные значения этого свойства:
+</font ></P>
+<ul>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">fkData</font> 
+    — поле данных;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">fkCalculated</font> 
+    — вычисляемое поле;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">fkLookup</font> 
+    — поле синхронного просмотра;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">fklnternalCalc</font> 
+    — внутреннее вычисляемое поле;</font></li>
+  <li><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;<font size="2">fkAggregate</font> 
+    — агрегатное поле.</font></li>
+</ul>
+<P><font face="Verdana" size="3">
+Если поле является вычисляемым, свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Calculated: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+принимает значение <font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+На связанный набор данных указывает свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSet: TDataSet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое при создании объекта средствами среды разработки заполняется автоматически.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataType: TFieldType;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+возвращает тип данных поля, а свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSize:   Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит объем памяти, необходимый для хранения значения поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+Одной из важнейших задач класса <font face="Verdana" size="2"> TFieid</font> является обеспечение доступа к текущему значению поля. В этом случае класс взаимодействует с буфером текущей записи набора данных, а значение можно получить при помощи нескольких свойств.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Value:  Variant</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+всегда содержит значение, которое сохранено после последнего выполнения метода
+<font face="Verdana" size="2"> Post</font> набора данных:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+with Tablel do begin Open;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+while Not EOF do begin</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+if Fields[0].Value &gt; 10</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+then Fields[1].Value := Fields[1].Value*2;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;Next;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">Close;&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В этом примере при помощи метода <font face="Verdana" size="2"> Next</font> осуществляется перебор всех записей набора данных. Если значение первого поля больше 10, то значение второго поля удваивается. Для этого применяется свойство
+<font face="Verdana" size="2"> value</font> объектов полей набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Однако из-за использования вариантов свойство
+<font face="Verdana" size="2"> value</font> является относительно медленным. И для преобразования текущего значения поля к необходимому виду можно применять целую группу быстрых свойств AS ..., которые содержат значение в определенном типе данных. Чаще всего используется свойство
+<font face="Verdana" size="2">Asstring</font>, например, оно может применяться для представления числовых значений полей в элементах управления:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Editl.Text := Tablel.Fields[0].AsString;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<B>&nbsp;Примечание</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> При работе со статическими объектами полей 
+    при передаче значений желательно использовать свойства из группы <font face="Verdana" size="2"> 
+    AS ...,</font> т. к. неявное задание типа свойством <font face="Verdana" size="2"> 
+    Value</font> может привести к ошибке преобразования данных типа Variant. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property CanModify:  Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+имеет значение <font face="Verdana" size="2">False</font>, значение поля нельзя редактировать. Однако это свойство является только средством для определения возможности редактирования.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Readonly:   Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+позволяет запретить редактирование <font face="Verdana" size="2"> (Readonly := True)</font> или разрешить его
+<font face="Verdana" size="2">(Readonly := False).</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+Большая группа свойств отвечает за представление и форматирование значения поля.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DisplayText: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит значение поля в строковом формате до начала редактирования. Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Text: String;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+предназначено для использования компонентами отображения данных при редактировании. Поэтому эти два свойства могут иметь разные значения в случае, если значение поля в строковом формате при редактировании и просмотре различно. У классов-наследников
+<font face="Verdana" size="2"> TField</font> для этого достаточно задать шаблон отображения данных для поля (свойство
+<font face="Verdana" size="2">Display/Format</font>) и шаблон редактирования данных (свойство
+<font face="Verdana" size="2">EditFormat)</font>. Например, вещественное число при просмотре может иметь разделители тысяч, а при редактировании нет. В этом случае рассматриваемые свойства будут иметь следующий вид:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+DisplayText = ' 1 452,32'&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> Text  =   4452,32'</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Свойства <font face="Verdana" size="2"> Text</font> и <font face="Verdana" size="2"> DisplayText</font> влияют на использование метода-обработчика
+<font face="Verdana" size="2">onGetText</font>. Если параметр <font face="Verdana" size="2"> DisplayText</font> имеет значение
+<font face="Verdana" size="2">True</font>, то параметр <font face="Verdana" size="2"> Text</font> содержит значение свойства
+<font face="Verdana" size="2">DisplayText</font>, в противном случае в метод передается значение поля в строковом формате.
+</font ></P>
+<P><font face="Verdana" size="3">
+Если поле не имеет значения, то при помощи свойства
+<font face="Verdana" size="2">DefaultExpression</font> можно задать некоторое постоянное значение, которое будет появляться в компоненте отображения данных при пустом поле. Если постоянное значение содержит какие-либо символы кроме цифр, то все выражение нужно обязательно брать в кавычки.
+</font ></P>
+<P><font face="Verdana" size="3">
+В случае возникновения исключительных ситуаций во время использования поля генерируется соответствующее сообщение, в котором в качестве имени поля применяется значение свойства
+<font face="Verdana" size="2">DisplayName</font>. Если задано свойство
+<font face="Verdana" size="2">DispiayLabel</font>, то <font face="Verdana" size="2">DisplayName</font> приравнивается к нему, в противном случае для задания свойства
+<font face="Verdana" size="2">DisplayName</font> используется свойство
+<font face="Verdana" size="2">FieldName</font>. Другим способом задать значение свойства
+<font face="Verdana" size="2">DisplayName</font> невозможно.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DisplayWidth: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет число символов для отображения значений поля в визуальных компонентах отображения данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Visible: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+отвечает за видимость поля в визуальных компонентах отображения данных. При этом компоненты, отображающие одно поле, перестают показывать его значения, а компоненты типа
+<font face="Verdana" size="2"> TDBGrid</font> не отображают колонки, связанные с полем.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> Еще несколько групп свойств класса <font face="Verdana" size="2">TField</font>, 
+    а также его методы-обработчики рассматриваются ниже в этой главе. </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

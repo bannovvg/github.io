@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Вложенные наборы данных</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+В гл. 14 рассматривался вопрос организации между таблицами отношения &quot;один-ко-многим&quot;, когда через одинаковое значение поля внешнего ключа одна запись главной таблицы связывается с несколькими записями подчиненной таблицы. Этот широко распространенный в практике программирования приложений БД механизм реализован и в компоненте
+<font face="Verdana" size="2">TClientDataSet</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для этого используется класс поля <font face="Verdana" size="2">TDataSetField</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+На стороне клиента для создания отношения &quot;один-ко-многим&quot; необходимо использовать как минимум два компонента
+<font face="Verdana" size="2">TClientDataSet</font>, главный из которых инкапсулирует основной набор данных, а подчиненный — вложенный набор данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+Итак, на стороне сервера есть два табличных компонента, связанных отношением &quot;один-ко-многим&quot; при помощи свойств
+<font face="Verdana" size="2"> MasterSource</font> и <font face="Verdana" size="2"> MasterFields</font> (см. гл. 14).
+Также это могут быть и два компонента запросов SQL, связанные параметрами подчиненного запроса с одноименными полями главного
+запроса и свойством <font face="Verdana" size="2">DataSource</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь на стороне клиента необходимо при помощи компонента-провайдера связать компонент
+<font face="Verdana" size="2"> TClientDataSet</font> с главным серверным компонентом отношения &quot;один-ко-многим&quot; и создать для него статические объекты для всех полей. Для этого достаточно дважды щелкнуть на компоненте и в окне Редактора полей (см. рис. 22.3) из всплывающего меню выбрать пункт <B>Add Field. </B>В результате в окне Редактора полей появятся имена объектов для
+</font ></P>
+<P><font face="Verdana" size="3">
+всех полей серверного набора данных, а также еще одно дополнительное поле объектного типа
+<font face="Verdana" size="2">TDataSetFieid</font>. Его имя совпадает с именем подчиненного серверного компонента отношения &quot;один-ко-многим&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Это поле связано с подчиненным компонентом на сервере. Чтобы убедиться в этом, достаточно просмотреть значение его свойства только для чтения
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property NestedDataSet: TDataSet;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Индексированный список всех полей, передаваемых из серверного подчиненного компонента, содержится в свойстве только для чтения
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Fields: TFields;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В дальнейшем связь между компонентами на клиенте настраивается именно через это поле. В подчиненном компоненте
+<font face="Verdana" size="2">TClientDataSet</font> в Инспекторе объектов необходимо выбрать свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DataSetField: TDataSetFieid;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+В списке этого свойства вы увидите имя только что созданного поля объектного типа
+<font face="Verdana" size="2">TDataSetField</font>. Выберите его и отношение &quot;один-ко-многим&quot; для клиентских наборов данных готово. При этом в компоненте вложенного набора данных автоматически очищаются свойства
+<font face="Verdana" size="2"> RemoteServer</font> и <font face="Verdana" size="2">FroviderName</font>, т. к. их значения утрачивают значение и компонент оказывается связан только с главным компонентом отношения &quot;один-ко-многим&quot;.
+</font ></P>
+<P><font face="Verdana" size="3">
+Теперь при навигации по записям основного набора данных во вложенном наборе данных автоматически будут появляться связанные записи. Также вы можете использовать все возможности, предоставляемые компонентом
+<font face="Verdana" size="2">TClientDataSet</font> как для основного, так и для вложенного набора данных.
+</font ></P>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index15.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index17.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

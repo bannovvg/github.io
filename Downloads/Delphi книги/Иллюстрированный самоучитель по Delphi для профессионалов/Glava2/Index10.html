@@ -1,0 +1,445 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <b>Внешний вид элемента управления 
+  </b><br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Для определения цвета компонента используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Color: TColor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При нахождении указателя мыши над компонентом его изображение может изменяться в соответствии со значением свойства
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Cursor: TCursor;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Для текста компонента шрифт обычно задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Font: TFont;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Сложный класс <font face="Verdana" size="2">TFont</font>, задающий все характеристики шрифта, подробно рассматривается в гл. 10.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DesktopFont: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет возможность использования шрифта для отображения, который применяется ОС для представления текста в значках.
+</font ></P>
+<P><font face="Verdana" size="3">
+Сам текст задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TCaption = string; property Text: TCaption;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Длину текста можно определить при помощи функции
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetTextLen: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Она возвращает число символов в тексте.
+</font ></P>
+<P><font face="Verdana" size="3">
+Элемент управления можно сделать видимым или невидимым. Для этого применяется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Visible: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Этих же результатов можно достичь методами <font face="Verdana" size="2"> show</font> (компонент видим) и
+<font face="Verdana" size="2"> Hide</font> (компонент невидим).
+</font ></P>
+<P><font face="Verdana" size="3">
+Опубликованное свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Hint: string;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+содержит текст ярлыка — однострочной подсказки, которая появляется в маленькой рамке при остановке мыши на элементе управления.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для управления ярлыком используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ShowHint: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> ярлык начинает работать, при значении
+<font face="Verdana" size="2"> False</font> ярлык выключается.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для каждого элемента управления можно создать собственное всплывающее меню. Ссылка на экземпляр класса
+<font face="Verdana" size="2">TPopupMenu</font>, инкапсулирующего такое меню, хранится в свойстве
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property PopupMenu: TPopupMenu;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Текущее состояние элемента управления определяется свойством
+<font face="Verdana" size="2">Controistate</font>:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TControlState = set of (csLButtonDown, csClicked, csPalette, csReadingState, csAlignmentNeeded, csFocusing, csCreating, csPaintCopy, csCustomPaint, csDestroyingHandle, csDocking,); property Controistate: TControlState;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Описание возможных состояний элемента управления представлено в табл. 2.3.&nbsp;
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 2.3. </B>Возможные 
+  состояния элемента управления </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="444" HEIGHT="235">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="21">
+<DIV WIDTH="180" HEIGHT="21" style="width: 86; height: 21">
+<P><font face="Verdana" size="3">
+<b>
+Состояние</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="286" HEIGHT="21">
+<DIV WIDTH="452" HEIGHT="21" style="width: 93; height: 21">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="60">
+<DIV WIDTH="180" HEIGHT="60" style="width: 115; height: 60">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csLButtonDown</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="286" HEIGHT="60">
+<DIV WIDTH="452" HEIGHT="60" style="width: 276; height: 60">
+<P><font face="Verdana" size="3">
+Левая кнопка мыши нажата, но еще не отпущена. Используется для реализации события
+<font face="Verdana" size="2"> OnMouseDown</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="46">
+<DIV WIDTH="180" HEIGHT="46" style="width: 80; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csClicked</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="286" HEIGHT="46">
+<DIV WIDTH="452" HEIGHT="46" style="width: 281; height: 46">
+<P><font face="Verdana" size="3">
+Левая кнопка мыши нажата, но еще не отпущена. Используется для реализации события
+<font face="Verdana" size="2"> OnClick</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="44">
+<DIV WIDTH="180" HEIGHT="44" style="width: 82; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csPalette</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="286" HEIGHT="44">
+<DIV WIDTH="452" HEIGHT="44" style="width: 249; height: 44">
+<P><font face="Verdana" size="3">
+Состояние соответствует режиму изменения палитры. Это реакция на сообщение
+<font face="Verdana" size="2">WM_ PALETTCHANGED</font>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="46">
+<DIV WIDTH="180" HEIGHT="46" style="width: 119; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csReadingState</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="286" HEIGHT="46">
+<DIV WIDTH="452" HEIGHT="46" style="width: 228; height: 46">
+<P><font face="Verdana" size="3">
+Осуществляется чтение значений свойств из потока (см. табл. 5.1)
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="164" HEIGHT="17">
+<DIV WIDTH="180" HEIGHT="48" style="width: 136; height: 32">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csAlignmentNeeded</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="286" HEIGHT="17">
+<DIV WIDTH="452" HEIGHT="48" style="width: 220; height: 34">
+<P><font face="Verdana" size="3">
+Осуществляется выравнивание компонента
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="155" HEIGHT="34">
+<DIV WIDTH="171" HEIGHT="34" style="width: 75; height: 34">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csFocusing</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="300" HEIGHT="34">
+<DIV WIDTH="466" HEIGHT="34" style="width: 254; height: 34">
+<P><font face="Verdana" size="3">
+Элемент управления получает фокус
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="155" HEIGHT="23">
+<DIV WIDTH="171" HEIGHT="23" style="width: 76; height: 23">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csCreating</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="300" HEIGHT="23">
+<DIV WIDTH="466" HEIGHT="23" style="width: 250; height: 23">
+<P><font face="Verdana" size="3">
+Элемент управления и его дочерние элементы создаются
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="155" HEIGHT="35">
+<DIV WIDTH="171" HEIGHT="35" style="width: 82; height: 35">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csPaintCopy</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="300" HEIGHT="35">
+<DIV WIDTH="466" HEIGHT="35" style="width: 236; height: 35">
+<P><font face="Verdana" size="3">
+Отрисовывается копия элемента управления
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="155" HEIGHT="44">
+<DIV WIDTH="171" HEIGHT="44" style="width: 99; height: 44">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csCustomPaint</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="300" HEIGHT="44">
+<DIV WIDTH="466" HEIGHT="44" style="width: 255; height: 44">
+<P><font face="Verdana" size="3">
+Элемент управления выполняет нестандартные операции отрисовки, заданные разработчиком
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="155" HEIGHT="33">
+<DIV WIDTH="171" HEIGHT="33" style="width: 131; height: 33">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csDestroyingHandle</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="300" HEIGHT="33">
+<DIV WIDTH="466" HEIGHT="33" style="width: 208; height: 33">
+<P><font face="Verdana" size="3">
+Указатель на объект элемента управления уничтожается
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="155" HEIGHT="29">
+<DIV WIDTH="171" HEIGHT="29" style="width: 80; height: 29">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+csDocking</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="300" HEIGHT="29">
+<DIV WIDTH="466" HEIGHT="29" style="width: 232; height: 29">
+<P><font face="Verdana" size="3">
+Элемент управления находится в режиме присоединения
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+В зависимости от совокупности установленных свойств, элемент управления может соответствовать одному из возможных стилей, который задается свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TControlStyle = set of (csAcceptsControls, csCaptureMouse, csDesignlnteractive, csClickEvents, csFramed, csSetCaption, csOpaque, csDoubleClicks, csFixedWidth, csFixedHeight, csNoDesignVisible, csReplicatable, csNoStdEvents, csDisplayDraglmage, csReflector, csActionClient, csMenuEvents); property ControlStyle: TControlStyle;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Доступность элемента управления в целом определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Enabled: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При значении <font face="Verdana" size="2"> True</font> элемент управления полностью работоспособен. При значении
+<font face="Verdana" size="2"> False</font> элемент управления неактивен и отображается серым цветом.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для получения контекста устройства нос элемента управления используется метод
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+function GetDeviceContext(var WindowHandle: HWnd): HDC; virtual;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Набор свойств и методов класса <font face="Verdana" size="2">TwinControl</font> обеспечивает функционирование механизма перетаскивания
+<font face="Verdana" size="2"> (Drag-and-Drop)</font> и механизма присоединения (<font face="Verdana" size="2">Drag-and-Dock</font>).
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index9.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index11.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

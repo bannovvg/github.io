@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Библиотека компонентов CLX</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Безусловно, библиотека компонентов CLX более бедна по сравнению с VCL. Тем не менее, ее компоненты позволяют создавать полноценные приложения. В целом состав компонентов CLX напоминает Палитру компонентов ранних версий Delphi. Библиотека CLX загружается в Палитру компонентов при открытии существующего или создании нового проекта CLX.
+</font ></P>
+<P><font face="Verdana" size="3">
+Все компоненты CLX, имеющие аналоги в VCL, а таких большинство, имеют те же имена, что и компоненты VCL. Так как при переносе компонентов из Палитры компонентов на форму соответствующие модули подключаются в проект автоматически, никаких проблем с двойным наименованием не возникает.
+</font ></P>
+<P><font face="Verdana" size="3">
+Исходные модули библиотеки CLX содержаться в папке \Delphi7\Source \С1х.
+</font ></P>
+<P><font face="Verdana" size="3">
+Первые три страницы Палитры компонентов <B>(Standard, Additional, Common Controls), </B>а также страница <B>Dialogs </B>содержат визуальные и невизуальные компоненты для конструирования пользовательского интерфейса приложения.
+</font ></P>
+<P><font face="Verdana" size="3">
+<B>        Примечание&nbsp;</B>
+</font ></P>
+<blockquote>
+  <P><font face="Verdana" size="3"> Из-за некоторых различий стандартов пользовательского 
+    интерфейса Windows и Linux часть визуальных компонентов CLX имеют несвойственные 
+    для Windows дополнительные функции. Отличия в стандартных свойствах и методах 
+    описываются ниже. </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Большинство компонентов на этих страницах хорошо знакомы разработчикам (правда, некоторые из них перекочевали из других страниц VCL — например
+<font face="Verdana" size="2"> TTimer</font> и<font face="Verdana" size="2">
+TSpinEdit</font>). Однако существуют некоторые новинки. Это компоненты
+<font face="Verdana" size="2"> TLCDNumber, TTextviewer и TTextBrowser. </font> Их краткая аннотация представлена в табл. 4.1.
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 4.1. </B>Уникальные 
+  визуальные компоненты CLX </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="497" HEIGHT="372">
+  <TR> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="129" HEIGHT="19"> 
+      <font face="Verdana, Arial, Helvetica, sans-serif"><b>Компонент&nbsp;</b> 
+      </font></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="137" HEIGHT="19"> 
+      <font face="Verdana, Arial, Helvetica, sans-serif"><b>Страница&nbsp; Палитры 
+      компонентов</b> </font></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="19"> 
+      <font face="Verdana, Arial, Helvetica, sans-serif"><b> Описание</b> </font></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="129" HEIGHT="179"> 
+      <DIV WIDTH="312" HEIGHT="179" style="width: 102; height: 27"> 
+        <P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> TLCDNumber 
+          </font></P>
+      </DIV>
+    </TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="137" HEIGHT="179"> 
+      <DIV WIDTH="323" HEIGHT="179" style="width: 77; height: 25"> 
+        <P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> &nbsp;<b>Additional</b> 
+          </font></P>
+      </DIV>
+    </TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="179"><font face="Verdana, Arial, Helvetica, sans-serif"> 
+      Компонент отображает совокупность символов (букв и цифр), которые можно 
+      представить в режиме цифрового дисплея. Соответственно, не все буквы можно 
+      показать в этом компоненте. Например, буквы J, Q, Z и т. д. Строка символов 
+      содержится в свойстве <font size="2"> Value</font></font> </TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="129" HEIGHT="71"> 
+      <DIV WIDTH="312" HEIGHT="71" style="width: 88; height: 26"> 
+        <P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> TTextviewer&nbsp; 
+          </font></P>
+      </DIV>
+    </TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="137" HEIGHT="71"> 
+      <DIV WIDTH="323" HEIGHT="71" style="width: 132; height: 30"> 
+        <P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> <b> Common 
+          Controls</b> </font></P>
+      </DIV>
+    </TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="71"><font face="Verdana, Arial, Helvetica, sans-serif"> 
+      Компонент является аналогом компонента VCL <font size="2">TRichEdit</font>. 
+      Предназначен для редактирования текстов </font></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="129" HEIGHT="75"> 
+      <DIV WIDTH="312" HEIGHT="75" style="width: 96; height: 27"> 
+        <P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> TTextBrowser&nbsp; 
+          </font></P>
+      </DIV>
+    </TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="137" HEIGHT="75"> 
+      <DIV WIDTH="323" HEIGHT="75" style="width: 131; height: 31"> 
+        <P><font face="Verdana, Arial, Helvetica, sans-serif" size="3"> <b> Common 
+          Controls</b> </font></P>
+      </DIV>
+    </TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="307" HEIGHT="75"><font face="Verdana, Arial, Helvetica, sans-serif"> 
+      Компонент развивает возможности компонента <font size="2">TTextviewer</font>, 
+      предоставляя функции гипертекстовой разметки </font></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Дополнительные возможности по созданию кроссплатформенных приложений баз данных дают компоненты на страницах <B>Data </B><b>Access</b>, <B>DataControIs, DBExpress, InterBase. </B>Безусловно, механизмы доступа к данным, используемые такими приложениями, в значительной степени зависят от операционной системы. Поэтому выбор способов доступа к данным сравнительно невелик.
+</font ></P>
+<P><font face="Verdana" size="3">
+Также библиотека CLX содержит довольно большое число компонентов, позволяющих создавать кроссплатформенные приложения для
+Internet. Это и привычные традиционные компоненты (страницы <B>Internet, InternetExpress, WebServices) </B>и новые из набора Internet Direct <B>(Indy).</B>
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index3.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index5.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

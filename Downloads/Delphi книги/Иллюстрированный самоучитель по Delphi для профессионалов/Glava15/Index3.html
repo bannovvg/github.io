@@ -1,0 +1,1334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index2.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center"> <font face="Verdana" size="3"> <font size="4">Табличное представление 
+  данных</font></font></P>
+<p align="center"><font face="Verdana" size="3"><font size="4">&nbsp;<br>
+  <font size="3"><strong>Компонент TDBGrid</strong></font></font> <br>
+  </font> </P>
+<p align="left">
+ 
+<P><font face="Verdana" size="3"> Этот компонент инкапсулирует двумерную таблицу, 
+  в которой строки представляют собой записи, а столбцы — поля набора данных. 
+  </font ></P>
+<P><font face="Verdana" size="3"> Компонент TDBGrid является<B> </B>потомком<B> 
+  </B>классов TDBCustomGrid И TCustomGrid. </font ></P>
+<P><font face="Verdana" size="3"> От класса TCustomGrid наследуются все функции 
+  отображения и управления работой двумерной структуры данных. Класс TDBCustomGrid 
+  обеспечивает визуализацию и редактирование полей из набора данных, причем TDBGrid 
+  только публикует свойства и методы класса TDBCustomGrid, не добавляя собственных. 
+  </font ></P>
+<P><font face="Verdana" size="3"> В компоненте TDBGrid можно отображать произвольное 
+  подмножество полей используемого набора данных, но число записей ограничить 
+  нельзя — в компоненте всегда присутствуют все записи связанного набора данных. 
+  Требуемый набор полей можно составить при помощи специального Редактора столбцов, 
+  который открывается при двойном щелчке на компоненте, перенесенном на форму, 
+  или кнопкой свойства columns в Инспекторе объектов. </font ></P>
+<P><font face="Verdana" size="3"> Новая колонка добавляется при помощи кнопки 
+  <b> Add New</b>, после этого ее название появляется в списке колонок (рис. 15.2). 
+  Для выбранной в списке колонки доступные для редактирования свойства появляются 
+  в Инспекторе объектов. Колонки в списке можно редактировать, удалять, менять 
+  местами. </font ></P>
+<P><font face="Verdana" size="3"> При помощи кнопки <B>Add All Fields </B>в сетку 
+  можно добавить все поля набора данных. </font ></P>
+<P><font face="Verdana" size="3"> Каждая колонка компонента TDBGrid описывается 
+  специальным классом TColumn, а совокупность колонок доступна через свойство 
+  columns компонента, оно имеет тип TDBGridColumns и представляет собой индексированный 
+  список объектов колонок. Поле набора данных связывается с конкретной колонкой<B> 
+  </B>при помощи свойства FieldName класса TColumn. При этом в колонку автоматически 
+  переносятся все необходимые параметры поля, в частности заголовок поля, настройки 
+  шрифтов, ширина поля. После ручного изменения параметров первоначальные значения 
+  восстанавливаются методами соответствующих объектов Icolumn. </font ></P>
+<p align="center">
+ 
+<div align="center"><font size="3" face="Verdana"><IMG src="gl.15.2.gif"> </font> 
+</div>
+<P align="center"> <font size="3" face="Verdana"><B>Рис. 15.2. </B> Редактор колонок 
+  компонента TDBGrid </font></P>
+<font size="3" face="Verdana"> 
+<P>&nbsp;При метода метода DefaultDrawColumnCell&nbsp; и метода- обработчика<B> 
+  </B>OnDraw-CoiumnCell можно управлять процессом отображения данных в ячейках. 
+</P>
+<P> Метод DefauitorawDataCelll предназначен только для обеспечения обратной совместимости 
+  по коду с более ранними версиями. </P>
+<P> Настройка параметров компонента TDBGrid, от которых зависит его внешний вид 
+  и некоторые функции, осуществляется при помощи свойства options (табл. 15.2). 
+  Текущая позиция в двумерной структуре данных может быть определена свойствами 
+  SelectedField, SelectedRows, Selectedlndex. </P>
+<P> При необходимости разработчик может использовать разнообразные методы-обработчики 
+  событий. Среди них есть как стандартные методы, присущие всем элементам управления, 
+  так и специфические. </P>
+<P> Например, при помощи метода-обработчика OnEditButtonClick можно предусмотреть 
+  вызов специализированной формы при щелчке на кнопке в ячейке: </P>
+</font> 
+<blockquote> 
+  <P><font face="Verdana" size="3"> procedure TForml.DBGridlEditButtonClick(Sender: 
+    TObject);&nbsp; </font ></P>
+  <P><font face="Verdana" size="3"> begin </font ></P>
+  <P><font face="Verdana" size="3"> if DBGridl.Selectedlndex = 2 then SomeForm.ShowModal;&nbsp; 
+    </font ></P>
+  <P><font face="Verdana" size="3"> end; </font ></P>
+</blockquote>
+<P><font face="Verdana" size="3"> <B>&nbsp;Примечание</B> </font ></P>
+<blockquote> 
+  <P><font face="Verdana" size="3"> Объект колонки TColumn имеет свойство ButtonStyle. 
+    Если ему присвоить значение cbsEllipsis, то при активизации ячейки этой колонки 
+    в правой части ячейки появляется кнопка. </font ></P>
+</blockquote>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 15.2. </B>Свойства 
+  и методы компонента WBGrid </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="435" HEIGHT="789">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="34"> <DIV WIDTH="266" HEIGHT="34" style="width: 100; height: 34"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="34"> <DIV WIDTH="42" HEIGHT="34" style="width: 25; height: 34"> 
+        <P><font face="Verdana" size="3"> <b> Тип</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="34"> <DIV WIDTH="317" HEIGHT="34" style="width: 101; height: 34"> 
+        <P><font face="Verdana" size="3"> <b> Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="519" HEIGHT="25"> <DIV WIDTH="266" HEIGHT="25" style="width: 84; height: 25"> 
+        <P><font face="Verdana" size="3"> <b> Свойства</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="52"> 
+      <DIV WIDTH="266" HEIGHT="52" style="width: 146; height: 52"> 
+        <P><font face="Verdana" size="3"> property Columns:&nbsp; TDBGridColumns;&nbsp; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="52"> 
+      <DIV WIDTH="42" HEIGHT="52" style="width: 6; height: 52"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="52"> 
+      <DIV WIDTH="317" HEIGHT="52" style="width: 247; height: 57"> 
+        <P><font face="Verdana" size="3"> Содержит коллекцию объектов TColumn, 
+          описывающих колонки компонента </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="94"> 
+      <DIV WIDTH="266" HEIGHT="94" style="width: 194; height: 94"> 
+        <P><font face="Verdana" size="3"> property DefaultDrawing: Boolean;&nbsp; 
+          </font ></P>
+        <P><font face="Verdana" size="3"> &nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="94"> 
+      <DIV WIDTH="42" HEIGHT="94" style="width: 18; height: 94"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="94"> 
+      <DIV WIDTH="317" HEIGHT="94" style="width: 251; height: 128"> 
+        <P><font face="Verdana" size="3"> Определяет способ визуализации данных 
+          в сетке. При значении True данные отображаются автоматически. При значении 
+          False используется метод-обработчик OnDrawColumnCell </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="50"> 
+      <DIV WIDTH="266" HEIGHT="50" style="width: 163; height: 50"> 
+        <P><font face="Verdana" size="3"> property FieldCount: Integer;&nbsp; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="50"> 
+      <DIV WIDTH="42" HEIGHT="50" style="width: 16; height: 50"> 
+        <P><font face="Verdana" size="3"> Ro </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="50"> 
+      <DIV WIDTH="317" HEIGHT="50" style="width: 200; height: 50"> 
+        <P><font face="Verdana" size="3"> Возвращает число видимых колонок сетки 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="48"> 
+      <DIV WIDTH="266" HEIGHT="48" style="width: 191; height: 48"> 
+        <P><font face="Verdana" size="3"> property Fields [Index: Integer] : TField;&nbsp; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="48"> 
+      <DIV WIDTH="42" HEIGHT="48" style="width: 13; height: 48"> 
+        <P><font face="Verdana" size="3"> Ro </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="48"> 
+      <DIV WIDTH="317" HEIGHT="48" style="width: 242; height: 54"> 
+        <P><font face="Verdana" size="3"> Массив объектов полей набора данных, 
+          отображаемых в компоненте </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="189" HEIGHT="552"> 
+      <DIV WIDTH="266" HEIGHT="552" style="width: 190; height: 227"> 
+        <P><font face="Verdana" size="3"> TDBGridOption = (dgEditing,&nbsp; dgAlwaysShowEditor,&nbsp; 
+          dgTitles, dglndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, 
+          dgRowSelect, dgAlwaysShowSelection,&nbsp; dgConfirmDelete, dgCancelOnExit, 
+          dgMultiSelect) ; </font ></P>
+        <P><font face="Verdana" size="3"> TDBGridOptions = set of TDBGridOption;&nbsp; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="29" HEIGHT="552"> 
+      <DIV WIDTH="42" HEIGHT="552" style="width: 18; height: 58"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="552"> 
+      <P><font face="Verdana" size="3"> Определяет особенности визуализации и 
+        поведения компонента: </font ></P>
+      <ul>
+        <li><font size="3" face="Verdana">&nbsp;dgEditing — данные можно редактировать;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dgAlwaysShowEditor — данные в 
+          сетке всегда в режиме редактирования;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dgTitles — видны заголовки колонок;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dglndicator — в начале строки 
+          виден номер текущей колонки;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dgColumnResize — колонки можно 
+          перемещать и менять их ширину;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dgColLines — видны линии между 
+          колонками;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dgRowLines — видны линии между 
+          строками;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dgTabs — для перемещения по строкам 
+          можно использовать клавиши &lt;Таb&gt; и &lt;Shift&gt;+&lt;Tat&raquo;;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dgRowSelect — можно выделять целые 
+          строки, при этом игнорируются установки dgEditing И dgAlwaysShowEditor;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dgAlwaysShowSelection — выделение 
+          текущей ячейки сохраняется, даже если сетка не активна;</font></li>
+        <li><font size="3" face="Verdana">&nbsp;dgConfirmDelete — при удалении 
+          строк появляется запрос о подтверждении операции;</font></li>
+        <li> 
+          <P><font face="Verdana" size="3">&nbsp;dgCancelOnExit — созданные пустые 
+            строки при уходе из сетки не сохраняются;</font ></P>
+        </li>
+        <li><font size="3" face="Verdana">&nbsp;dgMultiSelect — можно выделять 
+          несколько строк одновременно</font></li>
+      </ul></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="46"> <DIV WIDTH="260" HEIGHT="46" style="width: 188; height: 46"> 
+        <P><font face="Verdana" size="3"> property SelectedField: TField; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="46"> <DIV WIDTH="48" HEIGHT="46" style="width: 5; height: 46"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="46"> <DIV WIDTH="325" HEIGHT="46" style="width: 221; height: 46"> 
+        <P><font face="Verdana" size="3"> Содержит объект текущего поля </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="46"> 
+      <DIV WIDTH="260" HEIGHT="46" style="width: 185; height: 46"> 
+        <P><font face="Verdana" size="3"> property Selectedlndex: Integer; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="46"> 
+      <DIV WIDTH="48" HEIGHT="46" style="width: 7; height: 46"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="46"> 
+      <DIV WIDTH="325" HEIGHT="46" style="width: 248; height: 46"> 
+        <P><font face="Verdana" size="3"> Содержит номер текущей колонки в массиве 
+          свойства Columns </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="65"> 
+      <DIV WIDTH="260" HEIGHT="65" style="width: 179; height: 65"> 
+        <P><font face="Verdana" size="3"> property SelectedRows: TBookmarkList; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="65"> 
+      <DIV WIDTH="48" HEIGHT="65" style="width: 6; height: 65"> 
+        <P><font face="Verdana" size="3"> Ro </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="65"> 
+      <DIV WIDTH="325" HEIGHT="65" style="width: 254; height: 65"> 
+        <P><font face="Verdana" size="3"> Набор закладок на записи набора данных, 
+          соответствующих выделенным строкам сетки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="29"> 
+      <DIV WIDTH="260" HEIGHT="29" style="width: 156; height: 29"> 
+        <P><font face="Verdana" size="3"> property TitleFont: TFont; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="29"> 
+      <DIV WIDTH="48" HEIGHT="29" style="width: 10; height: 29"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="29"> 
+      <DIV WIDTH="325" HEIGHT="29" style="width: 203; height: 29"> 
+        <P><font face="Verdana" size="3"> Шрифт заголовков колонок </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="42"> 
+      <DIV WIDTH="260" HEIGHT="42" style="width: 160; height: 42"> 
+        <P><font face="Verdana" size="3"> property EditorMode: Boolean; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="42"> 
+      <DIV WIDTH="48" HEIGHT="42" style="width: 5; height: 42"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="42"> 
+      <DIV WIDTH="325" HEIGHT="42" style="width: 229; height: 42"> 
+        <P><font face="Verdana" size="3"> Показывает, можно ли редактировать текущую 
+          ячейку </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="27"> 
+      <DIV WIDTH="260" HEIGHT="27" style="width: 164; height: 32"> 
+        <P><font face="Verdana" size="3"> property FixedColor: TColor; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="27"> 
+      <DIV WIDTH="48" HEIGHT="27" style="width: 8; height: 27"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="27"> 
+      <DIV WIDTH="325" HEIGHT="27" style="width: 236; height: 36"> 
+        <P><font face="Verdana" size="3"> Цвет фона неподвижных ячеек сетки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="527" HEIGHT="33"> <DIV WIDTH="260" HEIGHT="33" style="width: 124; height: 33"> 
+        <P><font face="Verdana" size="3"> <b> Методы</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="131"> 
+      <DIV WIDTH="260" HEIGHT="131" style="width: 182; height: 131"> 
+        <P><font face="Verdana" size="3"> procedure DefaultDrawColumnCell (const 
+          Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState) 
+          ; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="131"> 
+      <DIV WIDTH="48" HEIGHT="131" style="width: 12; height: 131"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="131"> 
+      <DIV WIDTH="325" HEIGHT="131" style="width: 252; height: 133"> 
+        <P><font face="Verdana" size="3"> Перерисовывает текст в ячейке колонки 
+          с номером DataCol. Ячейка задается прямоугольником Rect на канве сетки. 
+          Параметр state определяет состояние ячейки после перерисовки. Параметр 
+          Column содержит экземпляр класса колонки, которой принадлежит ячейка 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="135"> 
+      <DIV WIDTH="260" HEIGHT="135" style="width: 153; height: 135"> 
+        <P><font face="Verdana" size="3"> procedure DefaultDrawDataCell (const 
+          Rect: TRect; Field: TField; State: TGridDrawState); </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="135"> 
+      <DIV WIDTH="48" HEIGHT="135" style="width: 1; height: 135"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="135"> 
+      <DIV WIDTH="325" HEIGHT="135" style="width: 229; height: 152"> 
+        <P><font face="Verdana" size="3"> Перерисовывает текст в ячейке колонки, 
+          определяемой параметром Field, содержащим связанный с колонкой объект 
+          поля. Ячейка задается прямоугольником Rect на канве сетки. Параметр 
+          State определяет состояние ячейки после перерисовки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="86"> 
+      <DIV WIDTH="260" HEIGHT="86" style="width: 177; height: 86"> 
+        <P><font face="Verdana" size="3"> procedure Def aultHandler (var Msg); 
+          override; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="86"> 
+      <DIV WIDTH="48" HEIGHT="86" style="width: 5; height: 86"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="86"> 
+      <DIV WIDTH="325" HEIGHT="86" style="width: 234; height: 109"> 
+        <P><font face="Verdana" size="3"> Вызывает всплывающее меню для колонки, 
+          которой соответствуют текущие координаты мыши. Компонент должен обрабатывать 
+          сообщение WM RBUTTONUP </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="183" HEIGHT="75"> 
+      <DIV WIDTH="260" HEIGHT="75" style="width: 188; height: 75"> 
+        <P><font face="Verdana" size="3"> function ExecuteAction (Action: TBasicAction): 
+          Boolean; override; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="35" HEIGHT="75"> 
+      <DIV WIDTH="48" HEIGHT="75" style="width: 8; height: 75"> 
+        <P><font face="Verdana" size="3"> Pu&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="309" HEIGHT="75"> 
+      <DIV WIDTH="325" HEIGHT="75" style="width: 232; height: 75"> 
+        <P><font face="Verdana" size="3"> Выполняет действие, заданное параметром 
+          Action, по отношению к данному&nbsp; компоненту </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="198" HEIGHT="110"> <DIV WIDTH="275" HEIGHT="110" style="width: 176; height: 110"> 
+      <P><font face="Verdana" size="3"> procedure&nbsp; ShowPopupEditor (Column: 
+        I TColumn; X: Integer = Low (Integer); Y: Integer = Low (Integer) ); dynamic;&nbsp; 
+        </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="110"> <DIV WIDTH="44" HEIGHT="110" style="width: 16; height: 110"> 
+      <P><font face="Verdana" size="3"> Pu&nbsp; </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="110"> <DIV WIDTH="317" HEIGHT="110" style="width: 240; height: 145"> 
+      <P><font face="Verdana" size="3"> Открывает набор данных, связанный с передаваемой 
+        параметром Column колонкой в новом окне. Работает только для типов данных 
+        абстрактный и набор данных. Параметры X и Y определяют положение нового 
+        окна </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="198" HEIGHT="60"> 
+      <DIV WIDTH="275" HEIGHT="60" style="width: 184; height: 60"> 
+        <P><font face="Verdana" size="3"> function | ValidFieldlndex (Fieldlndex:&nbsp; 
+          Integer) : Boolean;&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="60"> 
+      <DIV WIDTH="44" HEIGHT="60" style="width: 5; height: 60"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="60"> 
+      <DIV WIDTH="317" HEIGHT="60" style="width: 232; height: 60"> 
+        <P><font face="Verdana" size="3"> Возвращает значение True, если колонка 
+          с номером Fieldlndex связана с полем набора данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="198" HEIGHT="71"> 
+      <DIV WIDTH="275" HEIGHT="136" style="width: 180; height: 136"> 
+        <P><font face="Verdana" size="3"> type TGridCoord = record&nbsp; X: Longint;Y: 
+          Longint; end;&nbsp; </font ></P>
+        <P><font face="Verdana" size="3"> function MouseCoord(X, Y:&nbsp; Integer): 
+          TGridCoord; ; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="71"> 
+      <DIV WIDTH="44" HEIGHT="136" style="width: 16; height: 82"> 
+        <P><font face="Verdana" size="3"> Pu&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="71"> 
+      <DIV WIDTH="317" HEIGHT="136" style="width: 234; height: 136"> 
+        <P><font face="Verdana" size="3"> Возвращает номера строки и столбца, 
+          соответствующие ячейке, которой принадлежат экранные координаты X и 
+          Y </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="530" HEIGHT="25"> <DIV WIDTH="275" HEIGHT="25" style="width: 236; height: 25"> 
+        <P><font face="Verdana" size="3"> <b>Методы-обработчики событий</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="198" HEIGHT="98"> 
+      <DIV WIDTH="275" HEIGHT="100" style="width: 179; height: 100"> 
+        <P><font face="Verdana" size="3"> type TDBGridClickEvent =&nbsp; procedure 
+          (Column: TColumn) 1 of object; </font ></P>
+        <P><font face="Verdana" size="3"> property OnCellClick: TDBGridClickEvent;&nbsp; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="98"> 
+      <DIV WIDTH="44" HEIGHT="100" style="width: 16; height: 50"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="98"> 
+      <DIV WIDTH="317" HEIGHT="100" style="width: 215; height: 100"> 
+        <P><font face="Verdana" size="3"> Вызывается при щелчке мышью на ячейке. 
+          Параметр Column содержит колонку, которой принадлежит ячейка </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="198" HEIGHT="44"> 
+      <DIV WIDTH="275" HEIGHT="44" style="width: 170; height: 44"> 
+        <P><font face="Verdana" size="3"> property OnColEnter:&nbsp; TNotifyEvent; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="44"> 
+      <DIV WIDTH="44" HEIGHT="44" style="width: 12; height: 26"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="44"> 
+      <DIV WIDTH="317" HEIGHT="44" style="width: 249; height: 44"> 
+        <P><font face="Verdana" size="3"> Вызывается при переносе фокуса на новую 
+          колонку сетки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="198" HEIGHT="40"> 
+      <DIV WIDTH="275" HEIGHT="40" style="width: 163; height: 48"> 
+        <P><font face="Verdana" size="3"> property OnColExit:&nbsp; TNotifyEvent;&nbsp; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="40"> 
+      <DIV WIDTH="44" HEIGHT="40" style="width: 7; height: 32"> 
+        <P><font face="Verdana" size="3"> Pb&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="40"> 
+      <DIV WIDTH="317" HEIGHT="40" style="width: 222; height: 40"> 
+        <P><font face="Verdana" size="3"> Вызывается перед переносом фокуса из 
+          текущей колонки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="198" HEIGHT="116"> 
+      <DIV WIDTH="275" HEIGHT="116" style="width: 191; height: 118"> 
+        <P><font face="Verdana" size="3"> type TMovedEvent = procedure&nbsp; (Sender: 
+          TObject;&nbsp; Froinlndex, Tolndex:&nbsp; Longint) of object;&nbsp; 
+          </font ></P>
+        <P><font face="Verdana" size="3"> property OnColumnMoved:&nbsp; </font ></P>
+        <P><font face="Verdana" size="3"> TMovedEvent ; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="116"> 
+      <DIV WIDTH="44" HEIGHT="116" style="width: 6; height: 67"> 
+        <P><font face="Verdana" size="3"> Pb&nbsp; </font ></P>
+        <P><font face="Verdana" size="3"> &nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="116"> 
+      <DIV WIDTH="317" HEIGHT="116" style="width: 244; height: 128"> 
+        <P><font face="Verdana" size="3"> Вызывается при переносе колонки в сетке 
+          на новое место при помощи мыши. Параметр Fromindex возвращает номер 
+          старого положения колонки. Параметр Tolndex возвращает номер нового 
+          положения колонки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="198" HEIGHT="188"> 
+      <DIV WIDTH="275" HEIGHT="188" style="width: 187; height: 188"> 
+        <P><font face="Verdana" size="3"> type </font ></P>
+        <P><font face="Verdana" size="3"> TDrawColumnCellEvent =&nbsp; procedure 
+          (Sender: TObject;&nbsp; const Rect : TRect; DataCol : State: TGridDrawState)&nbsp; 
+          of object;&nbsp; </font ></P>
+        <P><font face="Verdana" size="3"> property OnDrawColurnnCell :&nbsp; TDrawColumnCellEvent;&nbsp; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="31" HEIGHT="188"> 
+      <DIV WIDTH="44" HEIGHT="188" style="width: 4; height: 65"> 
+        <P><font face="Verdana" size="3"> Pb&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="301" HEIGHT="188"> 
+      <DIV WIDTH="317" HEIGHT="188" style="width: 243; height: 278"> 
+        <P><font face="Verdana" size="3"> Вызывается при перерисовке ячейки. </font ></P>
+        <P><font face="Verdana" size="3"> Параметр Rect определяет ячейку по координатам 
+          прямоугольника на канве. </font ></P>
+        <P><font face="Verdana" size="3"> Параметр DataCol возвращает номер колонки 
+          в сетке. </font ></P>
+        <P><font face="Verdana" size="3"> Параметр Column содержит объект колонки. 
+          </font ></P>
+        <P><font face="Verdana" size="3"> Параметр State возвращает состояние 
+          колонки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="164"> <DIV WIDTH="258" HEIGHT="164" style="width: 176; height: 164"> 
+      <P><font face="Verdana" size="3"> type </font ></P>
+      <P><font face="Verdana" size="3"> TDrawDataCellEvent = procedure (Sender: 
+        TObject; const Rect: TRect; Field: TField; State: TGridDrawState) of object; 
+        </font ></P>
+      <P><font face="Verdana" size="3"> property OnDrawDataCell: TDrawDataCellEvent; 
+        </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="164"> <DIV WIDTH="46" HEIGHT="164" style="width: 6; height: 57"> 
+      <P><font face="Verdana" size="3"> Pb </font ></P>
+    </DIV></TD>
+  <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="299" HEIGHT="164"> <DIV WIDTH="315" HEIGHT="164" style="width: 239; height: 201"> 
+      <P><font face="Verdana" size="3"> I Вызывается при перерисовке ячейки | 
+        перед обработчиком OnDrawCoiumnCell,&nbsp; если свойство Columns. State 
+        =csDefault. </font ></P>
+      <P><font face="Verdana" size="3">&nbsp;Этот метод лучше не применять, т. 
+        к. он&nbsp; используется только для обеспечения обратной совместимости 
+        с ранними версиями </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="44"> 
+      <DIV WIDTH="258" HEIGHT="44" style="width: 156; height: 44"> 
+        <P><font face="Verdana" size="3"> property OnEditButtonClick: TNotifyEvent; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="44"> 
+      <DIV WIDTH="46" HEIGHT="44" style="width: 11; height: 39"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="299" HEIGHT="44"> 
+      <DIV WIDTH="315" HEIGHT="44" style="width: 215; height: 44"> 
+        <P><font face="Verdana" size="3"> 1 Вызывается при щелчке мышью на кнопке 
+          в ячейке </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="181" HEIGHT="106"> 
+      <DIV WIDTH="258" HEIGHT="106" style="width: 173; height: 106"> 
+        <P><font face="Verdana" size="3"> type TDBGridClickEvent = procedure (Column: 
+          TColumn) of object; </font ></P>
+        <P><font face="Verdana" size="3"> property OnTitleClick: TDBGridClickEvent; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="33" HEIGHT="106"> 
+      <DIV WIDTH="46" HEIGHT="106" style="width: 15; height: 81"> 
+        <P><font face="Verdana" size="3"> Pb&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="299" HEIGHT="106"> 
+      <DIV WIDTH="315" HEIGHT="106" style="width: 232; height: 106"> 
+        <P><font face="Verdana" size="3"> | Вызывается при щелчке мышью на заголовке 
+          колонки. Колонка определяется параметром Column </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> В работе компонента TDBGrid важную роль играет 
+  класс TColumn, который инкапсулирует свойства колонки или столбца сетки (табл. 
+  15.3). Его основным назначением является правильное отображение данных из поля 
+  набора данных, связанного с этой колонкой. Поэтому объект колонки обладает свойствами 
+  и методами, которые позволяют произвольным образом задавать параметры отображения 
+  данных (цвет, шрифт, ширину и т. д.). Первоначальные значения берутся из связанных 
+  с колонками полей. Измененные свойства можно восстановить при помощи группы 
+  специальных методов (DefauitColor, DefaultFont И др.). </font ></P>
+<P><font face="Verdana" size="3"> Свойство Assignedvalues позволяет в любой момент 
+  определить, какие первоначальные настройки были изменены. </font ></P>
+<P><font face="Verdana" size="3"> За отображение заголовка колонки отвечает свойство 
+  Title, представляющее собой ссылку на экземпляр объекта TColumnTitie. Здесь 
+  можно задать текст заголовка, параметры шрифта текста заголовка и цвет фона 
+  заголовка. По умолчанию текст заголовка берется из свойства DispiayLabel объекта 
+  TField (CM. гл. 13). </font ></P>
+<P><font face="Verdana" size="3"> Каждой колонке можно придать список, который 
+  разворачивается при щелчке на кнопке в активной ячейке колонки. Выбранное в 
+  списке значение автоматически заносится в ячейку. Для реализации этой возможности 
+  применяется свойство pickList типа TStrings. Достаточно лишь заполнить список 
+  значениями во время разработки или выполнения (рис. 15.3). </font ></P>
+<p align="center">
+ 
+<div align="center"><font size="3" face="Verdana"><IMG src="gl.15.3.gif" > </font> 
+</div>
+<P align="center"> <font size="3" face="Verdana"><B>Рис. 15.3. </B>Список колонки 
+  в компоненте TDBGrid </font></P>
+<font size="3" face="Verdana"> 
+<P align="center"> <B>Таблица 15.3. </B>Свойства и методы класса TColumn </P>
+</font> 
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="404" HEIGHT="512">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="196" HEIGHT="37"> <DIV WIDTH="281" HEIGHT="37" style="width: 94; height: 37"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="37"> <DIV WIDTH="48" HEIGHT="37" style="width: 17; height: 37"> 
+        <P><font face="Verdana" size="3"> <b> Тип</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="322" HEIGHT="37"> <DIV WIDTH="300" HEIGHT="37" style="width: 243; height: 37"> 
+        <P><font face="Verdana" size="3"> <b> Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="544" HEIGHT="21"> <DIV WIDTH="281" HEIGHT="21" style="width: 88; height: 21"> 
+        <P><font face="Verdana" size="3"> <b> Свойства</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="196" HEIGHT="54"> 
+      <DIV WIDTH="281" HEIGHT="54" style="width: 158; height: 54"> 
+        <P><font face="Verdana" size="3"> property Alignment: TAlignment; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="54"> 
+      <DIV WIDTH="48" HEIGHT="54" style="width: 20; height: 54"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="322" HEIGHT="54"> 
+      <DIV WIDTH="300" HEIGHT="54" style="width: 258; height: 54"> 
+        <P><font face="Verdana" size="3"> &nbsp;Определяет выравнивание данных&nbsp; 
+          в колонке </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="196" HEIGHT="200"> 
+      <DIV WIDTH="281" HEIGHT="200" style="width: 192; height: 200"> 
+        <P><font face="Verdana" size="3"> type&nbsp; </font ></P>
+        <P><font face="Verdana" size="3"> TColumnValue = (cvColor, cvWidth, cvFont, 
+          cvAlignment, cvReadOnly, cvTitleColor, cvTitleCaption, cv'i'itleAlignment, 
+          cvTitleFont, cvImeMode, cvImeName) ; TColuinnValues = set of TColumnValue; 
+          </font ></P>
+        <P><font face="Verdana" size="3"> property AssignedValues: TColuranValues 
+          ; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="200"> 
+      <DIV WIDTH="48" HEIGHT="200" style="width: 12; height: 200"> 
+        <P><font face="Verdana" size="3"> Ro </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="322" HEIGHT="200"> 
+      <DIV WIDTH="300" HEIGHT="200" style="width: 245; height: 200"> 
+        <P><font face="Verdana" size="3"> Возвращает набор атрибутов&nbsp; колонки, 
+          которые были изменены по сравнению с первоначальными </font ></P>
+        <P>&nbsp;</P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="196" HEIGHT="200"> 
+      <DIV WIDTH="281" HEIGHT="200" style="width: 188; height: 200"> 
+        <P><font face="Verdana" size="3"> type TColumnButtonStyle = (cbsAuto, 
+          cbsEllipsis, cbsNone) ; </font ></P>
+        <P><font face="Verdana" size="3"> property ButtonStyle: TColumnButtonStyle; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="200"> 
+      <DIV WIDTH="48" HEIGHT="200" style="width: 18; height: 200"> 
+        <P><font face="Verdana" size="3">Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="322" HEIGHT="200"> 
+      <DIV WIDTH="300" HEIGHT="200" style="width: 253; height: 304"> 
+        <P><font face="Verdana" size="3"> Задает способ редактирования&nbsp; данных 
+          в колонке: </font ></P>
+        <ul>
+          <li><font size="3" face="Verdana">&nbsp;cbsAuto — кнопка в редактируемой 
+            ячейке появляется, если&nbsp; связанное поле является полем&nbsp; 
+            синхронного просмотра;</font></li>
+          <li><font size="3" face="Verdana">&nbsp;cbsEllipsis — кнопка в редактируемой 
+            ячейке появляется всегда,&nbsp; щелчок на кнопке вызывает&nbsp; обработчик 
+            OnEditButtonClick;</font></li>
+          <li><font size="3" face="Verdana">&nbsp;cbsNone — при редактировании 
+            ячейки кнопка не появляется</font></li>
+        </ul>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="25"> <DIV WIDTH="279" HEIGHT="25" style="width: 156; height: 25"> 
+        <P><font face="Verdana" size="3"> property Color: TColor; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="25"> <DIV WIDTH="54" HEIGHT="25" style="width: 15; height: 25"> 
+        <P><font face="Verdana" size="3"> Pb&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="25"> <DIV WIDTH="288" HEIGHT="25" style="width: 123; height: 25"> 
+        <P><font face="Verdana" size="3"> Цвет фона колонки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="52"> 
+      <DIV WIDTH="279" HEIGHT="52" style="width: 180; height: 52"> 
+        <P><font face="Verdana" size="3"> property DisplayName: string; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="52"> 
+      <DIV WIDTH="54" HEIGHT="52" style="width: 10; height: 52"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="52"> 
+      <DIV WIDTH="288" HEIGHT="52" style="width: 203; height: 52"> 
+        <P><font face="Verdana" size="3"> Название колонки в списке Редактора 
+          столбцов </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="46"> 
+      <DIV WIDTH="279" HEIGHT="46" style="width: 180; height: 46"> 
+        <P><font face="Verdana" size="3"> property DropDownRows: Cardinal; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="46"> 
+      <DIV WIDTH="54" HEIGHT="46" style="width: 30; height: 46"> 
+        <P><font face="Verdana" size="3"> Pb&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="46"> 
+      <DIV WIDTH="288" HEIGHT="46" style="width: 251; height: 46"> 
+        <P><font face="Verdana" size="3"> Определяет число строк разворачивающегося 
+          списка ячейки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="84"> 
+      <DIV WIDTH="279" HEIGHT="84" style="width: 175; height: 84"> 
+        <P><font face="Verdana" size="3"> property Expandable: Boolean; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="84"> 
+      <DIV WIDTH="54" HEIGHT="84" style="width: 5; height: 84"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="84"> 
+      <DIV WIDTH="288" HEIGHT="84" style="width: 221; height: 84"> 
+        <P><font face="Verdana" size="3"> В значении True разрешает показ связанных 
+          с полем колонки дочерних полей абстрактного, ссылочного типов и массивов 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="96"> 
+      <DIV WIDTH="279" HEIGHT="96" style="width: 155; height: 96"> 
+        <P><font face="Verdana" size="3"> property Expanded: Boolean; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="96"> 
+      <DIV WIDTH="54" HEIGHT="96" style="width: 22; height: 96"> 
+        <P><font face="Verdana" size="3"> Pb&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="96"> 
+      <DIV WIDTH="288" HEIGHT="96" style="width: 209; height: 96"> 
+        <P><font face="Verdana" size="3"> При значении True каждое дочернее поле 
+          отображается в новой колонке. При значении False дочерние поля отображаются 
+          через точку с запятой и не доступны для редактирования </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="44"> 
+      <DIV WIDTH="279" HEIGHT="44" style="width: 155; height: 44"> 
+        <P><font face="Verdana" size="3"> property FieldName: string; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="44"> 
+      <DIV WIDTH="54" HEIGHT="44" style="width: 27; height: 44"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="44"> 
+      <DIV WIDTH="288" HEIGHT="44" style="width: 225; height: 44"> 
+        <P><font face="Verdana" size="3"> Название поля, связанного с колонкой 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="35"> 
+      <DIV WIDTH="279" HEIGHT="35" style="width: 169; height: 35"> 
+        <P><font face="Verdana" size="3"> property Font: TFont; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="35"> 
+      <DIV WIDTH="54" HEIGHT="35" style="width: 7; height: 33"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="35"> 
+      <DIV WIDTH="288" HEIGHT="35" style="width: 172; height: 35"> 
+        <P><font face="Verdana" size="3"> Шрифт данных в колонке </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="48"> 
+      <DIV WIDTH="279" HEIGHT="48" style="width: 119; height: 48"> 
+        <P><font face="Verdana" size="3"> property Grid: TCustomDBGrid; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="48"> 
+      <DIV WIDTH="54" HEIGHT="48" style="width: 11; height: 48"> 
+        <P><font face="Verdana" size="3"> Ro </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="48"> 
+      <DIV WIDTH="288" HEIGHT="48" style="width: 234; height: 48"> 
+        <P><font face="Verdana" size="3"> Определяет сетку, содержащую эту колонку 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="67"> 
+      <DIV WIDTH="279" HEIGHT="67" style="width: 178; height: 67"> 
+        <P><font face="Verdana" size="3"> property ParentColumn: TColumn; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="67"> 
+      <DIV WIDTH="54" HEIGHT="67" style="width: 4; height: 67"> 
+        <P><font face="Verdana" size="3"> Ro </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="67"> 
+      <DIV WIDTH="288" HEIGHT="67" style="width: 252; height: 67"> 
+        <P><font face="Verdana" size="3"> Определяет колонку-владельца текущей 
+          колонки. Используется для дочерних полей </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="62"> 
+      <DIV WIDTH="279" HEIGHT="62" style="width: 142; height: 62"> 
+        <P><font face="Verdana" size="3"> property PickList: TStrings; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="62"> 
+      <DIV WIDTH="54" HEIGHT="62" style="width: 26; height: 49"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="62"> 
+      <DIV WIDTH="288" HEIGHT="62" style="width: 228; height: 62"> 
+        <P><font face="Verdana" size="3"> Содержит разворачивающийся список, используемый 
+          при редактировании данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="48"> 
+      <DIV WIDTH="279" HEIGHT="48" style="width: 165; height: 48"> 
+        <P><font face="Verdana" size="3"> property PopupMenu: TPopupMenu; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="48"> 
+      <DIV WIDTH="54" HEIGHT="48" style="width: 22; height: 48"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="48"> 
+      <DIV WIDTH="288" HEIGHT="48" style="width: 230; height: 48"> 
+        <P><font face="Verdana" size="3"> Связывает с колонкой всплывающее меню 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="58"> 
+      <DIV WIDTH="279" HEIGHT="58" style="width: 140; height: 58"> 
+        <P><font face="Verdana" size="3"> property Showing: Boolean; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="58"> 
+      <DIV WIDTH="54" HEIGHT="58" style="width: 15; height: 58"> 
+        <P><font face="Verdana" size="3"> Ro </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="58"> 
+      <DIV WIDTH="288" HEIGHT="58" style="width: 244; height: 58"> 
+        <P><font face="Verdana" size="3"> Возвращает значение True, если колонка 
+          видима </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="44"> 
+      <DIV WIDTH="279" HEIGHT="44" style="width: 119; height: 44"> 
+        <P><font face="Verdana" size="3"> property Title: TColumnTitle; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="44"> 
+      <DIV WIDTH="54" HEIGHT="44" style="width: 17; height: 44"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="44"> 
+      <DIV WIDTH="288" HEIGHT="44" style="width: 253; height: 44"> 
+        <P><font face="Verdana" size="3"> Задает текст заголовка и его параметры 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="31"> 
+      <DIV WIDTH="279" HEIGHT="31" style="width: 186; height: 31"> 
+        <P><font face="Verdana" size="3"> property Visible: Boolean; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="31"> 
+      <DIV WIDTH="54" HEIGHT="31" style="width: 3; height: 31"> 
+        <P><font face="Verdana" size="3"> Pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="31"> 
+      <DIV WIDTH="288" HEIGHT="31" style="width: 203; height: 38"> 
+        <P><font face="Verdana" size="3"> Задает видимость колонки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="194" HEIGHT="33"> 
+      <DIV WIDTH="279" HEIGHT="33" style="width: 156; height: 33"> 
+        <P><font face="Verdana" size="3"> property Width: Integer; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="32" HEIGHT="33"> 
+      <DIV WIDTH="54" HEIGHT="33" style="width: 4; height: 33"> 
+        <P><font face="Verdana" size="3">pb </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="310" HEIGHT="33"> 
+      <DIV WIDTH="288" HEIGHT="33" style="width: 253; height: 33"> 
+        <P><font face="Verdana" size="3"> Задает ширину колонки в пикселах </font ></P>
+      </DIV></TD>
+  </TR>
+  <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="543" HEIGHT="27"> <DIV WIDTH="288" HEIGHT="27" style="width: 77; height: 27"> 
+      <P><font face="Verdana" size="3"> Методы </font ></P>
+    </DIV></TD>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="52"> 
+      <DIV WIDTH="288" HEIGHT="52" style="width: 186; height: 52"> 
+        <P><font face="Verdana" size="3"> procedure Assign (Source: TPersistent); 
+          override; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="52"> 
+      <DIV WIDTH="48" HEIGHT="52" style="width: 13; height: 52"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="52"> 
+      <DIV WIDTH="292" HEIGHT="52" style="width: 257; height: 52"> 
+        <P><font face="Verdana" size="3"> Копирует колонку Source в текущую колонку 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="40"> 
+      <DIV WIDTH="288" HEIGHT="40" style="width: 190; height: 48"> 
+        <P><font face="Verdana" size="3"> function Def aultAlignment: TAlignment; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="40"> 
+      <DIV WIDTH="48" HEIGHT="40" style="width: 18; height: 40"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="40"> 
+      <DIV WIDTH="292" HEIGHT="40" style="width: 239; height: 40"> 
+        <P><font face="Verdana" size="3"> Возвращает первоначальное значение выравнивания 
+          колонки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="42"> 
+      <DIV WIDTH="288" HEIGHT="42" style="width: 190; height: 42"> 
+        <P><font face="Verdana" size="3"> function DefaultColor: TColor; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="42"> 
+      <DIV WIDTH="48" HEIGHT="42" style="width: 12; height: 42"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="42"> 
+      <DIV WIDTH="292" HEIGHT="42" style="width: 218; height: 42"> 
+        <P><font face="Verdana" size="3"> Возвращает первоначальный фоновый цвет 
+          колонки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="40"> 
+      <DIV WIDTH="288" HEIGHT="40" style="width: 171; height: 40"> 
+        <P><font face="Verdana" size="3"> function DefaultFont: TFont; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="40"> 
+      <DIV WIDTH="48" HEIGHT="40" style="width: 9; height: 40"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="40"> 
+      <DIV WIDTH="292" HEIGHT="40" style="width: 252; height: 40"> 
+        <P><font face="Verdana" size="3"> Возвращает первоначальный шрифт данных 
+          в колонке </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="136"> 
+      <DIV WIDTH="288" HEIGHT="136" style="width: 194; height: 136"> 
+        <P><font face="Verdana" size="3"> type TIraeMode = (imDisable, iraClose, 
+          imOpen, imDontCare, imSAlpha, imAlpha, imHira, imSKata, irnKata, imChinese, 
+          imSHanguel, imHanguel); function DefaultlmeMode: TImeMode; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="136"> 
+      <DIV WIDTH="48" HEIGHT="136" style="width: 25; height: 136"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="136"> 
+      <DIV WIDTH="292" HEIGHT="136" style="width: 223; height: 136"> 
+        <P><font face="Verdana" size="3"> Возвращает первоначальный способ ввода 
+          символов </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="66"> 
+      <DIV WIDTH="288" HEIGHT="66" style="width: 196; height: 83"> 
+        <P><font face="Verdana" size="3"> type TImeName = type string; </font ></P>
+        <P><font face="Verdana" size="3"> function DefaultlmeName: TImeName; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="66"> 
+      <DIV WIDTH="48" HEIGHT="66" style="width: 23; height: 66"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="66"> 
+      <DIV WIDTH="292" HEIGHT="66" style="width: 242; height: 66"> 
+        <P><font face="Verdana" size="3"> Возвращает первоначальное имя редактора 
+          способа ввода символов </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="46"> 
+      <DIV WIDTH="288" HEIGHT="46" style="width: 204; height: 46"> 
+        <P><font face="Verdana" size="3"> function DefaultReadOnly: Boolean; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="46"> 
+      <DIV WIDTH="48" HEIGHT="46" style="width: 7; height: 46"> 
+        <P><font face="Verdana" size="3"> Pa </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="46"> 
+      <DIV WIDTH="292" HEIGHT="46" style="width: 261; height: 46"> 
+        <P><font face="Verdana" size="3"> : Возвращает первоначальный режим&nbsp; 
+          редактирования данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="42"> 
+      <DIV WIDTH="288" HEIGHT="42" style="width: 180; height: 42"> 
+        <P><font face="Verdana" size="3"> function DefaultWidth: Integer; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="42"> 
+      <DIV WIDTH="48" HEIGHT="42" style="width: 13; height: 42"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="42"> 
+      <DIV WIDTH="292" HEIGHT="42" style="width: 258; height: 42"> 
+        <P><font face="Verdana" size="3"> Возвращает первоначальную ширину&nbsp; 
+          колонки в пикселах </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="44"> 
+      <DIV WIDTH="288" HEIGHT="44" style="width: 202; height: 44"> 
+        <P><font face="Verdana" size="3"> function Depth: Integer; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="44"> 
+      <DIV WIDTH="48" HEIGHT="44" style="width: 4; height: 44"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="44"> 
+      <DIV WIDTH="292" HEIGHT="44" style="width: 269; height: 44"> 
+        <P><font face="Verdana" size="3"> ; Возвращает число непосредственных&nbsp; 
+          предков колонки </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="203" HEIGHT="46"> 
+      <DIV WIDTH="288" HEIGHT="46" style="width: 199; height: 46"> 
+        <P><font face="Verdana" size="3"> procedure RestoreDefaults; virtual; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="26" HEIGHT="46"> 
+      <DIV WIDTH="48" HEIGHT="46" style="width: 9; height: 46"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="314" HEIGHT="46"> 
+      <DIV WIDTH="292" HEIGHT="46" style="width: 246; height: 46"> 
+        <P><font face="Verdana" size="3"> i Восстанавливает первоначальные&nbsp; 
+          настройки колонки </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P><font face="Verdana" size="3"> При работе с компонентом TDBGrid все операции 
+  с отдельными колонками осуществляются при помощи экземпляра класса TDBGridColumns, 
+  который инкапсулирует список объектов колонок (свойство Columns компонента TDBGrid). 
+  Доступ к колонкам осуществляется при помощи свойства items. Нумерация колонок 
+  начинается с нуля. </font ></P>
+<P><font face="Verdana" size="3"> При помощи свойств и методов класса TDBGridColumns 
+  можно изменять настройки полей компонента TDBGrid во время выполнения (табл. 
+  15.4). </font ></P>
+<P><font face="Verdana" size="3"> Свойство state определяет способ создания колонок. 
+  Его значение устанавливается автоматически. При создании колонок для всех полей 
+  сразу (кнопка <B>Add All Fields </B>Редактора столбцов) устанавливается значение 
+  csDefault. </font ></P>
+<P><font face="Verdana" size="3"> При любом ручном изменении свойств устанавливается 
+  значение csCustomized. При программном изменении значения свойства во время 
+  выполнения все существующие колонки удаляются. </font ></P>
+<P><font face="Verdana" size="3"> Все данные из существующих колонок можно сохранить 
+  в файле или потоке при помощи методов SaveToFile и saveToStream, а затем загрузить 
+  их обратно методами LoadFromFile И LoadFromStream. </font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 15.4. </B>Свойства 
+  и методы класса TDBGridColumns </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="506" HEIGHT="704">
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="25"> <DIV WIDTH="277" HEIGHT="25" style="width: 92; height: 25"> 
+        <P><font face="Verdana" size="3"> <b> Объявление</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="25"> <DIV WIDTH="48" HEIGHT="25" style="width: 2; height: 25"> 
+        <P><font face="Verdana" size="3"> <b> Тип</b> </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="25"> <DIV WIDTH="312" HEIGHT="25" style="width: 58; height: 25"> 
+        <P><font face="Verdana" size="3"> <b> Описание</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="526" HEIGHT="30"> <DIV WIDTH="277" HEIGHT="30" style="width: 84; height: 30"> 
+        <P><font face="Verdana" size="3"> <b>Свойства</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="40"> 
+      <DIV WIDTH="277" HEIGHT="40" style="width: 114; height: 40"> 
+        <P><font face="Verdana" size="3"> property Grid: TCustomDBGrid; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="40"> 
+      <DIV WIDTH="48" HEIGHT="40" style="width: 27; height: 40"> 
+        <P><font face="Verdana" size="3"> Ro </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="40"> 
+      <DIV WIDTH="312" HEIGHT="40" style="width: 214; height: 40"> 
+        <P><font face="Verdana" size="3"> Возвращает ссылку на сетку, владеющую 
+          данным объектом </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="50"> 
+      <DIV WIDTH="277" HEIGHT="50" style="width: 183; height: 50"> 
+        <P><font face="Verdana" size="3"> property Items [Index: Integer] : TColumn 
+          default; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="50"> 
+      <DIV WIDTH="48" HEIGHT="50" style="width: 4; height: 50"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="50"> 
+      <DIV WIDTH="312" HEIGHT="50" style="width: 259; height: 50"> 
+        <P><font face="Verdana" size="3"> Индексный список объектов колонок сетки: 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="166"> 
+      <DIV WIDTH="277" HEIGHT="166" style="width: 201; height: 166"> 
+        <P><font face="Verdana" size="3"> type TDBGridColumnsState = (csDefault, 
+          csCustomized) ; </font ></P>
+        <P><font face="Verdana" size="3"> property State: TDBGridColumnsState; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="166"> 
+      <DIV WIDTH="48" HEIGHT="166" style="width: 33; height: 166"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="166"> 
+      <DIV WIDTH="312" HEIGHT="166" style="width: 256; height: 166"> 
+        <P><font face="Verdana" size="3"> Определяет способ создания колонок сетки: 
+          </font ></P>
+        <ul>
+          <li><font face="Verdana" size="3">csDefault — колонки создаются динамически 
+            с параметрами, соответствующими связанным полям;</font></li>
+          <li><font size="3" face="Verdana">&nbsp;csCustomized — параметры колонок 
+            определены разработчиком и могут отличаться от параметров полей</font></li>
+        </ul>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="33"> 
+      <DIV WIDTH="277" HEIGHT="33" style="width: 131; height: 48"> 
+        <P><font face="Verdana" size="3"> property Count: Integer; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="33"> 
+      <DIV WIDTH="48" HEIGHT="33" style="width: 22; height: 33"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="33"> 
+      <DIV WIDTH="312" HEIGHT="33" style="width: 230; height: 33"> 
+        <P><font face="Verdana" size="3"> Возвращает общее число колонок </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="3" ALIGN="LEFT" VALIGN="TOP" WIDTH="526" HEIGHT="21"> <DIV WIDTH="277" HEIGHT="21" style="width: 70; height: 21"> 
+        <P><font face="Verdana" size="3"> <b> Методы</b> </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="29"> 
+      <DIV WIDTH="277" HEIGHT="29" style="width: 176; height: 29"> 
+        <P><font face="Verdana" size="3"> function Add: TColumn; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="29"> 
+      <DIV WIDTH="48" HEIGHT="29" style="width: 14; height: 29"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="29"> 
+      <DIV WIDTH="312" HEIGHT="29" style="width: 229; height: 29"> 
+        <P><font face="Verdana" size="3"> Добавляет новый объект TColumn </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="50"> 
+      <DIV WIDTH="277" HEIGHT="50" style="width: 201; height: 50"> 
+        <P><font face="Verdana" size="3"> procedure LoadFromFile (const Filename: 
+          string); </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="50"> 
+      <DIV WIDTH="48" HEIGHT="50" style="width: 20; height: 50"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="50"> 
+      <DIV WIDTH="312" HEIGHT="50" style="width: 249; height: 50"> 
+        <P><font face="Verdana" size="3"> Загружает данные в объект из файла FileName 
+          </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="48"> 
+      <DIV WIDTH="277" HEIGHT="48" style="width: 159; height: 48"> 
+        <P><font face="Verdana" size="3"> procedure LoadFromStream(S: TStream) 
+          ; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="48"> 
+      <DIV WIDTH="48" HEIGHT="48" style="width: 10; height: 48"> 
+        <P><font face="Verdana" size="3"> Pu&nbsp; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="48"> 
+      <DIV WIDTH="312" HEIGHT="48" style="width: 257; height: 48"> 
+        <P><font face="Verdana" size="3"> Загружает данные в объект из потока 
+          s </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="63"> 
+      <DIV WIDTH="277" HEIGHT="63" style="width: 189; height: 63"> 
+        <P><font face="Verdana" size="3"> procedure RebuildColumns; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="63"> 
+      <DIV WIDTH="48" HEIGHT="63" style="width: 10; height: 63"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="63"> 
+      <DIV WIDTH="312" HEIGHT="63" style="width: 231; height: 63"> 
+        <P><font face="Verdana" size="3"> Удаляет существующие колонки и создает 
+          новые, основываясь на параметрах полей набора данных </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="40"> 
+      <DIV WIDTH="277" HEIGHT="40" style="width: 208; height: 40"> 
+        <P><font face="Verdana" size="3"> procedure RestoreDefaults; </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="40"> 
+      <DIV WIDTH="48" HEIGHT="40" style="width: 1; height: 40"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="40"> 
+      <DIV WIDTH="312" HEIGHT="40" style="width: 234; height: 40"> 
+        <P><font face="Verdana" size="3"> Восстанавливает первоначальные настройки 
+          колонок </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="50"> 
+      <DIV WIDTH="277" HEIGHT="50" style="width: 203; height: 50"> 
+        <P><font face="Verdana" size="3"> procedure SaveToFiie (const Filename: 
+          string); </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="50"> 
+      <DIV WIDTH="48" HEIGHT="50" style="width: 19; height: 50"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="50"> 
+      <DIV WIDTH="312" HEIGHT="50" style="width: 257; height: 50"> 
+        <P><font face="Verdana" size="3"> Сохраняет данные из колонок в файле 
+          FileName </font ></P>
+      </DIV></TD>
+  </TR>
+  <TR ALIGN="LEFT" VALIGN="TOP"> 
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="216" HEIGHT="58"> 
+      <DIV WIDTH="277" HEIGHT="58" style="width: 205; height: 58"> 
+        <P><font face="Verdana" size="3"> procedure SaveToStream(S: TStream) ; 
+          </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="41" HEIGHT="58"> 
+      <DIV WIDTH="48" HEIGHT="58" style="width: 1; height: 58"> 
+        <P><font face="Verdana" size="3"> Pu </font ></P>
+      </DIV></TD>
+    <TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="269" HEIGHT="58"> 
+      <DIV WIDTH="312" HEIGHT="58" style="width: 264; height: 58"> 
+        <P><font face="Verdana" size="3"> Сохраняет данные из колонок в потоке 
+          s </font ></P>
+      </DIV></TD>
+  </TR>
+</TABLE>
+<P>&nbsp;</P>
+<P><font face="Verdana" size="3"> &nbsp; </font ></P>
+<table COLS="3" WIDTH="16%">
+  <tr> 
+    <td> <font face="Verdana" size="3"> <a href="Index2.html"> <img SRC="Back.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td WIDTH="10%"> <font face="Verdana" size="3"> <a href="../index.html"> <img SRC="Menu.gif" BORDER="0"> 
+      </a> </font> </td>
+    <td ALIGN="RIGHT"> <font face="Verdana" size="3"> <a href="Index4.html"> <img SRC="For.gif" BORDER="0"> 
+      </a> </font> </td>
+  </tr>
+</table>
+</body>
+</html>

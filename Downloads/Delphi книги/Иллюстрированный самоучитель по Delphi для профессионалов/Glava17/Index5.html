@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Транзакции</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Подобно своим аналогам в BDE и ADO компонент <font face="Verdana" size="2"> TSQLConnection</font> поддерживает механизм транзакций и делает это сходным образом.
+</font ></P>
+<P><font face="Verdana" size="3">
+Начало, фиксацию и откат транзакции выполняют методы
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+procedure StartTransaction(TransDesc: TTransactionDesc);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">&nbsp;procedure Commit(TransDesc: TTransactionDesc);&nbsp;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> procedure Rollback(TransDesc: TTransactionDesc);</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+При этом запись <font face="Verdana" size="2"> TTransactionDesc</font> возвращает параметры транзакции:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TTransIsolationLevel = (xilDIRTYREAD, xilREADCOMMITTED, xilREPEATABLEREAD,
+xilCUSTOM);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">TTransactionDesc = packed record</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TransactionID   : LongWord;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+GloballD        : LongWord;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+IsolationLevel  : TTransIsolationLevel;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+Customlsolation  : LongWord;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+end;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Запись содержит уникальный в рамках соединения идентификатор транзакции
+<font face="Verdana" size="2"> TransactionID</font> И уровень
+изоляции Транзакции <font face="Verdana" size="2">IsolationLevel</font>. При
+уровне изоляции <font face="Verdana" size="2">xilCustom</font> определяется параметр
+<font face="Verdana" size="2">Customlsolation</font>. Идентификатор
+<font face="Verdana" size="2">GiobaliD</font> используется при работе с сервером
+<font face="Verdana" size="2">Oracle</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Некоторые серверы БД не поддерживают транзакции, и для определения этого факта используется свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TransactionsSupported: LongBool;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Если соединение уже находится в транзакции, свойству
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property InTransaction: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+присваивается значение <font face="Verdana" size="2">True</font>. Поэтому, если сервер не поддерживает множественные транзакции, всегда полезно убедиться, что соединение не обслуживает начатую транзакцию:
+</font ></P>
+<blockquote>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> var Translnfo: 
+    TTransactionDesc;</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> (...)</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> if Not MyConnection.InTransaction 
+    then</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> try</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> MyConnection.StartTransaction(Translnfo); 
+    {...}</font> </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">MyConnection.Commit(Translnfo);</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">&nbsp;except</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2"> MyConnection.Rollback(Translnfo);&nbsp;</font> 
+    </font ></p>
+  <p><font face="Verdana" size="3"> <font face="Verdana" size="2">end;</font> 
+    </font ></p>
+</blockquote>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>

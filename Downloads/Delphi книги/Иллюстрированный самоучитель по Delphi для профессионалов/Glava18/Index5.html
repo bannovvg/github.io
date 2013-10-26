@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
+</head>
+<body TEXT="#000000" BGCOLOR="#E7E3E7"  LINK="#004080" VLINK="#004080" olink="#008080">
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<p align="center">
+<font face="Verdana" size="3">
+<font size="4">Компоненты доступа к данным</font>
+<br>
+</font>
+</P>
+<p align="left">
+<font face="Verdana" size="3">
+
+</font ></P>
+<P><font face="Verdana" size="3">
+Так как компоненты InterBase Express используют для получения набора данных собственный механизм, то иерархия классов-предков включает только обязательный для всех наборов данных
+<font face="Verdana" size="2"> TDataSet</font> класс <font face="Verdana" size="2">TiBCustomDataSet</font>, который, собственно, и инкапсулирует механизм доступа InterBase Express (см. рис. 12.1).
+</font ></P>
+<P><font face="Verdana" size="3">
+Для связи с базой данных компоненты InterBase Express применяют компоненты соединения
+<font face="Verdana" size="2"> TiBDatabase</font> (см. выше). Для этого они используют свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Database: TiBDatabase;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Доступ к связанной транзакции осуществляется через свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Transaction: TIBTransaction;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Дополнительно к стандартным свойствам и методам, описываемым в гл. 12,
+класс <font face="Verdana" size="2"> TiBCustomDataSet</font> имеет свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type TIBUpdateRecordTypes = set of (cusModified, cuslnserted, cusDeleted,</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+cusUnmodified, cusUninserted);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property UpdateRecordTypes: TIBUpdateRecordTypes;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+cusModified</font> — модифицированные записи;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cuslnserted</font> — добавленные записи;&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> cusDeleted</font> — удаленные записи;&nbsp;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2"> cusUnmodified</font> — немодифицированные записи;
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">cusUninserted</font> — недобавленные записи.
+</font ></P>
+<P><font face="Verdana" size="3">
+Данное свойство определяет записи набора данных, на которые распространяются операции кэширования.
+</font ></P>
+<P><font face="Verdana" size="3">
+Свойство
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BufferChunks: Integer;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+определяет число записей, которые компонент загружает в собственный локальный буфер для ускорения выполнения стандартных операций.
+</font ></P>
+<P><font face="Verdana" size="3">
+При использовании компонентов в приложениях необходимо учитывать некоторые особенности.
+</font ></P>
+<P><font face="Verdana" size="3">
+Обновление набора данных выполняется не при каждом сохранении изменений. Такое поведение компонента определяется свойством
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property ForcedRefresh: Boolean;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+которое по умолчанию имеет значение <font face="Verdana" size="2">False</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+Это ускоряет работу компонента. При необходимости выполнять обновление данных с максимальной частотой свойству
+<font face="Verdana" size="2"> ForcedRefresh</font> нужно присвоить значение
+<font face="Verdana" size="2">True</font>.
+</font ></P>
+<P><font face="Verdana" size="3">
+В зависимости от настроек компонента, с ним можно выполнять различные виды операций редактирования, перечень которых содержится в свойстве &quot;только для чтения&quot;:
+</font ></P>
+<blockquote>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TLiveMode = (Imlnsert, ImModify, ImDelete, ImRefresh);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TLiveModes = set of TLiveMode; property LiveMode: TLiveModes;</font>
+</font ></P>
+</blockquote>
+<P><font face="Verdana" size="3">
+Так как все эти компоненты предназначены для работы с сервером, то изначально все они поддерживают режим кэширования изменений и имеют соответственные свойства, методы и методы-обработчики событий (табл. 18.2).
+</font ></P>
+<P align="center"><font face="Verdana" size="3"> <B>Таблица 18.2. </B> Методы-обработчики 
+  событий класса <B> </B><font face="Verdana" size="2">TiBCustomDataSet</font> 
+  </font ></P>
+<TABLE FRAME="BOX" RULES="ALL" BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="454" HEIGHT="492">
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="23">
+<DIV WIDTH="362" HEIGHT="23" style="width: 107; height: 23">
+<P><font face="Verdana" size="3">
+<b>
+Объявление</b>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="288" HEIGHT="23">
+<DIV WIDTH="275" HEIGHT="23" style="width: 113; height: 23">
+<P><font face="Verdana" size="3">
+<b>
+Описание</b>
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="46">
+<DIV WIDTH="362" HEIGHT="46" style="width: 183; height: 46">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Af terDatabaseDisconnect: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="288" HEIGHT="46">
+<DIV WIDTH="275" HEIGHT="46" style="width: 205; height: 46">
+<P><font face="Verdana" size="3">
+Выполняется после закрытия соединения с базой данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="67">
+<DIV WIDTH="362" HEIGHT="67" style="width: 167; height: 67">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property AfterTransactionEnd: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="288" HEIGHT="67">
+<DIV WIDTH="275" HEIGHT="67">
+<P><font face="Verdana" size="3">
+Выполняется по окончании транзакции, с которой связан данный набор данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="46">
+<DIV WIDTH="362" HEIGHT="46" style="width: 180; height: 48">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property Bef oreDatabaseDisconnect: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="288" HEIGHT="46">
+<DIV WIDTH="275" HEIGHT="46" style="width: 216; height: 46">
+<P><font face="Verdana" size="3">
+Выполняется перед закрытием соединения с базой данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="69">
+<DIV WIDTH="362" HEIGHT="69" style="width: 175; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property BeforeTransactionEnd: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="288" HEIGHT="69">
+<DIV WIDTH="275" HEIGHT="69" style="width: 227; height: 69">
+<P><font face="Verdana" size="3">
+Выполняется перед окончанием транзакции, с которой связан данный набор данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="69">
+<DIV WIDTH="362" HEIGHT="69" style="width: 183; height: 69">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property DatabaseFree: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="288" HEIGHT="69">
+<DIV WIDTH="275" HEIGHT="69" style="width: 269; height: 69">
+<P><font face="Verdana" size="3">
+Выполняется при обнулении свойства <font face="Verdana" size="2"> Database</font> компонента набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="205" HEIGHT="204">
+<DIV WIDTH="362" HEIGHT="204" style="width: 194; height: 204">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIBUpdateAction = (uaFail, uaAbort, uaSkip, uaRetry, uaApplied, uaApply) ;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIBUpdateErrorEvent = procedure ( DataSet : TDataSet ; E: EDatabaseError; UpdateKind: TUpdateKind; var UpdateAction: TIBUpdateAction) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnUpdateError: TIBUpdateErrorEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="288" HEIGHT="204">
+<DIV WIDTH="275" HEIGHT="204" style="width: 234; height: 204">
+<P><font face="Verdana" size="3">
+Вызывается при возникновении ошибки сохранения изменений в режиме кэширования
+</font ></P>
+</DIV>
+</TD>
+</TR>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="196">
+<DIV WIDTH="342" HEIGHT="196" style="width: 196; height: 265">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+type</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIBUpdateAction = (uaFail, uaAbort, uaSkip, uaRetry, uaApply, uaApplied);</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+TIBUpdateRecordEvent = procedure ( DataSet : TDataSet ; UpdateKind: TUpdateKind; var UpdateAction: TIBUpdateAction) of object;</font>
+</font ></P>
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property OnUpdateRecord: TIBUpdateRecordEvent ;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="299" HEIGHT="196">
+<DIV WIDTH="286" HEIGHT="196" style="width: 248; height: 196">
+<P><font face="Verdana" size="3">
+Вызывается при сохранении изменений в режиме кэширования
+</font ></P>
+</DIV>
+</TD>
+<TR ALIGN="LEFT" VALIGN="TOP">
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="185" HEIGHT="36">
+<DIV WIDTH="342" HEIGHT="69" style="width: 203; height: 36">
+<P><font face="Verdana" size="3">
+<font face="Verdana" size="2">
+property TransactionFree: TNotifyEvent;</font>
+</font ></P>
+</DIV>
+</TD>
+<TD COLSPAN="1" ROWSPAN="1" ALIGN="LEFT" VALIGN="TOP" WIDTH="299" HEIGHT="36">
+<DIV WIDTH="286" HEIGHT="69" style="width: 282; height: 34">
+<P><font face="Verdana" size="3">
+Выполняется при обнулении свойства <font face="Verdana" size="2"> Transaction</font> компонента набора данных
+</font ></P>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+<P><font face="Verdana" size="3">
+Возможности компонентов <font face="Verdana" size="2">TIBTable, TIBQuery, TIBStoredProc, TIBUpdateSQL</font>
+мало чем отличаются от стандартных, описанных в гл. 12.
+</font ></P>
+<P><font face="Verdana" size="3">
+Для взаимодействия с сервером компоненты InterBase Express используют два класса, которые инкапсулируют важные структуры API InterBase. Эти структуры обеспечивают передачу серверу параметров запроса и возвращение результата выполнения запроса. Поэтому сначала рассмотрим классы
+<font face="Verdana" size="2"> TIBXSQLDA</font> и <font face="Verdana" size="2">TIBXSQLVAR</font>, а затем перейдем к компонентам.
+</font ></P>
+
+
+<P><font face="Verdana" size="3">
+&nbsp;
+</font ></P>
+<table COLS="3" WIDTH="16%">
+<tr>
+<td>
+<font face="Verdana" size="3">
+<a href="Index4.html">
+<img SRC="Back.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td WIDTH="10%">
+<font face="Verdana" size="3">
+<a href="../index.html">
+<img SRC="Menu.gif" BORDER="0">
+</a>
+</font>
+</td>
+<td ALIGN="RIGHT">
+<font face="Verdana" size="3">
+<a href="Index6.html">
+<img SRC="For.gif" BORDER="0">
+</a>
+</font>
+</td>
+</tr>
+</table>
+</body>
+</html>
